@@ -351,14 +351,220 @@
         </section>
         <section anchor="ical-comp-vevent">
           <name>VEVENT</name>
-          <t>The VEVENT component (<xref target="RFC5545" section="3.6.1"/>) converts ...TBD</t>
+          <t>The VEVENT component (<xref target="RFC5545" section="3.6.1"/>) converts to a JSCalendar object of type Event (<xref target="RFC8984" section="2.1"/>).</t>
           <figure anchor="example-ical-comp-vevent">
             <name>Example for converting the VEVENT component to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
+BEGIN:VCALENDAR
+BEGIN:VEVENT
+...
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+{
+  "@type": "Group",
+  "entries": [{
+    "@type": "Event",
+    "...": ""
+  }]
+}
 ]]></sourcecode>
           </figure>
+          <section>
+            <name>Converting VEVENT components with differing UID values</name>
+            <t>VEVENT components having differing UID property values convert to different entries in the Group.  They sort in the same order as in the VCALENDAR component.</t>
+            <figure anchor="example-ical-comp-vevent-different-uid">
+              <name>Example for converting VEVENT components with differing UID property values to JSCalendar</name>
+              <sourcecode type="icalendar"><![CDATA[
+BEGIN:VCALENDAR
+BEGIN:VEVENT
+UID:DE935D01-3DF7-4201-B61A-D77D05C8B21A
+...
+END:VEVENT
+BEGIN:VEVENT
+UID:60BE3D6E-6383-473A-BCF1-3C43EA1FA571
+...
+END:VEVENT
+END:VCALENDAR
+]]></sourcecode>
+              <sourcecode type="jscalendar"><![CDATA[
+{
+  "@type": "Group",
+  "entries": [{
+    "@type": "Event",
+    "uid": "DE935D01-3DF7-4201-B61A-D77D05C8B21A",
+    "...": ""
+  }, {
+    "@type": "Event",
+    "uid": "60BE3D6E-6383-473A-BCF1-3C43EA1FA571",
+    "...": ""
+  }]
+}
+]]></sourcecode>
+            </figure>
+          </section>
+          <section>
+            <name>VEVENT recurrence overrides</name>
+            <t>VEVENT components having equal UID property values and <em>all but one of them</em> having the RECURRENCE-ID property set, convert to a single Event object.  The VEVENT component without a RECURRENCE-ID property converts to the Event object, all other VEVENT components with that UID value convert to a recurrence override of that event.</t>
+            <figure anchor="example-ical-comp-vevent-overrides">
+              <name>Example for converting VEVENT components as recurrence overrides to JSCalendar</name>
+              <sourcecode type="icalendar"><![CDATA[
+BEGIN:VCALENDAR
+BEGIN:VEVENT
+UID:F4257E1D-5461-4EF6-840F-9DFC653EB559
+RRULE:FREQ=DAILY
+DTSTART:20240101T140000
+...
+END:VEVENT
+BEGIN:VEVENT
+UID:F4257E1D-5461-4EF6-840F-9DFC653EB559
+RECURRENCE-ID:20240202T140000
+DTSTART:20240202T160000
+...
+END:VEVENT
+END:VCALENDAR
+]]></sourcecode>
+              <sourcecode type="jscalendar"><![CDATA[
+{
+  "@type": "Group",
+  "entries": [{
+    "@type": "Event",
+    "uid": "F4257E1D-5461-4EF6-840F-9DFC653EB559",
+    "start": "2024-01-01T14:00:00",
+    "recurrenceRules": [{
+      "@type": "RecurrenceRule",
+      "frequency": "daily"
+    }],
+    "recurrenceOverrides": {
+      "2024-02-02T14:00:00": {
+        "start": "2024-02-02T16:00:00"
+      }
+    },
+    "...": ""
+  }]
+}
+]]></sourcecode>
+            </figure>
+          </section>
+          <section>
+            <name>VEVENT recurrence instances</name>
+            <t>VEVENT components having equal UID property values and <em>all of them</em> having a RECURRENCE-ID property set, convert to multiple Event objects.  Each Event <bcp14>MUST</bcp14> have the <tt>recurrenceId</tt> property set, as well as the <tt>recurrenceIdTimeZone</tt> property if not <tt>null</tt>.   They sort in the same order as in the VCALENDAR component.</t>
+            <figure anchor="example-ical-comp-vevent-standalone-overrides">
+              <name>Example for converting VEVENT components as stand-alone recurrence instances to JSCalendar</name>
+              <sourcecode type="icalendar"><![CDATA[
+BEGIN:VCALENDAR
+BEGIN:VEVENT
+UID:F4257E1D-5461-4EF6-840F-9DFC653EB559
+RECURRENCE-ID:20240202T140000
+DTSTART:20240202T160000
+...
+END:VEVENT
+BEGIN:VEVENT
+UID:F4257E1D-5461-4EF6-840F-9DFC653EB559
+RECURRENCE-ID:20240103T140000
+DTSTART:20240103T140000
+...
+END:VEVENT
+END:VCALENDAR
+]]></sourcecode>
+              <sourcecode type="jscalendar"><![CDATA[
+{
+  "@type": "Group",
+  "entries": [{
+    "@type": "Event",
+    "uid": "F4257E1D-5461-4EF6-840F-9DFC653EB559",
+    "recurrenceId": "2024-02-02T14:00:00",
+    "start": "2024-02-02T16:00:00",
+    "...": ""
+  }, {
+    "@type": "Event",
+    "uid": "F4257E1D-5461-4EF6-840F-9DFC653EB559",
+    "recurrenceId": "2024-01-03T14:00:00",
+    "start": "2024-01-03T14:00:00",
+    "...": ""
+  }]
+}
+]]></sourcecode>
+            </figure>
+          </section>
+          <section>
+            <name>Duplicate VEVENT components</name>
+            <t>VEVENT components are duplicates if their UID property values and RECURRENCE-ID property values (or its absence) are equal.  Only the first component of such duplicates <bcp14>MUST</bcp14> be converted and all others <bcp14>MUST</bcp14> be ignored.</t>
+            <figure anchor="example-ical-comp-vevent-duplicates-uid">
+              <name>Example for converting duplicate VEVENT components with no RECURRENCE-ID to JSCalendar</name>
+              <sourcecode type="icalendar"><![CDATA[
+BEGIN:VCALENDAR
+BEGIN:VEVENT
+SUMMARY:Duplicate #1
+UID:F4257E1D-5461-4EF6-840F-9DFC653EB559
+...
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Duplicate #2
+UID:F4257E1D-5461-4EF6-840F-9DFC653EB559
+...
+END:VEVENT
+END:VCALENDAR
+]]></sourcecode>
+              <sourcecode type="jscalendar"><![CDATA[
+{
+  "@type": "Group",
+  "entries": [{
+    "@type": "Event",
+    "uid": "F4257E1D-5461-4EF6-840F-9DFC653EB559",
+    "title": "Duplicate #1",
+    "...": ""
+  }]
+}
+]]></sourcecode>
+            </figure>
+            <figure anchor="example-ical-comp-vevent-duplicates-recurrence-id">
+              <name>Example for converting duplicate VEVENT components with RECURRENCE-ID to JSCalendar</name>
+              <sourcecode type="icalendar"><![CDATA[
+BEGIN:VCALENDAR
+BEGIN:VEVENT
+SUMMARY:Main
+UID:F4257E1D-5461-4EF6-840F-9DFC653EB559
+RRULE:FREQ=DAILY
+DTSTART:20240101T140000
+...
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Duplicate #1
+UID:F4257E1D-5461-4EF6-840F-9DFC653EB559
+RECURRENCE-ID:20240202T140000
+...
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Duplicate #2
+UID:F4257E1D-5461-4EF6-840F-9DFC653EB559
+RECURRENCE-ID:20240202T140000
+...
+END:VEVENT
+END:VCALENDAR
+]]></sourcecode>
+              <sourcecode type="jscalendar"><![CDATA[
+{
+  "@type": "Group",
+  "entries": [{
+    "@type": "Event",
+    "title": "Main",
+    "uid": "F4257E1D-5461-4EF6-840F-9DFC653EB559",
+    "start": "2024-01-01T14:00:00",
+    "recurrenceRules": [{
+      "@type": "RecurrenceRule",
+      "frequency": "daily"
+    }],
+    "recurrenceOverrides": {
+      "2024-02-02T14:00:00": {
+        "title": "Duplicate #1"
+      }
+    },
+    "...": ""
+  }]
+}
+]]></sourcecode>
+            </figure>
+          </section>
         </section>
         <section anchor="ical-comp-vfreebusy">
           <name>VFREEBUSY</name>
@@ -1595,6 +1801,7 @@
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7953.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7986.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8607.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8984.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.9073.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.9074.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.9253.xml"/>
