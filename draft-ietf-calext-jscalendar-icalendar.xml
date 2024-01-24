@@ -488,7 +488,7 @@ END:VCALENDAR
           </section>
           <section>
             <name>Duplicate VEVENT components</name>
-            <t>VEVENT components are duplicates if their UID property values and RECURRENCE-ID property values (or its absence) are equal.  Only the first component of such duplicates <bcp14>MUST</bcp14> be converted and all others <bcp14>MUST</bcp14> be ignored.</t>
+            <t>VEVENT components are duplicates if their UID property values and RECURRENCE-ID property values (or its absence) are equal.  Only the very last component of such duplicates <bcp14>MUST</bcp14> be converted and all others <bcp14>MUST</bcp14> be ignored.</t>
             <figure anchor="test-ical-comp-vevent-duplicates-uid">
               <name>Example for converting duplicate VEVENT components with no RECURRENCE-ID to JSCalendar</name>
               <sourcecode type="icalendar"><![CDATA[
@@ -511,7 +511,7 @@ END:VCALENDAR
   "entries": [{
     "@type": "Event",
     "uid": "F4257E1D-5461-4EF6-840F-9DFC653EB559",
-    "title": "Duplicate #1",
+    "title": "Duplicate #2",
     "...": ""
   }]
 }
@@ -556,7 +556,7 @@ END:VCALENDAR
     }],
     "recurrenceOverrides": {
       "2024-02-02T14:00:00": {
-        "title": "Duplicate #1"
+        "title": "Duplicate #2"
       }
     },
     "...": ""
