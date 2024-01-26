@@ -82,6 +82,112 @@
         <t>The key words "<bcp14>MUST</bcp14>", "<bcp14>MUST NOT</bcp14>", "<bcp14>REQUIRED</bcp14>", "<bcp14>SHALL</bcp14>", "<bcp14>SHALL NOT</bcp14>", "<bcp14>SHOULD</bcp14>", "<bcp14>SHOULD NOT</bcp14>", "<bcp14>RECOMMENDED</bcp14>", "<bcp14>NOT RECOMMENDED</bcp14>", "<bcp14>MAY</bcp14>", and "<bcp14>OPTIONAL</bcp14>" in this document are to be interpreted as described in BCP 14 <xref target="RFC2119" format="default" sectionFormat="of" derivedContent="RFC2119"/> <xref target="RFC8174" format="default" sectionFormat="of" derivedContent="RFC8174"/> when, and only when, they appear in all capitals, as shown here.</t>
         <t>The ABNF definitions in this document use the notations of <xref target="RFC5234"/>. ABNF rules not defined in this document either are defined in <xref target="RFC5234"/> or <xref target="RFC5545"/>.</t>
       </section>
+      <section>
+        <name>Example Notations</name>
+        <t>This document contains examples that illustrate how to convert between the iCalendar and JSCalendar data formats.  The notation of these examples is such that their main points should be clear to the reader, but their contents can also be parsed for automated testing.  The authors of this document implemented a tool that extracts these examples for interoperation testing.  The following sections define the notation for such examples.</t>
+        <section anchor="notation-icalendar">
+          <name>iCalendar Examples</name>
+          <t>An iCalendar example contains either an extract or a complete representation of iCalendar data.  It always represents a VCALENDAR component, even if the example only depicts other components or properties.</t>
+          <t>An example that only contains iCalendar properties implicitly represents a VEVENT component that is part of a VCALENDAR component.  An example that only contains one or more non-VCALENDAR components implicitly represents a VCALENDAR component that contains them.  Implicit components are assumed to contain mandatory properties with some value, but the actual value is irrevelant for the main point of the example.</t>
+          <t>To illustrate this, <xref target="example-notation-icalendar-implicit-explicit"/> contains three examples, all of which represent the same iCalendar data.  In the first example, both the VEVENT component and VCALENDAR component are implicit, including their mandatory properties.  In the second example, only the VCALENDAR component and its mandatory properties are implicit.  The third example depicts a complete VCALENDAR component, nothing is implicit.</t>
+          <figure anchor="example-notation-icalendar-implicit-explicit">
+            <name>Examples for implicit and explicit iCalendar component notation</name>
+            <sourcecode type="icalendar"><![CDATA[
+SUMMARY:hello
+]]></sourcecode>
+            <sourcecode type="icalendar"><![CDATA[
+BEGIN:VEVENT
+DTSTAMP:20060102T030405Z
+DTSTART:20060102T030405Z
+SUMMARY:hello
+UID:CC0A494A-6E07-4827-8294-0752DD1ECFA4
+END:VEVENT
+]]></sourcecode>
+            <sourcecode type="icalendar"><![CDATA[
+BEGIN:VCALENDAR
+PRODID:-//FOO//bar//EN
+VERSION:2.0
+BEGIN:VEVENT
+DTSTAMP:20060102T030405Z
+DTSTART:20060102T030405Z
+SUMMARY:hello
+UID:CC0A494A-6E07-4827-8294-0752DD1ECFA4
+END:VEVENT
+END:VCALENDAR
+]]></sourcecode>
+          </figure>
+          <t>A line containing just the value <tt>...</tt> stands for any other properties that might be present in a component but are irrevelant for this example.  This includes mandatory properties.  <xref target="example-notation-icalendar-dotdotdot"/> illustrates this as an alternative representation for the examples of <xref target="example-notation-icalendar-implicit-explicit"/>.</t>
+          <figure anchor="example-notation-icalendar-dotdotdot">
+            <name>Example for additional properties represented by <tt>...</tt></name>
+            <sourcecode type="icalendar"><![CDATA[
+BEGIN:VEVENT
+SUMMARY:hello
+...
+END:VEVENT
+]]></sourcecode>
+          </figure>
+          <t>A line starting with two spaces represents the continuation of a folded content line (<xref target="RFC5545" section="3.1"/>).  <xref target="example-notation-icalendar-folded"/> illustrates this.</t>
+          <figure anchor="example-notation-icalendar-folded">
+            <name>Example for a folded content line</name>
+            <sourcecode type="icalendar"><![CDATA[
+SUMMARY:he
+  llo
+]]></sourcecode>
+          </figure>
+        </section>
+        <section anchor="notation-jscalendar">
+          <name>JSCalendar Examples</name>
+          <t>A JSCalendar example either either explicitly or implicitly contains a JSCalendar object.  An explicit JSCalendar object starts and ends with braces.  An implicit JSCalendar object omits braces, it only consists of JSON name/value pairs.  A JSCalendar example always represents a JSCalendar object of type Group, even if the example only depicts some properties or entries within that group.</t>
+          <t>An implicit JSCalendar object is assumed to be of type Event, unless it contains the <tt>@type</tt> property with a different value.  It is assumed to contain mandatory properties with some value, but the actual value is irrevelant for the main point of the example.</t>
+          <t><xref target="example-notation-jscalendar-implicit-explicit"/> illustrates this with four examples, all of which represent the same JSCalendar data.  The first example contains an implicit JSCalendar object of type Event.  The second example contains an implicit JSCalendar object with a <tt>@type</tt> property.  The third example contains an explicit Event object but the Group object containing it is omitted.  The fourth example contains the full Group object, nothing is implicit or omitted.</t>
+          <figure anchor="example-notation-jscalendar-implicit-explicit">
+            <name>Examples for implicit and explicit JSCalendar object notation</name>
+            <sourcecode type="jscalendar"><![CDATA[
+"title": "hello"
+]]></sourcecode>
+            <sourcecode type="jscalendar"><![CDATA[
+"@type": "Event",
+"title": "hello"
+]]></sourcecode>
+            <sourcecode type="jscalendar"><![CDATA[
+{
+  "@type": "Event",
+  "title": "hello",
+  "start": "2006-01-02T03:04:05",
+  "timeZone": "Etc/UTC",
+  "uid": "CC0A494A-6E07-4827-8294-0752DD1ECFA4",
+  "updated": "2006-01-02T03:04:05Z"
+}
+]]></sourcecode>
+            <sourcecode type="jscalendar"><![CDATA[
+{
+  "@type": "Group",
+  "entries": [
+    {
+      "@type": "Event",
+      "title": "hello",
+      "start": "2006-01-02T03:04:05",
+      "timeZone": "Etc/UTC",
+      "uid": "CC0A494A-6E07-4827-8294-0752DD1ECFA4",
+      "updated": "2006-01-02T03:04:05Z"
+    }
+  ]
+}
+]]></sourcecode>
+          </figure>
+          <t>A property with name <tt>"..."</tt> and value <tt>""</tt> stands for additional properties that might be present in a JSCalendar object, but which are irrelevant for this example.  This includes mandatory properties. <xref target="example-notation-jscalendar-dotdotdot"/> illustrates this as an alternative representation for the examples of <xref target="example-notation-jscalendar-implicit-explicit"/>.</t>
+          <figure anchor="example-notation-jscalendar-dotdotdot">
+            <name>Example for additional properties represented by <tt>...</tt></name>
+            <sourcecode type="jscalendar"><![CDATA[
+{
+  "@type": "Event",
+  "title": "hello",
+  "...": ""
+}
+]]></sourcecode>
+          </figure>
+        </section>
+      </section>
     </section>
     <section anchor="convert-icalendar-to-jscalendar">
       <name>Converting iCalendar to JSCalendar</name>
