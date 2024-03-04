@@ -87,9 +87,9 @@
         <t>This document contains examples that illustrate how to convert between the iCalendar and JSCalendar data formats.  The notation of these examples is such that their main points should be clear to the reader, but their contents can also be parsed for automated testing.  The authors of this document implemented a tool that extracts these examples for interoperation testing.  The following sections define the notation for such examples.</t>
         <section anchor="notation-icalendar">
           <name>iCalendar Examples</name>
-          <t>An iCalendar example contains either an extract or a complete representation of iCalendar data.  It always represents a VCALENDAR component, even if the example only depicts other components or properties.</t>
+          <t>An iCalendar example contains either an extract or a complete representation of iCalendar data.  It always represents an iCalendar object stream, even if the example only depicts non-VCALENDAR components or properties.</t>
           <t>An example that only contains iCalendar properties implicitly represents a VEVENT component that is part of a VCALENDAR component.  An example that only contains one or more non-VCALENDAR components implicitly represents a VCALENDAR component that contains them.  Implicit components are assumed to contain mandatory properties with some value, but the actual value is irrevelant for the main point of the example.</t>
-          <t>To illustrate this, <xref target="example-notation-icalendar-implicit-explicit"/> contains three examples, all of which represent the same iCalendar data.  In the first example, both the VEVENT component and VCALENDAR component are implicit, including their mandatory properties.  In the second example, only the VCALENDAR component and its mandatory properties are implicit.  The third example depicts a complete VCALENDAR component, nothing is implicit.</t>
+          <t>To illustrate this, <xref target="example-notation-icalendar-implicit-explicit"/>, <xref target="example-notation-icalendar-dotdotdot"/> contains three examples, all of which represent the same iCalendar data.  In the first example, both the VEVENT component and VCALENDAR component are implicit, including their mandatory properties.  In the second example, only the VCALENDAR component and its mandatory properties are implicit.  The third example depicts a complete VCALENDAR component, nothing is implicit.</t>
           <figure anchor="example-notation-icalendar-implicit-explicit">
             <name>Examples for implicit and explicit iCalendar component notation</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -134,12 +134,13 @@ SUMMARY:he
   llo
 ]]></sourcecode>
           </figure>
+          <t>For the rase case of an iCalendar object stream containing more than one iCalendar object, see <xref target="test-ical-stream-multi"/>.</t>
         </section>
         <section anchor="notation-jscalendar">
           <name>JSCalendar Examples</name>
-          <t>A JSCalendar example either either explicitly or implicitly contains a JSCalendar object.  An explicit JSCalendar object starts and ends with braces.  An implicit JSCalendar object omits braces, it only consists of JSON name/value pairs.  A JSCalendar example always represents a JSCalendar object of type Group, even if the example only depicts some properties or entries within that group.</t>
+          <t>A JSCalendar example either either explicitly or implicitly represents an array of JSCalendar Group objects.  An explicit array starts and ends with square brackets, and an explicit JSCalendar object starts and ends with braces.  An implicit JSCalendar object omits braces, it only consists of JSON name/value pairs.</t>
           <t>An implicit JSCalendar object is assumed to be of type Event, unless it contains the <tt>@type</tt> property with a different value.  It is assumed to contain mandatory properties with some value, but the actual value is irrevelant for the main point of the example.</t>
-          <t><xref target="example-notation-jscalendar-implicit-explicit"/> illustrates this with four examples, all of which represent the same JSCalendar data.  The first example contains an implicit JSCalendar object of type Event.  The second example contains an implicit JSCalendar object with a <tt>@type</tt> property.  The third example contains an explicit Event object but the Group object containing it is omitted.  The fourth example contains the full Group object, nothing is implicit or omitted.</t>
+          <t><xref target="example-notation-jscalendar-implicit-explicit"/> illustrates this with multiple examples, all of which represent the same JSCalendar data.  The first example contains an implicit JSCalendar object of type Event.  The second example contains an implicit JSCalendar object with a <tt>@type</tt> property.  The third example contains an explicit Event object but the Group object containing it is omitted.  The fourth example contains the full Group object, but the embedding array is omitted.  The fifth example represents the full array of Group objects, nothing is omitted.</t>
           <figure anchor="example-notation-jscalendar-implicit-explicit">
             <name>Examples for implicit and explicit JSCalendar object notation</name>
             <sourcecode type="jscalendar"><![CDATA[
@@ -174,6 +175,23 @@ SUMMARY:he
   ]
 }
 ]]></sourcecode>
+            <sourcecode type="jscalendar"><![CDATA[
+[
+  {
+    "@type": "Group",
+    "entries": [
+      {
+        "@type": "Event",
+        "title": "hello",
+        "start": "2006-01-02T03:04:05",
+        "timeZone": "Etc/UTC",
+        "uid": "CC0A494A-6E07-4827-8294-0752DD1ECFA4",
+        "updated": "2006-01-02T03:04:05Z"
+      }
+    ]
+  }
+]
+]]></sourcecode>
           </figure>
           <t>A property with name <tt>"..."</tt> and value <tt>""</tt> stands for additional properties that might be present in a JSCalendar object, but which are irrelevant for this example.  This includes mandatory properties. <xref target="example-notation-jscalendar-dotdotdot"/> illustrates this as an alternative representation for the examples of <xref target="example-notation-jscalendar-implicit-explicit"/>.</t>
           <figure anchor="example-notation-jscalendar-dotdotdot">
@@ -191,6 +209,86 @@ SUMMARY:he
     </section>
     <section anchor="convert-icalendar-to-jscalendar">
       <name>Converting iCalendar to JSCalendar</name>
+      <section anchor="ical-object">
+        <name>iCalendar Objects</name>
+        <t>A stream of iCalendar objects (<xref target="RFC5545" section="3.4"/>) converts to a JSON array of JSCalendar objects of type Group (<xref target="RFC8984" section="2.3"/>), in order of the iCalendar object stream.</t>
+        <figure anchor="test-ical-stream-multi">
+          <name>Example for converting a stream of multiple iCalendar objects</name>
+          <sourcecode type="icalendar"><![CDATA[
+BEGIN:VCALENDAR
+UID:41aa02b6-42d0-4f45-8cb4-8b5075be2e14
+BEGIN:VEVENT
+...
+END:VEVENT
+END:VCALENDAR
+BEGIN:VCALENDAR
+UID:7079ae36-552b-4b83-96f2-0ea000a8ea
+BEGIN:VEVENT
+...
+END:VEVENT
+END:VCALENDAR
+]]></sourcecode>
+          <sourcecode type="jscalendar"><![CDATA[
+[
+  {
+    "@type": "Group",
+    "uid":  "41aa02b6-42d0-4f45-8cb4-8b5075be2e14",
+    "entries": [
+      "@type": "Event",
+      "...": ""
+    ]
+  },
+  {
+    "@type": "Group",
+    "uid":  "7079ae36-552b-4b83-96f2-0ea000a8ea",
+    "entries": [
+      "@type": "Event",
+      "...": ""
+    ]
+  }
+]
+]]></sourcecode>
+        </figure>
+        <t>If a stream only contains a single iCalendar object, then the embedding array <bcp14>MAY</bcp14> be omitted and the iCalendar stream convert to a Group object.</t>
+        <figure anchor="test-ical-stream-single">
+          <name>Example for converting a stream with a single iCalendar object</name>
+          <sourcecode type="icalendar"><![CDATA[
+BEGIN:VCALENDAR
+UID:41aa02b6-42d0-4f45-8cb4-8b5075be2e14
+BEGIN:VEVENT
+...
+END:VEVENT
+END:VCALENDAR
+]]></sourcecode>
+          <sourcecode type="jscalendar"><![CDATA[
+{
+  "@type": "Group",
+  "uid":  "41aa02b6-42d0-4f45-8cb4-8b5075be2e14",
+  "entries": [
+    "@type": "Event",
+    "...": ""
+  ]
+}
+]]></sourcecode>
+        </figure>
+        <t>If a stream only contains a single iCalendar object and the converted Group object only has a single entry set in its <tt>entries</tt> property and no other property is set, then the Group object <bcp14>MAY</bcp14> be omitted and the stream convert to that single entry.</t>
+        <figure anchor="test-ical-stream-entry">
+          <name>Example for converting a stream of with a single iCalendar object to a single entry</name>
+          <sourcecode type="icalendar"><![CDATA[
+BEGIN:VCALENDAR
+BEGIN:VEVENT
+...
+END:VEVENT
+END:VCALENDAR
+]]></sourcecode>
+          <sourcecode type="jscalendar"><![CDATA[
+{
+  "@type": "Event",
+  "...": ""
+}
+]]></sourcecode>
+        </figure>
+      </section>
       <section anchor="ical-types">
         <name>Value Data Types</name>
         <section anchor="ical-type-binary">
