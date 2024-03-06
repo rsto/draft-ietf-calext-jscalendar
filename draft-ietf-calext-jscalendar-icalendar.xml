@@ -257,34 +257,39 @@ Obt8vRwnn+vwae16sg==
           <name>BOOLEAN</name>
           <t>The BOOLEAN value data type (<xref target="RFC5545" section="3.3.2"/>) converts to the JSON literal names "true" and "false" (<xref target="RFC8259" section="3"/>) by lowercasing the BOOLEAN value.</t>
           <figure anchor="example-ical-type-boolean">
-            <name>Example for converting the BOOLEAN value data type to JSON</name>
+            <name>Example for converting the BOOLEAN value data type to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
 FALSE
 ]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
+            <sourcecode type="json"><![CDATA[
 false
 ]]></sourcecode>
           </figure>
         </section>
         <section anchor="ical-type-cal-address">
           <name>CAL-ADDRESS</name>
-          <t>The CAL-ADDRESS value data type (<xref target="RFC5545" section="3.3.3"/>) converts ...TBD</t>
-          <figure anchor="test-ical-type-cal-address">
+          <t>The CAL-ADDRESS value data type (<xref target="RFC5545" section="3.3.3"/>) converts to a JSON string having the same value as the CAL-ADDRESS.</t>
+          <figure anchor="example-ical-type-cal-address">
             <name>Example for converting the CAL-ADDRESS value data type to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
+mailto:foo@example.com
 ]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
+            <sourcecode type="json"><![CDATA[
+"mailto:foo@example.com"
 ]]></sourcecode>
           </figure>
         </section>
         <section anchor="ical-type-date">
           <name>DATE</name>
-          <t>The DATE value data type (<xref target="RFC5545" section="3.3.4"/>) converts ...TBD</t>
-          <figure anchor="test-ical-type-date">
+          <t>The DATE value data type (<xref target="RFC5545" section="3.3.4"/>) converts to the LocalDateTime type (<xref target="RFC8984" section="1.4.5"/>).  The year, month and day of month values convert as-is.  The hour, minute and second values are all zero, fractional seconds are omitted.</t>
+          <t>Whether to interpret the resulting value as a timeless temporal or a temporal having zero time is specific to the JSCalendar property or object definition.</t>
+          <figure anchor="example-ical-type-date">
             <name>Example for converting the DATE value data type to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
+20240306
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+"2024-03-06T00:00:00"
 ]]></sourcecode>
           </figure>
         </section>
