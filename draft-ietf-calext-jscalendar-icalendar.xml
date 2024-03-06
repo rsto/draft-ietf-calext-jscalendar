@@ -338,14 +338,8 @@ DURATION:PT1H
         </section>
         <section anchor="ical-type-float">
           <name>FLOAT</name>
-          <t>The FLOAT value data type (<xref target="RFC5545" section="3.3.7"/>) converts ...TBD</t>
-          <figure anchor="test-ical-type-float">
-            <name>Example for converting the FLOAT value data type to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-]]></sourcecode>
-          </figure>
+          <t>The FLOAT value data type (<xref target="RFC5545" section="3.3.7"/>) does not convert to any JSCalendar value type.</t>
+          <t><xref target="ical-prop-geo"/> defines how to convert the GEO property value.  <xref target="jscal-prop-icalprops"/> defines how to convert arbitrary iCalendar properties having FLOAT values.</t>
         </section>
         <section anchor="ical-type-integer">
           <name>INTEGER</name>
@@ -1968,6 +1962,13 @@ END:VCALENDAR
     </section>
     <section anchor="updates-jscalendar">
       <name>Updates to JSCalendar</name>
+      <section anchor="new-jscalendar-properties">
+        <name>New JSCalendar properties</name>
+        <section anchor="jscal-prop-icalprops">
+          <name>Property <tt>iCalProps</tt></name>
+          <t>TBD</t>
+        </section>
+      </section>
     </section>
     <section anchor="updates-icalendar">
       <name>Updates to iCalendar</name>
