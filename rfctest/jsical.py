@@ -343,7 +343,7 @@ class JDiff:
             "sequence": 0,
             "showWithoutTime": False,
             "status": "confirmed",
-            "timeZone": None,
+            "timeZone": None,  # null value
             "timeZones": None,  # null value
             "title": "",
             "useDefaultAlerts": False,
@@ -431,7 +431,7 @@ class JObject:
             },
         }
         while parent := default_parent.get(data["@type"]):
-            data = parent(data)
+            data = {"...": ""} | parent(data)
         return JObject(data)
 
     def to_json(self) -> dict:
