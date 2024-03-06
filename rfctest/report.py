@@ -214,7 +214,10 @@ class HTMLReporter:
                     self.report_diff(
                         "The following property values do not match:",
                         (test.jgroup.to_json(), test.jresp),
-                        (test.jdiff.unequal, test.jdiff.unequal),
+                        (
+                            [unq[0] for unq in test.jdiff.unequal],
+                            [unq[1] for unq in test.jdiff.unequal],
+                        ),
                         ("Expected", "Response"),
                     )
                 if test.jdiff.b_only:

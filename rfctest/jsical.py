@@ -182,7 +182,7 @@ class JPath(UserList):
 @dataclass
 class JDiff:
     a_only: list[JPath]
-    unequal: list[JPath]
+    unequal: list[tuple[JPath]]
     b_only: list[JPath]
 
     def empty(self) -> bool:
@@ -198,13 +198,13 @@ class JDiff:
         a, b, apath: JPath, bpath: JPath
     ) -> tuple[list[JPath], list[JPath], list[JPath]]:
         if type(a) != type(b):
-            return [], [apath], []
+            return [], [(apath, bpath)], []
         if isinstance(a, dict):
             return JDiff._dict(a, b, apath, bpath)
         if isinstance(a, list):
             return JDiff._array(a, b, apath, bpath)
         if a != b:
-            return [], [apath], []
+            return [], [(apath, bpath)], []
         return [], [], []
 
     @staticmethod
@@ -255,6 +255,7 @@ class JDiff:
 
         Note that the keys in the middle list may differ for a and
         b for properties where the keys are of JSCalendar type Id."""
+
         prop_keys = {
             "alerts": lambda v: v.get("trigger", {}).get(
                 "offset", v.get("trigger", {}).get("when")
@@ -266,6 +267,8 @@ class JDiff:
         }
         pkey = prop_keys.get(apath[-1]) if len(apath) and len(bpath) else None
         if pkey and apath[-1] == bpath[-1]:
+            if len(a) == 1 and len(b) == 1:
+                return [], [(list(a)[0], list(b)[0])], []
             apkeys = {
                 pkey(v): k for k, v in a.items() if isinstance(v, dict) and pkey(v)
             }

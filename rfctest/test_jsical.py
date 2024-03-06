@@ -154,7 +154,8 @@ class TestDiffJson(unittest.TestCase):
         )
         self.assertEqual(JObject({"a": 1}).diff_json({"a": 1}), JDiff([], [], []))
         self.assertEqual(
-            JObject({"a": 1}).diff_json({"a": 2}), JDiff([], [JPath.decode("a")], [])
+            JObject({"a": 1}).diff_json({"a": 2}),
+            JDiff([], [(JPath.decode("a"), JPath.decode("a"))], []),
         )
         self.assertEqual(
             JObject({"a": 1}).diff_json({"b": 1}),
@@ -170,7 +171,7 @@ class TestDiffJson(unittest.TestCase):
         )
         self.assertEqual(
             JObject({"a": [1]}).diff_json({"a": [2]}),
-            JDiff([], [JPath.decode("a/0")], []),
+            JDiff([], [(JPath.decode("a/0"), JPath.decode("a/0"))], []),
         )
         self.assertEqual(
             JObject({"a": []}).diff_json({"a": [1]}),
@@ -184,7 +185,7 @@ class TestDiffJson(unittest.TestCase):
         )
         self.assertEqual(
             JObject({"a": {"b": 1}}).diff_json({"a": {"b": 2}}),
-            JDiff([], [JPath.decode("a/b")], []),
+            JDiff([], [(JPath.decode("a/b"), JPath.decode("a/b"))], []),
         )
         self.assertEqual(
             JObject({"a": {}}).diff_json({"a": {"b": 1}}),
@@ -192,7 +193,7 @@ class TestDiffJson(unittest.TestCase):
         )
         self.assertEqual(
             JObject({"a": 1}).diff_json({"a": {"b": 1}}),
-            JDiff([], [JPath.decode("a")], []),
+            JDiff([], [(JPath.decode("a"), JPath.decode("a"))], []),
         )
         self.assertEqual(
             JObject({"a": {"b": 1, "c": 1}}).diff_json({"a": {"b": 1}}),
@@ -216,25 +217,27 @@ class TestDiffJson(unittest.TestCase):
             JObject({"links": {"a": {"href": "http://a"}}}).diff_json(
                 {"links": {"a": {"href": "http://b"}}},
             ),
-            JDiff([JPath.decode("links/a")], [], [JPath.decode("links/a")]),
+            JDiff(
+                [], [(JPath.decode("links/a/href"), JPath.decode("links/a/href"))], []
+            ),
         )
         self.assertEqual(
             JObject({"links": {"a": {}}}).diff_json(
                 {"links": {"a": {"href": "http://b"}}}
             ),
-            JDiff([JPath.decode("links/a")], [], [JPath.decode("links/a")]),
+            JDiff([], [], [JPath.decode("links/a/href")]),
         )
         self.assertEqual(
             JObject({"links": {"a": {"href": "http://a"}}}).diff_json(
                 {"links": {"a": 1}},
             ),
-            JDiff([JPath.decode("links/a")], [], [JPath.decode("links/a")]),
+            JDiff([], [(JPath.decode("links/a"), JPath.decode("links/a"))], []),
         )
 
     def test_extra(self):
         self.assertEqual(
             JObject({"a": 1, "b": 2, "...": ""}).diff_json({"a": 3, "c": 4}),
-            JDiff([JPath.decode("b")], [JPath.decode("a")], []),
+            JDiff([JPath.decode("b")], [(JPath.decode("a"), JPath.decode("a"))], []),
         )
 
 
