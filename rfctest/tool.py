@@ -18,7 +18,7 @@ def find_tests(rfcfile_name: str, names: set[str] = None, verbose=False):
         anchor = figure.get("anchor")
         if not anchor:
             continue
-        if names and anchor not in names:
+        if not anchor.startswith("test-") or names and anchor not in names:
             continue
 
         icalcode = figure.find("./sourcecode[@type='icalendar']")
