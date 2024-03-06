@@ -325,12 +325,14 @@ CREATED:20060102T150405Z
         </section>
         <section anchor="ical-type-duration">
           <name>DURATION</name>
-          <t>The DURATION value data type (<xref target="RFC5545" section="3.3.6"/>) converts ...TBD</t>
+          <t>The DURATION value data type (<xref target="RFC5545" section="3.3.6"/>) converts to the Duration type (<xref target="RFC8984" section="1.4.6"/>).  The DURATION value converts as-is, fractional seconds are omitted.</t>
           <figure anchor="test-ical-type-duration">
             <name>Example for converting the DURATION value data type to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
+DURATION:PT1H
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+"duration": "PT1H"
 ]]></sourcecode>
           </figure>
         </section>
