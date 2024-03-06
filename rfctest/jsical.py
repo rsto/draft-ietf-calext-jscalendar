@@ -440,6 +440,9 @@ class JObject:
     def diff_json(self, data: dict) -> JDiff:
         return JDiff.diff_json(self.data, data)
 
+    def normalized(self) -> JObject:
+        return JObject(JDiff.normalize_json(self.data))
+
     @classmethod
     def parse(cls, s: str, default_type="Event") -> JObject:
         s = s.strip()

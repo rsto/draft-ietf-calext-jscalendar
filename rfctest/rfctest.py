@@ -43,7 +43,7 @@ class Backend:
 class TestState(enum.Enum):
     READY = "Read examples"
     PARSE_ICAL = "Parse iCalendar example"
-    PARSE_JCAL = "Parse JSCalendar example"
+    PARSE_JCAL = "Parse and normalize JSCalendar example"
     EXPAND_ICAL = "Expand iCalendar example"
     GET_RESPONSE = "Get backend reponse"
     PARSE_RESPONSE = "Normalize response"
@@ -98,7 +98,7 @@ class Test:
 
             if not self._advance_state(TestState.PARSE_JCAL, until_state):
                 return
-            self.jgroup = JObject.parse(self.jcaltext).to_group()
+            self.jgroup = JObject.parse(self.jcaltext).to_group().normalized()
 
             if not self._advance_state(TestState.EXPAND_ICAL, until_state):
                 return
