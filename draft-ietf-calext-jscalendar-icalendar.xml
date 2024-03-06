@@ -243,13 +243,16 @@ END:VCALENDAR
           <name>BINARY</name>
           <t>The BINARY value data type (<xref target="RFC5545" section="3.3.1"/>) converts to a JSON string having as value an URI <xref target="RFC3986"/> in the <tt>data</tt> URL scheme <xref target="RFC2397"/>.</t>
           <t>The data URL <bcp14>SHOULD</bcp14> use Base64-encoding, but it <bcp14>MAY</bcp14> use any other encoding that is valid according to <xref target="RFC2397"/>.  The data URL media type <bcp14>MUST</bcp14> be set, unless the binary value is known to be US-ASCII plain text.  If the value media type is unknown, then it <bcp14>MUST</bcp14> be <tt>application/octet-stream</tt>.</t>
-          <figure anchor="example-ical-type-binary">
-            <name>Example for converting a Base64-encoded BINARY value to a data URL</name>
+          <figure anchor="test-ical-type-binary">
+            <name>Example for converting a BINARY value to a data URL</name>
             <sourcecode type="icalendar"><![CDATA[
-Obt8vRwnn+vwae16sg==
+ATTACH;ENCODING=BASE64:Obt8vRwnn+vwae16sg==
 ]]></sourcecode>
-            <sourcecode type="json"><![CDATA[
-"data:application/octet-stream;base64,Obt8vRwnn+vwae16sg=="
+            <sourcecode type="jscalendar"><![CDATA[
+{
+  "@type": "Link",
+  "href": "data:application/octet-stream;base64,Obt8vRwnn+vwae16sg=="
+}
 ]]></sourcecode>
           </figure>
         </section>
@@ -269,13 +272,15 @@ false
         <section anchor="ical-type-cal-address">
           <name>CAL-ADDRESS</name>
           <t>The CAL-ADDRESS value data type (<xref target="RFC5545" section="3.3.3"/>) converts to a JSON string having the same value as the CAL-ADDRESS.</t>
-          <figure anchor="example-ical-type-cal-address">
+          <figure anchor="test-ical-type-cal-address">
             <name>Example for converting the CAL-ADDRESS value data type to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
-mailto:foo@example.com
+ORGANIZER:mailto:foo@example.com
 ]]></sourcecode>
-            <sourcecode type="json"><![CDATA[
-"mailto:foo@example.com"
+            <sourcecode type="jscalendar"><![CDATA[
+"replyTo": {
+  "imip": "mailto:foo@example.com"
+}
 ]]></sourcecode>
           </figure>
         </section>
@@ -283,13 +288,15 @@ mailto:foo@example.com
           <name>DATE</name>
           <t>The DATE value data type (<xref target="RFC5545" section="3.3.4"/>) converts to the LocalDateTime type (<xref target="RFC8984" section="1.4.5"/>).  The year, month and day of month values convert as-is.  The hour, minute and second values are all zero, fractional seconds are omitted.</t>
           <t>Whether to interpret the resulting value as a timeless temporal or a temporal having zero time is specific to the JSCalendar property or object definition.</t>
-          <figure anchor="example-ical-type-date">
+          <figure anchor="test-ical-type-date">
             <name>Example for converting the DATE value data type to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
-20240306
+DTSTART:20240306
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
-"2024-03-06T00:00:00"
+"start": "2024-03-06T00:00:00",
+"showWithoutTime": true,
+"timeZone": null
 ]]></sourcecode>
           </figure>
         </section>
@@ -297,22 +304,22 @@ mailto:foo@example.com
           <name>DATE-TIME</name>
           <t>A DATE-TIME value data type (<xref target="RFC5545" section="3.3.5"/>) in form "DATE WITH LOCAL TIME" converts the LocalDateTime type, a DATE-TIME in form "DATE WITH UTC TIME" converts to the UTCDateTime type (<xref target="RFC8984" section="1.4.4"/>).</t>
           <t>The year, month, day of month, hour, minute and second values convert as-is, fractional seconds are omitted.</t>
-          <figure anchor="example-ical-type-date-time-local-time">
+          <figure anchor="test-ical-type-date-time-local-time">
             <name>Example for converting a "DATE WITH LOCAL TIME" DATE-TIME value data type to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
-20240306T133256
+DTSTART:20240306T133256
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
-"2024-03-06T13:32:56"
+"start": "2024-03-06T13:32:56"
 ]]></sourcecode>
           </figure>
-          <figure anchor="example-ical-type-date-time-utc-time">
+          <figure anchor="test-ical-type-date-time-utc-time">
             <name>Example for converting a "DATE WITH UTC TIME" DATE-TIME value data type to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
-20060102T150405Z
+CREATED:20060102T150405Z
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
-"2006-01-02T15:04:05Z"
+"created": "2006-01-02T15:04:05Z"
 ]]></sourcecode>
           </figure>
         </section>
