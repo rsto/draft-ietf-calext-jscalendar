@@ -243,7 +243,7 @@ END:VCALENDAR
           <name>BINARY</name>
           <t>The BINARY value data type (<xref target="RFC5545" section="3.3.1"/>) converts to a JSON string having as value an URI <xref target="RFC3986"/> in the <tt>data</tt> URL scheme <xref target="RFC2397"/>.</t>
           <t>The data URL <bcp14>SHOULD</bcp14> use Base64-encoding, but it <bcp14>MAY</bcp14> use any other encoding that is valid according to <xref target="RFC2397"/>.  The data URL media type <bcp14>MUST</bcp14> be set, unless the binary value is known to be US-ASCII plain text.  If the value media type is unknown, then it <bcp14>MUST</bcp14> be <tt>application/octet-stream</tt>.</t>
-          <figure anchor="example-binary-value">
+          <figure anchor="example-ical-type-binary">
             <name>Example for converting a Base64-encoded BINARY value to a data URL</name>
             <sourcecode type="icalendar"><![CDATA[
 Obt8vRwnn+vwae16sg==
@@ -255,12 +255,14 @@ Obt8vRwnn+vwae16sg==
         </section>
         <section anchor="ical-type-boolean">
           <name>BOOLEAN</name>
-          <t>The BOOLEAN value data type (<xref target="RFC5545" section="3.3.2"/>) converts ...TBD</t>
-          <figure anchor="test-ical-type-boolean">
-            <name>Example for converting the BOOLEAN value data type to JSCalendar</name>
+          <t>The BOOLEAN value data type (<xref target="RFC5545" section="3.3.2"/>) converts to the JSON literal names "true" and "false" (<xref target="RFC8259" section="3"/>) by lowercasing the BOOLEAN value.</t>
+          <figure anchor="example-ical-type-boolean">
+            <name>Example for converting the BOOLEAN value data type to JSON</name>
             <sourcecode type="icalendar"><![CDATA[
+FALSE
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+false
 ]]></sourcecode>
           </figure>
         </section>
@@ -1967,6 +1969,7 @@ END:VCALENDAR
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7953.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7986.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8259.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8607.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8984.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.9073.xml"/>
