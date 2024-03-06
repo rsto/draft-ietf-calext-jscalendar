@@ -302,7 +302,7 @@ DTSTART:20240306
         </section>
         <section anchor="ical-type-date-time">
           <name>DATE-TIME</name>
-          <t>A DATE-TIME value data type (<xref target="RFC5545" section="3.3.5"/>) in form "DATE WITH LOCAL TIME" converts the LocalDateTime type, a DATE-TIME in form "DATE WITH UTC TIME" converts to the UTCDateTime type (<xref target="RFC8984" section="1.4.4"/>).</t>
+          <t>The DATE-TIME value data type (<xref target="RFC5545" section="3.3.5"/>) in form "DATE WITH LOCAL TIME" converts to the LocalDateTime type, the DATE-TIME in form "DATE WITH UTC TIME" to the UTCDateTime type (<xref target="RFC8984" section="1.4.4"/>).</t>
           <t>The year, month, day of month, hour, minute and second values convert as-is, fractional seconds are omitted.</t>
           <figure anchor="test-ical-type-date-time-local-time">
             <name>Example for converting a "DATE WITH LOCAL TIME" DATE-TIME value data type to JSCalendar</name>
