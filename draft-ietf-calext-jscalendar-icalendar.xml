@@ -295,12 +295,24 @@ mailto:foo@example.com
         </section>
         <section anchor="ical-type-date-time">
           <name>DATE-TIME</name>
-          <t>The DATE-TIME value data type (<xref target="RFC5545" section="3.3.5"/>) converts ...TBD</t>
-          <figure anchor="test-ical-type-date-time">
-            <name>Example for converting the DATE-TIME value data type to JSCalendar</name>
+          <t>A DATE-TIME value data type (<xref target="RFC5545" section="3.3.5"/>) in form "DATE WITH LOCAL TIME" converts the LocalDateTime type, a DATE-TIME in form "DATE WITH UTC TIME" converts to the UTCDateTime type (<xref target="RFC8984" section="1.4.4"/>).</t>
+          <t>The year, month, day of month, hour, minute and second values convert as-is, fractional seconds are omitted.</t>
+          <figure anchor="example-ical-type-date-time-local-time">
+            <name>Example for converting a "DATE WITH LOCAL TIME" DATE-TIME value data type to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
+20240306T133256
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+"2024-03-06T13:32:56"
+]]></sourcecode>
+          </figure>
+          <figure anchor="example-ical-type-date-time-utc-time">
+            <name>Example for converting a "DATE WITH UTC TIME" DATE-TIME value data type to JSCalendar</name>
+            <sourcecode type="icalendar"><![CDATA[
+20060102T150405Z
+]]></sourcecode>
+            <sourcecode type="jscalendar"><![CDATA[
+"2006-01-02T15:04:05Z"
 ]]></sourcecode>
           </figure>
         </section>
