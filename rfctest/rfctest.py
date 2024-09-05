@@ -26,8 +26,11 @@ class Backend:
         if self.auth:
             headers = {"Authorization": f"Basic {self.auth}"} | headers
         req = urllib.request.Request(self.url, headers=headers, data=data)
-        with urllib.request.urlopen(req) as res:
-            return res.read()
+        try:
+            with urllib.request.urlopen(req) as res:
+                return res.read()
+        except urllib.error.URLError as e:
+            raise BackendError(e)
 
     def convert_to_jgroup(self, ical: bytes) -> bytes:
         resp = self.http_post(
