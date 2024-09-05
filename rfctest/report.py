@@ -51,7 +51,7 @@ class JSONHighlighter:
         if self.path.encode() in self.highlight:
             print("</span>", end="", file=self.file)
         v = self.path.pop()
-        if have_next and self.scope == "[":
+        if have_next and self.scope[-1] == "[":
             self._enter_path(str(int(v) + 1))
 
     def print(self, data, highlight: dict[str, list[JPath]] = None):
