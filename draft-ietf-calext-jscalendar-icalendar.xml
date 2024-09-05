@@ -547,7 +547,8 @@ BEGIN:VEVENT
   "entries": [{
     "@type": "Event",
     "...": ""
-  }]
+  }],
+  "...": ""
 }
 ]]></sourcecode>
           </figure>
@@ -579,7 +580,8 @@ END:VCALENDAR
     "@type": "Event",
     "uid": "60BE3D6E-6383-473A-BCF1-3C43EA1FA571",
     "...": ""
-  }]
+  }],
+  "...": ""
 }
 ]]></sourcecode>
             </figure>
@@ -622,7 +624,8 @@ END:VCALENDAR
       }
     },
     "...": ""
-  }]
+  }],
+  "...": ""
 }
 ]]></sourcecode>
             </figure>
@@ -663,7 +666,8 @@ END:VCALENDAR
     "recurrenceId": "2024-01-03T14:00:00",
     "start": "2024-01-03T14:00:00",
     "...": ""
-  }]
+  }],
+  "...": ""
 }
 ]]></sourcecode>
             </figure>
@@ -695,7 +699,8 @@ END:VCALENDAR
     "uid": "F4257E1D-5461-4EF6-840F-9DFC653EB559",
     "title": "Duplicate #2",
     "...": ""
-  }]
+  }],
+  "...": ""
 }
 ]]></sourcecode>
             </figure>
@@ -744,7 +749,8 @@ END:VCALENDAR
       }
     },
     "...": ""
-  }]
+  }],
+  "...": ""
 }
 ]]></sourcecode>
             </figure>
