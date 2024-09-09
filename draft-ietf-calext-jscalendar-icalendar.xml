@@ -214,7 +214,8 @@ END:VCALENDAR
       "@type": "Event",
       "...": ""
     }
-  ]
+  ],
+  "...": ""
 }
 ]]></sourcecode>
         </figure>
