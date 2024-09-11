@@ -62,7 +62,9 @@ class JSONHighlighter:
 
         if highlight is not None:
             self.highlight.update(
-                (jp.encode(), cs) for cs, l in highlight.items() for jp in l
+                (jpath.encode(), css_class)
+                for css_class, jpaths in highlight.items()
+                for jpath in jpaths
             )
 
         tok_stack = []
