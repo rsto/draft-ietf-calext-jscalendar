@@ -65,30 +65,43 @@ class JSONHighlighter:
                 (jp.encode(), cs) for cs, l in highlight.items() for jp in l
             )
 
+        tok_stack = []
         for tok in json.JSONEncoder(sort_keys=True, separators=(",", ": ")).iterencode(
             data
         ):
-            match tok:
-                case "{" | "[":
-                    self.toks.append(tok)
-                    self._flush(end="\n")
-                    self.indent += 2
-                    self._enter_scope(tok)
-                case "}" | "]":
-                    self._flush()
-                    self.indent -= 2
-                    self.toks.append(tok)
-                    self._flush(pre="\n")
-                    self._leave_scope()
-                case ",":
-                    self.toks.append(tok)
-                    self._flush(end="\n")
-                    self._leave_path(have_next=True)
-                case ": ":
-                    self.toks.append(tok)
-                    self._enter_path(json.loads(self.toks[-2]))
-                case _:
-                    self.toks.append(tok)
+            # JSONEncoder returns a single token for the first item in
+            # an array, e.g.
+            #    >>> [tok for tok in json.JSONEncoder().iterencode([1])]
+            #    ['[1', ']']
+            # so we'll need to split that token into two to produce '['.
+            if tok[0] == "[" and len(tok):
+                tok_stack.append(tok[1:])
+                tok_stack.append(tok[0])
+            else:
+                tok_stack.append(tok)
+            while len(tok_stack):
+                tok = tok_stack.pop()
+                match tok:
+                    case "{" | "[":
+                        self.toks.append(tok)
+                        self._flush(end="\n")
+                        self.indent += 2
+                        self._enter_scope(tok)
+                    case "}" | "]":
+                        self._flush()
+                        self.indent -= 2
+                        self.toks.append(tok)
+                        self._flush(pre="\n")
+                        self._leave_scope()
+                    case ",":
+                        self.toks.append(tok)
+                        self._flush(end="\n")
+                        self._leave_path(have_next=True)
+                    case ": ":
+                        self.toks.append(tok)
+                        self._enter_path(json.loads(self.toks[-2]))
+                    case _:
+                        self.toks.append(tok)
         self._flush(pre="\n", end="\n")  # flush any garbage
 
 
