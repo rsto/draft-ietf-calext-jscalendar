@@ -219,23 +219,6 @@ END:VCALENDAR
 }
 ]]></sourcecode>
         </figure>
-        <t>If the Group object only has a single value in its <tt>entries</tt> property and no other property is set, then the Group object <bcp14>MAY</bcp14> be omitted.</t>
-        <figure anchor="test-ical-object-single-entry">
-          <name>Example for converting an iCalendar object to a single Group entry</name>
-          <sourcecode type="icalendar"><![CDATA[
-BEGIN:VCALENDAR
-BEGIN:VEVENT
-...
-END:VEVENT
-END:VCALENDAR
-]]></sourcecode>
-          <sourcecode type="jscalendar"><![CDATA[
-{
-  "@type": "Event",
-  "...": ""
-}
-]]></sourcecode>
-        </figure>
         <t>Converting an iCalendar stream of multiple iCalendar objects is <xref target="RFC5545" section="3.4"/> is implementation-specific, as multiple protocols and applications may have differing requirements.</t>
       </section>
       <section anchor="ical-types">
