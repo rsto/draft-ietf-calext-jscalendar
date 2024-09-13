@@ -344,12 +344,27 @@ DURATION:PT1H
         </section>
         <section anchor="ical-type-integer">
           <name>INTEGER</name>
-          <t>The INTEGER value data type (<xref target="RFC5545" section="3.3.8"/>) converts ...TBD</t>
-          <figure anchor="test-ical-type-integer">
-            <name>Example for converting the INTEGER value data type to JSCalendar</name>
+          <t>The INTEGER value data type (<xref target="RFC5545" section="3.3.8"/>) converts to either the Int type (<xref target="RFC8984" section="1.4.2"/>) or the UnsignedInt type (<xref target="RFC8984" section="1.4.3"/>), depending on the value type of the JSCalendar property.</t>
+          <figure anchor="test-ical-type-integer-int">
+            <name>Example for converting the INTEGER value data type to the JSCalendar Int type</name>
             <sourcecode type="icalendar"><![CDATA[
+RRULE:FREQ=MONTHLY;BYMONTHDAY=-1
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+"recurrenceRules": [{
+  "@type": "RecurrenceRule",
+  "frequency": "monthly",
+  "byMonthDay": [-1]
+}]
+]]></sourcecode>
+          </figure>
+          <figure anchor="test-ical-type-integer-unsigned-int">
+            <name>Example for converting the INTEGER value data type to the JSCalendar UnsignedInt type</name>
+            <sourcecode type="icalendar"><![CDATA[
+SEQUENCE:1
+]]></sourcecode>
+            <sourcecode type="jscalendar"><![CDATA[
+"sequence": 1
 ]]></sourcecode>
           </figure>
         </section>
