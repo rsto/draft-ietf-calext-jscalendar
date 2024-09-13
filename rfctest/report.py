@@ -3,7 +3,7 @@ from __future__ import annotations
 import html
 import json
 
-from rfctest.rfctest import Test, TestState
+from rfctest.rfctest import Test, TestOutcome, TestState
 from rfctest.jsical import JPath
 
 
@@ -121,7 +121,7 @@ class HTMLReporter:
         for test in tests:
             if test.failed() or self.report_succeeded_tests:
                 self._begin_test(test)
-                if self.report_all_test_states:
+                if test.outcome() == TestOutcome.ERROR or self.report_all_test_states:
                     for state in TestState:
                         self._print_test_state(test, state)
                         if test.state == state:
