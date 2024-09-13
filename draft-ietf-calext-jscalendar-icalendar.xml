@@ -292,7 +292,7 @@ ORGANIZER:mailto:foo@example.com
           <figure anchor="test-ical-type-date">
             <name>Example for converting the DATE value data type to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
-DTSTART:20240306
+DTSTART;VALUE=DATE:20240306
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
 "start": "2024-03-06T00:00:00",
