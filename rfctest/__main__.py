@@ -112,8 +112,7 @@ def main():
         tests = find_tests(args.file, names=want_tests)
         run_tests(tests, backend)
         with open(args.report, "w", encoding="utf-8") as file:
-            report = HTMLReporter(file)
-            report_tests(tests, report)
+            HTMLReporter(file).print(tests)
     except OSError as e:
         print(f"{e}", file=sys.stderr)
         raise SystemExit from e

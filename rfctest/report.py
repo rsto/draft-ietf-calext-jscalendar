@@ -111,8 +111,25 @@ class HTMLReporter:
     def __init__(self, file):
         self.file = file
         self.jhighlighter = JSONHighlighter(file)
+        self.report_all_test_states = False
+        self.report_succeeded_tests = False
 
-    def begin(self):
+    def print(self, tests: list[Test]):
+        self._print_preamble()
+        self._print_summary(tests)
+        failed_tests = [t for t in tests if t.failed()]
+        for test in tests:
+            if test.failed() or self.report_succeeded_tests:
+                self._begin_test(test)
+                if self.report_all_test_states:
+                    for state in TestState:
+                        self._print_test_state(test, state)
+                        if test.state == state:
+                            break
+                self._end_test(test)
+        self._print_footer()
+
+    def _print_preamble(self):
         print("<!doctype html>", file=self.file)
         print("<html>", file=self.file)
         print("<head>", file=self.file)
@@ -133,60 +150,44 @@ class HTMLReporter:
         print("<body>", file=self.file)
         print("<h1>iCalendar to JSCalendar</h1>", file=self.file)
 
-    def end(self):
+    def _print_footer(self):
         print("</body>", file=self.file)
         print("</html>", file=self.file)
         print("\n", file=self.file)
 
-    def summary(self, tests: list[Test]):
+    def _print_summary(self, tests: list[Test]):
         print("<h2>Summary</h2>", file=self.file)
         print("<table>", file=self.file)
         print("<tr><th>Test name</th><th>Outcome</th></tr>", file=self.file)
         for test in tests:
             outcome = test.outcome()
-            href = f"#{test.name}-{test.state}"
             print("<tr>", file=self.file)
-            print(f"<td>{test.name}</td>", file=self.file)
-            print(
-                f'<td><a href="{href}"><span class="{outcome}">{outcome}</span></a></td></tr>',
-                file=self.file,
-            )
+            print("<td>", file=self.file)
+            if test.failed():
+                print(f'<a href="#{test.name}">', file=self.file)
+            print(f"{test.name}", file=self.file)
+            if test.failed():
+                print(f"</a>", file=self.file)
+            print("</td>", file=self.file)
+            print(f"<td>", file=self.file)
+            print(f'<span class="{outcome}">{outcome}</span>', file=self.file)
+            print(f"</td>", file=self.file)
+            print(f"</tr>", file=self.file)
+
         print("</table>", file=self.file)
 
-    def begin_test(self, test: Test):
+    def _begin_test(self, test: Test):
+        outcome = test.outcome()
         print("<hr>", file=self.file)
-        print(f"<h2 id=>Test {test.name}</h2>", file=self.file)
+        print(f"<h2 id={test.name}>Test {test.name}</h2>", file=self.file)
+        print(f'<p><span class="{outcome}">{outcome}</span></p>', file=self.file)
+        self._print_test_state(test, test.state)
 
-    def end_test(self, test: Test):
+    def _end_test(self, test: Test):
         pass
 
-    def report_diff(
-        self,
-        description: str,
-        jvals: tuple[dict, dict],
-        highlight: tuple[list[JPath], list[JPath]],
-        captions: tuple[str, str],
-    ):
-        print(f"<p>{description}</p>", file=self.file)
-        print(
-            '<div style="display: flex; gap: 1em;" class="box">',
-            file=self.file,
-        )
-        for i in range(2):
-            print("<div>", file=self.file)
-            print(
-                f'<h4 style="text-align: center;">{captions[i]}</h4>',
-                file=self.file,
-            )
-            print('<p class="sourcecode">', file=self.file)
-            self.jhighlighter.print(jvals[i], highlight={"highlight": highlight[i]})
-            print("</p>", file=self.file)
-            print("</div>", file=self.file)
-        print("</div>", file=self.file)
-
-    def report_state(self, test: Test, state: TestState):
+    def _print_test_state(self, test: Test, state: TestState):
         print(f"<h3 id={test.name}-{state}>{state.value}</h3>", file=self.file)
-
         if test.error and test.state == state:
             print(
                 f"<p>Failed with error</p><pre>{test.error}</pre>",
@@ -219,14 +220,14 @@ class HTMLReporter:
                 if test.jdiff.empty():
                     print("<p>All properties match.</p>", file=self.file)
                 if test.jdiff.a_only:
-                    self.report_diff(
+                    self._report_diff(
                         "The following properties are expected but missing:",
                         (test.jgroup.to_json(), test.jresp),
                         (test.jdiff.a_only, []),
                         ("Expected", "Response"),
                     )
                 if test.jdiff.unequal:
-                    self.report_diff(
+                    self._report_diff(
                         "The following property values do not match:",
                         (test.jgroup.to_json(), test.jresp),
                         (
@@ -236,9 +237,33 @@ class HTMLReporter:
                         ("Expected", "Response"),
                     )
                 if test.jdiff.b_only:
-                    self.report_diff(
+                    self._report_diff(
                         "The following properties are unexpected:",
                         (test.jgroup.to_json(), test.jresp),
                         ([], test.jdiff.b_only),
                         ("Expected", "Response"),
                     )
+
+    def _report_diff(
+        self,
+        description: str,
+        jvals: tuple[dict, dict],
+        highlight: tuple[list[JPath], list[JPath]],
+        captions: tuple[str, str],
+    ):
+        print(f"<p>{description}</p>", file=self.file)
+        print(
+            '<div style="display: flex; gap: 1em;" class="box">',
+            file=self.file,
+        )
+        for i in range(2):
+            print("<div>", file=self.file)
+            print(
+                f'<h4 style="text-align: center;">{captions[i]}</h4>',
+                file=self.file,
+            )
+            print('<p class="sourcecode">', file=self.file)
+            self.jhighlighter.print(jvals[i], highlight={"highlight": highlight[i]})
+            print("</p>", file=self.file)
+            print("</div>", file=self.file)
+        print("</div>", file=self.file)

@@ -127,3 +127,6 @@ class Test:
         if not self.jdiff.empty():
             return TestOutcome.INVALID
         return TestOutcome.SUCCESS
+
+    def failed(self) -> bool:
+        return self.outcome() != TestOutcome.SUCCESS
