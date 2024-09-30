@@ -230,12 +230,12 @@ END:VCALENDAR
           <figure anchor="test-ical-type-binary">
             <name>Example for converting a BINARY value to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
-ATTACH;VALUE=BINARY;ENCODING=BASE64:Obt8vRwnn+vwae16sg==
+ATTACH;VALUE=BINARY;ENCODING=BASE64:SGVsbG8gV29ybGQhCg==
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
 {
   "@type": "Link",
-  "href": "data:application/octet-stream;base64,Obt8vRwnn+vwae16sg=="
+  "href": "data:;base64,SGVsbG8gV29ybGQhCg=="
 }
 ]]></sourcecode>
           </figure>
