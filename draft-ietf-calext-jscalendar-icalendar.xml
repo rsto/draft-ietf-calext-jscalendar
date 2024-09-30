@@ -323,7 +323,7 @@ DURATION:PT1H
         <section anchor="ical-type-float">
           <name>FLOAT</name>
           <t>The FLOAT value data type (<xref target="RFC5545" section="3.3.7"/>) does not convert to any JSCalendar value type.</t>
-          <t><xref target="ical-prop-geo"/> defines how to convert the GEO property value.  <xref target="jscal-prop-icalprops"/> defines how to convert arbitrary iCalendar properties having FLOAT values.</t>
+          <t><xref target="ical-prop-geo"/> defines how to convert the GEO property value.  <xref target="jscal-prop-icalprops"/> defines how to convert arbitrary iCalendar properties and types.</t>
         </section>
         <section anchor="ical-type-integer">
           <name>INTEGER</name>
@@ -353,14 +353,8 @@ SEQUENCE:1
         </section>
         <section anchor="ical-type-period">
           <name>PERIOD</name>
-          <t>The PERIOD value data type (<xref target="RFC5545" section="3.3.9"/>) converts ...TBD</t>
-          <figure anchor="test-ical-type-period">
-            <name>Example for converting the PERIOD value data type to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-]]></sourcecode>
-          </figure>
+          <t>The PERIOD value data type (<xref target="RFC5545" section="3.3.9"/>) does not convert to any JSCalendar value type.</t>
+          <t><xref target="jscal-prop-icalprops"/> defines how to convert arbitrary iCalendar properties and types.</t>
         </section>
         <section anchor="ical-type-recur">
           <name>RECUR</name>
@@ -488,14 +482,8 @@ DESCRIPTION:Lorem ipsum odor amet\,\nconsectetuer
         </section>
         <section anchor="ical-type-time">
           <name>TIME</name>
-          <t>The TIME value data type (<xref target="RFC5545" section="3.3.12"/>) converts ...TBD</t>
-          <figure anchor="test-ical-type-time">
-            <name>Example for converting the TIME value data type to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-]]></sourcecode>
-          </figure>
+          <t>The TIME value data type (<xref target="RFC5545" section="3.3.12"/>) does not convert to any JSCalendar value type.</t>
+          <t><xref target="jscal-prop-icalprops"/> defines how to convert arbitrary iCalendar properties and types.</t>
         </section>
         <section anchor="ical-type-uid">
           <name>UID</name>
