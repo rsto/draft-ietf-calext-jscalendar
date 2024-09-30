@@ -134,7 +134,7 @@ class VObject:
     @classmethod
     def parse(cls, s: str, default_name="VEVENT") -> VObject:
         # Unfold and split lines
-        lines = re.split(r"\r?\n", re.sub(r"\r?\n([ ]{2}|\t)", "", s.strip()))
+        lines = re.split(r"\r?\n", re.sub(r"\r?\n([ ]|\t)", "", s))
         # Parse example
         stack = [VObject(None)]
         comp = stack[0]

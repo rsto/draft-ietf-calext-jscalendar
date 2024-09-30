@@ -111,15 +111,12 @@ class HTMLReporter:
     def __init__(self, file):
         self.file = file
         self.jhighlighter = JSONHighlighter(file)
-        self.report_succeeded_tests = False
 
     def print(self, tests: list[Test]):
         self._print_preamble()
         self._print_summary(tests)
-        failed_tests = [t for t in tests if t.failed()]
         for test in tests:
-            if test.failed() or self.report_succeeded_tests:
-                self._print_test(test)
+            self._print_test(test)
         self._print_footer()
 
     def _print_preamble(self):
@@ -156,11 +153,9 @@ class HTMLReporter:
             outcome = test.outcome()
             print("<tr>", file=self.file)
             print("<td>", file=self.file)
-            if test.failed():
-                print(f'<a href="#{test.name}">', file=self.file)
+            print(f'<a href="#{test.name}">', file=self.file)
             print(f"{test.name}", file=self.file)
-            if test.failed():
-                print(f"</a>", file=self.file)
+            print(f"</a>", file=self.file)
             print("</td>", file=self.file)
             print(f"<td>", file=self.file)
             print(f'<span class="{outcome}">{outcome}</span>', file=self.file)
@@ -174,7 +169,8 @@ class HTMLReporter:
         print("<hr>", file=self.file)
         print(f"<h2 id={test.name}>Test {test.name}</h2>", file=self.file)
         print(f'<p><span class="{outcome}">{outcome}</span></p>', file=self.file)
-        self._print_test_state(test, test.state)
+        if test.failed():
+            self._print_test_state(test, test.state)
         print("<details>", file=self.file)
         print("<summary>Details</summary>", file=self.file)
         for state in TestState:
