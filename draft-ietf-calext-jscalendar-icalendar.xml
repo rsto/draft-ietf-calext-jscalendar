@@ -364,23 +364,125 @@ SEQUENCE:1
         </section>
         <section anchor="ical-type-recur">
           <name>RECUR</name>
-          <t>The RECUR value data type (<xref target="RFC5545" section="3.3.10"/>) converts ...TBD</t>
+          <t>The RECUR value data type (<xref target="RFC5545" section="3.3.10"/>) converts to the RecurrenceRule type (<xref target="RFC8984" section="4.3.3"/>) as follows:</t>
+          <table>
+            <thead>
+              <tr>
+                <th>RRULE</th>
+                <th>RecurrenceRule</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>FREQ</td>
+                <td>frequency</td>
+              </tr>
+              <tr>
+                <td>UNTIL</td>
+                <td>until</td>
+              </tr>
+              <tr>
+                <td>COUNT</td>
+                <td>count</td>
+              </tr>
+              <tr>
+                <td>INTERVAL</td>
+                <td>interval</td>
+              </tr>
+              <tr>
+                <td>BYSECOND</td>
+                <td>bySecond</td>
+              </tr>
+              <tr>
+                <td>BYMINUTE</td>
+                <td>byMinute</td>
+              </tr>
+              <tr>
+                <td>BYHOUR</td>
+                <td>byHour</td>
+              </tr>
+              <tr>
+                <td>BYDAY</td>
+                <td>byDay</td>
+              </tr>
+              <tr>
+                <td>BYMONTHDAY</td>
+                <td>byMonthDay</td>
+              </tr>
+              <tr>
+                <td>BYYEARDAY</td>
+                <td>byYearDay</td>
+              </tr>
+              <tr>
+                <td>BYWEEKNO</td>
+                <td>byWeekNo</td>
+              </tr>
+              <tr>
+                <td>BYMONTH</td>
+                <td>byMonth</td>
+              </tr>
+              <tr>
+                <td>BYSETPOS</td>
+                <td>bySetPosition</td>
+              </tr>
+              <tr>
+                <td>WKST</td>
+                <td>firstDayOfWeek</td>
+              </tr>
+              <tr>
+                <td>RSCALE <xref target="RFC7529"/></td>
+                <td>rscale</td>
+              </tr>
+              <tr>
+                <td>SKIP <xref target="RFC7529"/></td>
+                <td>skip</td>
+              </tr>
+            </tbody>
+          </table>
+          <t>
+              The string values of the FREQ, WKST, RSCALE convert to lowercase.  The UTC date-time value of the UNTIL part converts to a LocalDateTime value in the timezone of the JSCalendar Event's or Task's timeZone property, or floating time.  The entries in the numeric list properties such as byHour <bcp14>MUST</bcp14> be deduplicated and sorted ascending.
+          </t>
           <figure anchor="test-ical-type-recur">
             <name>Example for converting the RECUR value data type to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
+RRULE:FREQ=YEARLY
+ ;INTERVAL=2
+ ;BYMONTH=1
+ ;BYDAY=SU
+ ;BYHOUR=9,8
+ ;BYMINUTE=30
+ ;UNTIL=20240930T120000Z
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+"recurrenceRules": [{
+  "@type": "RecurrenceRule",
+  "frequency": "yearly",
+  "interval": 2,
+  "byMonth": ["1"],
+  "byDay": [{
+    "@type": "NDay",
+    "day": "su"
+  }],
+  "byHour": [8,9],
+  "byMinute": [30],
+  "until": "2024-09-30T14:00:00"
+}],
+"timeZone": "Europe/Berlin"
 ]]></sourcecode>
           </figure>
         </section>
         <section anchor="ical-type-text">
           <name>TEXT</name>
-          <t>The TEXT value data type (<xref target="RFC5545" section="3.3.11"/>) converts ...TBD</t>
+          <t>The TEXT value data type (<xref target="RFC5545" section="3.3.11"/>) converts to the String type (<xref target="RFC8984" section="1.3"/>).  Any escaped character in the iCalendar TEXT value <bcp14>MUST</bcp14> be unescaped during conversion, any line folds <bcp14>MUST</bcp14> be ignored.
+</t>
           <figure anchor="test-ical-type-text">
             <name>Example for converting the TEXT value data type to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
+DESCRIPTION:Lorem ipsum odor amet\,\nconsectetuer
+  adipiscing elit.
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+"description": "Lorem ipsum odor amet,\nconsectetuer adipiscing elit."
 ]]></sourcecode>
           </figure>
         </section>
@@ -1921,6 +2023,7 @@ END:VCALENDAR
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6321.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6638.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7265.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7529.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7808.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7953.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7986.xml"/>
