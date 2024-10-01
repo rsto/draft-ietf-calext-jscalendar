@@ -14,39 +14,12 @@
 <?rfc sortrefs="yes"?>
 <?rfc symrefs="yes"?>
 <?rfc iprnotified="no"?>
-<rfc xmlns:xi="http://www.w3.org/2001/XInclude" ipr="trust200902" category="std" consensus="true" docName="draft-ietf-calext-jscalendar-icalendar-08" obsoletes="" updates="" submissionType="IETF" xml:lang="en" tocInclude="true" symRefs="true" sortRefs="true" version="3">
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" ipr="trust200902" category="exp" consensus="true" docName="draft-ietf-calext-jscalendar-icalendar-08" obsoletes="" updates="" submissionType="IETF" xml:lang="en" tocInclude="true" symRefs="true" sortRefs="true" version="3">
   <front>
     <title abbrev="JSCalendar">JSCalendar: Converting from and to iCalendar</title>
     <seriesInfo name="Internet-Draft" value="draft-ietf-calext-jscalendar-icalendar-08"/>
-    <author initials="J.M." surname="Baum" fullname="Joris Baum">
-      <organization>audriga</organization>
-      <address>
-        <postal>
-          <street>Alter Schlachthof 57</street>
-          <city>Karlsruhe </city>
-          <code>76137</code>
-          <country>Germany</country>
-        </postal>
-        <email>joris@audriga.com</email>
-        <uri>https://www.audriga.com</uri>
-      </address>
-    </author>
-    <author initials="M." surname="Douglass" fullname="Michael Douglass">
-      <organization abbrev="BCS">Bedework Commercial Services</organization>
-      <address>
-        <postal>
-          <street>226 3rd Street</street>
-          <city>Troy</city>
-          <region>NY</region>
-          <code>12180</code>
-          <country>United States of America</country>
-        </postal>
-        <email>mdouglass@bedework.com</email>
-        <uri>http://bedework.com</uri>
-      </address>
-    </author>
     <author initials="R." surname="Stepanek" fullname="Robert Stepanek">
-      <organization>FastMail</organization>
+      <organization>Fastmail</organization>
       <address>
         <postal>
           <street>PO Box 234</street>
