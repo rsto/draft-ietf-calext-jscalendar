@@ -500,45 +500,49 @@ UID:93358b83-4c44-4a67-A8DD-5672df776f94
         </section>
         <section anchor="ical-type-unknown">
           <name>UNKNOWN</name>
-          <t>The UNKNOWN value data type (<xref target="RFC7265" section="5"/>) is reserved.  ...TBD</t>
-          <figure anchor="test-ical-type-unknown">
-            <name>Example for converting the UNKNOWN value data type to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-]]></sourcecode>
-          </figure>
+          <t>The UNKNOWN value data type (<xref target="RFC7265" section="5"/>) is reserved.  It does not convert to any JSCalendar value type.</t>
+          <t><xref target="jscal-prop-icalprops"/> defines how to convert arbitrary iCalendar properties and types.</t>
         </section>
         <section anchor="ical-type-uri">
           <name>URI</name>
-          <t>The URI value data type (<xref target="RFC5545" section="3.3.13"/>) converts ...TBD</t>
+          <t>The URI value data type (<xref target="RFC5545" section="3.3.13"/>) converts to the String type (<xref target="RFC8984" section="1.3"/>).  The JSCalendar string value <bcp14>MUST</bcp14> be valid according to the syntax rules defined in <xref target="RFC3986"/> and updates.</t>
           <figure anchor="test-ical-type-uri">
             <name>Example for converting the URI value data type to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
+URL:https://example.com/foo%2Bbar
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+{
+  "@type": "Link",
+  "href": "https://example.com/foo%2Bbar",
+  "...": ""
+}
 ]]></sourcecode>
           </figure>
         </section>
         <section anchor="ical-type-utc-offset">
           <name>UTC-OFFSET</name>
-          <t>The UTC-OFFSET value data type (<xref target="RFC5545" section="3.3.14"/>) converts ...TBD</t>
-          <figure anchor="test-ical-type-utc-offset">
-            <name>Example for converting the UTC-OFFSET value data type to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-]]></sourcecode>
-          </figure>
+          <t>The UTC-OFFSET value data type (<xref target="RFC5545" section="3.3.14"/>) converts to the String type (<xref target="RFC8984" section="1.3"/>).</t><t>See <xref target="ical-prop-tzoffsetfrom"/> and <xref target="ical-prop-tzoffsetto"/> for examples.</t>
         </section>
         <section anchor="ical-type-xml-reference">
           <name>XML-REFERENCE</name>
-          <t>The XML-REFERENCE value data type (<xref target="RFC9253" section="7"/>) converts ...TBD</t>
+          <t>The XML-REFERENCE value data type (<xref target="RFC9253" section="7"/>) converts to the String type (<xref target="RFC8984" section="1.3"/>).  The same conversion rules as for the <xref target="ical-type-uri">URI type</xref> apply.</t>
           <figure anchor="test-ical-type-xml-reference">
             <name>Example for converting the XML-REFERENCE value data type to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
+LINK;LINKREL="https://example.com/linkrel/costStructure"
+ ;VALUE=XML-REFERENCE
+ :https://example.com/xmlDocs/bidFramework.xml
+ #xpointer(descendant::CostStruc/range-to(
+ following::CostStrucEND[1]))
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+{
+  "@type": "Link",
+  "href": "https://example.com/xmlDocs/bidFramework.xml#xpointer(descendant::CostStruc/range-to(following::CostStrucEND[1]))",
+  "rel": "https://example.com/linkrel/costStructure",
+  "...": ""
+}
 ]]></sourcecode>
           </figure>
         </section>
