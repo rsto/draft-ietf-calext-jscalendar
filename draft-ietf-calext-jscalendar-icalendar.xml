@@ -487,12 +487,14 @@ DESCRIPTION:Lorem ipsum odor amet\,\nconsectetuer
         </section>
         <section anchor="ical-type-uid">
           <name>UID</name>
-          <t>The UID value data type (<xref target="RFC9253" section="7"/>) converts ...TBD</t>
+          <t>The UID value data type (<xref target="RFC9253" section="7"/>) converts to the String type (<xref target="RFC8984" section="1.3"/>).  Any escaped character in the iCalendar UID value <bcp14>MUST</bcp14> be unescaped during conversion, any line folds <bcp14>MUST</bcp14> be ignored.</t>
           <figure anchor="test-ical-type-uid">
             <name>Example for converting the UID value data type to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
+UID:93358b83-4c44-4a67-A8DD-5672df776f94
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+"uid": "93358b83-4c44-4a67-A8DD-5672df776f94"
 ]]></sourcecode>
           </figure>
         </section>
