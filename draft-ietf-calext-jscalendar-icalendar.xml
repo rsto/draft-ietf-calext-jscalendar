@@ -165,6 +165,16 @@ SUMMARY:he
     </section>
     <section anchor="convert-icalendar-to-jscalendar">
       <name>Converting iCalendar to JSCalendar</name>
+      <section anchor="generating-jscalendar-ids">
+        <name>Generating JSCalendar Ids</name>
+        <t>In many places in JSCalendar, a JSON map is used where the map keys are of type Id (<xref target="RFC8984" section="1.4.1"/>.  If an iCalendar property or component converts to a value in these JSON maps, then an implementation needs to choose an identifier as key.</t>
+<t>This document defines the new <xref target="ical-param-jsid">JSID</xref> parameter and <xref target="ical-prop-jsid">JSID</xref> property, which allow to set a JSCalendar Id value when converting from JSCalendar to iCalendar.  If they are set on a property or the component, then its value <bcp14>MUST</bcp14> be used a map key when converting from iCalendar to JSCalendar.  If no such parameter or property is set, then an implementation is free to choose any identifier as map key, as long the following requirements are met:</t>
+<ul>
+<li>The identifier <bcp14>MUST</bcp14> be a valid Id value.</li>
+<li>If the same iCalendar object is converted twice, then the identifier for each property or component <bcp14>MUST</bcp14> stay the same, irrespective of the order in which properties and subcomponents are processed.</li>
+</ul>
+<t>In a few cases, an iCalendar property and component may both convert to the same JSCalendar object.  Examples for this are the ATTENDEE property and PARTICIPANT component, as well as the LOCATION property and VLOCATION component... TBD</t>
+      </section>
       <section anchor="ical-object">
         <name>iCalendar Objects</name>
         <t>An iCalendar object (<xref target="RFC5545" section="3.4"/>) converts to a JSCalendar object of type Group (<xref target="RFC8984" section="2.3"/>).</t>
@@ -608,6 +618,8 @@ LINK;LINKREL="https://example.com/linkrel/costStructure"
             <sourcecode type="icalendar"><![CDATA[
 BEGIN:VCALENDAR
 BEGIN:VEVENT
+UID:bda09d03-564c-4ac8-851c-24e66d6abe3c
+DTSTART:20060102T030405Z
 ...
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
@@ -615,6 +627,10 @@ BEGIN:VEVENT
   "@type": "Group",
   "entries": [{
     "@type": "Event",
+    "uid": "bda09d03-564c-4ac8-851c-24e66d6abe3c",
+    "start": "2006-01-02T03:04:05",
+    "timeZone": "Etc/UTC",
+    "showWithoutTime": false,
     "...": ""
   }],
   "...": ""
@@ -1954,8 +1970,19 @@ END:VCALENDAR
     </section>
     <section anchor="updates-icalendar">
       <name>Updates to iCalendar</name>
+      <section anchor="new-icalendar-parameters">
+        <name>New iCalendar parameters</name>
+        <section anchor="ical-param-jsid">
+          <name>JSID</name>
+          <t>TBD</t>
+        </section>
+      </section>
       <section anchor="new-icalendar-properties">
         <name>New iCalendar properties</name>
+        <section anchor="ical-prop-jsid">
+          <name>JSID</name>
+          <t>TBD</t>
+        </section>
         <section anchor="ical-prop-show-without-time">
           <name>SHOW-WITHOUT-TIME</name>
           <t>TBD</t>
@@ -1968,7 +1995,23 @@ END:VCALENDAR
         <name>New JSCalendar properties</name>
         <section anchor="jscal-prop-icalprops">
           <name>Property <tt>iCalProps</tt></name>
-          <t>TBD</t>
+          <dl>
+            <dt>Type: <tt>JCalProp[]</tt> (optional).</dt>
+            <dd>This contains iCalendar properties that are set in the iCalendar component represented by this JSCalendar object.  The JCalProp type denotes a jCal-encoded iCalendar property as defined in <xref target="RFC7265" sectionFormat="of" section="3.4"/>.</dd>
+          </dl>
+          <figure anchor="test-ical-prop-icalprops">
+            <name>Example for the iCalProps property.</name>
+            <sourcecode type="icalendar"><![CDATA[
+X-FOO;X-BAR=Hello:World!
+]]></sourcecode>
+            <sourcecode type="jscalendar"><![CDATA[
+"iCalProps": [
+  ["x-foo", {
+    "x-bar": "Hello"
+  }, "unknown", "World!"]
+]
+]]></sourcecode>
+          </figure>
         </section>
       </section>
     </section>
