@@ -1528,13 +1528,22 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-summary">
           <name>SUMMARY</name>
-          <t>The SUMMARY property (<xref target="RFC5545" section="3.8.1.12"/>) converts ...TBD</t>
+          <t>The SUMMARY property (<xref target="RFC5545" section="3.8.1.12"/>) of a VEVENT or VTODO component converts to the title property (<xref target="RFC8984" section="4.2.1"/>) of the Event or Task.</t>
+          <t>For all other components, the SUMMARY property converts to an entry in the iCalProps property (<xref target="jscal-prop-icalprops"/>).</t>
           <figure anchor="test-ical-prop-summary">
             <name>Example for converting the SUMMARY property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
+BEGIN:VEVENT
+SUMMARY:test
+...
+END:VEVENT
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
-
+{
+  "@type": "Event",
+  "title": "test",
+  "...": ""
+}
 ]]></sourcecode>
           </figure>
         </section>
