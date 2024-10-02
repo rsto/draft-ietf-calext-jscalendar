@@ -52,7 +52,8 @@
       <name>Introduction</name>
       <section anchor="notational-conventions" numbered="true" toc="default">
         <name>Notational Conventions</name>
-        <t>The key words "<bcp14>MUST</bcp14>", "<bcp14>MUST NOT</bcp14>", "<bcp14>REQUIRED</bcp14>", "<bcp14>SHALL</bcp14>", "<bcp14>SHALL NOT</bcp14>", "<bcp14>SHOULD</bcp14>", "<bcp14>SHOULD NOT</bcp14>", "<bcp14>RECOMMENDED</bcp14>", "<bcp14>NOT RECOMMENDED</bcp14>", "<bcp14>MAY</bcp14>", and "<bcp14>OPTIONAL</bcp14>" in this document are to be interpreted as described in BCP 14 <xref target="RFC2119" format="default" sectionFormat="of" derivedContent="RFC2119"/> <xref target="RFC8174" format="default" sectionFormat="of" derivedContent="RFC8174"/> when, and only when, they appear in all capitals, as shown here.</t>
+        <t>The key words "<bcp14>MUST</bcp14>", "<bcp14>MUST NOT</bcp14>", "<bcp14>REQUIRED</bcp14>", "<bcp14>SHALL</bcp14>", "<bcp14>SHALL NOT</bcp14>", "<bcp14>SHOULD</bcp14>", "<bcp14>SHOULD NOT</bcp14>", "<bcp14>RECOMMENDED</bcp14>", "<bcp14>NOT RECOMMENDED</bcp14>", "<bcp14>MAY</bcp14>", and "<bcp14>OPTIONAL</bcp14>" in this document are to be interpreted as described in BCP 14 <xref target="RFC2119" format="default" sectionFormat="of" derivedContent="RFC2119"/>
+          <xref target="RFC8174" format="default" sectionFormat="of" derivedContent="RFC8174"/> when, and only when, they appear in all capitals, as shown here.</t>
         <t>The ABNF definitions in this document use the notations of <xref target="RFC5234"/>. ABNF rules not defined in this document either are defined in <xref target="RFC5234"/> or <xref target="RFC5545"/>.</t>
       </section>
       <section>
@@ -91,7 +92,8 @@ END:VCALENDAR
           </figure>
           <t>A line containing just the value <tt>...</tt> stands for any other properties that might be present in a component but are irrevelant for this example.  This includes mandatory properties.  <xref target="example-notation-icalendar-dotdotdot"/> illustrates this as an alternative representation for the examples of <xref target="example-notation-icalendar-implicit-explicit"/>.</t>
           <figure anchor="example-notation-icalendar-dotdotdot">
-            <name>Example for additional properties represented by <tt>...</tt></name>
+            <name>Example for additional properties represented by <tt>...</tt>
+            </name>
             <sourcecode type="icalendar"><![CDATA[
 BEGIN:VEVENT
 SUMMARY:hello
@@ -113,7 +115,8 @@ SUMMARY:he
           <t>A JSCalendar example always represents a Group object, even if the example only depicts one of the Group entries or properties.</t>
           <t>JSCalendar objects are depicted either explicitly or implicitly. An explicit JSCalendar object starts and ends with braces.  An implicit JSCalendar object omits braces, it only consists of JSON name/value pairs, separated by comma.</t>
           <t>An implicit JSCalendar object is assumed to be of type Event, unless it contains the <tt>@type</tt> property with a different value.  It is assumed to contain mandatory properties with some value, but the actual value is irrevelant for the main point of the example.</t>
-          <t><xref target="example-notation-jscalendar-implicit-explicit"/> illustrates this with multiple examples, all of which represent the same JSCalendar data.  The first example contains an implicit JSCalendar object of type Event.  The second example contains an implicit JSCalendar object with a <tt>@type</tt> property.  The third example contains an explicit Event object but the Group object containing it is omitted.  The fourth example contains the full Group object, nothing is omitted.</t>
+          <t>
+            <xref target="example-notation-jscalendar-implicit-explicit"/> illustrates this with multiple examples, all of which represent the same JSCalendar data.  The first example contains an implicit JSCalendar object of type Event.  The second example contains an implicit JSCalendar object with a <tt>@type</tt> property.  The third example contains an explicit Event object but the Group object containing it is omitted.  The fourth example contains the full Group object, nothing is omitted.</t>
           <figure anchor="example-notation-jscalendar-implicit-explicit">
             <name>Examples for implicit and explicit JSCalendar object notation</name>
             <sourcecode type="jscalendar"><![CDATA[
@@ -151,7 +154,8 @@ SUMMARY:he
           </figure>
           <t>A property with name <tt>"..."</tt> and value <tt>""</tt> stands for additional properties that might be present in a JSCalendar object, but which are irrelevant for this example.  This includes mandatory properties. <xref target="example-notation-jscalendar-dotdotdot"/> illustrates this as an alternative representation for the examples of <xref target="example-notation-jscalendar-implicit-explicit"/>.</t>
           <figure anchor="example-notation-jscalendar-dotdotdot">
-            <name>Example for additional properties represented by <tt>...</tt></name>
+            <name>Example for additional properties represented by <tt>...</tt>
+            </name>
             <sourcecode type="jscalendar"><![CDATA[
 {
   "@type": "Event",
@@ -168,12 +172,12 @@ SUMMARY:he
       <section anchor="generating-jscalendar-ids">
         <name>Generating JSCalendar Ids</name>
         <t>In many places in JSCalendar, a JSON map is used where the map keys are of type Id (<xref target="RFC8984" section="1.4.1"/>.  If an iCalendar property or component converts to a value in these JSON maps, then an implementation needs to choose an identifier as key.</t>
-<t>This document defines the new <xref target="ical-param-jsid">JSID</xref> parameter and <xref target="ical-prop-jsid">JSID</xref> property, which allow to set a JSCalendar Id value when converting from JSCalendar to iCalendar.  If they are set on a property or the component, then its value <bcp14>MUST</bcp14> be used a map key when converting from iCalendar to JSCalendar.  If no such parameter or property is set, then an implementation is free to choose any identifier as map key, as long the following requirements are met:</t>
-<ul>
-<li>The identifier <bcp14>MUST</bcp14> be a valid Id value.</li>
-<li>If the same iCalendar object is converted twice, then the identifier for each property or component <bcp14>MUST</bcp14> stay the same, irrespective of the order in which properties and subcomponents are processed.</li>
-</ul>
-<t>In a few cases, an iCalendar property and component may both convert to the same JSCalendar object.  Examples for this are the ATTENDEE property and PARTICIPANT component, as well as the LOCATION property and VLOCATION component... TBD</t>
+        <t>This document defines the new <xref target="ical-param-jsid">JSID</xref> parameter and <xref target="ical-prop-jsid">JSID</xref> property, which allow to set a JSCalendar Id value when converting from JSCalendar to iCalendar.  If they are set on a property or the component, then its value <bcp14>MUST</bcp14> be used a map key when converting from iCalendar to JSCalendar.  If no such parameter or property is set, then an implementation is free to choose any identifier as map key, as long the following requirements are met:</t>
+        <ul>
+          <li>The identifier <bcp14>MUST</bcp14> be a valid Id value.</li>
+          <li>If the same iCalendar object is converted twice, then the identifier for each property or component <bcp14>MUST</bcp14> stay the same, irrespective of the order in which properties and subcomponents are processed.</li>
+        </ul>
+        <t>In a few cases, an iCalendar property and component may both convert to the same JSCalendar object.  Examples for this are the ATTENDEE property and PARTICIPANT component, as well as the LOCATION property and VLOCATION component... TBD</t>
       </section>
       <section anchor="ical-object">
         <name>iCalendar Objects</name>
@@ -306,7 +310,8 @@ DURATION:PT1H
         <section anchor="ical-type-float">
           <name>FLOAT</name>
           <t>The FLOAT value data type (<xref target="RFC5545" section="3.3.7"/>) does not convert to any JSCalendar value type.</t>
-          <t><xref target="ical-prop-geo"/> defines how to convert the GEO property value.  <xref target="jscal-prop-icalprops"/> defines how to convert arbitrary iCalendar properties and types.</t>
+          <t>
+            <xref target="ical-prop-geo"/> defines how to convert the GEO property value.  <xref target="jscal-prop-icalprops"/> defines how to convert arbitrary iCalendar properties and types.</t>
         </section>
         <section anchor="ical-type-integer">
           <name>INTEGER</name>
@@ -317,11 +322,15 @@ DURATION:PT1H
 RRULE:FREQ=MONTHLY;BYMONTHDAY=-1
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
-"recurrenceRules": [{
-  "@type": "RecurrenceRule",
-  "frequency": "monthly",
-  "byMonthDay": [-1]
-}]
+"recurrenceRules": [
+  {
+    "@type": "RecurrenceRule",
+    "frequency": "monthly",
+    "byMonthDay": [
+      -1
+    ]
+  }
+]
 ]]></sourcecode>
           </figure>
           <figure anchor="test-ical-type-integer-unsigned-int">
@@ -337,7 +346,8 @@ SEQUENCE:1
         <section anchor="ical-type-period">
           <name>PERIOD</name>
           <t>The PERIOD value data type (<xref target="RFC5545" section="3.3.9"/>) does not convert to any JSCalendar value type.</t>
-          <t><xref target="jscal-prop-icalprops"/> defines how to convert arbitrary iCalendar properties and types.</t>
+          <t>
+            <xref target="jscal-prop-icalprops"/> defines how to convert arbitrary iCalendar properties and types.</t>
         </section>
         <section anchor="ical-type-recur">
           <name>RECUR</name>
@@ -407,11 +417,13 @@ SEQUENCE:1
                 <td>firstDayOfWeek</td>
               </tr>
               <tr>
-                <td>RSCALE <xref target="RFC7529"/></td>
+                <td>RSCALE <xref target="RFC7529"/>
+                </td>
                 <td>rscale</td>
               </tr>
               <tr>
-                <td>SKIP <xref target="RFC7529"/></td>
+                <td>SKIP <xref target="RFC7529"/>
+                </td>
                 <td>skip</td>
               </tr>
             </tbody>
@@ -432,19 +444,30 @@ RRULE:FREQ=YEARLY
  ;UNTIL=20240930T120000Z
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
-"recurrenceRules": [{
-  "@type": "RecurrenceRule",
-  "frequency": "yearly",
-  "interval": 2,
-  "byMonth": ["1"],
-  "byDay": [{
-    "@type": "NDay",
-    "day": "su"
-  }],
-  "byHour": [8,9],
-  "byMinute": [30],
-  "until": "2024-09-30T14:00:00"
-}],
+"recurrenceRules": [
+  {
+    "@type": "RecurrenceRule",
+    "frequency": "yearly",
+    "interval": 2,
+    "byMonth": [
+      "1"
+    ],
+    "byDay": [
+      {
+        "@type": "NDay",
+        "day": "su"
+      }
+    ],
+    "byHour": [
+      8,
+      9
+    ],
+    "byMinute": [
+      30
+    ],
+    "until": "2024-09-30T14:00:00"
+  }
+],
 "timeZone": "Europe/Berlin"
 ]]></sourcecode>
           </figure>
@@ -467,7 +490,8 @@ DESCRIPTION:Lorem ipsum odor amet\,\nconsectetuer
         <section anchor="ical-type-time">
           <name>TIME</name>
           <t>The TIME value data type (<xref target="RFC5545" section="3.3.12"/>) does not convert to any JSCalendar value type.</t>
-          <t><xref target="jscal-prop-icalprops"/> defines how to convert arbitrary iCalendar properties and types.</t>
+          <t>
+            <xref target="jscal-prop-icalprops"/> defines how to convert arbitrary iCalendar properties and types.</t>
         </section>
         <section anchor="ical-type-uid">
           <name>UID</name>
@@ -485,7 +509,8 @@ UID:93358b83-4c44-4a67-A8DD-5672df776f94
         <section anchor="ical-type-unknown">
           <name>UNKNOWN</name>
           <t>The UNKNOWN value data type (<xref target="RFC7265" section="5"/>) is reserved.  It does not convert to any JSCalendar value type.</t>
-          <t><xref target="jscal-prop-icalprops"/> defines how to convert arbitrary iCalendar properties and types.</t>
+          <t>
+            <xref target="jscal-prop-icalprops"/> defines how to convert arbitrary iCalendar properties and types.</t>
         </section>
         <section anchor="ical-type-uri">
           <name>URI</name>
@@ -506,7 +531,8 @@ URL:https://example.com/foo%2Bbar
         </section>
         <section anchor="ical-type-utc-offset">
           <name>UTC-OFFSET</name>
-          <t>The UTC-OFFSET value data type (<xref target="RFC5545" section="3.3.14"/>) converts to the String type (<xref target="RFC8984" section="1.3"/>).</t><t>See <xref target="ical-prop-tzoffsetfrom"/> and <xref target="ical-prop-tzoffsetto"/> for examples.</t>
+          <t>The UTC-OFFSET value data type (<xref target="RFC5545" section="3.3.14"/>) converts to the String type (<xref target="RFC8984" section="1.3"/>).</t>
+          <t>See <xref target="ical-prop-tzoffsetfrom"/> and <xref target="ical-prop-tzoffsetto"/> for examples.</t>
         </section>
         <section anchor="ical-type-xml-reference">
           <name>XML-REFERENCE</name>
@@ -541,6 +567,7 @@ LINK;LINKREL="https://example.com/linkrel/costStructure"
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -552,6 +579,7 @@ LINK;LINKREL="https://example.com/linkrel/costStructure"
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -563,6 +591,7 @@ LINK;LINKREL="https://example.com/linkrel/costStructure"
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -574,6 +603,7 @@ LINK;LINKREL="https://example.com/linkrel/costStructure"
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -585,6 +615,7 @@ LINK;LINKREL="https://example.com/linkrel/costStructure"
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -596,6 +627,7 @@ LINK;LINKREL="https://example.com/linkrel/costStructure"
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -607,6 +639,7 @@ LINK;LINKREL="https://example.com/linkrel/costStructure"
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -625,14 +658,16 @@ DTSTART:20060102T030405Z
             <sourcecode type="jscalendar"><![CDATA[
 {
   "@type": "Group",
-  "entries": [{
-    "@type": "Event",
-    "uid": "bda09d03-564c-4ac8-851c-24e66d6abe3c",
-    "start": "2006-01-02T03:04:05",
-    "timeZone": "Etc/UTC",
-    "showWithoutTime": false,
-    "...": ""
-  }],
+  "entries": [
+    {
+      "@type": "Event",
+      "uid": "bda09d03-564c-4ac8-851c-24e66d6abe3c",
+      "start": "2006-01-02T03:04:05",
+      "timeZone": "Etc/UTC",
+      "showWithoutTime": false,
+      "...": ""
+    }
+  ],
   "...": ""
 }
 ]]></sourcecode>
@@ -657,15 +692,18 @@ END:VCALENDAR
               <sourcecode type="jscalendar"><![CDATA[
 {
   "@type": "Group",
-  "entries": [{
-    "@type": "Event",
-    "uid": "DE935D01-3DF7-4201-B61A-D77D05C8B21A",
-    "...": ""
-  }, {
-    "@type": "Event",
-    "uid": "60BE3D6E-6383-473A-BCF1-3C43EA1FA571",
-    "...": ""
-  }],
+  "entries": [
+    {
+      "@type": "Event",
+      "uid": "DE935D01-3DF7-4201-B61A-D77D05C8B21A",
+      "...": ""
+    },
+    {
+      "@type": "Event",
+      "uid": "60BE3D6E-6383-473A-BCF1-3C43EA1FA571",
+      "...": ""
+    }
+  ],
   "...": ""
 }
 ]]></sourcecode>
@@ -695,21 +733,25 @@ END:VCALENDAR
               <sourcecode type="jscalendar"><![CDATA[
 {
   "@type": "Group",
-  "entries": [{
-    "@type": "Event",
-    "uid": "F4257E1D-5461-4EF6-840F-9DFC653EB559",
-    "start": "2024-01-01T14:00:00",
-    "recurrenceRules": [{
-      "@type": "RecurrenceRule",
-      "frequency": "daily"
-    }],
-    "recurrenceOverrides": {
-      "2024-02-02T14:00:00": {
-        "start": "2024-02-02T16:00:00"
-      }
-    },
-    "...": ""
-  }],
+  "entries": [
+    {
+      "@type": "Event",
+      "uid": "F4257E1D-5461-4EF6-840F-9DFC653EB559",
+      "start": "2024-01-01T14:00:00",
+      "recurrenceRules": [
+        {
+          "@type": "RecurrenceRule",
+          "frequency": "daily"
+        }
+      ],
+      "recurrenceOverrides": {
+        "2024-02-02T14:00:00": {
+          "start": "2024-02-02T16:00:00"
+        }
+      },
+      "...": ""
+    }
+  ],
   "...": ""
 }
 ]]></sourcecode>
@@ -739,19 +781,22 @@ END:VCALENDAR
               <sourcecode type="jscalendar"><![CDATA[
 {
   "@type": "Group",
-  "entries": [{
-    "@type": "Event",
-    "uid": "F4257E1D-5461-4EF6-840F-9DFC653EB559",
-    "recurrenceId": "2024-02-02T14:00:00",
-    "start": "2024-02-02T16:00:00",
-    "...": ""
-  }, {
-    "@type": "Event",
-    "uid": "F4257E1D-5461-4EF6-840F-9DFC653EB559",
-    "recurrenceId": "2024-01-03T14:00:00",
-    "start": "2024-01-03T14:00:00",
-    "...": ""
-  }],
+  "entries": [
+    {
+      "@type": "Event",
+      "uid": "F4257E1D-5461-4EF6-840F-9DFC653EB559",
+      "recurrenceId": "2024-02-02T14:00:00",
+      "start": "2024-02-02T16:00:00",
+      "...": ""
+    },
+    {
+      "@type": "Event",
+      "uid": "F4257E1D-5461-4EF6-840F-9DFC653EB559",
+      "recurrenceId": "2024-01-03T14:00:00",
+      "start": "2024-01-03T14:00:00",
+      "...": ""
+    }
+  ],
   "...": ""
 }
 ]]></sourcecode>
@@ -766,6 +811,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -777,6 +823,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -788,6 +835,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -799,6 +847,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -810,6 +859,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -821,6 +871,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -835,6 +886,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -846,6 +898,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -857,6 +910,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -868,6 +922,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -879,6 +934,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -890,6 +946,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -901,6 +958,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -912,6 +970,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -923,6 +982,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -934,6 +994,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -945,6 +1006,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -956,6 +1018,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -967,6 +1030,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -978,6 +1042,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -989,6 +1054,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1000,6 +1066,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1011,6 +1078,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1022,6 +1090,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1033,6 +1102,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1044,6 +1114,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1055,6 +1126,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1066,6 +1138,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1077,6 +1150,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1088,6 +1162,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1099,6 +1174,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1110,6 +1186,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1121,6 +1198,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1132,6 +1210,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1143,6 +1222,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1154,6 +1234,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1165,6 +1246,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1176,6 +1258,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1187,6 +1270,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1198,6 +1282,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1209,6 +1294,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1220,6 +1306,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1231,6 +1318,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1242,6 +1330,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1253,6 +1342,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1264,6 +1354,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1275,6 +1366,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1286,6 +1378,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1297,6 +1390,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1308,6 +1402,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1319,6 +1414,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1330,6 +1426,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1341,6 +1438,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1352,6 +1450,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1363,6 +1462,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1374,6 +1474,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1385,6 +1486,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1396,6 +1498,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1407,6 +1510,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1418,6 +1522,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1429,6 +1534,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1440,6 +1546,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1451,6 +1558,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1462,6 +1570,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1473,6 +1582,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1484,6 +1594,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1495,6 +1606,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1506,6 +1618,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1517,6 +1630,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1528,6 +1642,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1539,6 +1654,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1550,6 +1666,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1561,6 +1678,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1572,6 +1690,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1586,6 +1705,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1597,6 +1717,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1608,6 +1729,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1619,6 +1741,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1630,6 +1753,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1641,6 +1765,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1652,6 +1777,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1663,6 +1789,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1674,6 +1801,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1685,6 +1813,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1696,6 +1825,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1707,6 +1837,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1718,6 +1849,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1729,6 +1861,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1740,6 +1873,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1751,6 +1885,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1762,6 +1897,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1773,6 +1909,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1784,6 +1921,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1795,6 +1933,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1806,6 +1945,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1817,6 +1957,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1828,6 +1969,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1839,6 +1981,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1850,6 +1993,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1861,6 +2005,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1872,6 +2017,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1883,6 +2029,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1894,6 +2041,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1905,6 +2053,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1916,6 +2065,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1927,6 +2077,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1938,6 +2089,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1949,6 +2101,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1960,6 +2113,7 @@ END:VCALENDAR
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -1994,7 +2148,8 @@ END:VCALENDAR
       <section anchor="new-jscalendar-properties">
         <name>New JSCalendar properties</name>
         <section anchor="jscal-prop-icalprops">
-          <name>Property <tt>iCalProps</tt></name>
+          <name>Property <tt>iCalProps</tt>
+          </name>
           <dl>
             <dt>Type: <tt>JCalProp[]</tt> (optional).</dt>
             <dd>This contains iCalendar properties that are set in the iCalendar component represented by this JSCalendar object.  The JCalProp type denotes a jCal-encoded iCalendar property as defined in <xref target="RFC7265" sectionFormat="of" section="3.4"/>.</dd>
@@ -2006,9 +2161,14 @@ X-FOO;X-BAR=Hello:World!
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
 "iCalProps": [
-  ["x-foo", {
-    "x-bar": "Hello"
-  }, "unknown", "World!"]
+  [
+    "x-foo",
+    {
+      "x-bar": "Hello"
+    },
+    "unknown",
+    "World!"
+  ]
 ]
 ]]></sourcecode>
           </figure>
