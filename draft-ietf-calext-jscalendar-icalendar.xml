@@ -2147,6 +2147,62 @@ END:VCALENDAR
       <name>Updates to JSCalendar</name>
       <section anchor="new-jscalendar-properties">
         <name>New JSCalendar properties</name>
+        <section anchor="jscal-prop-icalcomps">
+          <name>Property <tt>iCalComps</tt>
+          </name>
+          <dl>
+            <dt>Type: <tt>JCalComp[]</tt> (optional).</dt>
+            <dd>This contains iCalendar components that are set in the iCalendar component represented by this JSCalendar object.  The JCalComp type denotes a jCal-encoded iCalendar component as defined in <xref target="RFC7265" sectionFormat="of" section="3.3"/>.</dd>
+          </dl>
+          <figure anchor="test-ical-prop-icalcomps">
+            <name>Example for the iCalComps property.</name>
+            <sourcecode type="icalendar"><![CDATA[
+BEGIN:VCALENDAR
+...
+BEGIN:VEVENT
+SUMMARY:hello
+...
+END:VEVENT
+BEGIN:X-COMPONENT
+UID:2EA10A8F-67FA-420F-8321-9C04F18AE60F
+SUMMARY:foo
+END:X-COMPONENT
+END:VCALENDAR
+]]></sourcecode>
+            <sourcecode type="jscalendar"><![CDATA[
+{
+  "@type": "Group",
+  "entries": [
+    {
+      "@type": "Event",
+      "title": "hello",
+      "...": ""
+    }
+  ],
+  "iCalComps": [
+    [
+      "x-component",
+      [
+        [
+          "uid",
+          {},
+          "text",
+          "2EA10A8F-67FA-420F-8321-9C04F18AE60F"
+        ],
+        [
+          "summary",
+          {},
+          "text",
+          "foo"
+        ]
+      ],
+      []
+    ]
+  ]
+}
+]]></sourcecode>
+          </figure>
+        </section>
         <section anchor="jscal-prop-icalprops">
           <name>Property <tt>iCalProps</tt>
           </name>
