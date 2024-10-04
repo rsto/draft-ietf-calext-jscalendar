@@ -177,7 +177,7 @@ SUMMARY:he
           <li>The identifier <bcp14>MUST</bcp14> be a valid Id value.</li>
           <li>If the same iCalendar object is converted twice, then the identifier for each property or component <bcp14>MUST</bcp14> stay the same, irrespective of the order in which properties and subcomponents are processed.</li>
         </ul>
-        <t>In a few cases, an iCalendar property and component may both convert to the same JSCalendar object.  Examples for this are the ATTENDEE property and PARTICIPANT component, as well as the LOCATION property and VLOCATION component... TBD</t>
+        <t>In a few cases, an iCalendar property and component may both convert to the same JSCalendar object.  Examples for this are the ATTENDEE property and PARTICIPANT component, as well as the LOCATION property and VLOCATION component ...TBD</t>
       </section>
       <section anchor="ical-object">
         <name>iCalendar Objects</name>
@@ -562,101 +562,236 @@ LINK;LINKREL="https://example.com/linkrel/costStructure"
         <name>Components</name>
         <section anchor="ical-comp-available">
           <name>AVAILABLE</name>
-          <t>The <xref target="RFC7953" section="3.1" sectionFormat="parens">AVAILABLE component</xref> converts ...TBD</t>
-          <figure anchor="example-ical-comp-available">
-            <name>Example for converting the AVAILABLE component to JSCalendar</name>
-            <sourcecode type="icalendar">
-<![CDATA[
-]]>
-</sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
+          <t>The <xref target="RFC7953" section="3.1" sectionFormat="parens">AVAILABLE component</xref> does not convert to a standard JSCalendar object.</t>
         </section>
         <section anchor="ical-comp-daylight">
           <name>DAYLIGHT</name>
-          <t>The <xref target="RFC5545" section="3.6.5" sectionFormat="parens">DAYLIGHT component</xref> converts ...TBD</t>
-          <figure anchor="example-ical-comp-daylight">
+          <t>The <xref target="RFC5545" section="3.6.5" sectionFormat="parens">DAYLIGHT component</xref> converts to a TimeZoneRule object in the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">daylight property</xref> of a TimeZone object.</t>
+          <figure anchor="test-ical-comp-daylight">
             <name>Example for converting the DAYLIGHT component to JSCalendar</name>
-            <sourcecode type="icalendar">
-<![CDATA[
+            <sourcecode type="icalendar"><![CDATA[
+BEGIN:VCALENDAR
+...
+BEGIN:VTIMEZONE
+TZID:NonIana
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0300
+DTSTART:20010503T000000
+END:DAYLIGHT
+END:VTIMEZONE
+...
+BEGIN:VEVENT
+DTSTART;TZID=NonIana:20241004T010000
+...
+END:VEVENT
+END:VCALENDAR
 ]]>
 </sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
-
+{
+  "@type": "Group",
+  "timeZones": {
+    "/NonIana": {
+      "@type": "TimeZone",
+      "tzId": "NonIana",
+      "daylight": [
+        {
+          "@type": "TimeZoneRule",
+          "start": "2001-05-03T00:00:00",
+          "offsetFrom": "-0400",
+          "offsetTo": "-0300"
+        }
+      ]
+    }
+  },
+  "...": ""
+}
 ]]></sourcecode>
           </figure>
         </section>
         <section anchor="ical-comp-participant">
           <name>PARTICIPANT</name>
-          <t>The <xref target="RFC9073" section="7.1" sectionFormat="parens">PARTICIPANT component</xref> converts ...TBD</t>
-          <figure anchor="example-ical-comp-participant">
+          <t>The <xref target="RFC9073" section="7.1" sectionFormat="parens">PARTICIPANT component</xref> converts to a Participant object in the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">participants property</xref>.</t>
+          <figure anchor="test-ical-comp-participant">
             <name>Example for converting the PARTICIPANT component to JSCalendar</name>
-            <sourcecode type="icalendar">
-<![CDATA[
+            <sourcecode type="icalendar"><![CDATA[
+BEGIN:VEVENT
+...
+BEGIN:PARTICIPANT
+UID:47AD2E1C-49D4-45DF-BD83-8398ACC7D8E2
+STRUCTURED-DATA;VALUE=URI:
+ http://dir.example.com/vcard/contacts/contact1.vcf
+PARTICIPANT-TYPE:CONTACT
+DESCRIPTION:A contact
+END:PARTICIPANT
+END:VEVENT
 ]]>
 </sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
-
+{
+  "@type": "Event",
+  "...": "",
+  "participants": {
+    "p32": {
+      "@type": "Participant",
+      "roles": {
+        "contact": true
+      },
+      "links": {
+        "l4": {
+          "@type": "Link",
+          "href": "http://dir.example.com/vcard/contacts/contact1.vcf"
+        }
+      },
+      "description": "A contact",
+      "iCalProps": [
+        [
+          "uid",
+          {},
+          "text",
+          "47AD2E1C-49D4-45DF-BD83-8398ACC7D8E2"
+        ]
+      ]
+    }
+  }
+}
 ]]></sourcecode>
           </figure>
+          <section>
+            <name>Converting a schedulable PARTICIPANT component</name>
+            <t>
+              <xref target="RFC9073"/> defines a PARTICIPANT component to be schedulable if it has a <xref target="ical-prop-calendar-address">CALENDAR-ADDRESS property</xref> set and the value of that property matches the value of an <xref target="ical-prop-attendee">ATTENDEE property</xref> in the enclosing component.</t>
+            <t>In this case, both the PARTICIPANT component and the ATTENDEE property convert to the same Participant object in the  <xref target="RFC8984" section="4.4.6" sectionFormat="parens">participants</xref> property.</t>
+            <figure anchor="test-ical-comp-participant-schedulable">
+              <name>Example for converting the PARTICIPANT component to JSCalendar</name>
+              <sourcecode type="icalendar"><![CDATA[
+BEGIN:VEVENT
+...
+BEGIN:PARTICIPANT
+CALENDAR-ADDRESS:mailto:foo@example.com
+...
+END:PARTICIPANT
+ATTENDEE;PARTSTAT=NEEDS-ACTION;RSVP=YES:mailto:foo@example.com
+END:VEVENT
+]]>
+</sourcecode>
+              <sourcecode type="jscalendar"><![CDATA[
+{
+  "@type": "Event",
+  "...": "",
+  "participants": {
+    "p47": {
+      "@type": "Participant",
+      "calendarAddress": "mailto:foo@example.com",
+      "roles": {
+        "attendee": true
+      },
+      "sendTo": {
+        "imip": "mailto:foo@example.com"
+      },
+      "...": ""
+    }
+  }
+}
+]]></sourcecode>
+            </figure>
+          </section>
         </section>
         <section anchor="ical-comp-standard">
           <name>STANDARD</name>
-          <t>The <xref target="RFC5545" section="3.6.5" sectionFormat="parens">STANDARD component</xref> converts ...TBD</t>
-          <figure anchor="example-ical-comp-standard">
+          <t>The <xref target="RFC5545" section="3.6.5" sectionFormat="parens">STANDARD component</xref> converts to a TimeZoneRule object in the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">standard property</xref> of a TimeZone object.</t>
+          <figure anchor="test-ical-comp-standard">
             <name>Example for converting the STANDARD component to JSCalendar</name>
-            <sourcecode type="icalendar">
-<![CDATA[
+            <sourcecode type="icalendar"><![CDATA[
+BEGIN:VCALENDAR
+...
+BEGIN:VTIMEZONE
+TZID:NonIana
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0300
+DTSTART:20010503T000000
+END:STANDARD
+END:VTIMEZONE
+...
+BEGIN:VEVENT
+DTSTART;TZID=NonIana:20241004T010000
+...
+END:VEVENT
+END:VCALENDAR
 ]]>
 </sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
-
+{
+  "@type": "Group",
+  "timeZones": {
+    "/NonIana": {
+      "@type": "TimeZone",
+      "tzId": "NonIana",
+      "standard": [
+        {
+          "@type": "TimeZoneRule",
+          "start": "2001-05-03T00:00:00",
+          "offsetFrom": "-0400",
+          "offsetTo": "-0300"
+        }
+      ]
+    }
+  },
+  "...": ""
+}
 ]]></sourcecode>
           </figure>
         </section>
         <section anchor="ical-comp-valarm">
           <name>VALARM</name>
-          <t>The <xref target="RFC5545" section="3.6.6" sectionFormat="parens">VALARM component</xref> converts ...TBD</t>
-          <figure anchor="example-ical-comp-valarm">
+          <t>The <xref target="RFC5545" section="3.6.6" sectionFormat="parens">VALARM component</xref> converts to an Alert object in the <xref target="RFC8984" section="4.5.2" sectionFormat="parens">alerts property</xref>.</t>
+          <figure anchor="test-ical-comp-valarm">
             <name>Example for converting the VALARM component to JSCalendar</name>
-            <sourcecode type="icalendar">
-<![CDATA[
+            <sourcecode type="icalendar"><![CDATA[
+BEGIN:VEVENT
+...
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Breakfast meeting
+END:VALARM
+END:VEVENT
 ]]>
 </sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
-
+{
+  "@type": "Event",
+  "...": "",
+  "alerts": {
+    "a8": {
+      "@type": "Alert",
+      "trigger": {
+        "@type": "OffsetTrigger",
+        "offset": "-PT30M"
+      },
+      "iCalProps": [
+        [
+          "description",
+          {},
+          "text",
+          "Breakfast meeting"
+        ]
+      ]
+    }
+  }
+}
 ]]></sourcecode>
           </figure>
         </section>
         <section anchor="ical-comp-vavailability">
           <name>VAVAILABILITY</name>
-          <t>The <xref target="RFC7953" section="3.1" sectionFormat="parens">VAVAILABILITY component</xref> converts ...TBD</t>
-          <figure anchor="example-ical-comp-vavailability">
-            <name>Example for converting the VAVAILABILITY component to JSCalendar</name>
-            <sourcecode type="icalendar">
-<![CDATA[
-]]>
-</sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
+          <t>The <xref target="RFC7953" section="3.1" sectionFormat="parens">VAVAILABILITY component</xref> does not convert to a standard JSCalendar element.</t>
         </section>
         <section anchor="ical-comp-vcalendar">
           <name>VCALENDAR</name>
-          <t>The <xref target="RFC5545" section="3.4" sectionFormat="parens">VCALENDAR component</xref> converts ...TBD</t>
-          <figure anchor="example-ical-comp-vcalendar">
-            <name>Example for converting the VCALENDAR component to JSCalendar</name>
-            <sourcecode type="icalendar">
-<![CDATA[
-]]>
-</sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
+          <t>See <xref target="ical-object"/>.</t>
         </section>
         <section anchor="ical-comp-vevent">
           <name>VEVENT</name>
@@ -688,7 +823,7 @@ DTSTART:20060102T030405Z
 }
 ]]></sourcecode>
           </figure>
-          <section>
+          <section anchor="ical-comp-vevent-differing-uid">
             <name>Converting VEVENT components with differing UID values</name>
             <t>VEVENT components having differing UID property values convert to different entries in the Group.  They sort in the same order as in the VCALENDAR component.</t>
             <figure anchor="test-ical-comp-vevent-different-uid">
@@ -725,7 +860,7 @@ END:VCALENDAR
 ]]></sourcecode>
             </figure>
           </section>
-          <section>
+          <section anchor="ical-comp-vevent-recurrence-overrides">
             <name>VEVENT recurrence overrides</name>
             <t>VEVENT components having equal UID property values and <em>all but one of them</em> having the RECURRENCE-ID property set, convert to a single Event object.  The VEVENT component without a RECURRENCE-ID property converts to the Event object, all other VEVENT components with that UID value convert to a recurrence override of that event.</t>
             <figure anchor="test-ical-comp-vevent-overrides">
@@ -773,7 +908,7 @@ END:VCALENDAR
 ]]></sourcecode>
             </figure>
           </section>
-          <section>
+          <section anchor="ical-comp-vevent-recurrence-instances">
             <name>VEVENT recurrence instances</name>
             <t>VEVENT components having equal UID property values and <em>all of them</em> having a RECURRENCE-ID property set, convert to multiple Event objects.  Each Event <bcp14>MUST</bcp14> have the <tt>recurrenceId</tt> property set, as well as the <tt>recurrenceIdTimeZone</tt> property if not <tt>null</tt>.   They sort in the same order as in the VCALENDAR component.</t>
             <figure anchor="test-ical-comp-vevent-standalone-overrides">
@@ -821,94 +956,232 @@ END:VCALENDAR
         </section>
         <section anchor="ical-comp-vfreebusy">
           <name>VFREEBUSY</name>
-          <t>The <xref target="RFC5545" section="3.6.4" sectionFormat="parens">VFREEBUSY component</xref> converts ...TBD</t>
-          <figure anchor="example-ical-comp-vfreebusy">
-            <name>Example for converting the VFREEBUSY component to JSCalendar</name>
-            <sourcecode type="icalendar">
-<![CDATA[
-]]>
-</sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
+          <t>The <xref target="RFC5545" section="3.6.4" sectionFormat="parens">VFREEBUSY component</xref> does not convert to a standard JSCalendar element.</t>
         </section>
         <section anchor="ical-comp-vjournal">
           <name>VJOURNAL</name>
-          <t>The <xref target="RFC5545" section="3.6.3" sectionFormat="parens">VJOURNAL component</xref> converts ...TBD</t>
-          <figure anchor="example-ical-comp-vjournal">
-            <name>Example for converting the VJOURNAL component to JSCalendar</name>
-            <sourcecode type="icalendar">
-<![CDATA[
-]]>
-</sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
+          <t>The <xref target="RFC5545" section="3.6.3" sectionFormat="parens">VJOURNAL component</xref> does not convert to a standard JSCalendar element.</t>
         </section>
         <section anchor="ical-comp-vlocation">
           <name>VLOCATION</name>
-          <t>The <xref target="RFC9073" section="7.2" sectionFormat="parens">VLOCATION component</xref> converts ...TBD</t>
-          <figure anchor="example-ical-comp-vlocation">
+          <t>The <xref target="RFC9073" section="7.2" sectionFormat="parens">VLOCATION component</xref> converts to a Location object in the <xref target="RFC8984" section="4.2.5" sectionFormat="parens">locations property</xref>.</t>
+          <figure anchor="test-ical-comp-vlocation">
             <name>Example for converting the VLOCATION component to JSCalendar</name>
-            <sourcecode type="icalendar">
-<![CDATA[
+            <sourcecode type="icalendar"><![CDATA[
+BEGIN:VEVENT
+...
+BEGIN:VLOCATION
+UID:123456-abcdef-98765432
+NAME:The venue
+STRUCTURED-DATA;VALUE=URI:
+ http://dir.example.com/venues/big-hall.vcf
+END:VLOCATION
+END:VEVENT
 ]]>
 </sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
-
+{
+  "@type": "Event",
+  "locations": {
+    "l52": {
+      "@type": "Location",
+      "name": "The venue",
+      "links": {
+        "l9": {
+          "@type": "Link",
+          "href": "http://dir.example.com/venues/big-hall.vcf"
+        }
+      },
+      "iCalProps": [
+        [
+          "uid",
+          {},
+          "text",
+          "123456-abcdef-98765432"
+        ]
+      ]
+    }
+  },
+  "...": ""
+}
 ]]></sourcecode>
           </figure>
         </section>
         <section anchor="ical-comp-vresource">
           <name>VRESOURCE</name>
-          <t>The <xref target="RFC9073" section="7.3" sectionFormat="parens">VRESOURCE component</xref> converts ...TBD</t>
-          <figure anchor="example-ical-comp-vresource">
+          <t>The <xref target="RFC9073" section="7.3" sectionFormat="parens">VRESOURCE component</xref> converts to a Participant object in the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">participants property</xref>.  The Participant kind property value <bcp14>MUST</bcp14> be set to "resource".</t>
+          <figure anchor="test-ical-comp-vresource">
             <name>Example for converting the VRESOURCE component to JSCalendar</name>
-            <sourcecode type="icalendar">
-<![CDATA[
+            <sourcecode type="icalendar"><![CDATA[
+BEGIN:VEVENT
+...
+BEGIN:VRESOURCE
+UID:456789-abcdef-98765432
+NAME:The projector
+RESOURCE-TYPE:projector
+STRUCTURED-DATA;VALUE=URI:http://dir.example.com/projectors/3d.vcf
+END:VRESOURCE
+END:VEVENT
 ]]>
 </sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
-
+{
+  "@type": "Event",
+  "...": "",
+  "participants": {
+    "p2": {
+      "@type": "Participant",
+      "kind": "resource",
+      "name": "The projector",
+      "links": {
+        "l4": {
+          "@type": "Link",
+          "href": "http://dir.example.com/projectors/3d.vcf"
+        }
+      },
+      "description": "A contact",
+      "iCalProps": [
+        [
+          "uid",
+          {},
+          "text",
+          "456789-abcdef-98765432"
+        ],
+        [
+          "resource-type",
+          {},
+          "text",
+          "projector"
+        ]
+      ]
+    }
+  }
+}
 ]]></sourcecode>
           </figure>
         </section>
         <section anchor="ical-comp-vtimezone">
           <name>VTIMEZONE</name>
-          <t>The <xref target="RFC5545" section="3.6.5" sectionFormat="parens">VTIMEZONE component</xref> converts ...TBD</t>
-          <figure anchor="example-ical-comp-vtimezone">
+          <t>The <xref target="RFC5545" section="3.6.5" sectionFormat="parens">VTIMEZONE component</xref> converts to a TimeZone object in the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">timeZones property</xref> of a Group, Event or Task object.</t>
+          <figure anchor="test-ical-comp-vtimezone">
             <name>Example for converting the VTIMEZONE component to JSCalendar</name>
-            <sourcecode type="icalendar">
-<![CDATA[
+            <sourcecode type="icalendar"><![CDATA[
+BEGIN:VCALENDAR
+...
+BEGIN:VTIMEZONE
+TZID:Puerto_Rico
+LAST-MODIFIED:20240909T122233Z
+BEGIN:DAYLIGHT
+TZNAME:AWT
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0300
+DTSTART:19420503T000000
+END:DAYLIGHT
+BEGIN:DAYLIGHT
+TZNAME:APT
+TZOFFSETFROM:-0300
+TZOFFSETTO:-0300
+DTSTART:19450814T200000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZNAME:AST
+TZOFFSETFROM:-0300
+TZOFFSETTO:-0400
+DTSTART:19450930T020000
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+...
+DTSTART;TZID=Puerto_Rico:20080708T130000
+END:VEVENT
+END:VCALENDAR
 ]]>
 </sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
-
+{
+  "@type": "Group",
+  "timeZones": {
+    "/Puerto_Rico": {
+      "@type": "TimeZone",
+      "tzId": "Puerto_Rico",
+      "updated": "2024-09-09T12:22:33Z",
+      "daylight": [
+        {
+          "@type": "TimeZoneRule",
+          "tzName": "A@T",
+          "start": "1942-05-03T00:00:00",
+          "offsetFrom": "-0400",
+          "offsetTo": "-0300"
+        },
+        {
+          "@type": "TimeZoneRule",
+          "tzName": "APT",
+          "start": "1945-08-14T20:00:00",
+          "offsetFrom": "-0300",
+          "offsetTo": "-0300"
+        }
+      ],
+      "standard": [
+        {
+          "@type": "TimeZoneRule",
+          "tzName": "AST",
+          "start": "1945-09-30T02:00:00",
+          "offsetFrom": "-0300",
+          "offsetTo": "-0400"
+        }
+      ]
+    }
+  },
+  "entries": [
+    {
+      "@type": "Event",
+      "start": "2008-07-08T13:00:00",
+      "timeZone": "/Puerto_Rico",
+      "...": ""
+    }
+  ],
+  "...": ""
+}
 ]]></sourcecode>
           </figure>
         </section>
         <section anchor="ical-comp-vtodo">
           <name>VTODO</name>
-          <t>The <xref target="RFC5545" section="3.6.2" sectionFormat="parens">VTODO component</xref> converts ...TBD</t>
-          <figure anchor="example-ical-comp-vtodo">
+          <t>The <xref target="RFC5545" section="3.6.2" sectionFormat="parens">VTODO component</xref> converts to a <xref target="RFC8984" section="2.2" sectionFormat="parens">Task object</xref>.</t>
+          <t>If a VCALENDAR component contains multiple VTODOs then the same rules as defined for VEVENT apply (<xref target="ical-comp-vevent-differing-uid"/> ff.).</t>
+          <figure anchor="test-ical-comp-vtodo">
             <name>Example for converting the VTODO component to JSCalendar</name>
-            <sourcecode type="icalendar">
-<![CDATA[
-]]>
-</sourcecode>
+            <sourcecode type="icalendar"><![CDATA[
+BEGIN:VCALENDAR
+BEGIN:VTODO
+UID:83C80482-806D-41C4-8029-E438F793005D
+DUE:20060102T030405Z
+...
+]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
-
+{
+  "@type": "Group",
+  "entries": [
+    {
+      "@type": "Task",
+      "uid": "83C80482-806D-41C4-8029-E438F793005D",
+      "due": "2006-01-02T03:04:05",
+      "timeZone": "Etc/UTC",
+      "...": ""
+    }
+  ],
+  "...": ""
+}
 ]]></sourcecode>
           </figure>
         </section>
       </section>
+      <!-- FIXME properties start -->
       <section anchor="ical-properties">
         <name>Properties</name>
         <section anchor="ical-prop-acknowledged">
           <name>ACKNOWLEDGED</name>
-          <t>The ACKNOWLEDGED property (<xref target="RFC9074" section="6.1"/>) converts ...TBD</t>
+          <t>The <xref target="RFC9074" section="6.1" sectionFormat="parens">ACKNOWLEDGED property</xref> converts to the <xref target="RFC8984" section="4.5.2" sectionFormat="parens">acknowledged property</xref> of an Alert object.</t>
           <figure anchor="test-ical-prop-acknowledged">
             <name>Example for converting the ACKNOWLEDGED property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -920,7 +1193,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-action">
           <name>ACTION</name>
-          <t>The ACTION property (<xref target="RFC5545" section="3.8.6.1"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.6.1" sectionFormat="parens">ACTION property</xref> converts to the <xref target="RFC8984" section="4.5.2" sectionFormat="parens">action property</xref> of an Alert object.</t>
           <figure anchor="test-ical-prop-action">
             <name>Example for converting the ACTION property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -932,7 +1205,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-attach">
           <name>ATTACH</name>
-          <t>The ATTACH property (<xref target="RFC5545" section="3.8.1.1"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.1.1" sectionFormat="parens">ATTACH property</xref> converts to a Link object in the  links property of an <xref target="RFC8984" section="4.2.7" sectionFormat="parens">Event, Group or Task object</xref>, or <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>, or <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref>. Its value converts to that Link object's <xref target="RFC8984" section="1.4.11" sectionFormat="parens">href property</xref>.</t>
           <figure anchor="test-ical-prop-attach">
             <name>Example for converting the ATTACH property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -944,7 +1217,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-attendee">
           <name>ATTENDEE</name>
-          <t>The ATTENDEE property (<xref target="RFC5545" section="3.8.4.1"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.4.1" sectionFormat="parens">ATTENDEE property</xref> converts to a Participant object in the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">participants property</xref>. Its value converts to that Participant object's <xref target="I-D.ietf-jmap-calendars" section="5.1.1" sectionFormat="parens">calendarAddress property</xref>.</t>
           <figure anchor="test-ical-prop-attendee">
             <name>Example for converting the ATTENDEE property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -956,19 +1229,11 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-busytype">
           <name>BUSYTYPE</name>
-          <t>The BUSYTYPE property (<xref target="RFC7953" section="3.2"/>) converts ...TBD</t>
-          <figure anchor="test-ical-prop-busytype">
-            <name>Example for converting the BUSYTYPE property to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
+          <t>The <xref target="RFC7953" section="3.2" sectionFormat="parens">BUSYTYPE property</xref> does not convert to a standard JSCalendar element.</t>
         </section>
         <section anchor="ical-prop-calendar-address">
           <name>CALENDAR-ADDRESS</name>
-          <t>The CALENDAR-ADDRESS property (<xref target="RFC9073" section="6.4"/>) converts ...TBD</t>
+          <t>The <xref target="RFC9073" section="6.4" sectionFormat="parens">CALENDAR-ADDRESS property</xref> converts to a Participant object in the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">participants property</xref>. Its value converts to that Participant object's <xref target="I-D.ietf-jmap-calendars" section="5.1.1" sectionFormat="parens">calendarAddress property</xref>.</t>
           <figure anchor="test-ical-prop-calendar-address">
             <name>Example for converting the CALENDAR-ADDRESS property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -980,19 +1245,11 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-calscale">
           <name>CALSCALE</name>
-          <t>The CALSCALE property (<xref target="RFC5545" section="3.7.1"/>) converts ...TBD</t>
-          <figure anchor="test-ical-prop-calscale">
-            <name>Example for converting the CALSCALE property to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
+          <t>The <xref target="RFC5545" section="3.7.1" sectionFormat="parens">CALSCALE property</xref> does not convert to a standard JSCalendar element.</t>
         </section>
         <section anchor="ical-prop-categories">
           <name>CATEGORIES</name>
-          <t>The CATEGORIES property (<xref target="RFC5545" section="3.8.1.2"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.1.2" sectionFormat="parens">CATEGORIES property</xref> converts to the <xref target="RFC8984" section="4.2.9" sectionFormat="parens">keywords property</xref>.</t>
           <figure anchor="test-ical-prop-categories">
             <name>Example for converting the CATEGORIES property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1004,7 +1261,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-class">
           <name>CLASS</name>
-          <t>The CLASS property (<xref target="RFC5545" section="3.8.1.3"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.1.3" sectionFormat="parens">CLASS property</xref> converts to the <xref target="RFC8984" section="4.4.3" sectionFormat="parens">privacy property</xref>.</t>
           <figure anchor="test-ical-prop-class">
             <name>Example for converting the CLASS property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1016,7 +1273,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-color">
           <name>COLOR</name>
-          <t>The COLOR property (<xref target="RFC7986" section="5.9"/>) converts ...TBD</t>
+          <t>The <xref target="RFC7986" section="5.9" sectionFormat="parens">COLOR property</xref> converts to the <xref target="RFC8984" section="4.2.11" sectionFormat="parens">color property</xref>.</t>
           <figure anchor="test-ical-prop-color">
             <name>Example for converting the COLOR property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1028,31 +1285,15 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-comment">
           <name>COMMENT</name>
-          <t>The COMMENT property (<xref target="RFC5545" section="3.8.1.4"/>) converts ...TBD</t>
-          <figure anchor="test-ical-prop-comment">
-            <name>Example for converting the COMMENT property to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
+          <t>The <xref target="RFC5545" section="3.8.1.4" sectionFormat="parens">COMMENT property</xref> does not convert to a standard JSCalendar element.</t>
         </section>
         <section anchor="ical-prop-completed">
           <name>COMPLETED</name>
-          <t>The COMPLETED property (<xref target="RFC5545" section="3.8.2.1"/>) converts ...TBD</t>
-          <figure anchor="test-ical-prop-completed">
-            <name>Example for converting the COMPLETED property to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
+          <t>The <xref target="RFC5545" section="3.8.2.1" sectionFormat="parens">COMPLETED property</xref> does not convert to a standard JSCalendar element.</t>
         </section>
         <section anchor="ical-prop-concept">
           <name>CONCEPT</name>
-          <t>The CONCEPT property (<xref target="RFC9253" section="8.1"/>) converts ...TBD</t>
+          <t>The <xref target="RFC9253" section="8.1" sectionFormat="parens">CONCEPT property</xref> converts to the <xref target="RFC8984" section="4.2.10" sectionFormat="parens">categories property</xref>.</t>
           <figure anchor="test-ical-prop-concept">
             <name>Example for converting the CONCEPT property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1064,7 +1305,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-conference">
           <name>CONFERENCE</name>
-          <t>The CONFERENCE property (<xref target="RFC7986" section="5.11"/>) converts ...TBD</t>
+          <t>The <xref target="RFC7986" section="5.11" sectionFormat="parens">CONFERENCE property</xref> converts to a VirtualLocation object in the <xref target="RFC8984" section="4.2.6" sectionFormat="parens">virtualLocations property</xref>. Its value converts to that VirtualLocation object's uri property.</t>
           <figure anchor="test-ical-prop-conference">
             <name>Example for converting the CONFERENCE property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1076,7 +1317,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-contact">
           <name>CONTACT</name>
-          <t>The CONTACT property (<xref target="RFC5545" section="3.8.4.2"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.4.2" sectionFormat="parens">CONTACT property</xref> converts to a Link object in the  links property of an <xref target="RFC8984" section="4.2.7" sectionFormat="parens">Event, Group or Task object</xref>, or <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>, or <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref>. Its value converts to that Link object's <xref target="RFC8984" section="1.4.11" sectionFormat="parens">href property</xref>.</t>
           <figure anchor="test-ical-prop-contact">
             <name>Example for converting the CONTACT property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1088,7 +1329,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-created">
           <name>CREATED</name>
-          <t>The CREATED property (<xref target="RFC5545" section="3.8.7.1"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.7.1" sectionFormat="parens">CREATED property</xref> converts to the <xref target="RFC8984" section="4.1.5" sectionFormat="parens">created property</xref>.</t>
           <figure anchor="test-ical-prop-created">
             <name>Example for converting the CREATED property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1100,7 +1341,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-description">
           <name>DESCRIPTION</name>
-          <t>The DESCRIPTION property (<xref target="RFC5545" section="3.8.1.5"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.1.5" sectionFormat="parens">DESCRIPTION property</xref> converts to the  TBDdescription.</t>
           <figure anchor="test-ical-prop-description">
             <name>Example for converting the DESCRIPTION property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1112,7 +1353,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-dtend">
           <name>DTEND</name>
-          <t>The DTEND property (<xref target="RFC5545" section="3.8.2.2"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.2.2" sectionFormat="parens">DTEND property</xref> converts to the <xref target="RFC8984" section="5.1.2" sectionFormat="parens">duration property</xref> of an Event object.</t>
           <figure anchor="test-ical-prop-dtend">
             <name>Example for converting the DTEND property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1124,8 +1365,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-dtstamp">
           <name>DTSTAMP</name>
-          <t>The DTSTAMP property (<xref target="RFC5545" section="3.8.7.2"/>) of a VCALENDAR, VEVENT or VTODO component converts to the updated property (<xref target="RFC8984" section="4.1.6"/>) of a Group, Event or Task.</t>
-          <t>For all other components, the property converts to an entry in the iCalProps property (<xref target="jscal-prop-icalprops"/>).</t>
+          <t>The <xref target="RFC5545" section="3.8.7.2" sectionFormat="parens">DTSTAMP property</xref> converts to the <xref target="RFC8984" section="4.1.6" sectionFormat="parens">updated property</xref>.</t>
           <figure anchor="test-ical-prop-dtstamp">
             <name>Example for converting the DTSTAMP property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1137,7 +1377,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-dtstart">
           <name>DTSTART</name>
-          <t>The DTSTART property (<xref target="RFC5545" section="3.8.2.4"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.2.4" sectionFormat="parens">DTSTART property</xref> converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">start property</xref> of a TimeZoneRule object.</t>
           <figure anchor="test-ical-prop-dtstart">
             <name>Example for converting the DTSTART property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1149,7 +1389,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-due">
           <name>DUE</name>
-          <t>The DUE property (<xref target="RFC5545" section="3.8.2.3"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.2.3" sectionFormat="parens">DUE property</xref> converts to the <xref target="RFC8984" section="5.2.1" sectionFormat="parens">due property</xref> of a Task object.</t>
           <figure anchor="test-ical-prop-due">
             <name>Example for converting the DUE property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1161,7 +1401,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-duration">
           <name>DURATION</name>
-          <t>The DURATION property (<xref target="RFC5545" section="3.8.2.5"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.2.5" sectionFormat="parens">DURATION property</xref> converts to the <xref target="RFC8984" section="5.1.2" sectionFormat="parens">duration property</xref> of an Event object.</t>
           <figure anchor="test-ical-prop-duration">
             <name>Example for converting the DURATION property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1173,7 +1413,8 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-exdate">
           <name>EXDATE</name>
-          <t>The EXDATE property (<xref target="RFC5545" section="3.8.5.1"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.5.1" sectionFormat="parens">EXDATE property</xref> converts to a PatchObject object in the recurrenceOverrides property of an <xref target="RFC8984" section="4.2.7" sectionFormat="parens">Event or Task object</xref>, or <xref target="RFC8984" section="4.7.2" sectionFormat="parens">TimeZoneRule object</xref>.</t>
+          <t>TBD .. Its value converts to that PatchObject object's <xref target="RFC8984" section="4.3.6" sectionFormat="parens">excluded property</xref>.</t>
           <figure anchor="test-ical-prop-exdate">
             <name>Example for converting the EXDATE property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1185,7 +1426,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-exrule">
           <name>EXRULE</name>
-          <t>The EXRULE property (<xref target="RFC2445" section="4.8.5.2"/>) is deprecated.  ...TBD</t>
+          <t>The <xref target="RFC2445" section="4.8.5.2" sectionFormat="parens">EXRULE property</xref> converts to a RecurrenceRule object in the <xref target="RFC8984" section="4.3.4" sectionFormat="parens">excludedRecurrenceRules property</xref>.</t>
           <figure anchor="test-ical-prop-exrule">
             <name>Example for converting the EXRULE property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1197,19 +1438,11 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-freebusy">
           <name>FREEBUSY</name>
-          <t>The FREEBUSY property (<xref target="RFC5545" section="3.8.2.6"/>) converts ...TBD</t>
-          <figure anchor="test-ical-prop-freebusy">
-            <name>Example for converting the FREEBUSY property to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
+          <t>The <xref target="RFC5545" section="3.8.2.6" sectionFormat="parens">FREEBUSY property</xref> does not convert to a standard JSCalendar element.</t>
         </section>
         <section anchor="ical-prop-geo">
           <name>GEO</name>
-          <t>The GEO property (<xref target="RFC5545" section="3.8.1.6"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.1.6" sectionFormat="parens">GEO property</xref> converts to a Location object in the <xref target="RFC8984" section="4.2.5" sectionFormat="parens">locations property</xref>. Its value converts to that Location object's <xref target="RFC8984" section="4.2.5" sectionFormat="parens">coordinates property</xref>.</t>
           <figure anchor="test-ical-prop-geo">
             <name>Example for converting the GEO property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1221,7 +1454,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-image">
           <name>IMAGE</name>
-          <t>The IMAGE property (<xref target="RFC7986" section="5.10"/>) converts ...TBD</t>
+          <t>The <xref target="RFC7986" section="5.10" sectionFormat="parens">IMAGE property</xref> converts to a Link object in the  links property of an <xref target="RFC8984" section="4.2.7" sectionFormat="parens">Event, Group or Task object</xref>, or <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>, or <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref>. Its value converts to that Link object's <xref target="RFC8984" section="1.4.11" sectionFormat="parens">href property</xref>.</t>
           <figure anchor="test-ical-prop-image">
             <name>Example for converting the IMAGE property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1233,7 +1466,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-last-modified">
           <name>LAST-MODIFIED</name>
-          <t>The LAST-MODIFIED property (<xref target="RFC5545" section="3.8.7.3"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.7.3" sectionFormat="parens">LAST-MODIFIED property</xref> converts to the <xref target="RFC8984" section="4.1.6" sectionFormat="parens">updated property</xref>.</t>
           <figure anchor="test-ical-prop-last-modified">
             <name>Example for converting the LAST-MODIFIED property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1245,7 +1478,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-link">
           <name>LINK</name>
-          <t>The LINK property (<xref target="RFC9253" section="8.2"/>) converts ...TBD</t>
+          <t>The <xref target="RFC9253" section="8.2" sectionFormat="parens">LINK property</xref> converts to a Link object in the  links property of an <xref target="RFC8984" section="4.2.7" sectionFormat="parens">Event, Group or Task object</xref>, or <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>, or <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref>. Its value converts to that Link object's <xref target="RFC8984" section="1.4.11" sectionFormat="parens">href property</xref>.</t>
           <figure anchor="test-ical-prop-link">
             <name>Example for converting the LINK property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1257,7 +1490,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-location">
           <name>LOCATION</name>
-          <t>The LOCATION property (<xref target="RFC5545" section="3.8.1.7"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.1.7" sectionFormat="parens">LOCATION property</xref> converts to a Location object in the <xref target="RFC8984" section="4.2.5" sectionFormat="parens">locations property</xref>. Its value converts to that Location object's name property.</t>
           <figure anchor="test-ical-prop-location">
             <name>Example for converting the LOCATION property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1269,7 +1502,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-location-type">
           <name>LOCATION-TYPE</name>
-          <t>The LOCATION-TYPE property (<xref target="RFC9073" section="6.1"/>) converts ...TBD</t>
+          <t>The <xref target="RFC9073" section="6.1" sectionFormat="parens">LOCATION-TYPE property</xref> converts to the <xref target="RFC8984" section="4.2.5" sectionFormat="parens">locationTypes property</xref> of a Location object.</t>
           <figure anchor="test-ical-prop-location-type">
             <name>Example for converting the LOCATION-TYPE property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1281,7 +1514,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-method">
           <name>METHOD</name>
-          <t>The METHOD property (<xref target="RFC5545" section="3.7.2"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.7.2" sectionFormat="parens">METHOD property</xref> converts to the <xref target="RFC8984" section="4.1.8" sectionFormat="parens">method property</xref>.</t>
           <figure anchor="test-ical-prop-method">
             <name>Example for converting the METHOD property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1293,7 +1526,8 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-name">
           <name>NAME</name>
-          <t>The NAME property (<xref target="RFC7986" section="5.1"/>) converts ...TBD</t>
+          <t>The <xref target="RFC7986" section="5.1" sectionFormat="parens">NAME property</xref> in a VLOCATION component converts to a Location object in TBD... Its value converts to that Location object's  TBDname.</t>
+          <t>The <xref target="RFC7986" section="5.1" sectionFormat="parens">NAME property</xref> in a VCALENDAR component converts to a Group object in TBD... Its value converts to that Group object's <xref target="RFC8984" section="4.2.1" sectionFormat="parens">title property</xref>.</t>
           <figure anchor="test-ical-prop-name">
             <name>Example for converting the NAME property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1305,7 +1539,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-organizer">
           <name>ORGANIZER</name>
-          <t>The ORGANIZER property (<xref target="RFC5545" section="3.8.4.3"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.4.3" sectionFormat="parens">ORGANIZER property</xref> converts to the <xref target="RFC8984" section="4.4.4" sectionFormat="parens">replyTo property</xref>.</t>
           <figure anchor="test-ical-prop-organizer">
             <name>Example for converting the ORGANIZER property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1317,7 +1551,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-participant-type">
           <name>PARTICIPANT-TYPE</name>
-          <t>The PARTICIPANT-TYPE property (<xref target="RFC9073" section="6.2"/>) converts ...TBD</t>
+          <t>The <xref target="RFC9073" section="6.2" sectionFormat="parens">PARTICIPANT-TYPE property</xref> converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">roles property</xref> of a Participant object.</t>
           <figure anchor="test-ical-prop-participant-type">
             <name>Example for converting the PARTICIPANT-TYPE property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1329,7 +1563,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-percent-complete">
           <name>PERCENT-COMPLETE</name>
-          <t>The PERCENT-COMPLETE property (<xref target="RFC5545" section="3.8.1.8"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.1.8" sectionFormat="parens">PERCENT-COMPLETE property</xref> converts to the <xref target="RFC8984" section="5.2.4" sectionFormat="parens">percentComplete property</xref>.</t>
           <figure anchor="test-ical-prop-percent-complete">
             <name>Example for converting the PERCENT-COMPLETE property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1341,7 +1575,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-priority">
           <name>PRIORITY</name>
-          <t>The PRIORITY property (<xref target="RFC5545" section="3.8.1.9"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.1.9" sectionFormat="parens">PRIORITY property</xref> converts to the <xref target="RFC8984" section="4.4.1" sectionFormat="parens">priority property</xref>.</t>
           <figure anchor="test-ical-prop-priority">
             <name>Example for converting the PRIORITY property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1353,40 +1587,9 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-prodid">
           <name>PRODID</name>
-          <t>The PRODID property (<xref target="RFC5545" section="3.7.3"/>) of a VCALENDAR component converts to the <xref target="RFC8984" section="4.1.4" sectionFormat="parens">prodId</xref> property of a Group, and to the prodId property of all Event or Task objects in the Group's entries property.</t>
-          <t>For all other components, the property converts to an entry in the iCalProps property (<xref target="jscal-prop-icalprops"/>).</t>
+          <t>The <xref target="RFC5545" section="3.7.3" sectionFormat="parens">PRODID property</xref> converts to the <xref target="RFC8984" section="4.1.4" sectionFormat="parens">prodId property</xref>.</t>
           <figure anchor="test-ical-prop-prodid">
             <name>Example for converting the PRODID property to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-BEGIN:VCALENDAR
-PRODID:-//FOO//bar//EN
-VERSION:2.0
-BEGIN:VEVENT
-...
-END:VEVENT
-END:VCALENDAR
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-{
-  "@type": "Group",
-  "prodId": "-//FOO//bar//EN",
-  "entries": [
-    {
-      "@type": "Event",
-      "prodId": "-//FOO//bar//EN",
-      "...": ""
-    }
-  ],
-  "...": ""
-}
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-prop-proximity">
-          <name>PROXIMITY</name>
-          <t>The PROXIMITY property (<xref target="RFC9074" section="8.1"/>) converts ...TBD</t>
-          <figure anchor="test-ical-prop-proximity">
-            <name>Example for converting the PROXIMITY property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
@@ -1394,9 +1597,13 @@ END:VCALENDAR
 ]]></sourcecode>
           </figure>
         </section>
+        <section anchor="ical-prop-proximity">
+          <name>PROXIMITY</name>
+          <t>The <xref target="RFC9074" section="8.1" sectionFormat="parens">PROXIMITY property</xref> does not convert to a standard JSCalendar element.</t>
+        </section>
         <section anchor="ical-prop-rdate">
           <name>RDATE</name>
-          <t>The RDATE property (<xref target="RFC5545" section="3.8.5.2"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.5.2" sectionFormat="parens">RDATE property</xref> converts to a PatchObject object in the recurrenceOverrides property of an <xref target="RFC8984" section="4.2.7" sectionFormat="parens">Event or Task object</xref>, or <xref target="RFC8984" section="4.7.2" sectionFormat="parens">TimeZoneRule object</xref>.</t>
           <figure anchor="test-ical-prop-rdate">
             <name>Example for converting the RDATE property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1408,7 +1615,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-recurrence-id">
           <name>RECURRENCE-ID</name>
-          <t>The RECURRENCE-ID property (<xref target="RFC5545" section="3.8.4.4"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.4.4" sectionFormat="parens">RECURRENCE-ID property</xref> converts to the <xref target="RFC8984" section="4.3.1" sectionFormat="parens">recurrenceId property</xref>.</t>
           <figure anchor="test-ical-prop-recurrence-id">
             <name>Example for converting the RECURRENCE-ID property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1420,31 +1627,15 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-refid">
           <name>REFID</name>
-          <t>The REFID property (<xref target="RFC9253" section="8.3"/>) converts ...TBD</t>
-          <figure anchor="test-ical-prop-refid">
-            <name>Example for converting the REFID property to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
+          <t>The <xref target="RFC9253" section="8.3" sectionFormat="parens">REFID property</xref> does not convert to a standard JSCalendar element.</t>
         </section>
         <section anchor="ical-prop-refresh-interval">
           <name>REFRESH-INTERVAL</name>
-          <t>The REFRESH-INTERVAL property (<xref target="RFC7986" section="5.7"/>) converts ...TBD</t>
-          <figure anchor="test-ical-prop-refresh-interval">
-            <name>Example for converting the REFRESH-INTERVAL property to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
+          <t>The <xref target="RFC7986" section="5.7" sectionFormat="parens">REFRESH-INTERVAL property</xref> does not convert to a standard JSCalendar element.</t>
         </section>
         <section anchor="ical-prop-related-to">
           <name>RELATED-TO</name>
-          <t>The RELATED-TO property (<xref target="RFC5545" section="3.8.4.5"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.4.5" sectionFormat="parens">RELATED-TO property</xref> converts to a Relation object in the  TBDrelatedTo.</t>
           <figure anchor="test-ical-prop-related-to">
             <name>Example for converting the RELATED-TO property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1456,19 +1647,11 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-repeat">
           <name>REPEAT</name>
-          <t>The REPEAT property (<xref target="RFC5545" section="3.8.6.2"/>) converts ...TBD</t>
-          <figure anchor="test-ical-prop-repeat">
-            <name>Example for converting the REPEAT property to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
+          <t>The <xref target="RFC5545" section="3.8.6.2" sectionFormat="parens">REPEAT property</xref> does not convert to a standard JSCalendar element.</t>
         </section>
         <section anchor="ical-prop-request-status">
           <name>REQUEST-STATUS</name>
-          <t>The REQUEST-STATUS property (<xref target="RFC5545" section="3.8.8.3"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.8.3" sectionFormat="parens">REQUEST-STATUS property</xref> converts to TBD...</t>
           <figure anchor="test-ical-prop-request-status">
             <name>Example for converting the REQUEST-STATUS property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1480,19 +1663,11 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-resource-type">
           <name>RESOURCE-TYPE</name>
-          <t>The RESOURCE-TYPE property (<xref target="RFC9073" section="6.3"/>) converts ...TBD</t>
-          <figure anchor="test-ical-prop-resource-type">
-            <name>Example for converting the RESOURCE-TYPE property to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
+          <t>The <xref target="RFC9073" section="6.3" sectionFormat="parens">RESOURCE-TYPE property</xref> does not convert to a standard JSCalendar element.</t>
         </section>
         <section anchor="ical-prop-resources">
           <name>RESOURCES</name>
-          <t>The RESOURCES property (<xref target="RFC5545" section="3.8.1.10"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.1.10" sectionFormat="parens">RESOURCES property</xref> converts to a Participant object in the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">participants property</xref>. Its value converts to that Participant object's <xref target="RFC8984" section="4.4.6" sectionFormat="parens">kind property</xref>.</t>
           <figure anchor="test-ical-prop-resources">
             <name>Example for converting the RESOURCES property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1504,7 +1679,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-rrule">
           <name>RRULE</name>
-          <t>The RRULE property (<xref target="RFC5545" section="3.8.5.3"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.5.3" sectionFormat="parens">RRULE property</xref> converts to a RecurrenceRule object in the recurrenceRules property of an <xref target="RFC8984" section="4.2.7" sectionFormat="parens">Event or Task object</xref>, or <xref target="RFC8984" section="4.7.2" sectionFormat="parens">TimeZoneRule object</xref>.</t>
           <figure anchor="test-ical-prop-rrule">
             <name>Example for converting the RRULE property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1516,7 +1691,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-sequence">
           <name>SEQUENCE</name>
-          <t>The SEQUENCE property (<xref target="RFC5545" section="3.8.7.4"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.7.4" sectionFormat="parens">SEQUENCE property</xref> converts to the <xref target="RFC8984" section="4.1.7" sectionFormat="parens">sequence property</xref>.</t>
           <figure anchor="test-ical-prop-sequence">
             <name>Example for converting the SEQUENCE property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1528,7 +1703,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-source">
           <name>SOURCE</name>
-          <t>The SOURCE property (<xref target="RFC7986" section="5.8"/>) converts ...TBD</t>
+          <t>The <xref target="RFC7986" section="5.8" sectionFormat="parens">SOURCE property</xref> converts to a Link object in the  links property of an <xref target="RFC8984" section="4.2.7" sectionFormat="parens">Event, Group or Task object</xref>, or <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>, or <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref>. Its value converts to that Link object's <xref target="RFC8984" section="1.4.11" sectionFormat="parens">href property</xref>.</t>
           <figure anchor="test-ical-prop-source">
             <name>Example for converting the SOURCE property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1540,19 +1715,11 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-status">
           <name>STATUS</name>
-          <t>The STATUS property (<xref target="RFC5545" section="3.8.1.11"/>) converts ...TBD</t>
-          <figure anchor="test-ical-prop-status">
-            <name>Example for converting the STATUS property to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
+          <t>The <xref target="RFC5545" section="3.8.1.11" sectionFormat="parens">STATUS property</xref> does not convert to a standard JSCalendar element.</t>
         </section>
         <section anchor="ical-prop-structured-data">
           <name>STRUCTURED-DATA</name>
-          <t>The STRUCTURED-DATA property (<xref target="RFC9073" section="6.6"/>) converts ...TBD</t>
+          <t>The <xref target="RFC9073" section="6.6" sectionFormat="parens">STRUCTURED-DATA property</xref> converts to a Link object in the  links property of an <xref target="RFC8984" section="4.2.7" sectionFormat="parens">Event, Group or Task object</xref>, or <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>, or <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref>. Its value converts to that Link object's <xref target="RFC8984" section="1.4.11" sectionFormat="parens">href property</xref>.</t>
           <figure anchor="test-ical-prop-structured-data">
             <name>Example for converting the STRUCTURED-DATA property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1564,7 +1731,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-styled-description">
           <name>STYLED-DESCRIPTION</name>
-          <t>The STYLED-DESCRIPTION property (<xref target="RFC9073" section="6.5"/>) converts ...TBD</t>
+          <t>The <xref target="RFC9073" section="6.5" sectionFormat="parens">STYLED-DESCRIPTION property</xref> converts to the  TBDdescription.</t>
           <figure anchor="test-ical-prop-styled-description">
             <name>Example for converting the STYLED-DESCRIPTION property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1576,28 +1743,19 @@ END:VCALENDAR
         </section>
         <section anchor="ical-prop-summary">
           <name>SUMMARY</name>
-          <t>The SUMMARY property (<xref target="RFC5545" section="3.8.1.12"/>) of a VEVENT or VTODO converts to the title property (<xref target="RFC8984" section="4.2.1"/>) of an Event or Task.</t>
-          <t>For all other components, the property converts to an entry in the iCalProps property (<xref target="jscal-prop-icalprops"/>).</t>
+          <t>The <xref target="RFC5545" section="3.8.1.12" sectionFormat="parens">SUMMARY property</xref> converts to the <xref target="RFC8984" section="4.2.1" sectionFormat="parens">title property</xref>.</t>
           <figure anchor="test-ical-prop-summary">
             <name>Example for converting the SUMMARY property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
-BEGIN:VEVENT
-SUMMARY:test
-...
-END:VEVENT
 ]]></sourcecode>
             <sourcecode type="jscalendar"><![CDATA[
-{
-  "@type": "Event",
-  "title": "test",
-  "...": ""
-}
+
 ]]></sourcecode>
           </figure>
         </section>
         <section anchor="ical-prop-transp">
           <name>TRANSP</name>
-          <t>The TRANSP property (<xref target="RFC5545" section="3.8.2.7"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.2.7" sectionFormat="parens">TRANSP property</xref> converts to the <xref target="RFC8984" section="4.4.2" sectionFormat="parens">freeBusyStatus property</xref>.</t>
           <figure anchor="test-ical-prop-transp">
             <name>Example for converting the TRANSP property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1609,7 +1767,7 @@ END:VEVENT
         </section>
         <section anchor="ical-prop-trigger">
           <name>TRIGGER</name>
-          <t>The TRIGGER property (<xref target="RFC5545" section="3.8.6.3"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.6.3" sectionFormat="parens">TRIGGER property</xref> converts to the <xref target="RFC8984" section="4.5.2" sectionFormat="parens">trigger property</xref> of an Alert object.</t>
           <figure anchor="test-ical-prop-trigger">
             <name>Example for converting the TRIGGER property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1621,7 +1779,7 @@ END:VEVENT
         </section>
         <section anchor="ical-prop-tzid">
           <name>TZID</name>
-          <t>The TZID property (<xref target="RFC5545" section="3.8.3.1"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.3.1" sectionFormat="parens">TZID property</xref> converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">tzId property</xref> of a TimeZone object.</t>
           <figure anchor="test-ical-prop-tzid">
             <name>Example for converting the TZID property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1633,7 +1791,7 @@ END:VEVENT
         </section>
         <section anchor="ical-prop-tzid-alias-of">
           <name>TZID-ALIAS-OF</name>
-          <t>The TZID-ALIAS-OF property (<xref target="RFC7808" section="7.2"/>) converts ...TBD</t>
+          <t>The <xref target="RFC7808" section="7.2" sectionFormat="parens">TZID-ALIAS-OF property</xref> converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">aliases property</xref> of a TimeZone object.</t>
           <figure anchor="test-ical-prop-tzid-alias-of">
             <name>Example for converting the TZID-ALIAS-OF property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1645,7 +1803,7 @@ END:VEVENT
         </section>
         <section anchor="ical-prop-tzname">
           <name>TZNAME</name>
-          <t>The TZNAME property (<xref target="RFC5545" section="3.8.3.2"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.3.2" sectionFormat="parens">TZNAME property</xref> converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">names property</xref> of a TimeZoneRule object.</t>
           <figure anchor="test-ical-prop-tzname">
             <name>Example for converting the TZNAME property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1657,7 +1815,7 @@ END:VEVENT
         </section>
         <section anchor="ical-prop-tzoffsetfrom">
           <name>TZOFFSETFROM</name>
-          <t>The TZOFFSETFROM property (<xref target="RFC5545" section="3.8.3.3"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.3.3" sectionFormat="parens">TZOFFSETFROM property</xref> converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">offsetFrom property</xref> of a TimeZoneRule object.</t>
           <figure anchor="test-ical-prop-tzoffsetfrom">
             <name>Example for converting the TZOFFSETFROM property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1669,7 +1827,7 @@ END:VEVENT
         </section>
         <section anchor="ical-prop-tzoffsetto">
           <name>TZOFFSETTO</name>
-          <t>The TZOFFSETTO property (<xref target="RFC5545" section="3.8.3.4"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.3.4" sectionFormat="parens">TZOFFSETTO property</xref> converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">offsetTo property</xref> of a TimeZoneRule object.</t>
           <figure anchor="test-ical-prop-tzoffsetto">
             <name>Example for converting the TZOFFSETTO property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1681,7 +1839,7 @@ END:VEVENT
         </section>
         <section anchor="ical-prop-tzuntil">
           <name>TZUNTIL</name>
-          <t>The TZUNTIL property (<xref target="RFC7808" section="7.1"/>) converts ...TBD</t>
+          <t>The <xref target="RFC7808" section="7.1" sectionFormat="parens">TZUNTIL property</xref> converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">validUntil property</xref> of a TimeZone object.</t>
           <figure anchor="test-ical-prop-tzuntil">
             <name>Example for converting the TZUNTIL property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1693,7 +1851,7 @@ END:VEVENT
         </section>
         <section anchor="ical-prop-tzurl">
           <name>TZURL</name>
-          <t>The TZURL property (<xref target="RFC5545" section="3.8.3.5"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.3.5" sectionFormat="parens">TZURL property</xref> converts to a TimeZone object in Its value converts to that TimeZone object's <xref target="RFC8984" section="4.7.2" sectionFormat="parens">url property</xref>.</t>
           <figure anchor="test-ical-prop-tzurl">
             <name>Example for converting the TZURL property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1705,7 +1863,7 @@ END:VEVENT
         </section>
         <section anchor="ical-prop-uid">
           <name>UID</name>
-          <t>The UID property (<xref target="RFC5545" section="3.8.4.7"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.4.7" sectionFormat="parens">UID property</xref> converts to the <xref target="RFC8984" section="4.1.2" sectionFormat="parens">uid property</xref>.</t>
           <figure anchor="test-ical-prop-uid">
             <name>Example for converting the UID property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1717,7 +1875,7 @@ END:VEVENT
         </section>
         <section anchor="ical-prop-url">
           <name>URL</name>
-          <t>The URL property (<xref target="RFC5545" section="3.8.4.6"/>) converts ...TBD</t>
+          <t>The <xref target="RFC5545" section="3.8.4.6" sectionFormat="parens">URL property</xref> converts to a Link object in the  links property of an <xref target="RFC8984" section="4.2.7" sectionFormat="parens">Event, Group or Task object</xref>, or <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>, or <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref>. Its value converts to that Link object's <xref target="RFC8984" section="1.4.11" sectionFormat="parens">href property</xref>.</t>
           <figure anchor="test-ical-prop-url">
             <name>Example for converting the URL property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1729,19 +1887,11 @@ END:VEVENT
         </section>
         <section anchor="ical-prop-version">
           <name>VERSION</name>
-          <t>The VERSION property (<xref target="RFC5545" section="3.7.4"/>) converts ...TBD</t>
-          <figure anchor="test-ical-prop-version">
-            <name>Example for converting the VERSION property to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
+          <t>The <xref target="RFC5545" section="3.7.4" sectionFormat="parens">VERSION property</xref> does not convert to a standard JSCalendar element.</t>
         </section>
         <section anchor="ical-prop-xml">
           <name>XML</name>
-          <t>The XML property (<xref target="RFC6321" section="4.2"/>) converts ...TBD</t>
+          <t>The <xref target="RFC6321" section="4.2" sectionFormat="parens">XML property</xref> converts to a Link object in the  links property of an <xref target="RFC8984" section="4.2.7" sectionFormat="parens">Event, Group or Task object</xref>, or <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>, or <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref>. Its value converts to that Link object's <xref target="RFC8984" section="1.4.11" sectionFormat="parens">href property</xref>.</t>
           <figure anchor="test-ical-prop-xml">
             <name>Example for converting the XML property to JSCalendar</name>
             <sourcecode type="icalendar"><![CDATA[
@@ -1752,429 +1902,8 @@ END:VEVENT
           </figure>
         </section>
       </section>
-      <section anchor="ical-parameters">
-        <name>Parameters</name>
-        <section anchor="ical-param-altrep">
-          <name>ALTREP</name>
-          <t>The ALTREP parameter (<xref target="RFC5545" section="3.2.1"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-altrep">
-            <name>Example for converting the ALTREP parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-cn">
-          <name>CN</name>
-          <t>The CN parameter (<xref target="RFC5545" section="3.2.2"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-cn">
-            <name>Example for converting the CN parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-cutype">
-          <name>CUTYPE</name>
-          <t>The CUTYPE parameter (<xref target="RFC5545" section="3.2.3"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-cutype">
-            <name>Example for converting the CUTYPE parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-delegated-from">
-          <name>DELEGATED-FROM</name>
-          <t>The DELEGATED-FROM parameter (<xref target="RFC5545" section="3.2.4"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-delegated-from">
-            <name>Example for converting the DELEGATED-FROM parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-delegated-to">
-          <name>DELEGATED-TO</name>
-          <t>The DELEGATED-TO parameter (<xref target="RFC5545" section="3.2.5"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-delegated-to">
-            <name>Example for converting the DELEGATED-TO parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-derived">
-          <name>DERIVED</name>
-          <t>The DERIVED parameter (<xref target="RFC9073" section="5.3"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-derived">
-            <name>Example for converting the DERIVED parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-dir">
-          <name>DIR</name>
-          <t>The DIR parameter (<xref target="RFC5545" section="3.2.6"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-dir">
-            <name>Example for converting the DIR parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-display">
-          <name>DISPLAY</name>
-          <t>The DISPLAY parameter (<xref target="RFC7986" section="6.1"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-display">
-            <name>Example for converting the DISPLAY parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-email">
-          <name>EMAIL</name>
-          <t>The EMAIL parameter (<xref target="RFC7986" section="6.2"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-email">
-            <name>Example for converting the EMAIL parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-encoding">
-          <name>ENCODING</name>
-          <t>The ENCODING parameter (<xref target="RFC5545" section="3.2.7"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-encoding">
-            <name>Example for converting the ENCODING parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-fbtype">
-          <name>FBTYPE</name>
-          <t>The FBTYPE parameter (<xref target="RFC5545" section="3.2.9"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-fbtype">
-            <name>Example for converting the FBTYPE parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-feature">
-          <name>FEATURE</name>
-          <t>The FEATURE parameter (<xref target="RFC7986" section="6.3"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-feature">
-            <name>Example for converting the FEATURE parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-filename">
-          <name>FILENAME</name>
-          <t>The FILENAME parameter (<xref target="RFC8607" section="4.2"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-filename">
-            <name>Example for converting the FILENAME parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-fmttype">
-          <name>FMTTYPE</name>
-          <t>The FMTTYPE parameter (<xref target="RFC5545" section="3.2.8"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-fmttype">
-            <name>Example for converting the FMTTYPE parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-gap">
-          <name>GAP</name>
-          <t>The GAP parameter (<xref target="RFC9253" section="6.2"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-gap">
-            <name>Example for converting the GAP parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-label">
-          <name>LABEL</name>
-          <t>The LABEL parameter (<xref target="RFC7986" section="6.4"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-label">
-            <name>Example for converting the LABEL parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-language">
-          <name>LANGUAGE</name>
-          <t>The LANGUAGE parameter (<xref target="RFC5545" section="3.2.10"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-language">
-            <name>Example for converting the LANGUAGE parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-linkrel">
-          <name>LINKREL</name>
-          <t>The LINKREL parameter (<xref target="RFC9253" section="6.1"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-linkrel">
-            <name>Example for converting the LINKREL parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-managed-id">
-          <name>MANAGED-ID</name>
-          <t>The MANAGED-ID parameter (<xref target="RFC8607" section="4.3"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-managed-id">
-            <name>Example for converting the MANAGED-ID parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-member">
-          <name>MEMBER</name>
-          <t>The MEMBER parameter (<xref target="RFC5545" section="3.2.11"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-member">
-            <name>Example for converting the MEMBER parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-order">
-          <name>ORDER</name>
-          <t>The ORDER parameter (<xref target="RFC9073" section="5.1"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-order">
-            <name>Example for converting the ORDER parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-partstat">
-          <name>PARTSTAT</name>
-          <t>The PARTSTAT parameter (<xref target="RFC5545" section="3.2.12"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-partstat">
-            <name>Example for converting the PARTSTAT parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-range">
-          <name>RANGE</name>
-          <t>The RANGE parameter (<xref target="RFC5545" section="3.2.13"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-range">
-            <name>Example for converting the RANGE parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-related">
-          <name>RELATED</name>
-          <t>The RELATED parameter (<xref target="RFC5545" section="3.2.14"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-related">
-            <name>Example for converting the RELATED parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-reltype">
-          <name>RELTYPE</name>
-          <t>The RELTYPE parameter (<xref target="RFC5545" section="3.2.15"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-reltype">
-            <name>Example for converting the RELTYPE parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-role">
-          <name>ROLE</name>
-          <t>The ROLE parameter (<xref target="RFC5545" section="3.2.16"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-role">
-            <name>Example for converting the ROLE parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-rsvp">
-          <name>RSVP</name>
-          <t>The RSVP parameter (<xref target="RFC5545" section="3.2.17"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-rsvp">
-            <name>Example for converting the RSVP parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-schedule-agent">
-          <name>SCHEDULE-AGENT</name>
-          <t>The SCHEDULE-AGENT parameter (<xref target="RFC6638" section="7.1"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-schedule-agent">
-            <name>Example for converting the SCHEDULE-AGENT parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-schedule-force-send">
-          <name>SCHEDULE-FORCE-SEND</name>
-          <t>The SCHEDULE-FORCE-SEND parameter (<xref target="RFC6638" section="7.2"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-schedule-force-send">
-            <name>Example for converting the SCHEDULE-FORCE-SEND parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-schedule-status">
-          <name>SCHEDULE-STATUS</name>
-          <t>The SCHEDULE-STATUS parameter (<xref target="RFC6638" section="7.3"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-schedule-status">
-            <name>Example for converting the SCHEDULE-STATUS parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-schema">
-          <name>SCHEMA</name>
-          <t>The SCHEMA parameter (<xref target="RFC9073" section="5.2"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-schema">
-            <name>Example for converting the SCHEMA parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-sent-by">
-          <name>SENT-BY</name>
-          <t>The SENT-BY parameter (<xref target="RFC5545" section="3.2.18"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-sent-by">
-            <name>Example for converting the SENT-BY parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-size">
-          <name>SIZE</name>
-          <t>The SIZE parameter (<xref target="RFC8607" section="4.1"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-size">
-            <name>Example for converting the SIZE parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-tzid">
-          <name>TZID</name>
-          <t>The TZID parameter (<xref target="RFC5545" section="3.2.19"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-tzid">
-            <name>Example for converting the TZID parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-param-value">
-          <name>VALUE</name>
-          <t>The VALUE parameter (<xref target="RFC5545" section="3.2.20"/>) converts ...TBD</t>
-          <figure anchor="test-ical-param-value">
-            <name>Example for converting the VALUE parameter to JSCalendar</name>
-            <sourcecode type="icalendar"><![CDATA[
-]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
-
-]]></sourcecode>
-          </figure>
-        </section>
-      </section>
+      <!-- FIXME end -->
+      <!-- FIXME parameters -->
     </section>
     <section anchor="convert-jscalendar-to-icalendar">
       <name>Converting JSCalendar to iCalendar</name>
@@ -2185,18 +1914,18 @@ END:VEVENT
         <name>New iCalendar parameters</name>
         <section anchor="ical-param-jsid">
           <name>JSID</name>
-          <t>TBD</t>
+          <t/>
         </section>
       </section>
       <section anchor="new-icalendar-properties">
         <name>New iCalendar properties</name>
         <section anchor="ical-prop-jsid">
           <name>JSID</name>
-          <t>TBD</t>
+          <t/>
         </section>
         <section anchor="ical-prop-show-without-time">
           <name>SHOW-WITHOUT-TIME</name>
-          <t>TBD</t>
+          <t/>
         </section>
       </section>
     </section>
@@ -2321,6 +2050,20 @@ X-FOO;X-BAR=Hello:World!
       </references>
       <references>
         <name>Informative References</name>
+        <!--[I-D.calconnect-vobject-i18n] IESG state Expired. Entered the long way to get the correct initials-->
+        <reference anchor="I-D.ietf-jmap-calendars" target="https://datatracker.ietf.org/doc/draft-ietf-jmap-calendars/">
+          <front>
+            <title>JMAP for Calendars</title>
+            <author fullname="Neil Jenkins" initials="N.M." surname="Jenkins">
+              <organization>Fastmail</organization>
+            </author>
+            <author fullname="Michael Douglass" initials="M." surname="Douglass">
+              <organization>Spherical Cow Group</organization>
+            </author>
+            <date day="22" month="July" year="2024"/>
+          </front>
+          <seriesInfo name="Internet-Draft" value="draft-ietf-jmap-calendars"/>
+        </reference>
       </references>
     </references>
   </back>
