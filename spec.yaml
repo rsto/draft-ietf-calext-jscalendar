@@ -1,30 +1,66 @@
-ical:
+icalendar:
   components:
     AVAILABLE:
       properties:
-      - DTSTAMP
-      - DTSTART
-      - UID
-      - DTEND
-      - DURATION
-      - CREATED
-      - DESCRIPTION
-      - LAST-MODIFIED
-      - LOCATION
-      - RECURRENCE-ID
-      - RRULE
-      - SUMMARY
-      - CATEGORIES
-      - COMMENT
-      - CONTACT
-      - EXDATE
-      - RDATE
+      - DTSTAMP: {}
+      - DTSTART: {}
+      - UID: {}
+      - DTEND: {}
+      - DURATION: {}
+      - CREATED: {}
+      - DESCRIPTION: {}
+      - LAST-MODIFIED: {}
+      - LOCATION: {}
+      - RECURRENCE-ID: {}
+      - RRULE: {}
+      - SUMMARY: {}
+      - CATEGORIES: {}
+      - COMMENT: {}
+      - CONTACT: {}
+      - EXDATE: {}
+      - RDATE: {}
       rfc: RFC7953
       section: '3.1'
       status: current
     DAYLIGHT:
       convert:
         object: TimeZoneRule
+        examples:
+          - icalendar: |
+              BEGIN:VCALENDAR
+              ...
+              BEGIN:VTIMEZONE
+              TZID:NonIana
+              BEGIN:DAYLIGHT
+              TZOFFSETFROM:-0400
+              TZOFFSETTO:-0300
+              DTSTART:20010503T000000
+              END:DAYLIGHT
+              END:VTIMEZONE
+              ...
+              BEGIN:VEVENT
+              DTSTART;TZID=NonIana:20241004T010000
+              ...
+              END:VEVENT
+              END:VCALENDAR
+            jscalendar: {
+              "@type": "Group",
+              "timeZones": {
+                "/NonIana": {
+                  "@type": "TimeZone",
+                  "tzId": "NonIana",
+                  "daylight": [
+                    {
+                      "@type": "TimeZoneRule",
+                      "start": "2001-05-03T00:00:00",
+                      "offsetFrom": "-0400",
+                      "offsetTo": "-0300"
+                    }
+                  ]
+                }
+              },
+              "...": ""
+            }
       properties:
       - DTSTART:
         convert:
@@ -52,17 +88,58 @@ ical:
       status: current
     PARTICIPANT:
       convert:
-        - object: Participant
+        object: Participant
+        examples:
+          - icalendar: |
+              BEGIN:VEVENT
+              ...
+              BEGIN:PARTICIPANT
+              UID:47AD2E1C-49D4-45DF-BD83-8398ACC7D8E2
+              STRUCTURED-DATA;VALUE=URI:
+                http://dir.example.com/vcard/contacts/contact1.vcf
+              PARTICIPANT-TYPE:CONTACT
+              DESCRIPTION:A contact
+              END:PARTICIPANT
+              END:VEVENT
+            jscalendar:
+              {
+                "@type": "Event",
+                "...": "",
+                "participants": {
+                  "p32": {
+                    "@type": "Participant",
+                    "roles": {
+                      "contact": true
+                    },
+                    "links": {
+                      "l4": {
+                        "@type": "Link",
+                        "href": "http://dir.example.com/vcard/contacts/contact1.vcf"
+                      }
+                    },
+                    "description": "A contact",
+                    "iCalProps": [
+                      [
+                        "uid",
+                        {},
+                        "text",
+                        "47AD2E1C-49D4-45DF-BD83-8398ACC7D8E2"
+                      ]
+                    ]
+                  }
+                }
+              }
+
       properties:
       - PARTICIPANT-TYPE:
         convert:
           property: roles
           note: Participant.roles enum only supports CONTACT
-      - UID
+      - UID: {}
       - CALENDAR-ADDRESS:
         convert:
           property: calendarAddress
-      - CREATED
+      - CREATED: {}
       - DESCRIPTION:
         convert:
           property: description
@@ -73,12 +150,12 @@ ical:
         convert:
           property: locationId
           note: Only one Location supported
-      - LAST-MODIFIED
-      - PRIORITY
+      - LAST-MODIFIED: {}
+      - PRIORITY: {}
       - SEQUENCE:
         convert:
           property: scheduleSequence
-      - STATUS
+      - STATUS: {}
       - SUMMARY:
         convert:
           property: name
@@ -88,7 +165,7 @@ ical:
       - ATTACH:
         convert:
           property: links
-      - CATEGORIES
+      - CATEGORIES: {}
       - COMMENT:
         convert:
           property: participationComment
@@ -100,31 +177,64 @@ ical:
         convert:
           property: locationId
           note: Only one Location supported
-      - REQUEST-STATUS
-      - RELATED
+      - REQUEST-STATUS: {}
+      - RELATED: {}
       - RESOURCES:
         convert:
           property: links
-      - strucloc
-      - strucres
-      - STYLED-DESCRIPTION
+      - STYLED-DESCRIPTION: {}
       - STRUCTURED-DATA:
         convert:
           property: links
       components:
         - VLOCATION:
           convert:
-            property: links
+            property: locationId
             note: Only one Location supported
-        - VRESOURCE:
-          convert:
-            property: links
+        - VRESOURCE: {}
       rfc: RFC9073
       section: '7.1'
       status: current
     STANDARD:
       convert:
         object: TimeZoneRule
+        examples:
+          - icalendar: |
+              BEGIN:VCALENDAR
+              ...
+              BEGIN:VTIMEZONE
+              TZID:NonIana
+              BEGIN:STANDARD
+              TZOFFSETFROM:-0400
+              TZOFFSETTO:-0300
+              DTSTART:20010503T000000
+              END:STANDARD
+              END:VTIMEZONE
+              ...
+              BEGIN:VEVENT
+              DTSTART;TZID=NonIana:20241004T010000
+              ...
+              END:VEVENT
+              END:VCALENDAR
+            jscalendar:
+              {
+                "@type": "Group",
+                "timeZones": {
+                  "/NonIana": {
+                    "@type": "TimeZone",
+                    "tzId": "NonIana",
+                    "standard": [
+                      {
+                        "@type": "TimeZoneRule",
+                        "start": "2001-05-03T00:00:00",
+                        "offsetFrom": "-0400",
+                        "offsetTo": "-0300"
+                      }
+                    ]
+                  }
+                },
+                "...": ""
+              }
       properties:
       - DTSTART:
         convert:
@@ -153,6 +263,38 @@ ical:
     VALARM:
       convert:
         object: Alert
+        examples:
+          - icalendar: |
+              BEGIN:VEVENT
+              ...
+              BEGIN:VALARM
+              TRIGGER:-PT30M
+              ACTION:DISPLAY
+              DESCRIPTION:Breakfast meeting
+              END:VALARM
+              END:VEVENT
+            jscalendar:
+              {
+                "@type": "Event",
+                "...": "",
+                "alerts": {
+                  "a8": {
+                    "@type": "Alert",
+                    "trigger": {
+                      "@type": "OffsetTrigger",
+                      "offset": "-PT30M"
+                    },
+                    "iCalProps": [
+                      [
+                        "description",
+                        {},
+                        "text",
+                        "Breakfast meeting"
+                      ]
+                    ]
+                  }
+                }
+              }
       properties:
       - ACTION:
         convert:
@@ -161,13 +303,13 @@ ical:
       - TRIGGER:
         convert:
           property: trigger
-      - DURATION
-      - REPEAT
-      - ATTACH
-      - DESCRIPTION
-      - SUMMARY
-      - ATTENDEE
-      - UID
+      - DURATION: {}
+      - REPEAT: {}
+      - ATTACH: {}
+      - DESCRIPTION: {}
+      - SUMMARY: {}
+      - ATTENDEE: {}
+      - UID: {}
       - RELATED-TO:
         convert:
           property: relatedTo
@@ -179,43 +321,63 @@ ical:
       status: current
     VAVAILABILITY:
       properties:
-      - DTSTAMP
-      - UID
-      - BUSYTYPE
-      - CLASS
-      - CREATED
-      - DESCRIPTION
-      - DTSTART
-      - LAST-MODIFIED
-      - LOCATION
-      - ORGANIZER
-      - PRIORITY
-      - SEQUENCE
-      - SUMMARY
-      - URL
-      - DTEND
-      - DURATION
-      - CATEGORIES
-      - COMMENT
-      - CONTACT
+      - DTSTAMP: {}
+      - UID: {}
+      - BUSYTYPE: {}
+      - CLASS: {}
+      - CREATED: {}
+      - DESCRIPTION: {}
+      - DTSTART: {}
+      - LAST-MODIFIED: {}
+      - LOCATION: {}
+      - ORGANIZER: {}
+      - PRIORITY: {}
+      - SEQUENCE: {}
+      - SUMMARY: {}
+      - URL: {}
+      - DTEND: {}
+      - DURATION: {}
+      - CATEGORIES: {}
+      - COMMENT: {}
+      - CONTACT: {}
       rfc: RFC7953
       section: '3.1'
       status: current
       components:
-        - AVAILABLE
+        - AVAILABLE: {}
     VCALENDAR:
       convert:
         object: Group
+        examples:
+          - icalendar: |
+              BEGIN:VCALENDAR
+              UID:41aa02b6-42d0-4f45-8cb4-8b5075be2e14
+              BEGIN:VEVENT
+              ...
+              END:VEVENT
+              END:VCALENDAR
+            jscalendar:
+              {
+                "@type": "Group",
+                "uid": "41aa02b6-42d0-4f45-8cb4-8b5075be2e14",
+                "entries": [
+                  {
+                    "@type": "Event",
+                    "...": ""
+                  }
+                ],
+                "...": ""
+              }
       properties:
       - PRODID:
         convert:
           property: prodId
           note: also converts to entries/*/method
-      - VERSION
+      - VERSION: {}
       - CREATED:
         convert:
           property: created
-      - CALSCALE
+      - CALSCALE: {}
       - METHOD:
         convert:
           property: entries/*/method
@@ -228,7 +390,7 @@ ical:
       - URL:
         convert:
           property: links
-      - REFRESH
+      - REFRESH: {}
       - SOURCE:
         convert:
           property: source
@@ -254,8 +416,141 @@ ical:
       section: '3.4'
       status: current
     VEVENT:
+      convert:
+        object: Event
+        examples:
+          - icalendar: |
+              BEGIN:VCALENDAR
+              BEGIN:VEVENT
+              UID:bda09d03-564c-4ac8-851c-24e66d6abe3c
+              DTSTART:20060102T030405Z
+              ...
+            jscalendar:
+                {
+                  "@type": "Group",
+                  "entries": [
+                    {
+                      "@type": "Event",
+                      "uid": "bda09d03-564c-4ac8-851c-24e66d6abe3c",
+                      "start": "2006-01-02T03:04:05",
+                      "timeZone": "Etc/UTC",
+                      "showWithoutTime": false,
+                      "...": ""
+                    }
+                  ],
+                  "...": ""
+                }
+          - name: Converting VEVENT components with differing UID values
+            desc: VEVENT components having differing UID property values convert to different entries in the Group.  They sort in the same order as in the VCALENDAR component.
+            icalendar: |
+              BEGIN:VCALENDAR
+              BEGIN:VEVENT
+              UID:DE935D01-3DF7-4201-B61A-D77D05C8B21A
+              ...
+              END:VEVENT
+              BEGIN:VEVENT
+              UID:60BE3D6E-6383-473A-BCF1-3C43EA1FA571
+              ...
+              END:VEVENT
+              END:VCALENDAR
+            jscalendar:
+              {
+                "@type": "Group",
+                "entries": [
+                  {
+                    "@type": "Event",
+                    "uid": "DE935D01-3DF7-4201-B61A-D77D05C8B21A",
+                    "...": ""
+                  },
+                  {
+                    "@type": "Event",
+                    "uid": "60BE3D6E-6383-473A-BCF1-3C43EA1FA571",
+                    "...": ""
+                  }
+                ],
+                "...": ""
+              }
+          - name: Converting VEVENT recurrence overrides
+            desc: VEVENT components having equal UID property values and <em>all but one of them</em> having the RECURRENCE-ID property set, convert to a single Event object.  The VEVENT component without a RECURRENCE-ID property converts to the Event object, all other VEVENT components with that UID value convert to a recurrence override of that event.
+            icalendar: |
+              BEGIN:VCALENDAR
+              BEGIN:VEVENT
+              UID:F4257E1D-5461-4EF6-840F-9DFC653EB559
+              RRULE:FREQ=DAILY
+              DTSTART:20240101T140000
+              ...
+              END:VEVENT
+              BEGIN:VEVENT
+              UID:F4257E1D-5461-4EF6-840F-9DFC653EB559
+              RECURRENCE-ID:20240202T140000
+              DTSTART:20240202T160000
+              ...
+              END:VEVENT
+              END:VCALENDAR
+            jscalendar:
+              {
+                "@type": "Group",
+                "entries": [
+                  {
+                    "@type": "Event",
+                    "uid": "F4257E1D-5461-4EF6-840F-9DFC653EB559",
+                    "start": "2024-01-01T14:00:00",
+                    "recurrenceRules": [
+                      {
+                        "@type": "RecurrenceRule",
+                        "frequency": "daily"
+                      }
+                    ],
+                    "recurrenceOverrides": {
+                      "2024-02-02T14:00:00": {
+                        "start": "2024-02-02T16:00:00"
+                      }
+                    },
+                    "...": ""
+                  }
+                ],
+                "...": ""
+              }
+          - name: Converting VEVENT recurrence instance
+            desc: VEVENT components having equal UID property values and <em>all of them</em> having a RECURRENCE-ID property set, convert to multiple Event objects.  Each Event <bcp14>MUST</bcp14> have the <tt>recurrenceId</tt> property set, as well as the <tt>recurrenceIdTimeZone</tt> property if not <tt>null</tt>. They sort in the same order as in the VCALENDAR component.
+            icalendar: |
+              BEGIN:VCALENDAR
+              BEGIN:VEVENT
+              UID:F4257E1D-5461-4EF6-840F-9DFC653EB559
+              RECURRENCE-ID:20240202T140000
+              DTSTART:20240202T160000
+              ...
+              END:VEVENT
+              BEGIN:VEVENT
+              UID:F4257E1D-5461-4EF6-840F-9DFC653EB559
+              RECURRENCE-ID:20240103T140000
+              DTSTART:20240103T140000
+              ...
+              END:VEVENT
+              END:VCALENDAR
+            jscalendar:
+              {
+                "@type": "Group",
+                "entries": [
+                  {
+                    "@type": "Event",
+                    "uid": "F4257E1D-5461-4EF6-840F-9DFC653EB559",
+                    "recurrenceId": "2024-02-02T14:00:00",
+                    "start": "2024-02-02T16:00:00",
+                    "...": ""
+                  },
+                  {
+                    "@type": "Event",
+                    "uid": "F4257E1D-5461-4EF6-840F-9DFC653EB559",
+                    "recurrenceId": "2024-01-03T14:00:00",
+                    "start": "2024-01-03T14:00:00",
+                    "...": ""
+                  }
+                ],
+                "...": ""
+              }
       properties:
-      - DTSTAMP
+      - DTSTAMP: {}
       - UID:
         convert:
           property: uid
@@ -292,7 +587,7 @@ ical:
       - SEQUENCE:
         convert:
           property: sequence
-      - STATUS
+      - STATUS: {}
       - SUMMARY:
         convert:
           property: title
@@ -321,7 +616,7 @@ ical:
       - CATEGORIES:
         convert:
           property: keywords
-      - COMMENT
+      - COMMENT: {}
       - CONTACT:
         convert:
           property: links
@@ -334,7 +629,7 @@ ical:
       - RELATED:
         convert:
           property: relatedTo
-      - RESOURCES
+      - RESOURCES: {}
       - RDATE:
         convert:
           property: recurrenceOverrides
@@ -356,122 +651,367 @@ ical:
       status: current
     VFREEBUSY:
       properties:
-      - DTSTAMP
-      - UID
-      - CONTACT
-      - DTSTART
-      - DTEND
-      - ORGANIZER
-      - URL
-      - ATTENDEE
-      - COMMENT
-      - FREEBUSY
-      - REQUEST-STATUS
+      - DTSTAMP: {}
+      - UID: {}
+      - CONTACT: {}
+      - DTSTART: {}
+      - DTEND: {}
+      - ORGANIZER: {}
+      - URL: {}
+      - ATTENDEE: {}
+      - COMMENT: {}
+      - FREEBUSY: {}
+      - REQUEST-STATUS: {}
       rfc: RFC5545
       section: 3.6.4
       status: current
     VJOURNAL:
       properties:
-      - DTSTAMP
-      - UID
-      - CLASS
-      - CREATED
-      - DTSTART
-      - LAST-MODIFIED
-      - ORGANIZER
-      - RECURRENCE-ID
-      - SEQUENCE
-      - STATUS
-      - SUMMARY
-      - URL
-      - RRULE
-      - ATTACH
-      - ATTENDEE
-      - CATEGORIES
-      - COMMENT
-      - CONTACT
-      - DESCRIPTION
-      - EXDATE
-      - RELATED
-      - RDATE
-      - REQUEST-STATUS
-      - COLOR
-      - IMAGE
+      - DTSTAMP: {}
+      - UID: {}
+      - CLASS: {}
+      - CREATED: {}
+      - DTSTART: {}
+      - LAST-MODIFIED: {}
+      - ORGANIZER: {}
+      - RECURRENCE-ID: {}
+      - SEQUENCE: {}
+      - STATUS: {}
+      - SUMMARY: {}
+      - URL: {}
+      - RRULE: {}
+      - ATTACH: {}
+      - ATTENDEE: {}
+      - CATEGORIES: {}
+      - COMMENT: {}
+      - CONTACT: {}
+      - DESCRIPTION: {}
+      - EXDATE: {}
+      - RELATED: {}
+      - RDATE: {}
+      - REQUEST-STATUS: {}
+      - COLOR: {}
+      - IMAGE: {}
       rfc: RFC5545
       section: 3.6.3
       status: current
     VLOCATION:
+      convert:
+        object: Location
       properties:
-      - UID
-      - DESCRIPTION
-      - GEO
-      - LOCATION-TYPE
-      - NAME
-      - STRUCTURED-DATA
+      - UID: {}
+      - DESCRIPTION:
+        convert:
+          property: description
+      - GEO:
+        convert:
+          property: coordinates
+      - LOCATION-TYPE:
+        convert:
+          property: locationTypes
+      - NAME:
+        convert:
+          property: name
+      - STRUCTURED-DATA:
+        convert:
+          property: links
       rfc: RFC9073
       section: '7.2'
       status: current
     VRESOURCE:
+      convert:
+        object: Participant
+        examples:
+          - icalendar: |
+              BEGIN:VEVENT
+              ...
+              BEGIN:VRESOURCE
+              UID:456789-abcdef-98765432
+              NAME:The projector
+              RESOURCE-TYPE:projector
+              STRUCTURED-DATA;VALUE=URI:http://dir.example.com/projectors/3d.vcf
+              END:VRESOURCE
+              END:VEVENT
+            jscalendar:
+              {
+                "@type": "Event",
+                "...": "",
+                "participants": {
+                  "p2": {
+                    "@type": "Participant",
+                    "kind": "resource",
+                    "name": "The projector",
+                    "links": {
+                      "l4": {
+                        "@type": "Link",
+                        "href": "http://dir.example.com/projectors/3d.vcf"
+                      }
+                    },
+                    "description": "A contact",
+                    "iCalProps": [
+                      [
+                        "uid",
+                        {},
+                        "text",
+                        "456789-abcdef-98765432"
+                      ],
+                      [
+                        "resource-type",
+                        {},
+                        "text",
+                        "projector"
+                      ]
+                    ]
+                  }
+                }
+              }
       properties:
       - UID
-      - DESCRIPTION
-      - GEO
-      - NAME
+      - DESCRIPTION:
+        convert:
+          property: description
+      - GEO:
+        convert:
+          property: locationId
+          note: Only one Location supported
+      - NAME:
+        convert:
+          property: name
       - RESOURCE-TYPE
-      - STRUCTURED-DATA
+      - STRUCTURED-DATA:
+        convert:
+          property: links
       rfc: RFC9073
       section: '7.3'
       status: current
     VTIMEZONE:
+      convert:
+        object: TimeZone
+        examples:
+          - icalendar: |
+              BEGIN:VCALENDAR
+              ...
+              BEGIN:VTIMEZONE
+              TZID:Puerto_Rico
+              LAST-MODIFIED:20240909T122233Z
+              BEGIN:DAYLIGHT
+              TZNAME:AWT
+              TZOFFSETFROM:-0400
+              TZOFFSETTO:-0300
+              DTSTART:19420503T000000
+              END:DAYLIGHT
+              BEGIN:DAYLIGHT
+              TZNAME:APT
+              TZOFFSETFROM:-0300
+              TZOFFSETTO:-0300
+              DTSTART:19450814T200000
+              END:DAYLIGHT
+              BEGIN:STANDARD
+              TZNAME:AST
+              TZOFFSETFROM:-0300
+              TZOFFSETTO:-0400
+              DTSTART:19450930T020000
+              END:STANDARD
+              END:VTIMEZONE
+              BEGIN:VEVENT
+              ...
+              DTSTART;TZID=Puerto_Rico:20080708T130000
+              END:VEVENT
+              END:VCALENDAR
+            jscalendar:
+              {
+                "@type": "Group",
+                "timeZones": {
+                  "/Puerto_Rico": {
+                    "@type": "TimeZone",
+                    "tzId": "Puerto_Rico",
+                    "updated": "2024-09-09T12:22:33Z",
+                    "daylight": [
+                      {
+                        "@type": "TimeZoneRule",
+                        "tzName": "A@T",
+                        "start": "1942-05-03T00:00:00",
+                        "offsetFrom": "-0400",
+                        "offsetTo": "-0300"
+                      },
+                      {
+                        "@type": "TimeZoneRule",
+                        "tzName": "APT",
+                        "start": "1945-08-14T20:00:00",
+                        "offsetFrom": "-0300",
+                        "offsetTo": "-0300"
+                      }
+                    ],
+                    "standard": [
+                      {
+                        "@type": "TimeZoneRule",
+                        "tzName": "AST",
+                        "start": "1945-09-30T02:00:00",
+                        "offsetFrom": "-0300",
+                        "offsetTo": "-0400"
+                      }
+                    ]
+                  }
+                },
+                "entries": [
+                  {
+                    "@type": "Event",
+                    "start": "2008-07-08T13:00:00",
+                    "timeZone": "/Puerto_Rico",
+                    "...": ""
+                  }
+                ],
+                "...": ""
+              }
       properties:
-      - TZID
-      - LAST-MODIFIED
-      - TZURL
+        - TZID:
+          convert:
+            property: tzId
+        - LAST-MODIFIED:
+          convert:
+            property: updated
+        - TZURL:
+          convert:
+            property: url
+        - TZID-ALIAS-OF:
+          convert:
+            property: aliases
       components:
-        - DAYLIGHT
-        - STANDARD
+        - DAYLIGHT:
+          convert:
+            property: daylight
+        - STANDARD:
+          convert:
+            property: standard
       rfc: RFC5545
       section: 3.6.5
       status: current
     VTODO:
+      convert:
+        object: Task
+        examples:
+          - icalendar:
+              BEGIN:VCALENDAR
+              BEGIN:VTODO
+              UID:83C80482-806D-41C4-8029-E438F793005D
+              DUE:20060102T030405Z
+              ...
+            jscalendar:
+              {
+                "@type": "Group",
+                "entries": [
+                  {
+                    "@type": "Task",
+                    "uid": "83C80482-806D-41C4-8029-E438F793005D",
+                    "due": "2006-01-02T03:04:05",
+                    "timeZone": "Etc/UTC",
+                    "...": ""
+                  }
+                ],
+                "...": ""
+              }
       properties:
-      - UID
-      - DTSTAMP
-      - CLASS
-      - COMPLETED
-      - CREATED
-      - DESCRIPTION
-      - DTSTART
-      - GEO
-      - LAST-MODIFIED
-      - LOCATION
-      - ORGANIZER
-      - PERCENT
-      - PRIORITY
-      - RECURRENCE-ID
-      - SEQUENCE
-      - STATUS
-      - SUMMARY
-      - TRANSP
-      - URL
-      - RRULE
-      - DUE
-      - DURATION
-      - ATTACH
-      - ATTENDEE
-      - CATEGORIES
-      - COMMENT
-      - CONTACT
-      - EXDATE
-      - REQUEST-STATUS
-      - RELATED
-      - RESOURCES
-      - RDATE
-      - COLOR
-      - CONFERENCE
-      - IMAGE
+      - PERCENT:
+        convert:
+          property: percentComplete
+      - COMPLETED: {}
+      - DTSTAMP: {}
+      - UID:
+        convert:
+          property: uid
+      - DSTART:
+        convert:
+          property: start
+      - CLASS:
+        convert:
+          property: privacy
+      - CREATED:
+        convert:
+          property: created
+      - DESCRIPTION:
+        convert:
+          property: description
+      - GEO:
+        convert:
+          property: locations
+      - LAST-MODIFIED:
+        convert:
+          property: updated
+      - LOCATION:
+        convert:
+          property: locations
+      - ORGANIZER:
+        convert:
+          property: replyTo
+      - PRIORITY:
+        convert:
+          property: priority
+      - RECURRENCE-ID:
+        convert:
+          property: recurrenceId
+      - SEQUENCE:
+        convert:
+          property: sequence
+      - STATUS: {}
+      - SUMMARY:
+        convert:
+          property: title
+      - TRANSP:
+        convert:
+          property: freeBusyStatus
+      - URL:
+        convert:
+          property: links
+      - RRULE:
+        convert:
+          property: recurrenceRules
+      - DUE:
+        convert:
+          property: due
+          note: Add Location.rel = "end" if TZID differs.
+      - DURATION:
+        convert:
+          property: duration
+      - ATTACH:
+        convert:
+          property: links
+      - ATTENDEE:
+        convert:
+          property: participants
+      - CATEGORIES:
+        convert:
+          property: keywords
+      - COMMENT: {}
+      - CONTACT:
+        convert:
+          property: links
+      - EXDATE:
+        convert:
+          property: recurrenceOverrides
+      - REQUEST-STATUS:
+        convert:
+          property: requestStatus
+      - RELATED:
+        convert:
+          property: relatedTo
+      - RESOURCES: {}
+      - RDATE:
+        convert:
+          property: recurrenceOverrides
+      - COLOR:
+        convert:
+          property: color
+      - CONFERENCE:
+        convert:
+          property: virtualLocations
+      - IMAGE:
+        convert:
+          property: links
       components:
-        - VALARM
+        - VALARM:
+          convert:
+            property: alerts
+
       rfc: RFC5545
       section: 3.6.2
       status: current
