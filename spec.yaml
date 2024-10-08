@@ -1,0 +1,1036 @@
+ical:
+  components:
+    AVAILABLE:
+      properties:
+      - DTSTAMP
+      - DTSTART
+      - UID
+      - DTEND
+      - DURATION
+      - CREATED
+      - DESCRIPTION
+      - LAST-MODIFIED
+      - LOCATION
+      - RECURRENCE-ID
+      - RRULE
+      - SUMMARY
+      - CATEGORIES
+      - COMMENT
+      - CONTACT
+      - EXDATE
+      - RDATE
+      rfc: RFC7953
+      section: '3.1'
+      status: current
+    DAYLIGHT:
+      convert:
+        object: TimeZoneRule
+      properties:
+      - DTSTART:
+        convert:
+          property: start
+      - TZOFFSETFROM:
+        convert:
+          property: offsetFrom
+      - TZOFFSETTO:
+        convert:
+          property: offsetTo
+      - RRULE:
+        convert:
+          property: recurrenceRules
+      - COMMENT:
+        convert:
+          property: comments
+      - RDATE:
+        convert:
+          property: recurrenceOverrides
+      - TZNAME:
+        convert:
+          property: names
+      rfc: RFC5545
+      section: 3.6.5
+      status: current
+    PARTICIPANT:
+      convert:
+        - object: Participant
+      properties:
+      - PARTICIPANT-TYPE:
+        convert:
+          property: roles
+          note: Participant.roles enum only supports CONTACT
+      - UID
+      - CALENDAR-ADDRESS:
+        convert:
+          property: calendarAddress
+      - CREATED
+      - DESCRIPTION:
+        convert:
+          property: description
+      - DTSTAMP:
+        convert:
+          property: scheduleUpdated
+      - GEO:
+        convert:
+          property: locationId
+          note: Only one Location supported
+      - LAST-MODIFIED
+      - PRIORITY
+      - SEQUENCE:
+        convert:
+          property: scheduleSequence
+      - STATUS
+      - SUMMARY:
+        convert:
+          property: name
+      - URL:
+        convert:
+          property: links
+      - ATTACH:
+        convert:
+          property: links
+      - CATEGORIES
+      - COMMENT:
+        convert:
+          property: participationComment
+          note: Only one comment supported
+      - CONTACT:
+        convert:
+          property: links
+      - LOCATION:
+        convert:
+          property: locationId
+          note: Only one Location supported
+      - REQUEST-STATUS
+      - RELATED
+      - RESOURCES:
+        convert:
+          property: links
+      - strucloc
+      - strucres
+      - STYLED-DESCRIPTION
+      - STRUCTURED-DATA:
+        convert:
+          property: links
+      components:
+        - VLOCATION:
+          convert:
+            property: links
+            note: Only one Location supported
+        - VRESOURCE:
+          convert:
+            property: links
+      rfc: RFC9073
+      section: '7.1'
+      status: current
+    STANDARD:
+      convert:
+        object: TimeZoneRule
+      properties:
+      - DTSTART:
+        convert:
+          property: start
+      - TZOFFSETFROM:
+        convert:
+          property: offsetFrom
+      - TZOFFSETTO:
+        convert:
+          property: offsetTo
+      - RRULE:
+        convert:
+          property: recurrenceRules
+      - COMMENT:
+        convert:
+          property: comments
+      - RDATE:
+        convert:
+          property: recurrenceOverrides
+      - TZNAME:
+        convert:
+          property: names
+      rfc: RFC5545
+      section: 3.6.5
+      status: current
+    VALARM:
+      convert:
+        object: Alert
+      properties:
+      - ACTION:
+        convert:
+          property: action
+          note: If ACTION is EMAIL or DISPLAY
+      - TRIGGER:
+        convert:
+          property: trigger
+      - DURATION
+      - REPEAT
+      - ATTACH
+      - DESCRIPTION
+      - SUMMARY
+      - ATTENDEE
+      - UID
+      - RELATED-TO:
+        convert:
+          property: relatedTo
+      - ACKNOWLEDGED:
+        convert:
+          property: acknowledged
+      rfc: RFC5545
+      section: 3.6.6
+      status: current
+    VAVAILABILITY:
+      properties:
+      - DTSTAMP
+      - UID
+      - BUSYTYPE
+      - CLASS
+      - CREATED
+      - DESCRIPTION
+      - DTSTART
+      - LAST-MODIFIED
+      - LOCATION
+      - ORGANIZER
+      - PRIORITY
+      - SEQUENCE
+      - SUMMARY
+      - URL
+      - DTEND
+      - DURATION
+      - CATEGORIES
+      - COMMENT
+      - CONTACT
+      rfc: RFC7953
+      section: '3.1'
+      status: current
+      components:
+        - AVAILABLE
+    VCALENDAR:
+      convert:
+        object: Group
+      properties:
+      - PRODID:
+        convert:
+          property: prodId
+          note: also converts to entries/*/method
+      - VERSION
+      - CREATED:
+        convert:
+          property: created
+      - CALSCALE
+      - METHOD:
+        convert:
+          property: entries/*/method
+      - UID:
+        convert:
+          property: uid
+      - LAST-MODIFIED:
+        convert:
+          property: updated
+      - URL:
+        convert:
+          property: links
+      - REFRESH
+      - SOURCE:
+        convert:
+          property: source
+      - COLOR:
+        convert:
+          property: color
+      - NAME:
+        convert:
+          property: title
+      - DESCRIPTION:
+        convert:
+          property: description
+      - CATEGORIES:
+        convert:
+          property: keywords
+      - CONCEPT:
+        convert:
+          property: categories
+      - IMAGE:
+        convert:
+          property: links
+      rfc: RFC5545
+      section: '3.4'
+      status: current
+    VEVENT:
+      properties:
+      - DTSTAMP
+      - UID:
+        convert:
+          property: uid
+      - DSTART:
+        convert:
+          property: start
+      - CLASS:
+        convert:
+          property: privacy
+      - CREATED:
+        convert:
+          property: created
+      - DESCRIPTION:
+        convert:
+          property: description
+      - GEO:
+        convert:
+          property: locations
+      - LAST-MODIFIED:
+        convert:
+          property: updated
+      - LOCATION:
+        convert:
+          property: locations
+      - ORGANIZER:
+        convert:
+          property: replyTo
+      - PRIORITY:
+        convert:
+          property: priority
+      - RECURRENCE-ID:
+        convert:
+          property: recurrenceId
+      - SEQUENCE:
+        convert:
+          property: sequence
+      - STATUS
+      - SUMMARY:
+        convert:
+          property: title
+      - TRANSP:
+        convert:
+          property: freeBusyStatus
+      - URL:
+        convert:
+          property: links
+      - RRULE:
+        convert:
+          property: recurrenceRules
+      - DTEND:
+        convert:
+          property: locations
+          note: Location.rel = "end". Only supported if timezone differs from start.
+      - DURATION:
+        convert:
+          property: duration
+      - ATTACH:
+        convert:
+          property: links
+      - ATTENDEE:
+        convert:
+          property: participants
+      - CATEGORIES:
+        convert:
+          property: keywords
+      - COMMENT
+      - CONTACT:
+        convert:
+          property: links
+      - EXDATE:
+        convert:
+          property: recurrenceOverrides
+      - REQUEST-STATUS:
+        convert:
+          property: requestStatus
+      - RELATED:
+        convert:
+          property: relatedTo
+      - RESOURCES
+      - RDATE:
+        convert:
+          property: recurrenceOverrides
+      - COLOR:
+        convert:
+          property: color
+      - CONFERENCE:
+        convert:
+          property: virtualLocations
+      - IMAGE:
+        convert:
+          property: links
+      components:
+        - VALARM:
+          convert:
+            property: alerts
+      rfc: RFC5545
+      section: 3.6.1
+      status: current
+    VFREEBUSY:
+      properties:
+      - DTSTAMP
+      - UID
+      - CONTACT
+      - DTSTART
+      - DTEND
+      - ORGANIZER
+      - URL
+      - ATTENDEE
+      - COMMENT
+      - FREEBUSY
+      - REQUEST-STATUS
+      rfc: RFC5545
+      section: 3.6.4
+      status: current
+    VJOURNAL:
+      properties:
+      - DTSTAMP
+      - UID
+      - CLASS
+      - CREATED
+      - DTSTART
+      - LAST-MODIFIED
+      - ORGANIZER
+      - RECURRENCE-ID
+      - SEQUENCE
+      - STATUS
+      - SUMMARY
+      - URL
+      - RRULE
+      - ATTACH
+      - ATTENDEE
+      - CATEGORIES
+      - COMMENT
+      - CONTACT
+      - DESCRIPTION
+      - EXDATE
+      - RELATED
+      - RDATE
+      - REQUEST-STATUS
+      - COLOR
+      - IMAGE
+      rfc: RFC5545
+      section: 3.6.3
+      status: current
+    VLOCATION:
+      properties:
+      - UID
+      - DESCRIPTION
+      - GEO
+      - LOCATION-TYPE
+      - NAME
+      - STRUCTURED-DATA
+      rfc: RFC9073
+      section: '7.2'
+      status: current
+    VRESOURCE:
+      properties:
+      - UID
+      - DESCRIPTION
+      - GEO
+      - NAME
+      - RESOURCE-TYPE
+      - STRUCTURED-DATA
+      rfc: RFC9073
+      section: '7.3'
+      status: current
+    VTIMEZONE:
+      properties:
+      - TZID
+      - LAST-MODIFIED
+      - TZURL
+      components:
+        - DAYLIGHT
+        - STANDARD
+      rfc: RFC5545
+      section: 3.6.5
+      status: current
+    VTODO:
+      properties:
+      - UID
+      - DTSTAMP
+      - CLASS
+      - COMPLETED
+      - CREATED
+      - DESCRIPTION
+      - DTSTART
+      - GEO
+      - LAST-MODIFIED
+      - LOCATION
+      - ORGANIZER
+      - PERCENT
+      - PRIORITY
+      - RECURRENCE-ID
+      - SEQUENCE
+      - STATUS
+      - SUMMARY
+      - TRANSP
+      - URL
+      - RRULE
+      - DUE
+      - DURATION
+      - ATTACH
+      - ATTENDEE
+      - CATEGORIES
+      - COMMENT
+      - CONTACT
+      - EXDATE
+      - REQUEST-STATUS
+      - RELATED
+      - RESOURCES
+      - RDATE
+      - COLOR
+      - CONFERENCE
+      - IMAGE
+      components:
+        - VALARM
+      rfc: RFC5545
+      section: 3.6.2
+      status: current
+  properties:
+    ACKNOWLEDGED:
+      rfc: RFC9074
+      section: '6.1'
+      status: current
+      parameters: []
+      types:
+        - DATE-TIME
+    ACTION:
+      parameters: []
+      rfc: RFC5545
+      section: 3.8.6.1
+      status: current
+      types:
+        - TEXT
+      values:
+        - AUDIO
+        - DISPLAY
+        - EMAIL
+    ATTACH:
+      rfc: RFC5545
+      section: 3.8.1.1
+      status: current
+      parameters:
+        - ENCODING
+        - FMTTYPE
+      types:
+        - URI
+        - BINARY
+    ATTENDEE:
+      rfc: RFC5545
+      section: 3.8.4.1
+      status: current
+      parameters:
+        - CUTYPE
+        - MEMBER
+        - ROLE
+        - PARTSTAT
+        - RSVP
+        - DELEGATED-TO
+        - SENT-BY
+        - CN
+        - DIR
+        - LANGUAGE
+      types:
+        - CAL-ADDRESS
+    BUSYTYPE:
+      rfc: RFC7953
+      section: '3.2'
+      status: current
+      parameters: []
+      types:
+        - TEXT
+    CALENDAR-ADDRESS:
+      parameters: []
+      rfc: RFC9073
+      section: '6.4'
+      status: current
+      types:
+      - CAL-ADDRESS
+    CALSCALE:
+      parameters: []
+      rfc: RFC5545
+      section: 3.7.1
+      status: current
+      types:
+      - TEXT
+    CATEGORIES:
+      parameters:
+      - LANGUAGE
+      rfc: RFC5545
+      section: 3.8.1.2
+      status: current
+      types:
+      - TEXT
+    CLASS:
+      parameters: []
+      rfc: RFC5545
+      section: 3.8.1.3
+      status: current
+      types:
+      - TEXT
+      values:
+      - PUBLIC
+      - PRIVATE
+      - CONFIDENTIAL
+    COLOR:
+      parameters: []
+      rfc: RFC7986
+      section: '5.9'
+      status: current
+      types:
+      - TEXT
+    COMMENT:
+      parameters:
+      - ALTREP
+      - LANGUAGE
+      rfc: RFC5545
+      section: 3.8.1.4
+      status: current
+      types:
+      - TEXT
+    COMPLETED:
+      parameters: []
+      rfc: RFC5545
+      section: 3.8.2.1
+      status: current
+      types:
+      - DATE-TIME
+    CONCEPT:
+      parameters: []
+      rfc: RFC9253
+      section: '8.1'
+      status: current
+      types:
+      - URI
+    CONFERENCE:
+      parameters:
+        - FEATURE
+        - LABEL
+        - LANGUAGE
+      rfc: RFC7986
+      section: '5.11'
+      status: current
+      types:
+      - URI
+    CONTACT:
+      parameters:
+      - ALTREP
+      - LANGUAGE
+      rfc: RFC5545
+      section: 3.8.4.2
+      status: current
+      types:
+      - TEXT
+    CREATED:
+      parameters: []
+      rfc: RFC5545
+      section: 3.8.7.1
+      status: current
+      types:
+      - DATE-TIME
+    DESCRIPTION:
+      parameters:
+      - ALTREP
+      - LANGUAGE
+      rfc: RFC5545
+      section: 3.8.1.5
+      status: current
+      types:
+      - TEXT
+    DTEND:
+      parameters:
+        - TZID
+      rfc: RFC5545
+      section: 3.8.2.2
+      status: current
+      types:
+      - DATE-TIME
+      - DATE
+    DTSTAMP:
+      parameters: []
+      rfc: RFC5545
+      section: 3.8.7.2
+      status: current
+      types:
+      - DATE-TIME
+    DTSTART:
+      parameters: []
+      rfc: RFC5545
+      section: 3.8.2.4
+      status: current
+      types:
+      - DATE-TIME
+      - DATE
+    DUE:
+      parameters: []
+      rfc: RFC5545
+      section: 3.8.2.3
+      status: current
+      types:
+      - DATE-TIME
+      - DATE
+    DURATION:
+      parameters: []
+      rfc: RFC5545
+      section: 3.8.2.5
+      status: current
+      types:
+      - DURATION
+    EXDATE:
+      parameters:
+      - TZID
+      rfc: RFC5545
+      section: 3.8.5.1
+      status: current
+      types:
+      - DATE-TIME
+      - DATE
+    EXRULE:
+      parameters: []
+      rfc: RFC2445
+      section: 4.8.5.2
+      status: deprecated
+      types:
+      - RECUR
+    FREEBUSY:
+      parameters:
+      - FBTYPE
+      rfc: RFC5545
+      section: 3.8.2.6
+      status: current
+      types:
+      - PERIOD
+    GEO:
+      parameters: []
+      rfc: RFC5545
+      section: 3.8.1.6
+      status: current
+      types:
+      - FLOAT
+    IMAGE:
+      parameters:
+      - ALTREP
+      - DISPLAY
+      - ENCODING
+      rfc: RFC7986
+      section: '5.10'
+      status: current
+      types:
+      - URI
+      - BINARY
+    LAST-MODIFIED:
+      parameters: []
+      rfc: RFC5545
+      section: 3.8.7.3
+      status: current
+      types:
+      - DATE-TIME
+    LINK:
+      parameters:
+      - FMTTYPE
+      - LABEL
+      - LANGUAGE
+      - LINKREL
+      rfc: RFC9253
+      section: '8.2'
+      status: current
+      types:
+      - URI
+      - UID
+      - XML-REFERENCE
+    LOCATION:
+      parameters:
+      - ALTREP
+      - LANGUAGE
+      rfc: RFC5545
+      section: 3.8.1.7
+      status: current
+      types:
+      - TEXT
+    LOCATION-TYPE:
+      parameters: []
+      rfc: RFC9073
+      section: '6.1'
+      status: current
+      types:
+      - TEXT
+    METHOD:
+      parameters: []
+      rfc: RFC5545
+      section: 3.7.2
+      status: current
+      types:
+      - TEXT
+    NAME:
+      parameters:
+      - ALTREP
+      - LANGUAGE
+      rfc: RFC7986
+      section: '5.1'
+      status: current
+      types:
+      - TEXT
+    ORGANIZER:
+      parameters:
+      - CN
+      - DIR
+      - SENT-BY
+      - LANGUAGE
+      rfc: RFC5545
+      section: 3.8.4.3
+      status: current
+      types:
+      - CAL-ADDRESS
+    PARTICIPANT-TYPE:
+      parameters: []
+      rfc: RFC9073
+      section: '6.2'
+      status: current
+      types:
+      - TEXT
+    PERCENT-COMPLETE:
+      parameters: []
+      rfc: RFC5545
+      section: 3.8.1.8
+      status: current
+      types:
+      - INTEGER
+    PRIORITY:
+      parameters: []
+      rfc: RFC5545
+      section: 3.8.1.9
+      status: current
+      types:
+      - INTEGER
+    PRODID:
+      parameters: []
+      rfc: RFC5545
+      section: 3.7.3
+      status: current
+      types:
+      - TEXT
+    PROXIMITY:
+      parameters: []
+      rfc: RFC9074
+      section: '8.1'
+      status: current
+      types:
+      - TEXT
+    RDATE:
+      parameters:
+      - TZID
+      rfc: RFC5545
+      section: 3.8.5.2
+      status: current
+      types:
+      - DATE-TIME
+      - DATE
+      - PERIOD
+    RECURRENCE-ID:
+      parameters:
+      - TZID
+      rfc: RFC5545
+      section: 3.8.4.4
+      status: current
+      types:
+      - DATE-TIME
+      - DATE
+    REFID:
+      parameters: []
+      rfc: RFC9253
+      section: '8.3'
+      status: current
+      types:
+      - TEXT
+    REFRESH-INTERVAL:
+      parameters: []
+      rfc: RFC7986
+      section: '5.7'
+      status: current
+      types:
+      - DURATION
+    RELATED-TO:
+      parameters:
+      - RELTYPE
+      rfc: RFC5545
+      section: 3.8.4.5
+      status: current
+      types:
+      - TEXT
+    REPEAT:
+      parameters: []
+      rfc: RFC5545
+      section: 3.8.6.2
+      status: current
+      types:
+      - INTEGER
+    REQUEST-STATUS:
+      parameters:
+      - LANGUAGE
+      rfc: RFC5545
+      section: 3.8.8.3
+      status: current
+      types:
+      - TEXT
+    RESOURCE-TYPE:
+      parameters: []
+      rfc: RFC9073
+      section: '6.3'
+      status: current
+      types:
+      - TEXT
+    RESOURCES:
+      parameters:
+      - ALTREP
+      - LANGUAGE
+      rfc: RFC5545
+      section: 3.8.1.10
+      status: current
+      types:
+      - TEXT
+    RRULE:
+      parameters: []
+      rfc: RFC5545
+      section: 3.8.5.3
+      status: current
+      types:
+      - RECUR
+    SEQUENCE:
+      parameters: []
+      rfc: RFC5545
+      section: 3.8.7.4
+      status: current
+      types:
+      - INTEGER
+    SOURCE:
+      parameters: []
+      rfc: RFC7986
+      section: '5.8'
+      status: current
+      types:
+      - URI
+    STATUS:
+      parameters: []
+      rfc: RFC5545
+      section: 3.8.1.11
+      status: current
+      types:
+      - TEXT
+    STRUCTURED-DATA:
+      parameters:
+      - ENCODING
+      - FMTTYPE
+      - SCHEMA
+      rfc: RFC9073
+      section: '6.6'
+      status: current
+      types:
+      - TEXT
+      - BINARY
+      - URI
+    STYLED-DESCRIPTION:
+      parameters:
+      - ALTREP
+      - LANGUAGE
+      - FMTTYPE
+      - DERIVED
+      rfc: RFC9073
+      section: '6.5'
+      status: current
+      types:
+      - TEXT
+      - URI
+    SUMMARY:
+      parameters:
+      - ALTREP
+      - LANGUAGE
+      rfc: RFC5545
+      section: 3.8.1.12
+      status: current
+      types:
+      - TEXT
+    TRANSP:
+      parameters: []
+      rfc: RFC5545
+      section: 3.8.2.7
+      status: current
+      types:
+      - TEXT
+    TRIGGER:
+      parameters:
+      - RELATED
+      rfc: RFC5545
+      section: 3.8.6.3
+      status: current
+      types:
+      - DURATION
+      - DATE-TIME
+    TZID:
+      parameters: []
+      rfc: RFC5545
+      section: 3.8.3.1
+      status: current
+      types:
+      - TEXT
+    TZID-ALIAS-OF:
+      parameters: []
+      rfc: RFC7808
+      section: '7.2'
+      status: current
+      types:
+      - TEXT
+    TZNAME:
+      parameters:
+      - LANGUAGE
+      rfc: RFC5545
+      section: 3.8.3.2
+      status: current
+      types:
+      - TEXT
+    TZOFFSETFROM:
+      parameters: []
+      rfc: RFC5545
+      section: 3.8.3.3
+      status: current
+      types:
+      - UTC-OFFSET
+    TZOFFSETTO:
+      parameters: []
+      rfc: RFC5545
+      section: 3.8.3.4
+      status: current
+      types:
+      - UTC-OFFSET
+    TZUNTIL:
+      parameters: []
+      rfc: RFC7808
+      section: '7.1'
+      status: current
+      types:
+      - DATE-TIME
+    TZURL:
+      parameters: []
+      rfc: RFC5545
+      section: 3.8.3.5
+      status: current
+      types:
+      - URI
+    UID:
+      parameters: []
+      rfc: RFC5545
+      section: 3.8.4.7
+      status: current
+      types:
+      - TEXT
+    URL:
+      parameters: []
+      rfc: RFC5545
+      section: 3.8.4.6
+      status: current
+      types:
+      - URI
+    VERSION:
+      parameters: []
+      rfc: RFC5545
+      section: 3.7.4
+      status: current
+      types:
+      - TEXT
+    XML:
+      parameters:
+      - ENCODING
+      rfc: RFC6321
+      section: '4.2'
+      status: current
+      types:
+      - TEXT
+      - BINARY
