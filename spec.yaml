@@ -2,23 +2,23 @@ icalendar:
   components:
     AVAILABLE:
       properties:
-        DTSTAMP: {}
-        DTSTART: {}
-        UID: {}
-        DTEND: {}
-        DURATION: {}
-        CREATED: {}
-        DESCRIPTION: {}
-        LAST-MODIFIED: {}
-        LOCATION: {}
-        RECURRENCE-ID: {}
-        RRULE: {}
-        SUMMARY: {}
         CATEGORIES: {}
         COMMENT: {}
         CONTACT: {}
+        CREATED: {}
+        DESCRIPTION: {}
+        DTEND: {}
+        DTSTAMP: {}
+        DTSTART: {}
+        DURATION: {}
         EXDATE: {}
+        LAST-MODIFIED: {}
+        LOCATION: {}
+        RECURRENCE-ID: {}
         RDATE: {}
+        RRULE: {}
+        SUMMARY: {}
+        UID: {}
       rfc: RFC7953
       section: '3.1'
       status: current
@@ -62,24 +62,24 @@ icalendar:
               "...": ""
             }
       properties:
+        COMMENT:
+          convert:
+            property: comments
         DTSTART:
           convert:
             property: start
+        RDATE:
+          convert:
+            property: recurrenceOverrides
+        RRULE:
+          convert:
+            property: recurrenceRules
         TZOFFSETFROM:
           convert:
             property: offsetFrom
         TZOFFSETTO:
           convert:
             property: offsetTo
-        RRULE:
-          convert:
-            property: recurrenceRules
-        COMMENT:
-          convert:
-            property: comments
-        RDATE:
-          convert:
-            property: recurrenceOverrides
         TZNAME:
           convert:
             property: names
@@ -131,14 +131,20 @@ icalendar:
               }
 
       properties:
-        PARTICIPANT-TYPE:
+        ATTACH:
           convert:
-            property: roles
-            note: Participant.roles enum only supports CONTACT
-        UID: {}
+            property: links
         CALENDAR-ADDRESS:
           convert:
             property: calendarAddress
+        CATEGORIES: {}
+        COMMENT:
+          convert:
+            property: participationComment
+            note: Only one comment supported
+        CONTACT:
+          convert:
+            property: links
         CREATED: {}
         DESCRIPTION:
           convert:
@@ -151,45 +157,39 @@ icalendar:
               property: locationId
               note: Only one Location supported
         LAST-MODIFIED: {}
-        PRIORITY: {}
-        SEQUENCE:
-          convert:
-            property: scheduleSequence
-        STATUS: {}
-        SUMMARY:
-          convert:
-            property: name
-        URL:
-          convert:
-            property: links
         LINK:
-          convert:
-            property: links
-        XML:
-          convert:
-            property: links
-        ATTACH:
-          convert:
-            property: links
-        CATEGORIES: {}
-        COMMENT:
-          convert:
-            property: participationComment
-            note: Only one comment supported
-        CONTACT:
           convert:
             property: links
         LOCATION:
           convert:
             property: locationId
             note: Only one Location supported
+        PARTICIPANT-TYPE:
+          convert:
+            property: roles
+            note: Participant.roles enum only supports CONTACT
+        PRIORITY: {}
         REQUEST-STATUS: {}
-        RELATED: {}
+        RELATED-TO: {}
         RESOURCES:
           convert:
             property: links
-        STYLED-DESCRIPTION: {}
+        SEQUENCE:
+          convert:
+            property: scheduleSequence
+        STATUS: {}
         STRUCTURED-DATA:
+          convert:
+            property: links
+        STYLED-DESCRIPTION: {}
+        SUMMARY:
+          convert:
+            property: name
+        UID: {}
+        URL:
+          convert:
+            property: links
+        XML:
           convert:
             property: links
       components:
@@ -242,24 +242,24 @@ icalendar:
                 "...": ""
               }
       properties:
+        COMMENT:
+          convert:
+            property: comments
         DTSTART:
           convert:
             property: start
+        RDATE:
+          convert:
+            property: recurrenceOverrides
+        RRULE:
+          convert:
+            property: recurrenceRules
         TZOFFSETFROM:
           convert:
             property: offsetFrom
         TZOFFSETTO:
           convert:
             property: offsetTo
-        RRULE:
-          convert:
-            property: recurrenceRules
-        COMMENT:
-          convert:
-            property: comments
-        RDATE:
-          convert:
-            property: recurrenceOverrides
         TZNAME:
           convert:
             property: names
@@ -302,52 +302,52 @@ icalendar:
                 }
               }
       properties:
-        ACTION:
-          convert:
-            property: action
-            note: Onlyi f ACTION is EMAIL or DISPLAY
-        TRIGGER:
-          convert:
-            property: trigger
-        DURATION: {}
-        REPEAT: {}
-        ATTACH: {}
-        DESCRIPTION: {}
-        SUMMARY: {}
-        ATTENDEE: {}
-        UID: {}
-        RELATED-TO:
-          convert:
-            property: relatedTo
         ACKNOWLEDGED:
           convert:
             property: acknowledged
+        ACTION:
+          convert:
+            property: action
+            note: Only if ACTION is EMAIL or DISPLAY.
+        ATTACH: {}
+        ATTENDEE: {}
+        DESCRIPTION: {}
+        DURATION: {}
         PROXIMITY: {}
         REFID: {}
+        RELATED-TO:
+          convert:
+            property: relatedTo
+        REPEAT: {}
+        SUMMARY: {}
+        TRIGGER:
+          convert:
+            property: trigger
+        UID: {}
       rfc: RFC5545
       section: 3.6.6
       status: current
     VAVAILABILITY:
       properties:
-        DTSTAMP: {}
-        UID: {}
         BUSYTYPE: {}
+        CATEGORIES: {}
         CLASS: {}
+        COMMENT: {}
+        CONTACT: {}
         CREATED: {}
         DESCRIPTION: {}
+        DTEND: {}
+        DTSTAMP: {}
         DTSTART: {}
+        DURATION: {}
         LAST-MODIFIED: {}
         LOCATION: {}
         ORGANIZER: {}
         PRIORITY: {}
         SEQUENCE: {}
         SUMMARY: {}
+        UID: {}
         URL: {}
-        DTEND: {}
-        DURATION: {}
-        CATEGORIES: {}
-        COMMENT: {}
-        CONTACT: {}
       rfc: RFC7953
       section: '3.1'
       status: current
@@ -377,55 +377,54 @@ icalendar:
                 "...": ""
               }
       properties:
-        PRODID:
-          convert:
-            property: prodId, entries/*/prodId
-        VERSION: {}
-        CREATED:
-          convert:
-            property: created
         CALSCALE: {}
-        METHOD:
-          convert:
-            property: entries/*/method
-        UID:
-          convert:
-            property: uid
-        LAST-MODIFIED:
-          convert:
-            property: updated
-        URL:
-          convert:
-            property: links
-        REFRESH: {}
-        SOURCE:
-          convert:
-            property: source
-        COLOR:
-          convert:
-            property: color
-        NAME:
-          convert:
-            property: title
-        DESCRIPTION:
-          convert:
-            property: description
         CATEGORIES:
           convert:
             property: keywords
+        COLOR:
+          convert:
+            property: color
         CONCEPT:
           convert:
             property: categories
+        CREATED:
+          convert:
+            property: created
+        DESCRIPTION:
+          convert:
+            property: description
         IMAGE:
           convert:
             property: links
+        LAST-MODIFIED:
+          convert:
+            property: updated
         LINK:
           convert:
             property: links
+        METHOD:
+          convert:
+            property: entries/*/method
+        NAME:
+          convert:
+            property: title
+        PRODID:
+          convert:
+            property: prodId, entries/*/prodId
+        REFRESH-INTERVAL: {}
+        SOURCE:
+          convert:
+            property: source
+        UID:
+          convert:
+            property: uid
+        URL:
+          convert:
+            property: links
+        VERSION: {}
         XML:
           convert:
             property: links
-        REFRESH-INTERVAL: {}
       components:
         VAVAILABILITY: {}
         VEVENT:
@@ -579,28 +578,63 @@ icalendar:
                 "...": ""
               }
       properties:
-        DTSTAMP: {}
-        UID:
+        ATTACH:
           convert:
-            property: uid
-        DSTART:
+            property: links
+        ATTENDEE:
           convert:
-            property: start
+            property: participants
+        CATEGORIES:
+          convert:
+            property: keywords
         CLASS:
           convert:
             property: privacy
+        COLOR:
+          convert:
+            property: color
+        COMMENT: {}
+        CONFERENCE:
+          convert:
+            property: virtualLocations
+        CONTACT:
+          convert:
+            property: links
         CREATED:
           convert:
             property: created
         DESCRIPTION:
           convert:
             property: description
+        DTEND:
+          convert:
+            property: locations
+            note: Location.rel = "end". Only supported if timezone differs from start.
+        DTSTAMP: {}
+        DTSTART:
+          convert:
+            property: start
+        DURATION:
+          convert:
+            property: duration
+        EXDATE:
+          convert:
+            property: recurrenceOverrides
+        EXRULE:
+          convert:
+            property: excludedRecurrenceRules
         GEO:
           convert:
             property: locations
+        IMAGE:
+          convert:
+            property: links
         LAST-MODIFIED:
           convert:
             property: updated
+        LINK:
+          convert:
+            property: links
         LOCATION:
           convert:
             property: locations
@@ -613,6 +647,20 @@ icalendar:
         RECURRENCE-ID:
           convert:
             property: recurrenceId
+        REQUEST-STATUS:
+          convert:
+            property: requestStatus
+        RELATED-TO:
+          convert:
+            property: relatedTo
+        RESOURCES: {}
+        RDATE:
+          convert:
+            property: recurrenceOverrides
+        REFID: {}
+        RRULE:
+          convert:
+            property: recurrenceRules
         SEQUENCE:
           convert:
             property: sequence
@@ -623,61 +671,12 @@ icalendar:
         TRANSP:
           convert:
             property: freeBusyStatus
+        UID:
+          convert:
+            property: uid
         URL:
           convert:
             property: links
-        RRULE:
-          convert:
-            property: recurrenceRules
-        DTEND:
-          convert:
-            property: locations
-            note: Location.rel = "end". Only supported if timezone differs from start.
-        DURATION:
-          convert:
-            property: duration
-        ATTACH:
-          convert:
-            property: links
-        LINK:
-          convert:
-            property: links
-        ATTENDEE:
-          convert:
-            property: participants
-        CATEGORIES:
-          convert:
-            property: keywords
-        COMMENT: {}
-        CONTACT:
-          convert:
-            property: links
-        EXDATE:
-          convert:
-            property: recurrenceOverrides
-        EXRULE:
-          convert:
-            property: excludedRecurrenceRules
-        REQUEST-STATUS:
-          convert:
-            property: requestStatus
-        RELATED:
-          convert:
-            property: relatedTo
-        RESOURCES: {}
-        RDATE:
-          convert:
-            property: recurrenceOverrides
-        COLOR:
-          convert:
-            property: color
-        CONFERENCE:
-          convert:
-            property: virtualLocations
-        IMAGE:
-          convert:
-            property: links
-        REFID: {}
         XML:
           convert:
             property: links
@@ -690,47 +689,47 @@ icalendar:
       status: current
     VFREEBUSY:
       properties:
-        DTSTAMP: {}
-        UID: {}
-        CONTACT: {}
-        DTSTART: {}
-        DTEND: {}
-        ORGANIZER: {}
-        URL: {}
         ATTENDEE: {}
         COMMENT: {}
+        CONTACT: {}
+        DTEND: {}
+        DTSTAMP: {}
+        DTSTART: {}
         FREEBUSY: {}
+        ORGANIZER: {}
         REQUEST-STATUS: {}
+        UID: {}
+        URL: {}
       rfc: RFC5545
       section: 3.6.4
       status: current
     VJOURNAL:
       properties:
-        DTSTAMP: {}
-        UID: {}
-        CLASS: {}
-        CREATED: {}
-        DTSTART: {}
-        LAST-MODIFIED: {}
-        ORGANIZER: {}
-        RECURRENCE-ID: {}
-        SEQUENCE: {}
-        STATUS: {}
-        SUMMARY: {}
-        URL: {}
-        RRULE: {}
         ATTACH: {}
         ATTENDEE: {}
         CATEGORIES: {}
+        CLASS: {}
+        COLOR: {}
         COMMENT: {}
         CONTACT: {}
+        CREATED: {}
         DESCRIPTION: {}
+        DTSTAMP: {}
+        DTSTART: {}
         EXDATE: {}
-        RELATED: {}
-        RDATE: {}
-        REQUEST-STATUS: {}
-        COLOR: {}
         IMAGE: {}
+        LAST-MODIFIED: {}
+        ORGANIZER: {}
+        RDATE: {}
+        RECURRENCE-ID: {}
+        RELATED-TO: {}
+        REQUEST-STATUS: {}
+        RRULE: {}
+        SEQUENCE: {}
+        STATUS: {}
+        SUMMARY: {}
+        UID: {}
+        URL: {}
       rfc: RFC5545
       section: 3.6.3
       status: current
@@ -738,29 +737,29 @@ icalendar:
       convert:
         object: Location
       properties:
-        UID: {}
         DESCRIPTION:
           convert:
             property: description
         GEO:
           convert:
             property: coordinates
+        LINK:
+          convert:
+            property: links
         LOCATION-TYPE:
           convert:
             property: locationTypes
         NAME:
           convert:
             property: name
+        REFID: {}
         STRUCTURED-DATA:
           convert:
             property: links
-        LINK:
-          convert:
-            property: links
+        UID: {}
         XML:
           convert:
             property: links
-        REFID: {}
       rfc: RFC9073
       section: '7.2'
       status: current
@@ -812,7 +811,6 @@ icalendar:
                 }
               }
       properties:
-        UID: {}
         DESCRIPTION:
           convert:
             property: description
@@ -827,6 +825,7 @@ icalendar:
         STRUCTURED-DATA:
           convert:
             property: links
+        UID: {}
         XML:
           convert:
             property: links
@@ -913,21 +912,21 @@ icalendar:
                 "...": ""
               }
       properties:
-          TZID:
-            convert:
-              property: tzId
           LAST-MODIFIED:
             convert:
               property: updated
-          TZURL:
+          TZID:
             convert:
-              property: url
+              property: tzId
           TZID-ALIAS-OF:
             convert:
               property: aliases
           TZUNTIL:
             convert:
               property: validUntil
+          TZURL:
+            convert:
+              property: url
       components:
           DAYLIGHT:
             convert:
@@ -964,44 +963,97 @@ icalendar:
                 "...": ""
               }
       properties:
-        PERCENT:
+        ATTACH:
           convert:
-            property: percentComplete
-        COMPLETED: {}
-        DTSTAMP: {}
-        UID:
+            property: links
+        ATTENDEE:
           convert:
-            property: uid
-        DSTART:
+            property: participants
+        CATEGORIES:
           convert:
-            property: start
+            property: keywords
         CLASS:
           convert:
             property: privacy
+        COLOR:
+          convert:
+            property: color
+        COMMENT: {}
+        COMPLETED: {}
+        CONFERENCE:
+          convert:
+            property: virtualLocations
+        CONTACT:
+          convert:
+            property: links
         CREATED:
           convert:
             property: created
         DESCRIPTION:
           convert:
             property: description
+        DTEND:
+          convert:
+            property: locations
+            note: Location.rel = "end". Only supported if timezone differs from start.
+        DTSTAMP: {}
+        DTSTART:
+          convert:
+            property: start
+        DUE:
+          convert:
+            property: due
+            note: Also add Location with timeZone and .rel = "end" if TZID differs from DTSTART TZID.
+        DURATION:
+          convert:
+            property: duration
+        EXDATE:
+          convert:
+            property: recurrenceOverrides
+        EXRULE:
+          convert:
+            property: excludedRecurrenceRules
         GEO:
           convert:
             property: locations
+        IMAGE:
+          convert:
+            property: links
         LAST-MODIFIED:
           convert:
             property: updated
+        LINK:
+          convert:
+            property: links
         LOCATION:
           convert:
             property: locations
         ORGANIZER:
           convert:
             property: replyTo
+        PERCENT-COMPLETE:
+          convert:
+            property: percentComplete
         PRIORITY:
           convert:
             property: priority
         RECURRENCE-ID:
           convert:
             property: recurrenceId
+        REQUEST-STATUS:
+          convert:
+            property: requestStatus
+        RELATED-TO:
+          convert:
+            property: relatedTo
+        RESOURCES: {}
+        RDATE:
+          convert:
+            property: recurrenceOverrides
+        REFID: {}
+        RRULE:
+          convert:
+            property: recurrenceRules
         SEQUENCE:
           convert:
             property: sequence
@@ -1012,67 +1064,15 @@ icalendar:
         TRANSP:
           convert:
             property: freeBusyStatus
+        UID:
+          convert:
+            property: uid
         URL:
-          convert:
-            property: links
-        RRULE:
-          convert:
-            property: recurrenceRules
-        DUE:
-          convert:
-            property: due
-            note: Also add Location with timeZone and .rel = "end" if TZID differs from DTSTART TZID.
-        DURATION:
-          convert:
-            property: duration
-        ATTACH:
-          convert:
-            property: links
-        LINK:
           convert:
             property: links
         XML:
           convert:
             property: links
-        ATTENDEE:
-          convert:
-            property: participants
-        CATEGORIES:
-          convert:
-            property: keywords
-        COMMENT: {}
-        CONTACT:
-          convert:
-            property: links
-        EXDATE:
-          convert:
-            property: recurrenceOverrides
-        EXRULE:
-          convert:
-            property: excludedRecurrenceRules
-        REQUEST-STATUS:
-          convert:
-            property: requestStatus
-        RELATED:
-          convert:
-            property: relatedTo
-        RESOURCES: {}
-        RDATE:
-          convert:
-            property: recurrenceOverrides
-        COLOR:
-          convert:
-            property: color
-        CONFERENCE:
-          convert:
-            property: virtualLocations
-        IMAGE:
-          convert:
-            property: links
-        REFID: {}
-        PERCENT-COMPLETE:
-          convert:
-            property: percentComplete
       components:
           VALARM:
             convert:
