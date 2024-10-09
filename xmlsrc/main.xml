@@ -191,9 +191,7 @@ SUMMARY:he
         <section anchor="ical-comp-{{ comp_name|lower }}">
           <name>{{ comp_name|upper }}</name>
           {% if comp.convert %}
-          <t>The <xref target="{{comp.rfc}}" section="{{comp.section}}" sectionFormat="parens">{{comp_name|upper}} component</xref> converts to a {{comp.convert.object}} object.
-            {% if convertible_comp_elems(comp) %}
-            Its entries convert as follows:</t>
+          <t>The <xref target="{{comp.rfc}}" section="{{comp.section}}" sectionFormat="parens">{{comp_name|upper}} component</xref> converts to a {{comp.convert.object}} object. Its entries convert as follows:</t>
             <table>
               <thead>
                 <tr>
@@ -204,28 +202,38 @@ SUMMARY:he
                 </tr>
               </thead>
               <tbody>
-                {% for elem in convertible_comp_elems(comp) %}
-                <tr>
-                  <td>{{ elem.kind }}</td>
-                  <td>{{ elem.name }}</td>
-                  <td>{{ elem.prop }}</td>
-                  <td>{{ elem.note }}</td>
-                </tr>
-                {% endfor %}
+                {% if comp.properties %}
+                  {% for prop_name, prop in comp.properties | dictsort %}
+                  <tr>
+                    <td>Property</td>
+                    <td>{{ prop_name }}</td>
+                    {% if prop.convert %}
+                    <td>{{ prop.convert.property }}</td>
+                    <td>{{ prop.convert.note }}</td>
+                    {% else %}
+                    <td>iCalProps</td>
+                    <td>Non-standard {{ comp.convert.object }} property.</td>
+                    {% endif %}
+                  </tr>
+                  {% endfor %}
+                {% endif %}
+                {% if comp.components %}
+                  {% for subcomp_name, subcomp in comp.components | dictsort %}
+                  <tr>
+                    <td>Component</td>
+                    <td>{{ subcomp_name }}</td>
+                    {% if subcomp.convert %}
+                    <td>{{ subcomp.convert.property }}</td>
+                    <td>{{ subcomp.convert.note }}</td>
+                    {% else %}
+                    <td>iCalComps</td>
+                    <td>Non-standard {{ comp.convert.object }} property.</td>
+                    {% endif %}
+                  </tr>
+                  {% endfor %}
+                {% endif %}
               </tbody>
             </table>
-            {% else %}
-            </t>
-            {% endif %}
-
-            {% if inconvertible_props(comp) %}
-            <section>
-              <name>Unsupported properties</name>
-            <t>The following properties of a {{ comp_name }} component do not convert to a standard {{ comp.convert.object}} property: {{ inconvertible_props(comp) | join(", ") }}.</t>
-            <t>They convert to the <xref target="jscal-prop-icalprops">iCalProps</xref> property.</t>
-            </section> 
-            {% endif %}
-
 
             {% for example in comp.convert.examples %}
             <section>
@@ -242,7 +250,7 @@ SUMMARY:he
               {% endfor %}
 
           {% else %}
-          <t>The <xref target="{{comp.rfc}}" section="{{comp.section}}" sectionFormat="parens">{{name|upper}} component</xref> does not convert to a standard JSCalendar element.</t>
+          <t>The <xref target="{{comp.rfc}}" section="{{comp.section}}" sectionFormat="parens">{{comp_name|upper}} component</xref> does not convert to a standard JSCalendar element.</t>
           {% endif %}
         </section>
         {% endfor %}
