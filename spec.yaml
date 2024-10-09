@@ -411,6 +411,18 @@ icalendar:
         IMAGE:
           convert:
             property: links
+      components:
+        VAVAILABILITY: {}
+        VEVENT:
+          convert:
+            property: entries
+        VJOURNAL: {}
+        VTIMEZONE:
+          convert:
+            property: timeZones
+        VTODO:
+          convert:
+            property: entries
       rfc: RFC5545
       section: '3.4'
       status: current
