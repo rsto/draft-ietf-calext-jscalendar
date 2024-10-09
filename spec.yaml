@@ -162,6 +162,12 @@ icalendar:
         URL:
           convert:
             property: links
+        LINK:
+          convert:
+            property: links
+        XML:
+          convert:
+            property: links
         ATTACH:
           convert:
             property: links
@@ -316,6 +322,8 @@ icalendar:
         ACKNOWLEDGED:
           convert:
             property: acknowledged
+        PROXIMITY: {}
+        REFID: {}
       rfc: RFC5545
       section: 3.6.6
       status: current
@@ -411,6 +419,13 @@ icalendar:
         IMAGE:
           convert:
             property: links
+        LINK:
+          convert:
+            property: links
+        XML:
+          convert:
+            property: links
+        REFRESH-INTERVAL: {}
       components:
         VAVAILABILITY: {}
         VEVENT:
@@ -624,6 +639,9 @@ icalendar:
         ATTACH:
           convert:
             property: links
+        LINK:
+          convert:
+            property: links
         ATTENDEE:
           convert:
             property: participants
@@ -637,6 +655,9 @@ icalendar:
         EXDATE:
           convert:
             property: recurrenceOverrides
+        EXRULE:
+          convert:
+            property: excludedRecurrenceRules
         REQUEST-STATUS:
           convert:
             property: requestStatus
@@ -654,6 +675,10 @@ icalendar:
           convert:
             property: virtualLocations
         IMAGE:
+          convert:
+            property: links
+        REFID: {}
+        XML:
           convert:
             property: links
       components:
@@ -729,6 +754,13 @@ icalendar:
         STRUCTURED-DATA:
           convert:
             property: links
+        LINK:
+          convert:
+            property: links
+        XML:
+          convert:
+            property: links
+        REFID: {}
       rfc: RFC9073
       section: '7.2'
       status: current
@@ -793,6 +825,9 @@ icalendar:
             property: name
         RESOURCE-TYPE: {}
         STRUCTURED-DATA:
+          convert:
+            property: links
+        XML:
           convert:
             property: links
       rfc: RFC9073
@@ -890,6 +925,9 @@ icalendar:
           TZID-ALIAS-OF:
             convert:
               property: aliases
+          TZUNTIL:
+            convert:
+              property: validUntil
       components:
           DAYLIGHT:
             convert:
@@ -990,6 +1028,12 @@ icalendar:
         ATTACH:
           convert:
             property: links
+        LINK:
+          convert:
+            property: links
+        XML:
+          convert:
+            property: links
         ATTENDEE:
           convert:
             property: participants
@@ -1003,6 +1047,9 @@ icalendar:
         EXDATE:
           convert:
             property: recurrenceOverrides
+        EXRULE:
+          convert:
+            property: excludedRecurrenceRules
         REQUEST-STATUS:
           convert:
             property: requestStatus
@@ -1022,11 +1069,14 @@ icalendar:
         IMAGE:
           convert:
             property: links
+        REFID: {}
+        PERCENT-COMPLETE:
+          convert:
+            property: percentComplete
       components:
           VALARM:
-          convert:
-            property: alerts
-
+            convert:
+              property: alerts
       rfc: RFC5545
       section: 3.6.2
       status: current
@@ -1089,503 +1139,503 @@ icalendar:
       section: '6.4'
       status: current
       types:
-      - CAL-ADDRESS
+        - CAL-ADDRESS
     CALSCALE:
       parameters: []
       rfc: RFC5545
       section: 3.7.1
       status: current
       types:
-      - TEXT
+        - TEXT
     CATEGORIES:
       parameters:
-      - LANGUAGE
+        - LANGUAGE
       rfc: RFC5545
       section: 3.8.1.2
       status: current
       types:
-      - TEXT
+        - TEXT
     CLASS:
       parameters: []
       rfc: RFC5545
       section: 3.8.1.3
       status: current
       types:
-      - TEXT
+        - TEXT
       values:
-      - PUBLIC
-      - PRIVATE
-      - CONFIDENTIAL
+        - PUBLIC
+        - PRIVATE
+        - CONFIDENTIAL
     COLOR:
       parameters: []
       rfc: RFC7986
       section: '5.9'
       status: current
       types:
-      - TEXT
+        - TEXT
     COMMENT:
       parameters:
-      - ALTREP
-      - LANGUAGE
+        - ALTREP
+        - LANGUAGE
       rfc: RFC5545
       section: 3.8.1.4
       status: current
       types:
-      - TEXT
+        - TEXT
     COMPLETED:
       parameters: []
       rfc: RFC5545
       section: 3.8.2.1
       status: current
       types:
-      - DATE-TIME
+        - DATE-TIME
     CONCEPT:
       parameters: []
       rfc: RFC9253
       section: '8.1'
       status: current
       types:
-      - URI
+        - URI
     CONFERENCE:
       parameters:
-        - FEATURE
-        - LABEL
-        - LANGUAGE
+          - FEATURE
+          - LABEL
+          - LANGUAGE
       rfc: RFC7986
       section: '5.11'
       status: current
       types:
-      - URI
+        - URI
     CONTACT:
       parameters:
-      - ALTREP
-      - LANGUAGE
+        - ALTREP
+        - LANGUAGE
       rfc: RFC5545
       section: 3.8.4.2
       status: current
       types:
-      - TEXT
+        - TEXT
     CREATED:
       parameters: []
       rfc: RFC5545
       section: 3.8.7.1
       status: current
       types:
-      - DATE-TIME
+        - DATE-TIME
     DESCRIPTION:
       parameters:
-      - ALTREP
-      - LANGUAGE
+        - ALTREP
+        - LANGUAGE
       rfc: RFC5545
       section: 3.8.1.5
       status: current
       types:
-      - TEXT
+        - TEXT
     DTEND:
       parameters:
-        - TZID
+          - TZID
       rfc: RFC5545
       section: 3.8.2.2
       status: current
       types:
-      - DATE-TIME
-      - DATE
+        - DATE-TIME
+        - DATE
     DTSTAMP:
       parameters: []
       rfc: RFC5545
       section: 3.8.7.2
       status: current
       types:
-      - DATE-TIME
+        - DATE-TIME
     DTSTART:
       parameters: []
       rfc: RFC5545
       section: 3.8.2.4
       status: current
       types:
-      - DATE-TIME
-      - DATE
+        - DATE-TIME
+        - DATE
     DUE:
       parameters: []
       rfc: RFC5545
       section: 3.8.2.3
       status: current
       types:
-      - DATE-TIME
-      - DATE
+        - DATE-TIME
+        - DATE
     DURATION:
       parameters: []
       rfc: RFC5545
       section: 3.8.2.5
       status: current
       types:
-      - DURATION
+        - DURATION
     EXDATE:
       parameters:
-      - TZID
+        - TZID
       rfc: RFC5545
       section: 3.8.5.1
       status: current
       types:
-      - DATE-TIME
-      - DATE
+        - DATE-TIME
+        - DATE
     EXRULE:
       parameters: []
       rfc: RFC2445
       section: 4.8.5.2
       status: deprecated
       types:
-      - RECUR
+        - RECUR
     FREEBUSY:
       parameters:
-      - FBTYPE
+        - FBTYPE
       rfc: RFC5545
       section: 3.8.2.6
       status: current
       types:
-      - PERIOD
+        - PERIOD
     GEO:
       parameters: []
       rfc: RFC5545
       section: 3.8.1.6
       status: current
       types:
-      - FLOAT
+        - FLOAT
     IMAGE:
       parameters:
-      - ALTREP
-      - DISPLAY
-      - ENCODING
+        - ALTREP
+        - DISPLAY
+        - ENCODING
       rfc: RFC7986
       section: '5.10'
       status: current
       types:
-      - URI
-      - BINARY
+        - URI
+        - BINARY
     LAST-MODIFIED:
       parameters: []
       rfc: RFC5545
       section: 3.8.7.3
       status: current
       types:
-      - DATE-TIME
+        - DATE-TIME
     LINK:
       parameters:
-      - FMTTYPE
-      - LABEL
-      - LANGUAGE
-      - LINKREL
+        - FMTTYPE
+        - LABEL
+        - LANGUAGE
+        - LINKREL
       rfc: RFC9253
       section: '8.2'
       status: current
       types:
-      - URI
-      - UID
-      - XML-REFERENCE
+        - URI
+        - UID
+        - XML-REFERENCE
     LOCATION:
       parameters:
-      - ALTREP
-      - LANGUAGE
+        - ALTREP
+        - LANGUAGE
       rfc: RFC5545
       section: 3.8.1.7
       status: current
       types:
-      - TEXT
+        - TEXT
     LOCATION-TYPE:
       parameters: []
       rfc: RFC9073
       section: '6.1'
       status: current
       types:
-      - TEXT
+        - TEXT
     METHOD:
       parameters: []
       rfc: RFC5545
       section: 3.7.2
       status: current
       types:
-      - TEXT
+        - TEXT
     NAME:
       parameters:
-      - ALTREP
-      - LANGUAGE
+        - ALTREP
+        - LANGUAGE
       rfc: RFC7986
       section: '5.1'
       status: current
       types:
-      - TEXT
+        - TEXT
     ORGANIZER:
       parameters:
-      - CN
-      - DIR
-      - SENT-BY
-      - LANGUAGE
+        - CN
+        - DIR
+        - SENT-BY
+        - LANGUAGE
       rfc: RFC5545
       section: 3.8.4.3
       status: current
       types:
-      - CAL-ADDRESS
+        - CAL-ADDRESS
     PARTICIPANT-TYPE:
       parameters: []
       rfc: RFC9073
       section: '6.2'
       status: current
       types:
-      - TEXT
+        - TEXT
     PERCENT-COMPLETE:
       parameters: []
       rfc: RFC5545
       section: 3.8.1.8
       status: current
       types:
-      - INTEGER
+        - INTEGER
     PRIORITY:
       parameters: []
       rfc: RFC5545
       section: 3.8.1.9
       status: current
       types:
-      - INTEGER
+        - INTEGER
     PRODID:
       parameters: []
       rfc: RFC5545
       section: 3.7.3
       status: current
       types:
-      - TEXT
+        - TEXT
     PROXIMITY:
       parameters: []
       rfc: RFC9074
       section: '8.1'
       status: current
       types:
-      - TEXT
+        - TEXT
     RDATE:
       parameters:
-      - TZID
+        - TZID
       rfc: RFC5545
       section: 3.8.5.2
       status: current
       types:
-      - DATE-TIME
-      - DATE
-      - PERIOD
+        - DATE-TIME
+        - DATE
+        - PERIOD
     RECURRENCE-ID:
       parameters:
-      - TZID
+        - TZID
       rfc: RFC5545
       section: 3.8.4.4
       status: current
       types:
-      - DATE-TIME
-      - DATE
+        - DATE-TIME
+        - DATE
     REFID:
       parameters: []
       rfc: RFC9253
       section: '8.3'
       status: current
       types:
-      - TEXT
+        - TEXT
     REFRESH-INTERVAL:
       parameters: []
       rfc: RFC7986
       section: '5.7'
       status: current
       types:
-      - DURATION
+        - DURATION
     RELATED-TO:
       parameters:
-      - RELTYPE
+        - RELTYPE
       rfc: RFC5545
       section: 3.8.4.5
       status: current
       types:
-      - TEXT
+        - TEXT
     REPEAT:
       parameters: []
       rfc: RFC5545
       section: 3.8.6.2
       status: current
       types:
-      - INTEGER
+        - INTEGER
     REQUEST-STATUS:
       parameters:
-      - LANGUAGE
+        - LANGUAGE
       rfc: RFC5545
       section: 3.8.8.3
       status: current
       types:
-      - TEXT
+        - TEXT
     RESOURCE-TYPE:
       parameters: []
       rfc: RFC9073
       section: '6.3'
       status: current
       types:
-      - TEXT
+        - TEXT
     RESOURCES:
       parameters:
-      - ALTREP
-      - LANGUAGE
+        - ALTREP
+        - LANGUAGE
       rfc: RFC5545
       section: 3.8.1.10
       status: current
       types:
-      - TEXT
+        - TEXT
     RRULE:
       parameters: []
       rfc: RFC5545
       section: 3.8.5.3
       status: current
       types:
-      - RECUR
+        - RECUR
     SEQUENCE:
       parameters: []
       rfc: RFC5545
       section: 3.8.7.4
       status: current
       types:
-      - INTEGER
+        - INTEGER
     SOURCE:
       parameters: []
       rfc: RFC7986
       section: '5.8'
       status: current
       types:
-      - URI
+        - URI
     STATUS:
       parameters: []
       rfc: RFC5545
       section: 3.8.1.11
       status: current
       types:
-      - TEXT
+        - TEXT
     STRUCTURED-DATA:
       parameters:
-      - ENCODING
-      - FMTTYPE
-      - SCHEMA
+        - ENCODING
+        - FMTTYPE
+        - SCHEMA
       rfc: RFC9073
       section: '6.6'
       status: current
       types:
-      - TEXT
-      - BINARY
-      - URI
+        - TEXT
+        - BINARY
+        - URI
     STYLED-DESCRIPTION:
       parameters:
-      - ALTREP
-      - LANGUAGE
-      - FMTTYPE
-      - DERIVED
+        - ALTREP
+        - LANGUAGE
+        - FMTTYPE
+        - DERIVED
       rfc: RFC9073
       section: '6.5'
       status: current
       types:
-      - TEXT
-      - URI
+        - TEXT
+        - URI
     SUMMARY:
       parameters:
-      - ALTREP
-      - LANGUAGE
+        - ALTREP
+        - LANGUAGE
       rfc: RFC5545
       section: 3.8.1.12
       status: current
       types:
-      - TEXT
+        - TEXT
     TRANSP:
       parameters: []
       rfc: RFC5545
       section: 3.8.2.7
       status: current
       types:
-      - TEXT
+        - TEXT
     TRIGGER:
       parameters:
-      - RELATED
+        - RELATED
       rfc: RFC5545
       section: 3.8.6.3
       status: current
       types:
-      - DURATION
-      - DATE-TIME
+        - DURATION
+        - DATE-TIME
     TZID:
       parameters: []
       rfc: RFC5545
       section: 3.8.3.1
       status: current
       types:
-      - TEXT
+        - TEXT
     TZID-ALIAS-OF:
       parameters: []
       rfc: RFC7808
       section: '7.2'
       status: current
       types:
-      - TEXT
+        - TEXT
     TZNAME:
       parameters:
-      - LANGUAGE
+        - LANGUAGE
       rfc: RFC5545
       section: 3.8.3.2
       status: current
       types:
-      - TEXT
+        - TEXT
     TZOFFSETFROM:
       parameters: []
       rfc: RFC5545
       section: 3.8.3.3
       status: current
       types:
-      - UTC-OFFSET
+        - UTC-OFFSET
     TZOFFSETTO:
       parameters: []
       rfc: RFC5545
       section: 3.8.3.4
       status: current
       types:
-      - UTC-OFFSET
+        - UTC-OFFSET
     TZUNTIL:
       parameters: []
       rfc: RFC7808
       section: '7.1'
       status: current
       types:
-      - DATE-TIME
+        - DATE-TIME
     TZURL:
       parameters: []
       rfc: RFC5545
       section: 3.8.3.5
       status: current
       types:
-      - URI
+        - URI
     UID:
       parameters: []
       rfc: RFC5545
       section: 3.8.4.7
       status: current
       types:
-      - TEXT
+        - TEXT
     URL:
       parameters: []
       rfc: RFC5545
       section: 3.8.4.6
       status: current
       types:
-      - URI
+        - URI
     VERSION:
       parameters: []
       rfc: RFC5545
       section: 3.7.4
       status: current
       types:
-      - TEXT
+        - TEXT
     XML:
       parameters:
-      - ENCODING
+        - ENCODING
       rfc: RFC6321
       section: '4.2'
       status: current
       types:
-      - TEXT
-      - BINARY
+        - TEXT
+        - BINARY
