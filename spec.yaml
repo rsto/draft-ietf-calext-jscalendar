@@ -71,9 +71,11 @@ icalendar:
         RDATE:
           convert:
             property: recurrenceOverrides
+            object: PatchObject
         RRULE:
           convert:
             property: recurrenceRules
+            object: RecurrenceRule
         TZOFFSETFROM:
           convert:
             property: offsetFrom
@@ -134,6 +136,7 @@ icalendar:
         ATTACH:
           convert:
             property: links
+            object: Link
         CALENDAR-ADDRESS:
           convert:
             property: calendarAddress
@@ -145,6 +148,7 @@ icalendar:
         CONTACT:
           convert:
             property: links
+            object: Link
         CREATED: {}
         DESCRIPTION:
           convert:
@@ -160,6 +164,7 @@ icalendar:
         LINK:
           convert:
             property: links
+            object: Link
         LOCATION:
           convert:
             property: locationId
@@ -174,6 +179,7 @@ icalendar:
         RESOURCES:
           convert:
             property: links
+            object: Link
         SEQUENCE:
           convert:
             property: scheduleSequence
@@ -181,6 +187,7 @@ icalendar:
         STRUCTURED-DATA:
           convert:
             property: links
+            object: Link
         STYLED-DESCRIPTION: {}
         SUMMARY:
           convert:
@@ -189,9 +196,11 @@ icalendar:
         URL:
           convert:
             property: links
+            object: Link
         XML:
           convert:
             property: links
+            object: Link
       components:
           VLOCATION:
             convert:
@@ -251,9 +260,11 @@ icalendar:
         RDATE:
           convert:
             property: recurrenceOverrides
+            object: PatchObject
         RRULE:
           convert:
             property: recurrenceRules
+            object: RecurrenceRule
         TZOFFSETFROM:
           convert:
             property: offsetFrom
@@ -319,6 +330,7 @@ icalendar:
           convert:
             property: relatedTo
         REPEAT: {}
+        STYLED-DESCRIPTION: {}
         SUMMARY: {}
         TRIGGER:
           convert:
@@ -396,12 +408,14 @@ icalendar:
         IMAGE:
           convert:
             property: links
+            object: Link
         LAST-MODIFIED:
           convert:
             property: updated
         LINK:
           convert:
             property: links
+            object: Link
         METHOD:
           convert:
             property: entries/*/method
@@ -421,10 +435,12 @@ icalendar:
         URL:
           convert:
             property: links
+            object: Link
         VERSION: {}
         XML:
           convert:
             property: links
+            object: Link
       components:
         VAVAILABILITY: {}
         VEVENT:
@@ -581,9 +597,11 @@ icalendar:
         ATTACH:
           convert:
             property: links
+            object: Link
         ATTENDEE:
           convert:
             property: participants
+            object: Participant
         CATEGORIES:
           convert:
             property: keywords
@@ -594,12 +612,17 @@ icalendar:
           convert:
             property: color
         COMMENT: {}
+        CONCEPT:
+          convert:
+            property: categories
         CONFERENCE:
           convert:
             property: virtualLocations
+            object: VirtualLocation
         CONTACT:
           convert:
             property: links
+            object: Link
         CREATED:
           convert:
             property: created
@@ -608,8 +631,8 @@ icalendar:
             property: description
         DTEND:
           convert:
-            property: locations
-            note: Location.rel = "end". Only supported if timezone differs from start.
+            property: duration
+            note: Location.rel = "end". If timezone differs from start.
         DTSTAMP: {}
         DTSTART:
           convert:
@@ -620,24 +643,30 @@ icalendar:
         EXDATE:
           convert:
             property: recurrenceOverrides
+            object: PatchObject
         EXRULE:
           convert:
             property: excludedRecurrenceRules
+            object: RecurrenceRule
         GEO:
           convert:
             property: locations
+            object: Location
         IMAGE:
           convert:
             property: links
+            object: Link
         LAST-MODIFIED:
           convert:
             property: updated
         LINK:
           convert:
             property: links
+            object: Link
         LOCATION:
           convert:
             property: locations
+            object: Location
         ORGANIZER:
           convert:
             property: replyTo
@@ -657,14 +686,19 @@ icalendar:
         RDATE:
           convert:
             property: recurrenceOverrides
+            object: PatchObject
         REFID: {}
         RRULE:
           convert:
             property: recurrenceRules
+            object: RecurrenceRule
         SEQUENCE:
           convert:
             property: sequence
         STATUS: {}
+        STYLED-DESCRIPTION:
+          convert:
+            property: description
         SUMMARY:
           convert:
             property: title
@@ -677,13 +711,16 @@ icalendar:
         URL:
           convert:
             property: links
+            object: Link
         XML:
           convert:
             property: links
+            object: Link
       components:
           VALARM:
             convert:
               property: alerts
+              object: Alert
       rfc: RFC5545
       section: 3.6.1
       status: current
@@ -746,6 +783,7 @@ icalendar:
         LINK:
           convert:
             property: links
+            object: Link
         LOCATION-TYPE:
           convert:
             property: locationTypes
@@ -756,10 +794,12 @@ icalendar:
         STRUCTURED-DATA:
           convert:
             property: links
+            object: Link
         UID: {}
         XML:
           convert:
             property: links
+            object: Link
       rfc: RFC9073
       section: '7.2'
       status: current
@@ -825,10 +865,12 @@ icalendar:
         STRUCTURED-DATA:
           convert:
             property: links
+            object: Link
         UID: {}
         XML:
           convert:
             property: links
+            object: Link
       rfc: RFC9073
       section: '7.3'
       status: current
@@ -931,9 +973,11 @@ icalendar:
           DAYLIGHT:
             convert:
               property: daylight
+              object: TimeZoneRule
           STANDARD:
             convert:
               property: standard
+              object: TimeZoneRule
       rfc: RFC5545
       section: 3.6.5
       status: current
@@ -966,9 +1010,11 @@ icalendar:
         ATTACH:
           convert:
             property: links
+            object: Link
         ATTENDEE:
           convert:
             property: participants
+            object: Participant
         CATEGORIES:
           convert:
             property: keywords
@@ -980,22 +1026,23 @@ icalendar:
             property: color
         COMMENT: {}
         COMPLETED: {}
+        CONCEPT:
+          convert:
+            property: categories
         CONFERENCE:
           convert:
             property: virtualLocations
+            object: VirtualLocation
         CONTACT:
           convert:
             property: links
+            object: Link
         CREATED:
           convert:
             property: created
         DESCRIPTION:
           convert:
             property: description
-        DTEND:
-          convert:
-            property: locations
-            note: Location.rel = "end". Only supported if timezone differs from start.
         DTSTAMP: {}
         DTSTART:
           convert:
@@ -1010,24 +1057,30 @@ icalendar:
         EXDATE:
           convert:
             property: recurrenceOverrides
+            object: PatchObject
         EXRULE:
           convert:
             property: excludedRecurrenceRules
+            object: RecurrenceRule
         GEO:
           convert:
             property: locations
+            object: Location
         IMAGE:
           convert:
             property: links
+            object: Link
         LAST-MODIFIED:
           convert:
             property: updated
         LINK:
           convert:
             property: links
+            object: Link
         LOCATION:
           convert:
             property: locations
+            object: Location
         ORGANIZER:
           convert:
             property: replyTo
@@ -1050,14 +1103,19 @@ icalendar:
         RDATE:
           convert:
             property: recurrenceOverrides
+            object: PatchObject
         REFID: {}
         RRULE:
           convert:
             property: recurrenceRules
+            object: RecurrenceRule
         SEQUENCE:
           convert:
             property: sequence
         STATUS: {}
+        STYLED-DESCRIPTION:
+          convert:
+            property: description
         SUMMARY:
           convert:
             property: title
@@ -1070,13 +1128,16 @@ icalendar:
         URL:
           convert:
             property: links
+            object: Link
         XML:
           convert:
             property: links
+            object: Link
       components:
           VALARM:
             convert:
               property: alerts
+              object: Alert
       rfc: RFC5545
       section: 3.6.2
       status: current
@@ -1085,11 +1146,11 @@ icalendar:
       rfc: RFC9074
       section: '6.1'
       status: current
-      parameters: []
+      parameters: {}
       types:
         - DATE-TIME
     ACTION:
-      parameters: []
+      parameters: {}
       rfc: RFC5545
       section: 3.8.6.1
       status: current
@@ -1104,8 +1165,19 @@ icalendar:
       section: 3.8.1.1
       status: current
       parameters:
-        - ENCODING
-        - FMTTYPE
+        ENCODING:
+          convert:
+            property: iCalParams
+            note: If unequal to BASE64
+        FILENAME: {}
+        FMTTYPE:
+          convert:
+            property: contentType
+        SIZE:
+          convert:
+            property: size
+            object: Link
+        MANAGED-ID: {}
       types:
         - URI
         - BINARY
@@ -1114,34 +1186,85 @@ icalendar:
       section: 3.8.4.1
       status: current
       parameters:
-        - CUTYPE
-        - MEMBER
-        - ROLE
-        - PARTSTAT
-        - RSVP
-        - DELEGATED-TO
-        - SENT-BY
-        - CN
-        - DIR
-        - LANGUAGE
+        SCHEDULE-FORCE-SEND:
+          convert:
+            property: scheduleForceSend
+            object: Participant
+        SCHEDULE-STATUS:
+          convert:
+            property: scheduleStatus
+            object: Participant
+        CUTYPE:
+          convert:
+            property: kind
+            object: Participant
+        MEMBER:
+          convert:
+            property: memberOf
+            object: Participant
+        ROLE:
+          convert:
+            property: roles
+            object: Participant
+        PARTSTAT:
+          convert:
+            property: participationStatus
+            object: Participant
+        RSVP:
+          convert:
+            property: expectReply
+            object: Participant
+        DELEGATED-TO:
+          convert:
+            property: delegatedTo
+            object: Participant
+        DELEGATED-FROM:
+          convert:
+            property: delegatedFrom
+            object: Participant
+        SENT-BY:
+          convert:
+            property: sentBy
+            object: Participant
+            note: TBC - different semantics
+        CN:
+          convert:
+            property: name
+            object: Participant
+        DIR:
+          convert:
+            property: links
+            object: Participant
+        LANGUAGE:
+          convert:
+            property: language
+            note: TBC - different semantics
+        EMAIL:
+          convert:
+            property: email
+            object: Participant
+        SCHEDULE-AGENT:
+          convert:
+            property: scheduleAgent
+            object: Participant
       types:
         - CAL-ADDRESS
     BUSYTYPE:
       rfc: RFC7953
       section: '3.2'
       status: current
-      parameters: []
+      parameters: {}
       types:
         - TEXT
     CALENDAR-ADDRESS:
-      parameters: []
+      parameters: {}
       rfc: RFC9073
       section: '6.4'
       status: current
       types:
         - CAL-ADDRESS
     CALSCALE:
-      parameters: []
+      parameters: {}
       rfc: RFC5545
       section: 3.7.1
       status: current
@@ -1149,14 +1272,14 @@ icalendar:
         - TEXT
     CATEGORIES:
       parameters:
-        - LANGUAGE
+        LANGUAGE: {}
       rfc: RFC5545
       section: 3.8.1.2
       status: current
       types:
         - TEXT
     CLASS:
-      parameters: []
+      parameters: {}
       rfc: RFC5545
       section: 3.8.1.3
       status: current
@@ -1167,7 +1290,7 @@ icalendar:
         - PRIVATE
         - CONFIDENTIAL
     COLOR:
-      parameters: []
+      parameters: {}
       rfc: RFC7986
       section: '5.9'
       status: current
@@ -1175,22 +1298,22 @@ icalendar:
         - TEXT
     COMMENT:
       parameters:
-        - ALTREP
-        - LANGUAGE
+        ALTREP: {}
+        LANGUAGE: {}
       rfc: RFC5545
       section: 3.8.1.4
       status: current
       types:
         - TEXT
     COMPLETED:
-      parameters: []
+      parameters: {}
       rfc: RFC5545
       section: 3.8.2.1
       status: current
       types:
         - DATE-TIME
     CONCEPT:
-      parameters: []
+      parameters: {}
       rfc: RFC9253
       section: '8.1'
       status: current
@@ -1198,9 +1321,13 @@ icalendar:
         - URI
     CONFERENCE:
       parameters:
-          - FEATURE
-          - LABEL
-          - LANGUAGE
+          FEATURE:
+            convert:
+              property: features
+          LABEL:
+            convert:
+              property: name
+          LANGUAGE: {}
       rfc: RFC7986
       section: '5.11'
       status: current
@@ -1208,15 +1335,15 @@ icalendar:
         - URI
     CONTACT:
       parameters:
-        - ALTREP
-        - LANGUAGE
+        ALTREP: {}
+        LANGUAGE: {}
       rfc: RFC5545
       section: 3.8.4.2
       status: current
       types:
         - TEXT
     CREATED:
-      parameters: []
+      parameters: {}
       rfc: RFC5545
       section: 3.8.7.1
       status: current
@@ -1224,8 +1351,8 @@ icalendar:
         - DATE-TIME
     DESCRIPTION:
       parameters:
-        - ALTREP
-        - LANGUAGE
+        ALTREP: {}
+        LANGUAGE: {}
       rfc: RFC5545
       section: 3.8.1.5
       status: current
@@ -1233,7 +1360,10 @@ icalendar:
         - TEXT
     DTEND:
       parameters:
-          - TZID
+          TZID:
+            convert:
+              property: locations
+              note: Location.rel = "end", if timezone differs from start.
       rfc: RFC5545
       section: 3.8.2.2
       status: current
@@ -1241,14 +1371,17 @@ icalendar:
         - DATE-TIME
         - DATE
     DTSTAMP:
-      parameters: []
+      parameters: {}
       rfc: RFC5545
       section: 3.8.7.2
       status: current
       types:
         - DATE-TIME
     DTSTART:
-      parameters: []
+      parameters:
+        TZID:
+          convert:
+            property: timeZone
       rfc: RFC5545
       section: 3.8.2.4
       status: current
@@ -1256,7 +1389,10 @@ icalendar:
         - DATE-TIME
         - DATE
     DUE:
-      parameters: []
+      parameters:
+        TZID:
+          convert:
+            property: timeZone
       rfc: RFC5545
       section: 3.8.2.3
       status: current
@@ -1264,7 +1400,7 @@ icalendar:
         - DATE-TIME
         - DATE
     DURATION:
-      parameters: []
+      parameters: {}
       rfc: RFC5545
       section: 3.8.2.5
       status: current
@@ -1272,7 +1408,7 @@ icalendar:
         - DURATION
     EXDATE:
       parameters:
-        - TZID
+        TZID: {}
       rfc: RFC5545
       section: 3.8.5.1
       status: current
@@ -1280,7 +1416,7 @@ icalendar:
         - DATE-TIME
         - DATE
     EXRULE:
-      parameters: []
+      parameters: {}
       rfc: RFC2445
       section: 4.8.5.2
       status: deprecated
@@ -1288,14 +1424,14 @@ icalendar:
         - RECUR
     FREEBUSY:
       parameters:
-        - FBTYPE
+        FBTYPE: {}
       rfc: RFC5545
       section: 3.8.2.6
       status: current
       types:
         - PERIOD
     GEO:
-      parameters: []
+      parameters: {}
       rfc: RFC5545
       section: 3.8.1.6
       status: current
@@ -1303,9 +1439,22 @@ icalendar:
         - FLOAT
     IMAGE:
       parameters:
-        - ALTREP
-        - DISPLAY
-        - ENCODING
+        ALTREP: {}
+        DISPLAY:
+          convert:
+            property: display
+            object: Link
+        ENCODING:
+          convert:
+            property: iCalParams
+            note: If unequal to BASE64
+        FMTTYPE:
+          convert:
+            property: contentType
+        SIZE:
+          convert:
+            property: size
+            object: Link
       rfc: RFC7986
       section: '5.10'
       status: current
@@ -1313,7 +1462,7 @@ icalendar:
         - URI
         - BINARY
     LAST-MODIFIED:
-      parameters: []
+      parameters: {}
       rfc: RFC5545
       section: 3.8.7.3
       status: current
@@ -1321,10 +1470,19 @@ icalendar:
         - DATE-TIME
     LINK:
       parameters:
-        - FMTTYPE
-        - LABEL
-        - LANGUAGE
-        - LINKREL
+        FMTTYPE:
+          convert:
+            property: contentType
+            object: Link
+        LABEL:
+          convert:
+            property: title
+            object: Link
+        LANGUAGE: {}
+        LINKREL:
+          convert:
+            property: rel
+            object: Link
       rfc: RFC9253
       section: '8.2'
       status: current
@@ -1334,22 +1492,22 @@ icalendar:
         - XML-REFERENCE
     LOCATION:
       parameters:
-        - ALTREP
-        - LANGUAGE
+        ALTREP: {}
+        LANGUAGE: {}
       rfc: RFC5545
       section: 3.8.1.7
       status: current
       types:
         - TEXT
     LOCATION-TYPE:
-      parameters: []
+      parameters: {}
       rfc: RFC9073
       section: '6.1'
       status: current
       types:
         - TEXT
     METHOD:
-      parameters: []
+      parameters: {}
       rfc: RFC5545
       section: 3.7.2
       status: current
@@ -1357,8 +1515,8 @@ icalendar:
         - TEXT
     NAME:
       parameters:
-        - ALTREP
-        - LANGUAGE
+        ALTREP: {}
+        LANGUAGE: {}
       rfc: RFC7986
       section: '5.1'
       status: current
@@ -1366,45 +1524,71 @@ icalendar:
         - TEXT
     ORGANIZER:
       parameters:
-        - CN
-        - DIR
-        - SENT-BY
-        - LANGUAGE
+        CN:
+          convert:
+            property: name
+            object: Participant
+        DIR:
+          convert:
+            property: links
+            object: Participant
+        SCHEDULE-AGENT:
+          convert:
+            property: iCalProps
+            note: TBC -- need scheduleForceAgent on Event and Todo?
+        SCHEDULE-FORCE-SEND:
+          convert:
+            property: iCalProps
+            note: TBC -- need scheduleForceSend on Event and Todo?
+        SCHEDULE-STATUS:
+          convert:
+            property: iCalProps
+            note: TBC -- need scheduleStatus on Event and Todo?
+        SENT-BY:
+          convert:
+            property: sentBy
+            object: Participant
+            note: TBC - different semantics
+        LANGUAGE:
+          convert:
+            property: language
+            note: TBC - different semantics
       rfc: RFC5545
       section: 3.8.4.3
       status: current
       types:
         - CAL-ADDRESS
     PARTICIPANT-TYPE:
-      parameters: []
+      parameters:
+        ORDER: {}
       rfc: RFC9073
       section: '6.2'
       status: current
       types:
         - TEXT
     PERCENT-COMPLETE:
-      parameters: []
+      parameters: {}
       rfc: RFC5545
       section: 3.8.1.8
       status: current
       types:
         - INTEGER
     PRIORITY:
-      parameters: []
+      parameters: {}
       rfc: RFC5545
       section: 3.8.1.9
       status: current
       types:
         - INTEGER
     PRODID:
-      parameters: []
+      parameters: {}
       rfc: RFC5545
       section: 3.7.3
       status: current
       types:
         - TEXT
     PROXIMITY:
-      parameters: []
+      parameters: {}
       rfc: RFC9074
       section: '8.1'
       status: current
@@ -1412,7 +1596,7 @@ icalendar:
         - TEXT
     RDATE:
       parameters:
-        - TZID
+        TZID: {}
       rfc: RFC5545
       section: 3.8.5.2
       status: current
@@ -1422,7 +1606,10 @@ icalendar:
         - PERIOD
     RECURRENCE-ID:
       parameters:
-        - TZID
+        TZID:
+          convert:
+            property: recurrenceIdTimeZone
+        RANGE: {}
       rfc: RFC5545
       section: 3.8.4.4
       status: current
@@ -1430,14 +1617,14 @@ icalendar:
         - DATE-TIME
         - DATE
     REFID:
-      parameters: []
+      parameters: {}
       rfc: RFC9253
       section: '8.3'
       status: current
       types:
         - TEXT
     REFRESH-INTERVAL:
-      parameters: []
+      parameters: {}
       rfc: RFC7986
       section: '5.7'
       status: current
@@ -1445,14 +1632,17 @@ icalendar:
         - DURATION
     RELATED-TO:
       parameters:
-        - RELTYPE
+        RELTYPE:
+          property: relation
+          object: Relation
+        GAP: {}
       rfc: RFC5545
       section: 3.8.4.5
       status: current
       types:
         - TEXT
     REPEAT:
-      parameters: []
+      parameters: {}
       rfc: RFC5545
       section: 3.8.6.2
       status: current
@@ -1460,14 +1650,14 @@ icalendar:
         - INTEGER
     REQUEST-STATUS:
       parameters:
-        - LANGUAGE
+        LANGUAGE: {}
       rfc: RFC5545
       section: 3.8.8.3
       status: current
       types:
         - TEXT
     RESOURCE-TYPE:
-      parameters: []
+      parameters: {}
       rfc: RFC9073
       section: '6.3'
       status: current
@@ -1475,36 +1665,36 @@ icalendar:
         - TEXT
     RESOURCES:
       parameters:
-        - ALTREP
-        - LANGUAGE
+        ALTREP: {}
+        LANGUAGE: {}
       rfc: RFC5545
       section: 3.8.1.10
       status: current
       types:
         - TEXT
     RRULE:
-      parameters: []
+      parameters: {}
       rfc: RFC5545
       section: 3.8.5.3
       status: current
       types:
         - RECUR
     SEQUENCE:
-      parameters: []
+      parameters: {}
       rfc: RFC5545
       section: 3.8.7.4
       status: current
       types:
         - INTEGER
     SOURCE:
-      parameters: []
+      parameters: {}
       rfc: RFC7986
       section: '5.8'
       status: current
       types:
         - URI
     STATUS:
-      parameters: []
+      parameters: {}
       rfc: RFC5545
       section: 3.8.1.11
       status: current
@@ -1512,9 +1702,15 @@ icalendar:
         - TEXT
     STRUCTURED-DATA:
       parameters:
-        - ENCODING
-        - FMTTYPE
-        - SCHEMA
+        ENCODING:
+          convert:
+            property: iCalParams
+            note: If unequal to BASE64
+        FMTTYPE:
+          convert:
+            property: contentType
+            object: Link
+        SCHEMA: {}
       rfc: RFC9073
       section: '6.6'
       status: current
@@ -1524,10 +1720,12 @@ icalendar:
         - URI
     STYLED-DESCRIPTION:
       parameters:
-        - ALTREP
-        - LANGUAGE
-        - FMTTYPE
-        - DERIVED
+        ALTREP: {}
+        LANGUAGE: {}
+        FMTTYPE:
+          convert:
+            property: descriptionContentType
+        DERIVED: {}
       rfc: RFC9073
       section: '6.5'
       status: current
@@ -1536,15 +1734,15 @@ icalendar:
         - URI
     SUMMARY:
       parameters:
-        - ALTREP
-        - LANGUAGE
+        ALTREP: {}
+        LANGUAGE: {}
       rfc: RFC5545
       section: 3.8.1.12
       status: current
       types:
         - TEXT
     TRANSP:
-      parameters: []
+      parameters: {}
       rfc: RFC5545
       section: 3.8.2.7
       status: current
@@ -1552,7 +1750,11 @@ icalendar:
         - TEXT
     TRIGGER:
       parameters:
-        - RELATED
+        RELATED:
+          convert:
+            property: relativeTo
+            object: OffsetTrigger
+            note: If VALUE=DURATION
       rfc: RFC5545
       section: 3.8.6.3
       status: current
@@ -1560,14 +1762,14 @@ icalendar:
         - DURATION
         - DATE-TIME
     TZID:
-      parameters: []
+      parameters: {}
       rfc: RFC5545
       section: 3.8.3.1
       status: current
       types:
         - TEXT
     TZID-ALIAS-OF:
-      parameters: []
+      parameters: {}
       rfc: RFC7808
       section: '7.2'
       status: current
@@ -1575,56 +1777,56 @@ icalendar:
         - TEXT
     TZNAME:
       parameters:
-        - LANGUAGE
+        LANGUAGE: {}
       rfc: RFC5545
       section: 3.8.3.2
       status: current
       types:
         - TEXT
     TZOFFSETFROM:
-      parameters: []
+      parameters: {}
       rfc: RFC5545
       section: 3.8.3.3
       status: current
       types:
         - UTC-OFFSET
     TZOFFSETTO:
-      parameters: []
+      parameters: {}
       rfc: RFC5545
       section: 3.8.3.4
       status: current
       types:
         - UTC-OFFSET
     TZUNTIL:
-      parameters: []
+      parameters: {}
       rfc: RFC7808
       section: '7.1'
       status: current
       types:
         - DATE-TIME
     TZURL:
-      parameters: []
+      parameters: {}
       rfc: RFC5545
       section: 3.8.3.5
       status: current
       types:
         - URI
     UID:
-      parameters: []
+      parameters: {}
       rfc: RFC5545
       section: 3.8.4.7
       status: current
       types:
         - TEXT
     URL:
-      parameters: []
+      parameters: {}
       rfc: RFC5545
       section: 3.8.4.6
       status: current
       types:
         - URI
     VERSION:
-      parameters: []
+      parameters: {}
       rfc: RFC5545
       section: 3.7.4
       status: current
@@ -1632,10 +1834,1228 @@ icalendar:
         - TEXT
     XML:
       parameters:
-        - ENCODING
+        ENCODING:
+          convert:
+            property: iCalParams
+            note: If unequal to BASE64
       rfc: RFC6321
       section: '4.2'
       status: current
       types:
         - TEXT
         - BINARY
+  parameters:
+    ALTREP:
+      rfc: RFC5545
+      section: 3.2.1
+      status: current
+    CN:
+      rfc: RFC5545
+      section: 3.2.2
+      status: current
+    CUTYPE:
+      rfc: RFC5545
+      section: 3.2.3
+      status: current
+    DELEGATED-FROM:
+      rfc: RFC5545
+      section: 3.2.4
+      status: current
+    DELEGATED-TO:
+      rfc: RFC5545
+      section: 3.2.5
+      status: current
+    DERIVED:
+      rfc: RFC9073
+      section: '5.3'
+      status: current
+    DIR:
+      rfc: RFC5545
+      section: 3.2.6
+      status: current
+    DISPLAY:
+      rfc: RFC7986
+      section: '6.1'
+      status: current
+    EMAIL:
+      rfc: RFC7986
+      section: '6.2'
+      status: current
+    ENCODING:
+      rfc: RFC5545
+      section: 3.2.7
+      status: current
+    FBTYPE:
+      rfc: RFC5545
+      section: 3.2.9
+      status: current
+    FEATURE:
+      rfc: RFC7986
+      section: '6.3'
+      status: current
+    FILENAME:
+      rfc: RFC8607
+      section: '4.2'
+      status: current
+    FMTTYPE:
+      rfc: RFC5545
+      section: 3.2.8
+      status: current
+    GAP:
+      rfc: RFC9253
+      section: '6.2'
+      status: current
+    LABEL:
+      rfc: RFC7986
+      section: '6.4'
+      status: current
+    LANGUAGE:
+      rfc: RFC5545
+      section: 3.2.10
+      status: current
+    LINKREL:
+      rfc: RFC9253
+      section: '6.1'
+      status: current
+    MANAGED-ID:
+      rfc: RFC8607
+      section: '4.3'
+      status: current
+    MEMBER:
+      rfc: RFC5545
+      section: 3.2.11
+      status: current
+    ORDER:
+      rfc: RFC9073
+      section: '5.1'
+      status: current
+    PARTSTAT:
+      rfc: RFC5545
+      section: 3.2.12
+      status: current
+    RANGE:
+      rfc: RFC5545
+      section: 3.2.13
+      status: current
+    RELATED:
+      rfc: RFC5545
+      section: 3.2.14
+      status: current
+    RELTYPE:
+      rfc: RFC5545
+      section: 3.2.15
+      status: current
+    ROLE:
+      rfc: RFC5545
+      section: 3.2.16
+      status: current
+    RSVP:
+      rfc: RFC5545
+      section: 3.2.17
+      status: current
+    SCHEDULE-AGENT:
+      rfc: RFC6638
+      section: '7.1'
+      status: current
+    SCHEDULE-FORCE-SEND:
+      rfc: RFC6638
+      section: '7.2'
+      status: current
+    SCHEDULE-STATUS:
+      rfc: RFC6638
+      section: '7.3'
+      status: current
+    SCHEMA:
+      rfc: RFC9073
+      section: '5.2'
+      status: current
+    SENT-BY:
+      rfc: RFC5545
+      section: 3.2.18
+      status: current
+    SIZE:
+      rfc: RFC8607
+      section: '4.1'
+      status: current
+    TZID:
+      rfc: RFC5545
+      section: 3.2.19
+      status: current
+    VALUE:
+      rfc: RFC5545
+      section: 3.2.20
+      status: current
+
+
+jscalendar:
+  types:
+    Alert:
+      rfc: RFC8984
+      section: '4.5.2'
+    Boolean:
+      rfc: RFC8984
+      section: '1.3'
+    Duration:
+      rfc: RFC8984
+      section: '1.4.6'
+    Event:
+      rfc: RFC8984
+      section: '2.1'
+    Group:
+      rfc: RFC8984
+      section: '2.3'
+    Id:
+      rfc: RFC8984
+      section: '1.4.1'
+    Int:
+      rfc: RFC8984
+      section: '1.4.2'
+    LocalDateTime:
+      rfc: RFC8984
+      section: '1.4.5'
+    Link:
+      rfc: RFC8984
+      section: '1.4.11'
+    Location:
+      rfc: RFC8984
+      section: '4.2.5'
+    NDay:
+      rfc: RFC8984
+      section: '4.3.3'
+    Number:
+      rfc: RFC8984
+      section: '1.3'
+    Participant:
+      rfc: RFC8984
+      section: '4.4.6'
+    PatchObject:
+      rfc: RFC8984
+      section: '1.4.9'
+    RecurrenceRule:
+      rfc: RFC8984
+      section: '4.3.3'
+    Relation:
+      rfc: RFC8984
+      section: '1.4.10'
+    SignedDuration:
+      rfc: RFC8984
+      section: '1.4.7'
+    String:
+      rfc: RFC8984
+      section: '1.3'
+    Task:
+      rfc: RFC8984
+      section: '2.2'
+    TimeZone:
+      rfc: RFC8984
+      section: '4.7.2'
+    TimeZoneId:
+      rfc: RFC8984
+      section: '1.4.8'
+    TimeZoneRule:
+      rfc: RFC8984
+      section: '4.7.2'
+    UnsignedInt:
+      rfc: RFC8984
+      section: '1.4.3'
+    UTCDateTime:
+      rfc: RFC8984
+      section: '1.4.4'
+    VirtualLocation:
+      rfc: RFC8984
+      section: '4.2.6'
+  properties:
+    '@type':
+      objects:
+        - Event
+        - Task
+        - Group
+        - AbsoluteTrigger
+        - Alert
+        - Link
+        - Location
+        - NDay
+        - OffsetTrigger
+        - Participant
+        - RecurrenceRule
+        - Relation
+        - TimeZone
+        - TimeZoneRule
+        - VirtualLocation
+      rfc: RFC8984
+      sections:
+        - 4.1.1
+        - 4.5.2
+        - 1.4.11
+        - 4.2.5
+        - 4.4.6
+        - 4.3.3
+        - 1.4.10
+        - 4.7.2
+        - 4.2.6
+      type: String
+      usage: common
+    acknowledged:
+      objects:
+        - Alert
+      rfc: RFC8984
+      sections:
+        - 4.5.2
+      type: UTCDateTime
+      usage: common
+    action:
+      objects:
+        - Alert
+      rfc: RFC8984
+      sections:
+        - 4.5.2
+      type: String
+      usage: common
+    alerts:
+      objects:
+        - Event
+        - Task
+      rfc: RFC8984
+      sections:
+        - 4.5.2
+      type: Id[Alert]
+      usage: common
+    aliases:
+      objects:
+        - TimeZone
+      rfc: RFC8984
+      sections:
+        - 4.7.2
+      type: String[Boolean]
+      usage: common
+    byDay:
+      objects:
+        - RecurrenceRule
+      rfc: RFC8984
+      sections:
+        - 4.3.3
+      type: NDay[]
+      usage: common
+    byHour:
+      objects:
+        - RecurrenceRule
+      rfc: RFC8984
+      sections:
+        - 4.3.3
+      type: UnsignedInt[]
+      usage: common
+    byMinute:
+      objects:
+        - RecurrenceRule
+      rfc: RFC8984
+      sections:
+        - 4.3.3
+      type: UnsignedInt[]
+      usage: common
+    byMonth:
+      objects:
+        - RecurrenceRule
+      rfc: RFC8984
+      sections:
+        - 4.3.3
+      type: String[]
+      usage: common
+    byMonthDay:
+      objects:
+        - RecurrenceRule
+      rfc: RFC8984
+      sections:
+        - 4.3.3
+      type: Int[]
+      usage: common
+    bySecond:
+      objects:
+        - RecurrenceRule
+      rfc: RFC8984
+      sections:
+        - 4.3.3
+      type: UnsignedInt[]
+      usage: common
+    bySetPosition:
+      objects:
+        - RecurrenceRule
+      rfc: RFC8984
+      sections:
+        - 4.3.3
+      type: Int[]
+      usage: common
+    byWeekNo:
+      objects:
+        - RecurrenceRule
+      rfc: RFC8984
+      sections:
+        - 4.3.3
+      type: Int[]
+      usage: common
+    byYearDay:
+      objects:
+        - RecurrenceRule
+      rfc: RFC8984
+      sections:
+        - 4.3.3
+      type: Int[]
+      usage: common
+    calendarAddress:
+      object:
+        - Participant
+      rfc: I-D.ietf-jmap-calendars
+      sections:
+        - 5.1.1
+      type: String
+      usage: common
+    categories:
+      objects:
+        - Event
+        - Task
+        - Group
+      rfc: RFC8984
+      sections:
+        - 4.2.10
+      type: String[Boolean]
+      usage: common
+    cid:
+      objects:
+        - Link
+      rfc: RFC8984
+      sections:
+        - 1.4.11
+      type: String
+      usage: common
+    color:
+      objects:
+        - Event
+        - Task
+        - Group
+      rfc: RFC8984
+      sections:
+        - 4.2.11
+      type: String
+      usage: common
+    comments:
+      objects:
+        - TimeZoneRule
+      rfc: RFC8984
+      sections:
+        - 4.7.2
+      type: String[]
+      usage: common
+    contentType:
+      objects:
+        - Link
+      rfc: RFC8984
+      sections:
+        - 1.4.11
+      type: String
+      usage: common
+    coordinates:
+      objects:
+        - Location
+      rfc: RFC8984
+      sections:
+        - 4.2.5
+      type: String
+      usage: common
+    count:
+      objects:
+        - RecurrenceRule
+      rfc: RFC8984
+      sections:
+        - 4.3.3
+      type: UnsignedInt
+      usage: common
+    created:
+      objects:
+        - Event
+        - Task
+        - Group
+      rfc: RFC8984
+      sections:
+        - 4.1.5
+      type: UTCDateTime
+      usage: common
+    day:
+      objects:
+        - NDay
+      rfc: RFC8984
+      sections:
+        - 4.3.3
+      type: String
+      usage: common
+    daylight:
+      objects:
+        - TimeZone
+      rfc: RFC8984
+      sections:
+        - 4.7.2
+      type: TimeZoneRule[]
+      usage: common
+    delegatedFrom:
+      objects:
+        - Participant
+      rfc: RFC8984
+      sections:
+        - 4.4.6
+      type: Id[Boolean]
+      usage: common
+    delegatedTo:
+      objects:
+        - Participant
+      rfc: RFC8984
+      sections:
+        - 4.4.6
+      type: Id[Boolean]
+      usage: common
+    description:
+      objects:
+        - Event
+        - Task
+        - Location
+        - Participant
+        - VirtualLocation
+      rfc: RFC8984
+      sections:
+        - 4.2.2
+        - 4.2.5
+        - 4.4.6
+        - 4.2.6
+      type: String
+      usage: common
+    descriptionContentType:
+      objects:
+        - Event
+        - Task
+      rfc: RFC8984
+      sections:
+        - 4.2.3
+      type: String
+      usage: common
+    display:
+      objects:
+        - Link
+      rfc: RFC8984
+      sections:
+        - 1.4.11
+      type: String
+      usage: common
+    due:
+      objects:
+        - Task
+      rfc: RFC8984
+      sections:
+        - 5.2.1
+      type: LocalDateTime
+      usage: common
+    duration:
+      objects:
+        - Event
+      rfc: RFC8984
+      sections:
+        - 5.1.2
+      type: Duration
+      usage: common
+    email:
+      objects:
+        - Participant
+      rfc: RFC8984
+      sections:
+        - 4.4.6
+      type: String
+      usage: common
+    entries:
+      objects:
+        - Group
+      rfc: RFC8984
+      sections:
+        - 5.3.1
+      type: (Task|Event)[]
+      usage: common
+    estimatedDuration:
+      objects:
+        - Task
+      rfc: RFC8984
+      sections:
+        - 5.2.3
+      type: Duration
+      usage: common
+    excluded:
+      objects:
+        - Event
+        - Task
+      rfc: RFC8984
+      sections:
+        - 4.3.6
+      type: Boolean
+      usage: common
+    excludedRecurrenceRules:
+      objects:
+        - Event
+        - Task
+      rfc: RFC8984
+      sections:
+        - 4.3.4
+      type: RecurrenceRule[]
+      usage: common
+    expectReply:
+      objects:
+        - Participant
+      rfc: RFC8984
+      sections:
+        - 4.4.6
+      type: Boolean
+      usage: common
+    features:
+      objects:
+        - VirtualLocation
+      rfc: RFC8984
+      sections:
+        - 4.2.6
+      type: String[Boolean]
+      usage: common
+    firstDayOfWeek:
+      objects:
+        - RecurrenceRule
+      rfc: RFC8984
+      sections:
+        - 4.3.3
+      type: String
+      usage: common
+    freeBusyStatus:
+      objects:
+        - Event
+        - Task
+      rfc: RFC8984
+      sections:
+        - 4.4.2
+      type: String
+      usage: common
+    frequency:
+      objects:
+        - RecurrenceRule
+      rfc: RFC8984
+      sections:
+        - 4.3.3
+      type: String
+      usage: common
+    href:
+      objects:
+        - Link
+      rfc: RFC8984
+      sections:
+        - 1.4.11
+      type: String
+      usage: common
+    interval:
+      objects:
+        - RecurrenceRule
+      rfc: RFC8984
+      sections:
+        - 4.3.3
+      type: UnsignedInt
+      usage: common
+    invitedBy:
+      objects:
+        - Participant
+      rfc: RFC8984
+      sections:
+        - 4.4.6
+      type: Id
+      usage: common
+    keywords:
+      objects:
+        - Event
+        - Task
+        - Group
+      rfc: RFC8984
+      sections:
+        - 4.2.9
+      type: String[Boolean]
+      usage: common
+    kind:
+      objects:
+        - Participant
+      rfc: RFC8984
+      sections:
+        - 4.4.6
+      type: String
+      usage: common
+    language:
+      objects:
+        - Participant
+      rfc: RFC8984
+      sections:
+        - 4.4.6
+      type: String
+      usage: common
+    links:
+      objects:
+        - Group
+        - Event
+        - Task
+        - Location
+        - Participant
+      rfc: RFC8984
+      sections:
+        - 4.2.7
+        - 4.2.5
+        - 4.4.6
+      type: Id[Link]
+      usage: common
+    locale:
+      objects:
+        - Group
+        - Event
+        - Task
+      rfc: RFC8984
+      sections:
+        - 4.2.8
+      type: String
+      usage: common
+    localizations:
+      objects:
+        - Event
+        - Task
+      rfc: RFC8984
+      sections:
+        - 4.6.1
+      type: String[PatchObject]
+      usage: common
+    locationId:
+      objects:
+        - Participant
+      rfc: RFC8984
+      sections:
+        - 4.4.6
+      type: Id
+      usage: common
+    locationTypes:
+      objects:
+        - Location
+      rfc: RFC8984
+      sections:
+        - 4.2.5
+      type: String[Boolean]
+      usage: common
+    locations:
+      objects:
+        - Event
+        - Task
+      rfc: RFC8984
+      sections:
+        - 4.2.5
+      type: Id[Location]
+      usage: common
+    memberOf:
+      objects:
+        - Participant
+      rfc: RFC8984
+      sections:
+        - 4.4.6
+      type: Id[Boolean]
+      usage: common
+    method:
+      objects:
+        - Event
+        - Task
+      rfc: RFC8984
+      sections:
+        - 4.1.8
+      type: String
+      usage: common
+    name:
+      objects:
+        - Location
+        - VirtualLocation
+        - Participant
+      rfc: RFC8984
+      sections:
+        - 4.2.5
+        - 4.2.6
+        - 4.4.6
+      type: String
+      usage: common
+    names:
+      objects:
+        - TimeZoneRule
+      rfc: RFC8984
+      sections:
+        - 4.7.2
+      type: String[Boolean]
+      usage: common
+    nthOfPeriod:
+      objects:
+        - NDay
+      rfc: RFC8984
+      sections:
+        - 4.3.3
+      type: Int
+      usage: common
+    offset:
+      objects:
+        - OffsetTrigger
+      rfc: RFC8984
+      sections:
+        - 4.5.2
+      type: SignedDuration
+      usage: common
+    offsetFrom:
+      objects:
+        - TimeZoneRule
+      rfc: RFC8984
+      sections:
+        - 4.7.2
+      type: UTCDateTime
+      usage: common
+    offsetTo:
+      objects:
+        - TimeZoneRule
+      rfc: RFC8984
+      sections:
+        - 4.7.2
+      type: UTCDateTime
+      usage: common
+    participants:
+      objects:
+        - Event
+        - Task
+      rfc: RFC8984
+      sections:
+        - 4.4.6
+      type: Id[Participant]
+      usage: common
+    participationComment:
+      objects:
+        - Participant
+      rfc: RFC8984
+      sections:
+        - 4.4.6
+      type: String
+      usage: common
+    participationStatus:
+      objects:
+        - Participant
+      rfc: RFC8984
+      sections:
+        - 4.4.6
+      type: String
+      usage: common
+    percentComplete:
+      objects:
+        - Task
+        - Participant
+      rfc: RFC8984
+      sections:
+        - 5.2.4
+      type: UnsignedInt
+      usage: common
+    priority:
+      objects:
+        - Event
+        - Task
+      rfc: RFC8984
+      sections:
+        - 4.4.1
+      type: Int
+      usage: common
+    privacy:
+      objects:
+        - Event
+        - Task
+      rfc: RFC8984
+      sections:
+        - 4.4.3
+      type: String
+      usage: common
+    prodId:
+      objects:
+        - Event
+        - Task
+        - Group
+      rfc: RFC8984
+      sections:
+        - 4.1.4
+      type: String
+      usage: common
+    progress:
+      objects:
+        - Task
+        - Participant
+      rfc: RFC8984
+      sections:
+        - 5.2.5
+      type: String
+      usage: common
+    progressUpdated:
+      objects:
+        - Task
+        - Participant
+      rfc: RFC8984
+      sections:
+        - 5.2.6
+      type: UTCDateTime
+      usage: common
+    recurrenceId:
+      objects:
+        - Event
+        - Task
+      rfc: RFC8984
+      sections:
+        - 4.3.1
+      type: LocalDateTime
+      usage: common
+    recurrenceIdTimeZone:
+      objects:
+        - Event
+        - Task
+      rfc: RFC8984
+      sections:
+        - 4.3.2
+      type: TimeZoneId|null
+      usage: common
+    recurrenceOverrides:
+      objects:
+        - Event
+        - Task
+        - TimeZoneRule
+      rfc: RFC8984
+      sections:
+        - 4.3.5
+        - 4.7.2
+      type: LocalDateTime[PatchObject]
+      usage: common
+    recurrenceRules:
+      objects:
+        - Event
+        - Task
+        - TimeZoneRule
+      rfc: RFC8984
+      sections:
+        - 4.3.3
+        - 4.7.2
+      type: RecurrenceRule[]
+      usage: common
+    rel:
+      objects:
+        - Link
+      rfc: RFC8984
+      sections:
+        - 1.4.11
+      type: String
+      usage: common
+    relatedTo:
+      objects:
+        - Event
+        - Task
+        - Alert
+      rfc: RFC8984
+      sections:
+        - 4.1.3
+        - 4.5.2
+      type: String[Relation]
+      usage: common
+    relation:
+      objects:
+        - Relation
+      rfc: RFC8984
+      sections:
+        - 1.4.10
+      type: String[Boolean]
+      usage: common
+    relativeTo:
+      objects:
+        - OffsetTrigger
+        - Location
+      rfc: RFC8984
+      sections:
+        - 4.5.2
+        - 4.2.5
+      type: String
+      usage: common
+    replyTo:
+      objects:
+        - Event
+        - Task
+      rfc: RFC8984
+      sections:
+        - 4.4.4
+      type: String[String]
+      usage: common
+    requestStatus:
+      objects:
+        - Event
+        - Task
+      rfc: RFC8984
+      sections:
+        - 4.4.7
+      type: String
+      usage: common
+    roles:
+      objects:
+        - Participant
+      rfc: RFC8984
+      sections:
+        - 4.4.6
+      type: String[Boolean]
+      usage: common
+    rscale:
+      objects:
+        - RecurrenceRule
+      rfc: RFC8984
+      sections:
+        - 4.3.3
+      type: String
+      usage: common
+    scheduleAgent:
+      objects:
+        - Participant
+      rfc: RFC8984
+      sections:
+        - 4.4.6
+      type: String
+      usage: common
+    scheduleForceSend:
+      objects:
+        - Participant
+      rfc: RFC8984
+      sections:
+        - 4.4.6
+      type: Boolean
+      usage: common
+    scheduleSequence:
+      objects:
+        - Participant
+      rfc: RFC8984
+      sections:
+        - 4.4.6
+      type: UnsignedInt
+      usage: common
+    scheduleStatus:
+      objects:
+        - Participant
+      rfc: RFC8984
+      sections:
+        - 4.4.6
+      type: String[]
+      usage: common
+    scheduleUpdated:
+      objects:
+        - Participant
+      rfc: RFC8984
+      sections:
+        - 4.4.6
+      type: UTCDateTime
+      usage: common
+    sendTo:
+      objects:
+        - Participant
+      rfc: RFC8984
+      sections:
+        - 4.4.6
+      type: String[String]
+      usage: common
+    sentBy:
+      objects:
+        - Event
+        - Task
+        - Participant
+      rfc: RFC8984
+      sections:
+        - 4.4.5
+        - 4.4.6
+      type: String
+      usage: common
+    sequence:
+      objects:
+        - Event
+        - Task
+      rfc: RFC8984
+      sections:
+        - 4.1.7
+      type: UnsignedInt
+      usage: common
+    showWithoutTime:
+      objects:
+        - Event
+        - Task
+      rfc: RFC8984
+      sections:
+        - 4.2.4
+      type: Boolean
+      usage: common
+    size:
+      objects:
+        - Link
+      rfc: RFC8984
+      sections:
+        - 1.4.11
+      type: UnsignedInt
+      usage: common
+    skip:
+      objects:
+        - RecurrenceRule
+      rfc: RFC8984
+      sections:
+        - 4.3.3
+      type: String
+      usage: common
+    source:
+      objects:
+        - Group
+      rfc: RFC8984
+      sections:
+        - 5.3.2
+      type: String
+      usage: common
+    standard:
+      objects:
+        - TimeZone
+      rfc: RFC8984
+      sections:
+        - 4.7.2
+      type: TimeZoneRule[]
+      usage: common
+    start:
+      objects:
+        - TimeZoneRule
+      rfc: RFC8984
+      sections:
+        - 4.7.2
+      type: LocalDateTime
+      usage: common
+    status:
+      objects:
+        - Event
+      rfc: RFC8984
+      sections:
+        - 5.1.3
+      type: String
+      usage: common
+    timeZone:
+      objects:
+        - Event
+        - Task
+        - Location
+      rfc: RFC8984
+      sections:
+        - 4.7.1
+        - 4.2.5
+      type: TimeZoneId|null
+      usage: common
+    timeZones:
+      objects:
+        - Event
+        - Task
+      rfc: RFC8984
+      sections:
+        - 4.7.2
+      type: TimeZoneId[TimeZone]
+      usage: common
+    title:
+      objects:
+        - Event
+        - Task
+        - Group
+        - Link
+      rfc: RFC8984
+      sections:
+        - 4.2.1
+      type: String
+      usage: common
+    trigger:
+      objects:
+        - Alert
+      rfc: RFC8984
+      sections:
+        - 4.5.2
+      type: OffsetTrigger|AbsoluteTrigger|UnknownTrigger
+      usage: common
+    tzId:
+      objects:
+        - TimeZone
+      rfc: RFC8984
+      sections:
+        - 4.7.2
+      type: String
+      usage: common
+    uid:
+      objects:
+        - Event
+        - Task
+        - Group
+      rfc: RFC8984
+      sections:
+        - 4.1.2
+      type: String
+      usage: common
+    until:
+      objects:
+        - RecurrenceRule
+      rfc: RFC8984
+      sections:
+        - 4.3.3
+      type: LocalDateTime
+      usage: common
+    updated:
+      objects:
+        - Event
+        - Task
+        - Group
+      rfc: RFC8984
+      sections:
+        - 4.1.6
+      type: UTCDateTime
+      usage: common
+    uri:
+      objects:
+        - VirtualLocation
+      rfc: RFC8984
+      sections:
+        - 4.2.6
+      type: String
+      usage: common
+    url:
+      objects:
+        - TimeZone
+      rfc: RFC8984
+      sections:
+        - 4.7.2
+      type: String
+      usage: common
+    useDefaultAlerts:
+      objects:
+        - Event
+        - Task
+      rfc: RFC8984
+      sections:
+        - 4.5.1
+      type: Boolean
+      usage: common
+    validUntil:
+      objects:
+        - TimeZone
+      rfc: RFC8984
+      sections:
+        - 4.7.2
+      type: UTCDateTime
+      usage: common
+    virtualLocations:
+      objects:
+        - Event
+        - Task
+      rfc: RFC8984
+      sections:
+        - 4.2.6
+      type: Id[VirtualLocation]
+      usage: common
+    when:
+      objects:
+        - AbsoluteTrigger
+      rfc: RFC8984
+      sections:
+        - 4.5.2
+      type: UTCDateTime
+      usage: common

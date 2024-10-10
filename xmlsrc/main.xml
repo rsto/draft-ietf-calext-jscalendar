@@ -170,50 +170,74 @@ SUMMARY:he
     <section anchor="convert-icalendar-to-jscalendar">
       <name>Converting iCalendar to JSCalendar</name>
 
-      {% macro render_component(comp_name, comp) -%}
-        <t>The <xref target="{{comp.rfc}}" section="{{comp.section}}" sectionFormat="parens">{{comp_name|upper}} component</xref> converts to a {{comp.convert.object}} object. Its entries convert as follows:</t>
-          <table>
+      {% macro render_component(spec, comp_name, comp) -%}
+      <t>The <xref target="{{comp.rfc}}" section="{{comp.section}}" sectionFormat="parens">{{comp_name|upper}} component</xref> converts to a <xref target="{{ spec.jscalendar.types[comp.convert.object].rfc }}" section="{{ spec.jscalendar.types[comp.convert.object].section }}" sectionFormat="parens">{{comp.convert.object}}</xref> object.</t>
+
+      {% if comp.properties %}
+      <t>Its properties convert as follows:</t>
+      <table>
+        <name>Properties of the {{ comp_name }} component</name>
             <thead>
               <tr>
-                <th>Kind</th>
                 <th>Name</th>
+                <th>Reference</th>
                 <th>{{ comp.convert.object }} property</th>
                 <th>Note</th>
+                <th>See</th>
               </tr>
             </thead>
             <tbody>
-              {% if comp.properties %}
                 {% for prop_name, prop in comp.properties | dictsort %}
                 <tr>
-                  <td>Property</td>
-                  <td>{{ prop_name }}</td>
+                  <td>{{prop_name}}</td>
+                  <td><xref target="{{ spec.icalendar.properties[prop_name].rfc}}" section="{{ spec.icalendar.properties[prop_name].section}}" sectionFormat="comma"/></td>
                   {% if prop.convert %}
                   <td>{{ prop.convert.property }}</td>
                   <td>{{ prop.convert.note }}</td>
+                  <td><xref target="ical-prop-{{ prop_name|lower }}"/></td>
                   {% else %}
                   <td>iCalProps</td>
-                  <td>Non-standard {{ comp.convert.object }} property.</td>
+                  <td>Non-standard</td>
+                  <td/>
                   {% endif %}
                 </tr>
                 {% endfor %}
-              {% endif %}
-              {% if comp.components %}
-                {% for subcomp_name, subcomp in comp.components | dictsort %}
-                <tr>
-                  <td>Component</td>
-                  <td>{{ subcomp_name }}</td>
-                  {% if subcomp.convert %}
-                  <td>{{ subcomp.convert.property }}</td>
-                  <td>{{ subcomp.convert.note }}</td>
-                  {% else %}
-                  <td>iCalComps</td>
-                  <td>Non-standard {{ comp.convert.object }} property.</td>
-                  {% endif %}
-                </tr>
-                {% endfor %}
-              {% endif %}
             </tbody>
           </table>
+          {% endif %}
+
+          {% if comp.components %}
+          <t>Its components convert as follows:</t>
+          <table>
+        <name>Components of the  {{ comp_name }} component</name>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Reference</th>
+                <th>{{ comp.convert.object }} property</th>
+                <th>Note</th>
+                <th>See</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for subcomp_name, subcomp in comp.components | dictsort %}
+              <tr>
+                <td>{{ subcomp_name }}</td>
+                <td><xref target="{{ spec.icalendar.components[subcomp_name].rfc}}" section="{{ spec.icalendar.components[subcomp_name].section}}" sectionFormat="comma"/></td>
+                {% if subcomp.convert %}
+                <td>{{ subcomp.convert.property }}</td>
+                <td>{{ subcomp.convert.note }}</td>
+                <td><xref target="ical-comp-{{ subcomp_name|lower }}"/></td>
+                {% else %}
+                <td>iCalComps</td>
+                <td>Non-standard</td>
+                <td></td>
+                {% endif %}
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          {% endif %}
 
           {% for example in comp.convert.examples %}
           <section>
@@ -233,7 +257,7 @@ SUMMARY:he
       <section anchor="ical-objects">
         <name>iCalendar Objects</name>
         <t><xref target="RFC5545" section="3.4"/> allows for an iCalendar stream to contain one or more iCalendar objects.  In contrast, this specification only defines conversion for streams consisting of a single iCalendar object. Converting streams of multiple iCalendar objects is implementation-specific.  All following sections of this document use the terms "iCalendar object" and "VCALENDAR component" interchangeably.</t>
-        {{ render_component("VCALENDAR", icalendar.components.VCALENDAR) }}
+        {{ render_component(spec, "VCALENDAR", spec.icalendar.components.VCALENDAR) }}
       </section>
       <section anchor="generating-jscalendar-ids">
         <name>JSCalendar Ids</name>
@@ -248,17 +272,77 @@ SUMMARY:he
       <section anchor="ical-components">
         <name>Components</name>
 
-        {% for comp_name, comp in icalendar.components | dictsort %}
+        {% for comp_name, comp in spec.icalendar.components | dictsort %}
         {% if comp_name != "VCALENDAR" %} 
          <section anchor="ical-comp-{{ comp_name|lower }}">
           <name>{{ comp_name|upper }}</name>
           {% if comp.convert %}
-          {{ render_component(comp_name, comp) }}
+          {{ render_component(spec, comp_name, comp) }}
           {% else %}
           <t>The <xref target="{{comp.rfc}}" section="{{comp.section}}" sectionFormat="parens">{{comp_name|upper}} component</xref> does not convert to a standard JSCalendar element.</t>
           {% endif %}
         </section>
         {% endif %}
+        {% endfor %}
+
+      </section>
+
+      <section anchor="ical-properties">
+        <name>Properties</name>
+
+        {% for prop_name, conv_prop in conv_props | dictsort %}
+        <section anchor="ical-prop-{{ prop_name|lower }}">
+          <name>{{ prop_name|upper }}</name>
+          {% if conv_prop %}
+          {% for jsprop_name, comps in conv_prop | dictsort %}
+          <t>
+            The <xref target="{{spec.icalendar.properties[prop_name].rfc}}" section="{{spec.icalendar.properties[prop_name].section}}" sectionFormat="parens">{{prop_name|upper}} property </xref> in a
+            {% for comp_name in comps["comps"] | sort %}{% if not loop.first and loop.last %} or {% endif %}{{ comp_name|upper }}{% if not loop.last and loop.length > 2 %}, {% endif %}{% endfor %} component converts to {% if comps["object"] %}a <xref target="{{ spec.jscalendar.types[comps['object']].rfc }}" section="{{ spec.jscalendar.types[comps['object']].section }}" sectionFormat="parens">{{ comps["object"] }} object</xref>.  The converted object is set in the TBDref{{jsprop_name}}. {% elif '*' in jsprop_name%} TBD{{ jsprop_name}} property. {% else %}the <xref target="{{ spec.jscalendar.properties[jsprop_name].rfc }}" section="{{ spec.jscalendar.properties[jsprop_name].sections[0] }}" sectionFormat="parens">{{ jsprop_name }}</xref> property.{% endif %}
+          </t>
+          {% endfor %}
+
+          {% if spec.icalendar.properties[prop_name].types | length > 1 %}
+          {% for type_name in spec.icalendar.properties[prop_name].types %}
+          <t>A value of type {{ type_name }} converts... TBD</t>
+          {% endfor %}
+          {% else %}
+          <t>Its {{ spec.icalendar.properties[prop_name].types[0] }} value converts...</t>
+          {% endif %}
+
+          {% if spec.icalendar.properties[prop_name].parameters %}
+          <t>Its parameters convert as follows:</t>
+          <table>
+        <name>Parameters of the {{ prop_name }} property</name>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Reference</th>
+                <th>Property</th>
+                <th>Note</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for param_name, param in spec.icalendar.properties[prop_name].parameters | dictsort %}
+                <tr>
+                  <td>{{ param_name }}</td>
+                  <td><xref target="{{ spec.icalendar.parameters[param_name].rfc}}" section="{{ spec.icalendar.parameters[param_name].section}}" sectionFormat="comma"/></td>
+                  {% if param.convert %}
+                  <td>{{ param.convert.property }}</td>
+                  <td>{{ param.convert.note }}</td>
+                  {% else %}
+                  <td>iCalParams</td>
+                  <td>Non-standard</td>
+                  {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+          {% endif %}
+
+          {% else %}
+          <t>The <xref target="{{spec.icalendar.properties[prop_name].rfc}}" section="{{spec.icalendar.properties[prop_name].section}}" sectionFormat="parens">{{prop_name|upper}} property</xref> does not convert to a standard JSCalendar element.</t>
+          {% endif %}
+        </section>
         {% endfor %}
 
       </section>
