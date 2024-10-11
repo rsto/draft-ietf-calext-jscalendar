@@ -434,18 +434,17 @@ SUMMARY:he
             </tr>
           </tbody>
         </table>
-        <section>
-          <name>Example:  Converting the VCALENDAR component</name>
-          <figure anchor="test-ical-comp-vcalendar">
-            <name> Converting the VCALENDAR component</name>
-            <sourcecode type="text/calendar"><![CDATA[BEGIN:VCALENDAR
+        <t>The following example illustrates how to convert the VCALENDAR component:</t>
+        <figure anchor="test-ical-comp-vcalendar">
+          <name>Converting the VCALENDAR component</name>
+          <sourcecode type="text/calendar"><![CDATA[BEGIN:VCALENDAR
 UID:41aa02b6-42d0-4f45-8cb4-8b5075be2e14
 BEGIN:VEVENT
 ...
 END:VEVENT
 END:VCALENDAR
 ]]></sourcecode>
-            <sourcecode type="json"><![CDATA[{
+          <sourcecode type="json"><![CDATA[{
   "...": "",
   "@type": "Group",
   "entries": [
@@ -456,8 +455,7 @@ END:VCALENDAR
   ],
   "uid": "41aa02b6-42d0-4f45-8cb4-8b5075be2e14"
 }]]></sourcecode>
-          </figure>
-        </section>
+        </figure>
       </section>
       <section anchor="generating-jscalendar-ids">
         <name>JSCalendar Ids</name>
@@ -570,11 +568,10 @@ END:VCALENDAR
               </tr>
             </tbody>
           </table>
-          <section>
-            <name>Example:  Converting the DAYLIGHT component</name>
-            <figure anchor="test-ical-comp-daylight">
-              <name> Converting the DAYLIGHT component</name>
-              <sourcecode type="text/calendar"><![CDATA[BEGIN:VCALENDAR
+          <t>The following example illustrates how to convert the DAYLIGHT component:</t>
+          <figure anchor="test-ical-comp-daylight">
+            <name>Converting the DAYLIGHT component</name>
+            <sourcecode type="text/calendar"><![CDATA[BEGIN:VCALENDAR
 ...
 BEGIN:VTIMEZONE
 TZID:NonIana
@@ -591,7 +588,7 @@ DTSTART;TZID=NonIana:20241004T010000
 END:VEVENT
 END:VCALENDAR
 ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[{
+            <sourcecode type="json"><![CDATA[{
   "...": "",
   "@type": "Group",
   "timeZones": {
@@ -609,8 +606,7 @@ END:VCALENDAR
     }
   }
 }]]></sourcecode>
-            </figure>
-          </section>
+          </figure>
         </section>
         <section anchor="ical-comp-participant">
           <name>PARTICIPANT</name>
@@ -920,11 +916,10 @@ END:VCALENDAR
               </tr>
             </tbody>
           </table>
-          <section>
-            <name>Example:  Converting the PARTICIPANT component</name>
-            <figure anchor="test-ical-comp-participant">
-              <name> Converting the PARTICIPANT component</name>
-              <sourcecode type="text/calendar"><![CDATA[BEGIN:VEVENT
+          <t>The following example illustrates how to convert the PARTICIPANT component:</t>
+          <figure anchor="test-ical-comp-participant">
+            <name>Converting the PARTICIPANT component</name>
+            <sourcecode type="text/calendar"><![CDATA[BEGIN:VEVENT
 ...
 BEGIN:PARTICIPANT
 UID:47AD2E1C-49D4-45DF-BD83-8398ACC7D8E2
@@ -935,7 +930,7 @@ DESCRIPTION:A contact
 END:PARTICIPANT
 END:VEVENT
 ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[{
+            <sourcecode type="json"><![CDATA[{
   "...": "",
   "@type": "Event",
   "participants": {
@@ -962,8 +957,7 @@ END:VEVENT
     }
   }
 }]]></sourcecode>
-            </figure>
-          </section>
+          </figure>
         </section>
         <section anchor="ical-comp-standard">
           <name>STANDARD</name>
@@ -1060,11 +1054,10 @@ END:VEVENT
               </tr>
             </tbody>
           </table>
-          <section>
-            <name>Example:  Converting the STANDARD component</name>
-            <figure anchor="test-ical-comp-standard">
-              <name> Converting the STANDARD component</name>
-              <sourcecode type="text/calendar"><![CDATA[BEGIN:VCALENDAR
+          <t>The following example illustrates how to convert the STANDARD component:</t>
+          <figure anchor="test-ical-comp-standard">
+            <name>Converting the STANDARD component</name>
+            <sourcecode type="text/calendar"><![CDATA[BEGIN:VCALENDAR
 ...
 BEGIN:VTIMEZONE
 TZID:NonIana
@@ -1081,7 +1074,7 @@ DTSTART;TZID=NonIana:20241004T010000
 END:VEVENT
 END:VCALENDAR
 ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[{
+            <sourcecode type="json"><![CDATA[{
   "...": "",
   "@type": "Group",
   "timeZones": {
@@ -1099,8 +1092,7 @@ END:VCALENDAR
     }
   }
 }]]></sourcecode>
-            </figure>
-          </section>
+          </figure>
         </section>
         <section anchor="ical-comp-valarm">
           <name>VALARM</name>
@@ -1254,11 +1246,10 @@ END:VCALENDAR
               </tr>
             </tbody>
           </table>
-          <section>
-            <name>Example:  Converting the VALARM component</name>
-            <figure anchor="test-ical-comp-valarm">
-              <name> Converting the VALARM component</name>
-              <sourcecode type="text/calendar"><![CDATA[BEGIN:VEVENT
+          <t>The following example illustrates how to convert the VALARM component:</t>
+          <figure anchor="test-ical-comp-valarm">
+            <name>Converting the VALARM component</name>
+            <sourcecode type="text/calendar"><![CDATA[BEGIN:VEVENT
 ...
 BEGIN:VALARM
 TRIGGER:-PT30M
@@ -1267,7 +1258,7 @@ DESCRIPTION:Breakfast meeting
 END:VALARM
 END:VEVENT
 ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[{
+            <sourcecode type="json"><![CDATA[{
   "...": "",
   "@type": "Event",
   "alerts": {
@@ -1288,8 +1279,7 @@ END:VEVENT
     }
   }
 }]]></sourcecode>
-            </figure>
-          </section>
+          </figure>
         </section>
         <section anchor="ical-comp-vavailability">
           <name>VAVAILABILITY</name>
@@ -1769,17 +1759,16 @@ END:VEVENT
               </tr>
             </tbody>
           </table>
-          <section>
-            <name>Example:  Converting the VEVENT component</name>
-            <figure anchor="test-ical-comp-vevent">
-              <name> Converting the VEVENT component</name>
-              <sourcecode type="text/calendar"><![CDATA[BEGIN:VCALENDAR
+          <t>The following example illustrates how to convert the VEVENT component:</t>
+          <figure anchor="test-ical-comp-vevent">
+            <name>Converting the VEVENT component</name>
+            <sourcecode type="text/calendar"><![CDATA[BEGIN:VCALENDAR
 BEGIN:VEVENT
 UID:bda09d03-564c-4ac8-851c-24e66d6abe3c
 DTSTART:20060102T030405Z
 ...
 ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[{
+            <sourcecode type="json"><![CDATA[{
   "...": "",
   "@type": "Group",
   "entries": [
@@ -1793,10 +1782,9 @@ DTSTART:20060102T030405Z
     }
   ]
 }]]></sourcecode>
-            </figure>
-          </section>
+          </figure>
           <section>
-            <name>Example: Converting VEVENT components with differing UID values</name>
+            <name>Converting VEVENT components with differing UID values</name>
             <t>VEVENT components having differing UID property values convert to different entries in the Group.  They sort in the same order as in the VCALENDAR component.</t>
             <figure anchor="test-ical-comp-vevent-uids">
               <name>Converting VEVENT components with differing UID values</name>
@@ -1830,7 +1818,7 @@ END:VCALENDAR
             </figure>
           </section>
           <section>
-            <name>Example: Converting VEVENT recurrence overrides</name>
+            <name>Converting VEVENT recurrence overrides</name>
             <t>VEVENT components having equal UID property values and <em>all but one of them</em> having the RECURRENCE-ID property set, convert to a single Event object.  The VEVENT component without a RECURRENCE-ID property converts to the Event object, all other VEVENT components with that UID value convert to a recurrence override of that event.</t>
             <figure anchor="test-ical-comp-vevent-recurrence-overrides">
               <name>Converting VEVENT recurrence overrides</name>
@@ -1875,7 +1863,7 @@ END:VCALENDAR
             </figure>
           </section>
           <section>
-            <name>Example: Converting VEVENT recurrence instance</name>
+            <name>Converting VEVENT recurrence instance</name>
             <t>VEVENT components having equal UID property values and <em>all of them</em> having a RECURRENCE-ID property set, convert to multiple Event objects.  Each Event <bcp14>MUST</bcp14> have the <tt>recurrenceId</tt> property set, as well as the <tt>recurrenceIdTimeZone</tt> property if not <tt>null</tt>. They sort in the same order as in the VCALENDAR component.</t>
             <figure anchor="test-ical-comp-vevent-recurrence-instances">
               <name>Converting VEVENT recurrence instance</name>
@@ -2060,6 +2048,14 @@ END:VCALENDAR
               </tr>
             </tbody>
           </table>
+          <t>The following example illustrates how to convert the VLOCATION component:</t>
+          <figure anchor="test-ical-comp-vlocation">
+            <name>Converting the VLOCATION component</name>
+            <sourcecode type="text/calendar"><![CDATA[
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+]]></sourcecode>
+          </figure>
         </section>
         <section anchor="ical-comp-vresource">
           <name>VRESOURCE</name>
@@ -2185,11 +2181,10 @@ END:VCALENDAR
               </tr>
             </tbody>
           </table>
-          <section>
-            <name>Example:  Converting the VRESOURCE component</name>
-            <figure anchor="test-ical-comp-vresource">
-              <name> Converting the VRESOURCE component</name>
-              <sourcecode type="text/calendar"><![CDATA[BEGIN:VEVENT
+          <t>The following example illustrates how to convert the VRESOURCE component:</t>
+          <figure anchor="test-ical-comp-vresource">
+            <name>Converting the VRESOURCE component</name>
+            <sourcecode type="text/calendar"><![CDATA[BEGIN:VEVENT
 ...
 BEGIN:VRESOURCE
 UID:456789-abcdef-98765432
@@ -2199,7 +2194,7 @@ STRUCTURED-DATA;VALUE=URI:http://dir.example.com/projectors/3d.vcf
 END:VRESOURCE
 END:VEVENT
 ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[{
+            <sourcecode type="json"><![CDATA[{
   "...": "",
   "@type": "Event",
   "participants": {
@@ -2231,8 +2226,7 @@ END:VEVENT
     }
   }
 }]]></sourcecode>
-            </figure>
-          </section>
+          </figure>
         </section>
         <section anchor="ical-comp-vtimezone">
           <name>VTIMEZONE</name>
@@ -2344,11 +2338,10 @@ END:VEVENT
               </tr>
             </tbody>
           </table>
-          <section>
-            <name>Example:  Converting the VTIMEZONE component</name>
-            <figure anchor="test-ical-comp-vtimezone">
-              <name> Converting the VTIMEZONE component</name>
-              <sourcecode type="text/calendar"><![CDATA[BEGIN:VCALENDAR
+          <t>The following example illustrates how to convert the VTIMEZONE component:</t>
+          <figure anchor="test-ical-comp-vtimezone">
+            <name>Converting the VTIMEZONE component</name>
+            <sourcecode type="text/calendar"><![CDATA[BEGIN:VCALENDAR
 ...
 BEGIN:VTIMEZONE
 TZID:Puerto_Rico
@@ -2378,7 +2371,7 @@ DTSTART;TZID=Puerto_Rico:20080708T130000
 END:VEVENT
 END:VCALENDAR
 ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[{
+            <sourcecode type="json"><![CDATA[{
   "...": "",
   "@type": "Group",
   "entries": [
@@ -2422,8 +2415,7 @@ END:VCALENDAR
     }
   }
 }]]></sourcecode>
-            </figure>
-          </section>
+          </figure>
         </section>
         <section anchor="ical-comp-vtodo">
           <name>VTODO</name>
@@ -2919,18 +2911,17 @@ END:VCALENDAR
               </tr>
             </tbody>
           </table>
-          <section>
-            <name>Example:  Converting the VTODO component</name>
-            <figure anchor="test-ical-comp-vtodo">
-              <name> Converting the VTODO component</name>
-              <sourcecode type="text/calendar"><![CDATA[BEGIN:VCALENDAR
+          <t>The following example illustrates how to convert the VTODO component:</t>
+          <figure anchor="test-ical-comp-vtodo">
+            <name>Converting the VTODO component</name>
+            <sourcecode type="text/calendar"><![CDATA[BEGIN:VCALENDAR
 ...
 BEGIN:VTODO
 UID:83C80482-806D-41C4-8029-E438F793005D
 DUE:20060102T030405Z
 ...
 ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[{
+            <sourcecode type="json"><![CDATA[{
   "...": "",
   "@type": "Group",
   "entries": [
@@ -2943,8 +2934,7 @@ DUE:20060102T030405Z
     }
   ]
 }]]></sourcecode>
-            </figure>
-          </section>
+          </figure>
         </section>
       </section>
       <section anchor="ical-properties">
