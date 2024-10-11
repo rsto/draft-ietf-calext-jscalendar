@@ -1783,7 +1783,7 @@ DTSTART:20060102T030405Z
   ]
 }]]></sourcecode>
           </figure>
-          <section>
+          <section anchor="ical-comp-vevent-differing-uid">
             <name>Converting VEVENT components with differing UID values</name>
             <t>VEVENT components having differing UID property values convert to different entries in the Group.  They sort in the same order as in the VCALENDAR component.</t>
             <figure anchor="test-ical-comp-vevent-uids">
@@ -2911,6 +2911,7 @@ END:VCALENDAR
               </tr>
             </tbody>
           </table>
+          <t>See <xref target="ical-comp-vevent-differing-uid"/> ff. how to convert multiple VTODOs in a VCALENDAR component.</t>
           <t>The following example illustrates how to convert the VTODO component:</t>
           <figure anchor="test-ical-comp-vtodo">
             <name>Converting the VTODO component</name>
