@@ -2943,9 +2943,30 @@ DUE:20060102T030405Z
         <section anchor="ical-prop-acknowledged">
           <name>ACKNOWLEDGED</name>
           <t>
-            The <xref target="RFC9074" section="6.1" sectionFormat="parens">ACKNOWLEDGED property </xref> in a VALARM component converts to the <xref target="RFC8984" section="4.5.2" sectionFormat="parens">acknowledged</xref> property.
+            The <xref target="RFC9074" section="6.1" sectionFormat="parens">ACKNOWLEDGED property </xref> in a VALARM component converts to the <xref target="RFC8984" section="4.5.2" sectionFormat="parens">acknowledged</xref> property of an Alert object.
           </t>
-          <t>Its DATE-TIME value converts... TBD</t>
+          <t>The following example illustrates how to convert the ACKNOWLEDGED property:</t>
+          <figure anchor="test-ical-prop-acknowledged">
+            <name>Converting the ACKNOWLEDGED property</name>
+            <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VEVENT
+...
+BEGIN:VALARM
+TRIGGER:PT-5M
+ACTION:DISPLAY
+ACKNOWLEDGED:20241002T114703Z
+...
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"alerts": {
+  "a": {
+    "@type": "Alert",
+    "acknowledged": "2024-10-02T11:47:03Z",
+    "...": ""
+  }
+}
+]]></sourcecode>
+          </figure>
         </section>
         <section anchor="ical-prop-action">
           <name>ACTION</name>
