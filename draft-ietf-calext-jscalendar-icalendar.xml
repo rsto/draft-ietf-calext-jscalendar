@@ -436,7 +436,7 @@ SUMMARY:he
         </table>
         <section>
           <name>Example:  Converting the VCALENDAR component</name>
-          <figure anchor="test-ical-comp-vcalendar-1">
+          <figure anchor="test-ical-comp-vcalendar">
             <name> Converting the VCALENDAR component</name>
             <sourcecode type="text/calendar"><![CDATA[BEGIN:VCALENDAR
 UID:41aa02b6-42d0-4f45-8cb4-8b5075be2e14
@@ -572,7 +572,7 @@ END:VCALENDAR
           </table>
           <section>
             <name>Example:  Converting the DAYLIGHT component</name>
-            <figure anchor="test-ical-comp-daylight-1">
+            <figure anchor="test-ical-comp-daylight">
               <name> Converting the DAYLIGHT component</name>
               <sourcecode type="text/calendar"><![CDATA[BEGIN:VCALENDAR
 ...
@@ -922,7 +922,7 @@ END:VCALENDAR
           </table>
           <section>
             <name>Example:  Converting the PARTICIPANT component</name>
-            <figure anchor="test-ical-comp-participant-1">
+            <figure anchor="test-ical-comp-participant">
               <name> Converting the PARTICIPANT component</name>
               <sourcecode type="text/calendar"><![CDATA[BEGIN:VEVENT
 ...
@@ -1062,7 +1062,7 @@ END:VEVENT
           </table>
           <section>
             <name>Example:  Converting the STANDARD component</name>
-            <figure anchor="test-ical-comp-standard-1">
+            <figure anchor="test-ical-comp-standard">
               <name> Converting the STANDARD component</name>
               <sourcecode type="text/calendar"><![CDATA[BEGIN:VCALENDAR
 ...
@@ -1256,7 +1256,7 @@ END:VCALENDAR
           </table>
           <section>
             <name>Example:  Converting the VALARM component</name>
-            <figure anchor="test-ical-comp-valarm-1">
+            <figure anchor="test-ical-comp-valarm">
               <name> Converting the VALARM component</name>
               <sourcecode type="text/calendar"><![CDATA[BEGIN:VEVENT
 ...
@@ -1771,7 +1771,7 @@ END:VEVENT
           </table>
           <section>
             <name>Example:  Converting the VEVENT component</name>
-            <figure anchor="test-ical-comp-vevent-1">
+            <figure anchor="test-ical-comp-vevent">
               <name> Converting the VEVENT component</name>
               <sourcecode type="text/calendar"><![CDATA[BEGIN:VCALENDAR
 BEGIN:VEVENT
@@ -1798,7 +1798,7 @@ DTSTART:20060102T030405Z
           <section>
             <name>Example: Converting VEVENT components with differing UID values</name>
             <t>VEVENT components having differing UID property values convert to different entries in the Group.  They sort in the same order as in the VCALENDAR component.</t>
-            <figure anchor="test-ical-comp-vevent-2">
+            <figure anchor="test-ical-comp-vevent-uids">
               <name>Converting VEVENT components with differing UID values</name>
               <sourcecode type="text/calendar"><![CDATA[BEGIN:VCALENDAR
 BEGIN:VEVENT
@@ -1832,7 +1832,7 @@ END:VCALENDAR
           <section>
             <name>Example: Converting VEVENT recurrence overrides</name>
             <t>VEVENT components having equal UID property values and <em>all but one of them</em> having the RECURRENCE-ID property set, convert to a single Event object.  The VEVENT component without a RECURRENCE-ID property converts to the Event object, all other VEVENT components with that UID value convert to a recurrence override of that event.</t>
-            <figure anchor="test-ical-comp-vevent-3">
+            <figure anchor="test-ical-comp-vevent-recurrence-overrides">
               <name>Converting VEVENT recurrence overrides</name>
               <sourcecode type="text/calendar"><![CDATA[BEGIN:VCALENDAR
 BEGIN:VEVENT
@@ -1877,7 +1877,7 @@ END:VCALENDAR
           <section>
             <name>Example: Converting VEVENT recurrence instance</name>
             <t>VEVENT components having equal UID property values and <em>all of them</em> having a RECURRENCE-ID property set, convert to multiple Event objects.  Each Event <bcp14>MUST</bcp14> have the <tt>recurrenceId</tt> property set, as well as the <tt>recurrenceIdTimeZone</tt> property if not <tt>null</tt>. They sort in the same order as in the VCALENDAR component.</t>
-            <figure anchor="test-ical-comp-vevent-4">
+            <figure anchor="test-ical-comp-vevent-recurrence-instances">
               <name>Converting VEVENT recurrence instance</name>
               <sourcecode type="text/calendar"><![CDATA[BEGIN:VCALENDAR
 BEGIN:VEVENT
@@ -2187,7 +2187,7 @@ END:VCALENDAR
           </table>
           <section>
             <name>Example:  Converting the VRESOURCE component</name>
-            <figure anchor="test-ical-comp-vresource-1">
+            <figure anchor="test-ical-comp-vresource">
               <name> Converting the VRESOURCE component</name>
               <sourcecode type="text/calendar"><![CDATA[BEGIN:VEVENT
 ...
@@ -2346,7 +2346,7 @@ END:VEVENT
           </table>
           <section>
             <name>Example:  Converting the VTIMEZONE component</name>
-            <figure anchor="test-ical-comp-vtimezone-1">
+            <figure anchor="test-ical-comp-vtimezone">
               <name> Converting the VTIMEZONE component</name>
               <sourcecode type="text/calendar"><![CDATA[BEGIN:VCALENDAR
 ...
@@ -2921,7 +2921,7 @@ END:VCALENDAR
           </table>
           <section>
             <name>Example:  Converting the VTODO component</name>
-            <figure anchor="test-ical-comp-vtodo-1">
+            <figure anchor="test-ical-comp-vtodo">
               <name> Converting the VTODO component</name>
               <sourcecode type="text/calendar"><![CDATA[BEGIN:VCALENDAR
 ...
