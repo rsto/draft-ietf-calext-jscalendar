@@ -2966,7 +2966,7 @@ DUE:20060102T030405Z
         <section anchor="ical-prop-attach">
           <name>ATTACH</name>
           <t>
-            The <xref target="RFC5545" section="3.8.1.1" sectionFormat="parens">ATTACH property </xref> in a VEVENT or VTODO, VLOCATION, VRESOURCE, or PARTICIPANT component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the TBDreflinks. 
+              The <xref target="RFC5545" section="3.8.1.1" sectionFormat="parens">ATTACH property </xref> in a VEVENT or VTODO, VRESOURCE or PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the links property of the Event or Task, Participant, or Location object.
           </t>
           <t>A value of type URI converts... TBD</t>
           <t>A value of type BINARY converts... TBD</t>
@@ -3038,7 +3038,7 @@ DUE:20060102T030405Z
         <section anchor="ical-prop-attendee">
           <name>ATTENDEE</name>
           <t>
-            The <xref target="RFC5545" section="3.8.4.1" sectionFormat="parens">ATTENDEE property </xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref>.  The converted object is set in the TBDrefparticipants. 
+            The <xref target="RFC5545" section="3.8.4.1" sectionFormat="parens">ATTENDEE property </xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref>.  The converted object is set in the participants property of the Event or Task object.
           </t>
           <t>Its CAL-ADDRESS value converts... TBD</t>
           <t>Its parameters convert as follows:</t>
@@ -3318,7 +3318,7 @@ DUE:20060102T030405Z
         <section anchor="ical-prop-conference">
           <name>CONFERENCE</name>
           <t>
-            The <xref target="RFC7986" section="5.11" sectionFormat="parens">CONFERENCE property </xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="4.2.6" sectionFormat="parens">VirtualLocation object</xref>.  The converted object is set in the TBDrefvirtualLocations. 
+            The <xref target="RFC7986" section="5.11" sectionFormat="parens">CONFERENCE property </xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="4.2.6" sectionFormat="parens">VirtualLocation object</xref>.  The converted object is set in the virtualLocations property of the Event or Task object.
           </t>
           <t>Its URI value converts... TBD</t>
           <t>Its parameters convert as follows:</t>
@@ -3373,7 +3373,7 @@ DUE:20060102T030405Z
         <section anchor="ical-prop-contact">
           <name>CONTACT</name>
           <t>
-            The <xref target="RFC5545" section="3.8.4.2" sectionFormat="parens">CONTACT property </xref> in a VEVENT or VTODO, or PARTICIPANT component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the TBDreflinks. 
+            The <xref target="RFC5545" section="3.8.4.2" sectionFormat="parens">CONTACT property </xref> in a VEVENT or VTODO, or PARTICIPANT component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the links property of the Event or Task, or Participant object.
           </t>
           <t>Its TEXT value converts... TBD</t>
           <t>Its parameters convert as follows:</t>
@@ -3608,7 +3608,7 @@ DUE:20060102T030405Z
         <section anchor="ical-prop-exdate">
           <name>EXDATE</name>
           <t>
-            The <xref target="RFC5545" section="3.8.5.1" sectionFormat="parens">EXDATE property </xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="1.4.9" sectionFormat="parens">PatchObject object</xref>.  The converted object is set in the TBDrefrecurrenceOverrides. 
+            The <xref target="RFC5545" section="3.8.5.1" sectionFormat="parens">EXDATE property </xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="1.4.9" sectionFormat="parens">PatchObject object</xref>.  The converted object is set in the recurrenceOverrides property of the Event or Task object.
           </t>
           <t>A value of type DATE-TIME converts... TBD</t>
           <t>A value of type DATE converts... TBD</t>
@@ -3648,7 +3648,7 @@ DUE:20060102T030405Z
         <section anchor="ical-prop-exrule">
           <name>EXRULE</name>
           <t>
-            The <xref target="RFC2445" section="4.8.5.2" sectionFormat="parens">EXRULE property </xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="4.3.3" sectionFormat="parens">RecurrenceRule object</xref>.  The converted object is set in the TBDrefexcludedRecurrenceRules. 
+            The <xref target="RFC2445" section="4.8.5.2" sectionFormat="parens">EXRULE property </xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="4.3.3" sectionFormat="parens">RecurrenceRule object</xref>.  The converted object is set in the excludedRecurrenceRules property of the Event or Task.
           </t>
           <t>Its RECUR value converts... TBD</t>
         </section>
@@ -3665,14 +3665,14 @@ DUE:20060102T030405Z
             The <xref target="RFC5545" section="3.8.1.6" sectionFormat="parens">GEO property </xref> in a PARTICIPANT or VRESOURCE component converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">locationId</xref> property.
           </t>
           <t>
-            The <xref target="RFC5545" section="3.8.1.6" sectionFormat="parens">GEO property </xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>.  The converted object is set in the TBDreflocations. 
+            The <xref target="RFC5545" section="3.8.1.6" sectionFormat="parens">GEO property </xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>.  The converted object is set in the locations property of the Event or Task object.
           </t>
           <t>Its FLOAT value converts... TBD</t>
         </section>
         <section anchor="ical-prop-image">
           <name>IMAGE</name>
           <t>
-            The <xref target="RFC7986" section="5.10" sectionFormat="parens">IMAGE property </xref> in a VEVENT or VTODO, VLOCATION, or VRESOURCE component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the TBDreflinks. 
+            The <xref target="RFC7986" section="5.10" sectionFormat="parens">IMAGE property </xref> in a VEVENT or VTODO, VLOCATION, or VRESOURCE component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the links property of the Event or Task, Location, or Participant object.
           </t>
           <t>A value of type URI converts... TBD</t>
           <t>A value of type BINARY converts... TBD</t>
@@ -3751,7 +3751,7 @@ DUE:20060102T030405Z
         <section anchor="ical-prop-link">
           <name>LINK</name>
           <t>
-            The <xref target="RFC9253" section="8.2" sectionFormat="parens">LINK property </xref> in a VEVENT or VTODO, VCALENDAR, VLOCATION, VRESOURCE, or PARTICIPANT component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the TBDreflinks. 
+            The <xref target="RFC9253" section="8.2" sectionFormat="parens">LINK property </xref> in a VEVENT or VTODO, VCALENDAR, VRESOURCE or PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the links property of the Event or Task, Group, Participant, or Location object.
           </t>
           <t>A value of type URI converts... TBD</t>
           <t>A value of type UID converts... TBD</t>
@@ -3819,7 +3819,7 @@ DUE:20060102T030405Z
             The <xref target="RFC5545" section="3.8.1.7" sectionFormat="parens">LOCATION property </xref> in a PARTICIPANT component converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">locationId</xref> property.
           </t>
           <t>
-            The <xref target="RFC5545" section="3.8.1.7" sectionFormat="parens">LOCATION property </xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>.  The converted object is set in the TBDreflocations. 
+            The <xref target="RFC5545" section="3.8.1.7" sectionFormat="parens">LOCATION property </xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>.  The converted object is set in the locations property of the Event or Task object.
           </t>
           <t>Its TEXT value converts... TBD</t>
           <t>Its parameters convert as follows:</t>
@@ -3873,7 +3873,7 @@ DUE:20060102T030405Z
         <section anchor="ical-prop-method">
           <name>METHOD</name>
           <t>
-            The <xref target="RFC5545" section="3.7.2" sectionFormat="parens">METHOD property </xref> in a VCALENDAR component converts to  TBDentries/*/method property. 
+            The <xref target="RFC5545" section="3.7.2" sectionFormat="parens">METHOD property </xref> in a VCALENDAR component converts to  TBDentries/*/method property.
           </t>
           <t>Its TEXT value converts... TBD</t>
         </section>
@@ -4070,7 +4070,7 @@ DUE:20060102T030405Z
         <section anchor="ical-prop-prodid">
           <name>PRODID</name>
           <t>
-            The <xref target="RFC5545" section="3.7.3" sectionFormat="parens">PRODID property </xref> in a VCALENDAR component converts to  TBDprodId, entries/*/prodId property. 
+            The <xref target="RFC5545" section="3.7.3" sectionFormat="parens">PRODID property </xref> in a VCALENDAR component converts to  TBDprodId, entries/*/prodId property.
           </t>
           <t>Its TEXT value converts... TBD</t>
         </section>
@@ -4081,7 +4081,7 @@ DUE:20060102T030405Z
         <section anchor="ical-prop-rdate">
           <name>RDATE</name>
           <t>
-            The <xref target="RFC5545" section="3.8.5.2" sectionFormat="parens">RDATE property </xref> in a VEVENT or VTODO, DAYLIGHT or STANDARD component converts to a <xref target="RFC8984" section="1.4.9" sectionFormat="parens">PatchObject object</xref>.  The converted object is set in the TBDrefrecurrenceOverrides. 
+              The <xref target="RFC5545" section="3.8.5.2" sectionFormat="parens">RDATE property </xref> in a VEVENT or VTODO, DAYLIGHT or STANDARD component converts to a <xref target="RFC8984" section="1.4.9" sectionFormat="parens">PatchObject object</xref>.  The converted object is set in the recurrenceOverrides property of the Event or Task, or TimeZoneRule object.
           </t>
           <t>A value of type DATE-TIME converts... TBD</t>
           <t>A value of type DATE converts... TBD</t>
@@ -4276,7 +4276,7 @@ DUE:20060102T030405Z
         <section anchor="ical-prop-rrule">
           <name>RRULE</name>
           <t>
-            The <xref target="RFC5545" section="3.8.5.3" sectionFormat="parens">RRULE property </xref> in a VEVENT or VTODO, DAYLIGHT or STANDARD component converts to a <xref target="RFC8984" section="4.3.3" sectionFormat="parens">RecurrenceRule object</xref>.  The converted object is set in the TBDrefrecurrenceRules. 
+            The <xref target="RFC5545" section="3.8.5.3" sectionFormat="parens">RRULE property </xref> in a VEVENT or VTODO, DAYLIGHT or STANDARD component converts to a <xref target="RFC8984" section="4.3.3" sectionFormat="parens">RecurrenceRule object</xref>.  The converted object is set in the recurrenceRules property of the Event or Task, or TimeZoneRule object.
           </t>
           <t>Its RECUR value converts... TBD</t>
         </section>
@@ -4304,7 +4304,7 @@ DUE:20060102T030405Z
         <section anchor="ical-prop-structured-data">
           <name>STRUCTURED-DATA</name>
           <t>
-            The <xref target="RFC9073" section="6.6" sectionFormat="parens">STRUCTURED-DATA property </xref> in a VEVENT or VTODO, VLOCATION, VRESOURCE, or PARTICIPANT component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the TBDreflinks. 
+            The <xref target="RFC9073" section="6.6" sectionFormat="parens">STRUCTURED-DATA property </xref> in a VEVENT or VTODO, VRESOURCE or PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the links property of the Event or Task, Participant, or Location object.
           </t>
           <t>A value of type TEXT converts... TBD</t>
           <t>A value of type BINARY converts... TBD</t>
@@ -4610,7 +4610,7 @@ DUE:20060102T030405Z
         <section anchor="ical-prop-url">
           <name>URL</name>
           <t>
-            The <xref target="RFC5545" section="3.8.4.6" sectionFormat="parens">URL property </xref> in a VEVENT or VTODO, VCALENDAR, or PARTICIPANT component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the TBDreflinks. 
+            The <xref target="RFC5545" section="3.8.4.6" sectionFormat="parens">URL property </xref> in a VEVENT or VTODO, VCALENDAR, or PARTICIPANT component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the links property of the Event or Task, Group, or Participant object.
           </t>
           <t>Its URI value converts... TBD</t>
         </section>
@@ -4621,7 +4621,7 @@ DUE:20060102T030405Z
         <section anchor="ical-prop-xml">
           <name>XML</name>
           <t>
-            The <xref target="RFC6321" section="4.2" sectionFormat="parens">XML property </xref> in a VEVENT or VTODO, VCALENDAR, VLOCATION, VRESOURCE, or PARTICIPANT component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the TBDreflinks. 
+            The <xref target="RFC6321" section="4.2" sectionFormat="parens">XML property </xref> in a VEVENT or VTODO, VCALENDAR, VRESOURCE or PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the links property of the Event or task, Group, Participant, or Location object.
           </t>
           <t>A value of type TEXT converts... TBD</t>
           <t>A value of type BINARY converts... TBD</t>
