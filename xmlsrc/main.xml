@@ -62,14 +62,14 @@
         <section anchor="notation-icalendar">
           <name>iCalendar Examples</name>
           <t>An iCalendar example contains either an extract or a complete representation of iCalendar data.  It always represents an iCalendar object, even if the example only depicts non-VCALENDAR components or properties.</t>
-          <t>An example that only contains iCalendar properties implicitly represents a VEVENT component that is part of a VCALENDAR component.  An example that only contains one or more non-VCALENDAR components implicitly represents a VCALENDAR component that contains them.  Implicit components are assumed to contain mandatory properties with some value, but the actual value is irrevelant for the main point of the example.</t>
+          <t>An example that only contains iCalendar properties implicitly represents a VEVENT component that is part of a VCALENDAR component.  An example that only contains one or more non-VCALENDAR components implicitly represents a VCALENDAR component that contains them.  Implicit components are assumed to contain mandatory properties with some value, but the actual value is irrelevant for the main point of the example.</t>
           <t>To illustrate this, <xref target="example-notation-icalendar-implicit-explicit"/>, <xref target="example-notation-icalendar-dotdotdot"/> contains three examples, all of which represent the same iCalendar data.  In the first example, both the VEVENT component and VCALENDAR component are implicit, including their mandatory properties.  In the second example, only the VCALENDAR component and its mandatory properties are implicit.  The third example depicts a complete VCALENDAR component, nothing is implicit.</t>
           <figure anchor="example-notation-icalendar-implicit-explicit">
             <name>Examples for implicit and explicit iCalendar component notation</name>
-            <sourcecode><![CDATA[
+            <sourcecode type="text/calendar"><![CDATA[
 SUMMARY:hello
 ]]></sourcecode>
-            <sourcecode><![CDATA[
+            <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VEVENT
 DTSTAMP:20060102T030405Z
 DTSTART:20060102T030405Z
@@ -77,7 +77,7 @@ SUMMARY:hello
 UID:CC0A494A-6E07-4827-8294-0752DD1ECFA4
 END:VEVENT
 ]]></sourcecode>
-            <sourcecode><![CDATA[
+            <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VCALENDAR
 PRODID:-//FOO//bar//EN
 VERSION:2.0
@@ -90,23 +90,23 @@ END:VEVENT
 END:VCALENDAR
 ]]></sourcecode>
           </figure>
-          <t>A line containing just the value <tt>...</tt> stands for any other properties that might be present in a component but are irrevelant for this example.  This includes mandatory properties.  <xref target="example-notation-icalendar-dotdotdot"/> illustrates this as an alternative representation for the examples of <xref target="example-notation-icalendar-implicit-explicit"/>.</t>
+          <t>A line containing just the value <tt>...</tt> stands for any other properties that might be present in a component but are irrelevant for this example.  This includes mandatory properties.  <xref target="example-notation-icalendar-dotdotdot"/> illustrates this as an alternative representation for the examples of <xref target="example-notation-icalendar-implicit-explicit"/>.</t>
           <figure anchor="example-notation-icalendar-dotdotdot">
             <name>Example for additional properties represented by <tt>...</tt>
             </name>
-            <sourcecode><![CDATA[
+            <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VEVENT
 SUMMARY:hello
 ...
 END:VEVENT
 ]]></sourcecode>
           </figure>
-          <t>A line starting with two spaces represents the continuation of a folded content line (<xref target="RFC5545" section="3.1"/>).  <xref target="example-notation-icalendar-folded"/> illustrates this.</t>
+          <t>A line starting with a single space represents the continuation of a folded content line (<xref target="RFC5545" section="3.1"/>).  <xref target="example-notation-icalendar-folded"/> illustrates this.</t>
           <figure anchor="example-notation-icalendar-folded">
             <name>Example for a folded content line</name>
-            <sourcecode><![CDATA[
+            <sourcecode type="text/calendar"><![CDATA[
 SUMMARY:he
-  llo
+ llo
 ]]></sourcecode>
           </figure>
         </section>
@@ -114,7 +114,7 @@ SUMMARY:he
           <name>JSCalendar Examples</name>
           <t>A JSCalendar example always represents a Group object, even if the example only depicts one of the Group entries or properties.</t>
           <t>JSCalendar objects are depicted either explicitly or implicitly. An explicit JSCalendar object starts and ends with braces.  An implicit JSCalendar object omits braces, it only consists of JSON name/value pairs, separated by comma.</t>
-          <t>An implicit JSCalendar object is assumed to be of type Event, unless it contains the <tt>@type</tt> property with a different value.  It is assumed to contain mandatory properties with some value, but the actual value is irrevelant for the main point of the example.</t>
+          <t>An implicit JSCalendar object is assumed to be of type Event, unless it contains the <tt>@type</tt> property with a different value.  It is assumed to contain mandatory properties with some value, but the actual value is irrelevant for the main point of the example.</t>
           <t>
             <xref target="example-notation-jscalendar-implicit-explicit"/> illustrates this with multiple examples, all of which represent the same JSCalendar data.  The first example contains an implicit JSCalendar object of type Event.  The second example contains an implicit JSCalendar object with a <tt>@type</tt> property.  The third example contains an explicit Event object but the Group object containing it is omitted.  The fourth example contains the full Group object, nothing is omitted.</t>
           <figure anchor="example-notation-jscalendar-implicit-explicit">
@@ -171,7 +171,7 @@ SUMMARY:he
       <name>Converting iCalendar to JSCalendar</name>
 
       {% macro render_component(spec, comp_name, comp) -%}
-      <t>The <xref target="{{comp.rfc}}" section="{{comp.section}}" sectionFormat="parens">{{comp_name|upper}} component</xref> converts to a <xref target="{{ spec.jscalendar.types[comp.convert.object].rfc }}" section="{{ spec.jscalendar.types[comp.convert.object].section }}" sectionFormat="parens">{{comp.convert.object}}</xref> object.</t>
+      <t>The <xref target="{{comp.rfc}}" section="{{comp.section}}" sectionFormat="parens">{{comp_name|upper}} component</xref> converts to a <xref target="{{ spec.jscalendar.types[comp.convert.object].rfc }}" section="{{ spec.jscalendar.types[comp.convert.object].section }}" sectionFormat="parens">{{comp.convert.object}} object</xref>.</t>
 
       {% if comp.properties %}
       <t>Its properties convert as follows:</t>
@@ -182,8 +182,8 @@ SUMMARY:he
                 <th>Name</th>
                 <th>Reference</th>
                 <th>{{ comp.convert.object }} property</th>
-                <th>Note</th>
                 <th>See</th>
+                <th>Note</th>
               </tr>
             </thead>
             <tbody>
@@ -193,12 +193,12 @@ SUMMARY:he
                   <td><xref target="{{ spec.icalendar.properties[prop_name].rfc}}" section="{{ spec.icalendar.properties[prop_name].section}}" sectionFormat="comma"/></td>
                   {% if prop.convert %}
                   <td>{{ prop.convert.property }}</td>
-                  <td>{{ prop.convert.note }}</td>
                   <td><xref target="ical-prop-{{ prop_name|lower }}"/></td>
+                  <td>{{ prop.convert.note }}</td>
                   {% else %}
                   <td>iCalProps</td>
-                  <td>Non-standard</td>
                   <td/>
+                  <td>Non-standard</td>
                   {% endif %}
                 </tr>
                 {% endfor %}
@@ -215,8 +215,8 @@ SUMMARY:he
                 <th>Name</th>
                 <th>Reference</th>
                 <th>{{ comp.convert.object }} property</th>
-                <th>Note</th>
                 <th>See</th>
+                <th>Note</th>
               </tr>
             </thead>
             <tbody>
@@ -226,12 +226,12 @@ SUMMARY:he
                 <td><xref target="{{ spec.icalendar.components[subcomp_name].rfc}}" section="{{ spec.icalendar.components[subcomp_name].section}}" sectionFormat="comma"/></td>
                 {% if subcomp.convert %}
                 <td>{{ subcomp.convert.property }}</td>
-                <td>{{ subcomp.convert.note }}</td>
                 <td><xref target="ical-comp-{{ subcomp_name|lower }}"/></td>
+                <td>{{ subcomp.convert.note }}</td>
                 {% else %}
                 <td>iCalComps</td>
-                <td>Non-standard</td>
                 <td></td>
+                <td>Non-standard</td>
                 {% endif %}
               </tr>
               {% endfor %}
@@ -245,7 +245,7 @@ SUMMARY:he
               {{ example.desc }}
               <figure anchor="test-ical-comp-{{ comp_name|lower }}-{{ loop.index }}">
                 <name>{% if example.name %}{{ example.name }}{% else %} Converting the {{ comp_name }} component{% endif %}</name>
-                <sourcecode><![CDATA[{{ example.icalendar }}]]>
+                <sourcecode type="text/calendar"><![CDATA[{{ example.icalendar }}]]>
   </sourcecode>
                 <sourcecode type="json"><![CDATA[{{ example.jscalendar|tojson(indent=2) }}]]>
   </sourcecode>
@@ -296,8 +296,7 @@ SUMMARY:he
           {% if conv_prop %}
           {% for jsprop_name, comps in conv_prop | dictsort %}
           <t>
-            The <xref target="{{spec.icalendar.properties[prop_name].rfc}}" section="{{spec.icalendar.properties[prop_name].section}}" sectionFormat="parens">{{prop_name|upper}} property </xref> in a
-            {% for comp_name in comps["comps"] | sort %}{% if not loop.first and loop.last %} or {% endif %}{{ comp_name|upper }}{% if not loop.last and loop.length > 2 %}, {% endif %}{% endfor %} component converts to {% if comps["object"] %}a <xref target="{{ spec.jscalendar.types[comps['object']].rfc }}" section="{{ spec.jscalendar.types[comps['object']].section }}" sectionFormat="parens">{{ comps["object"] }} object</xref>.  The converted object is set in the TBDref{{jsprop_name}}. {% elif '*' in jsprop_name%} TBD{{ jsprop_name}} property. {% else %}the <xref target="{{ spec.jscalendar.properties[jsprop_name].rfc }}" section="{{ spec.jscalendar.properties[jsprop_name].sections[0] }}" sectionFormat="parens">{{ jsprop_name }}</xref> property.{% endif %}
+            The <xref target="{{spec.icalendar.properties[prop_name].rfc}}" section="{{spec.icalendar.properties[prop_name].section}}" sectionFormat="parens">{{prop_name|upper}} property </xref> in a {% for comp_name in comps["comps"] | sort %}{% if not loop.first and loop.last %} or {% endif %}{{ comp_name|upper }}{% if not loop.last and loop.length > 2 %}, {% endif %}{% endfor %} component converts to {% if comps["object"] %}a <xref target="{{ spec.jscalendar.types[comps['object']].rfc }}" section="{{ spec.jscalendar.types[comps['object']].section }}" sectionFormat="parens">{{ comps["object"] }} object</xref>.  The converted object is set in the TBDref{{jsprop_name}}. {% elif '*' in jsprop_name%} TBD{{ jsprop_name}} property. {% else %}the <xref target="{{ spec.jscalendar.properties[jsprop_name].rfc }}" section="{{ spec.jscalendar.properties[jsprop_name].sections[0] }}" sectionFormat="parens">{{ jsprop_name }}</xref> property.{% endif %}
           </t>
           {% endfor %}
 
@@ -306,7 +305,7 @@ SUMMARY:he
           <t>A value of type {{ type_name }} converts... TBD</t>
           {% endfor %}
           {% else %}
-          <t>Its {{ spec.icalendar.properties[prop_name].types[0] }} value converts...</t>
+          <t>Its {{ spec.icalendar.properties[prop_name].types[0] }} value converts... TBD</t>
           {% endif %}
 
           {% if spec.icalendar.properties[prop_name].parameters %}
@@ -337,6 +336,19 @@ SUMMARY:he
                 {% endfor %}
             </tbody>
           </table>
+
+          <section anchor="example-ical-prop-{{ prop_name|lower }}">
+            <name>Example: Converting the {{ prop_name }} property</name>
+            <figure anchor="test-ical-prop-{{ prop_name|lower }}">
+              <name>Converting the {{ prop_name }} property</name>
+              <sourcecode type="text/calendar"><![CDATA[
+  ]]>
+              </sourcecode>
+              <sourcecode type="json"><![CDATA[
+  ]]>
+              </sourcecode>
+            </figure>
+          </section>
           {% endif %}
 
           {% else %}

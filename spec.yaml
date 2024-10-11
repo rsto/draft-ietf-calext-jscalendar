@@ -172,14 +172,11 @@ icalendar:
         PARTICIPANT-TYPE:
           convert:
             property: roles
-            note: Participant.roles enum only supports CONTACT
+            note: If value is CONTACT
         PRIORITY: {}
         REQUEST-STATUS: {}
         RELATED-TO: {}
-        RESOURCES:
-          convert:
-            property: links
-            object: Link
+        RESOURCES: {}
         SEQUENCE:
           convert:
             property: scheduleSequence
@@ -405,10 +402,6 @@ icalendar:
         DESCRIPTION:
           convert:
             property: description
-        IMAGE:
-          convert:
-            property: links
-            object: Link
         LAST-MODIFIED:
           convert:
             property: updated
@@ -696,6 +689,10 @@ icalendar:
           convert:
             property: sequence
         STATUS: {}
+        STRUCTURED-DATA:
+          convert:
+            property: links
+            object: Link
         STYLED-DESCRIPTION:
           convert:
             property: description
@@ -774,12 +771,20 @@ icalendar:
       convert:
         object: Location
       properties:
+        ATTACH:
+          convert:
+            property: links
+            object: Link
         DESCRIPTION:
           convert:
             property: description
         GEO:
           convert:
             property: coordinates
+        IMAGE:
+          convert:
+            property: links
+            object: Link
         LINK:
           convert:
             property: links
@@ -851,6 +856,10 @@ icalendar:
                 }
               }
       properties:
+        ATTACH:
+          convert:
+            property: links
+            object: Link
         DESCRIPTION:
           convert:
             property: description
@@ -858,6 +867,14 @@ icalendar:
           convert:
             property: locationId
             note: Only one Location supported
+        IMAGE:
+          convert:
+            property: links
+            object: Link
+        LINK:
+          convert:
+            property: links
+            object: Link
         NAME:
           convert:
             property: name
@@ -1113,6 +1130,10 @@ icalendar:
           convert:
             property: sequence
         STATUS: {}
+        STRUCTURED-DATA:
+          convert:
+            property: links
+            object: Link
         STYLED-DESCRIPTION:
           convert:
             property: description
