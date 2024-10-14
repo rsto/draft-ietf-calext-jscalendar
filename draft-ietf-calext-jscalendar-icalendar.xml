@@ -2391,14 +2391,14 @@ END:VCALENDAR
           "offsetFrom": "-0400",
           "offsetTo": "-0300",
           "start": "1942-05-03T00:00:00",
-          "tzName": "A@T"
+          "names": { "AWT": true }
         },
         {
           "@type": "TimeZoneRule",
           "offsetFrom": "-0300",
           "offsetTo": "-0300",
           "start": "1945-08-14T20:00:00",
-          "tzName": "APT"
+          "names": { "APT": true }
         }
       ],
       "standard": [
@@ -2407,7 +2407,7 @@ END:VCALENDAR
           "offsetFrom": "-0300",
           "offsetTo": "-0400",
           "start": "1945-09-30T02:00:00",
-          "tzName": "AST"
+          "names": { "AST": true }
         }
       ],
       "tzId": "Puerto_Rico",
