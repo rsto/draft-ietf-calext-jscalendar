@@ -924,7 +924,7 @@ END:VCALENDAR
 BEGIN:PARTICIPANT
 UID:47AD2E1C-49D4-45DF-BD83-8398ACC7D8E2
 STRUCTURED-DATA;VALUE=URI:
-  http://dir.example.com/vcard/contacts/contact1.vcf
+ http://dir.example.com/vcard/contacts/contact1.vcf
 PARTICIPANT-TYPE:CONTACT
 DESCRIPTION:A contact
 END:PARTICIPANT
