@@ -324,6 +324,17 @@ SUMMARY:he
               </td>
               <td/>
             </tr>
+              <tr>
+                <td>STRUCTURED-DATA</td>
+                <td>
+                  <xref target="RFC9073" section="6.6" sectionFormat="comma"/>
+                </td>
+                <td>links</td>
+                <td>
+                  <xref target="ical-prop-structured-data"/>
+                </td>
+                <td/>
+              </tr>
             <tr>
               <td>UID</td>
               <td>
@@ -1275,7 +1286,8 @@ END:VEVENT
       "trigger": {
         "@type": "OffsetTrigger",
         "offset": "-PT30M"
-      }
+      },
+      "action": "display"
     }
   }
 }]]></sourcecode>
@@ -4316,7 +4328,7 @@ ACKNOWLEDGED:20241002T114703Z
         <section anchor="ical-prop-structured-data">
           <name>STRUCTURED-DATA</name>
           <t>
-            The <xref target="RFC9073" section="6.6" sectionFormat="parens">STRUCTURED-DATA property </xref> in a VEVENT or VTODO, VRESOURCE or PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the links property of the Event or Task, Participant, or Location object.
+            The <xref target="RFC9073" section="6.6" sectionFormat="parens">STRUCTURED-DATA property </xref> in a VEVENT or VTODO, VCALENDAR, VRESOURCE or PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the links property of the Event or Task, Group, Participant, or Location object.
           </t>
           <t>A value of type TEXT converts... TBD</t>
           <t>A value of type BINARY converts... TBD</t>
