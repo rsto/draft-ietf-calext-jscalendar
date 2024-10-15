@@ -2955,7 +2955,7 @@ DUE:20060102T030405Z
         <section anchor="ical-prop-acknowledged">
           <name>ACKNOWLEDGED</name>
           <t>
-            The <xref target="RFC9074" section="6.1" sectionFormat="parens">ACKNOWLEDGED property </xref> in a VALARM component converts to the <xref target="RFC8984" section="4.5.2" sectionFormat="parens">acknowledged</xref> property of an Alert object.
+            The <xref target="RFC9074" section="6.1" sectionFormat="parens">ACKNOWLEDGED property </xref> in a VALARM component converts to the <xref target="RFC8984" section="4.5.2" sectionFormat="parens">acknowledged</xref> property of the Alert object.
           </t>
           <t>The following example illustrates how to convert the ACKNOWLEDGED property:</t>
           <figure anchor="test-ical-prop-acknowledged">
@@ -2983,9 +2983,72 @@ ACKNOWLEDGED:20241002T114703Z
         <section anchor="ical-prop-action">
           <name>ACTION</name>
           <t>
-            The <xref target="RFC5545" section="3.8.6.1" sectionFormat="parens">ACTION property </xref> in a VALARM component converts to the <xref target="RFC8984" section="4.5.2" sectionFormat="parens">action</xref> property.
+            The <xref target="RFC5545" section="3.8.6.1" sectionFormat="parens">ACTION property </xref> in a VALARM component converts to the <xref target="RFC8984" section="4.5.2" sectionFormat="parens">action</xref> property of the Alert object.
           </t>
-          <t>Its TEXT value converts... TBD</t>
+          <t>Its values convert as follows:</t>
+          <table anchor="ical-prop-action-values">
+            <name>Values of the ACTION property</name>
+            <thead>
+              <tr>
+                <th>iCalendar value</th>
+                <th>JSCalendar value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>DISPLAY</td>
+                <td>display</td>
+              </tr>
+              <tr>
+                <td>EMAIL</td>
+                <td>email</td>
+              </tr>
+            </tbody>
+          </table>
+          <t>An ACTION property with value AUDIO or any other not listed in <xref target="ical-prop-action-values"/> does not convert to the action property. Instead, the property converts to the <xref target="jscal-prop-icalprops">iCalProps property</xref> of the Alert.</t>
+          <t>The following example illustrates how to convert the ACTION property:</t>
+          <figure anchor="test-ical-prop-action-display">
+            <name>Converting the ACTION property for value DISPLAY</name>
+            <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VEVENT
+...
+BEGIN:VALARM
+TRIGGER:-PT5M
+ACTION:DISPLAY
+...
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"alerts": {
+  "a": {
+    "@type": "Alert",
+    "action": "display",
+    "...": ""
+  }
+}
+]]></sourcecode>
+          </figure>
+          <figure anchor="test-ical-prop-action-audio">
+            <name>Converting the ACTION property for value AUDIO</name>
+            <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VEVENT
+...
+BEGIN:VALARM
+TRIGGER:-PT5M
+ACTION:AUDIO
+...
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"alerts": {
+  "a": {
+    "@type": "Alert",
+    "iCalProps": [
+      ["action", {}, "text", "AUDIO"]
+    ],
+    "...": ""
+  }
+}
+]]></sourcecode>
+          </figure>
         </section>
         <section anchor="ical-prop-attach">
           <name>ATTACH</name>
