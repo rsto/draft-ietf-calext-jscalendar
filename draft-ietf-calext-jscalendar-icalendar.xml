@@ -3006,7 +3006,7 @@ ACKNOWLEDGED:20241002T114703Z
             </tbody>
           </table>
           <t>An ACTION property with value AUDIO or any other not listed in <xref target="ical-prop-action-values"/> does not convert to the action property. Instead, the property converts to the <xref target="jscal-prop-icalprops">iCalProps property</xref> of the Alert.</t>
-          <t>The following example illustrates how to convert the ACTION property:</t>
+          <t>The following examples illustrate how to convert the ACTION property:</t>
           <figure anchor="test-ical-prop-action-display">
             <name>Converting the ACTION property for value DISPLAY</name>
             <sourcecode type="text/calendar"><![CDATA[
@@ -3055,8 +3055,7 @@ ACTION:AUDIO
           <t>
               The <xref target="RFC5545" section="3.8.1.1" sectionFormat="parens">ATTACH property </xref> in a VEVENT or VTODO, VRESOURCE or PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the links property of the Event or Task, Participant, or Location object.
           </t>
-          <t>A value of type URI converts... TBD</t>
-          <t>A value of type BINARY converts... TBD</t>
+          <t>The ATTACH property value converts to the href property of the Link object. A value of type URI converts verbatim. A value of type BINARY converts to a URI in the "data" URL scheme (<xref target="RFC2397"/>. If the FMTTYPE parameter is set on the ATTACH property, then the parameter value <bcp14>SHOULD</bcp14> be set in the mediatype part of the data URL.</t>
           <t>Its parameters convert as follows:</t>
           <table>
             <name>Parameters of the ATTACH property</name>
@@ -3064,7 +3063,7 @@ ACTION:AUDIO
               <tr>
                 <th>Name</th>
                 <th>Reference</th>
-                <th>Property</th>
+                <th>Link Property</th>
                 <th>Note</th>
               </tr>
             </thead>
@@ -3111,16 +3110,38 @@ ACTION:AUDIO
               </tr>
             </tbody>
           </table>
-          <section anchor="example-ical-prop-attach">
-            <name>Example: Converting the ATTACH property</name>
-            <figure anchor="test-ical-prop-attach">
-              <name>Converting the ATTACH property</name>
+          <t>The following examples illustrate how to convert the ATTACH property:</t>
+            <figure anchor="test-ical-prop-attach-uri">
+              <name>Converting the ATTACH property with URI value</name>
               <sourcecode type="text/calendar"><![CDATA[
+ATTACH:https://example.com/foo.pdf
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
+"links": {
+  "a": {
+    "@type": "Link",
+    "href": "https://example.com/foo.pdf"
+  }
+}
   ]]></sourcecode>
             </figure>
-          </section>
+            <figure anchor="test-ical-prop-attach-binary">
+              <name>Converting the ATTACH property with BINARY value</name>
+              <sourcecode type="text/calendar"><![CDATA[
+ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
+ 0KGgoAAAANSUhEUgAAAAEAAAABAQAAAAA3bvkkAAAAAmJLR0QAAd2KE6QAA
+ AAKSURBVAjXY2gAAACCAIHdQ2r0AAAAAElFTkSuQmCC
+  ]]></sourcecode>
+              <sourcecode type="json"><![CDATA[
+"links": {
+  "a": {
+    "@type": "Link",
+    "href": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQAAAAA3bvkkAAAAAmJLR0QAAd2KE6QAAAAKSURBVAjXY2gAAACCAIHdQ2r0AAAAAElFTkSuQmCC",
+    "contentType": "image/png"
+  }
+}
+  ]]></sourcecode>
+            </figure>
         </section>
         <section anchor="ical-prop-attendee">
           <name>ATTENDEE</name>
