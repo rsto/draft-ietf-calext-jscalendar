@@ -3636,7 +3636,7 @@ CONCEPT:https://example.com/event-types/arts/literature
           <t>
             The <xref target="RFC7986" section="5.11" sectionFormat="parens">CONFERENCE property </xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="4.2.6" sectionFormat="parens">VirtualLocation object</xref>.  The converted object is set in the virtualLocations property of the Event or Task object.
           </t>
-          <t>Its URI value converts... TBD</t>
+          <t>The CONFERENCE property value converts to the uri property of the VirtualLocation object.</t>
           <t>Its parameters convert as follows:</t>
           <table>
             <name>Parameters of the CONFERENCE property</name>
@@ -3675,17 +3675,27 @@ CONCEPT:https://example.com/event-types/arts/literature
               </tr>
             </tbody>
           </table>
-          <section anchor="example-ical-prop-conference">
-            <name>Example: Converting the CONFERENCE property</name>
+          <t>The following example illustrates how to convert the CONFERENCE property:</t>
             <figure anchor="test-ical-prop-conference">
               <name>Converting the CONFERENCE property</name>
               <sourcecode type="text/calendar"><![CDATA[
+CONFERENCE;VALUE=URI;FEATURE=AUDIO,VIDEO;
+ LABEL=Attendee dial-in:https://chat.example.com/audio?id=123456
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
-
+"virtualLocations": {
+  "b2": {
+    "@type": "VirtualLocation",
+    "name": "Attendee dial-in",
+    "uri": "https://chat.example.com/audio?id=123456",
+    "features": {
+      "audio": true,
+      "video": true,
+    }
+  }
+}
 ]]></sourcecode>
             </figure>
-          </section>
         </section>
         <section anchor="ical-prop-contact">
           <name>CONTACT</name>
