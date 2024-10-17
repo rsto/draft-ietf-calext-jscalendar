@@ -3716,9 +3716,9 @@ CREATED:20240329T133000Z
         <section anchor="ical-prop-description">
           <name>DESCRIPTION</name>
           <t>
-            The <xref target="RFC5545" section="3.8.1.5" sectionFormat="parens">DESCRIPTION property </xref> in a VEVENT, VTODO, VCALENDAR, VLOCATION, VRESOURCE, or PARTICIPANT component converts to the <xref target="RFC8984" section="4.2.2" sectionFormat="parens">description</xref> property.
+            The <xref target="RFC5545" section="3.8.1.5" sectionFormat="parens">DESCRIPTION property </xref> in a VEVENT, VTODO, VCALENDAR, VLOCATION, VRESOURCE, or PARTICIPANT component converts to the <xref target="RFC8984" section="4.2.2" sectionFormat="parens">description</xref> property of the Event, Task, Group, Location, Link, or Participant object.
           </t>
-          <t>Its TEXT value converts... TBD</t>
+          <t>The DESCRIPTION property value is more likely than other TEXT-typed properties to contain escaped characters (see <xref target="RFC5545" section="3.3.11" sectionFormat="of"/>). As with any other TEXT value, implementations <bcp14>MUST</bcp14> unescape such characters before conversion and encode them as JSON string (see <xref target="RFC8259" section="7" sectionFormat="of"/>).</t>
           <t>Its parameters convert as follows:</t>
           <table>
             <name>Parameters of the DESCRIPTION property</name>
@@ -3736,7 +3736,7 @@ CREATED:20240329T133000Z
                 <td>
                   <xref target="RFC5545" section="3.2.1" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty</td>
+                <td>iCalComponent</td>
                 <td>Non-standard</td>
               </tr>
               <tr>
@@ -3744,22 +3744,21 @@ CREATED:20240329T133000Z
                 <td>
                   <xref target="RFC5545" section="3.2.10" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty</td>
+                <td>iCalComponent</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
           </table>
-          <section anchor="example-ical-prop-description">
-            <name>Example: Converting the DESCRIPTION property</name>
+          <t>The following example illustrates how to convert the DESCRIPTION property:</t>
             <figure anchor="test-ical-prop-description">
               <name>Converting the DESCRIPTION property</name>
               <sourcecode type="text/calendar"><![CDATA[
+DESCRIPTION:Some text\;and\na new line.
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
-
+"description": "Some text;and\na new line."
 ]]></sourcecode>
             </figure>
-          </section>
         </section>
         <section anchor="ical-prop-dtend">
           <name>DTEND</name>
