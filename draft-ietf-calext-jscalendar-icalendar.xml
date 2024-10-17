@@ -3763,32 +3763,12 @@ DESCRIPTION:Some text\;and\na new line.
         <section anchor="ical-prop-dtend">
           <name>DTEND</name>
           <t>
-            The <xref target="RFC5545" section="3.8.2.2" sectionFormat="parens">DTEND property </xref> in a VEVENT component converts to the <xref target="RFC8984" section="5.1.2" sectionFormat="parens">duration</xref> property.
+            The <xref target="RFC5545" section="3.8.2.2" sectionFormat="parens">DTEND property </xref> in a VEVENT component converts to the <xref target="RFC8984" section="5.1.2" sectionFormat="parens">duration</xref> property of the Event object.
           </t>
-          <t>A value of type DATE-TIME converts... TBD</t>
-          <t>A value of type DATE converts... TBD</t>
-          <t>Its parameters convert as follows:</t>
-          <table>
-            <name>Parameters of the DTEND property</name>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Property</th>
-                <th>Note</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>TZID</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.19" sectionFormat="comma"/>
-                </td>
-                <td>locations</td>
-                <td>Location.rel = "end", if timezone differs from start.</td>
-              </tr>
-            </tbody>
-          </table>
+          <t>A value of type DATE-TIME converts to a LocalDateTime containing both the date and time of the property value. A value of type DATE converts to a LocalDateTime containing the date of the property value and its time set to zero time.</t>
+<t>The duration is the timespan between the points in time of the DSTART and DTEND property values when converted to UTC time.</t>
+          <t>If the timezone of the DTEND property differs from that of the DTSTART property, then the DTEND property also converts to a Location object. The timezone identifier converts to the timeZone property of the Location object. If the DTEND property value is a DATE-TIME in form <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE WITH UTC TIME</xref> then that timezone identifier is "Etc/UTC". The relativeTo property of the Location is set to "end". The Location object is set in the locations property of the Event object.</t>
+<t>Implementations <bcp14>MAY</bcp14> preserve the fact that the duration got determined by the DTEND property. To do so, they <bcp14>MUST</bcp14> set the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> in the Event object and there add an entry for the path "duration" in the convertedProperties property. The value <bcp14>MUST</bcp14> be an ICalProperty with the name property set to "dtend" and the parameters of the DTEND property set in the parameters property.</t>
           <section anchor="example-ical-prop-dtend">
             <name>Example: Converting the DTEND property</name>
             <figure anchor="test-ical-prop-dtend">
