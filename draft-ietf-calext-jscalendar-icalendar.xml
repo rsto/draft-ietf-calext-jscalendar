@@ -190,7 +190,7 @@ SUMMARY:he
               <td>
                 <xref target="RFC5545" section="3.7.1" sectionFormat="comma"/>
               </td>
-              <td>iCalProps</td>
+              <td>iCalComponent/properties</td>
               <td/>
               <td>Non-standard</td>
             </tr>
@@ -309,7 +309,7 @@ SUMMARY:he
               <td>
                 <xref target="RFC7986" section="5.7" sectionFormat="comma"/>
               </td>
-              <td>iCalProps</td>
+              <td>iCalComponent/properties</td>
               <td/>
               <td>Non-standard</td>
             </tr>
@@ -362,7 +362,7 @@ SUMMARY:he
               <td>
                 <xref target="RFC5545" section="3.7.4" sectionFormat="comma"/>
               </td>
-              <td>iCalProps</td>
+              <td>iCalComponent/properties</td>
               <td/>
               <td>Non-standard</td>
             </tr>
@@ -397,7 +397,7 @@ SUMMARY:he
               <td>
                 <xref target="RFC7953" section="3.1" sectionFormat="comma"/>
               </td>
-              <td>iCalComps</td>
+              <td>iCalComponent/components</td>
               <td/>
               <td>Non-standard</td>
             </tr>
@@ -417,7 +417,7 @@ SUMMARY:he
               <td>
                 <xref target="RFC5545" section="3.6.3" sectionFormat="comma"/>
               </td>
-              <td>iCalComps</td>
+              <td>iCalComponent/components</td>
               <td/>
               <td>Non-standard</td>
             </tr>
@@ -662,7 +662,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.1.2" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -693,7 +693,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.7.1" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -735,7 +735,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.7.3" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -777,7 +777,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.1.9" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -786,7 +786,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.4.5" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -795,7 +795,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.8.3" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -804,7 +804,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.1.10" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -824,7 +824,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.1.11" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -844,7 +844,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC9073" section="6.5" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -864,7 +864,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -921,7 +921,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC9073" section="7.3" sectionFormat="comma"/>
                 </td>
-                <td>iCalComps</td>
+                <td>iCalComponent/components</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -948,7 +948,7 @@ END:VEVENT
     "p32": {
       "@type": "Participant",
       "description": "A contact",
-      "iCalProps": [
+      "iCalComponent/properties": [
         [
           "uid",
           {},
@@ -1148,7 +1148,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.1.1" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -1157,7 +1157,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.4.1" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -1166,7 +1166,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.1.5" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -1175,7 +1175,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.2.5" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -1184,7 +1184,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC9074" section="8.1" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -1193,7 +1193,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC9253" section="8.3" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -1213,7 +1213,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.6.2" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -1222,7 +1222,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC9073" section="6.5" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -1231,7 +1231,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.1.12" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -1251,7 +1251,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -1275,7 +1275,7 @@ END:VEVENT
   "alerts": {
     "a8": {
       "@type": "Alert",
-      "iCalProps": [
+      "iCalComponent/properties": [
         [
           "description",
           {},
@@ -1373,7 +1373,7 @@ END:VEVENT
                 <td>
                   <xref target="RFC5545" section="3.8.1.4" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -1448,7 +1448,7 @@ END:VEVENT
                 <td>
                   <xref target="RFC5545" section="3.8.7.2" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -1600,7 +1600,7 @@ END:VEVENT
                 <td>
                   <xref target="RFC9253" section="8.3" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -1631,7 +1631,7 @@ END:VEVENT
                 <td>
                   <xref target="RFC5545" section="3.8.1.10" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -1662,7 +1662,7 @@ END:VEVENT
                 <td>
                   <xref target="RFC5545" section="3.8.1.11" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -2023,7 +2023,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC9253" section="8.3" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -2043,7 +2043,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -2156,7 +2156,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC9073" section="6.3" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -2176,7 +2176,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -2213,7 +2213,7 @@ END:VEVENT
     "p2": {
       "@type": "Participant",
       "description": "A contact",
-      "iCalProps": [
+      "iCalComponent/properties": [
         [
           "uid",
           {},
@@ -2505,7 +2505,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.1.4" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -2514,7 +2514,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.2.1" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -2578,7 +2578,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.7.2" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -2752,7 +2752,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC9253" section="8.3" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -2783,7 +2783,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.1.10" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -2814,7 +2814,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.1.11" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td/>
                 <td>Non-standard</td>
               </tr>
@@ -3005,7 +3005,7 @@ ACKNOWLEDGED:20241002T114703Z
               </tr>
             </tbody>
           </table>
-          <t>An ACTION property with value AUDIO or any other not listed in <xref target="ical-prop-action-values"/> does not convert to the action property. Instead, the property converts to the <xref target="jscal-prop-icalprops">iCalProps property</xref> of the Alert.</t>
+          <t>An ACTION property with value AUDIO or any other not listed in <xref target="ical-prop-action-values"/> does not convert to the action property. Instead, the property converts to the <xref target="jscal-prop-icalcomponent">iCalComponent/properties property</xref> of the Alert.</t>
           <t>The following examples illustrate how to convert the ACTION property:</t>
           <figure anchor="test-ical-prop-action-display">
             <name>Converting the ACTION property for value DISPLAY</name>
@@ -3041,7 +3041,7 @@ ACTION:AUDIO
 "alerts": {
   "a": {
     "@type": "Alert",
-    "iCalProps": [
+    "iCalComponent/properties": [
       ["action", {}, "text", "AUDIO"]
     ],
     "...": ""
@@ -3073,7 +3073,7 @@ ACTION:AUDIO
                 <td>
                   <xref target="RFC5545" section="3.2.7" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>If unequal to BASE64</td>
               </tr>
               <tr>
@@ -3081,7 +3081,7 @@ ACTION:AUDIO
                 <td>
                   <xref target="RFC8607" section="4.2" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>Non-standard</td>
               </tr>
               <tr>
@@ -3097,7 +3097,7 @@ ACTION:AUDIO
                 <td>
                   <xref target="RFC8607" section="4.3" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>Non-standard</td>
               </tr>
               <tr>
@@ -3347,7 +3347,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC5545" section="3.2.10" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -3403,7 +3403,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC5545" section="3.2.1" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>Non-standard</td>
               </tr>
               <tr>
@@ -3411,7 +3411,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC5545" section="3.2.10" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -3477,7 +3477,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC5545" section="3.2.10" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -3516,7 +3516,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC5545" section="3.2.1" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>Non-standard</td>
               </tr>
               <tr>
@@ -3524,7 +3524,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC5545" section="3.2.10" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -3570,7 +3570,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC5545" section="3.2.1" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>Non-standard</td>
               </tr>
               <tr>
@@ -3578,7 +3578,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC5545" section="3.2.10" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -3752,7 +3752,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC5545" section="3.2.19" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -3816,7 +3816,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC5545" section="3.2.1" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>Non-standard</td>
               </tr>
               <tr>
@@ -3832,7 +3832,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC5545" section="3.2.7" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>If unequal to BASE64</td>
               </tr>
               <tr>
@@ -3912,7 +3912,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC5545" section="3.2.10" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>Non-standard</td>
               </tr>
               <tr>
@@ -3962,7 +3962,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC5545" section="3.2.1" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>Non-standard</td>
               </tr>
               <tr>
@@ -3970,7 +3970,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC5545" section="3.2.10" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -4026,7 +4026,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC5545" section="3.2.1" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>Non-standard</td>
               </tr>
               <tr>
@@ -4034,7 +4034,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC5545" section="3.2.10" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -4097,7 +4097,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC6638" section="7.1" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td>TBC -- need scheduleForceAgent on Event and Todo?</td>
               </tr>
               <tr>
@@ -4105,7 +4105,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC6638" section="7.2" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td>TBC -- need scheduleForceSend on Event and Todo?</td>
               </tr>
               <tr>
@@ -4113,7 +4113,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC6638" section="7.3" sectionFormat="comma"/>
                 </td>
-                <td>iCalProps</td>
+                <td>iCalComponent/properties</td>
                 <td>TBC -- need scheduleStatus on Event and Todo?</td>
               </tr>
               <tr>
@@ -4160,7 +4160,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC9073" section="5.1" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -4226,7 +4226,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC5545" section="3.2.19" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -4266,7 +4266,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC5545" section="3.2.13" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>Non-standard</td>
               </tr>
               <tr>
@@ -4321,7 +4321,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC9253" section="6.2" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>Non-standard</td>
               </tr>
               <tr>
@@ -4329,7 +4329,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC5545" section="3.2.15" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -4372,7 +4372,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC5545" section="3.2.10" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -4449,7 +4449,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC5545" section="3.2.7" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>If unequal to BASE64</td>
               </tr>
               <tr>
@@ -4465,7 +4465,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC9073" section="5.2" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -4505,7 +4505,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC5545" section="3.2.1" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>Non-standard</td>
               </tr>
               <tr>
@@ -4513,7 +4513,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC9073" section="5.3" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>Non-standard</td>
               </tr>
               <tr>
@@ -4529,7 +4529,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC5545" section="3.2.10" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -4571,7 +4571,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC5545" section="3.2.1" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>Non-standard</td>
               </tr>
               <tr>
@@ -4579,7 +4579,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC5545" section="3.2.10" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -4679,7 +4679,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC5545" section="3.2.10" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -4765,7 +4765,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
                 <td>
                   <xref target="RFC5545" section="3.2.7" sectionFormat="comma"/>
                 </td>
-                <td>iCalParams</td>
+                <td>iCalProperty/parameters</td>
                 <td>If unequal to BASE64</td>
               </tr>
             </tbody>
@@ -4811,22 +4811,51 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
       <name>Updates to JSCalendar</name>
       <section anchor="new-jscalendar-properties">
         <name>New JSCalendar properties</name>
-        <section anchor="jscal-prop-icalcomps">
-          <name>Property <tt>iCalComps</tt>
-          </name>
+        <section anchor="jscal-prop-icalcomponent">
+          <name>iCalComponent</name>
           <dl>
-            <dt>Type: <tt>JCalComp[]</tt> (optional).</dt>
-            <dd>This contains iCalendar components that are set in the iCalendar component represented by this JSCalendar object.  The JCalComp type denotes a jCal-encoded iCalendar component as defined in <xref target="RFC7265" sectionFormat="of" section="3.3"/>.</dd>
-          </dl>
+            <dt>Type: <tt>ICalComponent</tt> (optional).</dt>
+            <dd>
+              <t>This contains information about an iCalendar component that got partially or fully converted to JSCalendar.  It allows to preserve the name of the iCalendar component and some or all of its properties and subcomponents.</t>
+              <t>An ICalComponent object has the following properties:</t>
+              <dl>
+                <dt>@type: String (mandatory)</dt>
+                <dd>This specifies the type of this object. This <bcp14>MUST</bcp14> be ICalComponent.</dd>
+                <dt>name: String (mandatory)</dt>
+                <dd>This is the name of the iCalendar component in lowercase.</dd>
+                <dt>components: *[][] (optional)</dt>
+                <dd>This contains subcomponents of the iCalendar component. The value <bcp14>MUST</bcp14> be a list of iCalendar components formatted in jCal as defined in <xref target="RFC7265" section="3.3" sectionFormat="of"/>.
+                </dd>
+                <dt>convertedProperties: String[ICalProperty] (optional)</dt>
+                <dd>
+                  <t>This contains conversion-related information about the component's properties that got partially or fully converted to JSCalendar.  Each key defines the path to a property of the JSCalendar object on which the iCalComponent property is set on.  The value for each key contains information about the iCalendar property which converted to the object property located at that key (see <xref target="jscal-prop-icalproperty"/>).</t>
+                  <t>The key <bcp14>MUST</bcp14> be a valid key of a PatchObject as defined in <xref target="RFC8984" section="1.4.9" sectionFormat="of"/>.  The key <bcp14>MUST NOT</bcp14> point into a nested property, unless there is no way to otherwise preserve the iCalendar property elements. For example, if a VEVENT contains an ATTENDEE property, then any iCalendar information about the ATTENDEE property <bcp14>MUST</bcp14> be set in the iCalProperty property of the converted Participant object (see <xref target="ical-prop-attendee"/>).  In contrast, information about a RDATE property contained in a VEVENT would be located by a key pointing into the <tt>recurrenceOverrides</tt> property of the Event object (see <xref target="ical-prop-rdate"/>).</t>
+                </dd>
+                <dt>properties: *[][] (optional)</dt>
+                <dd>This contains properties of the iCalendar component. The value <bcp14>MUST</bcp14> be a list of iCalendar properties formatted in jCal as defined in <xref target="RFC7265" section="3.4" sectionFormat="of"/>.
+              </dd>
+              </dl>
+            </dd>
+            </dl>
         </section>
-        <section anchor="jscal-prop-icalprops">
-          <name>Property <tt>iCalProps</tt>
-          </name>
+        <section anchor="jscal-prop-icalproperty">
+          <name>iCalProperty</name>
           <dl>
-            <dt>Type: <tt>JCalProp[]</tt> (optional).</dt>
-            <dd>This contains iCalendar properties that are set in the iCalendar component represented by this JSCalendar object.  The JCalProp type denotes a jCal-encoded iCalendar property as defined in <xref target="RFC7265" sectionFormat="of" section="3.4"/>.</dd>
-          </dl>
-        </section>
+            <dt>Type: <tt>ICalProperty</tt> (optional).</dt>
+            <dd>
+              <t>This contains conversion-related information about an iCalendar property that got partially or fully converted to JSCalendar.  It allows to preserve the name of the iCalendar property and some or all of its parameters.</t>
+              <t>An ICalProperty object has the following properties:</t>
+              <dl>
+                <dt>@type: String (mandatory)</dt>
+                <dd>This specifies the type of this object. This <bcp14>MUST</bcp14> be ICalProperty.</dd>
+                <dt>name: String (mandatory)</dt>
+                <dd>This is the name of the iCalendar property in lowercase.</dd>
+                <dt>parameters: String[String] (optional)</dt>
+                <dd>This contains parameters of the iCalendar property. The value <bcp14>MUST</bcp14> comply with iCalendar parameters formatted in jCal as defined in <xref target="RFC7265" section="3.5" sectionFormat="of"/>.</dd>
+              </dl>
+            </dd>
+            </dl>
+          </section>
       </section>
     </section>
     <section anchor="IANA">
