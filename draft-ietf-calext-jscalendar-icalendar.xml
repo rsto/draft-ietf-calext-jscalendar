@@ -115,7 +115,8 @@ SUMMARY:he
           <t>A JSCalendar example always represents a Group object, even if the example only depicts one of the Group entries or properties.</t>
           <t>JSCalendar objects are depicted either explicitly or implicitly. An explicit JSCalendar object starts and ends with braces.  An implicit JSCalendar object omits braces, it only consists of JSON name/value pairs, separated by comma.</t>
           <t>An implicit JSCalendar object is assumed to be of type Event, unless it contains the <tt>@type</tt> property with a different value.  It is assumed to contain mandatory properties with some value, but the actual value is irrelevant for the main point of the example.</t>
-          <t><xref target="example-notation-jscalendar-implicit-explicit"/> illustrates this with multiple examples, all of which represent the same JSCalendar data.  The first example contains an implicit JSCalendar object of type Event.  The second example contains an implicit JSCalendar object with a <tt>@type</tt> property.  The third example contains an explicit Event object but the Group object containing it is omitted.  The fourth example contains the full Group object, nothing is omitted.</t>
+          <t>
+            <xref target="example-notation-jscalendar-implicit-explicit"/> illustrates this with multiple examples, all of which represent the same JSCalendar data.  The first example contains an implicit JSCalendar object of type Event.  The second example contains an implicit JSCalendar object with a <tt>@type</tt> property.  The third example contains an explicit Event object but the Group object containing it is omitted.  The fourth example contains the full Group object, nothing is omitted.</t>
           <figure anchor="example-notation-jscalendar-implicit-explicit">
             <name>Examples for implicit and explicit JSCalendar object notation</name>
             <sourcecode type="json"><![CDATA[
@@ -170,7 +171,8 @@ SUMMARY:he
       <name>Converting iCalendar to JSCalendar</name>
       <section anchor="ical-objects">
         <name>iCalendar Objects</name>
-        <t><xref target="RFC5545" section="3.4"/> allows for an iCalendar stream to contain one or more iCalendar objects.  In contrast, this specification only defines conversion for streams consisting of a single iCalendar object. Converting streams of multiple iCalendar objects is implementation-specific.  All following sections of this document use the terms "iCalendar object" and "VCALENDAR component" interchangeably.</t>
+        <t>
+          <xref target="RFC5545" section="3.4"/> allows for an iCalendar stream to contain one or more iCalendar objects.  In contrast, this specification only defines conversion for streams consisting of a single iCalendar object. Converting streams of multiple iCalendar objects is implementation-specific.  All following sections of this document use the terms "iCalendar object" and "VCALENDAR component" interchangeably.</t>
         <t>The <xref target="RFC5545" section="3.4" sectionFormat="parens">VCALENDAR component</xref> converts to a <xref target="RFC8984" section="2.3" sectionFormat="parens">Group object</xref>.</t>
         <t>Its properties convert as follows:</t>
         <table>
@@ -455,7 +457,8 @@ BEGIN:VEVENT
 END:VEVENT
 END:VCALENDAR
 ]]></sourcecode>
-          <sourcecode type="json"><![CDATA[{
+          <sourcecode type="json"><![CDATA[
+{
   "...": "",
   "@type": "Group",
   "entries": [
@@ -465,7 +468,8 @@ END:VCALENDAR
     }
   ],
   "uid": "41aa02b6-42d0-4f45-8cb4-8b5075be2e14"
-}]]></sourcecode>
+}
+]]></sourcecode>
         </figure>
       </section>
       <section anchor="generating-jscalendar-ids">
@@ -599,7 +603,8 @@ DTSTART;TZID=NonIana:20241004T010000
 END:VEVENT
 END:VCALENDAR
 ]]></sourcecode>
-            <sourcecode type="json"><![CDATA[{
+            <sourcecode type="json"><![CDATA[
+{
   "...": "",
   "@type": "Group",
   "timeZones": {
@@ -616,7 +621,8 @@ END:VCALENDAR
       "tzId": "NonIana"
     }
   }
-}]]></sourcecode>
+}
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="ical-comp-participant">
@@ -941,7 +947,8 @@ DESCRIPTION:A contact
 END:PARTICIPANT
 END:VEVENT
 ]]></sourcecode>
-            <sourcecode type="json"><![CDATA[{
+            <sourcecode type="json"><![CDATA[
+{
   "...": "",
   "@type": "Event",
   "participants": {
@@ -949,15 +956,16 @@ END:VEVENT
       "@type": "Participant",
       "description": "A contact",
       "iCalComponent": {
-"name": "participant",
-"properties": [
-        [
-          "uid",
-          {},
-          "text",
-          "47AD2E1C-49D4-45DF-BD83-8398ACC7D8E2"
+        "name": "participant",
+        "properties": [
+          [
+            "uid",
+            {},
+            "text",
+            "47AD2E1C-49D4-45DF-BD83-8398ACC7D8E2"
+          ]
         ]
-      ]},
+      },
       "links": {
         "l4": {
           "@type": "Link",
@@ -967,9 +975,10 @@ END:VEVENT
       "roles": {
         "contact": true
       }
-}
+    }
   }
-}]]></sourcecode>
+}
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="ical-comp-standard">
@@ -1087,7 +1096,8 @@ DTSTART;TZID=NonIana:20241004T010000
 END:VEVENT
 END:VCALENDAR
 ]]></sourcecode>
-            <sourcecode type="json"><![CDATA[{
+            <sourcecode type="json"><![CDATA[
+{
   "...": "",
   "@type": "Group",
   "timeZones": {
@@ -1104,7 +1114,8 @@ END:VCALENDAR
       "tzId": "NonIana"
     }
   }
-}]]></sourcecode>
+}
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="ical-comp-valarm">
@@ -1271,20 +1282,24 @@ DESCRIPTION:Breakfast meeting
 END:VALARM
 END:VEVENT
 ]]></sourcecode>
-            <sourcecode type="json"><![CDATA[{
+            <sourcecode type="json"><![CDATA[
+{
   "...": "",
   "@type": "Event",
   "alerts": {
     "a8": {
       "@type": "Alert",
-      "iCalComponent": {"name": "valarm", "properties": [
-        [
-          "description",
-          {},
-          "text",
-          "Breakfast meeting"
+      "iCalComponent": {
+        "name": "valarm",
+        "properties": [
+          [
+            "description",
+            {},
+            "text",
+            "Breakfast meeting"
+          ]
         ]
-      ]},
+      },
       "trigger": {
         "@type": "OffsetTrigger",
         "offset": "-PT30M"
@@ -1292,7 +1307,8 @@ END:VEVENT
       "action": "display"
     }
   }
-}]]></sourcecode>
+}
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="ical-comp-vavailability">
@@ -1782,7 +1798,8 @@ UID:bda09d03-564c-4ac8-851c-24e66d6abe3c
 DTSTART:20060102T030405Z
 ...
 ]]></sourcecode>
-            <sourcecode type="json"><![CDATA[{
+            <sourcecode type="json"><![CDATA[
+{
   "...": "",
   "@type": "Group",
   "entries": [
@@ -1795,7 +1812,8 @@ DTSTART:20060102T030405Z
       "uid": "bda09d03-564c-4ac8-851c-24e66d6abe3c"
     }
   ]
-}]]></sourcecode>
+}
+]]></sourcecode>
           </figure>
           <section anchor="ical-comp-vevent-differing-uid">
             <name>Converting VEVENT components with differing UID values</name>
@@ -1813,7 +1831,8 @@ UID:60BE3D6E-6383-473A-BCF1-3C43EA1FA571
 END:VEVENT
 END:VCALENDAR
 ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[{
+              <sourcecode type="json"><![CDATA[
+{
   "...": "",
   "@type": "Group",
   "entries": [
@@ -1828,7 +1847,8 @@ END:VCALENDAR
       "uid": "60BE3D6E-6383-473A-BCF1-3C43EA1FA571"
     }
   ]
-}]]></sourcecode>
+}
+]]></sourcecode>
             </figure>
           </section>
           <section>
@@ -1851,7 +1871,8 @@ DTSTART:20240202T160000
 END:VEVENT
 END:VCALENDAR
 ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[{
+              <sourcecode type="json"><![CDATA[
+{
   "...": "",
   "@type": "Group",
   "entries": [
@@ -1873,7 +1894,8 @@ END:VCALENDAR
       "uid": "F4257E1D-5461-4EF6-840F-9DFC653EB559"
     }
   ]
-}]]></sourcecode>
+}
+]]></sourcecode>
             </figure>
           </section>
           <section>
@@ -1896,7 +1918,8 @@ DTSTART:20240103T140000
 END:VEVENT
 END:VCALENDAR
 ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[{
+              <sourcecode type="json"><![CDATA[
+{
   "...": "",
   "@type": "Group",
   "entries": [
@@ -1915,7 +1938,8 @@ END:VCALENDAR
       "uid": "F4257E1D-5461-4EF6-840F-9DFC653EB559"
     }
   ]
-}]]></sourcecode>
+}
+]]></sourcecode>
             </figure>
           </section>
         </section>
@@ -2068,6 +2092,7 @@ END:VCALENDAR
             <sourcecode type="text/calendar"><![CDATA[
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
+
 ]]></sourcecode>
           </figure>
         </section>
@@ -2208,27 +2233,31 @@ STRUCTURED-DATA;VALUE=URI:http://dir.example.com/projectors/3d.vcf
 END:VRESOURCE
 END:VEVENT
 ]]></sourcecode>
-            <sourcecode type="json"><![CDATA[{
+            <sourcecode type="json"><![CDATA[
+{
   "...": "",
   "@type": "Event",
   "participants": {
     "p2": {
       "@type": "Participant",
       "description": "A contact",
-      "iCalComponent": {"name": "participant", "properties": [
-        [
-          "uid",
-          {},
-          "text",
-          "456789-abcdef-98765432"
-        ],
-        [
-          "resource-type",
-          {},
-          "text",
-          "projector"
+      "iCalComponent": {
+        "name": "participant",
+        "properties": [
+          [
+            "uid",
+            {},
+            "text",
+            "456789-abcdef-98765432"
+          ],
+          [
+            "resource-type",
+            {},
+            "text",
+            "projector"
+          ]
         ]
-      ]},
+      },
       "kind": "resource",
       "links": {
         "l4": {
@@ -2239,7 +2268,8 @@ END:VEVENT
       "name": "The projector"
     }
   }
-}]]></sourcecode>
+}
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="ical-comp-vtimezone">
@@ -2385,7 +2415,8 @@ DTSTART;TZID=Puerto_Rico:20080708T130000
 END:VEVENT
 END:VCALENDAR
 ]]></sourcecode>
-            <sourcecode type="json"><![CDATA[{
+            <sourcecode type="json"><![CDATA[
+{
   "...": "",
   "@type": "Group",
   "entries": [
@@ -2405,14 +2436,18 @@ END:VCALENDAR
           "offsetFrom": "-0400",
           "offsetTo": "-0300",
           "start": "1942-05-03T00:00:00",
-          "names": { "AWT": true }
+          "names": {
+            "AWT": true
+          }
         },
         {
           "@type": "TimeZoneRule",
           "offsetFrom": "-0300",
           "offsetTo": "-0300",
           "start": "1945-08-14T20:00:00",
-          "names": { "APT": true }
+          "names": {
+            "APT": true
+          }
         }
       ],
       "standard": [
@@ -2421,14 +2456,17 @@ END:VCALENDAR
           "offsetFrom": "-0300",
           "offsetTo": "-0400",
           "start": "1945-09-30T02:00:00",
-          "names": { "AST": true }
+          "names": {
+            "AST": true
+          }
         }
       ],
       "tzId": "Puerto_Rico",
       "updated": "2024-09-09T12:22:33Z"
     }
   }
-}]]></sourcecode>
+}
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="ical-comp-vtodo">
@@ -2936,7 +2974,8 @@ UID:83C80482-806D-41C4-8029-E438F793005D
 DUE:20060102T030405Z
 ...
 ]]></sourcecode>
-            <sourcecode type="json"><![CDATA[{
+            <sourcecode type="json"><![CDATA[
+{
   "...": "",
   "@type": "Group",
   "entries": [
@@ -2948,7 +2987,8 @@ DUE:20060102T030405Z
       "uid": "83C80482-806D-41C4-8029-E438F793005D"
     }
   ]
-}]]></sourcecode>
+}
+]]></sourcecode>
           </figure>
         </section>
       </section>
@@ -3043,9 +3083,17 @@ ACTION:AUDIO
 "alerts": {
   "a": {
     "@type": "Alert",
-    "iCalComponent": {"name": "valarm", "properties": [
-      ["action", {}, "text", "AUDIO"]
-    ]},
+    "iCalComponent": {
+      "name": "valarm",
+      "properties": [
+        [
+          "action",
+          {},
+          "text",
+          "AUDIO"
+        ]
+      ]
+    },
     "...": ""
   }
 }
@@ -3125,7 +3173,7 @@ ATTACH:https://example.com/foo.pdf
     "href": "https://example.com/foo.pdf"
   }
 }
-  ]]></sourcecode>
+]]></sourcecode>
           </figure>
           <figure anchor="test-ical-prop-attach-binary">
             <name>Converting the ATTACH property with BINARY value</name>
@@ -3142,7 +3190,7 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
     "contentType": "image/png"
   }
 }
-  ]]></sourcecode>
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="ical-prop-attendee">
@@ -3308,7 +3356,7 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
     }
   }
 }
-  ]]></sourcecode>
+]]></sourcecode>
           </figure>
         </section>
         <section anchor="ical-prop-busytype">
@@ -3318,9 +3366,26 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
         <section anchor="ical-prop-calendar-address">
           <name>CALENDAR-ADDRESS</name>
           <t>
-            The <xref target="RFC9073" section="6.4" sectionFormat="parens">CALENDAR-ADDRESS property </xref> in a PARTICIPANT component converts to the <xref target="I-D.ietf-jmap-calendars" section="5.1.1" sectionFormat="parens">calendarAddress</xref> property.
+              The <xref target="RFC9073" section="6.4" sectionFormat="parens">CALENDAR-ADDRESS property </xref> in a PARTICIPANT component converts to the <xref target="I-D.ietf-jmap-calendars" section="5.1.1" sectionFormat="parens">calendarAddress</xref> property of the Participant object.
           </t>
-          <t>Its CAL-ADDRESS value converts... TBD</t>
+          <t>The following example illustrates how to convert the CALENDAR-ADDRESS property:</t>
+          <figure anchor="test-ical-prop-calendar-address">
+            <name>Converting the CALENDAR-ADDRESS property</name>
+            <sourcecode type="text/calendar"><![CDATA[
+BEGIN:PARTICIPANT
+CALENDAR-ADDRESS:mailto:foo@example.com
+...
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"participants": {
+  "a2": {
+    "@type": "Participant",
+    "calendarAddress": "mailto:foo@example.com",
+    "...": ""
+  }
+}
+]]></sourcecode>
+          </figure>
         </section>
         <section anchor="ical-prop-calscale">
           <name>CALSCALE</name>
@@ -3361,7 +3426,8 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
               <sourcecode type="text/calendar"><![CDATA[
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
-  ]]></sourcecode>
+
+]]></sourcecode>
             </figure>
           </section>
         </section>
@@ -3425,7 +3491,8 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
               <sourcecode type="text/calendar"><![CDATA[
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
-  ]]></sourcecode>
+
+]]></sourcecode>
             </figure>
           </section>
         </section>
@@ -3491,7 +3558,8 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
               <sourcecode type="text/calendar"><![CDATA[
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
-  ]]></sourcecode>
+
+]]></sourcecode>
             </figure>
           </section>
         </section>
@@ -3538,7 +3606,8 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
               <sourcecode type="text/calendar"><![CDATA[
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
-  ]]></sourcecode>
+
+]]></sourcecode>
             </figure>
           </section>
         </section>
@@ -3592,7 +3661,8 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
               <sourcecode type="text/calendar"><![CDATA[
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
-  ]]></sourcecode>
+
+]]></sourcecode>
             </figure>
           </section>
         </section>
@@ -3632,7 +3702,8 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
               <sourcecode type="text/calendar"><![CDATA[
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
-  ]]></sourcecode>
+
+]]></sourcecode>
             </figure>
           </section>
         </section>
@@ -3679,7 +3750,8 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
               <sourcecode type="text/calendar"><![CDATA[
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
-  ]]></sourcecode>
+
+]]></sourcecode>
             </figure>
           </section>
         </section>
@@ -3719,7 +3791,8 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
               <sourcecode type="text/calendar"><![CDATA[
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
-  ]]></sourcecode>
+
+]]></sourcecode>
             </figure>
           </section>
         </section>
@@ -3766,7 +3839,8 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
               <sourcecode type="text/calendar"><![CDATA[
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
-  ]]></sourcecode>
+
+]]></sourcecode>
             </figure>
           </section>
         </section>
@@ -3862,7 +3936,8 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
               <sourcecode type="text/calendar"><![CDATA[
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
-  ]]></sourcecode>
+
+]]></sourcecode>
             </figure>
           </section>
         </section>
@@ -3934,7 +4009,8 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
               <sourcecode type="text/calendar"><![CDATA[
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
-  ]]></sourcecode>
+
+]]></sourcecode>
             </figure>
           </section>
         </section>
@@ -3984,7 +4060,8 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
               <sourcecode type="text/calendar"><![CDATA[
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
-  ]]></sourcecode>
+
+]]></sourcecode>
             </figure>
           </section>
         </section>
@@ -4048,7 +4125,8 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
               <sourcecode type="text/calendar"><![CDATA[
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
-  ]]></sourcecode>
+
+]]></sourcecode>
             </figure>
           </section>
         </section>
@@ -4135,7 +4213,8 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
               <sourcecode type="text/calendar"><![CDATA[
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
-  ]]></sourcecode>
+
+]]></sourcecode>
             </figure>
           </section>
         </section>
@@ -4174,7 +4253,8 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
               <sourcecode type="text/calendar"><![CDATA[
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
-  ]]></sourcecode>
+
+]]></sourcecode>
             </figure>
           </section>
         </section>
@@ -4240,7 +4320,8 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
               <sourcecode type="text/calendar"><![CDATA[
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
-  ]]></sourcecode>
+
+]]></sourcecode>
             </figure>
           </section>
         </section>
@@ -4288,7 +4369,8 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
               <sourcecode type="text/calendar"><![CDATA[
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
-  ]]></sourcecode>
+
+]]></sourcecode>
             </figure>
           </section>
         </section>
@@ -4343,7 +4425,8 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
               <sourcecode type="text/calendar"><![CDATA[
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
-  ]]></sourcecode>
+
+]]></sourcecode>
             </figure>
           </section>
         </section>
@@ -4386,7 +4469,8 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
               <sourcecode type="text/calendar"><![CDATA[
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
-  ]]></sourcecode>
+
+]]></sourcecode>
             </figure>
           </section>
         </section>
@@ -4479,7 +4563,8 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
               <sourcecode type="text/calendar"><![CDATA[
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
-  ]]></sourcecode>
+
+]]></sourcecode>
             </figure>
           </section>
         </section>
@@ -4543,7 +4628,8 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
               <sourcecode type="text/calendar"><![CDATA[
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
-  ]]></sourcecode>
+
+]]></sourcecode>
             </figure>
           </section>
         </section>
@@ -4593,7 +4679,8 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
               <sourcecode type="text/calendar"><![CDATA[
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
-  ]]></sourcecode>
+
+]]></sourcecode>
             </figure>
           </section>
         </section>
@@ -4640,7 +4727,8 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
               <sourcecode type="text/calendar"><![CDATA[
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
-  ]]></sourcecode>
+
+]]></sourcecode>
             </figure>
           </section>
         </section>
@@ -4693,7 +4781,8 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
               <sourcecode type="text/calendar"><![CDATA[
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
-  ]]></sourcecode>
+
+]]></sourcecode>
             </figure>
           </section>
         </section>
@@ -4779,7 +4868,8 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
               <sourcecode type="text/calendar"><![CDATA[
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
-  ]]></sourcecode>
+
+]]></sourcecode>
             </figure>
           </section>
         </section>
