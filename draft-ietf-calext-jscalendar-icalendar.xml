@@ -3127,7 +3127,7 @@ ACTION:AUDIO
                 <td>
                   <xref target="RFC5545" section="3.2.7" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>If unequal to BASE64</td>
               </tr>
               <tr>
@@ -3135,7 +3135,7 @@ ACTION:AUDIO
                 <td>
                   <xref target="RFC8607" section="4.2" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>Non-standard</td>
               </tr>
               <tr>
@@ -3151,7 +3151,7 @@ ACTION:AUDIO
                 <td>
                   <xref target="RFC8607" section="4.3" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>Non-standard</td>
               </tr>
               <tr>
@@ -3418,7 +3418,7 @@ CALENDAR-ADDRESS:mailto:foo@example.com
                 <td>
                   <xref target="RFC5545" section="3.2.10" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalComponent</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -3536,7 +3536,7 @@ COLOR:#ffa07a
                 <td>
                   <xref target="RFC5545" section="3.2.1" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalComponent</td>
                 <td>Non-standard</td>
               </tr>
               <tr>
@@ -3544,7 +3544,7 @@ COLOR:#ffa07a
                 <td>
                   <xref target="RFC5545" section="3.2.10" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalComponent</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -3656,7 +3656,7 @@ COMMENT:I'll think about it
                 <td>
                   <xref target="RFC5545" section="3.2.10" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -3696,7 +3696,7 @@ COMMENT:I'll think about it
                 <td>
                   <xref target="RFC5545" section="3.2.1" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>Non-standard</td>
               </tr>
               <tr>
@@ -3704,7 +3704,7 @@ COMMENT:I'll think about it
                 <td>
                   <xref target="RFC5545" section="3.2.10" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -3751,7 +3751,7 @@ COMMENT:I'll think about it
                 <td>
                   <xref target="RFC5545" section="3.2.1" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>Non-standard</td>
               </tr>
               <tr>
@@ -3759,7 +3759,7 @@ COMMENT:I'll think about it
                 <td>
                   <xref target="RFC5545" section="3.2.10" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -3937,7 +3937,7 @@ COMMENT:I'll think about it
                 <td>
                   <xref target="RFC5545" section="3.2.19" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -4002,7 +4002,7 @@ COMMENT:I'll think about it
                 <td>
                   <xref target="RFC5545" section="3.2.1" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>Non-standard</td>
               </tr>
               <tr>
@@ -4018,7 +4018,7 @@ COMMENT:I'll think about it
                 <td>
                   <xref target="RFC5545" section="3.2.7" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>If unequal to BASE64</td>
               </tr>
               <tr>
@@ -4099,7 +4099,7 @@ COMMENT:I'll think about it
                 <td>
                   <xref target="RFC5545" section="3.2.10" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>Non-standard</td>
               </tr>
               <tr>
@@ -4150,7 +4150,7 @@ COMMENT:I'll think about it
                 <td>
                   <xref target="RFC5545" section="3.2.1" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>Non-standard</td>
               </tr>
               <tr>
@@ -4158,7 +4158,7 @@ COMMENT:I'll think about it
                 <td>
                   <xref target="RFC5545" section="3.2.10" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -4215,7 +4215,7 @@ COMMENT:I'll think about it
                 <td>
                   <xref target="RFC5545" section="3.2.1" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>Non-standard</td>
               </tr>
               <tr>
@@ -4223,7 +4223,7 @@ COMMENT:I'll think about it
                 <td>
                   <xref target="RFC5545" section="3.2.10" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -4351,7 +4351,7 @@ COMMENT:I'll think about it
                 <td>
                   <xref target="RFC9073" section="5.1" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -4418,7 +4418,7 @@ COMMENT:I'll think about it
                 <td>
                   <xref target="RFC5545" section="3.2.19" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -4459,7 +4459,7 @@ COMMENT:I'll think about it
                 <td>
                   <xref target="RFC5545" section="3.2.13" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>Non-standard</td>
               </tr>
               <tr>
@@ -4515,7 +4515,7 @@ COMMENT:I'll think about it
                 <td>
                   <xref target="RFC9253" section="6.2" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>Non-standard</td>
               </tr>
               <tr>
@@ -4523,7 +4523,7 @@ COMMENT:I'll think about it
                 <td>
                   <xref target="RFC5545" section="3.2.15" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -4567,7 +4567,7 @@ COMMENT:I'll think about it
                 <td>
                   <xref target="RFC5545" section="3.2.10" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -4645,7 +4645,7 @@ COMMENT:I'll think about it
                 <td>
                   <xref target="RFC5545" section="3.2.7" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>If unequal to BASE64</td>
               </tr>
               <tr>
@@ -4661,7 +4661,7 @@ COMMENT:I'll think about it
                 <td>
                   <xref target="RFC9073" section="5.2" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -4702,7 +4702,7 @@ COMMENT:I'll think about it
                 <td>
                   <xref target="RFC5545" section="3.2.1" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>Non-standard</td>
               </tr>
               <tr>
@@ -4710,7 +4710,7 @@ COMMENT:I'll think about it
                 <td>
                   <xref target="RFC9073" section="5.3" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>Non-standard</td>
               </tr>
               <tr>
@@ -4726,7 +4726,7 @@ COMMENT:I'll think about it
                 <td>
                   <xref target="RFC5545" section="3.2.10" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -4769,7 +4769,7 @@ COMMENT:I'll think about it
                 <td>
                   <xref target="RFC5545" section="3.2.1" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>Non-standard</td>
               </tr>
               <tr>
@@ -4777,7 +4777,7 @@ COMMENT:I'll think about it
                 <td>
                   <xref target="RFC5545" section="3.2.10" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -4879,7 +4879,7 @@ COMMENT:I'll think about it
                 <td>
                   <xref target="RFC5545" section="3.2.10" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>Non-standard</td>
               </tr>
             </tbody>
@@ -4966,7 +4966,7 @@ COMMENT:I'll think about it
                 <td>
                   <xref target="RFC5545" section="3.2.7" sectionFormat="comma"/>
                 </td>
-                <td>iCalProperty/parameters</td>
+                <td>iCalProperty</td>
                 <td>If unequal to BASE64</td>
               </tr>
             </tbody>
