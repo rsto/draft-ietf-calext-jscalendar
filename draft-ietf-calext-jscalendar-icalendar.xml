@@ -3670,13 +3670,13 @@ CONCEPT:https://example.com/event-types/arts/literature
             </tbody>
           </table>
           <t>The following example illustrates how to convert the CONFERENCE property:</t>
-            <figure anchor="test-ical-prop-conference">
-              <name>Converting the CONFERENCE property</name>
-              <sourcecode type="text/calendar"><![CDATA[
+          <figure anchor="test-ical-prop-conference">
+            <name>Converting the CONFERENCE property</name>
+            <sourcecode type="text/calendar"><![CDATA[
 CONFERENCE;VALUE=URI;FEATURE=AUDIO,VIDEO;
  LABEL=Attendee dial-in:https://chat.example.com/audio?id=123456
   ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[
+            <sourcecode type="json"><![CDATA[
 "virtualLocations": {
   "b2": {
     "@type": "VirtualLocation",
@@ -3684,12 +3684,12 @@ CONFERENCE;VALUE=URI;FEATURE=AUDIO,VIDEO;
     "uri": "https://chat.example.com/audio?id=123456",
     "features": {
       "audio": true,
-      "video": true,
+      "video": true
     }
   }
 }
 ]]></sourcecode>
-            </figure>
+          </figure>
         </section>
         <section anchor="ical-prop-contact">
           <name>CONTACT</name>
@@ -3703,15 +3703,15 @@ CONFERENCE;VALUE=URI;FEATURE=AUDIO,VIDEO;
             The <xref target="RFC5545" section="3.8.7.1" sectionFormat="parens">CREATED property </xref> in a VEVENT, VTODO, or VCALENDAR component converts to the <xref target="RFC8984" section="4.1.5" sectionFormat="parens">created</xref> property of the Event, Task, or Group object.
           </t>
           <t>The following example illustrates how to convert the CREATED property:</t>
-            <figure anchor="test-ical-prop-created">
-              <name>Converting the CREATED property</name>
-              <sourcecode type="text/calendar"><![CDATA[
+          <figure anchor="test-ical-prop-created">
+            <name>Converting the CREATED property</name>
+            <sourcecode type="text/calendar"><![CDATA[
 CREATED:20240329T133000Z
   ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[
+            <sourcecode type="json"><![CDATA[
 "created": "2024-03-29T13:30:00Z"
 ]]></sourcecode>
-            </figure>
+          </figure>
         </section>
         <section anchor="ical-prop-description">
           <name>DESCRIPTION</name>
