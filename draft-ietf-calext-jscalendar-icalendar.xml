@@ -3394,9 +3394,9 @@ CALENDAR-ADDRESS:mailto:foo@example.com
         <section anchor="ical-prop-categories">
           <name>CATEGORIES</name>
           <t>
-            The <xref target="RFC5545" section="3.8.1.2" sectionFormat="parens">CATEGORIES property </xref> in a VEVENT, VTODO, or VCALENDAR component converts to the <xref target="RFC8984" section="4.2.9" sectionFormat="parens">keywords</xref> property.
+            The <xref target="RFC5545" section="3.8.1.2" sectionFormat="parens">CATEGORIES property </xref> in a VEVENT, VTODO, or VCALENDAR component converts to the <xref target="RFC8984" section="4.2.9" sectionFormat="parens">keywords</xref> property of the Event, Task, or Group object.
           </t>
-          <t>Its TEXT value converts... TBD</t>
+          <t>The list of category values converts to a set of keywords. The values convert case-sensitively. Multiple occurrences of the CATGORIES property in the same iCalendar component convert to the same keywords property in the JSCalendar object.</t>
           <t>Its parameters convert as follows:</t>
           <table>
             <name>Parameters of the CATEGORIES property</name>
@@ -3419,17 +3419,21 @@ CALENDAR-ADDRESS:mailto:foo@example.com
               </tr>
             </tbody>
           </table>
-          <section anchor="example-ical-prop-categories">
-            <name>Example: Converting the CATEGORIES property</name>
-            <figure anchor="test-ical-prop-categories">
-              <name>Converting the CATEGORIES property</name>
-              <sourcecode type="text/calendar"><![CDATA[
+          <t>The following example illustrates how to convert the CATEGORIES property:</t>
+          <figure anchor="test-ical-prop-categories">
+            <name>Converting the CATEGORIES property</name>
+            <sourcecode type="text/calendar"><![CDATA[
+CATEGORIES:APPOINTMENT,EDUCATION
+CATEGORIES:meeting
   ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[
-
+            <sourcecode type="json"><![CDATA[
+"keywords": {
+  "APPOINTMENT": true,
+  "EDUCATION": true,
+  "meeting": true
+}
 ]]></sourcecode>
-            </figure>
-          </section>
+          </figure>
         </section>
         <section anchor="ical-prop-class">
           <name>CLASS</name>
