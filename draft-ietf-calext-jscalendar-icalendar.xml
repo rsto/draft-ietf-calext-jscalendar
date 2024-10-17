@@ -3438,9 +3438,43 @@ CATEGORIES:meeting
         <section anchor="ical-prop-class">
           <name>CLASS</name>
           <t>
-            The <xref target="RFC5545" section="3.8.1.3" sectionFormat="parens">CLASS property </xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.4.3" sectionFormat="parens">privacy</xref> property.
+            The <xref target="RFC5545" section="3.8.1.3" sectionFormat="parens">CLASS property </xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.4.3" sectionFormat="parens">privacy</xref> property of the Event or Task object.
           </t>
-          <t>Its TEXT value converts... TBD</t>
+          <t>Its values convert as follows:</t>
+          <table anchor="ical-prop-class-values">
+            <name>Values of the CLASS property</name>
+            <thead>
+              <tr>
+                <th>iCalendar value</th>
+                <th>JSCalendar value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>PUBLIC</td>
+                <td>public</td>
+              </tr>
+              <tr>
+                <td>PRIVATE</td>
+                <td>private</td>
+              </tr>
+              <tr>
+                <td>CONFIDENTIAL</td>
+                <td>secret</td>
+              </tr>
+            </tbody>
+          </table>
+          <t>Any other value does not convert to the class property. Instead, the property converts to the <xref target="jscal-prop-icalcomponent">iCalComponent/properties property</xref> of the JSCalendar object.</t>
+          <t>The following example illustrates how to convert the CLASS property:</t>
+          <figure anchor="test-ical-prop-class">
+            <name>Converting the CLASS property</name>
+            <sourcecode type="text/calendar"><![CDATA[
+CLASS:PRIVATE
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"privacy": "private"
+]]></sourcecode>
+          </figure>
         </section>
         <section anchor="ical-prop-color">
           <name>COLOR</name>
