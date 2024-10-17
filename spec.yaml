@@ -145,10 +145,7 @@ icalendar:
           convert:
             property: participationComment
             note: Only one comment supported
-        CONTACT:
-          convert:
-            property: links
-            object: Link
+        CONTACT: {}
         CREATED: {}
         DESCRIPTION:
           convert:
@@ -614,10 +611,7 @@ icalendar:
           convert:
             property: virtualLocations
             object: VirtualLocation
-        CONTACT:
-          convert:
-            property: links
-            object: Link
+        CONTACT: {}
         CREATED:
           convert:
             property: created
@@ -1054,10 +1048,7 @@ icalendar:
           convert:
             property: virtualLocations
             object: VirtualLocation
-        CONTACT:
-          convert:
-            property: links
-            object: Link
+        CONTACT: {}
         CREATED:
           convert:
             property: created

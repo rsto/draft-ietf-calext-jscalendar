@@ -688,11 +688,9 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.4.2" sectionFormat="comma"/>
                 </td>
-                <td>links</td>
-                <td>
-                  <xref target="ical-prop-contact"/>
-                </td>
+                <td>iCalComponent/properties</td>
                 <td/>
+                <td>Non-standard</td>
               </tr>
               <tr>
                 <td>CREATED</td>
@@ -1424,11 +1422,9 @@ END:VEVENT
                 <td>
                   <xref target="RFC5545" section="3.8.4.2" sectionFormat="comma"/>
                 </td>
-                <td>links</td>
-                <td>
-                  <xref target="ical-prop-contact"/>
-                </td>
+                <td>iCalComponent/properties</td>
                 <td/>
+                <td>Non-standard</td>
               </tr>
               <tr>
                 <td>CREATED</td>
@@ -2589,11 +2585,9 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.4.2" sectionFormat="comma"/>
                 </td>
-                <td>links</td>
-                <td>
-                  <xref target="ical-prop-contact"/>
-                </td>
+                <td>iCalComponent/properties</td>
                 <td/>
+                <td>Non-standard</td>
               </tr>
               <tr>
                 <td>CREATED</td>
@@ -3700,50 +3694,8 @@ CONFERENCE;VALUE=URI;FEATURE=AUDIO,VIDEO;
         <section anchor="ical-prop-contact">
           <name>CONTACT</name>
           <t>
-            The <xref target="RFC5545" section="3.8.4.2" sectionFormat="parens">CONTACT property </xref> in a VEVENT, VTODO, or PARTICIPANT component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the links property of the Event, Task, or Participant object.
+            The <xref target="RFC5545" section="3.8.4.2" sectionFormat="parens">CONTACT property </xref> does not convert to a standard JSCalendar element.
           </t>
-          <t>Its TEXT value converts... TBD</t>
-          <t>Its parameters convert as follows:</t>
-          <table>
-            <name>Parameters of the CONTACT property</name>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Property</th>
-                <th>Note</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>ALTREP</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.1" sectionFormat="comma"/>
-                </td>
-                <td>iCalProperty</td>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
-                <td>LANGUAGE</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.10" sectionFormat="comma"/>
-                </td>
-                <td>iCalProperty</td>
-                <td>Non-standard</td>
-              </tr>
-            </tbody>
-          </table>
-          <section anchor="example-ical-prop-contact">
-            <name>Example: Converting the CONTACT property</name>
-            <figure anchor="test-ical-prop-contact">
-              <name>Converting the CONTACT property</name>
-              <sourcecode type="text/calendar"><![CDATA[
-  ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[
-
-]]></sourcecode>
-            </figure>
-          </section>
         </section>
         <section anchor="ical-prop-created">
           <name>CREATED</name>
