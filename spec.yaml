@@ -604,7 +604,9 @@ icalendar:
         COLOR:
           convert:
             property: color
-        COMMENT: {}
+        COMMENT:
+          convert:
+            property: participants/*/participationComment
         CONCEPT:
           convert:
             property: categories
@@ -1041,7 +1043,9 @@ icalendar:
         COLOR:
           convert:
             property: color
-        COMMENT: {}
+        COMMENT:
+          convert:
+            property: participants/*/participationComment
         COMPLETED: {}
         CONCEPT:
           convert:

@@ -1391,9 +1391,11 @@ END:VEVENT
                 <td>
                   <xref target="RFC5545" section="3.8.1.4" sectionFormat="comma"/>
                 </td>
-                <td>iCalComponent/properties</td>
+                <td>participants/*/participationComment</td>
+                <td>
+                  <xref target="ical-prop-comment"/>
+                </td>
                 <td/>
-                <td>Non-standard</td>
               </tr>
               <tr>
                 <td>CONCEPT</td>
@@ -2545,9 +2547,11 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.1.4" sectionFormat="comma"/>
                 </td>
-                <td>iCalComponent/properties</td>
+                <td>participants/*/participationComment</td>
+                <td>
+                  <xref target="ical-prop-comment"/>
+                </td>
                 <td/>
-                <td>Non-standard</td>
               </tr>
               <tr>
                 <td>COMPLETED</td>
@@ -3505,12 +3509,16 @@ COLOR:#ffa07a
         <section anchor="ical-prop-comment">
           <name>COMMENT</name>
           <t>
-            The <xref target="RFC5545" section="3.8.1.4" sectionFormat="parens">COMMENT property </xref> in a DAYLIGHT or STANDARD component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">comments</xref> property.
+            The <xref target="RFC5545" section="3.8.1.4" sectionFormat="parens">COMMENT property </xref> in a DAYLIGHT or STANDARD component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">comments</xref> property of the TimeZoneRule object.
           </t>
           <t>
             The <xref target="RFC5545" section="3.8.1.4" sectionFormat="parens">COMMENT property </xref> in a PARTICIPANT component converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">participationComment</xref> property.
           </t>
-          <t>Its TEXT value converts... TBD</t>
+          <t>
+              The <xref target="RFC5545" section="3.8.1.4" sectionFormat="parens">COMMENT property </xref> in an <xref target="RFC5546">iTIP-scheduled</xref> VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">participationComment</xref> property of that Participant object, which represents the source of this scheduling message, if any. It otherwise converts to the <xref target="jscal-prop-icalcomponent">iCalComponent/properties</xref> property of the Event or Task object.
+            </t>
+          <t>
+                Multiple COMMENT properties in a DAYLIGHT or STANDARD component convert in order of appearance in the comments property. Converting multiple COMMENT properties to the single-valued participationComment property is implementation-specific.</t>
           <t>Its parameters convert as follows:</t>
           <table>
             <name>Parameters of the COMMENT property</name>
@@ -3541,17 +3549,62 @@ COLOR:#ffa07a
               </tr>
             </tbody>
           </table>
-          <section anchor="example-ical-prop-comment">
-            <name>Example: Converting the COMMENT property</name>
-            <figure anchor="test-ical-prop-comment">
-              <name>Converting the COMMENT property</name>
-              <sourcecode type="text/calendar"><![CDATA[
+          <t>The following examples illustrate how to convert the COMMENT property:</t>
+          <figure anchor="test-ical-prop-comment-daylight">
+            <name>Converting the COMMENT property in a DAYLIGHT component</name>
+            <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VTIMEZONE
+TZID:NonIana
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0300
+DTSTART:20010503T000000
+COMMENT:take note of this
+COMMENT:and this
+END:DAYLIGHT
+END:VTIMEZONE
   ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[
-
+            <sourcecode type="json"><![CDATA[
+{
+  "@type": "Group",
+  "timeZones": {
+    "/NonIana": {
+      "@type": "TimeZone",
+      "daylight": [
+        {
+          "@type": "TimeZoneRule",
+          "comments": [
+            "take note of this",
+            "and this"
+          ],
+          "...": ""
+        }
+      ],
+      "...": ""
+    }
+  },
+  "...": ""
+}
 ]]></sourcecode>
-            </figure>
-          </section>
+          </figure>
+          <figure anchor="test-ical-prop-comment-participant">
+            <name>Converting the COMMENT property in a PARTICIPANT component</name>
+            <sourcecode type="text/calendar"><![CDATA[
+BEGIN:PARTICIPANT
+UID:127ABD62-D07A-4F39-AA62-530E37A8DF78
+COMMENT:I'll think about it
+...
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"participants": {
+  "g2": {
+    "@type": "Participant",
+    "participationComment": "I'll think about it",
+    "...": ""
+  }
+}
+]]></sourcecode>
+          </figure>
         </section>
         <section anchor="ical-prop-completed">
           <name>COMPLETED</name>
@@ -5023,6 +5076,7 @@ COLOR:#ffa07a
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3986.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5234.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5545.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5546.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6321.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6638.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7265.xml"/>
