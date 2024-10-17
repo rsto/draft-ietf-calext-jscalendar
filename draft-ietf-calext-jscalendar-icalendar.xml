@@ -948,14 +948,16 @@ END:VEVENT
     "p32": {
       "@type": "Participant",
       "description": "A contact",
-      "iCalComponent/properties": [
+      "iCalComponent": {
+"name": "participant",
+"properties": [
         [
           "uid",
           {},
           "text",
           "47AD2E1C-49D4-45DF-BD83-8398ACC7D8E2"
         ]
-      ],
+      ]},
       "links": {
         "l4": {
           "@type": "Link",
@@ -965,7 +967,7 @@ END:VEVENT
       "roles": {
         "contact": true
       }
-    }
+}
   }
 }]]></sourcecode>
           </figure>
@@ -1275,14 +1277,14 @@ END:VEVENT
   "alerts": {
     "a8": {
       "@type": "Alert",
-      "iCalComponent/properties": [
+      "iCalComponent": {"name": "valarm", "properties": [
         [
           "description",
           {},
           "text",
           "Breakfast meeting"
         ]
-      ],
+      ]},
       "trigger": {
         "@type": "OffsetTrigger",
         "offset": "-PT30M"
@@ -2213,7 +2215,7 @@ END:VEVENT
     "p2": {
       "@type": "Participant",
       "description": "A contact",
-      "iCalComponent/properties": [
+      "iCalComponent": {"name": "participant", "properties": [
         [
           "uid",
           {},
@@ -2226,7 +2228,7 @@ END:VEVENT
           "text",
           "projector"
         ]
-      ],
+      ]},
       "kind": "resource",
       "links": {
         "l4": {
@@ -3041,9 +3043,9 @@ ACTION:AUDIO
 "alerts": {
   "a": {
     "@type": "Alert",
-    "iCalComponent/properties": [
+    "iCalComponent": {"name": "valarm", "properties": [
       ["action", {}, "text", "AUDIO"]
-    ],
+    ]},
     "...": ""
   }
 }
