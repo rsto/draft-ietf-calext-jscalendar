@@ -1482,9 +1482,11 @@ END:VEVENT
                 <td>
                   <xref target="RFC5545" section="3.8.7.2" sectionFormat="comma"/>
                 </td>
-                <td>iCalComponent/properties</td>
+                <td>updated, scheduleUpdated</td>
+                <td>
+                  <xref target="ical-prop-dtstamp"/>
+                </td>
                 <td/>
-                <td>Non-standard</td>
               </tr>
               <tr>
                 <td>DTSTART</td>
@@ -2634,9 +2636,11 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.7.2" sectionFormat="comma"/>
                 </td>
-                <td>iCalComponent/properties</td>
+                <td>updated, scheduleUpdated</td>
+                <td>
+                  <xref target="ical-prop-dtstamp"/>
+                </td>
                 <td/>
-                <td>Non-standard</td>
               </tr>
               <tr>
                 <td>DTSTART</td>
@@ -5089,6 +5093,13 @@ DTEND;VALUE=DATE:20240112
                 <dd>This contains parameters of the iCalendar property. The value <bcp14>MUST</bcp14> comply with iCalendar parameters formatted in jCal as defined in <xref target="RFC7265" section="3.5" sectionFormat="of"/>.</dd>
               </dl>
             </dd>
+          </dl>
+        </section>
+        <section anchor="jscal-prop-scheduleupdated">
+          <name>scheduleUpdated</name>
+          <dl>
+            <dt>Type: <tt>UTCDateTime</tt> (optional).</dt>
+            <dd>This is the timestamp when the iTIP message for this calendar object was created. It corresponds to the DTSTAMP property of an iCalendar object that has the METHOD property set.  This property <bcp14>SHOULD</bcp14> be set if the method property is set, otherwise it <bcp14>MUST NOT</bcp14> be set.</dd>
           </dl>
         </section>
       </section>

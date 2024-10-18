@@ -622,7 +622,9 @@ icalendar:
           convert:
             property: duration
             note: Location.rel = "end". If timezone differs from start.
-        DTSTAMP: {}
+        DTSTAMP:
+          convert:
+            property: updated, scheduleUpdated
         DTSTART:
           convert:
             property: start
@@ -1055,7 +1057,9 @@ icalendar:
         DESCRIPTION:
           convert:
             property: description
-        DTSTAMP: {}
+        DTSTAMP:
+          convert:
+            property: updated, scheduleUpdated
         DTSTART:
           convert:
             property: start
