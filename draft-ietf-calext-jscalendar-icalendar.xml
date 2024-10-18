@@ -3787,17 +3787,65 @@ DESCRIPTION:Some text\;and\na new line.
           <t>The duration is the timespan between the points in time of the DSTART and DTEND property values when converted to UTC time.</t>
           <t>If the <xref target="ical-timezone-ids">timezone identifier</xref> of the DTEND property differs from that of the DTSTART property, then the DTEND property also converts to a Location object. The timezone identifier converts to the timeZone property of the Location object. The relativeTo property of the Location is set to "end". The Location object is set in the locations property of the Event object.</t>
           <t>Implementations <bcp14>MAY</bcp14> preserve the fact that the duration got determined by the DTEND property. To do so, they <bcp14>MUST</bcp14> set the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> in the Event object and there add an entry for the path "duration" in the convertedProperties property. The value <bcp14>MUST</bcp14> be an ICalProperty object with the name property set to "dtend".</t>
-          <section anchor="example-ical-prop-dtend">
-            <name>Example: Converting the DTEND property</name>
-            <figure anchor="test-ical-prop-dtend">
-              <name>Converting the DTEND property</name>
+            <figure anchor="test-ical-prop-dtend-same-tzid">
+              <name>Converting the DTEND property with same timezone</name>
               <sourcecode type="text/calendar"><![CDATA[
+DSTART;TZID=Australia/Melbourne:20241002T130000
+DTEND;TZID=Australia/Melbourne:20241002T140000
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
-
+"start": "2024-10-02T13:00:00",
+"timeZone": "Australia/Melbourne",
+"duration": "PT1H",
+"iCalComponent": {
+  "convertedProperties": {
+    "duration": {
+      "@type": "ICalProperty",
+      "name": "dtend"
+    }
+  }
+}
 ]]></sourcecode>
             </figure>
-          </section>
+            <figure anchor="test-ical-prop-dtend-different-tzid">
+              <name>Converting the DTEND property with different timezone</name>
+              <sourcecode type="text/calendar"><![CDATA[
+DSTART;TZID=Europe/Berlin:20241017T130005
+DTEND;TZID=Asia/Bangkok:20241018T020325
+  ]]></sourcecode>
+              <sourcecode type="json"><![CDATA[
+"start": "2024-10-17T13:00:05",
+"timeZone": "Europe/Berlin",
+"duration": "PT9H20M",
+"locations": {
+  "l5": {
+    "timeZone": "Asia/Bangkok",
+    "relativeTo": "end"
+  }
+}
+]]></sourcecode>
+            </figure>
+            <figure anchor="test-ical-prop-dtend-date-type">
+              <name>Converting the DTEND property with DATE data type</name>
+              <sourcecode type="text/calendar"><![CDATA[
+DSTART;VALUE=DATE:20240102
+DTEND;VALUE=DATE:20240112
+  ]]></sourcecode>
+              <sourcecode type="json"><![CDATA[
+"start": "2024-01-02T00:00:00",
+"timeZone": null,
+"duration": "P1W2D",
+"showWithoutTime": true,
+"iCalComponent": {
+  "convertedProperties": {
+    "duration": {
+      "@type": "ICalProperty",
+      "name": "dtend"
+    }
+  }
+}
+]]></sourcecode>
+            </figure>
         </section>
         <section anchor="ical-prop-dtstamp">
           <name>DTSTAMP</name>
