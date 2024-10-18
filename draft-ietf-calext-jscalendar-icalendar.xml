@@ -482,6 +482,26 @@ END:VCALENDAR
         </ul>
         <t>In a few cases, an iCalendar property and component may both convert to the same JSCalendar object.  Examples for this are the ATTENDEE property and PARTICIPANT component, as well as the LOCATION property and VLOCATION component ...TBD</t>
       </section>
+
+      <section anchor="ical-timezone-ids">
+        <name>Timezone identifiers</name>
+        <t>Converting temporal properties such as DTSTART, DTEND, and RECURRENCE-ID requires to not only determine the date and time of the property value but to also identify the timezone it references.</t>
+
+      <section anchor="ical-timezone-ids-floating-time">
+        <name>Floating time</name>
+        <t>If the property value data type is <xref target="RFC5545" section="3.3.4" sectionFormat="parens">DATE</xref> or  <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #1: DATE WITH LOCAL TIME</xref> then the timezone identifier is undefined, represented as "null" in JSCalendar.</t>
+    </section>
+      <section anchor="ical-timezone-ids-utc-time">
+        <name>UTC time</name>
+        <t>If the property value data type is <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #2: DATE WITH UTC TIME</xref> then the timezone identifier is the string "Etc/UTC" in JSCalendar.</t>
+      </section>
+      <section anchor="ical-timezone-ids-local-time">
+        <name>Local time</name>
+        <t>If the property value data type is <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #3: DATE WITH LOCAL TIME AND TIME ZONE REFERENCE</xref> then the timezone identifier is determined by the TZID parameter value.</t>
+        <t>If TZID parameter value is equal to a name in the <xref target="TZDB">IANA Time Zone Database</xref> then the timezone identifier is the verbatim name.</t>
+        <t>If the TZID parameter value is unequal to an IANA timezone name then implementations <bcp14>MAY</bcp14> determine the name of an IANA timezone which has the same timezone rules over the timespan of the calendar object. Otherwise, this non-IANA timezone identifier is represented in JSCalendar as a string starting with the / (SLASH) character, followed by the TZID parameter value. The corresponding VTIMEZONE <bcp14>MUST</bcp14> be converted to the timeZones property with the prefixed identifier as key. See <xref target="test-ical-comp-vtimezone"/> for an example.</t>
+      </section>
+      </section>
       <section anchor="ical-components">
         <name>Components</name>
         <section anchor="ical-comp-available">
@@ -5055,6 +5075,14 @@ DESCRIPTION:Some text\;and\na new line.
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.9073.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.9074.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.9253.xml"/>
+
+        <reference anchor="TZDB" target="https://www.iana.org/time-zones">
+        <front>
+          <title>IANA Time Zone Database</title>
+          <author />
+          <date />
+        </front>
+      </reference>
       </references>
       <references>
         <name>Informative References</name>
