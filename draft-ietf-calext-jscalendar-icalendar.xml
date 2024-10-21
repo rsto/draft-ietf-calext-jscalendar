@@ -5167,8 +5167,15 @@ EXDATE:20230801T130000Z
         <name>New JSCalendar properties</name>
         <section anchor="jscal-prop-icalcomponent">
           <name>iCalComponent</name>
-          <dl>
-            <dt>Type: <tt>ICalComponent</tt> (optional).</dt>
+          <dl newline="true">
+            <dt>Name:</dt>
+            <dd>iCalComponent</dd>
+            <dt>Context:</dt>
+            <dd>Any JSCalendar object</dd>
+            <dt>Type:</dt>
+            <dd>
+              <tt>ICalComponent</tt> (optional)</dd>
+            <dt>Description</dt>
             <dd>
               <t>This contains information about an iCalendar component that got partially or fully converted to JSCalendar.  It allows to preserve the name of the iCalendar component and some or all of its properties and subcomponents.</t>
               <t>An ICalComponent object has the following properties:</t>
@@ -5194,8 +5201,15 @@ EXDATE:20230801T130000Z
         </section>
         <section anchor="jscal-prop-icalproperty">
           <name>iCalProperty</name>
-          <dl>
-            <dt>Type: <tt>ICalProperty</tt> (optional).</dt>
+          <dl newline="true">
+            <dt>Name:</dt>
+            <dd>iCalProperty</dd>
+            <dt>Context:</dt>
+            <dd>Any JSCalendar object</dd>
+            <dt>Type:</dt>
+            <dd>
+              <tt>ICalProperty</tt> (optional)</dd>
+            <dt>Description:</dt>
             <dd>
               <t>This contains conversion-related information about an iCalendar property that got partially or fully converted to JSCalendar.  It allows to preserve the name of the iCalendar property and some or all of its parameters.</t>
               <t>An ICalProperty object has the following properties:</t>
@@ -5213,22 +5227,17 @@ EXDATE:20230801T130000Z
           </dl>
         </section>
         <section anchor="jscal-prop-locations">
-          <name>locations</name>
-					<dl newline="true">
-						<dt>Property Name</dt>
-						<dd>locations</dd>
-
-						<dt>Property Type</dt>
-						<dd><tt>Id[Location]</tt> (optional).</dd>
-
-						<dt>Property Context</dt>
-						<dd>Participant</dd>
-
-						<dt>Description</dt>
+          <name>locations (Participant)</name>
+          <dl newline="true">
+            <dt>Name:</dt>
+            <dd>locations</dd>
+            <dt>Context</dt>
+            <dd>Participant</dd>
+            <dt>Type:</dt>
+            <dd>
+              <tt>Id[Location]</tt> (optional)</dd>
+            <dt>Description:</dt>
             <dd>This represents locations associated with the participant. In contrast to the locationId property, this allows to associate multiple locations with the Participant object. It also allow to more clearly express that a location just is relevant for a single participant.</dd>
-
-						<dt>Intended Usage</dt>
-						<dd>common</dd>
           </dl>
         </section>
       </section>
