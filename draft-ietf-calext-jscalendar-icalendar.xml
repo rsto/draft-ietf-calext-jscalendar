@@ -3043,7 +3043,7 @@ DUE:20060102T030405Z
         <section anchor="ical-prop-acknowledged">
           <name>ACKNOWLEDGED</name>
           <t>
-            The <xref target="RFC9074" section="6.1" sectionFormat="parens">ACKNOWLEDGED property </xref> in a VALARM component converts to the <xref target="RFC8984" section="4.5.2" sectionFormat="parens">acknowledged</xref> property of the Alert object.
+            The <xref target="RFC9074" section="6.1" sectionFormat="parens">ACKNOWLEDGED property</xref> in a VALARM component converts to the <xref target="RFC8984" section="4.5.2" sectionFormat="parens">acknowledged</xref> property of the Alert object.
           </t>
           <t>The following example illustrates how to convert the ACKNOWLEDGED property:</t>
           <figure anchor="test-ical-prop-acknowledged">
@@ -3071,7 +3071,7 @@ ACKNOWLEDGED:20241002T114703Z
         <section anchor="ical-prop-action">
           <name>ACTION</name>
           <t>
-            The <xref target="RFC5545" section="3.8.6.1" sectionFormat="parens">ACTION property </xref> in a VALARM component converts to the <xref target="RFC8984" section="4.5.2" sectionFormat="parens">action</xref> property of the Alert object.
+            The <xref target="RFC5545" section="3.8.6.1" sectionFormat="parens">ACTION property</xref> in a VALARM component converts to the <xref target="RFC8984" section="4.5.2" sectionFormat="parens">action</xref> property of the Alert object.
           </t>
           <t>Its values convert as follows:</t>
           <table anchor="ical-prop-action-values">
@@ -3149,7 +3149,7 @@ ACTION:AUDIO
         <section anchor="ical-prop-attach">
           <name>ATTACH</name>
           <t>
-              The <xref target="RFC5545" section="3.8.1.1" sectionFormat="parens">ATTACH property </xref> in a VEVENT, VTODO, VRESOURCE, PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the links property of the Event, Task, Participant, or Location object.
+              The <xref target="RFC5545" section="3.8.1.1" sectionFormat="parens">ATTACH property</xref> in a VEVENT, VTODO, VRESOURCE, PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the links property of the Event, Task, Participant, or Location object.
           </t>
           <t>The ATTACH property value converts to the href property of the Link object. A value of type URI converts as-is. A value of type BINARY converts to a URI in the "data" URL scheme (<xref target="RFC2397"/>. If the FMTTYPE parameter is set on the ATTACH property, then the parameter value <bcp14>SHOULD</bcp14> be set in the mediatype part of the data URL.</t>
           <t>The ATTACH property parameters convert as follows:</t>
@@ -3242,7 +3242,7 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
         <section anchor="ical-prop-attendee">
           <name>ATTENDEE</name>
           <t>
-            The <xref target="RFC5545" section="3.8.4.1" sectionFormat="parens">ATTENDEE property </xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref>.  The converted object is set in the participants property of the Event or Task object.
+            The <xref target="RFC5545" section="3.8.4.1" sectionFormat="parens">ATTENDEE property</xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref>.  The converted object is set in the participants property of the Event or Task object.
           </t>
           <t>The ATTENDEE property value converts to both the calendarAddress and sendTo properties of the Participant object. If the URI value is in the "mailto" scheme, then it converts to the "imip" method in the sendTo property, otherwise it converts to the "other" method.</t>
           <t>The ATTENDEE property parameters convert as follows:</t>
@@ -3435,7 +3435,7 @@ ATTENDEE;PARTSTAT=TENTATIVE:mailto:foo@example.com
         <section anchor="ical-prop-calendar-address">
           <name>CALENDAR-ADDRESS</name>
           <t>
-              The <xref target="RFC9073" section="6.4" sectionFormat="parens">CALENDAR-ADDRESS property </xref> in a PARTICIPANT component converts to the <xref target="I-D.ietf-jmap-calendars" section="5.1.1" sectionFormat="parens">calendarAddress</xref> property of the Participant object.
+              The <xref target="RFC9073" section="6.4" sectionFormat="parens">CALENDAR-ADDRESS property</xref> in a PARTICIPANT component converts to the <xref target="I-D.ietf-jmap-calendars" section="5.1.1" sectionFormat="parens">calendarAddress</xref> property of the Participant object.
           </t>
           <t>The following example illustrates how to convert the CALENDAR-ADDRESS property:</t>
           <figure anchor="test-ical-prop-calendar-address">
@@ -3463,7 +3463,7 @@ CALENDAR-ADDRESS:mailto:foo@example.com
         <section anchor="ical-prop-categories">
           <name>CATEGORIES</name>
           <t>
-            The <xref target="RFC5545" section="3.8.1.2" sectionFormat="parens">CATEGORIES property </xref> in a VEVENT, VTODO, or VCALENDAR component converts to the <xref target="RFC8984" section="4.2.9" sectionFormat="parens">keywords</xref> property of the Event, Task, or Group object.
+            The <xref target="RFC5545" section="3.8.1.2" sectionFormat="parens">CATEGORIES property</xref> in a VEVENT, VTODO, or VCALENDAR component converts to the <xref target="RFC8984" section="4.2.9" sectionFormat="parens">keywords</xref> property of the Event, Task, or Group object.
           </t>
           <t>The list of category values converts to a set of keywords. The values convert case-sensitively. Multiple occurrences of the CATGORIES property in the same iCalendar component convert to the same keywords property in the JSCalendar object.</t>
           <t>Its parameters convert as follows:</t>
@@ -3507,7 +3507,7 @@ CATEGORIES:meeting
         <section anchor="ical-prop-class">
           <name>CLASS</name>
           <t>
-            The <xref target="RFC5545" section="3.8.1.3" sectionFormat="parens">CLASS property </xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.4.3" sectionFormat="parens">privacy</xref> property of the Event or Task object.
+            The <xref target="RFC5545" section="3.8.1.3" sectionFormat="parens">CLASS property</xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.4.3" sectionFormat="parens">privacy</xref> property of the Event or Task object.
           </t>
           <t>Its values convert as follows:</t>
           <table anchor="ical-prop-class-values">
@@ -3548,7 +3548,7 @@ CLASS:PRIVATE
         <section anchor="ical-prop-color">
           <name>COLOR</name>
           <t>
-            The <xref target="RFC7986" section="5.9" sectionFormat="parens">COLOR property </xref> in a VEVENT, VTODO, or VCALENDAR component converts to the <xref target="RFC8984" section="4.2.11" sectionFormat="parens">color</xref> property of the Event, Task, or Group object.
+            The <xref target="RFC7986" section="5.9" sectionFormat="parens">COLOR property</xref> in a VEVENT, VTODO, or VCALENDAR component converts to the <xref target="RFC8984" section="4.2.11" sectionFormat="parens">color</xref> property of the Event, Task, or Group object.
           </t>
           <t>Its value converts verbatim.</t>
           <t>The following examples illustrate how to convert the COLOR property:</t>
@@ -3574,13 +3574,13 @@ COLOR:#ffa07a
         <section anchor="ical-prop-comment">
           <name>COMMENT</name>
           <t>
-            The <xref target="RFC5545" section="3.8.1.4" sectionFormat="parens">COMMENT property </xref> in a DAYLIGHT or STANDARD component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">comments</xref> property of the TimeZoneRule object.
+            The <xref target="RFC5545" section="3.8.1.4" sectionFormat="parens">COMMENT property</xref> in a DAYLIGHT or STANDARD component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">comments</xref> property of the TimeZoneRule object.
           </t>
           <t>
-            The <xref target="RFC5545" section="3.8.1.4" sectionFormat="parens">COMMENT property </xref> in a PARTICIPANT component converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">participationComment</xref> property.
+            The <xref target="RFC5545" section="3.8.1.4" sectionFormat="parens">COMMENT property</xref> in a PARTICIPANT component converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">participationComment</xref> property.
           </t>
           <t>
-              The <xref target="RFC5545" section="3.8.1.4" sectionFormat="parens">COMMENT property </xref> in an <xref target="RFC5546">iTIP-scheduled</xref> VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">participationComment</xref> property of that Participant object, which represents the source of this scheduling message, if any. It otherwise converts to the <xref target="jscal-prop-icalcomponent">iCalComponent/properties</xref> property of the Event or Task object.
+              The <xref target="RFC5545" section="3.8.1.4" sectionFormat="parens">COMMENT property</xref> in an <xref target="RFC5546">iTIP-scheduled</xref> VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">participationComment</xref> property of that Participant object, which represents the source of this scheduling message, if any. It otherwise converts to the <xref target="jscal-prop-icalcomponent">iCalComponent/properties</xref> property of the Event or Task object.
             </t>
           <t>
                 Multiple COMMENT properties in a DAYLIGHT or STANDARD component convert in order of appearance in the comments property. Converting multiple COMMENT properties to the single-valued participationComment property is implementation-specific.</t>
@@ -3678,7 +3678,7 @@ COMMENT:I'll think about it
         <section anchor="ical-prop-concept">
           <name>CONCEPT</name>
           <t>
-            The <xref target="RFC9253" section="8.1" sectionFormat="parens">CONCEPT property </xref> in a VEVENT, VTODO, or VCALENDAR component converts to the <xref target="RFC8984" section="4.2.10" sectionFormat="parens">categories</xref> property of the Event, Task, or Group object.
+            The <xref target="RFC9253" section="8.1" sectionFormat="parens">CONCEPT property</xref> in a VEVENT, VTODO, or VCALENDAR component converts to the <xref target="RFC8984" section="4.2.10" sectionFormat="parens">categories</xref> property of the Event, Task, or Group object.
           </t>
           <t>The list of URI values converts to a set of URIs. Multiple occurrences of the CONCEPT property in the same iCalendar component convert to the same categories property in the JSCalendar object.</t>
           <t>The following example illustrates how to convert the CONCEPT property:</t>
@@ -3699,7 +3699,7 @@ CONCEPT:https://example.com/event-types/arts/literature
         <section anchor="ical-prop-conference">
           <name>CONFERENCE</name>
           <t>
-            The <xref target="RFC7986" section="5.11" sectionFormat="parens">CONFERENCE property </xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="4.2.6" sectionFormat="parens">VirtualLocation object</xref>.  The converted object is set in the virtualLocations property of the Event or Task object.
+            The <xref target="RFC7986" section="5.11" sectionFormat="parens">CONFERENCE property</xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="4.2.6" sectionFormat="parens">VirtualLocation object</xref>.  The converted object is set in the virtualLocations property of the Event or Task object.
           </t>
           <t>The CONFERENCE property value converts to the uri property of the VirtualLocation object.</t>
           <t>Its parameters convert as follows:</t>
@@ -3765,13 +3765,13 @@ CONFERENCE;VALUE=URI;FEATURE=AUDIO,VIDEO;
         <section anchor="ical-prop-contact">
           <name>CONTACT</name>
           <t>
-            The <xref target="RFC5545" section="3.8.4.2" sectionFormat="parens">CONTACT property </xref> does not convert to a standard JSCalendar element.
+            The <xref target="RFC5545" section="3.8.4.2" sectionFormat="parens">CONTACT property</xref> does not convert to a standard JSCalendar element.
           </t>
         </section>
         <section anchor="ical-prop-created">
           <name>CREATED</name>
           <t>
-            The <xref target="RFC5545" section="3.8.7.1" sectionFormat="parens">CREATED property </xref> in a VEVENT, VTODO, or VCALENDAR component converts to the <xref target="RFC8984" section="4.1.5" sectionFormat="parens">created</xref> property of the Event, Task, or Group object.
+            The <xref target="RFC5545" section="3.8.7.1" sectionFormat="parens">CREATED property</xref> in a VEVENT, VTODO, or VCALENDAR component converts to the <xref target="RFC8984" section="4.1.5" sectionFormat="parens">created</xref> property of the Event, Task, or Group object.
           </t>
           <t>The following example illustrates how to convert the CREATED property:</t>
           <figure anchor="test-ical-prop-created">
@@ -3787,7 +3787,7 @@ CREATED:20240329T133000Z
         <section anchor="ical-prop-description">
           <name>DESCRIPTION</name>
           <t>
-            The <xref target="RFC5545" section="3.8.1.5" sectionFormat="parens">DESCRIPTION property </xref> in a VEVENT, VTODO, VCALENDAR, VLOCATION, VRESOURCE, or PARTICIPANT component converts to the <xref target="RFC8984" section="4.2.2" sectionFormat="parens">description</xref> property of the Event, Task, Group, Location, Link, or Participant object.
+            The <xref target="RFC5545" section="3.8.1.5" sectionFormat="parens">DESCRIPTION property</xref> in a VEVENT, VTODO, VCALENDAR, VLOCATION, VRESOURCE, or PARTICIPANT component converts to the <xref target="RFC8984" section="4.2.2" sectionFormat="parens">description</xref> property of the Event, Task, Group, Location, Link, or Participant object.
           </t>
           <t>The DESCRIPTION property value is more likely than other TEXT-typed properties to contain escaped characters (see <xref target="RFC5545" section="3.3.11" sectionFormat="of"/>). As with any other TEXT value, implementations <bcp14>MUST</bcp14> unescape such characters before conversion and encode them as JSON string (see <xref target="RFC8259" section="7" sectionFormat="of"/>).</t>
           <t>Its parameters convert as follows:</t>
@@ -3834,7 +3834,7 @@ DESCRIPTION:Some text\;and\na new line.
         <section anchor="ical-prop-dtend">
           <name>DTEND</name>
           <t>
-            The <xref target="RFC5545" section="3.8.2.2" sectionFormat="parens">DTEND property </xref> in a VEVENT component converts to the <xref target="RFC8984" section="5.1.2" sectionFormat="parens">duration</xref> property of the Event object.
+            The <xref target="RFC5545" section="3.8.2.2" sectionFormat="parens">DTEND property</xref> in a VEVENT component converts to the <xref target="RFC8984" section="5.1.2" sectionFormat="parens">duration</xref> property of the Event object.
           </t>
           <t>The duration is the timespan between the points in time of the DSTART and DTEND property values when converted to UTC time.</t>
           <t>If the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DTEND property differs from that of the DTSTART property, then the DTEND property also converts to a Location object. The timezone identifier converts to the timeZone property of the Location object. The relativeTo property of the Location is set to "end". The Location object is set in the locations property of the Event object.</t>
@@ -3899,12 +3899,12 @@ DTEND;VALUE=DATE:20240112
         <section anchor="ical-prop-dtstamp">
           <name>DTSTAMP</name>
           <t>
-              The <xref target="RFC5545" section="3.8.7.2" sectionFormat="parens">DTSTAMP property </xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.1.6" sectionFormat="parens">updated property</xref> of the Event or Task object.</t>
-<t>Both the LAST-MODIFIED and DTSTAMP properties convert to the updated property. If both are present in the same component, then the DTSTAMP property value has higher precedence. Implementations <bcp14>MAY</bcp14> in that case preserve the value of the LAST-MODIFIED property in the iCalComponent property.</t>
+              The <xref target="RFC5545" section="3.8.7.2" sectionFormat="parens">DTSTAMP property</xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.1.6" sectionFormat="parens">updated property</xref> of the Event or Task object.</t>
+          <t>Both the LAST-MODIFIED and DTSTAMP properties convert to the updated property. If both are present in the same component, then the DTSTAMP property value has higher precedence. Implementations <bcp14>MAY</bcp14> in that case preserve the value of the LAST-MODIFIED property in the iCalComponent property.</t>
           <t>An Event or Task object which has the method property set might represent an iTIP reply for one of the participants in the object. In this case the value of the updated property in the Event or Task also converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">scheduleUpdated</xref> property of that Participant object, from which the iTIP reply originated from.
             </t>
           <t>
-              The <xref target="RFC5545" section="3.8.7.2" sectionFormat="parens">DTSTAMP property </xref> in a PARTICIPANT component converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">scheduleUpdated</xref> property.
+              The <xref target="RFC5545" section="3.8.7.2" sectionFormat="parens">DTSTAMP property</xref> in a PARTICIPANT component converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">scheduleUpdated</xref> property.
             </t>
           <t>The following examples illustrate how to convert the DTSTAMP property:</t>
           <figure anchor="test-ical-prop-dtstamp-vevent-method">
@@ -3962,7 +3962,7 @@ END:VEVENT
         <section anchor="ical-prop-dtstart">
           <name>DTSTART</name>
           <t>
-              The <xref target="RFC5545" section="3.8.2.4" sectionFormat="parens">DTSTART property </xref> in a VEVENT, VTODO, DAYLIGHT or STANDARD component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">start</xref> property of the Event, Task, or TimeZoneRule object.</t>
+              The <xref target="RFC5545" section="3.8.2.4" sectionFormat="parens">DTSTART property</xref> in a VEVENT, VTODO, DAYLIGHT or STANDARD component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">start</xref> property of the Event, Task, or TimeZoneRule object.</t>
           <t>See <xref target="convert-date-and-datetime"/> how to convert DATE and DATE-TIME values.</t>
           <t>For VEVENT and VTODO components, the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DTSTART property converts to the timeZone property of the Event or Task object.  In addition, if the value type of the DTSTART property is DATE, then the value of the <xref target="RFC8984" section="4.2.4" sectionFormat="parens">showWithoutTime property</xref> is "true".</t>
           <t>The following examples illustrate how to convert the DTSTART property for the VEVENT and VTODO components. See <xref target="ical-comp-daylight"/> and <xref target="ical-comp-standard"/> for examples how to convert the DTSTART property for the DAYLIGHT and STANDARD components.</t>
@@ -4014,7 +4014,7 @@ DTSTART;VALUE=DATE:20240921
         <section anchor="ical-prop-due">
           <name>DUE</name>
           <t>
-              The <xref target="RFC5545" section="3.8.2.3" sectionFormat="parens">DUE property </xref> in a VTODO component converts to the <xref target="RFC8984" section="5.2.1" sectionFormat="parens">due</xref> property of the Task object.</t>
+              The <xref target="RFC5545" section="3.8.2.3" sectionFormat="parens">DUE property</xref> in a VTODO component converts to the <xref target="RFC8984" section="5.2.1" sectionFormat="parens">due</xref> property of the Task object.</t>
           <t>
                 See <xref target="convert-date-and-datetime"/> how to convert DATE and DATE-TIME values.</t>
           <t>If the VTODO component does not contain a DTSTART property, then the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DUE property converts to the timeZone property of the Task object. If instead the VTODO component contains both the DUE and DTSTART properties, then the timezone identifier of the DUE property does not convert to a standard JSCalendar element. The value of the due property <bcp14>MUST</bcp14> denote the date and time relative to the timezone of the DTSTART property.</t>
@@ -4068,7 +4068,7 @@ DUE;VALUE=DATE:20240921
         <section anchor="ical-prop-duration">
           <name>DURATION</name>
           <t>
-            The <xref target="RFC5545" section="3.8.2.5" sectionFormat="parens">DURATION property </xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="5.1.2" sectionFormat="parens">duration</xref> property of the Event or Task object.
+            The <xref target="RFC5545" section="3.8.2.5" sectionFormat="parens">DURATION property</xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="5.1.2" sectionFormat="parens">duration</xref> property of the Event or Task object.
           </t>
           <t>The following example illustrates how to convert the DURATION property:</t>
           <figure anchor="test-ical-prop-duration">
@@ -4084,7 +4084,7 @@ DURATION:PT1H
         <section anchor="ical-prop-exdate">
           <name>EXDATE</name>
           <t>
-            The <xref target="RFC5545" section="3.8.5.1" sectionFormat="parens">EXDATE property </xref> of value type DATE or DATE-TIME in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="1.4.9" sectionFormat="parens">PatchObject object</xref>.  The converted object is set in the recurrenceOverrides property of the Event or Task object.
+            The <xref target="RFC5545" section="3.8.5.1" sectionFormat="parens">EXDATE property</xref> of value type DATE or DATE-TIME in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="1.4.9" sectionFormat="parens">PatchObject object</xref>.  The converted object is set in the recurrenceOverrides property of the Event or Task object.
           </t>
           <t>The property value converts to the key in the recurrenceOverrides property value. See <xref target="convert-date-and-datetime"/> how to convert DATE and DATE-TIME values. The datetime <bcp14>MUST</bcp14> be relative to the timezone identified by the timeZone property of the Event or Task.  The PatchObject value <bcp14>MUST</bcp14> set the excluded property to "true" and <bcp14>MUST NOT</bcp14> set any other property.</t>
           <t>An EXDATE property of value type PERIOD does not convert to a standard JSCalendar element.  Implementations <bcp14>MAY</bcp14> convert it to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the Event or Task object.</t>
@@ -4116,7 +4116,7 @@ EXDATE:20230801T130000Z
         <section anchor="ical-prop-exrule">
           <name>EXRULE</name>
           <t>
-            The <xref target="RFC2445" section="4.8.5.2" sectionFormat="parens">EXRULE property </xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="4.3.3" sectionFormat="parens">RecurrenceRule object</xref>.  The converted object is set in the excludedRecurrenceRules property of the Event or Task.
+            The <xref target="RFC2445" section="4.8.5.2" sectionFormat="parens">EXRULE property</xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="4.3.3" sectionFormat="parens">RecurrenceRule object</xref>.  The converted object is set in the excludedRecurrenceRules property of the Event or Task.
           </t>
           <t>See <xref target="ical-prop-rrule"/> for an example how to convert a recurrence rule.</t>
         </section>
@@ -4127,17 +4127,17 @@ EXDATE:20230801T130000Z
         <section anchor="ical-prop-geo">
           <name>GEO</name>
           <t>
-            The <xref target="RFC5545" section="3.8.1.6" sectionFormat="parens">GEO property </xref> in a VLOCATION component converts to the <xref target="RFC8984" section="4.2.5" sectionFormat="parens">coordinates</xref> property.
+            The <xref target="RFC5545" section="3.8.1.6" sectionFormat="parens">GEO property</xref> in a VLOCATION component converts to the <xref target="RFC8984" section="4.2.5" sectionFormat="parens">coordinates</xref> property.
           </t>
           <t>
-            The <xref target="RFC5545" section="3.8.1.6" sectionFormat="parens">GEO property </xref> in a VEVENT, VTODO, PARTICIPANT or VRESOURCE component converts to a <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>.  The converted object is set in the locations property of the Event, Task, or Participant object.
+            The <xref target="RFC5545" section="3.8.1.6" sectionFormat="parens">GEO property</xref> in a VEVENT, VTODO, PARTICIPANT or VRESOURCE component converts to a <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>.  The converted object is set in the locations property of the Event, Task, or Participant object.
           </t>
           <t>Its FLOAT value converts... TBD</t>
         </section>
         <section anchor="ical-prop-image">
           <name>IMAGE</name>
           <t>
-            The <xref target="RFC7986" section="5.10" sectionFormat="parens">IMAGE property </xref> in a VEVENT, VTODO, VLOCATION, or VRESOURCE component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the links property of the Event, Task, Location, or Participant object.
+            The <xref target="RFC7986" section="5.10" sectionFormat="parens">IMAGE property</xref> in a VEVENT, VTODO, VLOCATION, or VRESOURCE component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the links property of the Event, Task, Location, or Participant object.
           </t>
           <t>The IMAGE property value converts to the href property of the Link object. A value of type URI converts as-is. See <xref target="ical-prop-attach"/> how to convert a BINARY value.</t>
           <t>TBD.. set rel="icon"?</t>
@@ -4222,9 +4222,9 @@ IMAGE;VALUE=URI;DISPLAY=BADGE;FMTTYPE=image/png:
         <section anchor="ical-prop-last-modified">
           <name>LAST-MODIFIED</name>
           <t>
-            The <xref target="RFC5545" section="3.8.7.3" sectionFormat="parens">LAST-MODIFIED property </xref> in a VEVENT, VTODO, VCALENDAR, or VTIMEZONE component converts to the <xref target="RFC8984" section="4.1.6" sectionFormat="parens">updated</xref> property of the Event, Task, Group, or TimeZone object.
+            The <xref target="RFC5545" section="3.8.7.3" sectionFormat="parens">LAST-MODIFIED property</xref> in a VEVENT, VTODO, VCALENDAR, or VTIMEZONE component converts to the <xref target="RFC8984" section="4.1.6" sectionFormat="parens">updated</xref> property of the Event, Task, Group, or TimeZone object.
           </t>
-<t>Both the LAST-MODIFIED and DTSTAMP properties convert to the updated property. If both are present in the same component, then the DTSTAMP property value has higher precedence. Implementations <bcp14>MAY</bcp14> in that case preserve the value of the LAST-MODIFIED property in the iCalComponent property.</t>
+          <t>Both the LAST-MODIFIED and DTSTAMP properties convert to the updated property. If both are present in the same component, then the DTSTAMP property value has higher precedence. Implementations <bcp14>MAY</bcp14> in that case preserve the value of the LAST-MODIFIED property in the iCalComponent property.</t>
           <t>The following example illustrates how to convert the LAST-MODIFIED property:</t>
           <figure anchor="test-ical-prop-last-modified">
             <name>Converting the IMAGE property</name>
@@ -4239,7 +4239,7 @@ LAST-MODIFIED:20240914T231257Z
         <section anchor="ical-prop-link">
           <name>LINK</name>
           <t>
-            The <xref target="RFC9253" section="8.2" sectionFormat="parens">LINK property </xref> in a VEVENT, VTODO, VCALENDAR, VRESOURCE, PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the links property of the Event, Task, Group, Participant, or Location object.
+            The <xref target="RFC9253" section="8.2" sectionFormat="parens">LINK property</xref> in a VEVENT, VTODO, VCALENDAR, VRESOURCE, PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the links property of the Event, Task, Group, Participant, or Location object.
           </t>
           <t>A value of type URI converts... TBD</t>
           <t>A value of type UID converts... TBD</t>
@@ -4305,7 +4305,7 @@ LAST-MODIFIED:20240914T231257Z
         <section anchor="ical-prop-location">
           <name>LOCATION</name>
           <t>
-            The <xref target="RFC5545" section="3.8.1.7" sectionFormat="parens">LOCATION property </xref> in a VEVENT, VTODO, or PARTICIPANT component converts to a <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>.  The converted object is set in the locations property of the Event, Task, or Participant object.
+            The <xref target="RFC5545" section="3.8.1.7" sectionFormat="parens">LOCATION property</xref> in a VEVENT, VTODO, or PARTICIPANT component converts to a <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>.  The converted object is set in the locations property of the Event, Task, or Participant object.
           </t>
           <t>Its TEXT value converts... TBD</t>
           <t>Its parameters convert as follows:</t>
@@ -4353,24 +4353,24 @@ LAST-MODIFIED:20240914T231257Z
         <section anchor="ical-prop-location-type">
           <name>LOCATION-TYPE</name>
           <t>
-            The <xref target="RFC9073" section="6.1" sectionFormat="parens">LOCATION-TYPE property </xref> in a VLOCATION component converts to the <xref target="RFC8984" section="4.2.5" sectionFormat="parens">locationTypes</xref> property.
+            The <xref target="RFC9073" section="6.1" sectionFormat="parens">LOCATION-TYPE property</xref> in a VLOCATION component converts to the <xref target="RFC8984" section="4.2.5" sectionFormat="parens">locationTypes</xref> property.
           </t>
           <t>Its TEXT value converts... TBD</t>
         </section>
         <section anchor="ical-prop-method">
           <name>METHOD</name>
           <t>
-            The <xref target="RFC5545" section="3.7.2" sectionFormat="parens">METHOD property </xref> in a VCALENDAR component converts to  TBDentries/*/method property.
+            The <xref target="RFC5545" section="3.7.2" sectionFormat="parens">METHOD property</xref> in a VCALENDAR component converts to  TBDentries/*/method property.
           </t>
           <t>Its TEXT value converts... TBD</t>
         </section>
         <section anchor="ical-prop-name">
           <name>NAME</name>
           <t>
-            The <xref target="RFC7986" section="5.1" sectionFormat="parens">NAME property </xref> in a VLOCATION or VRESOURCE component converts to the <xref target="RFC8984" section="4.2.5" sectionFormat="parens">name</xref> property.
+            The <xref target="RFC7986" section="5.1" sectionFormat="parens">NAME property</xref> in a VLOCATION or VRESOURCE component converts to the <xref target="RFC8984" section="4.2.5" sectionFormat="parens">name</xref> property.
           </t>
           <t>
-            The <xref target="RFC7986" section="5.1" sectionFormat="parens">NAME property </xref> in a VCALENDAR component converts to the <xref target="RFC8984" section="4.2.1" sectionFormat="parens">title</xref> property.
+            The <xref target="RFC7986" section="5.1" sectionFormat="parens">NAME property</xref> in a VCALENDAR component converts to the <xref target="RFC8984" section="4.2.1" sectionFormat="parens">title</xref> property.
           </t>
           <t>Its TEXT value converts... TBD</t>
           <t>Its parameters convert as follows:</t>
@@ -4418,7 +4418,7 @@ LAST-MODIFIED:20240914T231257Z
         <section anchor="ical-prop-organizer">
           <name>ORGANIZER</name>
           <t>
-            The <xref target="RFC5545" section="3.8.4.3" sectionFormat="parens">ORGANIZER property </xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.4.4" sectionFormat="parens">replyTo</xref> property.
+            The <xref target="RFC5545" section="3.8.4.3" sectionFormat="parens">ORGANIZER property</xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.4.4" sectionFormat="parens">replyTo</xref> property.
           </t>
           <t>Its CAL-ADDRESS value converts... TBD</t>
           <t>Its parameters convert as follows:</t>
@@ -4506,7 +4506,7 @@ LAST-MODIFIED:20240914T231257Z
         <section anchor="ical-prop-participant-type">
           <name>PARTICIPANT-TYPE</name>
           <t>
-            The <xref target="RFC9073" section="6.2" sectionFormat="parens">PARTICIPANT-TYPE property </xref> in a PARTICIPANT component converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">roles</xref> property.
+            The <xref target="RFC9073" section="6.2" sectionFormat="parens">PARTICIPANT-TYPE property</xref> in a PARTICIPANT component converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">roles</xref> property.
           </t>
           <t>Its TEXT value converts... TBD</t>
           <t>Its parameters convert as follows:</t>
@@ -4546,21 +4546,21 @@ LAST-MODIFIED:20240914T231257Z
         <section anchor="ical-prop-percent-complete">
           <name>PERCENT-COMPLETE</name>
           <t>
-            The <xref target="RFC5545" section="3.8.1.8" sectionFormat="parens">PERCENT-COMPLETE property </xref> in a VTODO component converts to the <xref target="RFC8984" section="5.2.4" sectionFormat="parens">percentComplete</xref> property.
+            The <xref target="RFC5545" section="3.8.1.8" sectionFormat="parens">PERCENT-COMPLETE property</xref> in a VTODO component converts to the <xref target="RFC8984" section="5.2.4" sectionFormat="parens">percentComplete</xref> property.
           </t>
           <t>Its INTEGER value converts... TBD</t>
         </section>
         <section anchor="ical-prop-priority">
           <name>PRIORITY</name>
           <t>
-            The <xref target="RFC5545" section="3.8.1.9" sectionFormat="parens">PRIORITY property </xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.4.1" sectionFormat="parens">priority</xref> property.
+            The <xref target="RFC5545" section="3.8.1.9" sectionFormat="parens">PRIORITY property</xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.4.1" sectionFormat="parens">priority</xref> property.
           </t>
           <t>Its INTEGER value converts... TBD</t>
         </section>
         <section anchor="ical-prop-prodid">
           <name>PRODID</name>
           <t>
-            The <xref target="RFC5545" section="3.7.3" sectionFormat="parens">PRODID property </xref> in a VCALENDAR component converts to  TBDprodId, entries/*/prodId property.
+            The <xref target="RFC5545" section="3.7.3" sectionFormat="parens">PRODID property</xref> in a VCALENDAR component converts to  TBDprodId, entries/*/prodId property.
           </t>
           <t>Its TEXT value converts... TBD</t>
         </section>
@@ -4571,7 +4571,7 @@ LAST-MODIFIED:20240914T231257Z
         <section anchor="ical-prop-rdate">
           <name>RDATE</name>
           <t>
-              The <xref target="RFC5545" section="3.8.5.2" sectionFormat="parens">RDATE property </xref> in a VEVENT, VTODO, DAYLIGHT or STANDARD component converts to a <xref target="RFC8984" section="1.4.9" sectionFormat="parens">PatchObject object</xref>.  The converted object is set in the recurrenceOverrides property of the Event, Task, or TimeZoneRule object.
+              The <xref target="RFC5545" section="3.8.5.2" sectionFormat="parens">RDATE property</xref> in a VEVENT, VTODO, DAYLIGHT or STANDARD component converts to a <xref target="RFC8984" section="1.4.9" sectionFormat="parens">PatchObject object</xref>.  The converted object is set in the recurrenceOverrides property of the Event, Task, or TimeZoneRule object.
           </t>
           <t>A value of type DATE-TIME converts... TBD</t>
           <t>A value of type DATE converts... TBD</t>
@@ -4613,7 +4613,7 @@ LAST-MODIFIED:20240914T231257Z
         <section anchor="ical-prop-recurrence-id">
           <name>RECURRENCE-ID</name>
           <t>
-            The <xref target="RFC5545" section="3.8.4.4" sectionFormat="parens">RECURRENCE-ID property </xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.3.1" sectionFormat="parens">recurrenceId</xref> property.
+            The <xref target="RFC5545" section="3.8.4.4" sectionFormat="parens">RECURRENCE-ID property</xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.3.1" sectionFormat="parens">recurrenceId</xref> property.
           </t>
           <t>A value of type DATE-TIME converts... TBD</t>
           <t>A value of type DATE converts... TBD</t>
@@ -4670,7 +4670,7 @@ LAST-MODIFIED:20240914T231257Z
         <section anchor="ical-prop-related-to">
           <name>RELATED-TO</name>
           <t>
-            The <xref target="RFC5545" section="3.8.4.5" sectionFormat="parens">RELATED-TO property </xref> in a VEVENT, VTODO, or VALARM component converts to the <xref target="RFC8984" section="4.1.3" sectionFormat="parens">relatedTo</xref> property.
+            The <xref target="RFC5545" section="3.8.4.5" sectionFormat="parens">RELATED-TO property</xref> in a VEVENT, VTODO, or VALARM component converts to the <xref target="RFC8984" section="4.1.3" sectionFormat="parens">relatedTo</xref> property.
           </t>
           <t>Its TEXT value converts... TBD</t>
           <t>Its parameters convert as follows:</t>
@@ -4722,7 +4722,7 @@ LAST-MODIFIED:20240914T231257Z
         <section anchor="ical-prop-request-status">
           <name>REQUEST-STATUS</name>
           <t>
-            The <xref target="RFC5545" section="3.8.8.3" sectionFormat="parens">REQUEST-STATUS property </xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.4.7" sectionFormat="parens">requestStatus</xref> property.
+            The <xref target="RFC5545" section="3.8.8.3" sectionFormat="parens">REQUEST-STATUS property</xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.4.7" sectionFormat="parens">requestStatus</xref> property.
           </t>
           <t>Its TEXT value converts... TBD</t>
           <t>Its parameters convert as follows:</t>
@@ -4770,24 +4770,24 @@ LAST-MODIFIED:20240914T231257Z
         <section anchor="ical-prop-rrule">
           <name>RRULE</name>
           <t>
-            The <xref target="RFC5545" section="3.8.5.3" sectionFormat="parens">RRULE property </xref> in a VEVENT, VTODO, DAYLIGHT or STANDARD component converts to a <xref target="RFC8984" section="4.3.3" sectionFormat="parens">RecurrenceRule object</xref>.  The converted object is set in the recurrenceRules property of the Event, Task, or TimeZoneRule object.
+            The <xref target="RFC5545" section="3.8.5.3" sectionFormat="parens">RRULE property</xref> in a VEVENT, VTODO, DAYLIGHT or STANDARD component converts to a <xref target="RFC8984" section="4.3.3" sectionFormat="parens">RecurrenceRule object</xref>.  The converted object is set in the recurrenceRules property of the Event, Task, or TimeZoneRule object.
           </t>
           <t>Its RECUR value converts... TBD</t>
         </section>
         <section anchor="ical-prop-sequence">
           <name>SEQUENCE</name>
           <t>
-            The <xref target="RFC5545" section="3.8.7.4" sectionFormat="parens">SEQUENCE property </xref> in a PARTICIPANT component converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">scheduleSequence</xref> property.
+            The <xref target="RFC5545" section="3.8.7.4" sectionFormat="parens">SEQUENCE property</xref> in a PARTICIPANT component converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">scheduleSequence</xref> property.
           </t>
           <t>
-            The <xref target="RFC5545" section="3.8.7.4" sectionFormat="parens">SEQUENCE property </xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.1.7" sectionFormat="parens">sequence</xref> property.
+            The <xref target="RFC5545" section="3.8.7.4" sectionFormat="parens">SEQUENCE property</xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.1.7" sectionFormat="parens">sequence</xref> property.
           </t>
           <t>Its INTEGER value converts... TBD</t>
         </section>
         <section anchor="ical-prop-source">
           <name>SOURCE</name>
           <t>
-            The <xref target="RFC7986" section="5.8" sectionFormat="parens">SOURCE property </xref> in a VCALENDAR component converts to the <xref target="RFC8984" section="5.3.2" sectionFormat="parens">source</xref> property.
+            The <xref target="RFC7986" section="5.8" sectionFormat="parens">SOURCE property</xref> in a VCALENDAR component converts to the <xref target="RFC8984" section="5.3.2" sectionFormat="parens">source</xref> property.
           </t>
           <t>Its URI value converts... TBD</t>
         </section>
@@ -4798,7 +4798,7 @@ LAST-MODIFIED:20240914T231257Z
         <section anchor="ical-prop-structured-data">
           <name>STRUCTURED-DATA</name>
           <t>
-            The <xref target="RFC9073" section="6.6" sectionFormat="parens">STRUCTURED-DATA property </xref> in a VEVENT, VTODO, VCALENDAR, VRESOURCE, PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the links property of the Event, Task, Group, Participant, or Location object.
+            The <xref target="RFC9073" section="6.6" sectionFormat="parens">STRUCTURED-DATA property</xref> in a VEVENT, VTODO, VCALENDAR, VRESOURCE, PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the links property of the Event, Task, Group, Participant, or Location object.
           </t>
           <t>A value of type TEXT converts... TBD</t>
           <t>A value of type BINARY converts... TBD</t>
@@ -4856,7 +4856,7 @@ LAST-MODIFIED:20240914T231257Z
         <section anchor="ical-prop-styled-description">
           <name>STYLED-DESCRIPTION</name>
           <t>
-            The <xref target="RFC9073" section="6.5" sectionFormat="parens">STYLED-DESCRIPTION property </xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.2.2" sectionFormat="parens">description</xref> property.
+            The <xref target="RFC9073" section="6.5" sectionFormat="parens">STYLED-DESCRIPTION property</xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.2.2" sectionFormat="parens">description</xref> property.
           </t>
           <t>A value of type TEXT converts... TBD</t>
           <t>A value of type URI converts... TBD</t>
@@ -4921,10 +4921,10 @@ LAST-MODIFIED:20240914T231257Z
         <section anchor="ical-prop-summary">
           <name>SUMMARY</name>
           <t>
-            The <xref target="RFC5545" section="3.8.1.12" sectionFormat="parens">SUMMARY property </xref> in a PARTICIPANT component converts to the <xref target="RFC8984" section="4.2.5" sectionFormat="parens">name</xref> property.
+            The <xref target="RFC5545" section="3.8.1.12" sectionFormat="parens">SUMMARY property</xref> in a PARTICIPANT component converts to the <xref target="RFC8984" section="4.2.5" sectionFormat="parens">name</xref> property.
           </t>
           <t>
-            The <xref target="RFC5545" section="3.8.1.12" sectionFormat="parens">SUMMARY property </xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.2.1" sectionFormat="parens">title</xref> property.
+            The <xref target="RFC5545" section="3.8.1.12" sectionFormat="parens">SUMMARY property</xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.2.1" sectionFormat="parens">title</xref> property.
           </t>
           <t>Its TEXT value converts... TBD</t>
           <t>Its parameters convert as follows:</t>
@@ -4972,14 +4972,14 @@ LAST-MODIFIED:20240914T231257Z
         <section anchor="ical-prop-transp">
           <name>TRANSP</name>
           <t>
-            The <xref target="RFC5545" section="3.8.2.7" sectionFormat="parens">TRANSP property </xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.4.2" sectionFormat="parens">freeBusyStatus</xref> property.
+            The <xref target="RFC5545" section="3.8.2.7" sectionFormat="parens">TRANSP property</xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.4.2" sectionFormat="parens">freeBusyStatus</xref> property.
           </t>
           <t>Its TEXT value converts... TBD</t>
         </section>
         <section anchor="ical-prop-trigger">
           <name>TRIGGER</name>
           <t>
-            The <xref target="RFC5545" section="3.8.6.3" sectionFormat="parens">TRIGGER property </xref> in a VALARM component converts to the <xref target="RFC8984" section="4.5.2" sectionFormat="parens">trigger</xref> property.
+            The <xref target="RFC5545" section="3.8.6.3" sectionFormat="parens">TRIGGER property</xref> in a VALARM component converts to the <xref target="RFC8984" section="4.5.2" sectionFormat="parens">trigger</xref> property.
           </t>
           <t>A value of type DURATION converts... TBD</t>
           <t>A value of type DATE-TIME converts... TBD</t>
@@ -5020,21 +5020,21 @@ LAST-MODIFIED:20240914T231257Z
         <section anchor="ical-prop-tzid">
           <name>TZID</name>
           <t>
-            The <xref target="RFC5545" section="3.8.3.1" sectionFormat="parens">TZID property </xref> in a VTIMEZONE component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">tzId</xref> property.
+            The <xref target="RFC5545" section="3.8.3.1" sectionFormat="parens">TZID property</xref> in a VTIMEZONE component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">tzId</xref> property.
           </t>
           <t>Its TEXT value converts... TBD</t>
         </section>
         <section anchor="ical-prop-tzid-alias-of">
           <name>TZID-ALIAS-OF</name>
           <t>
-            The <xref target="RFC7808" section="7.2" sectionFormat="parens">TZID-ALIAS-OF property </xref> in a VTIMEZONE component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">aliases</xref> property.
+            The <xref target="RFC7808" section="7.2" sectionFormat="parens">TZID-ALIAS-OF property</xref> in a VTIMEZONE component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">aliases</xref> property.
           </t>
           <t>Its TEXT value converts... TBD</t>
         </section>
         <section anchor="ical-prop-tzname">
           <name>TZNAME</name>
           <t>
-            The <xref target="RFC5545" section="3.8.3.2" sectionFormat="parens">TZNAME property </xref> in a DAYLIGHT or STANDARD component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">names</xref> property.
+            The <xref target="RFC5545" section="3.8.3.2" sectionFormat="parens">TZNAME property</xref> in a DAYLIGHT or STANDARD component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">names</xref> property.
           </t>
           <t>Its TEXT value converts... TBD</t>
           <t>Its parameters convert as follows:</t>
@@ -5074,42 +5074,42 @@ LAST-MODIFIED:20240914T231257Z
         <section anchor="ical-prop-tzoffsetfrom">
           <name>TZOFFSETFROM</name>
           <t>
-            The <xref target="RFC5545" section="3.8.3.3" sectionFormat="parens">TZOFFSETFROM property </xref> in a DAYLIGHT or STANDARD component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">offsetFrom</xref> property.
+            The <xref target="RFC5545" section="3.8.3.3" sectionFormat="parens">TZOFFSETFROM property</xref> in a DAYLIGHT or STANDARD component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">offsetFrom</xref> property.
           </t>
           <t>Its UTC-OFFSET value converts... TBD</t>
         </section>
         <section anchor="ical-prop-tzoffsetto">
           <name>TZOFFSETTO</name>
           <t>
-            The <xref target="RFC5545" section="3.8.3.4" sectionFormat="parens">TZOFFSETTO property </xref> in a DAYLIGHT or STANDARD component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">offsetTo</xref> property.
+            The <xref target="RFC5545" section="3.8.3.4" sectionFormat="parens">TZOFFSETTO property</xref> in a DAYLIGHT or STANDARD component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">offsetTo</xref> property.
           </t>
           <t>Its UTC-OFFSET value converts... TBD</t>
         </section>
         <section anchor="ical-prop-tzuntil">
           <name>TZUNTIL</name>
           <t>
-            The <xref target="RFC7808" section="7.1" sectionFormat="parens">TZUNTIL property </xref> in a VTIMEZONE component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">validUntil</xref> property.
+            The <xref target="RFC7808" section="7.1" sectionFormat="parens">TZUNTIL property</xref> in a VTIMEZONE component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">validUntil</xref> property.
           </t>
           <t>Its DATE-TIME value converts... TBD</t>
         </section>
         <section anchor="ical-prop-tzurl">
           <name>TZURL</name>
           <t>
-            The <xref target="RFC5545" section="3.8.3.5" sectionFormat="parens">TZURL property </xref> in a VTIMEZONE component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">url</xref> property.
+            The <xref target="RFC5545" section="3.8.3.5" sectionFormat="parens">TZURL property</xref> in a VTIMEZONE component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">url</xref> property.
           </t>
           <t>Its URI value converts... TBD</t>
         </section>
         <section anchor="ical-prop-uid">
           <name>UID</name>
           <t>
-            The <xref target="RFC5545" section="3.8.4.7" sectionFormat="parens">UID property </xref> in a VEVENT, VTODO, or VCALENDAR component converts to the <xref target="RFC8984" section="4.1.2" sectionFormat="parens">uid</xref> property.
+            The <xref target="RFC5545" section="3.8.4.7" sectionFormat="parens">UID property</xref> in a VEVENT, VTODO, or VCALENDAR component converts to the <xref target="RFC8984" section="4.1.2" sectionFormat="parens">uid</xref> property.
           </t>
           <t>Its TEXT value converts... TBD</t>
         </section>
         <section anchor="ical-prop-url">
           <name>URL</name>
           <t>
-            The <xref target="RFC5545" section="3.8.4.6" sectionFormat="parens">URL property </xref> in a VEVENT, VTODO, VCALENDAR, or PARTICIPANT component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the links property of the Event, Task, Group, or Participant object.
+            The <xref target="RFC5545" section="3.8.4.6" sectionFormat="parens">URL property</xref> in a VEVENT, VTODO, VCALENDAR, or PARTICIPANT component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the links property of the Event, Task, Group, or Participant object.
           </t>
           <t>Its URI value converts... TBD</t>
         </section>
@@ -5120,7 +5120,7 @@ LAST-MODIFIED:20240914T231257Z
         <section anchor="ical-prop-xml">
           <name>XML</name>
           <t>
-            The <xref target="RFC6321" section="4.2" sectionFormat="parens">XML property </xref> in a VEVENT, VTODO, VCALENDAR, VRESOURCE, PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the links property of the Event, Task, Group, Participant, or Location object.
+            The <xref target="RFC6321" section="4.2" sectionFormat="parens">XML property</xref> in a VEVENT, VTODO, VCALENDAR, VRESOURCE, PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the links property of the Event, Task, Group, Participant, or Location object.
           </t>
           <t>A value of type TEXT converts... TBD</t>
           <t>A value of type BINARY converts... TBD</t>
