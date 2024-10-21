@@ -4360,9 +4360,37 @@ LAST-MODIFIED:20240914T231257Z
         <section anchor="ical-prop-method">
           <name>METHOD</name>
           <t>
-            The <xref target="RFC5545" section="3.7.2" sectionFormat="parens">METHOD property</xref> in a VCALENDAR component converts to  TBDentries/*/method property.
+              The <xref target="RFC5545" section="3.7.2" sectionFormat="parens">METHOD property</xref> in a VCALENDAR component converts to the <xref target="RFC8984">method property (TBD section)</xref> of the Event or Task objects, that are listed in the Group object's entries property.
           </t>
-          <t>Its TEXT value converts... TBD</t>
+          <t>The property value converts lowercase.</t>
+          <t>The following example illustrates how to convert the METHOD property:</t>
+          <figure anchor="test-ical-prop-method">
+            <name>Converting the IMAGE property</name>
+            <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VCALENDAR
+METHOD:REQUEST
+BEGIN:VEVENT
+ORGANIZER:mailto:foo@example.com
+ATTENDEE;RSVP=YES;PARTSTAT=NEEDS-ACTION:mailto:bar@example.com
+...
+END:VEVENT
+...
+END:VCALENDAR
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+{
+  "@type": "Group",
+  "entries": [
+    {
+      "@type": "Event",
+      "method": "request",
+      "...": ""
+    }
+  ],
+  "...": ""
+}
+]]></sourcecode>
+          </figure>
         </section>
         <section anchor="ical-prop-name">
           <name>NAME</name>
