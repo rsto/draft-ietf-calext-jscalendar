@@ -1482,7 +1482,7 @@ END:VEVENT
                 <td>
                   <xref target="RFC5545" section="3.8.7.2" sectionFormat="comma"/>
                 </td>
-                <td>updated, scheduleUpdated</td>
+                <td>updated</td>
                 <td>
                   <xref target="ical-prop-dtstamp"/>
                 </td>
@@ -2636,7 +2636,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.7.2" sectionFormat="comma"/>
                 </td>
-                <td>updated, scheduleUpdated</td>
+                <td>updated</td>
                 <td>
                   <xref target="ical-prop-dtstamp"/>
                 </td>
@@ -3791,6 +3791,7 @@ DESCRIPTION:Some text\;and\na new line.
           <t>The duration is the timespan between the points in time of the DSTART and DTEND property values when converted to UTC time.</t>
           <t>If the <xref target="ical-timezone-ids">timezone identifier</xref> of the DTEND property differs from that of the DTSTART property, then the DTEND property also converts to a Location object. The timezone identifier converts to the timeZone property of the Location object. The relativeTo property of the Location is set to "end". The Location object is set in the locations property of the Event object.</t>
           <t>Implementations <bcp14>MAY</bcp14> preserve the fact that the duration got determined by the DTEND property. How to this depends on if the timezone identifiers of DTSTART and DTEND are equal.  If the identifiers are equal, then implementations <bcp14>MUST</bcp14> set the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> in the Event object and there add an entry for the path "duration" in the convertedProperties property. The value <bcp14>MUST</bcp14> be an ICalProperty object with the name property set to "dtend". If instead the timezone identifiers are not equal, then implementations <bcp14>MUST</bcp14> set the <xref target="jscal-prop-icalproperty">iCalProperty property</xref> of the Location object.</t>
+          <t>The following examples illustrate how to convert the DTEND property:</t>
           <figure anchor="test-ical-prop-dtend-same-tzid">
             <name>Converting the DTEND property with same timezone</name>
             <sourcecode type="text/calendar"><![CDATA[
@@ -3849,10 +3850,63 @@ DTEND;VALUE=DATE:20240112
         </section>
         <section anchor="ical-prop-dtstamp">
           <name>DTSTAMP</name>
+            <t>
+              The <xref target="RFC5545" section="3.8.7.2" sectionFormat="parens">DTSTAMP property </xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.1.6" sectionFormat="parens">updated property</xref> of the Event or Task object. If both the LAST-MODIFIED and DSTAMP properties are present, then the DTSTAMP property value has higher precedence. Implementations <bcp14>MAY</bcp14> in that case preserve the value of the LAST-MODIFIED property in the iCalComponent property.</t>
+<t>An Event or Task object which has the method property set might represent an iTIP reply for one of the participants in the object. In this case the value of the updated property in the Event or Task also converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">scheduleUpdated</xref> property of that Participant object, from which the iTIP reply originated from.
+            </t>
           <t>
-            The <xref target="RFC5545" section="3.8.7.2" sectionFormat="parens">DTSTAMP property </xref> in a PARTICIPANT component converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">scheduleUpdated</xref> property.
-          </t>
-          <t>Its DATE-TIME value converts... TBD</t>
+              The <xref target="RFC5545" section="3.8.7.2" sectionFormat="parens">DTSTAMP property </xref> in a PARTICIPANT component converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">scheduleUpdated</xref> property.
+            </t>
+            <t>The following examples illustrate how to convert the DTSTAMP property:</t>
+          <figure anchor="test-ical-prop-dtstamp-vevent-method">
+            <name>Converting the DTSTAMP property in a VEVENT component</name>
+            <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VCALENDAR
+METHOD:REPLY
+BEGIN:VEVENT
+DTSTAMP:20240304T132000Z
+...
+END:VEVENT
+...
+END:VCALENDAR
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+{
+  "@type": "Group",
+  "entries": [{
+    "@type": "Event",
+    "method": "reply",
+    "updated": "2024-03-04T13:20:00Z",
+    "...": ""
+  }],
+  "...": ""
+}
+]]></sourcecode>
+          </figure>
+          <figure anchor="test-ical-prop-dtstamp-participant">
+            <name>Converting the DTSTAMP property in a PARTICIPANT component</name>
+            <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VEVENT
+BEGIN:PARTICIPANT
+DTSTAMP:20240304T132000Z
+CALENDAR-ADDRESS:mailto:foo@example.com
+...
+END:PARTICIPANT
+ATTENDEE;PARTSTAT=ACCEPTED:mailto:foo@example.com
+...
+END:VEVENT
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"participants": {
+  "f4": {
+    "@type": "Participant",
+    "scheduleUpdated": "2024-03-04T13:20:00Z",
+    "calendarAddress": "mailto:foo@example.com"
+    "...": ""
+  }
+}
+]]></sourcecode>
+          </figure>
         </section>
         <section anchor="ical-prop-dtstart">
           <name>DTSTART</name>
@@ -5088,13 +5142,6 @@ DTEND;VALUE=DATE:20240112
                 <dd>This contains parameters of the iCalendar property. The value <bcp14>MUST</bcp14> comply with iCalendar parameters formatted in jCal as defined in <xref target="RFC7265" section="3.5" sectionFormat="of"/>.</dd>
               </dl>
             </dd>
-          </dl>
-        </section>
-        <section anchor="jscal-prop-scheduleupdated">
-          <name>scheduleUpdated</name>
-          <dl>
-            <dt>Type: <tt>UTCDateTime</tt> (optional).</dt>
-            <dd>This is the timestamp when the iTIP message for this calendar object was created. It corresponds to the DTSTAMP property of an iCalendar object that has the METHOD property set.  This property <bcp14>SHOULD</bcp14> be set if the method property is set, otherwise it <bcp14>MUST NOT</bcp14> be set.</dd>
           </dl>
         </section>
       </section>
