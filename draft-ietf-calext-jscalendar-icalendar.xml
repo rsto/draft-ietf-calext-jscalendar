@@ -4088,32 +4088,36 @@ DURATION:PT1H
           <t>The property value converts to the key in the recurrenceOverrides property value. See <xref target="convert-date-and-datetime"/> how to convert DATE and DATE-TIME values. The datetime <bcp14>MUST</bcp14> be relative to the timezone identified by the timeZone property of the Event or Task.  The PatchObject value <bcp14>MUST</bcp14> set the excluded property to "true" and <bcp14>MUST NOT</bcp14> set any other property.</t>
           <t>An EXDATE property of value type PERIOD does not convert to a standard JSCalendar element.  Implementations <bcp14>MAY</bcp14> convert it to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the Event or Task object.</t>
           <t>The following example illustrates how to convert the EXDATE property:</t>
-            <figure anchor="test-ical-prop-exdate">
-              <name>Converting the EXDATE property</name>
-              <sourcecode type="text/calendar"><![CDATA[
+          <figure anchor="test-ical-prop-exdate">
+            <name>Converting the EXDATE property</name>
+            <sourcecode type="text/calendar"><![CDATA[
 DTSTART:20230101T130000Z
 RRULE:FREQ=MONTHLY
 EXDATE:20230801T130000Z
   ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[
+            <sourcecode type="json"><![CDATA[
 "start": "2023-01-01T13:00:00",
 "timeZone": "Etc/UTC",
-"recurrenceRules": [{
-  "@type": "RecurrenceRule",
-  "frequency": "monthly"
-}],
+"recurrenceRules": [
+  {
+    "@type": "RecurrenceRule",
+    "frequency": "monthly"
+  }
+],
 "recurrenceOverrides": {
-  "2023-08-01T13:00:00": { "excluded": true }
+  "2023-08-01T13:00:00": {
+    "excluded": true
+  }
 }
 ]]></sourcecode>
-            </figure>
+          </figure>
         </section>
         <section anchor="ical-prop-exrule">
           <name>EXRULE</name>
           <t>
             The <xref target="RFC2445" section="4.8.5.2" sectionFormat="parens">EXRULE property </xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="4.3.3" sectionFormat="parens">RecurrenceRule object</xref>.  The converted object is set in the excludedRecurrenceRules property of the Event or Task.
           </t>
-          <t>Its RECUR value converts... TBD</t>
+          <t>See <xref target="ical-prop-rrule"/> for an example how to convert a recurrence rule.</t>
         </section>
         <section anchor="ical-prop-freebusy">
           <name>FREEBUSY</name>
