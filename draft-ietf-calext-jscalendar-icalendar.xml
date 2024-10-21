@@ -383,7 +383,7 @@ SUMMARY:he
         </table>
         <t>Its components convert as follows:</t>
         <table>
-          <name>Components of the  VCALENDAR component</name>
+          <name>Components of the VCALENDAR component</name>
           <thead>
             <tr>
               <th>Name</th>
@@ -740,11 +740,11 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.1.6" sectionFormat="comma"/>
                 </td>
-                <td>locationId</td>
+                <td>locations</td>
                 <td>
                   <xref target="ical-prop-geo"/>
                 </td>
-                <td>Only one Location supported</td>
+                <td/>
               </tr>
               <tr>
                 <td>LAST-MODIFIED</td>
@@ -771,11 +771,11 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.1.7" sectionFormat="comma"/>
                 </td>
-                <td>locationId</td>
+                <td>locations</td>
                 <td>
                   <xref target="ical-prop-location"/>
                 </td>
-                <td>Only one Location supported</td>
+                <td/>
               </tr>
               <tr>
                 <td>PARTICIPANT-TYPE</td>
@@ -910,7 +910,7 @@ END:VCALENDAR
           </table>
           <t>Its components convert as follows:</t>
           <table>
-            <name>Components of the  PARTICIPANT component</name>
+            <name>Components of the PARTICIPANT component</name>
             <thead>
               <tr>
                 <th>Name</th>
@@ -926,11 +926,11 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC9073" section="7.2" sectionFormat="comma"/>
                 </td>
-                <td>locationId</td>
+                <td>locations</td>
                 <td>
                   <xref target="ical-comp-vlocation"/>
                 </td>
-                <td>Only one Location supported</td>
+                <td/>
               </tr>
               <tr>
                 <td>VRESOURCE</td>
@@ -1777,7 +1777,7 @@ END:VEVENT
           </table>
           <t>Its components convert as follows:</t>
           <table>
-            <name>Components of the  VEVENT component</name>
+            <name>Components of the VEVENT component</name>
             <thead>
               <tr>
                 <th>Name</th>
@@ -2183,11 +2183,11 @@ END:VLOCATION
                 <td>
                   <xref target="RFC5545" section="3.8.1.6" sectionFormat="comma"/>
                 </td>
-                <td>locationId</td>
+                <td>locations</td>
                 <td>
                   <xref target="ical-prop-geo"/>
                 </td>
-                <td>Only one Location supported</td>
+                <td/>
               </tr>
               <tr>
                 <td>IMAGE</td>
@@ -2391,7 +2391,7 @@ END:VEVENT
           </table>
           <t>Its components convert as follows:</t>
           <table>
-            <name>Components of the  VTIMEZONE component</name>
+            <name>Components of the VTIMEZONE component</name>
             <thead>
               <tr>
                 <th>Name</th>
@@ -2985,7 +2985,7 @@ END:VCALENDAR
           </table>
           <t>Its components convert as follows:</t>
           <table>
-            <name>Components of the  VTODO component</name>
+            <name>Components of the VTODO component</name>
             <thead>
               <tr>
                 <th>Name</th>
@@ -4129,10 +4129,7 @@ EXDATE:20230801T130000Z
             The <xref target="RFC5545" section="3.8.1.6" sectionFormat="parens">GEO property </xref> in a VLOCATION component converts to the <xref target="RFC8984" section="4.2.5" sectionFormat="parens">coordinates</xref> property.
           </t>
           <t>
-            The <xref target="RFC5545" section="3.8.1.6" sectionFormat="parens">GEO property </xref> in a PARTICIPANT or VRESOURCE component converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">locationId</xref> property.
-          </t>
-          <t>
-            The <xref target="RFC5545" section="3.8.1.6" sectionFormat="parens">GEO property </xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>.  The converted object is set in the locations property of the Event or Task object.
+            The <xref target="RFC5545" section="3.8.1.6" sectionFormat="parens">GEO property </xref> in a VEVENT, VTODO, PARTICIPANT or VRESOURCE component converts to a <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>.  The converted object is set in the locations property of the Event, Task, or Participant object.
           </t>
           <t>Its FLOAT value converts... TBD</t>
         </section>
@@ -4285,10 +4282,7 @@ EXDATE:20230801T130000Z
         <section anchor="ical-prop-location">
           <name>LOCATION</name>
           <t>
-            The <xref target="RFC5545" section="3.8.1.7" sectionFormat="parens">LOCATION property </xref> in a PARTICIPANT component converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">locationId</xref> property.
-          </t>
-          <t>
-            The <xref target="RFC5545" section="3.8.1.7" sectionFormat="parens">LOCATION property </xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>.  The converted object is set in the locations property of the Event or Task object.
+            The <xref target="RFC5545" section="3.8.1.7" sectionFormat="parens">LOCATION property </xref> in a VEVENT, VTODO, or PARTICIPANT component converts to a <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>.  The converted object is set in the locations property of the Event, Task, or Participant object.
           </t>
           <t>Its TEXT value converts... TBD</t>
           <t>Its parameters convert as follows:</t>
@@ -5216,6 +5210,25 @@ EXDATE:20230801T130000Z
                 <dd>This contains parameters of the iCalendar property. The value <bcp14>MUST</bcp14> comply with iCalendar parameters formatted in jCal as defined in <xref target="RFC7265" section="3.5" sectionFormat="of"/>.</dd>
               </dl>
             </dd>
+          </dl>
+        </section>
+        <section anchor="jscal-prop-locations">
+          <name>locations</name>
+					<dl newline="true">
+						<dt>Property Name</dt>
+						<dd>locations</dd>
+
+						<dt>Property Type</dt>
+						<dd><tt>Id[Location]</tt> (optional).</dd>
+
+						<dt>Property Context</dt>
+						<dd>Participant</dd>
+
+						<dt>Description</dt>
+            <dd>This represents locations associated with the participant. In contrast to the locationId property, this allows to associate multiple locations with the Participant object. It also allow to more clearly express that a location just is relevant for a single participant.</dd>
+
+						<dt>Intended Usage</dt>
+						<dd>common</dd>
           </dl>
         </section>
       </section>

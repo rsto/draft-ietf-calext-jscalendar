@@ -155,8 +155,7 @@ icalendar:
             property: scheduleUpdated
         GEO:
           convert:
-              property: locationId
-              note: Only one Location supported
+              property: locations
         LAST-MODIFIED: {}
         LINK:
           convert:
@@ -164,8 +163,7 @@ icalendar:
             object: Link
         LOCATION:
           convert:
-            property: locationId
-            note: Only one Location supported
+            property: locations
         PARTICIPANT-TYPE:
           convert:
             property: roles
@@ -198,8 +196,7 @@ icalendar:
       components:
           VLOCATION:
             convert:
-              property: locationId
-              note: Only one Location supported
+              property: locations
           VRESOURCE: {}
       rfc: RFC9073
       section: '7.1'
@@ -863,8 +860,7 @@ icalendar:
             property: description
         GEO:
           convert:
-            property: locationId
-            note: Only one Location supported
+            property: locations
         IMAGE:
           convert:
             property: links
