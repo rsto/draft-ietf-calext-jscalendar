@@ -3899,7 +3899,8 @@ DTEND;VALUE=DATE:20240112
         <section anchor="ical-prop-dtstamp">
           <name>DTSTAMP</name>
           <t>
-              The <xref target="RFC5545" section="3.8.7.2" sectionFormat="parens">DTSTAMP property </xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.1.6" sectionFormat="parens">updated property</xref> of the Event or Task object. If both the LAST-MODIFIED and DSTAMP properties are present, then the DTSTAMP property value has higher precedence. Implementations <bcp14>MAY</bcp14> in that case preserve the value of the LAST-MODIFIED property in the iCalComponent property.</t>
+              The <xref target="RFC5545" section="3.8.7.2" sectionFormat="parens">DTSTAMP property </xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.1.6" sectionFormat="parens">updated property</xref> of the Event or Task object.</t>
+<t>Both the LAST-MODIFIED and DTSTAMP properties convert to the updated property. If both are present in the same component, then the DTSTAMP property value has higher precedence. Implementations <bcp14>MAY</bcp14> in that case preserve the value of the LAST-MODIFIED property in the iCalComponent property.</t>
           <t>An Event or Task object which has the method property set might represent an iTIP reply for one of the participants in the object. In this case the value of the updated property in the Event or Task also converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">scheduleUpdated</xref> property of that Participant object, from which the iTIP reply originated from.
             </t>
           <t>
@@ -4221,9 +4222,19 @@ IMAGE;VALUE=URI;DISPLAY=BADGE;FMTTYPE=image/png:
         <section anchor="ical-prop-last-modified">
           <name>LAST-MODIFIED</name>
           <t>
-            The <xref target="RFC5545" section="3.8.7.3" sectionFormat="parens">LAST-MODIFIED property </xref> in a VEVENT, VTODO, VCALENDAR, or VTIMEZONE component converts to the <xref target="RFC8984" section="4.1.6" sectionFormat="parens">updated</xref> property.
+            The <xref target="RFC5545" section="3.8.7.3" sectionFormat="parens">LAST-MODIFIED property </xref> in a VEVENT, VTODO, VCALENDAR, or VTIMEZONE component converts to the <xref target="RFC8984" section="4.1.6" sectionFormat="parens">updated</xref> property of the Event, Task, Group, or TimeZone object.
           </t>
-          <t>Its DATE-TIME value converts... TBD</t>
+<t>Both the LAST-MODIFIED and DTSTAMP properties convert to the updated property. If both are present in the same component, then the DTSTAMP property value has higher precedence. Implementations <bcp14>MAY</bcp14> in that case preserve the value of the LAST-MODIFIED property in the iCalComponent property.</t>
+          <t>The following example illustrates how to convert the LAST-MODIFIED property:</t>
+          <figure anchor="test-ical-prop-last-modified">
+            <name>Converting the IMAGE property</name>
+            <sourcecode type="text/calendar"><![CDATA[
+LAST-MODIFIED:20240914T231257Z
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"updated": "2024-09-14T23:12:57Z"
+]]></sourcecode>
+          </figure>
         </section>
         <section anchor="ical-prop-link">
           <name>LINK</name>
