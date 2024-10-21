@@ -4138,8 +4138,8 @@ EXDATE:20230801T130000Z
           <t>
             The <xref target="RFC7986" section="5.10" sectionFormat="parens">IMAGE property </xref> in a VEVENT, VTODO, VLOCATION, or VRESOURCE component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the links property of the Event, Task, Location, or Participant object.
           </t>
-          <t>A value of type URI converts... TBD</t>
-          <t>A value of type BINARY converts... TBD</t>
+          <t>The IMAGE property value converts to the href property of the Link object. A value of type URI converts as-is. See <xref target="ical-prop-attach"/> how to convert a BINARY value.</t>
+          <t>TBD.. set rel="icon"?</t>
           <t>Its parameters convert as follows:</t>
           <table>
             <name>Parameters of the IMAGE property</name>
@@ -4194,17 +4194,29 @@ EXDATE:20230801T130000Z
               </tr>
             </tbody>
           </table>
-          <section anchor="example-ical-prop-image">
-            <name>Example: Converting the IMAGE property</name>
-            <figure anchor="test-ical-prop-image">
-              <name>Converting the IMAGE property</name>
-              <sourcecode type="text/calendar"><![CDATA[
+          <t>Implementations <bcp14>MAY</bcp14> preserve the fact that the Link object got converted from an IMAGE property. To so, they <bcp14>MUST</bcp14> set the <xref target="jscal-prop-icalproperty">iCalProperty</xref> on the Link object.</t>
+          <t>The following example illustrates how to convert the IMAGE property:</t>
+          <figure anchor="test-ical-prop-image">
+            <name>Converting the IMAGE property</name>
+            <sourcecode type="text/calendar"><![CDATA[
+IMAGE;VALUE=URI;DISPLAY=BADGE;FMTTYPE=image/png:
+ https://example.com/images/party.png
   ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[
-
+            <sourcecode type="json"><![CDATA[
+"links": {
+  "4": {
+    "@type": "Link",
+    "href": "https://example.com/images/party.png",
+    "display": "badge",
+    "contentType": "image/png",
+    "iCalProperty": {
+      "@type": "ICalProperty",
+      "name": "image"
+    }
+  }
+}
 ]]></sourcecode>
-            </figure>
-          </section>
+          </figure>
         </section>
         <section anchor="ical-prop-last-modified">
           <name>LAST-MODIFIED</name>
