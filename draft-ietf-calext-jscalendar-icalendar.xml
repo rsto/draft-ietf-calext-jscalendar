@@ -482,23 +482,14 @@ END:VCALENDAR
         </ul>
         <t>In a few cases, an iCalendar property and component may both convert to the same JSCalendar object.  Examples for this are the ATTENDEE property and PARTICIPANT component, as well as the LOCATION property and VLOCATION component ...TBD</t>
       </section>
-      <section anchor="ical-timezone-ids">
+      <section anchor="ical-timezone-identifiers">
         <name>Timezone identifiers</name>
-        <t>Converting temporal properties such as DTSTART, DTEND, and RECURRENCE-ID requires to not only determine the date and time of the property value but to also identify the timezone it references.</t>
-        <section anchor="ical-timezone-ids-floating-time">
-          <name>Floating time</name>
-          <t>If the property value data type is <xref target="RFC5545" section="3.3.4" sectionFormat="parens">DATE</xref> or  <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #1: DATE WITH LOCAL TIME</xref> then the timezone identifier is undefined, represented as "null" in JSCalendar.</t>
-        </section>
-        <section anchor="ical-timezone-ids-utc-time">
-          <name>UTC time</name>
-          <t>If the property value data type is <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #2: DATE WITH UTC TIME</xref> then the timezone identifier is the string "Etc/UTC" in JSCalendar.</t>
-        </section>
-        <section anchor="ical-timezone-ids-local-time">
-          <name>Local time</name>
-          <t>If the property value data type is <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #3: DATE WITH LOCAL TIME AND TIME ZONE REFERENCE</xref> then the timezone identifier is determined by the TZID parameter value.</t>
-          <t>If TZID parameter value is equal to a name in the <xref target="TZDB">IANA Time Zone Database</xref> then the timezone identifier is the verbatim name.</t>
-          <t>If the TZID parameter value is unequal to an IANA timezone name then implementations <bcp14>MAY</bcp14> determine the name of an IANA timezone which has the same timezone rules over the timespan of the calendar object. Otherwise, this non-IANA timezone identifier is represented in JSCalendar as a string starting with the / (SLASH) character, followed by the TZID parameter value. The corresponding VTIMEZONE <bcp14>MUST</bcp14> be converted to the timeZones property with the prefixed identifier as key. See <xref target="test-ical-comp-vtimezone"/> for an example.</t>
-        </section>
+        <t>Converting temporal properties such as DTSTART, DTEND, and RECURRENCE-ID requires to not only determine the date and time of the property value, but also the timezone it references.</t>
+        <t>If the property value data type is <xref target="RFC5545" section="3.3.4" sectionFormat="parens">DATE</xref> or  <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #1: DATE WITH LOCAL TIME</xref> then the timezone identifier is the JSON null value in JSCalendar.</t>
+        <t>If the property value data type is <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #2: DATE WITH UTC TIME</xref> then the timezone identifier is the string "Etc/UTC" in JSCalendar.</t>
+        <t>If the property value data type is <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #3: DATE WITH LOCAL TIME AND TIME ZONE REFERENCE</xref> then the timezone identifier is determined by the TZID parameter value:</t>
+        <t>If the TZID parameter value is equal to a name in the <xref target="TZDB">IANA Time Zone Database</xref> then the timezone identifier is that verbatim name.</t>
+        <t>If the TZID parameter value is unequal to an IANA timezone name then implementations <bcp14>MAY</bcp14> determine the name of an IANA timezone which has the same timezone rules over the timespan of the calendar object. Otherwise, the non-IANA timezone identifier is represented in JSCalendar as a string starting with the / (SLASH) character, followed by the TZID parameter value. The corresponding VTIMEZONE <bcp14>MUST</bcp14> be converted to the timeZones property with the prefixed identifier as key. See <xref target="test-ical-comp-vtimezone"/> for an example.</t>
       </section>
       <section anchor="ical-components">
         <name>Components</name>
@@ -3787,9 +3778,9 @@ DESCRIPTION:Some text\;and\na new line.
           <t>
             The <xref target="RFC5545" section="3.8.2.2" sectionFormat="parens">DTEND property </xref> in a VEVENT component converts to the <xref target="RFC8984" section="5.1.2" sectionFormat="parens">duration</xref> property of the Event object.
           </t>
-          <t>A value of type DATE-TIME converts to a LocalDateTime containing both the date and time of the property value. A value of type DATE converts to a LocalDateTime containing the date of the property value and its time set to zero time.</t>
+          <t>A value of type DATE-TIME converts to a LocalDateTime with both the date and time of the property value. A value of type DATE converts to a LocalDateTime with the date of the property value and its time set to zero time.</t>
           <t>The duration is the timespan between the points in time of the DSTART and DTEND property values when converted to UTC time.</t>
-          <t>If the <xref target="ical-timezone-ids">timezone identifier</xref> of the DTEND property differs from that of the DTSTART property, then the DTEND property also converts to a Location object. The timezone identifier converts to the timeZone property of the Location object. The relativeTo property of the Location is set to "end". The Location object is set in the locations property of the Event object.</t>
+          <t>If the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DTEND property differs from that of the DTSTART property, then the DTEND property also converts to a Location object. The timezone identifier converts to the timeZone property of the Location object. The relativeTo property of the Location is set to "end". The Location object is set in the locations property of the Event object.</t>
           <t>Implementations <bcp14>MAY</bcp14> preserve the fact that the duration got determined by the DTEND property. How to this depends on if the timezone identifiers of DTSTART and DTEND are equal.  If the identifiers are equal, then implementations <bcp14>MUST</bcp14> set the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> in the Event object and there add an entry for the path "duration" in the convertedProperties property. The value <bcp14>MUST</bcp14> be an ICalProperty object with the name property set to "dtend". If instead the timezone identifiers are not equal, then implementations <bcp14>MUST</bcp14> set the <xref target="jscal-prop-icalproperty">iCalProperty property</xref> of the Location object.</t>
           <t>The following examples illustrate how to convert the DTEND property:</t>
           <figure anchor="test-ical-prop-dtend-same-tzid">
@@ -3850,14 +3841,14 @@ DTEND;VALUE=DATE:20240112
         </section>
         <section anchor="ical-prop-dtstamp">
           <name>DTSTAMP</name>
-            <t>
+          <t>
               The <xref target="RFC5545" section="3.8.7.2" sectionFormat="parens">DTSTAMP property </xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.1.6" sectionFormat="parens">updated property</xref> of the Event or Task object. If both the LAST-MODIFIED and DSTAMP properties are present, then the DTSTAMP property value has higher precedence. Implementations <bcp14>MAY</bcp14> in that case preserve the value of the LAST-MODIFIED property in the iCalComponent property.</t>
-<t>An Event or Task object which has the method property set might represent an iTIP reply for one of the participants in the object. In this case the value of the updated property in the Event or Task also converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">scheduleUpdated</xref> property of that Participant object, from which the iTIP reply originated from.
+          <t>An Event or Task object which has the method property set might represent an iTIP reply for one of the participants in the object. In this case the value of the updated property in the Event or Task also converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">scheduleUpdated</xref> property of that Participant object, from which the iTIP reply originated from.
             </t>
           <t>
               The <xref target="RFC5545" section="3.8.7.2" sectionFormat="parens">DTSTAMP property </xref> in a PARTICIPANT component converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">scheduleUpdated</xref> property.
             </t>
-            <t>The following examples illustrate how to convert the DTSTAMP property:</t>
+          <t>The following examples illustrate how to convert the DTSTAMP property:</t>
           <figure anchor="test-ical-prop-dtstamp-vevent-method">
             <name>Converting the DTSTAMP property in a VEVENT component</name>
             <sourcecode type="text/calendar"><![CDATA[
@@ -3873,12 +3864,14 @@ END:VCALENDAR
             <sourcecode type="json"><![CDATA[
 {
   "@type": "Group",
-  "entries": [{
-    "@type": "Event",
-    "method": "reply",
-    "updated": "2024-03-04T13:20:00Z",
-    "...": ""
-  }],
+  "entries": [
+    {
+      "@type": "Event",
+      "method": "reply",
+      "updated": "2024-03-04T13:20:00Z",
+      "...": ""
+    }
+  ],
   "...": ""
 }
 ]]></sourcecode>
@@ -3901,7 +3894,7 @@ END:VEVENT
   "f4": {
     "@type": "Participant",
     "scheduleUpdated": "2024-03-04T13:20:00Z",
-    "calendarAddress": "mailto:foo@example.com"
+    "calendarAddress": "mailto:foo@example.com",
     "...": ""
   }
 }
@@ -3911,43 +3904,55 @@ END:VEVENT
         <section anchor="ical-prop-dtstart">
           <name>DTSTART</name>
           <t>
-            The <xref target="RFC5545" section="3.8.2.4" sectionFormat="parens">DTSTART property </xref> in a VEVENT, VTODO, or DAYLIGHT or STANDARD component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">start</xref> property.
+            The <xref target="RFC5545" section="3.8.2.4" sectionFormat="parens">DTSTART property </xref> in a VEVENT, VTODO, DAYLIGHT or STANDARD component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">start</xref> property of the Event, Task, or TimeZoneRule object.
           </t>
-          <t>A value of type DATE-TIME converts... TBD</t>
-          <t>A value of type DATE converts... TBD</t>
-          <t>Its parameters convert as follows:</t>
-          <table>
-            <name>Parameters of the DTSTART property</name>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Property</th>
-                <th>Note</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>TZID</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.19" sectionFormat="comma"/>
-                </td>
-                <td>timeZone</td>
-                <td/>
-              </tr>
-            </tbody>
-          </table>
-          <section anchor="example-ical-prop-dtstart">
-            <name>Example: Converting the DTSTART property</name>
-            <figure anchor="test-ical-prop-dtstart">
-              <name>Converting the DTSTART property</name>
-              <sourcecode type="text/calendar"><![CDATA[
-  ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[
-
+          <t>A value of type DATE-TIME converts to a LocalDateTime with both the date and time of the property value. A value of type DATE converts to a LocalDateTime with the date of the property value and its time set to zero time.</t>
+          <t>For VEVENT and VTODO components, the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DTSTART property converts to the timeZone property of the Event or Task object.  In addition, if the value type of the DTSTART property is DATE, then the value of the <xref target="RFC8984" section="4.2.4" sectionFormat="parens">showWithoutTime property</xref> is "true".</t>
+          <t>The following examples illustrate how to convert the DTSTART property for the VEVENT and VTODO components. See <xref target="ical-comp-daylight"/> and <xref target="ical-comp-standard"/> for examples how to convert the DTSTART property for the DAYLIGHT and STANDARD components.</t>
+          <figure anchor="test-ical-prop-dtstart-tzid">
+            <name>Converting the DTSTART property with TZID parameter</name>
+            <sourcecode type="text/calendar"><![CDATA[
+DTSTART;TZID=Europe/Berlin:20240921T105302
 ]]></sourcecode>
-            </figure>
-          </section>
+            <sourcecode type="json"><![CDATA[
+"start": "2024-09-21T10:53:02",
+"timeZone": "Europe/Berlin",
+"showWithoutTime": "false"
+]]></sourcecode>
+          </figure>
+          <figure anchor="test-ical-prop-dtstart-utc">
+            <name>Converting the DTSTART property with UTC time</name>
+            <sourcecode type="text/calendar"><![CDATA[
+DTSTART:20240921T105302Z
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"start": "2024-09-21T10:53:02",
+"timeZone": "Etc/UTC",
+"showWithoutTime": "false"
+]]></sourcecode>
+          </figure>
+          <figure anchor="test-ical-prop-dtstart-float">
+            <name>Converting the DTSTART property with floating time</name>
+            <sourcecode type="text/calendar"><![CDATA[
+DTSTART:20240921T105302
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"start": "2024-09-21T10:53:02",
+"timeZone": null,
+"showWithoutTime": "false"
+]]></sourcecode>
+          </figure>
+          <figure anchor="test-ical-prop-dtstart-date">
+            <name>Converting the DTSTART property with value type DATE</name>
+            <sourcecode type="text/calendar"><![CDATA[
+DTSTART;VALUE=DATE:20240921
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"start": "2024-09-21T00:00:00",
+"timeZone": null,
+"showWithoutTime": "true"
+]]></sourcecode>
+          </figure>
         </section>
         <section anchor="ical-prop-due">
           <name>DUE</name>
