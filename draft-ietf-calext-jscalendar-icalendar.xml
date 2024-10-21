@@ -4011,43 +4011,56 @@ DTSTART;VALUE=DATE:20240921
         <section anchor="ical-prop-due">
           <name>DUE</name>
           <t>
-            The <xref target="RFC5545" section="3.8.2.3" sectionFormat="parens">DUE property </xref> in a VTODO component converts to the <xref target="RFC8984" section="5.2.1" sectionFormat="parens">due</xref> property.
+            The <xref target="RFC5545" section="3.8.2.3" sectionFormat="parens">DUE property </xref> in a VTODO component converts to the <xref target="RFC8984" section="5.2.1" sectionFormat="parens">due</xref> property of the Task object.
           </t>
-          <t>A value of type DATE-TIME converts... TBD</t>
-          <t>A value of type DATE converts... TBD</t>
-          <t>Its parameters convert as follows:</t>
-          <table>
-            <name>Parameters of the DUE property</name>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Property</th>
-                <th>Note</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>TZID</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.19" sectionFormat="comma"/>
-                </td>
-                <td>timeZone</td>
-                <td/>
-              </tr>
-            </tbody>
-          </table>
-          <section anchor="example-ical-prop-due">
-            <name>Example: Converting the DUE property</name>
-            <figure anchor="test-ical-prop-due">
-              <name>Converting the DUE property</name>
-              <sourcecode type="text/calendar"><![CDATA[
-  ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[
-
+          <t>A value of type DATE-TIME converts to a LocalDateTime with both the date and time of the property value. A value of type DATE converts to a LocalDateTime with the date of the property value and its time set to zero time.</t>
+          <t>If the VTODO component does not contain a DTSTART property, then the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DUE property converts to the timeZone property of the Task object. If instead the VTODO component contains both the DUE and DTSTART properties, then the timezone identifier of the DUE property does not convert to a standard JSCalendar element. The value of the due property <bcp14>MUST</bcp14> denote the date and time relative to the timezone of the DTSTART property.</t>
+          <t>If the value type of the DUE property is DATE, then the value of the <xref target="RFC8984" section="4.2.4" sectionFormat="parens">showWithoutTime property</xref> is "true".</t>
+          <t>The following examples illustrate how to convert the DUE property:</t>
+          <figure anchor="test-ical-prop-due-tzid">
+            <name>Converting the DUE property with TZID parameter</name>
+            <sourcecode type="text/calendar"><![CDATA[
+DUE;TZID=Europe/Berlin:20240921T105302
 ]]></sourcecode>
-            </figure>
-          </section>
+            <sourcecode type="json"><![CDATA[
+"due": "2024-09-21T10:53:02",
+"timeZone": "Europe/Berlin",
+"showWithoutTime": "false"
+]]></sourcecode>
+          </figure>
+          <figure anchor="test-ical-prop-due-utc">
+            <name>Converting the DUE property with UTC time</name>
+            <sourcecode type="text/calendar"><![CDATA[
+DUE:20240921T105302Z
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"start": "2024-09-21T10:53:02",
+"timeZone": "Etc/UTC",
+"showWithoutTime": "false"
+]]></sourcecode>
+          </figure>
+          <figure anchor="test-ical-prop-due-float">
+            <name>Converting the DUE property with floating time</name>
+            <sourcecode type="text/calendar"><![CDATA[
+DUE:20240921T105302
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"start": "2024-09-21T10:53:02",
+"timeZone": null,
+"showWithoutTime": "false"
+]]></sourcecode>
+          </figure>
+          <figure anchor="test-ical-prop-due-date">
+            <name>Converting the DUE property with value type DATE</name>
+            <sourcecode type="text/calendar"><![CDATA[
+DUE;VALUE=DATE:20240921
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"start": "2024-09-21T00:00:00",
+"timeZone": null,
+"showWithoutTime": "true"
+]]></sourcecode>
+          </figure>
         </section>
         <section anchor="ical-prop-duration">
           <name>DURATION</name>
