@@ -478,9 +478,8 @@ END:VCALENDAR
         <t>This document defines the new <xref target="ical-param-jsid">JSID</xref> parameter and <xref target="ical-prop-jsid">JSID</xref> property, which allow to set a JSCalendar Id value when converting from JSCalendar to iCalendar.  If they are set on a property or the component, then its value <bcp14>MUST</bcp14> be used a map key when converting from iCalendar to JSCalendar.  If no such parameter or property is set, then an implementation is free to choose any identifier as map key, as long the following requirements are met:</t>
         <ul>
           <li>The identifier <bcp14>MUST</bcp14> be a valid Id value.</li>
-          <li>If the same iCalendar object is converted twice, then the identifier for each property or component <bcp14>MUST</bcp14> stay the same, irrespective of the order in which properties and subcomponents are processed.</li>
+          <li>The identifiers for the exact same iCalendar object <bcp14>MUST</bcp14> stay the same, irrespective of the order in which properties and subcomponents are processed.</li>
         </ul>
-        <t>In a few cases, an iCalendar property and component may both convert to the same JSCalendar object.  Examples for this are the ATTENDEE property and PARTICIPANT component, as well as the LOCATION property and VLOCATION component ...TBD</t>
       </section>
       <section anchor="ical-timezone-identifiers">
         <name>Timezone identifiers</name>
@@ -2099,9 +2098,41 @@ END:VCALENDAR
           <figure anchor="test-ical-comp-vlocation">
             <name>Converting the VLOCATION component</name>
             <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VLOCATION
+UID:4954DC22-5BD6-4E98-844D-0302982F54AC
+NAME:The venue
+STRUCTURED-DATA;VALUE=URI:
+ http://dir.example.com/venues/big-hall.vcf
+END:VLOCATION
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
-
+"locations": {
+  "e4": {
+    "@type": "Location",
+    "name": "The venue",
+    "links": {
+      "21": {
+        "@type": "Link",
+        "href": "http://dir.example.com/venues/big-hall.vcf",
+        "iCalProperty": {
+          "@type": "ICalProperty",
+          "name": "structured-data"
+        }
+      }
+    },
+    "iCalComponent": {
+      "@type": "ICalComponent",
+      "properties": [
+        [
+          "uid",
+          {},
+          "text",
+          "4954DC22-5BD6-4E98-844D-0302982F54AC"
+        ]
+      ]
+    }
+  }
+}
 ]]></sourcecode>
           </figure>
         </section>
