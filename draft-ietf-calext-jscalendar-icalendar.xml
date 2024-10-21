@@ -490,6 +490,10 @@ END:VCALENDAR
         <t>If the TZID parameter value is equal to a name in the <xref target="TZDB">IANA Time Zone Database</xref> then the timezone identifier is that verbatim name.</t>
         <t>If the TZID parameter value is unequal to an IANA timezone name then implementations <bcp14>MAY</bcp14> determine the name of an IANA timezone which has the same timezone rules over the timespan of the calendar object. Otherwise, the non-IANA timezone identifier is represented in JSCalendar as a string starting with the / (SLASH) character, followed by the TZID parameter value. The corresponding VTIMEZONE <bcp14>MUST</bcp14> be converted to the timeZones property with the prefixed identifier as key. See <xref target="test-ical-comp-vtimezone"/> for an example.</t>
       </section>
+      <section anchor="convert-date-and-datetime">
+        <name>DATE and DATE-TIME</name>
+        <t>iCalendar provides the DATE and DATE-TIME value types to distinguish date-only from datetime values. JSCalendar only supports datetime values.  A property value of type DATE-TIME converts to either a LocalDateTime or UTCDateTime, depending on the JSCalendar property definition. A DATE value type converts to a LocalDateTime with zero time.</t>
+      </section>
       <section anchor="ical-components">
         <name>Components</name>
         <section anchor="ical-comp-available">
@@ -3832,7 +3836,6 @@ DESCRIPTION:Some text\;and\na new line.
           <t>
             The <xref target="RFC5545" section="3.8.2.2" sectionFormat="parens">DTEND property </xref> in a VEVENT component converts to the <xref target="RFC8984" section="5.1.2" sectionFormat="parens">duration</xref> property of the Event object.
           </t>
-          <t>A value of type DATE-TIME converts to a LocalDateTime with both the date and time of the property value. A value of type DATE converts to a LocalDateTime with the date of the property value and its time set to zero time.</t>
           <t>The duration is the timespan between the points in time of the DSTART and DTEND property values when converted to UTC time.</t>
           <t>If the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DTEND property differs from that of the DTSTART property, then the DTEND property also converts to a Location object. The timezone identifier converts to the timeZone property of the Location object. The relativeTo property of the Location is set to "end". The Location object is set in the locations property of the Event object.</t>
           <t>Implementations <bcp14>MAY</bcp14> preserve the fact that the duration got determined by the DTEND property. How to this depends on if the timezone identifiers of DTSTART and DTEND are equal.  If the identifiers are equal, then implementations <bcp14>MUST</bcp14> set the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> in the Event object and there add an entry for the path "duration" in the convertedProperties property. The value <bcp14>MUST</bcp14> be an ICalProperty object with the name property set to "dtend". If instead the timezone identifiers are not equal, then implementations <bcp14>MUST</bcp14> set the <xref target="jscal-prop-icalproperty">iCalProperty property</xref> of the Location object.</t>
@@ -3958,9 +3961,8 @@ END:VEVENT
         <section anchor="ical-prop-dtstart">
           <name>DTSTART</name>
           <t>
-            The <xref target="RFC5545" section="3.8.2.4" sectionFormat="parens">DTSTART property </xref> in a VEVENT, VTODO, DAYLIGHT or STANDARD component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">start</xref> property of the Event, Task, or TimeZoneRule object.
-          </t>
-          <t>A value of type DATE-TIME converts to a LocalDateTime with both the date and time of the property value. A value of type DATE converts to a LocalDateTime with the date of the property value and its time set to zero time.</t>
+              The <xref target="RFC5545" section="3.8.2.4" sectionFormat="parens">DTSTART property </xref> in a VEVENT, VTODO, DAYLIGHT or STANDARD component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">start</xref> property of the Event, Task, or TimeZoneRule object.</t>
+          <t>See <xref target="convert-date-and-datetime"/> how to convert DATE and DATE-TIME values.</t>
           <t>For VEVENT and VTODO components, the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DTSTART property converts to the timeZone property of the Event or Task object.  In addition, if the value type of the DTSTART property is DATE, then the value of the <xref target="RFC8984" section="4.2.4" sectionFormat="parens">showWithoutTime property</xref> is "true".</t>
           <t>The following examples illustrate how to convert the DTSTART property for the VEVENT and VTODO components. See <xref target="ical-comp-daylight"/> and <xref target="ical-comp-standard"/> for examples how to convert the DTSTART property for the DAYLIGHT and STANDARD components.</t>
           <figure anchor="test-ical-prop-dtstart-tzid">
@@ -4011,9 +4013,9 @@ DTSTART;VALUE=DATE:20240921
         <section anchor="ical-prop-due">
           <name>DUE</name>
           <t>
-            The <xref target="RFC5545" section="3.8.2.3" sectionFormat="parens">DUE property </xref> in a VTODO component converts to the <xref target="RFC8984" section="5.2.1" sectionFormat="parens">due</xref> property of the Task object.
-          </t>
-          <t>A value of type DATE-TIME converts to a LocalDateTime with both the date and time of the property value. A value of type DATE converts to a LocalDateTime with the date of the property value and its time set to zero time.</t>
+              The <xref target="RFC5545" section="3.8.2.3" sectionFormat="parens">DUE property </xref> in a VTODO component converts to the <xref target="RFC8984" section="5.2.1" sectionFormat="parens">due</xref> property of the Task object.</t>
+          <t>
+                See <xref target="convert-date-and-datetime"/> how to convert DATE and DATE-TIME values.</t>
           <t>If the VTODO component does not contain a DTSTART property, then the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DUE property converts to the timeZone property of the Task object. If instead the VTODO component contains both the DUE and DTSTART properties, then the timezone identifier of the DUE property does not convert to a standard JSCalendar element. The value of the due property <bcp14>MUST</bcp14> denote the date and time relative to the timezone of the DTSTART property.</t>
           <t>If the value type of the DUE property is DATE, then the value of the <xref target="RFC8984" section="4.2.4" sectionFormat="parens">showWithoutTime property</xref> is "true".</t>
           <t>The following examples illustrate how to convert the DUE property:</t>
