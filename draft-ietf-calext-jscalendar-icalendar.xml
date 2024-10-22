@@ -4164,8 +4164,7 @@ GEO:48.858222;2.2945
           <t>
             The <xref target="RFC7986" section="5.10" sectionFormat="parens">IMAGE property</xref> in a VEVENT, VTODO, VLOCATION, or VRESOURCE component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the links property of the Event, Task, Location, or Participant object.
           </t>
-          <t>The IMAGE property value converts to the href property of the Link object. A value of type URI converts as-is. See <xref target="ical-prop-attach"/> how to convert a BINARY value.</t>
-          <t>TBD.. set rel="icon"?</t>
+          <t>The IMAGE property value converts to the href property of the Link object. A value of type URI converts as-is. See <xref target="ical-prop-attach"/> how to convert a BINARY value. If the DISPLAY parameter is set, then the "rel" property of the Link object <bcp14>MUST</bcp14> be set to "icon".</t>
           <t>Its parameters convert as follows:</t>
           <table>
             <name>Parameters of the IMAGE property</name>
@@ -4192,7 +4191,7 @@ GEO:48.858222;2.2945
                   <xref target="RFC7986" section="6.1" sectionFormat="comma"/>
                 </td>
                 <td>display</td>
-                <td/>
+                <td>Set Link.rel to "icon"</td>
               </tr>
               <tr>
                 <td>ENCODING</td>
@@ -4234,6 +4233,7 @@ IMAGE;VALUE=URI;DISPLAY=BADGE;FMTTYPE=image/png:
     "@type": "Link",
     "href": "https://example.com/images/party.png",
     "display": "badge",
+    "rel": "icon",
     "contentType": "image/png",
     "iCalProperty": {
       "@type": "ICalProperty",
