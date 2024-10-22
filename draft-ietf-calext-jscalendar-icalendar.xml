@@ -4264,11 +4264,12 @@ LAST-MODIFIED:20240914T231257Z
         <section anchor="ical-prop-link">
           <name>LINK</name>
           <t>
-            The <xref target="RFC9253" section="8.2" sectionFormat="parens">LINK property</xref> in a VEVENT, VTODO, VCALENDAR, VRESOURCE, PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the links property of the Event, Task, Group, Participant, or Location object.
-          </t>
-          <t>A value of type URI converts... TBD</t>
-          <t>A value of type UID converts... TBD</t>
-          <t>A value of type XML-REFERENCE converts... TBD</t>
+            The <xref target="RFC9253" section="8.2" sectionFormat="parens">LINK property</xref> in a VEVENT, VTODO, VCALENDAR, VRESOURCE, PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref> under the following conditions:</t>
+          <ul>
+            <li>The property value type is URI.</li>
+            <li>The LINKREL parameter either is not set, or the parameter value is a registered relation type as defined in <xref target="RFC8288" section="2.1.1" sectionFormat="parens"/>.</li>
+          </ul>
+          <t>The converted object is set in the links property of the Event, Task, Group, Participant, or Location object. The LINK property value converts to the href property of the Link object.</t>
           <t>Its parameters convert as follows:</t>
           <table>
             <name>Parameters of the LINK property</name>
@@ -4315,17 +4316,49 @@ LAST-MODIFIED:20240914T231257Z
               </tr>
             </tbody>
           </table>
-          <section anchor="example-ical-prop-link">
-            <name>Example: Converting the LINK property</name>
-            <figure anchor="test-ical-prop-link">
-              <name>Converting the LINK property</name>
-              <sourcecode type="text/calendar"><![CDATA[
+          <t>A LINK property with a value type other than URI or an unregistered LINK parameter value does not convert to a standard JSCalendar element. Implementations <bcp14>MAY</bcp14> convert it to the <xref target="jscal-prop-icalcomponent">iCalComponent</xref> property.</t>
+          <t>The following examples illustrate how to convert the LINK property:</t>
+          <figure anchor="test-ical-prop-link">
+            <name>Converting the LINK property to a Link object</name>
+            <sourcecode type="text/calendar"><![CDATA[
+LINK;LABEL=Venue;VALUE=URI:https://example.com/events
   ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[
-
+            <sourcecode type="json"><![CDATA[
+"links": {
+  "l1": {
+    "@type": "Link",
+    "href": "https://example.com/events",
+    "title": "Venue"
+  }
+}
 ]]></sourcecode>
-            </figure>
-          </section>
+          </figure>
+          <figure anchor="test-ical-prop-link-xml-reference">
+            <name>Converting the LINK property to iCalComponent</name>
+            <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VEVENT
+LINK;LINKREL="https://example.com/linkrel/costStructure";
+ VALUE=XML-REFERENCE:
+ https://example.com/xmlDocs/bidFramework.xml#xpointer(id("cost"))
+...
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"iCalComponent": {
+  "@type": "ICalComponent",
+  "name": "vevent",
+  "properties": [
+    [
+      "link",
+      {
+        "linkrel": "https://example.com/linkrel/costStructure"
+      },
+      "xml-reference",
+      "https://example.com/xmlDocs/bidFramework.xml#xpointer(id("cost"))"
+    ]
+  ]
+}
+]]></sourcecode>
+          </figure>
         </section>
         <section anchor="ical-prop-location">
           <name>LOCATION</name>
@@ -4385,7 +4418,7 @@ LAST-MODIFIED:20240914T231257Z
         <section anchor="ical-prop-method">
           <name>METHOD</name>
           <t>
-              The <xref target="RFC5545" section="3.7.2" sectionFormat="parens">METHOD property</xref> in a VCALENDAR component converts to the <xref target="RFC8984">method property (TBD section)</xref> of all Event or Task objects that are listed in the Group object's entries property.
+              The <xref target="RFC5545" section="3.7.2" sectionFormat="parens">METHOD property</xref> in a VCALENDAR component converts to the <xref target="RFC8984" section="4.1.8" sectionFormat="parens">method property</xref> of all Event or Task objects that are listed in the Group object's entries property.
           </t>
           <t>The property value converts in lowercase.</t>
           <t>The following example illustrates how to convert the METHOD property:</t>
@@ -4608,7 +4641,7 @@ BEGIN:VEVENT
         <section anchor="ical-prop-prodid">
           <name>PRODID</name>
           <t>
-            The <xref target="RFC5545" section="3.7.3" sectionFormat="parens">PRODID property</xref> in a VCALENDAR component converts to the <xref target="RFC8984">prodId property (TBD section)</xref> of the Group object, and to the prodId property of all Event or Task objects that are listed in the Group object's entries property.</t>
+            The <xref target="RFC5545" section="3.7.3" sectionFormat="parens">PRODID property</xref> in a VCALENDAR component converts to the <xref target="RFC8984" section="4.1.4" sectionFormat="parens">prodId property</xref> of the Group object, and to the prodId property of all Event or Task objects that are listed in the Group object's entries property.</t>
           <t>The property value converts verbatim.</t>
           <t>The following example illustrates how to convert the PRODID property:</t>
           <figure anchor="test-ical-prop-prodid">
@@ -5363,6 +5396,7 @@ BEGIN:VEVENT
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7986.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8259.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8288.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8607.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8984.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.9073.xml"/>
