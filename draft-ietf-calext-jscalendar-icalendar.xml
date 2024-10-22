@@ -4353,7 +4353,7 @@ LINK;LINKREL="https://example.com/linkrel/costStructure";
         "linkrel": "https://example.com/linkrel/costStructure"
       },
       "xml-reference",
-      "https://example.com/xmlDocs/bidFramework.xml#xpointer(id("cost"))"
+      "https://example.com/xmlDocs/bidFramework.xml#xpointer(id(\"cost\"))"
     ]
   ]
 }
@@ -4365,7 +4365,7 @@ LINK;LINKREL="https://example.com/linkrel/costStructure";
           <t>
             The <xref target="RFC5545" section="3.8.1.7" sectionFormat="parens">LOCATION property</xref> in a VEVENT, VTODO, or PARTICIPANT component converts to a <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>.  The converted object is set in the locations property of the Event, Task, or Participant object.
           </t>
-          <t>Its TEXT value converts... TBD</t>
+          <t>The property value converts to the title property of the Location object.</t>
           <t>Its parameters convert as follows:</t>
           <table>
             <name>Parameters of the LOCATION property</name>
@@ -4396,17 +4396,21 @@ LINK;LINKREL="https://example.com/linkrel/costStructure";
               </tr>
             </tbody>
           </table>
-          <section anchor="example-ical-prop-location">
-            <name>Example: Converting the LOCATION property</name>
-            <figure anchor="test-ical-prop-location">
-              <name>Converting the LOCATION property</name>
-              <sourcecode type="text/calendar"><![CDATA[
+          <t>The following example illustrates how to convert the LOCATION property:</t>
+          <figure anchor="test-ical-prop-location">
+            <name>Converting the LOCATION property</name>
+            <sourcecode type="text/calendar"><![CDATA[
+LOCATION:Conference Room - F123\, Bldg. 002
   ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[
-
+            <sourcecode type="json"><![CDATA[
+"locations": {
+  "f45": {
+    "@type": "Location",
+    "title": "Conference Room - F123, Bldg. 002"
+  }
+}
 ]]></sourcecode>
-            </figure>
-          </section>
+          </figure>
         </section>
         <section anchor="ical-prop-location-type">
           <name>LOCATION-TYPE</name>
