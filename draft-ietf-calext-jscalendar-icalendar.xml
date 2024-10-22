@@ -3457,7 +3457,7 @@ CALENDAR-ADDRESS:mailto:foo@example.com
           <t>
             The <xref target="RFC5545" section="3.8.1.2" sectionFormat="parens">CATEGORIES property</xref> in a VEVENT, VTODO, or VCALENDAR component converts to the <xref target="RFC8984" section="4.2.9" sectionFormat="parens">keywords</xref> property of the Event, Task, or Group object.
           </t>
-          <t>The list of category values converts to a set of keywords. The values convert case-sensitively. Multiple occurrences of the CATGORIES property in the same iCalendar component convert to the same keywords property in the JSCalendar object.</t>
+          <t>The list of category values converts to a set of keywords. The values convert case-sensitively. All CATEGORIES properties in the same iCalendar component convert to the keywords property in the JSCalendar object.</t>
           <t>Its parameters convert as follows:</t>
           <table>
             <name>Parameters of the CATEGORIES property</name>
@@ -4415,9 +4415,32 @@ LOCATION:Conference Room - F123\, Bldg. 002
         <section anchor="ical-prop-location-type">
           <name>LOCATION-TYPE</name>
           <t>
-            The <xref target="RFC9073" section="6.1" sectionFormat="parens">LOCATION-TYPE property</xref> in a VLOCATION component converts to the <xref target="RFC8984" section="4.2.5" sectionFormat="parens">locationTypes</xref> property.
-          </t>
-          <t>Its TEXT value converts... TBD</t>
+            The <xref target="RFC9073" section="6.1" sectionFormat="parens">LOCATION-TYPE property</xref> in a VLOCATION component converts to the <xref target="RFC8984" section="4.2.5" sectionFormat="parens">locationTypes</xref> property.</t>
+          <t>The list of location type values converts to a set of location types. The values convert case-sensitively. All LOCATION-TYPE properties in the same VLOCATION convert to the locationTypes property in the Location object.</t>
+          <t>The following example illustrates how to convert the LOCATION-TYPE property:</t>
+          <figure anchor="test-ical-prop-location-type">
+            <name>Converting the LOCATION property</name>
+            <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VEVENT
+BEGIN:VLOCATION
+LOCATION-TYPE:hotel,restaurant
+LOCATION-TYPE:bar
+...
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"locations": {
+  "1": {
+    "@type": "Location",
+    "locationTypes": {
+      "bar": true,
+      "hotel": true,
+      "restaurant": true
+    },
+    "...": ""
+  }
+}
+]]></sourcecode>
+          </figure>
         </section>
         <section anchor="ical-prop-method">
           <name>METHOD</name>
