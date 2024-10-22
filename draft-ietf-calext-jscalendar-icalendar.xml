@@ -90,11 +90,12 @@ END:VEVENT
 END:VCALENDAR
 ]]></sourcecode>
           </figure>
-          <t>A line containing just the value <tt>...</tt> stands for any other properties that might be present in a component but are irrelevant for this example.  This includes mandatory properties.  Such a line at the end of the example additionally stands for any END content lines, in reserve order of any unbalanced BEGIN content lines. <xref target="example-notation-icalendar-dotdotdot"/> illustrates this as an alternative representation for the examples of <xref target="example-notation-icalendar-implicit-explicit"/>.</t>
+          <t>A line containing just the value <tt>...</tt> stands for any other properties that might be present in a component but are irrelevant for this example.  This includes mandatory properties.  Such a line at the end of the example additionally stands for END content lines to complete any components starting with BEGIN content lines, and any of their missing mandatory properties. <xref target="example-notation-icalendar-dotdotdot"/> illustrates this as an alternative representation for the examples of <xref target="example-notation-icalendar-implicit-explicit"/>.</t>
           <figure anchor="example-notation-icalendar-dotdotdot">
-            <name>Example for additional properties represented by <tt>...</tt>
+            <name>Example for additional properties and component ENDs represented by <tt>...</tt>
             </name>
             <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VCALENDAR
 BEGIN:VEVENT
 SUMMARY:hello
 ...
@@ -2265,14 +2266,13 @@ END:VLOCATION
             <name>Converting the VRESOURCE component</name>
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VEVENT
-...
 BEGIN:VRESOURCE
 UID:456789-abcdef-98765432
 NAME:The projector
 RESOURCE-TYPE:projector
 STRUCTURED-DATA;VALUE=URI:http://dir.example.com/projectors/3d.vcf
 END:VRESOURCE
-END:VEVENT
+...
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 {
@@ -2428,7 +2428,6 @@ END:VEVENT
             <name>Converting the VTIMEZONE component</name>
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VCALENDAR
-...
 BEGIN:VTIMEZONE
 TZID:Puerto_Rico
 LAST-MODIFIED:20240909T122233Z
@@ -2452,10 +2451,8 @@ DTSTART:19450930T020000
 END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
-...
 DTSTART;TZID=Puerto_Rico:20080708T130000
-END:VEVENT
-END:VCALENDAR
+...
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 {
@@ -3013,7 +3010,6 @@ END:VCALENDAR
             <name>Converting the VTODO component</name>
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VCALENDAR
-...
 BEGIN:VTODO
 UID:83C80482-806D-41C4-8029-E438F793005D
 DUE:20060102T030405Z
@@ -3049,7 +3045,6 @@ DUE:20060102T030405Z
             <name>Converting the ACKNOWLEDGED property</name>
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VEVENT
-...
 BEGIN:VALARM
 TRIGGER:-PT5M
 ACTION:DISPLAY
@@ -3098,7 +3093,6 @@ ACKNOWLEDGED:20241002T114703Z
             <name>Converting the ACTION property for value DISPLAY</name>
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VEVENT
-...
 BEGIN:VALARM
 TRIGGER:-PT5M
 ACTION:DISPLAY
@@ -3118,7 +3112,6 @@ ACTION:DISPLAY
             <name>Converting the ACTION property for value AUDIO</name>
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VEVENT
-...
 BEGIN:VALARM
 TRIGGER:-PT5M
 ACTION:AUDIO
@@ -3617,6 +3610,7 @@ COLOR:#ffa07a
           <figure anchor="test-ical-prop-comment-daylight">
             <name>Converting the COMMENT property in a DAYLIGHT component</name>
             <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VCALENDAR
 BEGIN:VTIMEZONE
 TZID:NonIana
 BEGIN:DAYLIGHT
@@ -3627,6 +3621,7 @@ COMMENT:take note of this
 COMMENT:and this
 END:DAYLIGHT
 END:VTIMEZONE
+...
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 {
@@ -3914,9 +3909,6 @@ METHOD:REPLY
 BEGIN:VEVENT
 DTSTAMP:20240304T132000Z
 ...
-END:VEVENT
-...
-END:VCALENDAR
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 {
@@ -4131,7 +4123,41 @@ EXDATE:20230801T130000Z
           <t>
             The <xref target="RFC5545" section="3.8.1.6" sectionFormat="parens">GEO property</xref> in a VEVENT, VTODO, PARTICIPANT or VRESOURCE component converts to a <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>.  The converted object is set in the locations property of the Event, Task, or Participant object.
           </t>
-          <t>Its FLOAT value converts... TBD</t>
+          <t>The pair of FLOAT values converts to an URI with the <xref target="RFC5870">"geo" scheme</xref>.  The first FLOAT value converts to the "coord-a" part of the URI, the second FLOAT value to the "coord-b" part. A preceding plus sign (+) of the FLOAT value <bcp14>MUST</bcp14> be omitted, a preceding minus sign (-) <bcp14>MUST</bcp14> be preserved.  The third, altitude coordinate <bcp14>MUST NOT</bcp14> be set, unless its value is known.</t>
+          <t>The following examples illustrate how to convert the GEO property:</t>
+          <figure anchor="test-ical-prop-geo">
+            <name>Converting the GEO property in a VEVENT</name>
+            <sourcecode type="text/calendar"><![CDATA[
+GEO:+45.5;-93.3
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"locations": {
+  "d4": {
+    "@type": "Location",
+    "coordinates": "geo:45.5,-93.3"
+  }
+}
+]]></sourcecode>
+          </figure>
+          <figure anchor="test-ical-prop-geo-vlocation">
+            <name>Converting the GEO property in a VLOCATION</name>
+            <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VEVENT
+BEGIN:VLOCATION
+NAME:Eiffel Tower
+GEO:48.858222;2.2945
+...
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"locations": {
+  "2": {
+    "@type": "Location",
+    "name": "Eiffel Tower",
+    "coordinates": "geo:48.858222,2.2945"
+  }
+}
+]]></sourcecode>
+          </figure>
         </section>
         <section anchor="ical-prop-image">
           <name>IMAGE</name>
@@ -4359,22 +4385,17 @@ LAST-MODIFIED:20240914T231257Z
         <section anchor="ical-prop-method">
           <name>METHOD</name>
           <t>
-              The <xref target="RFC5545" section="3.7.2" sectionFormat="parens">METHOD property</xref> in a VCALENDAR component converts to the <xref target="RFC8984">method property (TBD section)</xref> of the Event or Task objects, that are listed in the Group object's entries property.
+              The <xref target="RFC5545" section="3.7.2" sectionFormat="parens">METHOD property</xref> in a VCALENDAR component converts to the <xref target="RFC8984">method property (TBD section)</xref> of all Event or Task objects that are listed in the Group object's entries property.
           </t>
-          <t>The property value converts lowercase.</t>
+          <t>The property value converts in lowercase.</t>
           <t>The following example illustrates how to convert the METHOD property:</t>
           <figure anchor="test-ical-prop-method">
-            <name>Converting the IMAGE property</name>
+            <name>Converting the METHOD property</name>
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VCALENDAR
 METHOD:REQUEST
 BEGIN:VEVENT
-ORGANIZER:mailto:foo@example.com
-ATTENDEE;RSVP=YES;PARTSTAT=NEEDS-ACTION:mailto:bar@example.com
 ...
-END:VEVENT
-...
-END:VCALENDAR
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 {
@@ -4587,9 +4608,32 @@ END:VCALENDAR
         <section anchor="ical-prop-prodid">
           <name>PRODID</name>
           <t>
-            The <xref target="RFC5545" section="3.7.3" sectionFormat="parens">PRODID property</xref> in a VCALENDAR component converts to  TBDprodId, entries/*/prodId property.
-          </t>
-          <t>Its TEXT value converts... TBD</t>
+            The <xref target="RFC5545" section="3.7.3" sectionFormat="parens">PRODID property</xref> in a VCALENDAR component converts to the <xref target="RFC8984">prodId property (TBD section)</xref> of the Group object, and to the prodId property of all Event or Task objects that are listed in the Group object's entries property.</t>
+          <t>The property value converts verbatim.</t>
+          <t>The following example illustrates how to convert the PRODID property:</t>
+          <figure anchor="test-ical-prop-prodid">
+            <name>Converting the PRODID property</name>
+            <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VCALENDAR
+PRODID:-//BAZ//bam//EN
+BEGIN:VEVENT
+...
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+{
+  "@type": "Group",
+  "prodId": "-//BAZ//bam//EN",
+  "entries": [
+    {
+      "@type": "Event",
+      "prodId": "-//BAZ//bam//EN",
+      "...": ""
+    }
+  ],
+  "...": ""
+}
+]]></sourcecode>
+          </figure>
         </section>
         <section anchor="ical-prop-proximity">
           <name>PROXIMITY</name>
@@ -5309,6 +5353,7 @@ END:VCALENDAR
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5234.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5545.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5546.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5870.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6321.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6638.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7265.xml"/>
