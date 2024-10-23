@@ -62,8 +62,8 @@
         <section anchor="notation-icalendar">
           <name>iCalendar Examples</name>
           <t>An iCalendar example contains either an extract or a complete representation of iCalendar data.  It always represents an iCalendar object, even if the example only depicts non-VCALENDAR components or properties.</t>
-          <t>An example that only contains iCalendar properties implicitly represents a VEVENT component that is part of a VCALENDAR component.  An example that only contains one or more non-VCALENDAR components implicitly represents a VCALENDAR component that contains them.  Implicit components are assumed to contain mandatory properties with some value, but the actual value is irrelevant for the main point of the example.</t>
-          <t>To illustrate this, <xref target="example-notation-icalendar-implicit-explicit"/>, <xref target="example-notation-icalendar-dotdotdot"/> contains three examples, all of which represent the same iCalendar data.  In the first example, both the VEVENT component and VCALENDAR component are implicit, including their mandatory properties.  In the second example, only the VCALENDAR component and its mandatory properties are implicit.  The third example depicts a complete VCALENDAR component, nothing is implicit.</t>
+          <t>An example that only contains iCalendar properties implicitly represents a VEVENT component that is part of a VCALENDAR component.  An example that only contains one or more non-VCALENDAR components implicitly represents a VCALENDAR component that contains them.  Implicit components are assumed to contain mandatory properties with some value, but the actual value is irrelevant for the main point of the example. Notably, if an implicit component includes an ATTENDEE but not an ORGANIZER property, then an ORGANIZER property having a different calendar address value is implicitly present. The same applies for an example with an ORGANIZER but no ATTENDEE property.</t>
+          <t><xref target="example-notation-icalendar-implicit-explicit"/> contains three examples, all of which represent the same iCalendar data.  In the first example, both the VEVENT component and VCALENDAR component are implicit, including their mandatory properties.  In the second example, only the VCALENDAR component and its mandatory properties are implicit.  The third example depicts a complete VCALENDAR component, nothing is implicit.</t>
           <figure anchor="example-notation-icalendar-implicit-explicit">
             <name>Examples for implicit and explicit iCalendar component notation</name>
             <sourcecode type="text/calendar"><![CDATA[
@@ -90,7 +90,7 @@ END:VEVENT
 END:VCALENDAR
 ]]></sourcecode>
           </figure>
-          <t>A line containing just the value <tt>...</tt> stands for any other properties that might be present in a component but are irrelevant for this example.  This includes mandatory properties.  Such a line at the end of the example additionally stands for END content lines to complete any components starting with BEGIN content lines, and any of their missing mandatory properties. <xref target="example-notation-icalendar-dotdotdot"/> illustrates this as an alternative representation for the examples of <xref target="example-notation-icalendar-implicit-explicit"/>.</t>
+          <t>A line containing just the value <tt>...</tt> stands for any other properties that might be present in a component but are irrelevant for this example.  This includes mandatory properties as described for implicit components.  The line <tt>...</tt> at the end of the example additionally stands for any END content lines to complete components that started with BEGIN content lines, and any of their missing mandatory properties. <xref target="example-notation-icalendar-dotdotdot"/> illustrates this as an alternative representation for the examples of <xref target="example-notation-icalendar-implicit-explicit"/>.</t>
           <figure anchor="example-notation-icalendar-dotdotdot">
             <name>Example for additional properties and component ENDs represented by <tt>...</tt>
             </name>
@@ -3393,7 +3393,8 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
     "sendTo": {
       "imip": "mailto:hcabot@example.com"
     }
-  }
+  },
+"o4": { "...": "" }
 }
 ]]></sourcecode>
           </figure>
@@ -3415,7 +3416,8 @@ ATTENDEE;PARTSTAT=TENTATIVE:mailto:foo@example.com
     "participationStatus": "tentative",
     "scheduleUpdated": "2023-07-23T12:52:01Z",
     "...": ""
-  }
+  },
+"o4": { "...": "" }
 }
 ]]></sourcecode>
           </figure>
@@ -3945,7 +3947,8 @@ END:VEVENT
     "scheduleUpdated": "2024-03-04T13:20:00Z",
     "calendarAddress": "mailto:foo@example.com",
     "...": ""
-  }
+  },
+"o4": { "...": "" }
 }
 ]]></sourcecode>
           </figure>
@@ -4700,9 +4703,9 @@ ATTENDEE;RSVP=TRUE;PARTSTAT=NEEDS-ACTION:mailto:bar@example.com
         <section anchor="ical-prop-participant-type">
           <name>PARTICIPANT-TYPE</name>
           <t>
-            The <xref target="RFC9073" section="6.2" sectionFormat="parens">PARTICIPANT-TYPE property</xref> in a PARTICIPANT component converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">roles property</xref>.
+            The <xref target="RFC9073" section="6.2" sectionFormat="parens">PARTICIPANT-TYPE property</xref> in a PARTICIPANT component converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">roles property</xref> of the Participant object.
           </t>
-          <t>Its TEXT value converts... TBD</t>
+          <t>The property value converts in lowercase.</t>
           <t>Its parameters convert as follows:</t>
           <table>
             <name>Parameters of the PARTICIPANT-TYPE property</name>
@@ -4725,17 +4728,24 @@ ATTENDEE;RSVP=TRUE;PARTSTAT=NEEDS-ACTION:mailto:bar@example.com
               </tr>
             </tbody>
           </table>
-          <section anchor="example-ical-prop-participant-type">
-            <name>Example: Converting the PARTICIPANT-TYPE property</name>
+          <t>The following example illustrates how to convert the PARTICIPANT-TYPE property:</t>
             <figure anchor="test-ical-prop-participant-type">
               <name>Converting the PARTICIPANT-TYPE property</name>
               <sourcecode type="text/calendar"><![CDATA[
+BEGIN:PARTICIPANT
+PARTICIPANT-TYPE:CONTACT
+CALENDAR-ADDRESS:mailto:foo@example.com
+...
+END:PARTICIPANT
+ATTENDEE;RSVP=YES;PARTSTAT=NEEDS-ACTION:mailto:foo@example.com
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
-
+"participants": {
+  "a": { "@type": "Participant", "roles": { "attendee": true, "contact": true }, "...": "" },
+  "b": { "...": "" }
+}
 ]]></sourcecode>
             </figure>
-          </section>
         </section>
         <section anchor="ical-prop-percent-complete">
           <name>PERCENT-COMPLETE</name>
