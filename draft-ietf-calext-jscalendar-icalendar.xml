@@ -4810,9 +4810,19 @@ PERCENT-COMPLETE:78
         <section anchor="ical-prop-priority">
           <name>PRIORITY</name>
           <t>
-            The <xref target="RFC5545" section="3.8.1.9" sectionFormat="parens">PRIORITY property</xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.4.1" sectionFormat="parens">priority property</xref>.
+            The <xref target="RFC5545" section="3.8.1.9" sectionFormat="parens">PRIORITY property</xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.4.1" sectionFormat="parens">priority property</xref> of the Event or Task object.
           </t>
-          <t>Its INTEGER value converts... TBD</t>
+          <t>The property value converts as-is.</t>
+          <t>The following example illustrates how to convert the PRIORITY property:</t>
+          <figure anchor="test-ical-prop-priority">
+            <name>Converting the PRIORITY property</name>
+            <sourcecode type="text/calendar"><![CDATA[
+PRIORITY:3
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"priority": 3
+]]></sourcecode>
+          </figure>
         </section>
         <section anchor="ical-prop-prodid">
           <name>PRODID</name>
@@ -4851,44 +4861,32 @@ BEGIN:VEVENT
         <section anchor="ical-prop-rdate">
           <name>RDATE</name>
           <t>
-              The <xref target="RFC5545" section="3.8.5.2" sectionFormat="parens">RDATE property</xref> in a VEVENT, VTODO, DAYLIGHT or STANDARD component converts to a <xref target="RFC8984" section="1.4.9" sectionFormat="parens">PatchObject object</xref>.  The converted object is set in the recurrenceOverrides property of the Event, Task, or TimeZoneRule object.
+              The <xref target="RFC5545" section="3.8.5.2" sectionFormat="parens">RDATE property</xref> of type DATE or DATE-TIME in a VEVENT, VTODO, DAYLIGHT or STANDARD component converts to a <xref target="RFC8984" section="1.4.9" sectionFormat="parens">PatchObject object</xref>.  The converted object is set in the recurrenceOverrides property of the Event, Task, or TimeZoneRule object.
           </t>
-          <t>A value of type DATE-TIME converts... TBD</t>
-          <t>A value of type DATE converts... TBD</t>
-          <t>A value of type PERIOD converts... TBD</t>
-          <t>Its parameters convert as follows:</t>
-          <table>
-            <name>Parameters of the RDATE property</name>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Property</th>
-                <th>Note</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>TZID</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.19" sectionFormat="comma"/>
-                </td>
-                <td>iCalProperty</td>
-                <td>Non-standard</td>
-              </tr>
-            </tbody>
-          </table>
-          <section anchor="example-ical-prop-rdate">
-            <name>Example: Converting the RDATE property</name>
-            <figure anchor="test-ical-prop-rdate">
-              <name>Converting the RDATE property</name>
-              <sourcecode type="text/calendar"><![CDATA[
+          <t>The property value converts to the key in the recurrenceOverrides property value. See <xref target="convert-date-and-datetime"/> how to convert DATE and DATE-TIME values. For Event Task objects, the datetime <bcp14>MUST</bcp14> be relative to the timezone identified by the timeZone property, for TimeZoneRule objects the datetime is relative to the UTC offset specified in the offsetFrom property.  The PatchObject value <bcp14>MUST</bcp14> be an empty JSON object.</t>
+          <t>An RDATE property of value type PERIOD does not convert to a standard JSCalendar element.  Implementations <bcp14>MAY</bcp14> convert it to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the Event, Task, or TimeZoneRule object.</t>
+          <t>The following example illustrates how to convert the RDATE property:</t>
+          <figure anchor="test-ical-prop-rdate">
+            <name>Converting the RDATE property</name>
+            <sourcecode type="text/calendar"><![CDATA[
+DTSTART:20230101T130000Z
+RRULE:FREQ=MONTHLY
+RDATE:20230805T170000Z
   ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[
-
+            <sourcecode type="json"><![CDATA[
+"start": "2023-01-01T13:00:00",
+"timeZone": "Etc/UTC",
+"recurrenceRules": [
+  {
+    "@type": "RecurrenceRule",
+    "frequency": "monthly"
+  }
+],
+"recurrenceOverrides": {
+  "2023-08-05T17:00:00": {}
+}
 ]]></sourcecode>
-            </figure>
-          </section>
+          </figure>
         </section>
         <section anchor="ical-prop-recurrence-id">
           <name>RECURRENCE-ID</name>
