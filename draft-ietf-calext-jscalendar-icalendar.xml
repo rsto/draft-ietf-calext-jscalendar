@@ -4475,12 +4475,11 @@ BEGIN:VEVENT
         <section anchor="ical-prop-name">
           <name>NAME</name>
           <t>
-            The <xref target="RFC7986" section="5.1" sectionFormat="parens">NAME property</xref> in a VLOCATION or VRESOURCE component converts to the <xref target="RFC8984" section="4.2.5" sectionFormat="parens">name</xref> property.
+            The <xref target="RFC7986" section="5.1" sectionFormat="parens">NAME property</xref> in a VLOCATION or VRESOURCE component converts to the name property of the <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location</xref> or <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant</xref> object.
           </t>
           <t>
-            The <xref target="RFC7986" section="5.1" sectionFormat="parens">NAME property</xref> in a VCALENDAR component converts to the <xref target="RFC8984" section="4.2.1" sectionFormat="parens">title</xref> property.
+            The <xref target="RFC7986" section="5.1" sectionFormat="parens">NAME property</xref> in a VCALENDAR component converts to the <xref target="RFC8984" section="4.2.1" sectionFormat="parens">title</xref> property of the Group object.
           </t>
-          <t>Its TEXT value converts... TBD</t>
           <t>Its parameters convert as follows:</t>
           <table>
             <name>Parameters of the NAME property</name>
@@ -4511,17 +4510,53 @@ BEGIN:VEVENT
               </tr>
             </tbody>
           </table>
-          <section anchor="example-ical-prop-name">
-            <name>Example: Converting the NAME property</name>
-            <figure anchor="test-ical-prop-name">
-              <name>Converting the NAME property</name>
-              <sourcecode type="text/calendar"><![CDATA[
+          <t>The following examples illustrate how to convert the NAME property:</t>
+          <figure anchor="test-ical-prop-name-vcalendar">
+            <name>Converting the NAME property in a VCALENDAR component</name>
+            <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VCALENDAR
+NAME:Company Vacation Days
+...
   ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[
-
+            <sourcecode type="json"><![CDATA[
+{
+  "@type": "Group",
+  "title": "Company Vacation Days",
+  "...": ""
+}
 ]]></sourcecode>
-            </figure>
-          </section>
+          </figure>
+          <figure anchor="test-ical-prop-name-vlocation-participant">
+            <name>Converting the NAME property in the VLOCATION and PARTICIPANT components</name>
+            <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VEVENT
+BEGIN:PARTICIPANT
+NAME:John Doe
+...
+END:PARTICIPANT
+BEGIN:VLOCATION
+NAME:Fred's Bar
+...
+END:VLOCATION
+...
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"locations": {
+  "1": {
+    "@type": "Location",
+    "name": "Fred's Bar",
+    "...": ""
+  }
+},
+"participants": {
+  "1": {
+    "@type": "Participant",
+    "name": "John Doe",
+    "...": ""
+  }
+}
+]]></sourcecode>
+          </figure>
         </section>
         <section anchor="ical-prop-organizer">
           <name>ORGANIZER</name>
