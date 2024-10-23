@@ -3236,7 +3236,7 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
           <t>
             The <xref target="RFC5545" section="3.8.4.1" sectionFormat="parens">ATTENDEE property</xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref>.  The converted object is set in the participants property of the Event or Task object.
           </t>
-          <t>The ATTENDEE property value converts to both the calendarAddress and sendTo properties of the Participant object. If the URI value is in the "mailto" scheme, then it converts to the "imip" method in the sendTo property, otherwise it converts to the "other" method.</t>
+          <t>The ATTENDEE property value converts to both the calendarAddress and sendTo properties of the Participant object. If the CAL-ADDRESS value is in the "mailto" scheme, then it converts to the "imip" method in the sendTo property, otherwise it converts to the "other" method.</t>
           <t>The ATTENDEE property parameters convert as follows:</t>
           <table>
             <name>Parameters of the ATTENDEE property</name>
@@ -3373,7 +3373,7 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
           </table>
           <t>If no ROLE parameter is set, then the "attendee" role in the roles property <bcp14>MUST</bcp14> be set.</t>
           <t>Every calendar address value of the DELEGATED-FROM, DELEGATED-TO, or MEMBER parameters converts to the identifier of an Participant object. This identifier is determined by finding that Participant object in the participants property, which has a calendarAddress property value matching the parameter value. If no such Participant object exists after all properties and components have been converted, then a new Participant object having that calendarAddress property value is created. If multiple Participant objects match, then choosing the Participant identifier is implementation-specific.</t>
-          <t>An ATTENDEE property and a PARTICIPANT component in the same iCalendar component convert to the same Participant object, if the value of the ATTENDEE property and the value of the CALENDAR-ADDRESS property in the PARTICIPANT component are equal. How to deal with diverging converted property values is implementation-specific.</t>
+          <t>An ATTENDEE property and a PARTICIPANT component in the same iCalendar component convert to the same Participant object, if their converted calendarAddress property values are equal after <xref target="RFC3986" section="6" sectionFormat="parens">URI normalization</xref>. How to deal with conflicting values when converting other Participant properties is implementation-specific.</t>
           <t>The following examples illustrate how to convert the ATTENDEE property:</t>
           <figure anchor="test-ical-prop-attendee">
             <name>Converting the ATTENDEE property</name>
@@ -4561,10 +4561,12 @@ END:VLOCATION
         <section anchor="ical-prop-organizer">
           <name>ORGANIZER</name>
           <t>
-            The <xref target="RFC5545" section="3.8.4.3" sectionFormat="parens">ORGANIZER property</xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.4.4" sectionFormat="parens">replyTo</xref> property.
+            The <xref target="RFC5545" section="3.8.4.3" sectionFormat="parens">ORGANIZER property</xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.4.4" sectionFormat="parens">replyTo</xref> property. In addition, it converts to a Participant object in the  <xref target="RFC8984" section="4.4.6" sectionFormat="parens">participants</xref> property.
           </t>
-          <t>Its CAL-ADDRESS value converts... TBD</t>
-          <t>Its parameters convert as follows:</t>
+          <t>If the CAL-ADDRESS property value is in the "mailto" scheme, then it converts to the "imip" method in the replyTo property, otherwise it converts to the "other" method. The property value also converts to the calendarAddress property of the Participant object. The "owner" role is set in the roles property of the Participant. In contrast to the ATTENDEE property, the property value does not convert to the sendTo property of the Participant object.</t>
+          <t>An ORGANIZER property, an ATTENDEE property, and a PARTICIPANT component in the same iCalendar component all convert to the same Participant object, if their converted calendarAddress property values are equal after <xref target="RFC3986" section="6" sectionFormat="parens">URI normalization</xref>. How to deal with conflicting values when converting other Participant properties is implementation-specific.</t>
+          <t>Implementations <bcp14>MAY</bcp14> preserve arbitrary parameters of the ORGANIZER property, in which case they <bcp14>MUST</bcp14> convert these to a "replyTo" entry in the convertedProperties property of the Event or Task object's <xref target="jscal-prop-icalcomponent">iCalComponent property</xref>.</t>
+          <t>The ORGANIZER property parameters convert as follows:</t>
           <table>
             <name>Parameters of the ORGANIZER property</name>
             <thead>
@@ -4634,17 +4636,66 @@ END:VLOCATION
               </tr>
             </tbody>
           </table>
-          <section anchor="example-ical-prop-organizer">
-            <name>Example: Converting the ORGANIZER property</name>
-            <figure anchor="test-ical-prop-organizer">
-              <name>Converting the ORGANIZER property</name>
-              <sourcecode type="text/calendar"><![CDATA[
+          <t>The following examples illustrate how to convert the ORGANIZER property:</t>
+          <figure anchor="test-ical-prop-organizer">
+            <name>Converting an ORGANIZER property</name>
+            <sourcecode type="text/calendar"><![CDATA[
+ORGANIZER:mailto:foo@example.com
+...
+ATTENDEE;RSVP=TRUE;PARTSTAT=NEEDS-ACTION:mailto:bar@example.com
   ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[
-
+            <sourcecode type="json"><![CDATA[
+"replyTo": {
+  "imip": "mailto:foo@example.com"
+},
+"participants": {
+  "a": {
+    "@type": "Participant",
+    "calendarAddress": "mailto:foo@example.com",
+    "roles": {
+      "owner": true
+    }
+  },
+  "b": {
+    "@type": "Participant",
+    "...": ""
+  }
+}
 ]]></sourcecode>
-            </figure>
-          </section>
+          </figure>
+          <figure anchor="test-ical-prop-organizer-and-attendee">
+            <name>Converting an ORGANIZER and ATTENDEE property</name>
+            <sourcecode type="text/calendar"><![CDATA[
+ORGANIZER:mailto:foo@example.com
+ATTENDEE;RSVP=FALSE;PARTSTAT=ACCEPTED;CN="Jane Doe":mailto:foo@example.com
+...
+ATTENDEE;RSVP=TRUE;PARTSTAT=NEEDS-ACTION:mailto:bar@example.com
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"replyTo": {
+  "imip": "mailto:foo@example.com"
+},
+"participants": {
+  "a": {
+    "@type": "Participant",
+    "calendarAddress": "mailto:foo@example.com",
+    "name": "Jane Doe",
+    "participationStatus": "accepted",
+    "roles": {
+      "attendee": true,
+      "owner": true
+    },
+    "sendTo": {
+      "imip": "mailto:foo@example.com"
+    }
+  },
+  "b": {
+    "@type": "Participant",
+    "...": ""
+  }
+}
+]]></sourcecode>
+          </figure>
         </section>
         <section anchor="ical-prop-participant-type">
           <name>PARTICIPANT-TYPE</name>
