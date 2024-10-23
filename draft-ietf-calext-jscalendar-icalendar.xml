@@ -3938,22 +3938,13 @@ DTSTAMP:20240304T132000Z
 BEGIN:VEVENT
 BEGIN:PARTICIPANT
 DTSTAMP:20240304T132000Z
-CALENDAR-ADDRESS:mailto:foo@example.com
 ...
-END:PARTICIPANT
-ATTENDEE;PARTSTAT=ACCEPTED:mailto:foo@example.com
-...
-END:VEVENT
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "participants": {
   "f4": {
     "@type": "Participant",
     "scheduleUpdated": "2024-03-04T13:20:00Z",
-    "calendarAddress": "mailto:foo@example.com",
-    "...": ""
-  },
-  "o4": {
     "...": ""
   }
 }
@@ -4771,6 +4762,50 @@ ATTENDEE;RSVP=YES;PARTSTAT=NEEDS-ACTION:mailto:foo@example.com
           <t>The property value converts as-is.</t>
           <t>A Task object which has the method property set might represent an iTIP reply of one of the participants in the object. In this case the value of the percentComplete property in the Task also converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">percentComplete</xref> of that Participant object, which represents the participant from which the iTIP reply originated.</t>
           <t>The PERCENT-COMPLETE property in a PARTICIPANT component converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">percentComplete property</xref> of the Participant object.</t>
+          <t>The following examples illustrate how to convert the PERCENT-COMPLETE property:</t>
+          <figure anchor="test-ical-prop-percent-complete-method">
+            <name>Converting the PERCENT-COMPLETE property in a VEVENT component</name>
+            <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VCALENDAR
+METHOD:REPLY
+BEGIN:VTODO
+PERCENT-COMPLETE:53
+...
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+{
+  "@type": "Group",
+  "entries": [
+    {
+      "@type": "Task",
+      "method": "reply",
+      "percentComplete": 53,
+      "...": ""
+    }
+  ],
+  "...": ""
+}
+]]></sourcecode>
+          </figure>
+          <figure anchor="test-ical-prop-percent-complete-participant">
+            <name>Converting the PERCENT-COMPLETE property in a PARTICIPANT component</name>
+            <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VTODO
+BEGIN:PARTICIPANT
+PERCENT-COMPLETE:78
+...
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"@type": "Task",
+"participants": {
+  "f4": {
+    "@type": "Participant",
+    "percentComplete": 78,
+    "...": ""
+  }
+}
+]]></sourcecode>
+          </figure>
         </section>
         <section anchor="ical-prop-priority">
           <name>PRIORITY</name>
