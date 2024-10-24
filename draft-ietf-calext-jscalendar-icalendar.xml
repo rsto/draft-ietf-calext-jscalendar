@@ -5108,7 +5108,8 @@ REQUEST-STATUS:2.0;Success
             </tbody>
           </table>
           <t>The string values of the FREQ, WKST, RSCALE convert to lowercase.  The UNTIL part in a VEVENT or VTODO converts to a LocalDateTime value relative to the timezone of the Event or Task, or to floating time for the TimeZoneRule object.</t>
-          <figure anchor="test-ical-type-recur">
+          <t>The following example illustrates how to convert the RRULE property:</t>
+          <figure anchor="test-ical-prop-rrule">
             <name>Example for converting the RRULE property</name>
             <sourcecode type="icalendar"><![CDATA[
 DTSTART;TZID=Europe/Berlin:20240101T010000
@@ -5120,7 +5121,7 @@ RRULE:FREQ=YEARLY
  ;BYMINUTE=30
  ;UNTIL=20240930T120000Z
 ]]></sourcecode>
-            <sourcecode type="jscalendar"><![CDATA[
+            <sourcecode type="json"><![CDATA[
 "recurrenceRules": [
   {
     "@type": "RecurrenceRule",
@@ -5153,19 +5154,42 @@ RRULE:FREQ=YEARLY
         <section anchor="ical-prop-sequence">
           <name>SEQUENCE</name>
           <t>
-            The <xref target="RFC5545" section="3.8.7.4" sectionFormat="parens">SEQUENCE property</xref> in a PARTICIPANT component converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">scheduleSequence property</xref>.
+            The <xref target="RFC5545" section="3.8.7.4" sectionFormat="parens">SEQUENCE property</xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.1.7" sectionFormat="parens">sequence property</xref>. The SEQUENCE property in a PARTICIPANT component converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">scheduleSequence property</xref>.
           </t>
-          <t>
-            The <xref target="RFC5545" section="3.8.7.4" sectionFormat="parens">SEQUENCE property</xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.1.7" sectionFormat="parens">sequence property</xref>.
-          </t>
-          <t>Its INTEGER value converts... TBD</t>
+          <t>The property value converts as-is.</t>
+          <t>The following example illustrates how to convert the SEQUENCE property:</t>
+          <figure anchor="test-ical-prop-sequence">
+            <name>Example for converting the SEQUENCE property</name>
+            <sourcecode type="icalendar"><![CDATA[
+SEQUENCE:3
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"sequence": 3
+]]></sourcecode>
+          </figure>
         </section>
         <section anchor="ical-prop-source">
           <name>SOURCE</name>
           <t>
             The <xref target="RFC7986" section="5.8" sectionFormat="parens">SOURCE property</xref> in a VCALENDAR component converts to the <xref target="RFC8984" section="5.3.2" sectionFormat="parens">source property</xref>.
           </t>
-          <t>Its URI value converts... TBD</t>
+          <t>The property value converts as-is.</t>
+          <t>The following example illustrates how to convert the SOURCE property:</t>
+          <figure anchor="test-ical-prop-source">
+            <name>Example for converting the SOURCE property</name>
+            <sourcecode type="icalendar"><![CDATA[
+BEGIN:VCALENDAR
+SOURCE;VALUE=URI:https://example.com/holidays.ics
+...
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+{
+  "@type": "Group",
+  "source": "https://example.com/holidays.ics",
+  "...": ""
+}
+]]></sourcecode>
+          </figure>
         </section>
         <section anchor="ical-prop-status">
           <name>STATUS</name>
