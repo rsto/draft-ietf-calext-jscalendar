@@ -170,294 +170,296 @@ SUMMARY:he
     </section>
     <section anchor="convert-icalendar-to-jscalendar">
       <name>Converting iCalendar to JSCalendar</name>
-      <section anchor="ical-objects">
-        <name>iCalendar Objects</name>
-        <t>
-          <xref target="RFC5545" section="3.4"/> allows for an iCalendar stream to contain one or more iCalendar objects.  In contrast, this specification only defines conversion for streams consisting of a single iCalendar object. Converting streams of multiple iCalendar objects is implementation-specific.  All following sections of this document use the terms "iCalendar object" and "VCALENDAR component" interchangeably.</t>
-        <t>The <xref target="RFC5545" section="3.4" sectionFormat="parens">VCALENDAR component</xref> converts to a <xref target="RFC8984" section="2.3" sectionFormat="parens">Group object</xref>.</t>
-        <t>Its properties convert as follows:</t>
-        <table>
-          <name>Properties of the VCALENDAR component</name>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Reference</th>
-              <th>Group property</th>
-              <th>See</th>
-              <th>Note</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>CALSCALE</td>
-              <td>
-                <xref target="RFC5545" section="3.7.1" sectionFormat="comma"/>
-              </td>
-              <td>iCalComponent/properties</td>
-              <td/>
-              <td>Non-standard</td>
-            </tr>
-            <tr>
-              <td>CATEGORIES</td>
-              <td>
-                <xref target="RFC5545" section="3.8.1.2" sectionFormat="comma"/>
-              </td>
-              <td>keywords</td>
-              <td>
-                <xref target="ical-prop-categories"/>
-              </td>
-              <td/>
-            </tr>
-            <tr>
-              <td>COLOR</td>
-              <td>
-                <xref target="RFC7986" section="5.9" sectionFormat="comma"/>
-              </td>
-              <td>color</td>
-              <td>
-                <xref target="ical-prop-color"/>
-              </td>
-              <td/>
-            </tr>
-            <tr>
-              <td>CONCEPT</td>
-              <td>
-                <xref target="RFC9253" section="8.1" sectionFormat="comma"/>
-              </td>
-              <td>categories</td>
-              <td>
-                <xref target="ical-prop-concept"/>
-              </td>
-              <td/>
-            </tr>
-            <tr>
-              <td>CREATED</td>
-              <td>
-                <xref target="RFC5545" section="3.8.7.1" sectionFormat="comma"/>
-              </td>
-              <td>created</td>
-              <td>
-                <xref target="ical-prop-created"/>
-              </td>
-              <td/>
-            </tr>
-            <tr>
-              <td>DESCRIPTION</td>
-              <td>
-                <xref target="RFC5545" section="3.8.1.5" sectionFormat="comma"/>
-              </td>
-              <td>description</td>
-              <td>
-                <xref target="ical-prop-description"/>
-              </td>
-              <td/>
-            </tr>
-            <tr>
-              <td>LAST-MODIFIED</td>
-              <td>
-                <xref target="RFC5545" section="3.8.7.3" sectionFormat="comma"/>
-              </td>
-              <td>updated</td>
-              <td>
-                <xref target="ical-prop-last-modified"/>
-              </td>
-              <td/>
-            </tr>
-            <tr>
-              <td>LINK</td>
-              <td>
-                <xref target="RFC9253" section="8.2" sectionFormat="comma"/>
-              </td>
-              <td>links</td>
-              <td>
-                <xref target="ical-prop-link"/>
-              </td>
-              <td/>
-            </tr>
-            <tr>
-              <td>METHOD</td>
-              <td>
-                <xref target="RFC5545" section="3.7.2" sectionFormat="comma"/>
-              </td>
-              <td>entries/*/method</td>
-              <td>
-                <xref target="ical-prop-method"/>
-              </td>
-              <td/>
-            </tr>
-            <tr>
-              <td>NAME</td>
-              <td>
-                <xref target="RFC7986" section="5.1" sectionFormat="comma"/>
-              </td>
-              <td>title</td>
-              <td>
-                <xref target="ical-prop-name"/>
-              </td>
-              <td/>
-            </tr>
-            <tr>
-              <td>PRODID</td>
-              <td>
-                <xref target="RFC5545" section="3.7.3" sectionFormat="comma"/>
-              </td>
-              <td>prodId, entries/*/prodId</td>
-              <td>
-                <xref target="ical-prop-prodid"/>
-              </td>
-              <td/>
-            </tr>
-            <tr>
-              <td>REFRESH-INTERVAL</td>
-              <td>
-                <xref target="RFC7986" section="5.7" sectionFormat="comma"/>
-              </td>
-              <td>iCalComponent/properties</td>
-              <td/>
-              <td>Non-standard</td>
-            </tr>
-            <tr>
-              <td>SOURCE</td>
-              <td>
-                <xref target="RFC7986" section="5.8" sectionFormat="comma"/>
-              </td>
-              <td>source</td>
-              <td>
-                <xref target="ical-prop-source"/>
-              </td>
-              <td/>
-            </tr>
-            <tr>
-              <td>STRUCTURED-DATA</td>
-              <td>
-                <xref target="RFC9073" section="6.6" sectionFormat="comma"/>
-              </td>
-              <td>links</td>
-              <td>
-                <xref target="ical-prop-structured-data"/>
-              </td>
-              <td/>
-            </tr>
-            <tr>
-              <td>UID</td>
-              <td>
-                <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma"/>
-              </td>
-              <td>uid</td>
-              <td>
-                <xref target="ical-prop-uid"/>
-              </td>
-              <td/>
-            </tr>
-            <tr>
-              <td>URL</td>
-              <td>
-                <xref target="RFC5545" section="3.8.4.6" sectionFormat="comma"/>
-              </td>
-              <td>links</td>
-              <td>
-                <xref target="ical-prop-url"/>
-              </td>
-              <td/>
-            </tr>
-            <tr>
-              <td>VERSION</td>
-              <td>
-                <xref target="RFC5545" section="3.7.4" sectionFormat="comma"/>
-              </td>
-              <td>iCalComponent/properties</td>
-              <td/>
-              <td>Non-standard</td>
-            </tr>
-            <tr>
-              <td>XML</td>
-              <td>
-                <xref target="RFC6321" section="4.2" sectionFormat="comma"/>
-              </td>
-              <td>links</td>
-              <td>
-                <xref target="ical-prop-xml"/>
-              </td>
-              <td/>
-            </tr>
-          </tbody>
-        </table>
-        <t>Its components convert as follows:</t>
-        <table>
-          <name>Components of the VCALENDAR component</name>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Reference</th>
-              <th>Group property</th>
-              <th>See</th>
-              <th>Note</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>VAVAILABILITY</td>
-              <td>
-                <xref target="RFC7953" section="3.1" sectionFormat="comma"/>
-              </td>
-              <td>iCalComponent/components</td>
-              <td/>
-              <td>Non-standard</td>
-            </tr>
-            <tr>
-              <td>VEVENT</td>
-              <td>
-                <xref target="RFC5545" section="3.6.1" sectionFormat="comma"/>
-              </td>
-              <td>entries</td>
-              <td>
-                <xref target="ical-comp-vevent"/>
-              </td>
-              <td/>
-            </tr>
-            <tr>
-              <td>VJOURNAL</td>
-              <td>
-                <xref target="RFC5545" section="3.6.3" sectionFormat="comma"/>
-              </td>
-              <td>iCalComponent/components</td>
-              <td/>
-              <td>Non-standard</td>
-            </tr>
-            <tr>
-              <td>VTIMEZONE</td>
-              <td>
-                <xref target="RFC5545" section="3.6.5" sectionFormat="comma"/>
-              </td>
-              <td>timeZones</td>
-              <td>
-                <xref target="ical-comp-vtimezone"/>
-              </td>
-              <td/>
-            </tr>
-            <tr>
-              <td>VTODO</td>
-              <td>
-                <xref target="RFC5545" section="3.6.2" sectionFormat="comma"/>
-              </td>
-              <td>entries</td>
-              <td>
-                <xref target="ical-comp-vtodo"/>
-              </td>
-              <td/>
-            </tr>
-          </tbody>
-        </table>
-        <t>The following example illustrates how to convert the VCALENDAR component:</t>
-        <figure anchor="test-ical-comp-vcalendar">
-          <name>Converting the VCALENDAR component</name>
-          <sourcecode type="text/calendar"><![CDATA[
+      <section anchor="ical-general">
+        <name>General rules</name>
+        <section anchor="ical-objects">
+          <name>iCalendar Objects</name>
+          <t>
+            <xref target="RFC5545" section="3.4"/> allows for an iCalendar stream to contain one or more iCalendar objects.  In contrast, this specification only defines conversion for streams consisting of a single iCalendar object. Converting streams of multiple iCalendar objects is implementation-specific.  All following sections of this document use the terms "iCalendar object" and "VCALENDAR component" interchangeably.</t>
+          <t>The <xref target="RFC5545" section="3.4" sectionFormat="parens">VCALENDAR component</xref> converts to a <xref target="RFC8984" section="2.3" sectionFormat="parens">Group object</xref>.</t>
+          <t>Its properties convert as follows:</t>
+          <table>
+            <name>Properties of the VCALENDAR component</name>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Reference</th>
+                <th>Group property</th>
+                <th>See</th>
+                <th>Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>CALSCALE</td>
+                <td>
+                  <xref target="RFC5545" section="3.7.1" sectionFormat="comma"/>
+                </td>
+                <td>iCalComponent/properties</td>
+                <td/>
+                <td>Non-standard</td>
+              </tr>
+              <tr>
+                <td>CATEGORIES</td>
+                <td>
+                  <xref target="RFC5545" section="3.8.1.2" sectionFormat="comma"/>
+                </td>
+                <td>keywords</td>
+                <td>
+                  <xref target="ical-prop-categories"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
+                <td>COLOR</td>
+                <td>
+                  <xref target="RFC7986" section="5.9" sectionFormat="comma"/>
+                </td>
+                <td>color</td>
+                <td>
+                  <xref target="ical-prop-color"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
+                <td>CONCEPT</td>
+                <td>
+                  <xref target="RFC9253" section="8.1" sectionFormat="comma"/>
+                </td>
+                <td>categories</td>
+                <td>
+                  <xref target="ical-prop-concept"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
+                <td>CREATED</td>
+                <td>
+                  <xref target="RFC5545" section="3.8.7.1" sectionFormat="comma"/>
+                </td>
+                <td>created</td>
+                <td>
+                  <xref target="ical-prop-created"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
+                <td>DESCRIPTION</td>
+                <td>
+                  <xref target="RFC5545" section="3.8.1.5" sectionFormat="comma"/>
+                </td>
+                <td>description</td>
+                <td>
+                  <xref target="ical-prop-description"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
+                <td>LAST-MODIFIED</td>
+                <td>
+                  <xref target="RFC5545" section="3.8.7.3" sectionFormat="comma"/>
+                </td>
+                <td>updated</td>
+                <td>
+                  <xref target="ical-prop-last-modified"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
+                <td>LINK</td>
+                <td>
+                  <xref target="RFC9253" section="8.2" sectionFormat="comma"/>
+                </td>
+                <td>links</td>
+                <td>
+                  <xref target="ical-prop-link"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
+                <td>METHOD</td>
+                <td>
+                  <xref target="RFC5545" section="3.7.2" sectionFormat="comma"/>
+                </td>
+                <td>entries/*/method</td>
+                <td>
+                  <xref target="ical-prop-method"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
+                <td>NAME</td>
+                <td>
+                  <xref target="RFC7986" section="5.1" sectionFormat="comma"/>
+                </td>
+                <td>title</td>
+                <td>
+                  <xref target="ical-prop-name"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
+                <td>PRODID</td>
+                <td>
+                  <xref target="RFC5545" section="3.7.3" sectionFormat="comma"/>
+                </td>
+                <td>prodId, entries/*/prodId</td>
+                <td>
+                  <xref target="ical-prop-prodid"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
+                <td>REFRESH-INTERVAL</td>
+                <td>
+                  <xref target="RFC7986" section="5.7" sectionFormat="comma"/>
+                </td>
+                <td>iCalComponent/properties</td>
+                <td/>
+                <td>Non-standard</td>
+              </tr>
+              <tr>
+                <td>SOURCE</td>
+                <td>
+                  <xref target="RFC7986" section="5.8" sectionFormat="comma"/>
+                </td>
+                <td>source</td>
+                <td>
+                  <xref target="ical-prop-source"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
+                <td>STRUCTURED-DATA</td>
+                <td>
+                  <xref target="RFC9073" section="6.6" sectionFormat="comma"/>
+                </td>
+                <td>links</td>
+                <td>
+                  <xref target="ical-prop-structured-data"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
+                <td>UID</td>
+                <td>
+                  <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma"/>
+                </td>
+                <td>uid</td>
+                <td>
+                  <xref target="ical-prop-uid"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
+                <td>URL</td>
+                <td>
+                  <xref target="RFC5545" section="3.8.4.6" sectionFormat="comma"/>
+                </td>
+                <td>links</td>
+                <td>
+                  <xref target="ical-prop-url"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
+                <td>VERSION</td>
+                <td>
+                  <xref target="RFC5545" section="3.7.4" sectionFormat="comma"/>
+                </td>
+                <td>iCalComponent/properties</td>
+                <td/>
+                <td>Non-standard</td>
+              </tr>
+              <tr>
+                <td>XML</td>
+                <td>
+                  <xref target="RFC6321" section="4.2" sectionFormat="comma"/>
+                </td>
+                <td>links</td>
+                <td>
+                  <xref target="ical-prop-xml"/>
+                </td>
+                <td/>
+              </tr>
+            </tbody>
+          </table>
+          <t>Its components convert as follows:</t>
+          <table>
+            <name>Components of the VCALENDAR component</name>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Reference</th>
+                <th>Group property</th>
+                <th>See</th>
+                <th>Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>VAVAILABILITY</td>
+                <td>
+                  <xref target="RFC7953" section="3.1" sectionFormat="comma"/>
+                </td>
+                <td>iCalComponent/components</td>
+                <td/>
+                <td>Non-standard</td>
+              </tr>
+              <tr>
+                <td>VEVENT</td>
+                <td>
+                  <xref target="RFC5545" section="3.6.1" sectionFormat="comma"/>
+                </td>
+                <td>entries</td>
+                <td>
+                  <xref target="ical-comp-vevent"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
+                <td>VJOURNAL</td>
+                <td>
+                  <xref target="RFC5545" section="3.6.3" sectionFormat="comma"/>
+                </td>
+                <td>iCalComponent/components</td>
+                <td/>
+                <td>Non-standard</td>
+              </tr>
+              <tr>
+                <td>VTIMEZONE</td>
+                <td>
+                  <xref target="RFC5545" section="3.6.5" sectionFormat="comma"/>
+                </td>
+                <td>timeZones</td>
+                <td>
+                  <xref target="ical-comp-vtimezone"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
+                <td>VTODO</td>
+                <td>
+                  <xref target="RFC5545" section="3.6.2" sectionFormat="comma"/>
+                </td>
+                <td>entries</td>
+                <td>
+                  <xref target="ical-comp-vtodo"/>
+                </td>
+                <td/>
+              </tr>
+            </tbody>
+          </table>
+          <t>The following example illustrates how to convert the VCALENDAR component:</t>
+          <figure anchor="test-ical-comp-vcalendar">
+            <name>Converting the VCALENDAR component</name>
+            <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VCALENDAR
 UID:41aa02b6-42d0-4f45-8cb4-8b5075be2e14
 BEGIN:VEVENT
 ...
 ]]></sourcecode>
-          <sourcecode type="json"><![CDATA[
+            <sourcecode type="json"><![CDATA[
 {
   "...": "",
   "@type": "Group",
@@ -470,29 +472,130 @@ BEGIN:VEVENT
   "uid": "41aa02b6-42d0-4f45-8cb4-8b5075be2e14"
 }
 ]]></sourcecode>
-        </figure>
-      </section>
-      <section anchor="generating-jscalendar-ids">
-        <name>JSCalendar Ids</name>
-        <t>In many places in JSCalendar, a JSON map is used where the map keys are of type Id (<xref target="RFC8984" section="1.4.1"/>.  If an iCalendar property or component converts to a value in these JSON maps, then an implementation needs to choose an identifier as key.</t>
-        <t>This document defines the new <xref target="ical-param-jsid">JSID</xref> parameter and <xref target="ical-prop-jsid">JSID property</xref>, which allow to set a JSCalendar Id value when converting from JSCalendar to iCalendar.  If they are set on a property or the component, then its value <bcp14>MUST</bcp14> be used a map key when converting from iCalendar to JSCalendar.  If no such parameter or property is set, then an implementation is free to choose any identifier as map key, as long the following requirements are met:</t>
-        <ul>
-          <li>The identifier <bcp14>MUST</bcp14> be a valid Id value.</li>
-          <li>The identifiers for the exact same iCalendar object <bcp14>MUST</bcp14> stay the same, irrespective of the order in which properties and subcomponents are processed.</li>
-        </ul>
-      </section>
-      <section anchor="ical-timezone-identifiers">
-        <name>Timezone identifiers</name>
-        <t>Converting temporal properties such as DTSTART, DTEND, and RECURRENCE-ID requires to not only determine the date and time of the property value, but also the timezone it references.</t>
-        <t>If the property value data type is <xref target="RFC5545" section="3.3.4" sectionFormat="parens">DATE</xref> or  <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #1: DATE WITH LOCAL TIME</xref> then the timezone identifier is the JSON null value in JSCalendar.</t>
-        <t>If the property value data type is <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #2: DATE WITH UTC TIME</xref> then the timezone identifier is the string "Etc/UTC" in JSCalendar.</t>
-        <t>If the property value data type is <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #3: DATE WITH LOCAL TIME AND TIME ZONE REFERENCE</xref> then the timezone identifier is determined by the TZID parameter value:</t>
-        <t>If the TZID parameter value is equal to a name in the <xref target="TZDB">IANA Time Zone Database</xref> then the timezone identifier is that verbatim name.</t>
-        <t>If the TZID parameter value is unequal to an IANA timezone name then implementations <bcp14>MAY</bcp14> determine the name of an IANA timezone which has the same timezone rules over the timespan of the calendar object. Otherwise, the non-IANA timezone identifier is represented in JSCalendar as a string starting with the / (SLASH) character, followed by the TZID parameter value. The corresponding VTIMEZONE <bcp14>MUST</bcp14> be converted to the timeZones property with the prefixed identifier as key. See <xref target="test-ical-comp-vtimezone"/> for an example.</t>
-      </section>
-      <section anchor="convert-date-and-datetime">
-        <name>DATE and DATE-TIME</name>
-        <t>iCalendar provides the DATE and DATE-TIME value types to distinguish date-only from datetime values. JSCalendar only supports datetime values.  A property value of type DATE-TIME converts to either a LocalDateTime or UTCDateTime, depending on the JSCalendar property definition. A DATE value type converts to a LocalDateTime with zero time.</t>
+          </figure>
+        </section>
+        <section anchor="ical-recurring-components">
+          <name>Recurring Components</name>
+          <t>Components in an iCalendar object generally convert to distinct JSCalendar objects. For example, two VEVENT components with different UID property values in the same iCalendar object convert to two separate Event objects in the Group object's entries. This rule does not apply to recurrence overrides, defined as follows.</t>
+          <t>A VEVENT (or VTODO) component is a recurrence override if it has the RECURRENCE-ID property set, and the iCalendar object contains a VEVENT (or VTODO) component that does not have the RECURRENCE-ID but the RRULE property set, and the UID property values of the two components are equal. The component without the RECURRENCE-ID property is in that case referred to as the "main component".</t>
+          <t>The main component converts to an entry in the Group object's entries property.</t>
+          <t>The recurrence override converts to the recurrenceOverrides property of the converted main component. Its RECURRENCE-ID property value converts to the key in the recurrenceOverrides property. The value of the recurrenceOverrides property at that key is the PatchObject that transform the converted main component into the converted recurrence override. The recurrenceId and recurrenceIdTimeZone properties <bcp14>MUST NOT</bcp14> be set in the PatchObject.</t>
+          <t>The following example illustrates how to convert a main component and its recurrence override:</t>
+          <figure anchor="test-ical-comp-vevent-recurrence-overrides">
+            <name>Converting VEVENT recurrence overrides</name>
+            <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VCALENDAR
+BEGIN:VEVENT
+UID:F4257E1D-5461-4EF6-840F-9DFC653EB559
+RRULE:FREQ=DAILY
+DTSTART;TZID=Europe/Berlin:20240101T140000
+...
+END:VEVENT
+BEGIN:VEVENT
+UID:F4257E1D-5461-4EF6-840F-9DFC653EB559
+RECURRENCE-ID;TZID=Europe/Berlin:20240202T140000
+DTSTART;TZID=Europe/Berlin:20240202T160000
+...
+END:VEVENT
+END:VCALENDAR
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+{
+  "...": "",
+  "@type": "Group",
+  "entries": [
+    {
+      "...": "",
+      "@type": "Event",
+      "recurrenceOverrides": {
+        "2024-02-02T14:00:00": {
+          "start": "2024-02-02T16:00:00"
+        }
+      },
+      "recurrenceRules": [
+        {
+          "@type": "RecurrenceRule",
+          "frequency": "daily"
+        }
+      ],
+      "start": "2024-01-01T14:00:00",
+      "timeZone": "Europe/Berlin",
+      "uid": "F4257E1D-5461-4EF6-840F-9DFC653EB559"
+    }
+  ]
+}
+]]></sourcecode>
+          </figure>
+          <t>A VEVENT (or VTODO) component is a stand-alone recurrence instance if it has the RECURRENCE-ID property set and the iCalendar object does not contain its related main component. Each stand-alone recurrence instance converts to a distinct Event (or Task) object in the Group object's entries property.  The recurrenceId property <bcp14>MUST</bcp14> be set, the recurrenceIdTimeZone property <bcp14>MUST</bcp14> be set if not "null". The converted objects sort in order of appearance of the iCalendar components.</t>
+          <t>The following example illustrates how to convert stand-alone recurrence instances:</t>
+          <figure anchor="test-ical-comp-vevent-recurrence-instances">
+            <name>Converting VEVENT recurrence instances</name>
+            <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VCALENDAR
+BEGIN:VEVENT
+UID:F4257E1D-5461-4EF6-840F-9DFC653EB559
+RECURRENCE-ID;TZID=Europe/Berlin:20240202T140000
+DTSTART;TZID=Europe/Berlin:20240202T160000
+...
+END:VEVENT
+BEGIN:VEVENT
+UID:F4257E1D-5461-4EF6-840F-9DFC653EB559
+RECURRENCE-ID;TZID=Europe/Berlin:20240103T140000
+DTSTART;TZID=Europe/Berlin:20240103T160000
+...
+END:VEVENT
+END:VCALENDAR
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+{
+  "...": "",
+  "@type": "Group",
+  "entries": [
+    {
+      "...": "",
+      "@type": "Event",
+      "recurrenceId": "2024-02-02T14:00:00",
+      "recurrenceIdTimeZone": "2024-02-02T14:00:00",
+      "start": "2024-02-02T16:00:00",
+      "timeZone": "Europe/Berlin",
+      "uid": "F4257E1D-5461-4EF6-840F-9DFC653EB559"
+    },
+    {
+      "...": "",
+      "@type": "Event",
+      "recurrenceId": "2024-01-03T14:00:00",
+      "recurrenceIdTimeZone": "2024-02-02T14:00:00",
+      "start": "2024-01-03T14:00:00",
+      "timeZone": "Europe/Berlin",
+      "uid": "F4257E1D-5461-4EF6-840F-9DFC653EB559"
+    }
+  ]
+}
+]]></sourcecode>
+          </figure>
+        </section>
+        <section anchor="generating-jscalendar-ids">
+          <name>JSCalendar Ids</name>
+          <t>In many places in JSCalendar, a JSON map is used where the map keys are of type Id (<xref target="RFC8984" section="1.4.1"/>.  If an iCalendar property or component converts to a value in these JSON maps, then an implementation needs to choose an identifier as key.</t>
+          <t>This document defines the new <xref target="ical-param-jsid">JSID</xref> parameter and <xref target="ical-prop-jsid">JSID property</xref>, which allow to set a JSCalendar Id value when converting from JSCalendar to iCalendar.  If they are set on a property or the component, then its value <bcp14>MUST</bcp14> be used a map key when converting from iCalendar to JSCalendar.  If no such parameter or property is set, then an implementation is free to choose any identifier as map key, as long the following requirements are met:</t>
+          <ul>
+            <li>The identifier <bcp14>MUST</bcp14> be a valid Id value.</li>
+            <li>The identifiers for the exact same iCalendar object <bcp14>MUST</bcp14> stay the same, irrespective of the order in which properties and subcomponents are processed.</li>
+          </ul>
+        </section>
+        <section anchor="ical-timezone-identifiers">
+          <name>Timezone identifiers</name>
+          <t>Converting temporal properties such as DTSTART, DTEND, and RECURRENCE-ID requires to not only determine the date and time of the property value, but also the timezone it references.</t>
+          <t>If the property value data type is <xref target="RFC5545" section="3.3.4" sectionFormat="parens">DATE</xref> or  <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #1: DATE WITH LOCAL TIME</xref> then the timezone identifier is the JSON null value in JSCalendar.</t>
+          <t>If the property value data type is <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #2: DATE WITH UTC TIME</xref> then the timezone identifier is the string "Etc/UTC" in JSCalendar.</t>
+          <t>If the property value data type is <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #3: DATE WITH LOCAL TIME AND TIME ZONE REFERENCE</xref> then the timezone identifier is determined by the TZID parameter value:</t>
+          <t>If the TZID parameter value is equal to a name in the <xref target="TZDB">IANA Time Zone Database</xref> then the timezone identifier is that verbatim name.</t>
+          <t>If the TZID parameter value is unequal to an IANA timezone name then implementations <bcp14>MAY</bcp14> determine the name of an IANA timezone which has the same timezone rules over the timespan of the calendar object. Otherwise, the non-IANA timezone identifier is represented in JSCalendar as a string starting with the / (SLASH) character, followed by the TZID parameter value. The corresponding VTIMEZONE <bcp14>MUST</bcp14> be converted to the timeZones property with the prefixed identifier as key. See <xref target="test-ical-comp-vtimezone"/> for an example.</t>
+        </section>
+        <section anchor="convert-date-and-datetime">
+          <name>DATE and DATE-TIME</name>
+          <t>iCalendar provides the DATE and DATE-TIME value types to distinguish date-only from datetime values. JSCalendar only supports datetime values.  A property value of type DATE-TIME converts to either a LocalDateTime or UTCDateTime, depending on the JSCalendar property definition. A DATE value type converts to a LocalDateTime with zero time.</t>
+        </section>
       </section>
       <section anchor="ical-components">
         <name>Components</name>
@@ -1322,6 +1425,7 @@ END:VALARM
         <section anchor="ical-comp-vevent">
           <name>VEVENT</name>
           <t>The <xref target="RFC5545" section="3.6.1" sectionFormat="parens">VEVENT component</xref> converts to a <xref target="RFC8984" section="2.1" sectionFormat="parens">Event object</xref>.</t>
+          <t>VEVENT components with different UID property values in the same iCalendar object convert to different entries in the Group.  They sort in the same order as in the VCALENDAR component.</t>
           <t>Its properties convert as follows:</t>
           <table>
             <name>Properties of the VEVENT component</name>
@@ -1801,36 +1905,8 @@ END:VALARM
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VCALENDAR
 BEGIN:VEVENT
-UID:bda09d03-564c-4ac8-851c-24e66d6abe3c
-DTSTART:20060102T030405Z
-...
-]]></sourcecode>
-            <sourcecode type="json"><![CDATA[
-{
-  "...": "",
-  "@type": "Group",
-  "entries": [
-    {
-      "...": "",
-      "@type": "Event",
-      "showWithoutTime": false,
-      "start": "2006-01-02T03:04:05",
-      "timeZone": "Etc/UTC",
-      "uid": "bda09d03-564c-4ac8-851c-24e66d6abe3c"
-    }
-  ]
-}
-]]></sourcecode>
-          </figure>
-          <section anchor="ical-comp-vevent-differing-uid">
-            <name>Converting VEVENT components with differing UID values</name>
-            <t>VEVENT components having differing UID property values convert to different entries in the Group.  They sort in the same order as in the VCALENDAR component.</t>
-            <figure anchor="test-ical-comp-vevent-uids">
-              <name>Converting VEVENT components with differing UID values</name>
-              <sourcecode type="text/calendar"><![CDATA[
-BEGIN:VCALENDAR
-BEGIN:VEVENT
 UID:DE935D01-3DF7-4201-B61A-D77D05C8B21A
+DTSTART:20060102T030405Z
 ...
 END:VEVENT
 BEGIN:VEVENT
@@ -1839,119 +1915,28 @@ UID:60BE3D6E-6383-473A-BCF1-3C43EA1FA571
 END:VEVENT
 END:VCALENDAR
 ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[
+            <sourcecode type="json"><![CDATA[
 {
   "...": "",
   "@type": "Group",
   "entries": [
     {
-      "...": "",
       "@type": "Event",
-      "uid": "DE935D01-3DF7-4201-B61A-D77D05C8B21A"
+      "showWithoutTime": false,
+      "start": "2006-01-02T03:04:05",
+      "timeZone": "Etc/UTC",
+      "uid": "DE935D01-3DF7-4201-B61A-D77D05C8B21A",
+      "...": ""
     },
     {
-      "...": "",
       "@type": "Event",
-      "uid": "60BE3D6E-6383-473A-BCF1-3C43EA1FA571"
+      "uid": "60BE3D6E-6383-473A-BCF1-3C43EA1FA571",
+      "...": ""
     }
   ]
 }
 ]]></sourcecode>
-            </figure>
-          </section>
-          <section>
-            <name>Converting VEVENT recurrence overrides</name>
-            <t>VEVENT components having equal UID property values and <em>all but one of them</em> having the RECURRENCE-ID property set, convert to a single Event object.  The VEVENT component without a RECURRENCE-ID property converts to the Event object, all other VEVENT components with that UID value convert to a recurrence override of that event.</t>
-            <figure anchor="test-ical-comp-vevent-recurrence-overrides">
-              <name>Converting VEVENT recurrence overrides</name>
-              <sourcecode type="text/calendar"><![CDATA[
-BEGIN:VCALENDAR
-BEGIN:VEVENT
-UID:F4257E1D-5461-4EF6-840F-9DFC653EB559
-RRULE:FREQ=DAILY
-DTSTART:20240101T140000
-...
-END:VEVENT
-BEGIN:VEVENT
-UID:F4257E1D-5461-4EF6-840F-9DFC653EB559
-RECURRENCE-ID:20240202T140000
-DTSTART:20240202T160000
-...
-END:VEVENT
-END:VCALENDAR
-]]></sourcecode>
-              <sourcecode type="json"><![CDATA[
-{
-  "...": "",
-  "@type": "Group",
-  "entries": [
-    {
-      "...": "",
-      "@type": "Event",
-      "recurrenceOverrides": {
-        "2024-02-02T14:00:00": {
-          "start": "2024-02-02T16:00:00"
-        }
-      },
-      "recurrenceRules": [
-        {
-          "@type": "RecurrenceRule",
-          "frequency": "daily"
-        }
-      ],
-      "start": "2024-01-01T14:00:00",
-      "uid": "F4257E1D-5461-4EF6-840F-9DFC653EB559"
-    }
-  ]
-}
-]]></sourcecode>
-            </figure>
-          </section>
-          <section>
-            <name>Converting VEVENT recurrence instance</name>
-            <t>VEVENT components having equal UID property values and <em>all of them</em> having a RECURRENCE-ID property set, convert to multiple Event objects.  Each Event <bcp14>MUST</bcp14> have the <tt>recurrenceId</tt> property set, as well as the <tt>recurrenceIdTimeZone</tt> property if not <tt>null</tt>. They sort in the same order as in the VCALENDAR component.</t>
-            <figure anchor="test-ical-comp-vevent-recurrence-instances">
-              <name>Converting VEVENT recurrence instance</name>
-              <sourcecode type="text/calendar"><![CDATA[
-BEGIN:VCALENDAR
-BEGIN:VEVENT
-UID:F4257E1D-5461-4EF6-840F-9DFC653EB559
-RECURRENCE-ID:20240202T140000
-DTSTART:20240202T160000
-...
-END:VEVENT
-BEGIN:VEVENT
-UID:F4257E1D-5461-4EF6-840F-9DFC653EB559
-RECURRENCE-ID:20240103T140000
-DTSTART:20240103T140000
-...
-END:VEVENT
-END:VCALENDAR
-]]></sourcecode>
-              <sourcecode type="json"><![CDATA[
-{
-  "...": "",
-  "@type": "Group",
-  "entries": [
-    {
-      "...": "",
-      "@type": "Event",
-      "recurrenceId": "2024-02-02T14:00:00",
-      "start": "2024-02-02T16:00:00",
-      "uid": "F4257E1D-5461-4EF6-840F-9DFC653EB559"
-    },
-    {
-      "...": "",
-      "@type": "Event",
-      "recurrenceId": "2024-01-03T14:00:00",
-      "start": "2024-01-03T14:00:00",
-      "uid": "F4257E1D-5461-4EF6-840F-9DFC653EB559"
-    }
-  ]
-}
-]]></sourcecode>
-            </figure>
-          </section>
+          </figure>
         </section>
         <section anchor="ical-comp-vfreebusy">
           <name>VFREEBUSY</name>
@@ -2512,6 +2497,7 @@ DTSTART;TZID=Puerto_Rico:20080708T130000
         <section anchor="ical-comp-vtodo">
           <name>VTODO</name>
           <t>The <xref target="RFC5545" section="3.6.2" sectionFormat="parens">VTODO component</xref> converts to a <xref target="RFC8984" section="2.2" sectionFormat="parens">Task object</xref>.</t>
+          <t>VTODO components with different UID property values in the same iCalendar object convert to different entries in the Group.  They sort in the same order as in the VCALENDAR component.</t>
           <t>Its properties convert as follows:</t>
           <table>
             <name>Properties of the VTODO component</name>
@@ -3005,7 +2991,6 @@ DTSTART;TZID=Puerto_Rico:20080708T130000
               </tr>
             </tbody>
           </table>
-          <t>See <xref target="ical-comp-vevent-differing-uid"/> ff. how to convert multiple VTODOs in a VCALENDAR component.</t>
           <t>The following example illustrates how to convert the VTODO component:</t>
           <figure anchor="test-ical-comp-vtodo">
             <name>Converting the VTODO component</name>
@@ -3837,14 +3822,14 @@ DESCRIPTION:Some text\;and\na new line.
           <t>
             The <xref target="RFC5545" section="3.8.2.2" sectionFormat="parens">DTEND property</xref> in a VEVENT component converts to the <xref target="RFC8984" section="5.1.2" sectionFormat="parens">duration property</xref> of the Event object.
           </t>
-          <t>The duration is the timespan between the points in time of the DSTART and DTEND property values when converted to UTC time.</t>
+          <t>The duration is the timespan between the points in time of the DTSTART and DTEND property values when converted to UTC time.</t>
           <t>If the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DTEND property differs from that of the DTSTART property, then the DTEND property also converts to a Location object. The timezone identifier converts to the timeZone property of the Location object. The relativeTo property of the Location is set to "end". The Location object is set in the locations property of the Event object.</t>
           <t>Implementations <bcp14>MAY</bcp14> preserve the fact that the duration got determined by the DTEND property. How to this depends on if the timezone identifiers of DTSTART and DTEND are equal.  If the identifiers are equal, then implementations <bcp14>MUST</bcp14> set the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> in the Event object and there add an entry for the path "duration" in the convertedProperties property. The value <bcp14>MUST</bcp14> be an ICalProperty object with the name property set to "dtend". If instead the timezone identifiers are not equal, then implementations <bcp14>MUST</bcp14> set the <xref target="jscal-prop-icalproperty">iCalProperty property</xref> of the Location object.</t>
           <t>The following examples illustrate how to convert the DTEND property:</t>
           <figure anchor="test-ical-prop-dtend-same-tzid">
             <name>Converting the DTEND property with same timezone</name>
             <sourcecode type="text/calendar"><![CDATA[
-DSTART;TZID=Australia/Melbourne:20241002T130000
+DTSTART;TZID=Australia/Melbourne:20241002T130000
 DTEND;TZID=Australia/Melbourne:20241002T140000
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
@@ -3864,7 +3849,7 @@ DTEND;TZID=Australia/Melbourne:20241002T140000
           <figure anchor="test-ical-prop-dtend-different-tzid">
             <name>Converting the DTEND property with different timezone</name>
             <sourcecode type="text/calendar"><![CDATA[
-DSTART;TZID=Europe/Berlin:20241017T130005
+DTSTART;TZID=Europe/Berlin:20241017T130005
 DTEND;TZID=Asia/Bangkok:20241018T020325
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
@@ -3886,7 +3871,7 @@ DTEND;TZID=Asia/Bangkok:20241018T020325
           <figure anchor="test-ical-prop-dtend-date-type">
             <name>Converting the DTEND property with DATE value type</name>
             <sourcecode type="text/calendar"><![CDATA[
-DSTART;VALUE=DATE:20240102
+DTSTART;VALUE=DATE:20240102
 DTEND;VALUE=DATE:20240112
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
@@ -4890,52 +4875,10 @@ RDATE:20230805T170000Z
         </section>
         <section anchor="ical-prop-recurrence-id">
           <name>RECURRENCE-ID</name>
-          <t>
-            The <xref target="RFC5545" section="3.8.4.4" sectionFormat="parens">RECURRENCE-ID property</xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.3.1" sectionFormat="parens">recurrenceId property</xref>.
-          </t>
-          <t>A value of type DATE-TIME converts... TBD</t>
-          <t>A value of type DATE converts... TBD</t>
-          <t>Its parameters convert as follows:</t>
-          <table>
-            <name>Parameters of the RECURRENCE-ID property</name>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Property</th>
-                <th>Note</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>RANGE</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.13" sectionFormat="comma"/>
-                </td>
-                <td>iCalProperty</td>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
-                <td>TZID</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.19" sectionFormat="comma"/>
-                </td>
-                <td>recurrenceIdTimeZone</td>
-                <td/>
-              </tr>
-            </tbody>
-          </table>
-          <section anchor="example-ical-prop-recurrence-id">
-            <name>Example: Converting the RECURRENCE-ID property</name>
-            <figure anchor="test-ical-prop-recurrence-id">
-              <name>Converting the RECURRENCE-ID property</name>
-              <sourcecode type="text/calendar"><![CDATA[
-  ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[
-
-]]></sourcecode>
-            </figure>
-          </section>
+          <t>The <xref target="RFC5545" section="3.8.4.4" sectionFormat="parens">RECURRENCE-ID property</xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.3.1" sectionFormat="parens">recurrenceId property</xref> of the Event or Task object. The <xref target="ical-timezone-identifiers">timezone identifier</xref> of the RECURRENCE-ID property converts to the recurrenceIdTimeZone property.</t>
+          <t>See <xref target="convert-date-and-datetime"/> how to convert DATE and DATE-TIME values.</t>
+          <t>The <xref target="RFC5545" section="3.2.13" sectionFormat="parens">RANGE parameter</xref> does not convert to a standard JSCalendar element. Implementations <bcp14>MAY</bcp14> preserve it in the <xref target="jscal-prop-icalcomponent">iCalComponent</xref> property.</t>
+          <t>See <xref target="ical-recurring-components"/> for further requirements and examples.</t>
         </section>
         <section anchor="ical-prop-refid">
           <name>REFID</name>
