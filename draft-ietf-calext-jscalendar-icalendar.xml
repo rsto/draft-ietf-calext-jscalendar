@@ -4349,7 +4349,7 @@ LINK;LINKREL="https://example.com/linkrel/costStructure";
         <section anchor="ical-prop-location">
           <name>LOCATION</name>
           <t>
-            The <xref target="RFC5545" section="3.8.1.7" sectionFormat="parens">LOCATION property</xref> in a VEVENT, VTODO, or PARTICIPANT component converts to a <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>.  The converted object is set in the locations property of the Event, Task, or Participant object.
+            The <xref target="RFC5545" section="3.8.1.7" sectionFormat="parens">LOCATION property</xref> in a VEVENT, VTODO, or PARTICIPANT component converts to a <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>, unless its DERIVED parameter value is TRUE. The converted object is set in the locations property of the Event, Task, or Participant object.
           </t>
           <t>The property value converts to the title property of the Location object.</t>
           <t>Its parameters convert as follows:</t>
@@ -4382,6 +4382,7 @@ LINK;LINKREL="https://example.com/linkrel/costStructure";
               </tr>
             </tbody>
           </table>
+          <t>If the DERIVED parameter value is TRUE, it does not convert to a Location object. Instead, a VLOCATION component is expected to represent the location. Implementations <bcp14>MAY</bcp14> in this case convert the LOCATION property to the <xref target="jscal-prop-icalcomponent">iCalComponent</xref> property.</t>
           <t>The following example illustrates how to convert the LOCATION property:</t>
           <figure anchor="test-ical-prop-location">
             <name>Converting the LOCATION property</name>
