@@ -4382,7 +4382,7 @@ LINK;LINKREL="https://example.com/linkrel/costStructure";
               </tr>
             </tbody>
           </table>
-          <t>If the DERIVED parameter value is TRUE, it does not convert to a Location object. Instead, a VLOCATION component is expected to represent the location. Implementations <bcp14>MAY</bcp14> in this case convert the LOCATION property to the <xref target="jscal-prop-icalcomponent">iCalComponent</xref> property.</t>
+          <t>If the DERIVED parameter value is TRUE, then the LOCATION property does not convert to a Location object. Instead, a VLOCATION component is expected to represent the location. Implementations <bcp14>MAY</bcp14> the property to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref>.</t>
           <t>The following example illustrates how to convert the LOCATION property:</t>
           <figure anchor="test-ical-prop-location">
             <name>Converting the LOCATION property</name>
@@ -4892,50 +4892,82 @@ RDATE:20230805T170000Z
         <section anchor="ical-prop-related-to">
           <name>RELATED-TO</name>
           <t>
-            The <xref target="RFC5545" section="3.8.4.5" sectionFormat="parens">RELATED-TO property</xref> in a VEVENT, VTODO, or VALARM component converts to the <xref target="RFC8984" section="4.1.3" sectionFormat="parens">relatedTo property</xref>.
+            The <xref target="RFC5545" section="3.8.4.5" sectionFormat="parens">RELATED-TO property</xref> in a VEVENT, VTODO, or VALARM component converts to a <xref target="RFC8984" section="1.4.10" sectionFormat="parens">Relation object</xref>.  The converted object is set in the relatedTo property of the <xref target="RFC8984" section="4.1.3" sectionFormat="parens">Event or Task object</xref>, or the <xref target="RFC8984" section="4.5.2" sectionFormat="parens">Alert object</xref>.
           </t>
-          <t>Its TEXT value converts... TBD</t>
-          <t>Its parameters convert as follows:</t>
-          <table>
-            <name>Parameters of the RELATED-TO property</name>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Property</th>
-                <th>Note</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>GAP</td>
-                <td>
-                  <xref target="RFC9253" section="6.2" sectionFormat="comma"/>
-                </td>
-                <td>iCalProperty</td>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
-                <td>RELTYPE</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.15" sectionFormat="comma"/>
-                </td>
-                <td>iCalProperty</td>
-                <td>Non-standard</td>
-              </tr>
-            </tbody>
-          </table>
-          <section anchor="example-ical-prop-related-to">
-            <name>Example: Converting the RELATED-TO property</name>
-            <figure anchor="test-ical-prop-related-to">
-              <name>Converting the RELATED-TO property</name>
-              <sourcecode type="text/calendar"><![CDATA[
+          <t>The property value in a VEVENT or VTODO converts as-is to the key of the Relation object in the relatedTo property. The property value in a VALARM converts to the same value as the key of that Alert object, which represents the VALARM component having that property value set in the UID property. Any RELTYPE parameters convert to the relations property in that Relation object. The parameter values convert in lowercase.</t>
+          <t>The <xref target="RFC9253" section="6.2" sectionFormat="parens">GAP parameter</xref> does not convert a standard JSCalendar element. Implementations <bcp14>MAY</bcp14> convert it to th<xref target="jscal-prop-icalproperty">iCalProperty property</xref> of the Relation object.</t>
+          <figure anchor="test-ical-prop-related-to">
+            <name>Converting the RELATED-TO property in a VEVENT</name>
+            <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VEVENT
+RELATED-TO;RELTYPE=PARENT:4E05861C-A0C9-46AC-9A66-760FC1E0E167
+RELATED-TO:4120A9B1-1133-4AC0-9185-C4C8396048ED
+...
   ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[
-
+            <sourcecode type="json"><![CDATA[
+"relatedTo": {
+  "4E05861C-A0C9-46AC-9A66-760FC1E0E167": {
+    "@type": "Relation",
+    "relation": {
+      "parent": true
+    }
+  },
+  "4120A9B1-1133-4AC0-9185-C4C8396048ED": {
+    "@type": "Relation"
+  }
+}
 ]]></sourcecode>
-            </figure>
-          </section>
+          </figure>
+          <figure anchor="test-ical-prop-related-to-valarm">
+            <name>Converting the RELATED-TO property in a VALARM</name>
+            <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VEVENT
+...
+BEGIN:VALARM
+UID:8297C37D-BA2D-4476-91AE-C1EAA364F8E1
+TRIGGER:-PT15M
+DESCRIPTION:Event reminder
+ACTION:DISPLAY
+ACKNOWLEDGED:20210302T151514Z
+END:VALARM
+...
+BEGIN:VALARM
+UID:DE7B5C34-83FF-47FE-BE9E-FF41AE6DD097
+TRIGGER;VALUE=DATE-TIME:20210302T152000Z
+RELATED-TO;RELTYPE=SNOOZE:8297C37D-BA2D-4476-91AE-C1EAA364F8E1
+DESCRIPTION:Event reminder
+ACTION:DISPLAY
+END:VALARM
+...
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"alerts": {
+  "1": {
+    "@type": "Alert",
+    "trigger": {
+      "@type": "OffsetTrigger",
+      "offset": "-PT15M"
+    },
+    "...": ""
+  },
+  "2": {
+    "@type": "Alert",
+    "trigger": {
+      "@type": "AbsoluteTrigger",
+      "when": "2021-03-02T15:20:00Z"
+    },
+    "relatedTo": {
+      "1": {
+        "relation": {
+          "snooze": true
+        }
+      }
+    },
+    "...": ""
+  }
+}
+]]></sourcecode>
+          </figure>
         </section>
         <section anchor="ical-prop-repeat">
           <name>REPEAT</name>
