@@ -5029,7 +5029,126 @@ REQUEST-STATUS:2.0;Success
           <t>
             The <xref target="RFC5545" section="3.8.5.3" sectionFormat="parens">RRULE property</xref> in a VEVENT, VTODO, DAYLIGHT or STANDARD component converts to a <xref target="RFC8984" section="4.3.3" sectionFormat="parens">RecurrenceRule object</xref>.  The converted object is set in the recurrenceRules property of the Event, Task, or TimeZoneRule object.
           </t>
-          <t>Its RECUR value converts... TBD</t>
+          <t>The RECUR value data type converts to a RecurrenceRule object as follows:</t>
+          <table>
+            <name>Converting the RECUR value type to a RecurrenceRule object</name>
+            <thead>
+              <tr>
+                <th>RRULE field</th>
+                <th>RecurrenceRule property</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>FREQ</td>
+                <td>frequency</td>
+              </tr>
+              <tr>
+                <td>UNTIL</td>
+                <td>until</td>
+              </tr>
+              <tr>
+                <td>COUNT</td>
+                <td>count</td>
+              </tr>
+              <tr>
+                <td>INTERVAL</td>
+                <td>interval</td>
+              </tr>
+              <tr>
+                <td>BYSECOND</td>
+                <td>bySecond</td>
+              </tr>
+              <tr>
+                <td>BYMINUTE</td>
+                <td>byMinute</td>
+              </tr>
+              <tr>
+                <td>BYHOUR</td>
+                <td>byHour</td>
+              </tr>
+              <tr>
+                <td>BYDAY</td>
+                <td>byDay</td>
+              </tr>
+              <tr>
+                <td>BYMONTHDAY</td>
+                <td>byMonthDay</td>
+              </tr>
+              <tr>
+                <td>BYYEARDAY</td>
+                <td>byYearDay</td>
+              </tr>
+              <tr>
+                <td>BYWEEKNO</td>
+                <td>byWeekNo</td>
+              </tr>
+              <tr>
+                <td>BYMONTH</td>
+                <td>byMonth</td>
+              </tr>
+              <tr>
+                <td>BYSETPOS</td>
+                <td>bySetPosition</td>
+              </tr>
+              <tr>
+                <td>WKST</td>
+                <td>firstDayOfWeek</td>
+              </tr>
+              <tr>
+                <td>RSCALE <xref target="RFC7529"/>
+                </td>
+                <td>rscale</td>
+              </tr>
+              <tr>
+                <td>SKIP <xref target="RFC7529"/>
+                </td>
+                <td>skip</td>
+              </tr>
+            </tbody>
+          </table>
+          <t>The string values of the FREQ, WKST, RSCALE convert to lowercase.  The UNTIL part in a VEVENT or VTODO converts to a LocalDateTime value relative to the timezone of the Event or Task, or to floating time for the TimeZoneRule object.</t>
+          <figure anchor="test-ical-type-recur">
+            <name>Example for converting the RRULE property</name>
+            <sourcecode type="icalendar"><![CDATA[
+DTSTART;TZID=Europe/Berlin:20240101T010000
+RRULE:FREQ=YEARLY
+ ;INTERVAL=2
+ ;BYMONTH=1
+ ;BYDAY=SU
+ ;BYHOUR=8,9
+ ;BYMINUTE=30
+ ;UNTIL=20240930T120000Z
+]]></sourcecode>
+            <sourcecode type="jscalendar"><![CDATA[
+"recurrenceRules": [
+  {
+    "@type": "RecurrenceRule",
+    "frequency": "yearly",
+    "interval": 2,
+    "byMonth": [
+      "1"
+    ],
+    "byDay": [
+      {
+        "@type": "NDay",
+        "day": "su"
+      }
+    ],
+    "byHour": [
+      8,
+      9
+    ],
+    "byMinute": [
+      30
+    ],
+    "until": "2024-09-30T14:00:00"
+  }
+],
+"start": "2024-01-01T01:00:00",
+"timeZone": "Europe/Berlin"
+]]></sourcecode>
+          </figure>
         </section>
         <section anchor="ical-prop-sequence">
           <name>SEQUENCE</name>
