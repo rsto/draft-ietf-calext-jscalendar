@@ -376,11 +376,9 @@ SUMMARY:he
                 <td>
                   <xref target="RFC6321" section="4.2" sectionFormat="comma"/>
                 </td>
-                <td>links</td>
-                <td>
-                  <xref target="ical-prop-xml"/>
-                </td>
+                <td>iCalComponent/properties</td>
                 <td/>
+                <td>Non-standard</td>
               </tr>
             </tbody>
           </table>
@@ -1000,11 +998,9 @@ DTSTART;TZID=NonIana:20241004T010000
                 <td>
                   <xref target="RFC6321" section="4.2" sectionFormat="comma"/>
                 </td>
-                <td>links</td>
-                <td>
-                  <xref target="ical-prop-xml"/>
-                </td>
+                <td>iCalComponent/properties</td>
                 <td/>
+                <td>Non-standard</td>
               </tr>
             </tbody>
           </table>
@@ -1865,11 +1861,9 @@ END:VALARM
                 <td>
                   <xref target="RFC6321" section="4.2" sectionFormat="comma"/>
                 </td>
-                <td>links</td>
-                <td>
-                  <xref target="ical-prop-xml"/>
-                </td>
+                <td>iCalComponent/properties</td>
                 <td/>
+                <td>Non-standard</td>
               </tr>
             </tbody>
           </table>
@@ -2073,11 +2067,9 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC6321" section="4.2" sectionFormat="comma"/>
                 </td>
-                <td>links</td>
-                <td>
-                  <xref target="ical-prop-xml"/>
-                </td>
+                <td>iCalComponent/properties</td>
                 <td/>
+                <td>Non-standard</td>
               </tr>
             </tbody>
           </table>
@@ -2239,11 +2231,9 @@ END:VLOCATION
                 <td>
                   <xref target="RFC6321" section="4.2" sectionFormat="comma"/>
                 </td>
-                <td>links</td>
-                <td>
-                  <xref target="ical-prop-xml"/>
-                </td>
+                <td>iCalComponent/properties</td>
                 <td/>
+                <td>Non-standard</td>
               </tr>
             </tbody>
           </table>
@@ -2967,11 +2957,9 @@ DTSTART;TZID=CustomTz:20080708T130000
                 <td>
                   <xref target="RFC6321" section="4.2" sectionFormat="comma"/>
                 </td>
-                <td>links</td>
-                <td>
-                  <xref target="ical-prop-xml"/>
-                </td>
+                <td>iCalComponent/properties</td>
                 <td/>
+                <td>Non-standard</td>
               </tr>
             </tbody>
           </table>
@@ -5611,44 +5599,7 @@ URL:https://example.com/calendar/birtdays.ics
         </section>
         <section anchor="ical-prop-xml">
           <name>XML</name>
-          <t>
-            The <xref target="RFC6321" section="4.2" sectionFormat="parens">XML property</xref> in a VEVENT, VTODO, VCALENDAR, VRESOURCE, PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the links property of the Event, Task, Group, Participant, or Location object.
-          </t>
-          <t>A value of type TEXT converts... TBD</t>
-          <t>A value of type BINARY converts... TBD</t>
-          <t>Its parameters convert as follows:</t>
-          <table>
-            <name>Parameters of the XML property</name>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Property</th>
-                <th>Note</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>ENCODING</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.7" sectionFormat="comma"/>
-                </td>
-                <td>iCalProperty</td>
-                <td>If unequal to BASE64</td>
-              </tr>
-            </tbody>
-          </table>
-          <section anchor="example-ical-prop-xml">
-            <name>Example: Converting the XML property</name>
-            <figure anchor="test-ical-prop-xml">
-              <name>Converting the XML property</name>
-              <sourcecode type="text/calendar"><![CDATA[
-  ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[
-
-]]></sourcecode>
-            </figure>
-          </section>
+          <t>The <xref target="RFC6321" section="4.2" sectionFormat="parens">XML property</xref> does not convert to a standard JSCalendar element.</t>
         </section>
       </section>
     </section>

@@ -189,10 +189,7 @@ icalendar:
           convert:
             property: links
             object: Link
-        XML:
-          convert:
-            property: links
-            object: Link
+        XML: {}
       components:
           VLOCATION:
             convert:
@@ -424,10 +421,7 @@ icalendar:
             property: links
             object: Link
         VERSION: {}
-        XML:
-          convert:
-            property: links
-            object: Link
+        XML: {}
       components:
         VAVAILABILITY: {}
         VEVENT:
@@ -704,10 +698,7 @@ icalendar:
           convert:
             property: links
             object: Link
-        XML:
-          convert:
-            property: links
-            object: Link
+        XML: {}
       components:
           VALARM:
             convert:
@@ -796,10 +787,7 @@ icalendar:
             property: links
             object: Link
         UID: {}
-        XML:
-          convert:
-            property: links
-            object: Link
+        XML: {}
       rfc: RFC9073
       section: '7.2'
       status: current
@@ -878,10 +866,7 @@ icalendar:
             property: links
             object: Link
         UID: {}
-        XML:
-          convert:
-            property: links
-            object: Link
+        XML: {}
       rfc: RFC9073
       section: '7.3'
       status: current
@@ -1145,10 +1130,7 @@ icalendar:
           convert:
             property: links
             object: Link
-        XML:
-          convert:
-            property: links
-            object: Link
+        XML: {}
       components:
           VALARM:
             convert:
