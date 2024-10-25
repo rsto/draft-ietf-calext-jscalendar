@@ -4743,7 +4743,6 @@ ATTENDEE;RSVP=YES;PARTSTAT=NEEDS-ACTION:mailto:foo@example.com
           <t>
             The <xref target="RFC5545" section="3.8.1.8" sectionFormat="parens">PERCENT-COMPLETE property</xref> in a VTODO component converts to the <xref target="RFC8984" section="5.2.4" sectionFormat="parens">percentComplete property</xref> of the Task object.
           </t>
-          <t>The property value converts as-is.</t>
           <t>A Task object which has the method property set might represent an iTIP reply of one of the participants in the object. In this case the value of the percentComplete property in the Task also converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">percentComplete</xref> of that Participant object, which represents the participant from which the iTIP reply originated.</t>
           <t>The PERCENT-COMPLETE property in a PARTICIPANT component converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">percentComplete property</xref> of the Participant object.</t>
           <t>The following examples illustrate how to convert the PERCENT-COMPLETE property:</t>
@@ -4796,7 +4795,6 @@ PERCENT-COMPLETE:78
           <t>
             The <xref target="RFC5545" section="3.8.1.9" sectionFormat="parens">PRIORITY property</xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.4.1" sectionFormat="parens">priority property</xref> of the Event or Task object.
           </t>
-          <t>The property value converts as-is.</t>
           <t>The following example illustrates how to convert the PRIORITY property:</t>
           <figure anchor="test-ical-prop-priority">
             <name>Converting the PRIORITY property</name>
@@ -4977,7 +4975,6 @@ END:VALARM
           <t>
             The <xref target="RFC5545" section="3.8.8.3" sectionFormat="parens">REQUEST-STATUS property</xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.4.7" sectionFormat="parens">requestStatus property</xref> of the Event or Task object.
           </t>
-          <t>The property value converts as-is.</t>
           <t>Its parameters convert as follows:</t>
           <table>
             <name>Parameters of the REQUEST-STATUS property</name>
@@ -5154,7 +5151,6 @@ RRULE:FREQ=YEARLY
           <t>
             The <xref target="RFC5545" section="3.8.7.4" sectionFormat="parens">SEQUENCE property</xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.1.7" sectionFormat="parens">sequence property</xref>. The SEQUENCE property in a PARTICIPANT component converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">scheduleSequence property</xref>.
           </t>
-          <t>The property value converts as-is.</t>
           <t>The following example illustrates how to convert the SEQUENCE property:</t>
           <figure anchor="test-ical-prop-sequence">
             <name>Example for converting the SEQUENCE property</name>
@@ -5171,7 +5167,6 @@ SEQUENCE:3
           <t>
             The <xref target="RFC7986" section="5.8" sectionFormat="parens">SOURCE property</xref> in a VCALENDAR component converts to the <xref target="RFC8984" section="5.3.2" sectionFormat="parens">source property</xref>.
           </t>
-          <t>The property value converts as-is.</t>
           <t>The following example illustrates how to convert the SOURCE property:</t>
           <figure anchor="test-ical-prop-source">
             <name>Example for converting the SOURCE property</name>
