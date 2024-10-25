@@ -5583,7 +5583,27 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
           <t>
             The <xref target="RFC5545" section="3.8.4.6" sectionFormat="parens">URL property</xref> in a VEVENT, VTODO, VCALENDAR, or PARTICIPANT component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the links property of the Event, Task, Group, or Participant object.
           </t>
-          <t>Its URI value converts... TBD</t>
+          <t>The property value converts to the href property of the Link object.</t>
+          <t>Implementations <bcp14>MAY</bcp14> preserve the fact that the Link object got converted from an URL property. To so, they <bcp14>MUST</bcp14> set the <xref target="jscal-prop-icalproperty">iCalProperty</xref> on the Link object.</t>
+          <t>The following example illustrates how to convert the URL property:</t>
+          <figure anchor="test-ical-prop-url">
+            <name>Converting the IMAGE property</name>
+            <sourcecode type="text/calendar"><![CDATA[
+URL:https://example.com/calendar/birtdays.ics
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"links": {
+  "3": {
+    "@type": "Link",
+    "href": "https://example.com/calendar/birtdays.ics",
+    "iCalProperty": {
+      "@type": "ICalProperty",
+      "name": "url"
+    }
+  }
+}
+]]></sourcecode>
+          </figure>
         </section>
         <section anchor="ical-prop-version">
           <name>VERSION</name>
