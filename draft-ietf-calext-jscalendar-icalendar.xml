@@ -5329,12 +5329,11 @@ STYLED-DESCRIPTION;VALUE=TEXT;FMTTYPE=text/html:
         <section anchor="ical-prop-summary">
           <name>SUMMARY</name>
           <t>
-            The <xref target="RFC5545" section="3.8.1.12" sectionFormat="parens">SUMMARY property</xref> in a PARTICIPANT component converts to the <xref target="RFC8984" section="4.2.5" sectionFormat="parens">name property</xref>.
-          </t>
-          <t>
             The <xref target="RFC5545" section="3.8.1.12" sectionFormat="parens">SUMMARY property</xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.2.1" sectionFormat="parens">title property</xref>.
           </t>
-          <t>Its TEXT value converts... TBD</t>
+          <t>
+            The <xref target="RFC5545" section="3.8.1.12" sectionFormat="parens">SUMMARY property</xref> in a PARTICIPANT component converts to the <xref target="RFC8984" section="4.2.5" sectionFormat="parens">name property</xref>.
+          </t>
           <t>Its parameters convert as follows:</t>
           <table>
             <name>Parameters of the SUMMARY property</name>
@@ -5365,17 +5364,34 @@ STYLED-DESCRIPTION;VALUE=TEXT;FMTTYPE=text/html:
               </tr>
             </tbody>
           </table>
-          <section anchor="example-ical-prop-summary">
-            <name>Example: Converting the SUMMARY property</name>
-            <figure anchor="test-ical-prop-summary">
-              <name>Converting the SUMMARY property</name>
-              <sourcecode type="text/calendar"><![CDATA[
+          <t>The following examples illustrate how to convert the SUMMARY property:</t>
+          <figure anchor="test-ical-prop-summary">
+            <name>Converting the SUMMARY property in a VEVENT</name>
+            <sourcecode type="text/calendar"><![CDATA[
+SUMMARY:Birthday Party
   ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[
-
+            <sourcecode type="json"><![CDATA[
+"title": "Birthday Party"
 ]]></sourcecode>
-            </figure>
-          </section>
+          </figure>
+          <figure anchor="test-ical-prop-summary-participant">
+            <name>Converting the SUMMARY property in a PARTICIPANT</name>
+            <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VEVENT
+BEGIN:PARTICIPANT
+SUMMARY:John
+...
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"participants": {
+  "1": {
+    "@type": "Participant",
+    "name": "John",
+    "...": ""
+  }
+}
+]]></sourcecode>
+          </figure>
         </section>
         <section anchor="ical-prop-transp">
           <name>TRANSP</name>
