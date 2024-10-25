@@ -3772,10 +3772,7 @@ CREATED:20240329T133000Z
         </section>
         <section anchor="ical-prop-description">
           <name>DESCRIPTION</name>
-          <t>
-            The <xref target="RFC5545" section="3.8.1.5" sectionFormat="parens">DESCRIPTION property</xref> in a VEVENT, VTODO, VCALENDAR, VLOCATION, VRESOURCE, or PARTICIPANT component converts to the <xref target="RFC8984" section="4.2.2" sectionFormat="parens">description property</xref> of the Event, Task, Group, Location, Link, or Participant object.
-          </t>
-          <t>The DESCRIPTION property value is more likely than other TEXT-typed properties to contain escaped characters (see <xref target="RFC5545" section="3.3.11" sectionFormat="of"/>). As with any other TEXT value, implementations <bcp14>MUST</bcp14> unescape such characters before conversion and encode them as JSON string (see <xref target="RFC8259" section="7" sectionFormat="of"/>).</t>
+          <t>The <xref target="RFC5545" section="3.8.1.5" sectionFormat="parens">DESCRIPTION property</xref> in a VEVENT, VTODO, VCALENDAR, VLOCATION, VRESOURCE, or PARTICIPANT component converts to the <xref target="RFC8984" section="4.2.2" sectionFormat="parens">description property</xref> of the Event, Task, Group, Location, Link, or Participant object, unless its DERIVED parameter value is TRUE.</t>
           <t>Its parameters convert as follows:</t>
           <table>
             <name>Parameters of the DESCRIPTION property</name>
@@ -3806,14 +3803,15 @@ CREATED:20240329T133000Z
               </tr>
             </tbody>
           </table>
+          <t>If the DERIVED parameter value is TRUE, then the property does not convert to the description property. Instead, a non-derived STYLED-DESCRIPTION property is expected to contain the description. Implementations MAY preserve the property in the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref>.</t>
           <t>The following example illustrates how to convert the DESCRIPTION property:</t>
           <figure anchor="test-ical-prop-description">
             <name>Converting the DESCRIPTION property</name>
             <sourcecode type="text/calendar"><![CDATA[
-DESCRIPTION:Some text\;and\na new line.
+DESCRIPTION:The pancakes there are delicious\; they are fluffy and sweet.
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
-"description": "Some text;and\na new line."
+"description": "The pancakes there are delicious; they are fluffy and sweet."
 ]]></sourcecode>
           </figure>
         </section>
@@ -4382,7 +4380,7 @@ LINK;LINKREL="https://example.com/linkrel/costStructure";
               </tr>
             </tbody>
           </table>
-          <t>If the DERIVED parameter value is TRUE, then the LOCATION property does not convert to a Location object. Instead, a VLOCATION component is expected to represent the location. Implementations <bcp14>MAY</bcp14> the property to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref>.</t>
+          <t>If the DERIVED parameter value is TRUE, then the property does not convert to a Location object. Instead, a VLOCATION component is expected to represent the location. Implementations <bcp14>MAY</bcp14> preserve the property in the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref>.</t>
           <t>The following example illustrates how to convert the LOCATION property:</t>
           <figure anchor="test-ical-prop-location">
             <name>Converting the LOCATION property</name>
@@ -5267,11 +5265,13 @@ STRUCTURED-DATA;FMTTYPE=application/ld+json;
         </section>
         <section anchor="ical-prop-styled-description">
           <name>STYLED-DESCRIPTION</name>
-          <t>
-            The <xref target="RFC9073" section="6.5" sectionFormat="parens">STYLED-DESCRIPTION property</xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.2.2" sectionFormat="parens">description property</xref>.
-          </t>
-          <t>A value of type TEXT converts... TBD</t>
-          <t>A value of type URI converts... TBD</t>
+          <t>The <xref target="RFC9073" section="6.5" sectionFormat="parens">STYLED-DESCRIPTION property</xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.2.2" sectionFormat="parens">description property</xref> under the following conditions:</t>
+          <ul>
+            <li>The property value type <bcp14>MUST</bcp14> be TEXT.</li>
+            <li>The FMTTYPE parameter either <bcp14>MUST NOT</bcp14> not be set, or its value <bcp14>MUST</bcp14> be a <xref target="RFC6838">media type</xref> with top-level type "text".</li>
+            <li>Its DERIVED parameter value <bcp14>MUST NOT</bcp14> be TRUE.</li>
+          </ul>
+          <t>If the DERIVED parameter value is TRUE, then the property does not convert to the descrition property. Instead, an non-derived STYLED-DESCRIPTION property or the DESCRIPTION property is expected to contain the description. Implementations MAY preserve the property in the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref>.</t>
           <t>Its parameters convert as follows:</t>
           <table>
             <name>Parameters of the STYLED-DESCRIPTION property</name>
@@ -5318,17 +5318,18 @@ STRUCTURED-DATA;FMTTYPE=application/ld+json;
               </tr>
             </tbody>
           </table>
-          <section anchor="example-ical-prop-styled-description">
-            <name>Example: Converting the STYLED-DESCRIPTION property</name>
-            <figure anchor="test-ical-prop-styled-description">
-              <name>Converting the STYLED-DESCRIPTION property</name>
-              <sourcecode type="text/calendar"><![CDATA[
+          <t>The following example illustrates how to convert the STYLED-DESCRIPTION property:</t>
+          <figure anchor="test-ical-prop-styled-description">
+            <name>Converting the STYLED-DESCRIPTION property</name>
+            <sourcecode type="text/calendar"><![CDATA[
+STYLED-DESCRIPTION;VALUE=TEXT;FMTTYPE=text/html:
+ <!DOCTYPE html><html><body>hello,<b>world</b></body></html>
   ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[
-
+            <sourcecode type="json"><![CDATA[
+"description": "<!DOCTYPE html><html><body>hello,<b>world</b></body></html>",
+"descriptionContentType": "text/html"
 ]]></sourcecode>
-            </figure>
-          </section>
+          </figure>
         </section>
         <section anchor="ical-prop-summary">
           <name>SUMMARY</name>
@@ -5697,13 +5698,13 @@ STRUCTURED-DATA;FMTTYPE=application/ld+json;
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5870.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6321.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6638.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6838.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7265.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7529.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7808.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7953.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7986.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml"/>
-        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8259.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8288.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8607.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8984.xml"/>
