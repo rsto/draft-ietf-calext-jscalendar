@@ -597,10 +597,6 @@ END:VCALENDAR
       </section>
       <section anchor="ical-components">
         <name>Components</name>
-        <section anchor="ical-comp-available">
-          <name>AVAILABLE</name>
-          <t>The <xref target="RFC7953" section="3.1" sectionFormat="parens">AVAILABLE component</xref> does not convert to a standard JSCalendar element.</t>
-        </section>
         <section anchor="ical-comp-daylight">
           <name>DAYLIGHT</name>
           <t>The <xref target="RFC5545" section="3.6.5" sectionFormat="parens">DAYLIGHT component</xref> converts to a <xref target="RFC8984" section="4.7.2" sectionFormat="parens">TimeZoneRule object</xref>.</t>
@@ -1414,10 +1410,6 @@ END:VALARM
 ]]></sourcecode>
           </figure>
         </section>
-        <section anchor="ical-comp-vavailability">
-          <name>VAVAILABILITY</name>
-          <t>The <xref target="RFC7953" section="3.1" sectionFormat="parens">VAVAILABILITY component</xref> does not convert to a standard JSCalendar element.</t>
-        </section>
         <section anchor="ical-comp-vevent">
           <name>VEVENT</name>
           <t>The <xref target="RFC5545" section="3.6.1" sectionFormat="parens">VEVENT component</xref> converts to a <xref target="RFC8984" section="2.1" sectionFormat="parens">Event object</xref>.</t>
@@ -1931,14 +1923,6 @@ END:VCALENDAR
 }
 ]]></sourcecode>
           </figure>
-        </section>
-        <section anchor="ical-comp-vfreebusy">
-          <name>VFREEBUSY</name>
-          <t>The <xref target="RFC5545" section="3.6.4" sectionFormat="parens">VFREEBUSY component</xref> does not convert to a standard JSCalendar element.</t>
-        </section>
-        <section anchor="ical-comp-vjournal">
-          <name>VJOURNAL</name>
-          <t>The <xref target="RFC5545" section="3.6.3" sectionFormat="parens">VJOURNAL component</xref> does not convert to a standard JSCalendar element.</t>
         </section>
         <section anchor="ical-comp-vlocation">
           <name>VLOCATION</name>
@@ -3410,10 +3394,6 @@ ATTENDEE;PARTSTAT=TENTATIVE:mailto:foo@example.com
 ]]></sourcecode>
           </figure>
         </section>
-        <section anchor="ical-prop-busytype">
-          <name>BUSYTYPE</name>
-          <t>The <xref target="RFC7953" section="3.2" sectionFormat="parens">BUSYTYPE property</xref> does not convert to a standard JSCalendar element.</t>
-        </section>
         <section anchor="ical-prop-calendar-address">
           <name>CALENDAR-ADDRESS</name>
           <t>
@@ -3437,10 +3417,6 @@ CALENDAR-ADDRESS:mailto:foo@example.com
 }
 ]]></sourcecode>
           </figure>
-        </section>
-        <section anchor="ical-prop-calscale">
-          <name>CALSCALE</name>
-          <t>The <xref target="RFC5545" section="3.7.1" sectionFormat="parens">CALSCALE property</xref> does not convert to a standard JSCalendar element.</t>
         </section>
         <section anchor="ical-prop-categories">
           <name>CATEGORIES</name>
@@ -3655,10 +3631,6 @@ COMMENT:I'll think about it
 ]]></sourcecode>
           </figure>
         </section>
-        <section anchor="ical-prop-completed">
-          <name>COMPLETED</name>
-          <t>The <xref target="RFC5545" section="3.8.2.1" sectionFormat="parens">COMPLETED property</xref> does not convert to a standard JSCalendar element.</t>
-        </section>
         <section anchor="ical-prop-concept">
           <name>CONCEPT</name>
           <t>
@@ -3745,12 +3717,6 @@ CONFERENCE;VALUE=URI;FEATURE=AUDIO,VIDEO;
 }
 ]]></sourcecode>
           </figure>
-        </section>
-        <section anchor="ical-prop-contact">
-          <name>CONTACT</name>
-          <t>
-            The <xref target="RFC5545" section="3.8.4.2" sectionFormat="parens">CONTACT property</xref> does not convert to a standard JSCalendar element.
-          </t>
         </section>
         <section anchor="ical-prop-created">
           <name>CREATED</name>
@@ -4092,10 +4058,6 @@ EXDATE:20230801T130000Z
             The <xref target="RFC2445" section="4.8.5.2" sectionFormat="parens">EXRULE property</xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="4.3.3" sectionFormat="parens">RecurrenceRule object</xref>.  The converted object is set in the excludedRecurrenceRules property of the Event or Task.
           </t>
           <t>See <xref target="ical-prop-rrule"/> for an example how to convert a recurrence rule.</t>
-        </section>
-        <section anchor="ical-prop-freebusy">
-          <name>FREEBUSY</name>
-          <t>The <xref target="RFC5545" section="3.8.2.6" sectionFormat="parens">FREEBUSY property</xref> does not convert to a standard JSCalendar element.</t>
         </section>
         <section anchor="ical-prop-geo">
           <name>GEO</name>
@@ -4834,10 +4796,6 @@ BEGIN:VEVENT
 ]]></sourcecode>
           </figure>
         </section>
-        <section anchor="ical-prop-proximity">
-          <name>PROXIMITY</name>
-          <t>The <xref target="RFC9074" section="8.1" sectionFormat="parens">PROXIMITY property</xref> does not convert to a standard JSCalendar element.</t>
-        </section>
         <section anchor="ical-prop-rdate">
           <name>RDATE</name>
           <t>
@@ -4874,14 +4832,6 @@ RDATE:20230805T170000Z
           <t>See <xref target="convert-date-and-datetime"/> how to convert DATE and DATE-TIME values.</t>
           <t>The <xref target="RFC5545" section="3.2.13" sectionFormat="parens">RANGE parameter</xref> does not convert to a standard JSCalendar element. Implementations <bcp14>MAY</bcp14> preserve it in the <xref target="jscal-prop-icalcomponent">iCalComponent</xref> property.</t>
           <t>See <xref target="ical-recurring-components"/> for further requirements and examples.</t>
-        </section>
-        <section anchor="ical-prop-refid">
-          <name>REFID</name>
-          <t>The <xref target="RFC9253" section="8.3" sectionFormat="parens">REFID property</xref> does not convert to a standard JSCalendar element.</t>
-        </section>
-        <section anchor="ical-prop-refresh-interval">
-          <name>REFRESH-INTERVAL</name>
-          <t>The <xref target="RFC7986" section="5.7" sectionFormat="parens">REFRESH-INTERVAL property</xref> does not convert to a standard JSCalendar element.</t>
         </section>
         <section anchor="ical-prop-related-to">
           <name>RELATED-TO</name>
@@ -4964,10 +4914,6 @@ END:VALARM
 ]]></sourcecode>
           </figure>
         </section>
-        <section anchor="ical-prop-repeat">
-          <name>REPEAT</name>
-          <t>The <xref target="RFC5545" section="3.8.6.2" sectionFormat="parens">REPEAT property</xref> does not convert to a standard JSCalendar element.</t>
-        </section>
         <section anchor="ical-prop-request-status">
           <name>REQUEST-STATUS</name>
           <t>
@@ -5008,14 +4954,6 @@ REQUEST-STATUS:2.0;Success
 ]]></sourcecode>
             </figure>
           </section>
-        </section>
-        <section anchor="ical-prop-resource-type">
-          <name>RESOURCE-TYPE</name>
-          <t>The <xref target="RFC9073" section="6.3" sectionFormat="parens">RESOURCE-TYPE property</xref> does not convert to a standard JSCalendar element.</t>
-        </section>
-        <section anchor="ical-prop-resources">
-          <name>RESOURCES</name>
-          <t>The <xref target="RFC5545" section="3.8.1.10" sectionFormat="parens">RESOURCES property</xref> does not convert to a standard JSCalendar element.</t>
         </section>
         <section anchor="ical-prop-rrule">
           <name>RRULE</name>
@@ -5181,10 +5119,6 @@ SOURCE;VALUE=URI:https://example.com/holidays.ics
 }
 ]]></sourcecode>
           </figure>
-        </section>
-        <section anchor="ical-prop-status">
-          <name>STATUS</name>
-          <t>The <xref target="RFC5545" section="3.8.1.11" sectionFormat="parens">STATUS property</xref> does not convert to a standard JSCalendar element.</t>
         </section>
         <section anchor="ical-prop-structured-data">
           <name>STRUCTURED-DATA</name>
@@ -5592,14 +5526,6 @@ URL:https://example.com/calendar/birtdays.ics
 }
 ]]></sourcecode>
           </figure>
-        </section>
-        <section anchor="ical-prop-version">
-          <name>VERSION</name>
-          <t>The <xref target="RFC5545" section="3.7.4" sectionFormat="parens">VERSION property</xref> does not convert to a standard JSCalendar element.</t>
-        </section>
-        <section anchor="ical-prop-xml">
-          <name>XML</name>
-          <t>The <xref target="RFC6321" section="4.2" sectionFormat="parens">XML property</xref> does not convert to a standard JSCalendar element.</t>
         </section>
       </section>
     </section>
