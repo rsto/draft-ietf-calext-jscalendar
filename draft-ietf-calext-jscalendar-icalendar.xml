@@ -2419,6 +2419,7 @@ TZID:CustomTz
 TZID-ALIAS-OF:Puerto_Rico
 TZID-ALIAS-OF:America/Anguilla
 LAST-MODIFIED:20240909T122233Z
+TZUNTIL:20080709T000000Z
 BEGIN:DAYLIGHT
 TZNAME:AWT
 TZOFFSETFROM:-0400
@@ -2461,6 +2462,7 @@ DTSTART;TZID=CustomTz:20080708T130000
         "Puerto_Rico": true,
         "America/Anguilla": true
       },
+      "validUntil": "2008-07-09T00:00:00Z",
       "daylight": [
         {
           "@type": "TimeZoneRule",
@@ -5520,70 +5522,36 @@ TRIGGER;VALUE=DATE-TIME:20250302T010203Z
         <section anchor="ical-prop-tzid-alias-of">
           <name>TZID-ALIAS-OF</name>
           <t>
-            The <xref target="RFC7808" section="7.2" sectionFormat="parens">TZID-ALIAS-OF property</xref> in a VTIMEZONE component converts to an entry in the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">aliases property</xref>.
+            The <xref target="RFC7808" section="7.2" sectionFormat="parens">TZID-ALIAS-OF property</xref> in a VTIMEZONE component converts to an entry in the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">aliases property</xref> of the TimeZone object.
           </t>
           <t>See <xref target="test-ical-comp-vtimezone"/> for an example.</t>
         </section>
         <section anchor="ical-prop-tzname">
           <name>TZNAME</name>
           <t>
-            The <xref target="RFC5545" section="3.8.3.2" sectionFormat="parens">TZNAME property</xref> in a DAYLIGHT or STANDARD component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">names property</xref>.
+            The <xref target="RFC5545" section="3.8.3.2" sectionFormat="parens">TZNAME property</xref> in a DAYLIGHT or STANDARD component converts to an entry in the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">names property</xref> of the TimeZoneRule object.
           </t>
-          <t>Its TEXT value converts... TBD</t>
-          <t>Its parameters convert as follows:</t>
-          <table>
-            <name>Parameters of the TZNAME property</name>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Property</th>
-                <th>Note</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>LANGUAGE</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.10" sectionFormat="comma"/>
-                </td>
-                <td>iCalProperty</td>
-                <td>Non-standard</td>
-              </tr>
-            </tbody>
-          </table>
-          <section anchor="example-ical-prop-tzname">
-            <name>Example: Converting the TZNAME property</name>
-            <figure anchor="test-ical-prop-tzname">
-              <name>Converting the TZNAME property</name>
-              <sourcecode type="text/calendar"><![CDATA[
-  ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[
-
-]]></sourcecode>
-            </figure>
-          </section>
+          <t>See <xref target="test-ical-comp-vtimezone"/> for an example.</t>
         </section>
         <section anchor="ical-prop-tzoffsetfrom">
           <name>TZOFFSETFROM</name>
           <t>
-            The <xref target="RFC5545" section="3.8.3.3" sectionFormat="parens">TZOFFSETFROM property</xref> in a DAYLIGHT or STANDARD component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">offsetFrom property</xref>.
+            The <xref target="RFC5545" section="3.8.3.3" sectionFormat="parens">TZOFFSETFROM property</xref> in a DAYLIGHT or STANDARD component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">offsetFrom property</xref> of the TimeZoneRule object.
           </t>
-          <t>Its UTC-OFFSET value converts... TBD</t>
+          <t>See <xref target="test-ical-comp-vtimezone"/> for an example.</t>
         </section>
         <section anchor="ical-prop-tzoffsetto">
           <name>TZOFFSETTO</name>
           <t>
-            The <xref target="RFC5545" section="3.8.3.4" sectionFormat="parens">TZOFFSETTO property</xref> in a DAYLIGHT or STANDARD component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">offsetTo property</xref>.
+            The <xref target="RFC5545" section="3.8.3.4" sectionFormat="parens">TZOFFSETTO property</xref> in a DAYLIGHT or STANDARD component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">offsetTo property</xref> of the TimeZoneRule object.
           </t>
-          <t>Its UTC-OFFSET value converts... TBD</t>
+          <t>See <xref target="test-ical-comp-vtimezone"/> for an example.</t>
         </section>
         <section anchor="ical-prop-tzuntil">
           <name>TZUNTIL</name>
-          <t>
-            The <xref target="RFC7808" section="7.1" sectionFormat="parens">TZUNTIL property</xref> in a VTIMEZONE component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">validUntil property</xref>.
-          </t>
-          <t>Its DATE-TIME value converts... TBD</t>
+          <t>The <xref target="RFC7808" section="7.1" sectionFormat="parens">TZUNTIL property</xref> in a VTIMEZONE component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">validUntil property</xref>.</t>
+          <t>See <xref target="convert-date-and-datetime"/> how to convert DATE and DATE-TIME values.</t>
+          <t>See <xref target="test-ical-comp-vtimezone"/> for an example.</t>
         </section>
         <section anchor="ical-prop-tzurl">
           <name>TZURL</name>
