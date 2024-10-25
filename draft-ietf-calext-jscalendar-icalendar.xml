@@ -5398,7 +5398,36 @@ SUMMARY:John
           <t>
             The <xref target="RFC5545" section="3.8.2.7" sectionFormat="parens">TRANSP property</xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.4.2" sectionFormat="parens">freeBusyStatus property</xref>.
           </t>
-          <t>Its TEXT value converts... TBD</t>
+          <t>Its values convert as follows:</t>
+          <table anchor="ical-prop-transp-values">
+            <name>Values of the TRANSP property</name>
+            <thead>
+              <tr>
+                <th>iCalendar value</th>
+                <th>JSCalendar value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>OPAQUE</td>
+                <td>busy</td>
+              </tr>
+              <tr>
+                <td>TRANSPARENT</td>
+                <td>free</td>
+              </tr>
+            </tbody>
+          </table>
+          <t>The following example illustrates how to convert the TRANSP property:</t>
+          <figure anchor="test-ical-prop-transp">
+            <name>Converting the TRANSP property</name>
+            <sourcecode type="text/calendar"><![CDATA[
+TRANSP:TRANSPARENT
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"freeBusyStatus": "free"
+]]></sourcecode>
+          </figure>
         </section>
         <section anchor="ical-prop-trigger">
           <name>TRIGGER</name>
