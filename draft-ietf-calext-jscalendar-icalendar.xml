@@ -5567,7 +5567,16 @@ TRIGGER;VALUE=DATE-TIME:20250302T010203Z
           <t>
             The <xref target="RFC5545" section="3.8.4.7" sectionFormat="parens">UID property</xref> in a VEVENT, VTODO, or VCALENDAR component converts to the <xref target="RFC8984" section="4.1.2" sectionFormat="parens">uid property</xref>.
           </t>
-          <t>Its TEXT value converts... TBD</t>
+          <t>The following example illustrates how to convert the UID property:</t>
+          <figure anchor="test-ical-prop-uid">
+            <name>Converting the UID property</name>
+            <sourcecode type="text/calendar"><![CDATA[
+UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"uid": "5ACEA86F-40CF-47EE-9CCA-7C85588A589F"
+]]></sourcecode>
+          </figure>
         </section>
         <section anchor="ical-prop-url">
           <name>URL</name>
