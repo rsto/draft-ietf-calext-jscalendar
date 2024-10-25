@@ -2420,6 +2420,7 @@ TZID-ALIAS-OF:Puerto_Rico
 TZID-ALIAS-OF:America/Anguilla
 LAST-MODIFIED:20240909T122233Z
 TZUNTIL:20080709T000000Z
+TZURL:https://example.com/tz/CustomTz.ics
 BEGIN:DAYLIGHT
 TZNAME:AWT
 TZOFFSETFROM:-0400
@@ -2495,7 +2496,8 @@ DTSTART;TZID=CustomTz:20080708T130000
         }
       ],
       "tzId": "Puerto_Rico",
-      "updated": "2024-09-09T12:22:33Z"
+      "updated": "2024-09-09T12:22:33Z",
+      "url": "https://example.com/tz/CustomTz.ics"
     }
   }
 }
@@ -5556,9 +5558,9 @@ TRIGGER;VALUE=DATE-TIME:20250302T010203Z
         <section anchor="ical-prop-tzurl">
           <name>TZURL</name>
           <t>
-            The <xref target="RFC5545" section="3.8.3.5" sectionFormat="parens">TZURL property</xref> in a VTIMEZONE component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">url property</xref>.
+            The <xref target="RFC5545" section="3.8.3.5" sectionFormat="parens">TZURL property</xref> in a VTIMEZONE component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">url property</xref> of the TimeZone object.
           </t>
-          <t>Its URI value converts... TBD</t>
+          <t>See <xref target="test-ical-comp-vtimezone"/> for an example.</t>
         </section>
         <section anchor="ical-prop-uid">
           <name>UID</name>
