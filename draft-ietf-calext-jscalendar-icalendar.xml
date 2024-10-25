@@ -5432,10 +5432,9 @@ TRANSP:TRANSPARENT
         <section anchor="ical-prop-trigger">
           <name>TRIGGER</name>
           <t>
-            The <xref target="RFC5545" section="3.8.6.3" sectionFormat="parens">TRIGGER property</xref> in a VALARM component converts to the <xref target="RFC8984" section="4.5.2" sectionFormat="parens">trigger property</xref>.
+            The <xref target="RFC5545" section="3.8.6.3" sectionFormat="parens">TRIGGER property</xref> in a VALARM component converts to either an AbsoluteTrigger or OffsetTrigger object.  The converted object is set in the <xref target="RFC8984" section="4.5.2" sectionFormat="parens">trigger property</xref> of the Alert object.
           </t>
-          <t>A value of type DURATION converts... TBD</t>
-          <t>A value of type DATE-TIME converts... TBD</t>
+          <t>A property of value type DURATION converts an OffsetTrigger object. The property value converts to its offset property. A value of type DATE-TIME converts to an AbsoluteTrigger object. The property value converts to its when property.</t>
           <t>Its parameters convert as follows:</t>
           <table>
             <name>Parameters of the TRIGGER property</name>
@@ -5458,17 +5457,33 @@ TRANSP:TRANSPARENT
               </tr>
             </tbody>
           </table>
-          <section anchor="example-ical-prop-trigger">
-            <name>Example: Converting the TRIGGER property</name>
-            <figure anchor="test-ical-prop-trigger">
-              <name>Converting the TRIGGER property</name>
+          <t>The following examples illustrate how to convert the TRIGGER property:</t>
+            <figure anchor="test-ical-prop-trigger-offset">
+              <name>Converting the TRIGGER property to an OffsetTrigger object</name>
               <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VEVENT
+...
+BEGIN:VALARM
+TRIGGER;RELATED=END:PT5M
+...
   ]]></sourcecode>
               <sourcecode type="json"><![CDATA[
-
+"alerts": {"2d": { "@type": "Alert", "trigger: { "@type": "OffsetTrigger", "offset": "PT5M", "relativeTo": "end" }, "...": "" } }
 ]]></sourcecode>
             </figure>
-          </section>
+            <figure anchor="test-ical-prop-trigger-offset">
+              <name>Converting the TRIGGER property to an OffsetTrigger object</name>
+              <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VEVENT
+...
+BEGIN:VALARM
+TRIGGER;VALUE=DATE-TIME:20250302T010203Z
+...
+  ]]></sourcecode>
+              <sourcecode type="json"><![CDATA[
+"alerts": {"14": { "@type": "Alert", "trigger: { "@type": "AbsoluteTrigger", "when": "2025-03-02T01:02:03Z" }, "...": "" } }
+]]></sourcecode>
+            </figure>
         </section>
         <section anchor="ical-prop-tzid">
           <name>TZID</name>
