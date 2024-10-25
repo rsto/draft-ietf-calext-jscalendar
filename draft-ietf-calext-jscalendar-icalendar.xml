@@ -2415,7 +2415,9 @@ END:VRESOURCE
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VCALENDAR
 BEGIN:VTIMEZONE
-TZID:Puerto_Rico
+TZID:CustomTz
+TZID-ALIAS-OF:Puerto_Rico
+TZID-ALIAS-OF:America/Anguilla
 LAST-MODIFIED:20240909T122233Z
 BEGIN:DAYLIGHT
 TZNAME:AWT
@@ -2437,7 +2439,7 @@ DTSTART:19450930T020000
 END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
-DTSTART;TZID=Puerto_Rico:20080708T130000
+DTSTART;TZID=CustomTz:20080708T130000
 ...
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
@@ -2449,12 +2451,16 @@ DTSTART;TZID=Puerto_Rico:20080708T130000
       "...": "",
       "@type": "Event",
       "start": "2008-07-08T13:00:00",
-      "timeZone": "/Puerto_Rico"
+      "timeZone": "/CustomTz"
     }
   ],
   "timeZones": {
-    "/Puerto_Rico": {
+    "/CustomTz": {
       "@type": "TimeZone",
+      "aliases": {
+        "Puerto_Rico": true,
+        "America/Anguilla": true
+      },
       "daylight": [
         {
           "@type": "TimeZoneRule",
@@ -5458,46 +5464,65 @@ TRANSP:TRANSPARENT
             </tbody>
           </table>
           <t>The following examples illustrate how to convert the TRIGGER property:</t>
-            <figure anchor="test-ical-prop-trigger-offset">
-              <name>Converting the TRIGGER property to an OffsetTrigger object</name>
-              <sourcecode type="text/calendar"><![CDATA[
+          <figure anchor="test-ical-prop-trigger-offset">
+            <name>Converting the TRIGGER property to an OffsetTrigger</name>
+            <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VEVENT
 ...
 BEGIN:VALARM
 TRIGGER;RELATED=END:PT5M
 ...
   ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[
-"alerts": {"2d": { "@type": "Alert", "trigger: { "@type": "OffsetTrigger", "offset": "PT5M", "relativeTo": "end" }, "...": "" } }
+            <sourcecode type="json"><![CDATA[
+"alerts": {
+  "2d": {
+    "@type": "Alert",
+    "trigger": {
+      "@type": "OffsetTrigger",
+      "offset": "PT5M",
+      "relativeTo": "end"
+    },
+    "...": ""
+  }
+}
 ]]></sourcecode>
-            </figure>
-            <figure anchor="test-ical-prop-trigger-offset">
-              <name>Converting the TRIGGER property to an OffsetTrigger object</name>
-              <sourcecode type="text/calendar"><![CDATA[
+          </figure>
+          <figure anchor="test-ical-prop-trigger-absolute">
+            <name>Converting the TRIGGER property to an AbsoluteTrigger</name>
+            <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VEVENT
 ...
 BEGIN:VALARM
 TRIGGER;VALUE=DATE-TIME:20250302T010203Z
 ...
   ]]></sourcecode>
-              <sourcecode type="json"><![CDATA[
-"alerts": {"14": { "@type": "Alert", "trigger: { "@type": "AbsoluteTrigger", "when": "2025-03-02T01:02:03Z" }, "...": "" } }
+            <sourcecode type="json"><![CDATA[
+"alerts": {
+  "14": {
+    "@type": "Alert",
+    "trigger": {
+      "@type": "AbsoluteTrigger",
+      "when": "2025-03-02T01:02:03Z"
+    },
+    "...": ""
+  }
+}
 ]]></sourcecode>
-            </figure>
+          </figure>
         </section>
         <section anchor="ical-prop-tzid">
           <name>TZID</name>
           <t>
             The <xref target="RFC5545" section="3.8.3.1" sectionFormat="parens">TZID property</xref> in a VTIMEZONE component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">tzId property</xref>.
           </t>
-          <t>Its TEXT value converts... TBD</t>
+          <t>See <xref target="test-ical-comp-vtimezone"/> for an example.</t>
         </section>
         <section anchor="ical-prop-tzid-alias-of">
           <name>TZID-ALIAS-OF</name>
           <t>
-            The <xref target="RFC7808" section="7.2" sectionFormat="parens">TZID-ALIAS-OF property</xref> in a VTIMEZONE component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">aliases property</xref>.
+            The <xref target="RFC7808" section="7.2" sectionFormat="parens">TZID-ALIAS-OF property</xref> in a VTIMEZONE component converts to an entry in the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">aliases property</xref>.
           </t>
-          <t>Its TEXT value converts... TBD</t>
+          <t>See <xref target="test-ical-comp-vtimezone"/> for an example.</t>
         </section>
         <section anchor="ical-prop-tzname">
           <name>TZNAME</name>
