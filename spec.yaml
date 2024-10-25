@@ -255,7 +255,6 @@ icalendar:
             property: links
             object: Link
         VERSION: {}
-        XML: {}
       components:
         VAVAILABILITY: {}
         VEVENT:
