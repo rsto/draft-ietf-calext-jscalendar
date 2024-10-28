@@ -112,7 +112,6 @@ icalendar:
           convert:
             property: links
             object: Link
-        XML: {}
       components:
           VLOCATION:
             convert:
@@ -397,7 +396,6 @@ icalendar:
           convert:
             property: links
             object: Link
-        XML: {}
       components:
           VALARM:
             convert:
@@ -486,7 +484,6 @@ icalendar:
             property: links
             object: Link
         UID: {}
-        XML: {}
       rfc: RFC9073
       section: '7.2'
       status: current
@@ -521,7 +518,6 @@ icalendar:
             property: links
             object: Link
         UID: {}
-        XML: {}
       rfc: RFC9073
       section: '7.3'
       status: current
@@ -687,7 +683,6 @@ icalendar:
           convert:
             property: links
             object: Link
-        XML: {}
       components:
           VALARM:
             convert:
