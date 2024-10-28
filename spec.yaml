@@ -8,8 +8,10 @@ icalendar:
         CREATED: {}
         DESCRIPTION: {}
         DTEND: {}
-        DTSTAMP: {}
-        DTSTART: {}
+        DTSTAMP:
+          required: true
+        DTSTART:
+          required: true
         DURATION: {}
         EXDATE: {}
         LAST-MODIFIED: {}
@@ -18,7 +20,8 @@ icalendar:
         RDATE: {}
         RRULE: {}
         SUMMARY: {}
-        UID: {}
+        UID:
+          required: true
       rfc: RFC7953
       section: '3.1'
       status: current
@@ -30,6 +33,7 @@ icalendar:
           convert:
             property: comments
         DTSTART:
+          required: true
           convert:
             property: start
         RDATE:
@@ -41,9 +45,11 @@ icalendar:
             property: recurrenceRules
             object: RecurrenceRule
         TZOFFSETFROM:
+          required: true
           convert:
             property: offsetFrom
         TZOFFSETTO:
+          required: true
           convert:
             property: offsetTo
         TZNAME:
@@ -88,6 +94,7 @@ icalendar:
           convert:
             property: locations
         PARTICIPANT-TYPE:
+          required: true
           convert:
             property: roles
         PRIORITY: {}
@@ -106,7 +113,8 @@ icalendar:
         SUMMARY:
           convert:
             property: name
-        UID: {}
+        UID:
+          required: true
         URL:
           convert:
             property: links
@@ -127,6 +135,7 @@ icalendar:
           convert:
             property: comments
         DTSTART:
+          required: true
           convert:
             property: start
         RDATE:
@@ -138,9 +147,11 @@ icalendar:
             property: recurrenceRules
             object: RecurrenceRule
         TZOFFSETFROM:
+          required: true
           convert:
             property: offsetFrom
         TZOFFSETTO:
+          required: true
           convert:
             property: offsetTo
         TZNAME:
@@ -157,12 +168,15 @@ icalendar:
           convert:
             property: acknowledged
         ACTION:
+          required: true
           convert:
             property: action
             note: Only if ACTION is EMAIL or DISPLAY.
         ATTACH: {}
-        ATTENDEE: {}
-        DESCRIPTION: {}
+        ATTENDEE:
+          required: true
+        DESCRIPTION:
+          required: true
         DURATION: {}
         PROXIMITY: {}
         REFID: {}
@@ -171,8 +185,10 @@ icalendar:
             property: relatedTo
         REPEAT: {}
         STYLED-DESCRIPTION: {}
-        SUMMARY: {}
+        SUMMARY:
+          required: true
         TRIGGER:
+          required: true
           convert:
             property: trigger
         UID: {}
@@ -189,7 +205,8 @@ icalendar:
         CREATED: {}
         DESCRIPTION: {}
         DTEND: {}
-        DTSTAMP: {}
+        DTSTAMP:
+          required: true
         DTSTART: {}
         DURATION: {}
         LAST-MODIFIED: {}
@@ -198,7 +215,8 @@ icalendar:
         PRIORITY: {}
         SEQUENCE: {}
         SUMMARY: {}
-        UID: {}
+        UID:
+          required: true
         URL: {}
       rfc: RFC7953
       section: '3.1'
@@ -239,6 +257,7 @@ icalendar:
           convert:
             property: title
         PRODID:
+          required: true
           convert:
             property: prodId, entries/*/prodId
         REFRESH-INTERVAL: {}
@@ -252,7 +271,8 @@ icalendar:
           convert:
             property: links
             object: Link
-        VERSION: {}
+        VERSION:
+          required: true
       components:
         VAVAILABILITY: {}
         VEVENT:
@@ -313,6 +333,7 @@ icalendar:
           convert:
             property: updated, scheduleUpdated
         DTSTART:
+          required: true
           convert:
             property: start
         DURATION:
@@ -388,6 +409,7 @@ icalendar:
           convert:
             property: freeBusyStatus
         UID:
+          required: true
           convert:
             property: uid
         URL:
@@ -408,12 +430,14 @@ icalendar:
         COMMENT: {}
         CONTACT: {}
         DTEND: {}
-        DTSTAMP: {}
+        DTSTAMP:
+          required: true
         DTSTART: {}
         FREEBUSY: {}
         ORGANIZER: {}
         REQUEST-STATUS: {}
-        UID: {}
+        UID:
+          required: true
         URL: {}
       rfc: RFC5545
       section: 3.6.4
@@ -429,7 +453,8 @@ icalendar:
         CONTACT: {}
         CREATED: {}
         DESCRIPTION: {}
-        DTSTAMP: {}
+        DTSTAMP:
+          required: true
         DTSTART: {}
         EXDATE: {}
         IMAGE: {}
@@ -443,7 +468,8 @@ icalendar:
         SEQUENCE: {}
         STATUS: {}
         SUMMARY: {}
-        UID: {}
+        UID:
+          required: true
         URL: {}
       rfc: RFC5545
       section: 3.6.3
@@ -481,7 +507,8 @@ icalendar:
           convert:
             property: links
             object: Link
-        UID: {}
+        UID:
+          required: true
       rfc: RFC9073
       section: '7.2'
       status: current
@@ -515,7 +542,8 @@ icalendar:
           convert:
             property: links
             object: Link
-        UID: {}
+        UID:
+          required: true
       rfc: RFC9073
       section: '7.3'
       status: current
@@ -527,6 +555,7 @@ icalendar:
             convert:
               property: updated
           TZID:
+            required: true
             convert:
               property: tzId
           TZID-ALIAS-OF:
