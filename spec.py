@@ -42,7 +42,7 @@ def main():
     #template = env.get_template("main.xml")
     #print(template.render({"spec": spec, "conv_props": conv_props(spec)}))
 
-    template = env.get_template("comptables.xml")
+    template = env.get_template("inconvertible.xml")
     print(template.render({"spec": spec}))
 
 if __name__ == "__main__":

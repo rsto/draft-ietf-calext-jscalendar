@@ -383,6 +383,7 @@ SUMMARY:he
               </tr>
             </tbody>
           </table>
+          <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the Group object.</t>
           <t>The following example illustrates how to convert the VCALENDAR component:</t>
           <figure anchor="test-ical-comp-vcalendar">
             <name>Converting the VCALENDAR component</name>
@@ -627,6 +628,7 @@ END:VCALENDAR
               </tr>
             </tbody>
           </table>
+          <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the TimeZoneRule object.</t>
           <t>The following example illustrates how to convert the DAYLIGHT component:</t>
           <figure anchor="test-ical-comp-daylight">
             <name>Converting the DAYLIGHT component</name>
@@ -779,7 +781,7 @@ DTSTART;TZID=NonIana:20241004T010000
                 <td>
                   <xref target="ical-prop-participant-type"/>
                 </td>
-                <td></td>
+                <td/>
               </tr>
               <tr>
                 <td>SEQUENCE</td>
@@ -853,6 +855,7 @@ DTSTART;TZID=NonIana:20241004T010000
               </tr>
             </tbody>
           </table>
+          <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the Participant object. This includes mandatory properties such as <xref target="RFC5545" section="3.8.4.7" sectionFormat="parens">UID</xref>.</t>
           <t>The following example illustrates how to convert the PARTICIPANT component:</t>
           <figure anchor="test-ical-comp-participant">
             <name>Converting the PARTICIPANT component</name>
@@ -996,6 +999,7 @@ END:PARTICIPANT
               </tr>
             </tbody>
           </table>
+          <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the TimeZoneRule object.</t>
           <t>The following example illustrates how to convert the STANDARD component:</t>
           <figure anchor="test-ical-comp-standard">
             <name>Converting the STANDARD component</name>
@@ -1097,6 +1101,7 @@ DTSTART;TZID=NonIana:20241004T010000
               </tr>
             </tbody>
           </table>
+          <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the Alert object. This includes mandatory properties such as <xref target="RFC5545" section="3.8.4.1" sectionFormat="parens">ATTENDEE</xref>, <xref target="RFC5545" section="3.8.1.5" sectionFormat="parens">DESCRIPTION</xref>, or <xref target="RFC5545" section="3.8.1.12" sectionFormat="parens">SUMMARY</xref>.</t>
           <t>The following example illustrates how to convert the VALARM component:</t>
           <figure anchor="test-ical-comp-valarm">
             <name>Converting the VALARM component</name>
@@ -1275,7 +1280,7 @@ END:VALARM
                 <td>
                   <xref target="ical-prop-dtend"/>
                 </td>
-                <td></td>
+                <td/>
               </tr>
               <tr>
                 <td>DTSTAMP</td>
@@ -1569,6 +1574,7 @@ END:VALARM
               </tr>
             </tbody>
           </table>
+          <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the Event object.</t>
           <figure anchor="test-ical-comp-vevent">
             <name>Converting the VEVENT component</name>
             <sourcecode type="text/calendar"><![CDATA[
@@ -1713,6 +1719,7 @@ END:VCALENDAR
               </tr>
             </tbody>
           </table>
+          <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the Location object. This includes mandatory properties such as <xref target="RFC5545" section="3.8.4.7" sectionFormat="parens">UID</xref>.</t>
           <t>The following example illustrates how to convert the VLOCATION component:</t>
           <figure anchor="test-ical-comp-vlocation">
             <name>Converting the VLOCATION component</name>
@@ -1850,6 +1857,7 @@ END:VLOCATION
               </tr>
             </tbody>
           </table>
+          <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the Participant object. This includes mandatory properties such as <xref target="RFC5545" section="3.8.4.7" sectionFormat="parens">UID</xref>.</t>
           <t>The following example illustrates how to convert the VRESOURCE component:</t>
           <figure anchor="test-ical-comp-vresource">
             <name>Converting the VRESOURCE component</name>
@@ -2012,6 +2020,7 @@ END:VRESOURCE
               </tr>
             </tbody>
           </table>
+          <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the TimeZone object.</t>
           <t>The following example illustrates how to convert the VTIMEZONE component:</t>
           <figure anchor="test-ical-comp-vtimezone">
             <name>Converting the VTIMEZONE component</name>
@@ -2111,7 +2120,6 @@ DTSTART;TZID=CustomTz:20080708T130000
           <name>VTODO</name>
           <t>The <xref target="RFC5545" section="3.6.2" sectionFormat="parens">VTODO component</xref> converts to a <xref target="RFC8984" section="2.2" sectionFormat="parens">Task object</xref>.</t>
           <t>VTODO components with different UID property values in the same iCalendar object convert to different entries in the Group.  They sort in the same order as in the VCALENDAR component.</t>
-          <t>The following example illustrates how to convert the VTODO component:</t>
           <t>Its properties convert as follows:</t>
           <table anchor="ical-comp-vtodo-props">
             <name>Properties of the VTODO component</name>
@@ -2266,7 +2274,7 @@ DTSTART;TZID=CustomTz:20080708T130000
                 <td>
                   <xref target="ical-prop-due"/>
                 </td>
-                <td></td>
+                <td/>
               </tr>
               <tr>
                 <td>DURATION</td>
@@ -2549,6 +2557,8 @@ DTSTART;TZID=CustomTz:20080708T130000
               </tr>
             </tbody>
           </table>
+          <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the Task object.</t>
+          <t>The following example illustrates how to convert the VTODO component:</t>
           <figure anchor="test-ical-comp-vtodo">
             <name>Converting the VTODO component</name>
             <sourcecode type="text/calendar"><![CDATA[
@@ -3588,7 +3598,7 @@ GEO:48.858222;2.2945
                   <xref target="RFC7986" section="6.1" sectionFormat="comma"/>
                 </td>
                 <td>display</td>
-                <td></td>
+                <td/>
               </tr>
               <tr>
                 <td>FMTTYPE</td>

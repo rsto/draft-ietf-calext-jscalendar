@@ -1,0 +1,14 @@
+
+{% macro render_component(spec, comp_name, comp) -%}
+<t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the {{ comp.convert.object }} object. This includes mandatory properties such as {% for prop_name, prop in comp.properties | dictsort %}{% if not prop.convert and prop.required %}<xref target="{{ spec.icalendar.properties[prop_name].rfc}}" section="{{ spec.icalendar.properties[prop_name].section}}" sectionFormat="parens">{{ prop_name }}</xref>{% endif %}{% endfor %}</t>
+{%- endmacro %}
+
+<xroot>
+{% for comp_name, comp in spec.icalendar.components | dictsort %}
+  {% if comp.convert %}
+    <xcomp name="{{ comp_name }}">
+    {{ render_component(spec, comp_name, comp) }}
+   </xcomp>
+  {% endif %}
+{% endfor %}
+</xroot>
