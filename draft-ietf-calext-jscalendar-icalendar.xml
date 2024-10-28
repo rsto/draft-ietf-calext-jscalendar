@@ -782,7 +782,7 @@ DTSTART;TZID=NonIana:20241004T010000
                 <td>
                   <xref target="ical-prop-participant-type"/>
                 </td>
-                <td>If value is CONTACT</td>
+                <td></td>
               </tr>
               <tr>
                 <td>SEQUENCE</td>
@@ -1283,7 +1283,7 @@ END:VALARM
                 <td>
                   <xref target="ical-prop-dtend"/>
                 </td>
-                <td>Location.rel = "end". If timezone differs from start.</td>
+                <td></td>
               </tr>
               <tr>
                 <td>DTSTAMP</td>
@@ -2281,7 +2281,7 @@ DTSTART;TZID=CustomTz:20080708T130000
                 <td>
                   <xref target="ical-prop-due"/>
                 </td>
-                <td>Also add Location with timeZone and .rel = "end" if TZID differs from DTSTART TZID.</td>
+                <td></td>
               </tr>
               <tr>
                 <td>DURATION</td>

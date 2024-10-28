@@ -90,7 +90,6 @@ icalendar:
         PARTICIPANT-TYPE:
           convert:
             property: roles
-            note: If value is CONTACT
         PRIORITY: {}
         REQUEST-STATUS: {}
         RELATED-TO: {}
@@ -310,7 +309,6 @@ icalendar:
         DTEND:
           convert:
             property: duration
-            note: Location.rel = "end". If timezone differs from start.
         DTSTAMP:
           convert:
             property: updated, scheduleUpdated
@@ -600,7 +598,6 @@ icalendar:
         DUE:
           convert:
             property: due
-            note: Also add Location with timeZone and .rel = "end" if TZID differs from DTSTART TZID.
         DURATION:
           convert:
             property: duration
