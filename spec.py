@@ -38,9 +38,12 @@ def conv_props(spec):
 def main():
     spec = load()
     env = Environment(loader=FileSystemLoader("xmlsrc"))
-    template = env.get_template("main.xml")
-    print(template.render({"spec": spec, "conv_props": conv_props(spec)}))
 
+    #template = env.get_template("main.xml")
+    #print(template.render({"spec": spec, "conv_props": conv_props(spec)}))
+
+    template = env.get_template("comptables.xml")
+    print(template.render({"spec": spec}))
 
 if __name__ == "__main__":
     main()

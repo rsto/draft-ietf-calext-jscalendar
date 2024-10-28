@@ -1,0 +1,73 @@
+
+{% macro render_component(spec, comp_name, comp) -%}
+      {% if comp.properties %}
+      <t>Its properties convert as follows:</t>
+      <table anchor="ical-comp-{{ comp_name | lower }}-props">
+        <name>Properties of the {{ comp_name }} component</name>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Reference</th>
+                <th>{{ comp.convert.object }} property</th>
+                <th>See</th>
+                <th>Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for prop_name, prop in comp.properties | dictsort %}
+                {% if prop.convert %}
+                <tr>
+                  <td>{{prop_name}}</td>
+                  <td><xref target="{{ spec.icalendar.properties[prop_name].rfc}}" section="{{ spec.icalendar.properties[prop_name].section}}" sectionFormat="comma"/></td>
+                  <td>{{ prop.convert.property }}</td>
+                  <td><xref target="ical-prop-{{ prop_name|lower }}"/></td>
+                  <td>{{ prop.convert.note }}</td>
+                </tr>
+                {% endif %}
+              {% endfor %}
+            </tbody>
+          </table>
+        {% endif %}
+
+          {% if comp.components %}
+          <t>Its components convert as follows:</t>
+      <table anchor="ical-comp-{{ comp_name | lower }}-comps">
+        <name>Components of the  {{ comp_name }} component</name>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Reference</th>
+                <th>{{ comp.convert.object }} property</th>
+                <th>See</th>
+                <th>Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for subcomp_name, subcomp in comp.components | dictsort %}
+                {% if subcomp.convert %}
+              <tr>
+                <td>{{ subcomp_name }}</td>
+                <td><xref target="{{ spec.icalendar.components[subcomp_name].rfc}}" section="{{ spec.icalendar.components[subcomp_name].section}}" sectionFormat="comma"/></td>
+                <td>{{ subcomp.convert.property }}</td>
+                <td><xref target="ical-comp-{{ subcomp_name|lower }}"/></td>
+                <td>{{ subcomp.convert.note }}</td>
+              </tr>
+              {% endif %}
+              {% endfor %}
+            </tbody>
+          </table>
+          {% endif %}
+
+          <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the {{ comp.convert.object }} object. This includes properties such as {% for prop_name, prop in comp.properties | dictsort %}{% if not prop.convert %}{% if loop.last %}, or {% elif not loop.first %}, {% endif %}<xref target="{{ spec.icalendar.properties[prop_name].rfc}}" section="{{ spec.icalendar.properties[prop_name].section}}" sectionFormat="parens">{{ prop_name }}</xref>{%endif %}{% endfor %}</t>
+
+          {%- endmacro %}
+
+<xroot>
+{% for comp_name, comp in spec.icalendar.components | dictsort %}
+  {% if comp.convert %}
+    <xcomp name="{{ comp_name }}">
+    {{ render_component(spec, comp_name, comp) }}
+   </xcomp>
+  {% endif %}
+{% endfor %}
+</xroot>

@@ -178,7 +178,7 @@ SUMMARY:he
             <xref target="RFC5545" section="3.4"/> allows for an iCalendar stream to contain one or more iCalendar objects.  In contrast, this specification only defines conversion for streams consisting of a single iCalendar object. Converting streams of multiple iCalendar objects is implementation-specific.  All following sections of this document use the terms "iCalendar object" and "VCALENDAR component" interchangeably.</t>
           <t>The <xref target="RFC5545" section="3.4" sectionFormat="parens">VCALENDAR component</xref> converts to a <xref target="RFC8984" section="2.3" sectionFormat="parens">Group object</xref>.</t>
           <t>Its properties convert as follows:</t>
-          <table>
+          <table anchor="ical-comp-vcalendar-props">
             <name>Properties of the VCALENDAR component</name>
             <thead>
               <tr>
@@ -190,15 +190,6 @@ SUMMARY:he
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>CALSCALE</td>
-                <td>
-                  <xref target="RFC5545" section="3.7.1" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
               <tr>
                 <td>CATEGORIES</td>
                 <td>
@@ -310,15 +301,6 @@ SUMMARY:he
                 <td/>
               </tr>
               <tr>
-                <td>REFRESH-INTERVAL</td>
-                <td>
-                  <xref target="RFC7986" section="5.7" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
                 <td>SOURCE</td>
                 <td>
                   <xref target="RFC7986" section="5.8" sectionFormat="comma"/>
@@ -326,17 +308,6 @@ SUMMARY:he
                 <td>source</td>
                 <td>
                   <xref target="ical-prop-source"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>STRUCTURED-DATA</td>
-                <td>
-                  <xref target="RFC9073" section="6.6" sectionFormat="comma"/>
-                </td>
-                <td>links</td>
-                <td>
-                  <xref target="ical-prop-structured-data"/>
                 </td>
                 <td/>
               </tr>
@@ -362,29 +333,11 @@ SUMMARY:he
                 </td>
                 <td/>
               </tr>
-              <tr>
-                <td>VERSION</td>
-                <td>
-                  <xref target="RFC5545" section="3.7.4" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
-                <td>XML</td>
-                <td>
-                  <xref target="RFC6321" section="4.2" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
             </tbody>
           </table>
           <t>Its components convert as follows:</t>
-          <table>
-            <name>Components of the VCALENDAR component</name>
+          <table anchor="ical-comp-vcalendar-comps">
+            <name>Components of the  VCALENDAR component</name>
             <thead>
               <tr>
                 <th>Name</th>
@@ -396,15 +349,6 @@ SUMMARY:he
             </thead>
             <tbody>
               <tr>
-                <td>VAVAILABILITY</td>
-                <td>
-                  <xref target="RFC7953" section="3.1" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/components</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
                 <td>VEVENT</td>
                 <td>
                   <xref target="RFC5545" section="3.6.1" sectionFormat="comma"/>
@@ -414,15 +358,6 @@ SUMMARY:he
                   <xref target="ical-comp-vevent"/>
                 </td>
                 <td/>
-              </tr>
-              <tr>
-                <td>VJOURNAL</td>
-                <td>
-                  <xref target="RFC5545" section="3.6.3" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/components</td>
-                <td/>
-                <td>Non-standard</td>
               </tr>
               <tr>
                 <td>VTIMEZONE</td>
@@ -448,6 +383,8 @@ SUMMARY:he
               </tr>
             </tbody>
           </table>
+          <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the Group object. This includes properties such as <xref target="RFC5545" section="3.7.1" sectionFormat="parens">CALSCALE</xref>, <xref target="RFC7986" section="5.7" sectionFormat="parens">REFRESH-INTERVAL</xref>, or <xref target="RFC5545" section="3.7.4" sectionFormat="parens">VERSION</xref>
+          </t>
           <t>The following example illustrates how to convert the VCALENDAR component:</t>
           <figure anchor="test-ical-comp-vcalendar">
             <name>Converting the VCALENDAR component</name>
@@ -601,7 +538,7 @@ END:VCALENDAR
           <name>DAYLIGHT</name>
           <t>The <xref target="RFC5545" section="3.6.5" sectionFormat="parens">DAYLIGHT component</xref> converts to a <xref target="RFC8984" section="4.7.2" sectionFormat="parens">TimeZoneRule object</xref>.</t>
           <t>Its properties convert as follows:</t>
-          <table>
+          <table anchor="ical-comp-daylight-props">
             <name>Properties of the DAYLIGHT component</name>
             <thead>
               <tr>
@@ -692,6 +629,7 @@ END:VCALENDAR
               </tr>
             </tbody>
           </table>
+          <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the TimeZoneRule object.</t>
           <t>The following example illustrates how to convert the DAYLIGHT component:</t>
           <figure anchor="test-ical-comp-daylight">
             <name>Converting the DAYLIGHT component</name>
@@ -735,7 +673,7 @@ DTSTART;TZID=NonIana:20241004T010000
           <name>PARTICIPANT</name>
           <t>The <xref target="RFC9073" section="7.1" sectionFormat="parens">PARTICIPANT component</xref> converts to a <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref>.</t>
           <t>Its properties convert as follows:</t>
-          <table>
+          <table anchor="ical-comp-participant-props">
             <name>Properties of the PARTICIPANT component</name>
             <thead>
               <tr>
@@ -770,15 +708,6 @@ DTSTART;TZID=NonIana:20241004T010000
                 <td/>
               </tr>
               <tr>
-                <td>CATEGORIES</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.2" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
                 <td>COMMENT</td>
                 <td>
                   <xref target="RFC5545" section="3.8.1.4" sectionFormat="comma"/>
@@ -788,24 +717,6 @@ DTSTART;TZID=NonIana:20241004T010000
                   <xref target="ical-prop-comment"/>
                 </td>
                 <td>Only one comment supported</td>
-              </tr>
-              <tr>
-                <td>CONTACT</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.4.2" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
-                <td>CREATED</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.7.1" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
               </tr>
               <tr>
                 <td>DESCRIPTION</td>
@@ -841,15 +752,6 @@ DTSTART;TZID=NonIana:20241004T010000
                 <td/>
               </tr>
               <tr>
-                <td>LAST-MODIFIED</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.7.3" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
                 <td>LINK</td>
                 <td>
                   <xref target="RFC9253" section="8.2" sectionFormat="comma"/>
@@ -883,42 +785,6 @@ DTSTART;TZID=NonIana:20241004T010000
                 <td>If value is CONTACT</td>
               </tr>
               <tr>
-                <td>PRIORITY</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.9" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
-                <td>RELATED-TO</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.4.5" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
-                <td>REQUEST-STATUS</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.8.3" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
-                <td>RESOURCES</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.10" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
                 <td>SEQUENCE</td>
                 <td>
                   <xref target="RFC5545" section="3.8.7.4" sectionFormat="comma"/>
@@ -928,15 +794,6 @@ DTSTART;TZID=NonIana:20241004T010000
                   <xref target="ical-prop-sequence"/>
                 </td>
                 <td/>
-              </tr>
-              <tr>
-                <td>STATUS</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.11" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
               </tr>
               <tr>
                 <td>STRUCTURED-DATA</td>
@@ -950,15 +807,6 @@ DTSTART;TZID=NonIana:20241004T010000
                 <td/>
               </tr>
               <tr>
-                <td>STYLED-DESCRIPTION</td>
-                <td>
-                  <xref target="RFC9073" section="6.5" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
                 <td>SUMMARY</td>
                 <td>
                   <xref target="RFC5545" section="3.8.1.12" sectionFormat="comma"/>
@@ -968,15 +816,6 @@ DTSTART;TZID=NonIana:20241004T010000
                   <xref target="ical-prop-summary"/>
                 </td>
                 <td/>
-              </tr>
-              <tr>
-                <td>UID</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
               </tr>
               <tr>
                 <td>URL</td>
@@ -989,20 +828,11 @@ DTSTART;TZID=NonIana:20241004T010000
                 </td>
                 <td/>
               </tr>
-              <tr>
-                <td>XML</td>
-                <td>
-                  <xref target="RFC6321" section="4.2" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
             </tbody>
           </table>
           <t>Its components convert as follows:</t>
-          <table>
-            <name>Components of the PARTICIPANT component</name>
+          <table anchor="ical-comp-participant-comps">
+            <name>Components of the  PARTICIPANT component</name>
             <thead>
               <tr>
                 <th>Name</th>
@@ -1024,17 +854,10 @@ DTSTART;TZID=NonIana:20241004T010000
                 </td>
                 <td/>
               </tr>
-              <tr>
-                <td>VRESOURCE</td>
-                <td>
-                  <xref target="RFC9073" section="7.3" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/components</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
             </tbody>
           </table>
+          <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the Participant object. This includes properties such as <xref target="RFC5545" section="3.8.1.2" sectionFormat="parens">CATEGORIES</xref>, <xref target="RFC5545" section="3.8.4.2" sectionFormat="parens">CONTACT</xref>, <xref target="RFC5545" section="3.8.7.1" sectionFormat="parens">CREATED</xref>, <xref target="RFC5545" section="3.8.7.3" sectionFormat="parens">LAST-MODIFIED</xref>, <xref target="RFC5545" section="3.8.1.9" sectionFormat="parens">PRIORITY</xref>, <xref target="RFC5545" section="3.8.4.5" sectionFormat="parens">RELATED-TO</xref>, <xref target="RFC5545" section="3.8.8.3" sectionFormat="parens">REQUEST-STATUS</xref>, <xref target="RFC5545" section="3.8.1.10" sectionFormat="parens">RESOURCES</xref>, <xref target="RFC5545" section="3.8.1.11" sectionFormat="parens">STATUS</xref>, <xref target="RFC9073" section="6.5" sectionFormat="parens">STYLED-DESCRIPTION</xref>, or <xref target="RFC5545" section="3.8.4.7" sectionFormat="parens">UID</xref>
+          </t>
           <t>The following example illustrates how to convert the PARTICIPANT component:</t>
           <figure anchor="test-ical-comp-participant">
             <name>Converting the PARTICIPANT component</name>
@@ -1087,7 +910,7 @@ END:PARTICIPANT
           <name>STANDARD</name>
           <t>The <xref target="RFC5545" section="3.6.5" sectionFormat="parens">STANDARD component</xref> converts to a <xref target="RFC8984" section="4.7.2" sectionFormat="parens">TimeZoneRule object</xref>.</t>
           <t>Its properties convert as follows:</t>
-          <table>
+          <table anchor="ical-comp-standard-props">
             <name>Properties of the STANDARD component</name>
             <thead>
               <tr>
@@ -1178,6 +1001,7 @@ END:PARTICIPANT
               </tr>
             </tbody>
           </table>
+          <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the TimeZoneRule object.</t>
           <t>The following example illustrates how to convert the STANDARD component:</t>
           <figure anchor="test-ical-comp-standard">
             <name>Converting the STANDARD component</name>
@@ -1221,7 +1045,7 @@ DTSTART;TZID=NonIana:20241004T010000
           <name>VALARM</name>
           <t>The <xref target="RFC5545" section="3.6.6" sectionFormat="parens">VALARM component</xref> converts to a <xref target="RFC8984" section="4.5.2" sectionFormat="parens">Alert object</xref>.</t>
           <t>Its properties convert as follows:</t>
-          <table>
+          <table anchor="ical-comp-valarm-props">
             <name>Properties of the VALARM component</name>
             <thead>
               <tr>
@@ -1256,60 +1080,6 @@ DTSTART;TZID=NonIana:20241004T010000
                 <td>Only if ACTION is EMAIL or DISPLAY.</td>
               </tr>
               <tr>
-                <td>ATTACH</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.1" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
-                <td>ATTENDEE</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.4.1" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
-                <td>DESCRIPTION</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.5" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
-                <td>DURATION</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.2.5" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
-                <td>PROXIMITY</td>
-                <td>
-                  <xref target="RFC9074" section="8.1" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
-                <td>REFID</td>
-                <td>
-                  <xref target="RFC9253" section="8.3" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
                 <td>RELATED-TO</td>
                 <td>
                   <xref target="RFC5545" section="3.8.4.5" sectionFormat="comma"/>
@@ -1319,33 +1089,6 @@ DTSTART;TZID=NonIana:20241004T010000
                   <xref target="ical-prop-related-to"/>
                 </td>
                 <td/>
-              </tr>
-              <tr>
-                <td>REPEAT</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.6.2" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
-                <td>STYLED-DESCRIPTION</td>
-                <td>
-                  <xref target="RFC9073" section="6.5" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
-                <td>SUMMARY</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.12" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
               </tr>
               <tr>
                 <td>TRIGGER</td>
@@ -1358,17 +1101,10 @@ DTSTART;TZID=NonIana:20241004T010000
                 </td>
                 <td/>
               </tr>
-              <tr>
-                <td>UID</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
             </tbody>
           </table>
+          <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the Alert object. This includes properties such as <xref target="RFC5545" section="3.8.1.1" sectionFormat="parens">ATTACH</xref>, <xref target="RFC5545" section="3.8.4.1" sectionFormat="parens">ATTENDEE</xref>, <xref target="RFC5545" section="3.8.1.5" sectionFormat="parens">DESCRIPTION</xref>, <xref target="RFC5545" section="3.8.2.5" sectionFormat="parens">DURATION</xref>, <xref target="RFC9074" section="8.1" sectionFormat="parens">PROXIMITY</xref>, <xref target="RFC9253" section="8.3" sectionFormat="parens">REFID</xref>, <xref target="RFC5545" section="3.8.6.2" sectionFormat="parens">REPEAT</xref>, <xref target="RFC9073" section="6.5" sectionFormat="parens">STYLED-DESCRIPTION</xref>, <xref target="RFC5545" section="3.8.1.12" sectionFormat="parens">SUMMARY</xref>, or <xref target="RFC5545" section="3.8.4.7" sectionFormat="parens">UID</xref>
+          </t>
           <t>The following example illustrates how to convert the VALARM component:</t>
           <figure anchor="test-ical-comp-valarm">
             <name>Converting the VALARM component</name>
@@ -1414,8 +1150,9 @@ END:VALARM
           <name>VEVENT</name>
           <t>The <xref target="RFC5545" section="3.6.1" sectionFormat="parens">VEVENT component</xref> converts to a <xref target="RFC8984" section="2.1" sectionFormat="parens">Event object</xref>.</t>
           <t>VEVENT components with different UID property values in the same iCalendar object convert to different entries in the Group.  They sort in the same order as in the VCALENDAR component.</t>
+          <t>The following example illustrates how to convert the VEVENT component:</t>
           <t>Its properties convert as follows:</t>
-          <table>
+          <table anchor="ical-comp-vevent-props">
             <name>Properties of the VEVENT component</name>
             <thead>
               <tr>
@@ -1516,15 +1253,6 @@ END:VALARM
                 <td/>
               </tr>
               <tr>
-                <td>CONTACT</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.4.2" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
                 <td>CREATED</td>
                 <td>
                   <xref target="RFC5545" section="3.8.7.1" sectionFormat="comma"/>
@@ -1562,7 +1290,7 @@ END:VALARM
                 <td>
                   <xref target="RFC5545" section="3.8.7.2" sectionFormat="comma"/>
                 </td>
-                <td>updated</td>
+                <td>updated, scheduleUpdated</td>
                 <td>
                   <xref target="ical-prop-dtstamp"/>
                 </td>
@@ -1712,15 +1440,6 @@ END:VALARM
                 <td/>
               </tr>
               <tr>
-                <td>REFID</td>
-                <td>
-                  <xref target="RFC9253" section="8.3" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
                 <td>RELATED-TO</td>
                 <td>
                   <xref target="RFC5545" section="3.8.4.5" sectionFormat="comma"/>
@@ -1743,15 +1462,6 @@ END:VALARM
                 <td/>
               </tr>
               <tr>
-                <td>RESOURCES</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.10" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
                 <td>RRULE</td>
                 <td>
                   <xref target="RFC5545" section="3.8.5.3" sectionFormat="comma"/>
@@ -1772,15 +1482,6 @@ END:VALARM
                   <xref target="ical-prop-sequence"/>
                 </td>
                 <td/>
-              </tr>
-              <tr>
-                <td>STATUS</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.11" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
               </tr>
               <tr>
                 <td>STRUCTURED-DATA</td>
@@ -1848,20 +1549,11 @@ END:VALARM
                 </td>
                 <td/>
               </tr>
-              <tr>
-                <td>XML</td>
-                <td>
-                  <xref target="RFC6321" section="4.2" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
             </tbody>
           </table>
           <t>Its components convert as follows:</t>
-          <table>
-            <name>Components of the VEVENT component</name>
+          <table anchor="ical-comp-vevent-comps">
+            <name>Components of the  VEVENT component</name>
             <thead>
               <tr>
                 <th>Name</th>
@@ -1885,7 +1577,8 @@ END:VALARM
               </tr>
             </tbody>
           </table>
-          <t>The following example illustrates how to convert the VEVENT component:</t>
+          <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the Event object. This includes properties such as <xref target="RFC5545" section="3.8.4.2" sectionFormat="parens">CONTACT</xref>, <xref target="RFC9253" section="8.3" sectionFormat="parens">REFID</xref>, <xref target="RFC5545" section="3.8.1.10" sectionFormat="parens">RESOURCES</xref>, or <xref target="RFC5545" section="3.8.1.11" sectionFormat="parens">STATUS</xref>
+          </t>
           <figure anchor="test-ical-comp-vevent">
             <name>Converting the VEVENT component</name>
             <sourcecode type="text/calendar"><![CDATA[
@@ -1928,7 +1621,7 @@ END:VCALENDAR
           <name>VLOCATION</name>
           <t>The <xref target="RFC9073" section="7.2" sectionFormat="parens">VLOCATION component</xref> converts to a <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>.</t>
           <t>Its properties convert as follows:</t>
-          <table>
+          <table anchor="ical-comp-vlocation-props">
             <name>Properties of the VLOCATION component</name>
             <thead>
               <tr>
@@ -2018,15 +1711,6 @@ END:VCALENDAR
                 <td/>
               </tr>
               <tr>
-                <td>REFID</td>
-                <td>
-                  <xref target="RFC9253" section="8.3" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
                 <td>STRUCTURED-DATA</td>
                 <td>
                   <xref target="RFC9073" section="6.6" sectionFormat="comma"/>
@@ -2037,26 +1721,10 @@ END:VCALENDAR
                 </td>
                 <td/>
               </tr>
-              <tr>
-                <td>UID</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
-                <td>XML</td>
-                <td>
-                  <xref target="RFC6321" section="4.2" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
             </tbody>
           </table>
+          <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the Location object. This includes properties such as <xref target="RFC9253" section="8.3" sectionFormat="parens">REFID</xref>, or <xref target="RFC5545" section="3.8.4.7" sectionFormat="parens">UID</xref>
+          </t>
           <t>The following example illustrates how to convert the VLOCATION component:</t>
           <figure anchor="test-ical-comp-vlocation">
             <name>Converting the VLOCATION component</name>
@@ -2103,7 +1771,7 @@ END:VLOCATION
           <name>VRESOURCE</name>
           <t>The <xref target="RFC9073" section="7.3" sectionFormat="parens">VRESOURCE component</xref> converts to a <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref>.</t>
           <t>Its properties convert as follows:</t>
-          <table>
+          <table anchor="ical-comp-vresource-props">
             <name>Properties of the VRESOURCE component</name>
             <thead>
               <tr>
@@ -2182,15 +1850,6 @@ END:VLOCATION
                 <td/>
               </tr>
               <tr>
-                <td>RESOURCE-TYPE</td>
-                <td>
-                  <xref target="RFC9073" section="6.3" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
                 <td>STRUCTURED-DATA</td>
                 <td>
                   <xref target="RFC9073" section="6.6" sectionFormat="comma"/>
@@ -2201,26 +1860,10 @@ END:VLOCATION
                 </td>
                 <td/>
               </tr>
-              <tr>
-                <td>UID</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
-                <td>XML</td>
-                <td>
-                  <xref target="RFC6321" section="4.2" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
             </tbody>
           </table>
+          <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the Participant object. This includes properties such as <xref target="RFC9073" section="6.3" sectionFormat="parens">RESOURCE-TYPE</xref>, or <xref target="RFC5545" section="3.8.4.7" sectionFormat="parens">UID</xref>
+          </t>
           <t>The following example illustrates how to convert the VRESOURCE component:</t>
           <figure anchor="test-ical-comp-vresource">
             <name>Converting the VRESOURCE component</name>
@@ -2277,7 +1920,7 @@ END:VRESOURCE
           <name>VTIMEZONE</name>
           <t>The <xref target="RFC5545" section="3.6.5" sectionFormat="parens">VTIMEZONE component</xref> converts to a <xref target="RFC8984" section="4.7.2" sectionFormat="parens">TimeZone object</xref>.</t>
           <t>Its properties convert as follows:</t>
-          <table>
+          <table anchor="ical-comp-vtimezone-props">
             <name>Properties of the VTIMEZONE component</name>
             <thead>
               <tr>
@@ -2347,8 +1990,8 @@ END:VRESOURCE
             </tbody>
           </table>
           <t>Its components convert as follows:</t>
-          <table>
-            <name>Components of the VTIMEZONE component</name>
+          <table anchor="ical-comp-vtimezone-comps">
+            <name>Components of the  VTIMEZONE component</name>
             <thead>
               <tr>
                 <th>Name</th>
@@ -2383,6 +2026,7 @@ END:VRESOURCE
               </tr>
             </tbody>
           </table>
+          <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the TimeZone object.</t>
           <t>The following example illustrates how to convert the VTIMEZONE component:</t>
           <figure anchor="test-ical-comp-vtimezone">
             <name>Converting the VTIMEZONE component</name>
@@ -2482,8 +2126,9 @@ DTSTART;TZID=CustomTz:20080708T130000
           <name>VTODO</name>
           <t>The <xref target="RFC5545" section="3.6.2" sectionFormat="parens">VTODO component</xref> converts to a <xref target="RFC8984" section="2.2" sectionFormat="parens">Task object</xref>.</t>
           <t>VTODO components with different UID property values in the same iCalendar object convert to different entries in the Group.  They sort in the same order as in the VCALENDAR component.</t>
+          <t>The following example illustrates how to convert the VTODO component:</t>
           <t>Its properties convert as follows:</t>
-          <table>
+          <table anchor="ical-comp-vtodo-props">
             <name>Properties of the VTODO component</name>
             <thead>
               <tr>
@@ -2562,15 +2207,6 @@ DTSTART;TZID=CustomTz:20080708T130000
                 <td/>
               </tr>
               <tr>
-                <td>COMPLETED</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.2.1" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
                 <td>CONCEPT</td>
                 <td>
                   <xref target="RFC9253" section="8.1" sectionFormat="comma"/>
@@ -2591,15 +2227,6 @@ DTSTART;TZID=CustomTz:20080708T130000
                   <xref target="ical-prop-conference"/>
                 </td>
                 <td/>
-              </tr>
-              <tr>
-                <td>CONTACT</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.4.2" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
               </tr>
               <tr>
                 <td>CREATED</td>
@@ -2628,7 +2255,7 @@ DTSTART;TZID=CustomTz:20080708T130000
                 <td>
                   <xref target="RFC5545" section="3.8.7.2" sectionFormat="comma"/>
                 </td>
-                <td>updated</td>
+                <td>updated, scheduleUpdated</td>
                 <td>
                   <xref target="ical-prop-dtstamp"/>
                 </td>
@@ -2800,15 +2427,6 @@ DTSTART;TZID=CustomTz:20080708T130000
                 <td/>
               </tr>
               <tr>
-                <td>REFID</td>
-                <td>
-                  <xref target="RFC9253" section="8.3" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
                 <td>RELATED-TO</td>
                 <td>
                   <xref target="RFC5545" section="3.8.4.5" sectionFormat="comma"/>
@@ -2831,15 +2449,6 @@ DTSTART;TZID=CustomTz:20080708T130000
                 <td/>
               </tr>
               <tr>
-                <td>RESOURCES</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.10" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
-              <tr>
                 <td>RRULE</td>
                 <td>
                   <xref target="RFC5545" section="3.8.5.3" sectionFormat="comma"/>
@@ -2860,15 +2469,6 @@ DTSTART;TZID=CustomTz:20080708T130000
                   <xref target="ical-prop-sequence"/>
                 </td>
                 <td/>
-              </tr>
-              <tr>
-                <td>STATUS</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.11" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
               </tr>
               <tr>
                 <td>STRUCTURED-DATA</td>
@@ -2936,20 +2536,11 @@ DTSTART;TZID=CustomTz:20080708T130000
                 </td>
                 <td/>
               </tr>
-              <tr>
-                <td>XML</td>
-                <td>
-                  <xref target="RFC6321" section="4.2" sectionFormat="comma"/>
-                </td>
-                <td>iCalComponent/properties</td>
-                <td/>
-                <td>Non-standard</td>
-              </tr>
             </tbody>
           </table>
           <t>Its components convert as follows:</t>
-          <table>
-            <name>Components of the VTODO component</name>
+          <table anchor="ical-comp-vtodo-comps">
+            <name>Components of the  VTODO component</name>
             <thead>
               <tr>
                 <th>Name</th>
@@ -2973,7 +2564,8 @@ DTSTART;TZID=CustomTz:20080708T130000
               </tr>
             </tbody>
           </table>
-          <t>The following example illustrates how to convert the VTODO component:</t>
+          <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the Task object. This includes properties such as <xref target="RFC5545" section="3.8.2.1" sectionFormat="parens">COMPLETED</xref>, <xref target="RFC5545" section="3.8.4.2" sectionFormat="parens">CONTACT</xref>, <xref target="RFC9253" section="8.3" sectionFormat="parens">REFID</xref>, <xref target="RFC5545" section="3.8.1.10" sectionFormat="parens">RESOURCES</xref>, or <xref target="RFC5545" section="3.8.1.11" sectionFormat="parens">STATUS</xref>
+          </t>
           <figure anchor="test-ical-comp-vtodo">
             <name>Converting the VTODO component</name>
             <sourcecode type="text/calendar"><![CDATA[
@@ -5652,13 +5244,11 @@ URL:https://example.com/calendar/birtdays.ics
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5545.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5546.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5870.xml"/>
-        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6321.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6638.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6838.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7265.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7529.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7808.xml"/>
-        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7953.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7986.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8288.xml"/>
