@@ -1777,7 +1777,7 @@ jscalendar:
       type: Int[]
       usage: common
     calendarAddress:
-      object:
+      objects:
         - Participant
       rfc: I-D.ietf-jmap-calendars
       sections:
