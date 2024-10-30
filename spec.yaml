@@ -1461,6 +1461,10 @@ icalendar:
       rfc: RFC5545
       section: 3.2.7
       status: current
+    ESTIMATED-DURATION:
+      rfc: draft-ietf-calext-ical-tasks
+      section: 12.1
+      status: current
     FBTYPE:
       rfc: RFC5545
       section: 3.2.9
@@ -1513,6 +1517,10 @@ icalendar:
       rfc: RFC5545
       section: 3.2.13
       status: current
+    REASON:
+      rfc: draft-ietf-calext-ical-tasks
+      section: 12.2
+      status: current
     RELATED:
       rfc: RFC5545
       section: 3.2.14
@@ -1553,6 +1561,14 @@ icalendar:
       rfc: RFC8607
       section: '4.1'
       status: current
+    SUBSTATE:
+      rfc: draft-ietf-calext-ical-tasks
+      section: 12.3
+      status: current
+    TASK-MODE:
+      rfc: draft-ietf-calext-ical-tasks
+      section: 12.4
+      status: current
     TZID:
       rfc: RFC5545
       section: 3.2.19
@@ -1566,6 +1582,8 @@ icalendar:
 jscalendar:
   types:
     Alert:
+      convert:
+        component: VALARM
       rfc: RFC8984
       section: '4.5.2'
     Boolean:
@@ -1575,9 +1593,13 @@ jscalendar:
       rfc: RFC8984
       section: '1.4.6'
     Event:
+      convert:
+        component: VEVENT
       rfc: RFC8984
       section: '2.1'
     Group:
+      convert:
+        component: VCALENDAR
       rfc: RFC8984
       section: '2.3'
     Id:
@@ -1590,9 +1612,13 @@ jscalendar:
       rfc: RFC8984
       section: '1.4.5'
     Link:
+      convert:
+        property: ATTACH
       rfc: RFC8984
       section: '1.4.11'
     Location:
+      convert:
+        component: VLOCATION
       rfc: RFC8984
       section: '4.2.5'
     NDay:
@@ -1602,6 +1628,8 @@ jscalendar:
       rfc: RFC8984
       section: '1.3'
     Participant:
+      convert:
+        property: ATTENDEE
       rfc: RFC8984
       section: '4.4.6'
     PatchObject:
@@ -1620,15 +1648,21 @@ jscalendar:
       rfc: RFC8984
       section: '1.3'
     Task:
+      convert:
+        component: VTODO
       rfc: RFC8984
       section: '2.2'
     TimeZone:
+      convert:
+        component: VTIMEZONE
       rfc: RFC8984
       section: '4.7.2'
     TimeZoneId:
       rfc: RFC8984
       section: '1.4.8'
     TimeZoneRule:
+      convert:
+        component: DAYLIGHT
       rfc: RFC8984
       section: '4.7.2'
     UnsignedInt:
@@ -1638,6 +1672,8 @@ jscalendar:
       rfc: RFC8984
       section: '1.4.4'
     VirtualLocation:
+      convert:
+        property: CONFERENCE
       rfc: RFC8984
       section: '4.2.6'
   properties:
@@ -1673,7 +1709,9 @@ jscalendar:
       usage: common
     acknowledged:
       objects:
-        Alert: {}
+        Alert:
+          convert:
+            property: ACKNOWLEDGED
       rfc: RFC8984
       sections:
         - 4.5.2
@@ -1681,7 +1719,9 @@ jscalendar:
       usage: common
     action:
       objects:
-        Alert: {}
+        Alert:
+          convert:
+            property: ACTION
       rfc: RFC8984
       sections:
         - 4.5.2
@@ -1689,8 +1729,12 @@ jscalendar:
       usage: common
     alerts:
       objects:
-        Event: {}
-        Task: {}
+        Event:
+          convert:
+            object: Alert
+        Task:
+          convert:
+            object: Alert
       rfc: RFC8984
       sections:
         - 4.5.2
@@ -1698,7 +1742,9 @@ jscalendar:
       usage: common
     aliases:
       objects:
-        TimeZone: {}
+        TimeZone:
+          convert:
+            property: TZID-ALIAS-OF
       rfc: RFC8984
       sections:
         - 4.7.2
@@ -1706,7 +1752,9 @@ jscalendar:
       usage: common
     byDay:
       objects:
-        RecurrenceRule: {}
+        RecurrenceRule:
+          convert:
+            field: BYDAY
       rfc: RFC8984
       sections:
         - 4.3.3
@@ -1714,7 +1762,9 @@ jscalendar:
       usage: common
     byHour:
       objects:
-        RecurrenceRule: {}
+        RecurrenceRule:
+          convert:
+            field: BYHOUR
       rfc: RFC8984
       sections:
         - 4.3.3
@@ -1722,7 +1772,9 @@ jscalendar:
       usage: common
     byMinute:
       objects:
-        RecurrenceRule: {}
+        RecurrenceRule:
+          convert:
+            field: BYMINUTE
       rfc: RFC8984
       sections:
         - 4.3.3
@@ -1730,7 +1782,9 @@ jscalendar:
       usage: common
     byMonth:
       objects:
-        RecurrenceRule: {}
+        RecurrenceRule:
+          convert:
+            field: BYMONTH
       rfc: RFC8984
       sections:
         - 4.3.3
@@ -1738,7 +1792,9 @@ jscalendar:
       usage: common
     byMonthDay:
       objects:
-        RecurrenceRule: {}
+        RecurrenceRule:
+          convert:
+            field: BYMONTHDAY
       rfc: RFC8984
       sections:
         - 4.3.3
@@ -1746,7 +1802,9 @@ jscalendar:
       usage: common
     bySecond:
       objects:
-        RecurrenceRule: {}
+        RecurrenceRule:
+          convert:
+            field: BYSECOND
       rfc: RFC8984
       sections:
         - 4.3.3
@@ -1754,7 +1812,9 @@ jscalendar:
       usage: common
     bySetPosition:
       objects:
-        RecurrenceRule: {}
+        RecurrenceRule:
+          convert:
+            field: BYSETPOS
       rfc: RFC8984
       sections:
         - 4.3.3
@@ -1762,7 +1822,9 @@ jscalendar:
       usage: common
     byWeekNo:
       objects:
-        RecurrenceRule: {}
+        RecurrenceRule:
+          convert:
+            field: BYWEEKNO
       rfc: RFC8984
       sections:
         - 4.3.3
@@ -1770,7 +1832,9 @@ jscalendar:
       usage: common
     byYearDay:
       objects:
-        RecurrenceRule: {}
+        RecurrenceRule:
+          convert:
+            field: BYYEARDAY
       rfc: RFC8984
       sections:
         - 4.3.3
@@ -1778,7 +1842,11 @@ jscalendar:
       usage: common
     calendarAddress:
       objects:
-        Participant: {}
+        Participant:
+          convert:
+            property: CALENDAR-ADDRESS
+            component: PARTICIPANT
+            value: ATTENDEE
       rfc: I-D.ietf-jmap-calendars
       sections:
         - 5.1.1
@@ -1786,9 +1854,15 @@ jscalendar:
       usage: common
     categories:
       objects:
-        Event: {}
-        Task: {}
-        Group: {}
+        Event:
+          convert:
+            property: CONCEPT
+        Task:
+          convert:
+            property: CONCEPT
+        Group:
+          convert:
+            property: CONCEPT
       rfc: RFC8984
       sections:
         - 4.2.10
@@ -1804,9 +1878,15 @@ jscalendar:
       usage: common
     color:
       objects:
-        Event: {}
-        Task: {}
-        Group: {}
+        Event:
+          convert:
+            property: COLOR
+        Task:
+          convert:
+            property: COLOR
+        Group:
+          convert:
+            property: COLOR
       rfc: RFC8984
       sections:
         - 4.2.11
@@ -1814,7 +1894,9 @@ jscalendar:
       usage: common
     comments:
       objects:
-        TimeZoneRule: {}
+        TimeZoneRule:
+          convert:
+            property: COMMENT
       rfc: RFC8984
       sections:
         - 4.7.2
@@ -1822,7 +1904,9 @@ jscalendar:
       usage: common
     contentType:
       objects:
-        Link: {}
+        Link:
+          convert:
+            parameter: FMTTYPE
       rfc: RFC8984
       sections:
         - 1.4.11
@@ -1830,7 +1914,10 @@ jscalendar:
       usage: common
     coordinates:
       objects:
-        Location: {}
+        Location:
+          convert:
+            property: GEO
+            component: VLOCATION
       rfc: RFC8984
       sections:
         - 4.2.5
@@ -1838,7 +1925,9 @@ jscalendar:
       usage: common
     count:
       objects:
-        RecurrenceRule: {}
+        RecurrenceRule:
+          convert:
+            field: COUNT
       rfc: RFC8984
       sections:
         - 4.3.3
@@ -1846,9 +1935,15 @@ jscalendar:
       usage: common
     created:
       objects:
-        Event: {}
-        Task: {}
-        Group: {}
+        Event:
+          convert:
+            property: CREATED
+        Task:
+          convert:
+            property: CREATED
+        Group:
+          convert:
+            property: CREATED
       rfc: RFC8984
       sections:
         - 4.1.5
@@ -1864,7 +1959,9 @@ jscalendar:
       usage: common
     daylight:
       objects:
-        TimeZone: {}
+        TimeZone:
+          convert:
+            component: DAYLIGHT
       rfc: RFC8984
       sections:
         - 4.7.2
@@ -1872,7 +1969,9 @@ jscalendar:
       usage: common
     delegatedFrom:
       objects:
-        Participant: {}
+        Participant:
+          convert:
+            parameter: DELEGATED-FROM
       rfc: RFC8984
       sections:
         - 4.4.6
@@ -1880,7 +1979,9 @@ jscalendar:
       usage: common
     delegatedTo:
       objects:
-        Participant: {}
+        Participant:
+          convert:
+            parameter: DELEGATED-TO
       rfc: RFC8984
       sections:
         - 4.4.6
@@ -1888,10 +1989,19 @@ jscalendar:
       usage: common
     description:
       objects:
-        Event: {}
-        Task: {}
-        Location: {}
-        Participant: {}
+        Event:
+          convert:
+            property: DESCRIPTION
+        Task:
+          convert:
+            property: DESCRIPTION
+        Location:
+          convert:
+            property: DESCRIPTION
+        Participant:
+          convert:
+            component: PARTICIPANT
+            property: DESCRIPTION
         VirtualLocation: {}
       rfc: RFC8984
       sections:
@@ -1903,8 +2013,14 @@ jscalendar:
       usage: common
     descriptionContentType:
       objects:
-        Event: {}
-        Task: {}
+        Event:
+          convert:
+            parameter: FMTTYPE
+            property: STYLED-DESCRIPTION
+        Task:
+          convert:
+            parameter: FMTTYPE
+            property: STYLED-DESCRIPTION
       rfc: RFC8984
       sections:
         - 4.2.3
@@ -1912,7 +2028,10 @@ jscalendar:
       usage: common
     display:
       objects:
-        Link: {}
+        Link:
+          convert:
+            parameter: DISPLAY
+            property: IMAGE
       rfc: RFC8984
       sections:
         - 1.4.11
@@ -1920,7 +2039,9 @@ jscalendar:
       usage: common
     due:
       objects:
-        Task: {}
+        Task:
+          convert:
+            property: DUE
       rfc: RFC8984
       sections:
         - 5.2.1
@@ -1928,7 +2049,9 @@ jscalendar:
       usage: common
     duration:
       objects:
-        Event: {}
+        Event:
+          convert:
+            property: DURATION
       rfc: RFC8984
       sections:
         - 5.1.2
@@ -1936,7 +2059,9 @@ jscalendar:
       usage: common
     email:
       objects:
-        Participant: {}
+        Participant:
+          convert:
+            parameter: EMAIL
       rfc: RFC8984
       sections:
         - 4.4.6
@@ -1944,7 +2069,9 @@ jscalendar:
       usage: common
     entries:
       objects:
-        Group: {}
+        Group:
+          convert:
+            parameter: VEVENT
       rfc: RFC8984
       sections:
         - 5.3.1
@@ -1952,7 +2079,9 @@ jscalendar:
       usage: common
     estimatedDuration:
       objects:
-        Task: {}
+        Task:
+          convert:
+            property: ESTIMATED-DURATION
       rfc: RFC8984
       sections:
         - 5.2.3
@@ -1960,8 +2089,12 @@ jscalendar:
       usage: common
     excluded:
       objects:
-        Event: {}
-        Task: {}
+        Event:
+          convert:
+            property: EXDATE
+        Task:
+          convert:
+            property: EXDATE
       rfc: RFC8984
       sections:
         - 4.3.6
@@ -1969,8 +2102,12 @@ jscalendar:
       usage: common
     excludedRecurrenceRules:
       objects:
-        Event: {}
-        Task: {}
+        Event:
+          convert:
+            property: EXRULE
+        Task:
+          convert:
+            property: EXRULE
       rfc: RFC8984
       sections:
         - 4.3.4
@@ -1978,7 +2115,9 @@ jscalendar:
       usage: common
     expectReply:
       objects:
-        Participant: {}
+        Participant:
+          convert:
+            parameter: RSVP
       rfc: RFC8984
       sections:
         - 4.4.6
@@ -1986,7 +2125,9 @@ jscalendar:
       usage: common
     features:
       objects:
-        VirtualLocation: {}
+        VirtualLocation:
+          convert:
+            parameter: FEATURE
       rfc: RFC8984
       sections:
         - 4.2.6
@@ -1994,7 +2135,9 @@ jscalendar:
       usage: common
     firstDayOfWeek:
       objects:
-        RecurrenceRule: {}
+        RecurrenceRule:
+          convert:
+            field: WKST
       rfc: RFC8984
       sections:
         - 4.3.3
@@ -2002,7 +2145,9 @@ jscalendar:
       usage: common
     freeBusyStatus:
       objects:
-        Event: {}
+        Event:
+          convert:
+            property: TRANSP
         Task: {}
       rfc: RFC8984
       sections:
@@ -2011,7 +2156,9 @@ jscalendar:
       usage: common
     frequency:
       objects:
-        RecurrenceRule: {}
+        RecurrenceRule:
+          convert:
+            field: FREQ
       rfc: RFC8984
       sections:
         - 4.3.3
@@ -2019,7 +2166,9 @@ jscalendar:
       usage: common
     href:
       objects:
-        Link: {}
+        Link:
+          convert:
+            value: ATTACH
       rfc: RFC8984
       sections:
         - 1.4.11
@@ -2027,7 +2176,9 @@ jscalendar:
       usage: common
     interval:
       objects:
-        RecurrenceRule: {}
+        RecurrenceRule:
+          convert:
+            field: INTERVAL
       rfc: RFC8984
       sections:
         - 4.3.3
@@ -2043,9 +2194,15 @@ jscalendar:
       usage: common
     keywords:
       objects:
-        Event: {}
-        Task: {}
-        Group: {}
+        Event:
+          convert:
+            property: CATEGORIES
+        Task:
+          convert:
+            property: CATEGORIES
+        Group:
+          convert:
+            property: CATEGORIES
       rfc: RFC8984
       sections:
         - 4.2.9
@@ -2069,11 +2226,21 @@ jscalendar:
       usage: common
     links:
       objects:
-        Group: {}
-        Event: {}
-        Task: {}
-        Location: {}
-        Participant: {}
+        Group:
+          convert:
+            object: Link
+        Event:
+          convert:
+            object: Link
+        Task:
+          convert:
+            object: Link
+        Location:
+          convert:
+            object: Link
+        Participant:
+          convert:
+            object: Link
       rfc: RFC8984
       sections:
         - 4.2.7
@@ -2110,7 +2277,10 @@ jscalendar:
       usage: common
     locationTypes:
       objects:
-        Location: {}
+        Location:
+          convert:
+            property: LOCATION-TYPE
+            component: VLOCATION
       rfc: RFC8984
       sections:
         - 4.2.5
@@ -2118,8 +2288,12 @@ jscalendar:
       usage: common
     locations:
       objects:
-        Event: {}
-        Task: {}
+        Event:
+          convert:
+            object: Location
+        Task:
+          convert:
+            object: Location
       rfc: RFC8984
       sections:
         - 4.2.5
@@ -2127,7 +2301,9 @@ jscalendar:
       usage: common
     memberOf:
       objects:
-        Participant: {}
+        Participant:
+          convert:
+            parameter: MEMBER
       rfc: RFC8984
       sections:
         - 4.4.6
@@ -2135,8 +2311,12 @@ jscalendar:
       usage: common
     method:
       objects:
-        Event: {}
-        Task: {}
+        Event:
+          property: METHOD
+          component: VCALENDAR
+        Task:
+          property: METHOD
+          component: VCALENDAR
       rfc: RFC8984
       sections:
         - 4.1.8
@@ -2144,9 +2324,17 @@ jscalendar:
       usage: common
     name:
       objects:
-        Location: {}
-        VirtualLocation: {}
-        Participant: {}
+        Location:
+          convert:
+            value: LOCATION
+            property: NAME
+            component: VLOCATION
+        VirtualLocation:
+          convert:
+            parameter: LABEL
+        Participant:
+          convert:
+            parameter: CN
       rfc: RFC8984
       sections:
         - 4.2.5
@@ -2156,7 +2344,9 @@ jscalendar:
       usage: common
     names:
       objects:
-        TimeZoneRule: {}
+        TimeZoneRule:
+          convert:
+            property: TZNAME
       rfc: RFC8984
       sections:
         - 4.7.2
@@ -2172,7 +2362,9 @@ jscalendar:
       usage: common
     offset:
       objects:
-        OffsetTrigger: {}
+        OffsetTrigger:
+          convert:
+            value: TRIGGER
       rfc: RFC8984
       sections:
         - 4.5.2
@@ -2180,7 +2372,9 @@ jscalendar:
       usage: common
     offsetFrom:
       objects:
-        TimeZoneRule: {}
+        TimeZoneRule:
+          convert:
+            property: TZOFFSETFROM
       rfc: RFC8984
       sections:
         - 4.7.2
@@ -2188,7 +2382,9 @@ jscalendar:
       usage: common
     offsetTo:
       objects:
-        TimeZoneRule: {}
+        TimeZoneRule:
+          convert:
+            property: TZOFFSETTO
       rfc: RFC8984
       sections:
         - 4.7.2
@@ -2196,8 +2392,12 @@ jscalendar:
       usage: common
     participants:
       objects:
-        Event: {}
-        Task: {}
+        Event:
+          convert:
+            object: Participant
+        Task:
+          convert:
+            object: Participant
       rfc: RFC8984
       sections:
         - 4.4.6
@@ -2205,7 +2405,9 @@ jscalendar:
       usage: common
     participationComment:
       objects:
-        Participant: {}
+        Participant:
+          convert:
+            property: COMMENT
       rfc: RFC8984
       sections:
         - 4.4.6
@@ -2213,7 +2415,9 @@ jscalendar:
       usage: common
     participationStatus:
       objects:
-        Participant: {}
+        Participant:
+          convert:
+            parameter: PARTSTAT
       rfc: RFC8984
       sections:
         - 4.4.6
@@ -2222,7 +2426,10 @@ jscalendar:
     percentComplete:
       objects:
         Task: {}
-        Participant: {}
+        Participant:
+          convert:
+            property: PERCENT-COMPLETE
+            component: PARTICIPANT
       rfc: RFC8984
       sections:
         - 5.2.4
@@ -2230,8 +2437,12 @@ jscalendar:
       usage: common
     priority:
       objects:
-        Event: {}
-        Task: {}
+        Event:
+          convert:
+            property: PRIORITY
+        Task:
+          convert:
+            property: PRIORITY
       rfc: RFC8984
       sections:
         - 4.4.1
@@ -2239,8 +2450,12 @@ jscalendar:
       usage: common
     privacy:
       objects:
-        Event: {}
-        Task: {}
+        Event:
+          convert:
+            property: CLASS
+        Task:
+          convert:
+            property: CLASS
       rfc: RFC8984
       sections:
         - 4.4.3
@@ -2248,9 +2463,17 @@ jscalendar:
       usage: common
     prodId:
       objects:
-        Event: {}
-        Task: {}
-        Group: {}
+        Event:
+          convert:
+            property: PRODID
+            component: VCALENDAR
+        Task:
+          convert:
+            property: PRODID
+            component: VCALENDAR
+        Group:
+          convert:
+            property: PRODID
       rfc: RFC8984
       sections:
         - 4.1.4
@@ -2276,8 +2499,12 @@ jscalendar:
       usage: common
     recurrenceId:
       objects:
-        Event: {}
-        Task: {}
+        Event:
+          convert:
+            property: RECURRENCE-ID
+        Task:
+          convert:
+            property: RECURRENCE-ID
       rfc: RFC8984
       sections:
         - 4.3.1
@@ -2285,8 +2512,14 @@ jscalendar:
       usage: common
     recurrenceIdTimeZone:
       objects:
-        Event: {}
-        Task: {}
+        Event:
+          convert:
+            parameter: TZID
+            property: RECURRENCE-ID
+        Task:
+          convert:
+            parameter: TZID
+            property: RECURRENCE-ID
       rfc: RFC8984
       sections:
         - 4.3.2
@@ -2294,9 +2527,15 @@ jscalendar:
       usage: common
     recurrenceOverrides:
       objects:
-        Event: {}
-        Task: {}
-        TimeZoneRule: {}
+        Event:
+          convert:
+            property: RDATE
+        Task:
+          convert:
+            property: RDATE
+        TimeZoneRule:
+          convert:
+            property: RDATE
       rfc: RFC8984
       sections:
         - 4.3.5
@@ -2305,9 +2544,15 @@ jscalendar:
       usage: common
     recurrenceRules:
       objects:
-        Event: {}
-        Task: {}
-        TimeZoneRule: {}
+        Event:
+          convert:
+            property: RRULE
+        Task:
+          convert:
+            property: RRULE
+        TimeZoneRule:
+          convert:
+            property: RRULE
       rfc: RFC8984
       sections:
         - 4.3.3
@@ -2316,7 +2561,10 @@ jscalendar:
       usage: common
     rel:
       objects:
-        Link: {}
+        Link:
+          convert:
+            parameter: LINKREL
+            property: LINK
       rfc: RFC8984
       sections:
         - 1.4.11
@@ -2324,9 +2572,15 @@ jscalendar:
       usage: common
     relatedTo:
       objects:
-        Event: {}
-        Task: {}
-        Alert: {}
+        Event:
+          convert:
+            property: RELATED-TO
+        Task:
+          convert:
+            property: RELATED-TO
+        Alert:
+          convert:
+            property: RELATED-TO
       rfc: RFC8984
       sections:
         - 4.1.3
@@ -2335,7 +2589,10 @@ jscalendar:
       usage: common
     relation:
       objects:
-        Relation: {}
+        Relation:
+          convert:
+            parameter: RELTYPE
+            property: RELATED-TO
       rfc: RFC8984
       sections:
         - 1.4.10
@@ -2343,7 +2600,9 @@ jscalendar:
       usage: common
     relativeTo:
       objects:
-        OffsetTrigger: {}
+        OffsetTrigger:
+          convert:
+            parameter: RELATED
         Location: {}
       rfc: RFC8984
       sections:
@@ -2353,8 +2612,12 @@ jscalendar:
       usage: common
     replyTo:
       objects:
-        Event: {}
-        Task: {}
+        Event:
+          convert:
+            property: ORGANIZER
+        Task:
+          convert:
+            property: ORGANIZER
       rfc: RFC8984
       sections:
         - 4.4.4
@@ -2362,8 +2625,12 @@ jscalendar:
       usage: common
     requestStatus:
       objects:
-        Event: {}
-        Task: {}
+        Event:
+          convert:
+            property: REQUEST-STATUS
+        Task:
+          convert:
+            property: REQUEST-STATUS
       rfc: RFC8984
       sections:
         - 4.4.7
@@ -2371,7 +2638,9 @@ jscalendar:
       usage: common
     roles:
       objects:
-        Participant: {}
+        Participant:
+          convert:
+            parameter: ROLE
       rfc: RFC8984
       sections:
         - 4.4.6
@@ -2379,7 +2648,9 @@ jscalendar:
       usage: common
     rscale:
       objects:
-        RecurrenceRule: {}
+        RecurrenceRule:
+          convert:
+            field: RSCALE
       rfc: RFC8984
       sections:
         - 4.3.3
@@ -2387,7 +2658,9 @@ jscalendar:
       usage: common
     scheduleAgent:
       objects:
-        Participant: {}
+        Participant:
+          convert:
+            parameter: SCHEDULE-AGENT
       rfc: RFC8984
       sections:
         - 4.4.6
@@ -2395,7 +2668,9 @@ jscalendar:
       usage: common
     scheduleForceSend:
       objects:
-        Participant: {}
+        Participant:
+          convert:
+            parameter: SCHEDULE-FORCE-SEND
       rfc: RFC8984
       sections:
         - 4.4.6
@@ -2411,7 +2686,9 @@ jscalendar:
       usage: common
     scheduleStatus:
       objects:
-        Participant: {}
+        Participant:
+          convert:
+            parameter: SCHEDULE-STATUS
       rfc: RFC8984
       sections:
         - 4.4.6
@@ -2446,8 +2723,12 @@ jscalendar:
       usage: common
     sequence:
       objects:
-        Event: {}
-        Task: {}
+        Event:
+          convert:
+            property: SEQUENCE
+        Task:
+          convert:
+            property: SEQUENCE
       rfc: RFC8984
       sections:
         - 4.1.7
@@ -2464,7 +2745,9 @@ jscalendar:
       usage: common
     size:
       objects:
-        Link: {}
+        Link:
+          convert:
+            parameter: SIZE
       rfc: RFC8984
       sections:
         - 1.4.11
@@ -2472,7 +2755,9 @@ jscalendar:
       usage: common
     skip:
       objects:
-        RecurrenceRule: {}
+        RecurrenceRule:
+          convert:
+            field: SKIP
       rfc: RFC8984
       sections:
         - 4.3.3
@@ -2480,7 +2765,9 @@ jscalendar:
       usage: common
     source:
       objects:
-        Group: {}
+        Group:
+          convert:
+            property: SOURCE
       rfc: RFC8984
       sections:
         - 5.3.2
@@ -2488,7 +2775,9 @@ jscalendar:
       usage: common
     standard:
       objects:
-        TimeZone: {}
+        TimeZone:
+          convert:
+            object: TimeZoneRule
       rfc: RFC8984
       sections:
         - 4.7.2
@@ -2496,7 +2785,15 @@ jscalendar:
       usage: common
     start:
       objects:
-        TimeZoneRule: {}
+        Event:
+          convert:
+            property: DTSTART
+        Task:
+          convert:
+            property: DTSTART
+        TimeZoneRule:
+          convert:
+            property: DTSTART
       rfc: RFC8984
       sections:
         - 4.7.2
@@ -2532,9 +2829,15 @@ jscalendar:
       usage: common
     title:
       objects:
-        Event: {}
-        Task: {}
-        Group: {}
+        Event:
+          convert:
+            property: SUMMARY
+        Task:
+          convert:
+            property: SUMMARY
+        Group:
+          convert:
+            property: NAME
         Link: {}
       rfc: RFC8984
       sections:
@@ -2543,7 +2846,8 @@ jscalendar:
       usage: common
     trigger:
       objects:
-        Alert: {}
+        Alert:
+          convert: TRIGGER
       rfc: RFC8984
       sections:
         - 4.5.2
@@ -2551,7 +2855,9 @@ jscalendar:
       usage: common
     tzId:
       objects:
-        TimeZone: {}
+        TimeZone:
+          convert:
+            property: TZID
       rfc: RFC8984
       sections:
         - 4.7.2
@@ -2559,9 +2865,15 @@ jscalendar:
       usage: common
     uid:
       objects:
-        Event: {}
-        Task: {}
-        Group: {}
+        Event:
+          convert:
+            property: UID
+        Task:
+          convert:
+            property: UID
+        Group:
+          convert:
+            property: UID
       rfc: RFC8984
       sections:
         - 4.1.2
@@ -2569,7 +2881,9 @@ jscalendar:
       usage: common
     until:
       objects:
-        RecurrenceRule: {}
+        RecurrenceRule:
+          convert:
+            field: UNTIL
       rfc: RFC8984
       sections:
         - 4.3.3
@@ -2577,9 +2891,15 @@ jscalendar:
       usage: common
     updated:
       objects:
-        Event: {}
-        Task: {}
-        Group: {}
+        Event:
+          convert:
+            property: DTSTAMP
+        Task:
+          convert:
+            property: DTSTAMP
+        Group:
+          convert:
+            property: DTSTAMP
       rfc: RFC8984
       sections:
         - 4.1.6
@@ -2587,7 +2907,9 @@ jscalendar:
       usage: common
     uri:
       objects:
-        VirtualLocation: {}
+        VirtualLocation:
+          convert:
+            value: CONFERENCE
       rfc: RFC8984
       sections:
         - 4.2.6
@@ -2595,7 +2917,9 @@ jscalendar:
       usage: common
     url:
       objects:
-        TimeZone: {}
+        TimeZone:
+          convert:
+            property: TZURL
       rfc: RFC8984
       sections:
         - 4.7.2
@@ -2612,7 +2936,9 @@ jscalendar:
       usage: common
     validUntil:
       objects:
-        TimeZone: {}
+        TimeZone:
+          convert:
+            property: TZUNTIL
       rfc: RFC8984
       sections:
         - 4.7.2
@@ -2620,8 +2946,12 @@ jscalendar:
       usage: common
     virtualLocations:
       objects:
-        Event: {}
-        Task: {}
+        Event:
+          convert:
+            object: VirtualLocation
+        Task:
+          convert:
+            object: VirtualLocation
       rfc: RFC8984
       sections:
         - 4.2.6
@@ -2629,7 +2959,9 @@ jscalendar:
       usage: common
     when:
       objects:
-        AbsoluteTrigger: {}
+        AbsoluteTrigger:
+          convert:
+            value: TRIGGER
       rfc: RFC8984
       sections:
         - 4.5.2
