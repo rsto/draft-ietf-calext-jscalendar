@@ -4780,6 +4780,1159 @@ URL:https://example.com/calendar/birtdays.ics
     </section>
     <section anchor="convert-jscalendar-to-icalendar">
       <name>Converting JSCalendar to iCalendar</name>
+      <section anchor="convert-jscalendar-alert">
+        <name>Alert</name>
+        <table>
+          <name>Properties of the Alert object</name>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Reference</th>
+              <th>iCalendar Element</th>
+              <th>None</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>acknowledged</td>
+              <td>
+                <xref target="RFC8984" section="4.5.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>action</td>
+              <td>
+                <xref target="RFC8984" section="4.5.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>relatedTo</td>
+              <td>
+                <xref target="RFC8984" section="4.1.3" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>trigger</td>
+              <td>
+                <xref target="RFC8984" section="4.5.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+          </tbody>
+        </table>
+        <table>
+          <name>Properties of the OffsetTrigger object</name>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Reference</th>
+              <th>iCalendar Element</th>
+              <th>None</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>offset</td>
+              <td>
+                <xref target="RFC8984" section="4.5.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>relativeTo</td>
+              <td>
+                <xref target="RFC8984" section="4.5.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+          </tbody>
+        </table>
+        <table>
+          <name>Properties of the AbsoluteTrigger object</name>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Reference</th>
+              <th>iCalendar Element</th>
+              <th>None</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>when</td>
+              <td>
+                <xref target="RFC8984" section="4.5.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section anchor="convert-jscalendar-event-and-task">
+        <name>Event and Task</name>
+        <table>
+          <name>Properties of the Event and Task object</name>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Reference</th>
+              <th>iCalendar Element</th>
+              <th>None</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>alerts</td>
+              <td>
+                <xref target="RFC8984" section="4.5.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>categories</td>
+              <td>
+                <xref target="RFC8984" section="4.2.10" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>color</td>
+              <td>
+                <xref target="RFC8984" section="4.2.11" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>created</td>
+              <td>
+                <xref target="RFC8984" section="4.1.5" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>description</td>
+              <td>
+                <xref target="RFC8984" section="4.2.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>descriptionContentType</td>
+              <td>
+                <xref target="RFC8984" section="4.2.3" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>excluded</td>
+              <td>
+                <xref target="RFC8984" section="4.3.6" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>excludedRecurrenceRules</td>
+              <td>
+                <xref target="RFC8984" section="4.3.4" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>freeBusyStatus</td>
+              <td>
+                <xref target="RFC8984" section="4.4.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>keywords</td>
+              <td>
+                <xref target="RFC8984" section="4.2.9" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>links</td>
+              <td>
+                <xref target="RFC8984" section="4.2.7" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>locale</td>
+              <td>
+                <xref target="RFC8984" section="4.2.8" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>localizations</td>
+              <td>
+                <xref target="RFC8984" section="4.6.1" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>locations</td>
+              <td>
+                <xref target="RFC8984" section="4.2.5" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>method</td>
+              <td>
+                <xref target="RFC8984" section="4.1.8" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>participants</td>
+              <td>
+                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>priority</td>
+              <td>
+                <xref target="RFC8984" section="4.4.1" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>privacy</td>
+              <td>
+                <xref target="RFC8984" section="4.4.3" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>prodId</td>
+              <td>
+                <xref target="RFC8984" section="4.1.4" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>recurrenceId</td>
+              <td>
+                <xref target="RFC8984" section="4.3.1" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>recurrenceIdTimeZone</td>
+              <td>
+                <xref target="RFC8984" section="4.3.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>recurrenceOverrides</td>
+              <td>
+                <xref target="RFC8984" section="4.3.5" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>recurrenceRules</td>
+              <td>
+                <xref target="RFC8984" section="4.3.3" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>relatedTo</td>
+              <td>
+                <xref target="RFC8984" section="4.1.3" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>replyTo</td>
+              <td>
+                <xref target="RFC8984" section="4.4.4" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>requestStatus</td>
+              <td>
+                <xref target="RFC8984" section="4.4.7" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>sentBy</td>
+              <td>
+                <xref target="RFC8984" section="4.4.5" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>sequence</td>
+              <td>
+                <xref target="RFC8984" section="4.1.7" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>showWithoutTime</td>
+              <td>
+                <xref target="RFC8984" section="4.2.4" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>start</td>
+              <td>
+                <xref target="RFC8984" section="4.7.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>timeZone</td>
+              <td>
+                <xref target="RFC8984" section="4.7.1" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>timeZones</td>
+              <td>
+                <xref target="RFC8984" section="4.7.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>title</td>
+              <td>
+                <xref target="RFC8984" section="4.2.1" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>uid</td>
+              <td>
+                <xref target="RFC8984" section="4.1.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>updated</td>
+              <td>
+                <xref target="RFC8984" section="4.1.6" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>useDefaultAlerts</td>
+              <td>
+                <xref target="RFC8984" section="4.5.1" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>virtualLocations</td>
+              <td>
+                <xref target="RFC8984" section="4.2.6" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+          </tbody>
+        </table>
+        <table>
+          <name>Properties of the Event object</name>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Reference</th>
+              <th>iCalendar Element</th>
+              <th>None</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>duration</td>
+              <td>
+                <xref target="RFC8984" section="5.1.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>status</td>
+              <td>
+                <xref target="RFC8984" section="5.1.3" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+          </tbody>
+        </table>
+        <table>
+          <name>Properties of the Task object</name>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Reference</th>
+              <th>iCalendar Element</th>
+              <th>None</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>due</td>
+              <td>
+                <xref target="RFC8984" section="5.2.1" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>estimatedDuration</td>
+              <td>
+                <xref target="RFC8984" section="5.2.3" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>percentComplete</td>
+              <td>
+                <xref target="RFC8984" section="5.2.4" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>progress</td>
+              <td>
+                <xref target="RFC8984" section="5.2.5" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>progressUpdated</td>
+              <td>
+                <xref target="RFC8984" section="5.2.6" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section anchor="convert-jscalendar-group">
+        <name>Group</name>
+        <table>
+          <name>Properties of the Group object</name>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Reference</th>
+              <th>iCalendar Element</th>
+              <th>None</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>categories</td>
+              <td>
+                <xref target="RFC8984" section="4.2.10" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>color</td>
+              <td>
+                <xref target="RFC8984" section="4.2.11" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>created</td>
+              <td>
+                <xref target="RFC8984" section="4.1.5" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>entries</td>
+              <td>
+                <xref target="RFC8984" section="5.3.1" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>keywords</td>
+              <td>
+                <xref target="RFC8984" section="4.2.9" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>links</td>
+              <td>
+                <xref target="RFC8984" section="4.2.7" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>locale</td>
+              <td>
+                <xref target="RFC8984" section="4.2.8" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>prodId</td>
+              <td>
+                <xref target="RFC8984" section="4.1.4" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>source</td>
+              <td>
+                <xref target="RFC8984" section="5.3.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>title</td>
+              <td>
+                <xref target="RFC8984" section="4.2.1" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>uid</td>
+              <td>
+                <xref target="RFC8984" section="4.1.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>updated</td>
+              <td>
+                <xref target="RFC8984" section="4.1.6" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section anchor="convert-jscalendar-link">
+        <name>Link</name>
+        <table>
+          <name>Properties of the Link object</name>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Reference</th>
+              <th>iCalendar Element</th>
+              <th>None</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>cid</td>
+              <td>
+                <xref target="RFC8984" section="1.4.11" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>contentType</td>
+              <td>
+                <xref target="RFC8984" section="1.4.11" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>display</td>
+              <td>
+                <xref target="RFC8984" section="1.4.11" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>href</td>
+              <td>
+                <xref target="RFC8984" section="1.4.11" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>rel</td>
+              <td>
+                <xref target="RFC8984" section="1.4.11" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>size</td>
+              <td>
+                <xref target="RFC8984" section="1.4.11" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>title</td>
+              <td>
+                <xref target="RFC8984" section="4.2.1" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section anchor="convert-jscalendar-location">
+        <name>Location</name>
+        <table>
+          <name>Properties of the Location object</name>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Reference</th>
+              <th>iCalendar Element</th>
+              <th>None</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>coordinates</td>
+              <td>
+                <xref target="RFC8984" section="4.2.5" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>description</td>
+              <td>
+                <xref target="RFC8984" section="4.2.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>links</td>
+              <td>
+                <xref target="RFC8984" section="4.2.7" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>locationTypes</td>
+              <td>
+                <xref target="RFC8984" section="4.2.5" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>name</td>
+              <td>
+                <xref target="RFC8984" section="4.2.5" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>relativeTo</td>
+              <td>
+                <xref target="RFC8984" section="4.5.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>timeZone</td>
+              <td>
+                <xref target="RFC8984" section="4.7.1" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section anchor="convert-jscalendar-participant">
+        <name>Participant</name>
+        <table>
+          <name>Properties of the Participant object</name>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Reference</th>
+              <th>iCalendar Element</th>
+              <th>None</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>calendarAddress</td>
+              <td>
+                <xref target="I-D.ietf-jmap-calendars" section="5.1.1" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>delegatedFrom</td>
+              <td>
+                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>delegatedTo</td>
+              <td>
+                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>description</td>
+              <td>
+                <xref target="RFC8984" section="4.2.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>email</td>
+              <td>
+                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>expectReply</td>
+              <td>
+                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>invitedBy</td>
+              <td>
+                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>kind</td>
+              <td>
+                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>language</td>
+              <td>
+                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>links</td>
+              <td>
+                <xref target="RFC8984" section="4.2.7" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>locationId</td>
+              <td>
+                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>memberOf</td>
+              <td>
+                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>name</td>
+              <td>
+                <xref target="RFC8984" section="4.2.5" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>participationComment</td>
+              <td>
+                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>participationStatus</td>
+              <td>
+                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>percentComplete</td>
+              <td>
+                <xref target="RFC8984" section="5.2.4" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>progress</td>
+              <td>
+                <xref target="RFC8984" section="5.2.5" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>progressUpdated</td>
+              <td>
+                <xref target="RFC8984" section="5.2.6" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>roles</td>
+              <td>
+                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>scheduleAgent</td>
+              <td>
+                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>scheduleForceSend</td>
+              <td>
+                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>scheduleSequence</td>
+              <td>
+                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>scheduleStatus</td>
+              <td>
+                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>scheduleUpdated</td>
+              <td>
+                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>sendTo</td>
+              <td>
+                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>sentBy</td>
+              <td>
+                <xref target="RFC8984" section="4.4.5" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section anchor="convert-jscalendar-timezone">
+        <name>TimeZone</name>
+        <table>
+          <name>Properties of the TimeZone object</name>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Reference</th>
+              <th>iCalendar Element</th>
+              <th>None</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>aliases</td>
+              <td>
+                <xref target="RFC8984" section="4.7.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>daylight</td>
+              <td>
+                <xref target="RFC8984" section="4.7.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>standard</td>
+              <td>
+                <xref target="RFC8984" section="4.7.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>tzId</td>
+              <td>
+                <xref target="RFC8984" section="4.7.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>url</td>
+              <td>
+                <xref target="RFC8984" section="4.7.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>validUntil</td>
+              <td>
+                <xref target="RFC8984" section="4.7.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+          </tbody>
+        </table>
+        <table>
+          <name>Properties of the TimeZoneRule object</name>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Reference</th>
+              <th>iCalendar Element</th>
+              <th>None</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>comments</td>
+              <td>
+                <xref target="RFC8984" section="4.7.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>names</td>
+              <td>
+                <xref target="RFC8984" section="4.7.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>offsetFrom</td>
+              <td>
+                <xref target="RFC8984" section="4.7.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>offsetTo</td>
+              <td>
+                <xref target="RFC8984" section="4.7.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>recurrenceOverrides</td>
+              <td>
+                <xref target="RFC8984" section="4.3.5" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>recurrenceRules</td>
+              <td>
+                <xref target="RFC8984" section="4.3.3" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>start</td>
+              <td>
+                <xref target="RFC8984" section="4.7.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section anchor="convert-jscalendar-virtuallocation">
+        <name>VirtualLocation</name>
+        <table>
+          <name>Properties of the VirtualLocation object</name>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Reference</th>
+              <th>iCalendar Element</th>
+              <th>None</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>description</td>
+              <td>
+                <xref target="RFC8984" section="4.2.2" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>features</td>
+              <td>
+                <xref target="RFC8984" section="4.2.6" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>name</td>
+              <td>
+                <xref target="RFC8984" section="4.2.5" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>uri</td>
+              <td>
+                <xref target="RFC8984" section="4.2.6" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+          </tbody>
+        </table>
+      </section>
     </section>
     <section anchor="updates-icalendar">
       <name>Updates to iCalendar</name>

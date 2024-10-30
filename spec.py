@@ -7,47 +7,17 @@ from collections import defaultdict
 from jinja2 import Environment, FileSystemLoader
 
 
-def jsnoconv(spec):
-    allprops = defaultdict(set)
+def objprops(spec, objs):
+    props = list()
     for prop_name, prop in spec["jscalendar"]["properties"].items():
         if prop_name == "@type":
             continue
-        for obj_name in prop["objects"]:
-            allprops[obj_name].add(prop_name)
-
-    convprops = defaultdict(set)
-    for comp_name, comp in spec["icalendar"]["components"].items():
-        if "convert" in comp:
-            for prop_name, prop in comp["properties"].items():
-                if "convert" in prop:
-                    convprops[comp["convert"]["object"]].add(
-                        prop["convert"]["property"]
-                    )
-                    for param_name, param in spec["icalendar"]["properties"][prop_name][
-                        "parameters"
-                    ].items():
-                        if "convert" in param:
-                            if "object" in param["convert"]:
-                                convprops[param["convert"]["object"]].add(
-                                    param["convert"]["property"]
-                                )
-                            else:
-                                convprops[comp["convert"]["object"]].add(
-                                    param["convert"]["property"]
-                                )
-            if "components" in comp:
-                for subcomp_name, subcomp in comp["components"].items():
-                    if "convert" in subcomp:
-                        convprops[comp["convert"]["object"]].add(
-                            subcomp["convert"]["property"]
-                        )
-
-    for obj_name, obj_props in allprops.items():
-        if not obj_name in convprops:
-            print(f"Uncovered object: {obj_name}")
-        else:
-            diff = obj_props - convprops[obj_name]
-            print(f"{obj_name}: {diff}")
+        prop_objs = set(prop["objects"])
+        if not objs <= prop_objs:
+            continue
+        prop["name"] = prop_name
+        props.append(prop)
+    return props
 
 
 def load(fname="spec.yaml"):
@@ -58,11 +28,85 @@ def load(fname="spec.yaml"):
 def main():
     spec = load()
     env = Environment(loader=FileSystemLoader("xmlsrc"))
-
-    # template = env.get_template("inconvertible.xml")
-    # print(template.render({"spec": spec}))
-
-    jsnoconv(spec)
+    template = env.get_template("js2ical.xml")
+    sections = [
+        {
+            "title": "Event and Task",
+            "anchor": "convert-jscalendar-event-and-task",
+            "objects": ["Event", "Task"],
+        },
+        {
+            "title": "Event",
+            "anchor": "convert-jscalendar-event",
+            "objects": ["Event"],
+        },
+        {
+            "title": "Task",
+            "anchor": "convert-jscalendar-task",
+            "objects": ["Task"],
+        },
+        {
+            "title": "Group",
+            "anchor": "convert-jscalendar-group",
+            "objects": ["Group"],
+        },
+        {
+            "title": "Alert",
+            "anchor": "convert-jscalendar-alert",
+            "objects": ["Alert"],
+        },
+        {
+            "title": "OffsetTrigger",
+            "anchor": "convert-jscalendar-offset-trigger",
+            "objects": ["OffsetTrigger"],
+        },
+        {
+            "title": "AbsoluteTrigger",
+            "anchor": "convert-jscalendar-absolute-trigger",
+            "objects": ["AbsoluteTrigger"],
+        },
+        {
+            "title": "Link",
+            "anchor": "convert-jscalendar-link",
+            "objects": ["Link"],
+        },
+        {
+            "title": "Location",
+            "anchor": "convert-jscalendar-location",
+            "objects": ["Location"],
+        },
+        {
+            "title": "Participant",
+            "anchor": "convert-jscalendar-participant",
+            "objects": ["Participant"],
+        },
+        {
+            "title": "TimeZone",
+            "anchor": "convert-jscalendar-timezone",
+            "objects": ["TimeZone"],
+        },
+        {
+            "title": "TimeZoneRule",
+            "anchor": "convert-jscalendar-timezonerule",
+            "objects": ["TimeZoneRule"],
+        },
+        {
+            "title": "VirtualLocation",
+            "anchor": "convert-jscalendar-virtuallocation",
+            "objects": ["VirtualLocation"],
+        },
+    ]
+    for section in sections:
+        print(
+            template.render(
+                {
+                    "spec": spec,
+                    "title": section["title"],
+                    "anchor": section["anchor"],
+                    "objprops": objprops(spec, set(section["objects"])),
+                }
+            )
+        )
 
 
 if __name__ == "__main__":

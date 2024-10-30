@@ -1,0 +1,24 @@
+<section anchor="{{ anchor }}">
+  <name>{{ title }}</name>
+  <table>
+    <name>Properties of the {{ title }} object</name>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Reference</th>
+        <th>iCalendar Element</th>
+        <th>None</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for prop in objprops | sort(attribute='name') %}
+      <tr>
+        <td>{{ prop.name }}</td>
+        <td><xref target="{{ prop.rfc }}" section="{{ prop.sections[0] }}" sectionFormat="comma"/></td>
+        <td>TBD</td>
+        <td></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
