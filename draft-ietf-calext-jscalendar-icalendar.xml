@@ -533,141 +533,6 @@ END:VCALENDAR
       </section>
       <section anchor="ical-components">
         <name>Components</name>
-        <section anchor="ical-comp-daylight">
-          <name>DAYLIGHT</name>
-          <t>The <xref target="RFC5545" section="3.6.5" sectionFormat="parens">DAYLIGHT component</xref> converts to a <xref target="RFC8984" section="4.7.2" sectionFormat="parens">TimeZoneRule object</xref>.</t>
-          <t>Its properties convert as follows:</t>
-          <table anchor="ical-comp-daylight-props">
-            <name>Properties of the DAYLIGHT component</name>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>TimeZoneRule property</th>
-                <th>See</th>
-                <th>Note</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>COMMENT</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.4" sectionFormat="comma"/>
-                </td>
-                <td>comments</td>
-                <td>
-                  <xref target="ical-prop-comment"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>DTSTART</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.2.4" sectionFormat="comma"/>
-                </td>
-                <td>start</td>
-                <td>
-                  <xref target="ical-prop-dtstart"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>RDATE</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.5.2" sectionFormat="comma"/>
-                </td>
-                <td>recurrenceOverrides</td>
-                <td>
-                  <xref target="ical-prop-rdate"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>RRULE</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.5.3" sectionFormat="comma"/>
-                </td>
-                <td>recurrenceRules</td>
-                <td>
-                  <xref target="ical-prop-rrule"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>TZNAME</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.3.2" sectionFormat="comma"/>
-                </td>
-                <td>names</td>
-                <td>
-                  <xref target="ical-prop-tzname"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>TZOFFSETFROM</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.3.3" sectionFormat="comma"/>
-                </td>
-                <td>offsetFrom</td>
-                <td>
-                  <xref target="ical-prop-tzoffsetfrom"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>TZOFFSETTO</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.3.4" sectionFormat="comma"/>
-                </td>
-                <td>offsetTo</td>
-                <td>
-                  <xref target="ical-prop-tzoffsetto"/>
-                </td>
-                <td/>
-              </tr>
-            </tbody>
-          </table>
-          <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the TimeZoneRule object.</t>
-          <t>The following example illustrates how to convert the DAYLIGHT component:</t>
-          <figure anchor="test-ical-comp-daylight">
-            <name>Converting the DAYLIGHT component</name>
-            <sourcecode type="text/calendar"><![CDATA[
-BEGIN:VCALENDAR
-BEGIN:VTIMEZONE
-TZID:NonIana
-BEGIN:DAYLIGHT
-TZOFFSETFROM:-0400
-TZOFFSETTO:-0300
-DTSTART:20010503T000000
-END:DAYLIGHT
-END:VTIMEZONE
-BEGIN:VEVENT
-DTSTART;TZID=NonIana:20241004T010000
-...
-]]></sourcecode>
-            <sourcecode type="json"><![CDATA[
-{
-  "...": "",
-  "@type": "Group",
-  "timeZones": {
-    "/NonIana": {
-      "@type": "TimeZone",
-      "daylight": [
-        {
-          "@type": "TimeZoneRule",
-          "offsetFrom": "-0400",
-          "offsetTo": "-0300",
-          "start": "2001-05-03T00:00:00"
-        }
-      ],
-      "tzId": "NonIana"
-    }
-  }
-}
-]]></sourcecode>
-          </figure>
-        </section>
         <section anchor="ical-comp-participant">
           <name>PARTICIPANT</name>
           <t>The <xref target="RFC9073" section="7.1" sectionFormat="parens">PARTICIPANT component</xref> converts to a <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref>.</t>
@@ -898,141 +763,6 @@ END:PARTICIPANT
       "roles": {
         "contact": true
       }
-    }
-  }
-}
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-comp-standard">
-          <name>STANDARD</name>
-          <t>The <xref target="RFC5545" section="3.6.5" sectionFormat="parens">STANDARD component</xref> converts to a <xref target="RFC8984" section="4.7.2" sectionFormat="parens">TimeZoneRule object</xref>.</t>
-          <t>Its properties convert as follows:</t>
-          <table anchor="ical-comp-standard-props">
-            <name>Properties of the STANDARD component</name>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>TimeZoneRule property</th>
-                <th>See</th>
-                <th>Note</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>COMMENT</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.4" sectionFormat="comma"/>
-                </td>
-                <td>comments</td>
-                <td>
-                  <xref target="ical-prop-comment"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>DTSTART</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.2.4" sectionFormat="comma"/>
-                </td>
-                <td>start</td>
-                <td>
-                  <xref target="ical-prop-dtstart"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>RDATE</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.5.2" sectionFormat="comma"/>
-                </td>
-                <td>recurrenceOverrides</td>
-                <td>
-                  <xref target="ical-prop-rdate"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>RRULE</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.5.3" sectionFormat="comma"/>
-                </td>
-                <td>recurrenceRules</td>
-                <td>
-                  <xref target="ical-prop-rrule"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>TZNAME</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.3.2" sectionFormat="comma"/>
-                </td>
-                <td>names</td>
-                <td>
-                  <xref target="ical-prop-tzname"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>TZOFFSETFROM</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.3.3" sectionFormat="comma"/>
-                </td>
-                <td>offsetFrom</td>
-                <td>
-                  <xref target="ical-prop-tzoffsetfrom"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>TZOFFSETTO</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.3.4" sectionFormat="comma"/>
-                </td>
-                <td>offsetTo</td>
-                <td>
-                  <xref target="ical-prop-tzoffsetto"/>
-                </td>
-                <td/>
-              </tr>
-            </tbody>
-          </table>
-          <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the TimeZoneRule object.</t>
-          <t>The following example illustrates how to convert the STANDARD component:</t>
-          <figure anchor="test-ical-comp-standard">
-            <name>Converting the STANDARD component</name>
-            <sourcecode type="text/calendar"><![CDATA[
-BEGIN:VCALENDAR
-BEGIN:VTIMEZONE
-TZID:NonIana
-BEGIN:STANDARD
-TZOFFSETFROM:-0400
-TZOFFSETTO:-0300
-DTSTART:20010503T000000
-END:STANDARD
-END:VTIMEZONE
-BEGIN:VEVENT
-DTSTART;TZID=NonIana:20241004T010000
-...
-]]></sourcecode>
-            <sourcecode type="json"><![CDATA[
-{
-  "...": "",
-  "@type": "Group",
-  "timeZones": {
-    "/NonIana": {
-      "@type": "TimeZone",
-      "standard": [
-        {
-          "@type": "TimeZoneRule",
-          "offsetFrom": "-0400",
-          "offsetTo": "-0300",
-          "start": "2001-05-03T00:00:00"
-        }
-      ],
-      "tzId": "NonIana"
     }
   }
 }
@@ -2002,9 +1732,7 @@ END:VRESOURCE
                   <xref target="RFC5545" section="3.6.5" sectionFormat="comma"/>
                 </td>
                 <td>daylight</td>
-                <td>
-                  <xref target="ical-comp-daylight"/>
-                </td>
+                <td>In this section</td>
                 <td/>
               </tr>
               <tr>
@@ -2013,14 +1741,106 @@ END:VRESOURCE
                   <xref target="RFC5545" section="3.6.5" sectionFormat="comma"/>
                 </td>
                 <td>standard</td>
-                <td>
-                  <xref target="ical-comp-standard"/>
-                </td>
+                <td>In this section</td>
                 <td/>
               </tr>
             </tbody>
           </table>
           <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the TimeZone object.</t>
+          <t>The <xref target="RFC5545" section="3.6.5" sectionFormat="parens">DAYLIGHT component</xref> and <xref target="RFC5545" section="3.6.5" sectionFormat="parens">STANDARD component</xref> convert to a <xref target="RFC8984" section="4.7.2" sectionFormat="parens">TimeZoneRule object</xref>.</t>
+          <t>Their properties convert as follows:</t>
+          <table anchor="ical-comp-daylight-props">
+            <name>Properties of the DAYLIGHT or STANDARD component</name>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Reference</th>
+                <th>TimeZoneRule property</th>
+                <th>See</th>
+                <th>Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>COMMENT</td>
+                <td>
+                  <xref target="RFC5545" section="3.8.1.4" sectionFormat="comma"/>
+                </td>
+                <td>comments</td>
+                <td>
+                  <xref target="ical-prop-comment"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
+                <td>DTSTART</td>
+                <td>
+                  <xref target="RFC5545" section="3.8.2.4" sectionFormat="comma"/>
+                </td>
+                <td>start</td>
+                <td>
+                  <xref target="ical-prop-dtstart"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
+                <td>RDATE</td>
+                <td>
+                  <xref target="RFC5545" section="3.8.5.2" sectionFormat="comma"/>
+                </td>
+                <td>recurrenceOverrides</td>
+                <td>
+                  <xref target="ical-prop-rdate"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
+                <td>RRULE</td>
+                <td>
+                  <xref target="RFC5545" section="3.8.5.3" sectionFormat="comma"/>
+                </td>
+                <td>recurrenceRules</td>
+                <td>
+                  <xref target="ical-prop-rrule"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
+                <td>TZNAME</td>
+                <td>
+                  <xref target="RFC5545" section="3.8.3.2" sectionFormat="comma"/>
+                </td>
+                <td>names</td>
+                <td>
+                  <xref target="ical-prop-tzname"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
+                <td>TZOFFSETFROM</td>
+                <td>
+                  <xref target="RFC5545" section="3.8.3.3" sectionFormat="comma"/>
+                </td>
+                <td>offsetFrom</td>
+                <td>
+                  <xref target="ical-prop-tzoffsetfrom"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
+                <td>TZOFFSETTO</td>
+                <td>
+                  <xref target="RFC5545" section="3.8.3.4" sectionFormat="comma"/>
+                </td>
+                <td>offsetTo</td>
+                <td>
+                  <xref target="ical-prop-tzoffsetto"/>
+                </td>
+                <td/>
+              </tr>
+            </tbody>
+          </table>
+          <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the TimeZoneRule object.</t>
           <t>The following example illustrates how to convert the VTIMEZONE component:</t>
           <figure anchor="test-ical-comp-vtimezone">
             <name>Converting the VTIMEZONE component</name>
@@ -2107,7 +1927,7 @@ DTSTART;TZID=CustomTz:20080708T130000
           }
         }
       ],
-      "tzId": "Puerto_Rico",
+      "tzId": "CustomTz",
       "updated": "2024-09-09T12:22:33Z",
       "url": "https://example.com/tz/CustomTz.ics"
     }
@@ -3375,7 +3195,7 @@ DTSTAMP:20240304T132000Z
               The <xref target="RFC5545" section="3.8.2.4" sectionFormat="parens">DTSTART property</xref> in a VEVENT, VTODO, DAYLIGHT or STANDARD component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">start property</xref> of the Event, Task, or TimeZoneRule object.</t>
           <t>See <xref target="convert-date-and-datetime"/> how to convert DATE and DATE-TIME values.</t>
           <t>For VEVENT and VTODO components, the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DTSTART property converts to the timeZone property of the Event or Task object.  In addition, if the value type of the DTSTART property is DATE, then the value of the <xref target="RFC8984" section="4.2.4" sectionFormat="parens">showWithoutTime property</xref> is "true".</t>
-          <t>The following examples illustrate how to convert the DTSTART property for the VEVENT and VTODO components. See <xref target="ical-comp-daylight"/> and <xref target="ical-comp-standard"/> for examples how to convert the DTSTART property for the DAYLIGHT and STANDARD components.</t>
+          <t>The following examples illustrate how to convert the DTSTART property for the VEVENT and VTODO components. See <xref target="ical-comp-vtimezone"/> for examples how to convert the DTSTART property for the DAYLIGHT and STANDARD components.</t>
           <figure anchor="test-ical-prop-dtstart-tzid">
             <name>Converting the DTSTART property with TZID parameter</name>
             <sourcecode type="text/calendar"><![CDATA[
