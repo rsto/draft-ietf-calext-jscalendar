@@ -4643,9 +4643,9 @@ URL:https://example.com/calendar/birtdays.ics
         </section>
       </section>
     </section>
-    <section anchor="convert-jscalendar-to-icalendar">
+    <section anchor="jscal-to-icalendar">
       <name>Converting JSCalendar to iCalendar</name>
-      <section anchor="convert-jscalendar-alert">
+      <section anchor="jscal-alert">
         <name>Alert</name>
         <t>The <xref target="RFC8984" section="4.5.2" sectionFormat="parens">Alert object</xref> converts to a <xref target="RFC5545" section="3.6.6" sectionFormat="parens">VALARM component</xref>.</t>
         <t>Its properties convert as iCalendar properties follows:</t>
@@ -4704,12 +4704,12 @@ URL:https://example.com/calendar/birtdays.ics
         </table>
         <t>The value of the RELATED-TO property is the UID property value of that VALARM component, to which the related  Alert object converts to. Consequently, the UID property for such a VALARM <bcp14>MUST</bcp14> be set, otherwise the UID property <bcp14>SHOULD</bcp14> be set.</t>
       </section>
-      <section anchor="convert-jscalendar-event-and-task">
+      <section anchor="jscal-event-and-task">
         <name>Event and Task</name>
         <t>The <xref target="RFC8984" section="2.1" sectionFormat="parens">Event object</xref> converts to a <xref target="RFC5545" section="3.6.1" sectionFormat="parens">VEVENT component</xref>, the <xref target="RFC8984" section="2.2" sectionFormat="parens">Task object</xref> to a <xref target="RFC5545" section="3.6.2" sectionFormat="parens">VTODO component</xref>.</t>
         <t>
-            The following table defines how properties common to both object types convert to iCalendar elements. <xref target="convert-jscalendar-event-props"/> and <xref target="convert-jscalendar-task-props"/> later in this section define how to convert properties specific to either Event or Task objects.</t>
-        <table anchor="convert-jscalendar-event-and-task-props">
+            The following table defines how properties common to both object types convert to iCalendar elements. <xref target="jscal-event-props"/> and <xref target="jscal-task-props"/> later in this section define how to convert properties specific to either Event or Task objects.</t>
+        <table anchor="jscal-event-and-task-props">
           <name>Properties of the Event and Task object</name>
           <thead>
             <tr>
@@ -4727,7 +4727,7 @@ URL:https://example.com/calendar/birtdays.ics
               </td>
               <td>VALARM (component)</td>
               <td>
-                <xref target="convert-jscalendar-alert">Alert object</xref>
+                <xref target="jscal-alert">Alert object</xref>
               </td>
             </tr>
             <tr>
@@ -4837,7 +4837,7 @@ URL:https://example.com/calendar/birtdays.ics
               <td>ATTACH, or other</td>
               <td>
                 <t>
-                  <xref target="convert-jscalendar-link">Link object</xref>
+                  <xref target="jscal-link">Link object</xref>
                 </t>
               </td>
             </tr>
@@ -4865,7 +4865,7 @@ URL:https://example.com/calendar/birtdays.ics
               <td>LOCATION, GEO, or VLOCATION (component)</td>
               <td>
                 <t>
-                  <xref target="convert-jscalendar-location">Location object</xref>
+                  <xref target="jscal-location">Location object</xref>
                 </t>
               </td>
             </tr>
@@ -4877,7 +4877,7 @@ URL:https://example.com/calendar/birtdays.ics
               <td>METHOD of iCalendar object</td>
               <td>
                 <t>
-                  <xref target="ical-prop-method"/>, and <xref target="convert-jscalendar-group">Group object</xref>
+                  <xref target="ical-prop-method"/>, and <xref target="jscal-group">Group object</xref>
                 </t>
               </td>
             </tr>
@@ -4889,7 +4889,7 @@ URL:https://example.com/calendar/birtdays.ics
               <td>ATTENDEE, or PARTICIPANT (component)</td>
               <td>
                 <t>
-                  <xref target="convert-jscalendar-participant">Participant object</xref>
+                  <xref target="jscal-participant">Participant object</xref>
                 </t>
               </td>
             </tr>
@@ -4925,7 +4925,7 @@ URL:https://example.com/calendar/birtdays.ics
               <td>PRODID of iCalendar object</td>
               <td>
                 <t>
-                  <xref target="ical-prop-prodid"/>, and <xref target="convert-jscalendar-group">Group object</xref>
+                  <xref target="ical-prop-prodid"/>, and <xref target="jscal-group">Group object</xref>
                 </t>
               </td>
             </tr>
@@ -5069,7 +5069,7 @@ URL:https://example.com/calendar/birtdays.ics
               <td>VTIMEZONE (component) of iCalendar object</td>
               <td>
                 <t>
-                  <xref target="convert-jscalendar-timezone">TimeZone object</xref>
+                  <xref target="jscal-timezone">TimeZone object</xref>
                 </t>
               </td>
             </tr>
@@ -5144,7 +5144,7 @@ URL:https://example.com/calendar/birtdays.ics
           </li>
         </ul>
         <t>Properties specific to the Event object type convert to iCalendar properties as follows:</t>
-        <table anchor="convert-jscalendar-event-props">
+        <table anchor="jscal-event-props">
           <name>Properties of the Event object</name>
           <thead>
             <tr>
@@ -5182,7 +5182,7 @@ URL:https://example.com/calendar/birtdays.ics
           </tbody>
         </table>
         <t>Properties specific to the Task object type convert to iCalendar properties as follows:</t>
-        <table anchor="convert-jscalendar-task-props">
+        <table anchor="jscal-task-props">
           <name>Properties of the Task object</name>
           <thead>
             <tr>
@@ -5248,7 +5248,7 @@ URL:https://example.com/calendar/birtdays.ics
           </tbody>
         </table>
       </section>
-      <section anchor="convert-jscalendar-group">
+      <section anchor="jscal-group">
         <name>Group</name>
         <table>
           <name>Properties of the Group object</name>
@@ -5360,7 +5360,7 @@ URL:https://example.com/calendar/birtdays.ics
           </tbody>
         </table>
       </section>
-      <section anchor="convert-jscalendar-link">
+      <section anchor="jscal-link">
         <name>Link</name>
         <table>
           <name>Properties of the Link object</name>
@@ -5432,7 +5432,7 @@ URL:https://example.com/calendar/birtdays.ics
           </tbody>
         </table>
       </section>
-      <section anchor="convert-jscalendar-location">
+      <section anchor="jscal-location">
         <name>Location</name>
         <table>
           <name>Properties of the Location object</name>
@@ -5504,7 +5504,7 @@ URL:https://example.com/calendar/birtdays.ics
           </tbody>
         </table>
       </section>
-      <section anchor="convert-jscalendar-participant">
+      <section anchor="jscal-participant">
         <name>Participant</name>
         <table>
           <name>Properties of the Participant object</name>
@@ -5728,7 +5728,7 @@ URL:https://example.com/calendar/birtdays.ics
           </tbody>
         </table>
       </section>
-      <section anchor="convert-jscalendar-timezone">
+      <section anchor="jscal-timezone">
         <name>TimeZone</name>
         <table>
           <name>Properties of the TimeZone object</name>
@@ -5861,7 +5861,7 @@ URL:https://example.com/calendar/birtdays.ics
           </tbody>
         </table>
       </section>
-      <section anchor="convert-jscalendar-virtuallocation">
+      <section anchor="jscal-virtual-location">
         <name>VirtualLocation</name>
         <table>
           <name>Properties of the VirtualLocation object</name>
