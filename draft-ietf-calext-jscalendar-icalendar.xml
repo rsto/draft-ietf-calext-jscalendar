@@ -5421,7 +5421,7 @@ URL:https://example.com/calendar/birtdays.ics
       </section>
       <section anchor="jscal-link">
         <name>Link</name>
-        <t>The <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref> converts one of the following properties: <xref target="ical-prop-attach">ATTACH</xref>, <xref target="ical-prop-image">IMAGE</xref>, <xref target="ical-prop-link">LINK</xref>, <xref target="ical-prop-structured-data">STRUCTURED-DATA</xref>, or <xref target="ical-prop-url">URL</xref>. How to choose the iCalendar property is implementation-specific. The following recommentations apply:</t>
+        <t>The <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref> converts one of the following properties: <xref target="ical-prop-attach">ATTACH</xref>, <xref target="ical-prop-image">IMAGE</xref>, <xref target="ical-prop-link">LINK</xref>, <xref target="ical-prop-structured-data">STRUCTURED-DATA</xref>, or <xref target="ical-prop-url">URL</xref>. Which iCalendar property to choose is implementation-specific. As a guideline:</t>
         <ul>
           <li>Choose IMAGE, if the display property is set or the rel property value is "icon".</li>
           <li>Choose LINK, if the rel property is set to any other value.</li>
@@ -5505,6 +5505,15 @@ URL:https://example.com/calendar/birtdays.ics
       </section>
       <section anchor="jscal-location">
         <name>Location</name>
+        <t>The <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref> converts to either a <xref target="ical-prop-location">LOCATION</xref>, <xref target="ical-prop-geo">GEO</xref>, or <xref target="ical-prop-geo">DTEND</xref> property, or it converts to a <xref target="ical-comp-vlocation">VLOCATION component</xref>. Which iCalendar element to choose is implementation-specific. As a guideline:</t>
+        <ul>
+          <li>Choose LOCATION, if only the title property is set and the iCalendar component not already contains a LOCATION property. The title property converts to the LOCATION property value.</li>
+          <li>Choose GEO, if only the coordinates property is set the iCalendar component not already contains a GEO property. The coordinates property converts to the GEO property value. TBD - How to convert arbitrary geo: URIs?</li>
+          <li>Choose DTEND, if the embedding object is an Event, only the timeZone and the relativeTo properties are set, the relativeTo property value is "end" and the iCalendar component not already contains a DTEND property. The timeZone property converts to the TZID parameter of the DTEND property. The duration of the embedding Event object determines the DTEND property value.</li>
+          <li>Choose the VLOCATION component otherwise.</li>
+        </ul>
+        <t>Implementations <bcp14>MAY</bcp14> convert one of the Location objects that convert to a VLOCATION also to the LOCATION property; converting the title or description property to the LOCATION property value is a reasonable choice. The DERIVED parameter <bcp14>MUST</bcp14> be set on the LOCATION property.</t>
+        <t>The properties convert to a VLOCATION component as follows:</t>
         <table>
           <name>Properties of the Location object</name>
           <thead>
@@ -5521,40 +5530,52 @@ URL:https://example.com/calendar/birtdays.ics
               <td>
                 <xref target="RFC8984" section="4.2.5" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>GEO</td>
+              <td>
+                <xref target="ical-prop-geo"/>
+              </td>
             </tr>
             <tr>
               <td>description</td>
               <td>
                 <xref target="RFC8984" section="4.2.2" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>DESCRIPTION</td>
+              <td>
+                <xref target="ical-prop-description"/>
+              </td>
             </tr>
             <tr>
               <td>links</td>
               <td>
                 <xref target="RFC8984" section="4.2.7" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>ATTACH, or other</td>
+              <td>
+                <t>
+                  <xref target="jscal-link">Link object</xref>
+                </t>
+              </td>
             </tr>
             <tr>
               <td>locationTypes</td>
               <td>
                 <xref target="RFC8984" section="4.2.5" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>LOCATION-TYPE</td>
+              <td>
+                <xref target="ical-prop-location-type"/>
+              </td>
             </tr>
             <tr>
               <td>name</td>
               <td>
                 <xref target="RFC8984" section="4.2.5" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>NAME</td>
+              <td>
+                <xref target="ical-prop-name"/>
+              </td>
             </tr>
             <tr>
               <td>relativeTo</td>
