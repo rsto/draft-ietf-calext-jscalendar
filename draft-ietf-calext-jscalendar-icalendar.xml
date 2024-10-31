@@ -172,7 +172,7 @@ SUMMARY:he
       <name>Converting iCalendar to JSCalendar</name>
       <section anchor="ical-general">
         <name>General rules</name>
-        <section anchor="ical-objects">
+        <section anchor="ical-comp-vcalendar">
           <name>iCalendar Objects</name>
           <t>
             <xref target="RFC5545" section="3.4"/> allows for an iCalendar stream to contain one or more iCalendar objects.  In contrast, this specification only defines conversion for streams consisting of a single iCalendar object. Converting streams of multiple iCalendar objects is implementation-specific.  All following sections of this document use the terms "iCalendar object" and "VCALENDAR component" interchangeably.</t>
@@ -4647,7 +4647,7 @@ URL:https://example.com/calendar/birtdays.ics
       <name>Converting JSCalendar to iCalendar</name>
       <section anchor="jscal-alert">
         <name>Alert</name>
-        <t>The <xref target="RFC8984" section="4.5.2" sectionFormat="parens">Alert object</xref> converts to a <xref target="RFC5545" section="3.6.6" sectionFormat="parens">VALARM component</xref>.</t>
+        <t>The <xref target="RFC8984" section="4.5.2" sectionFormat="parens">Alert object</xref> converts to a <xref target="ical-comp-valarm">VALARM component</xref>.</t>
         <t>Its properties convert as follows:</t>
         <table>
           <name>Properties of the Alert object</name>
@@ -4712,7 +4712,7 @@ URL:https://example.com/calendar/birtdays.ics
       </section>
       <section anchor="jscal-event-and-task">
         <name>Event and Task</name>
-        <t>The <xref target="RFC8984" section="2.1" sectionFormat="parens">Event object</xref> converts to a <xref target="RFC5545" section="3.6.1" sectionFormat="parens">VEVENT component</xref>, the <xref target="RFC8984" section="2.2" sectionFormat="parens">Task object</xref> to a <xref target="RFC5545" section="3.6.2" sectionFormat="parens">VTODO component</xref>.</t>
+        <t>The <xref target="RFC8984" section="2.1" sectionFormat="parens">Event object</xref> converts to a <xref target="ical-comp-vevent">VEVENT component</xref>, the <xref target="RFC8984" section="2.2" sectionFormat="parens">Task object</xref> converts to a <xref target="ical-comp-vtodo">VTODO component</xref>.</t>
         <t>
             The following table defines how to convert properties that are common to both the Event and Task object types. <xref target="jscal-event-props"/> and <xref target="jscal-task-props"/> later in this section define how to convert properties specific to either Event or Task objects.</t>
         <table anchor="jscal-event-and-task-props">
@@ -5256,7 +5256,7 @@ URL:https://example.com/calendar/birtdays.ics
       </section>
       <section anchor="jscal-group">
         <name>Group</name>
-        <t>The <xref target="RFC8984" section="2.3" sectionFormat="parens">Group object</xref> converts to a <xref target="RFC5545" section="3.4" sectionFormat="parens">VCALENDAR component</xref>.</t>
+        <t>The <xref target="RFC8984" section="2.3" sectionFormat="parens">Group object</xref> converts to a <xref target="ical-comp-vcalendar">VCALENDAR component</xref>.</t>
         <t>Its properties convert as follows:</t>
         <table>
           <name>Properties of the Group object</name>
@@ -5333,7 +5333,7 @@ URL:https://example.com/calendar/birtdays.ics
               <td>
                 <xref target="RFC8984" section="4.2.7" sectionFormat="comma"/>
               </td>
-              <td>URL, or other</td>
+              <td>ATTACH, or other</td>
               <td>
                 <t>
                   <xref target="jscal-link">Link object</xref>
@@ -5421,13 +5421,22 @@ URL:https://example.com/calendar/birtdays.ics
       </section>
       <section anchor="jscal-link">
         <name>Link</name>
+        <t>The <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref> converts one of the following properties: <xref target="ical-prop-attach">ATTACH</xref>, <xref target="ical-prop-image">IMAGE</xref>, <xref target="ical-prop-link">LINK</xref>, <xref target="ical-prop-structured-data">STRUCTURED-DATA</xref>, or <xref target="ical-prop-url">URL</xref>. How to choose the iCalendar property is implementation-specific. The following recommentations apply:</t>
+        <ul>
+          <li>Choose IMAGE, if the display property is set or the rel property value is "icon".</li>
+          <li>Choose LINK, if the rel property is set to any other value.</li>
+          <li>Choose URL, if only the href property is set and its value links to a dynamic rendition of the calendar object.</li>
+          <li>TBD - Choose STRUCTURED-DATA, if the schema property is set.</li>
+          <li>Choose ATTACH otherwise.</li>
+        </ul>
+        <t>The href property converts to the iCalendar property value. The other Link properties convert as follows:</t>
         <table>
           <name>Properties of the Link object</name>
           <thead>
             <tr>
               <th>Name</th>
               <th>Reference</th>
-              <th>Property (or other)</th>
+              <th>Parameter (or other)</th>
               <th>See</th>
             </tr>
           </thead>
@@ -5445,40 +5454,39 @@ URL:https://example.com/calendar/birtdays.ics
               <td>
                 <xref target="RFC8984" section="1.4.11" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>FMTTYPE</td>
+              <td>
+                <xref target="ical-prop-attach"/>
+              </td>
             </tr>
             <tr>
               <td>display</td>
               <td>
                 <xref target="RFC8984" section="1.4.11" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
-            </tr>
-            <tr>
-              <td>href</td>
+              <td>DISPLAY</td>
               <td>
-                <xref target="RFC8984" section="1.4.11" sectionFormat="comma"/>
+                <xref target="ical-prop-image"/>
               </td>
-              <td>TBD</td>
-              <td/>
             </tr>
             <tr>
               <td>rel</td>
               <td>
                 <xref target="RFC8984" section="1.4.11" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>LINKREL</td>
+              <td>
+                <xref target="ical-prop-link"/>, and remarks below</td>
             </tr>
             <tr>
               <td>size</td>
               <td>
                 <xref target="RFC8984" section="1.4.11" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>SIZE</td>
+              <td>
+                <xref target="ical-prop-attach"/>
+              </td>
             </tr>
             <tr>
               <td>title</td>
@@ -5490,6 +5498,10 @@ URL:https://example.com/calendar/birtdays.ics
             </tr>
           </tbody>
         </table>
+        <t>Remarks:</t>
+        <ul>
+          <li>The LINKREL parameter <bcp14>SHOULD</bcp14> be omitted if the Link object converts to an IMAGE property and the rel property value is "icon".</li>
+        </ul>
       </section>
       <section anchor="jscal-location">
         <name>Location</name>
