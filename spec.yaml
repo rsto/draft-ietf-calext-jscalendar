@@ -394,7 +394,9 @@ icalendar:
         SEQUENCE:
           convert:
             property: sequence
-        STATUS: {}
+        STATUS:
+          convert:
+            property: status
         STRUCTURED-DATA:
           convert:
             property: links
@@ -688,7 +690,9 @@ icalendar:
         SEQUENCE:
           convert:
             property: sequence
-        STATUS: {}
+        STATUS:
+          convert:
+            property: progress
         STRUCTURED-DATA:
           convert:
             property: links
@@ -2481,7 +2485,9 @@ jscalendar:
       usage: common
     progress:
       objects:
-        Task: {}
+        Task:
+          convert:
+            property: STATUS
         Participant: {}
       rfc: RFC8984
       sections:
@@ -2801,7 +2807,9 @@ jscalendar:
       usage: common
     status:
       objects:
-        Event: {}
+        Event:
+          convert:
+            property: STATUS
       rfc: RFC8984
       sections:
         - 5.1.3
