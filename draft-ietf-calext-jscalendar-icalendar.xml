@@ -5598,99 +5598,82 @@ URL:https://example.com/calendar/birtdays.ics
       </section>
       <section anchor="jscal-participant">
         <name>Participant</name>
-        <table>
-          <name>Properties of the Participant object</name>
+        <t>The <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref> either converts to one of an <xref target="ical-prop-attendee">ATTENDEE property</xref>, a <xref target="ical-comp-participant">PARTICIPANT component</xref>, or a <xref target="ical-comp-vresource">VRESOURCE component</xref>; or it converts to both an ATTENDEE property and a PARTICIPANT component:</t>
+        <ul>
+          <li>
+            <t>It converts to an ATTENDEE property if at least one of the <xref target="I-D.ietf-jmap-calendars" section="5.1.1" sectionFormat="parens">calendarAddress</xref> or <xref target="RFC8984" section="4.4.6" sectionFormat="parens">sendTo</xref> properties is set. The calendarAddress property converts to the ATTENDEE property value, if set; otherwise one of the scheduling methods in the sendTo property converts to the ATTENDEE property value.</t>
+          </li>
+          <li>
+            <t>It converts to a PARTICIPANT component if it converts to an ATTENDEE property but not all of its properties convert to ATTENDEE property parameters as depicted in <xref target="jscal-participant-props-attendee"/>. In this case the CALENDAR-ADDRESS property value of the PARTICIPANT <bcp14>MUST</bcp14> be set to the ATTENDEE property value. Alternatively, the Participant object also converts to a PARTICIPANT component if it does not convert to an ATTENDEE property but its kind property value is unequal to "resource".</t>
+          </li>
+          <li>
+            <t>It converts to a VRESOURCE component if it does not convert to an ATTENDEE property and its kind property value is "resource".</t>
+          </li>
+        </ul>
+        <t>The following Participant properties convert to the ATTENDEE property. How to convert these properties if the Participant does not convert to an ATTENDEE is implementation-specific.</t>
+        <table anchor="jscal-participant-props-attendee">
+          <name>Properties of the Participant object that convert to the ATTENDEE property</name>
           <thead>
             <tr>
               <th>Name</th>
               <th>Reference</th>
-              <th>Property (or other)</th>
+              <th>Parameter (or other)</th>
               <th>See</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>calendarAddress</td>
-              <td>
-                <xref target="I-D.ietf-jmap-calendars" section="5.1.1" sectionFormat="comma"/>
-              </td>
-              <td>TBD</td>
-              <td/>
-            </tr>
-            <tr>
               <td>delegatedFrom</td>
               <td>
                 <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>DELEGATED-FROM</td>
+              <td>
+                <xref target="ical-prop-attendee"/>
+              </td>
             </tr>
             <tr>
               <td>delegatedTo</td>
               <td>
                 <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
-            </tr>
-            <tr>
-              <td>description</td>
+              <td>DELEGATED-TO</td>
               <td>
-                <xref target="RFC8984" section="4.2.2" sectionFormat="comma"/>
+                <xref target="ical-prop-attendee"/>
               </td>
-              <td>TBD</td>
-              <td/>
             </tr>
             <tr>
               <td>email</td>
               <td>
                 <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>EMAIL</td>
+              <td>
+                <xref target="ical-prop-attendee"/>
+              </td>
             </tr>
             <tr>
               <td>expectReply</td>
               <td>
                 <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
-            </tr>
-            <tr>
-              <td>invitedBy</td>
+              <td>RSVP</td>
               <td>
-                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
+                <xref target="ical-prop-attendee"/>
               </td>
-              <td>TBD</td>
-              <td/>
             </tr>
             <tr>
               <td>kind</td>
               <td>
                 <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
-            </tr>
-            <tr>
-              <td>language</td>
+              <td>CUTYPE</td>
               <td>
-                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
+                <xref target="ical-prop-attendee"/>
               </td>
-              <td>TBD</td>
-              <td/>
             </tr>
             <tr>
-              <td>links</td>
-              <td>
-                <xref target="RFC8984" section="4.2.7" sectionFormat="comma"/>
-              </td>
-              <td>TBD</td>
-              <td/>
-            </tr>
-            <tr>
-              <td>locationId</td>
+              <td>invitedBy</td>
               <td>
                 <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
               </td>
@@ -5702,80 +5685,59 @@ URL:https://example.com/calendar/birtdays.ics
               <td>
                 <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>MEMBER</td>
+              <td>
+                <xref target="ical-prop-attendee"/>
+              </td>
             </tr>
             <tr>
               <td>name</td>
               <td>
                 <xref target="RFC8984" section="4.2.5" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
-            </tr>
-            <tr>
-              <td>participationComment</td>
+              <td>CN</td>
               <td>
-                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
+                <xref target="ical-prop-attendee"/>
               </td>
-              <td>TBD</td>
-              <td/>
             </tr>
             <tr>
               <td>participationStatus</td>
               <td>
                 <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
-            </tr>
-            <tr>
-              <td>percentComplete</td>
+              <td>PARTSTAT</td>
               <td>
-                <xref target="RFC8984" section="5.2.4" sectionFormat="comma"/>
+                <xref target="ical-prop-attendee"/>
               </td>
-              <td>TBD</td>
-              <td/>
-            </tr>
-            <tr>
-              <td>progress</td>
-              <td>
-                <xref target="RFC8984" section="5.2.5" sectionFormat="comma"/>
-              </td>
-              <td>TBD</td>
-              <td/>
-            </tr>
-            <tr>
-              <td>progressUpdated</td>
-              <td>
-                <xref target="RFC8984" section="5.2.6" sectionFormat="comma"/>
-              </td>
-              <td>TBD</td>
-              <td/>
             </tr>
             <tr>
               <td>roles</td>
               <td>
                 <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>ROLE, or PARTICIPANT-TYPE property of the PARTICIPANT component</td>
+              <td>
+                <xref target="ical-prop-attendee"/>, <xref target="ical-prop-participant-type"/>, and remarks below</td>
             </tr>
             <tr>
               <td>scheduleAgent</td>
               <td>
                 <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>SCHEDULE-AGENT</td>
+              <td>
+                <xref target="ical-prop-attendee"/>
+              </td>
             </tr>
             <tr>
               <td>scheduleForceSend</td>
               <td>
                 <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>SCHEDULE-FORCE-SEND</td>
+              <td>
+                <xref target="ical-prop-attendee"/>
+              </td>
             </tr>
             <tr>
               <td>scheduleSequence</td>
@@ -5790,8 +5752,10 @@ URL:https://example.com/calendar/birtdays.ics
               <td>
                 <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>SCHEDULE-STATUS</td>
+              <td>
+                <xref target="ical-prop-attendee"/>
+              </td>
             </tr>
             <tr>
               <td>scheduleUpdated</td>
@@ -5816,6 +5780,108 @@ URL:https://example.com/calendar/birtdays.ics
               </td>
               <td>TBD</td>
               <td/>
+            </tr>
+          </tbody>
+        </table>
+        <t>Remarks:</t>
+        <ul>
+          <li><t>The "optional" role converts to the "OPT-PARTICIPANT" ROLE parameter value, the "chair" role to "CHAIR", "informational" to "NON-PARTICIPANT". The "attendee" role does convert to the ROLE parameter, it is implied by the ATTENDEE property. The "owner" role does not convert to the ROLE parameter, if the property value of the ATTENDEE is equal to the value of the ORGANIZER property in the same component. All other roles require a PARTICIPANT component and convert to the PARTICIPANT-TYPE property in that component.</t></li>
+        </ul>
+        <t>The following Participant properties convert to the PARTICIPANT or VRESOURCE component:</t>
+        <table>
+          <name>Properties of the Participant object that convert to the PARTICIPANT or VRESOURCE component</name>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Reference</th>
+              <th>Property (or other)</th>
+              <th>See</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>description</td>
+              <td>
+                <xref target="RFC8984" section="4.2.2" sectionFormat="comma"/>
+              </td>
+              <td>DESCRIPTION</td>
+              <td><xref target="ical-prop-description"/></td>
+            </tr>
+            <tr>
+              <td>language</td>
+              <td>
+                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>links</td>
+              <td>
+                <xref target="RFC8984" section="4.2.7" sectionFormat="comma"/>
+              </td>
+              <td>ATTACH, or other</td>
+              <td>
+                <t>
+                  <xref target="jscal-link">Link object</xref>
+                </t>
+              </td>
+            </tr>
+            <tr>
+              <td>locationId</td>
+              <td>
+                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>name</td>
+              <td>
+                <xref target="RFC8984" section="4.2.5" sectionFormat="comma"/>
+              </td>
+              <td>NAME</td>
+              <td><t><xref target="ical-prop-name"/></t></td>
+            </tr>
+            <tr>
+              <td>participationComment</td>
+              <td>
+                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
+              </td>
+              <td>COMMENT</td>
+              <td><t><xref target="ical-prop-comment"/></t></td>
+            </tr>
+            <tr>
+              <td>percentComplete</td>
+              <td>
+                <xref target="RFC8984" section="5.2.4" sectionFormat="comma"/>
+              </td>
+              <td>PERCENT-COMPLETE</td>
+              <td><t><xref target="ical-prop-percent-complete"/></t></td>
+            </tr>
+            <tr>
+              <td>progress</td>
+              <td>
+                <xref target="RFC8984" section="5.2.5" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>progressUpdated</td>
+              <td>
+                <xref target="RFC8984" section="5.2.6" sectionFormat="comma"/>
+              </td>
+              <td>TBD</td>
+              <td/>
+            </tr>
+            <tr>
+              <td>roles</td>
+              <td>
+                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
+              </td>
+              <td>PARTICIPANT-TYPE</td>
+              <td><xref target="ical-prop-participant-type"/></td>
             </tr>
           </tbody>
         </table>
