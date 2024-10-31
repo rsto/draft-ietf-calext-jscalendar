@@ -4648,14 +4648,14 @@ URL:https://example.com/calendar/birtdays.ics
       <section anchor="jscal-alert">
         <name>Alert</name>
         <t>The <xref target="RFC8984" section="4.5.2" sectionFormat="parens">Alert object</xref> converts to a <xref target="RFC5545" section="3.6.6" sectionFormat="parens">VALARM component</xref>.</t>
-        <t>Its properties convert as iCalendar properties follows:</t>
+        <t>Its properties convert as follows:</t>
         <table>
           <name>Properties of the Alert object</name>
           <thead>
             <tr>
               <th>Name</th>
               <th>Reference</th>
-              <th>Property</th>
+              <th>Property (or other)</th>
               <th>See</th>
             </tr>
           </thead>
@@ -4687,7 +4687,8 @@ URL:https://example.com/calendar/birtdays.ics
               </td>
               <td>RELATED-TO</td>
               <td>
-                <xref target="ical-prop-related-to"/>
+                <t>
+                  <xref target="ical-prop-related-to"/>, and remarks below</t>
               </td>
             </tr>
             <tr>
@@ -4702,13 +4703,18 @@ URL:https://example.com/calendar/birtdays.ics
             </tr>
           </tbody>
         </table>
-        <t>The value of the RELATED-TO property is the UID property value of that VALARM component, to which the related  Alert object converts to. Consequently, the UID property for such a VALARM <bcp14>MUST</bcp14> be set, otherwise the UID property <bcp14>SHOULD</bcp14> be set.</t>
+        <t>Remarks:</t>
+        <ul>
+          <li>
+            <t>The value of the RELATED-TO property is the UID property value of that VALARM component, to which the related  Alert object converts to. Consequently, the UID property for such a VALARM <bcp14>MUST</bcp14> be set, otherwise the UID property <bcp14>SHOULD</bcp14> be set.</t>
+          </li>
+        </ul>
       </section>
       <section anchor="jscal-event-and-task">
         <name>Event and Task</name>
         <t>The <xref target="RFC8984" section="2.1" sectionFormat="parens">Event object</xref> converts to a <xref target="RFC5545" section="3.6.1" sectionFormat="parens">VEVENT component</xref>, the <xref target="RFC8984" section="2.2" sectionFormat="parens">Task object</xref> to a <xref target="RFC5545" section="3.6.2" sectionFormat="parens">VTODO component</xref>.</t>
         <t>
-            The following table defines how properties common to both object types convert to iCalendar elements. <xref target="jscal-event-props"/> and <xref target="jscal-task-props"/> later in this section define how to convert properties specific to either Event or Task objects.</t>
+            The following table defines how to convert properties that are common to both the Event and Task object types. <xref target="jscal-event-props"/> and <xref target="jscal-task-props"/> later in this section define how to convert properties specific to either Event or Task objects.</t>
         <table anchor="jscal-event-and-task-props">
           <name>Properties of the Event and Task object</name>
           <thead>
@@ -5150,7 +5156,7 @@ URL:https://example.com/calendar/birtdays.ics
             <tr>
               <th>Name</th>
               <th>Reference</th>
-              <th>Property</th>
+              <th>Property (or other)</th>
               <th>See</th>
             </tr>
           </thead>
@@ -5188,7 +5194,7 @@ URL:https://example.com/calendar/birtdays.ics
             <tr>
               <th>Name</th>
               <th>Reference</th>
-              <th>Property</th>
+              <th>Property (or other)</th>
               <th>See</th>
             </tr>
           </thead>
@@ -5250,14 +5256,16 @@ URL:https://example.com/calendar/birtdays.ics
       </section>
       <section anchor="jscal-group">
         <name>Group</name>
+        <t>The <xref target="RFC8984" section="2.3" sectionFormat="parens">Group object</xref> converts to a <xref target="RFC5545" section="3.4" sectionFormat="parens">VCALENDAR component</xref>.</t>
+        <t>Its properties convert as follows:</t>
         <table>
           <name>Properties of the Group object</name>
           <thead>
             <tr>
               <th>Name</th>
               <th>Reference</th>
-              <th>iCalendar Element</th>
-              <th>None</th>
+              <th>Property (or other)</th>
+              <th>See</th>
             </tr>
           </thead>
           <tbody>
@@ -5266,48 +5274,71 @@ URL:https://example.com/calendar/birtdays.ics
               <td>
                 <xref target="RFC8984" section="4.2.10" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>CONCEPT</td>
+              <td>
+                <t>
+                  <xref target="ical-prop-concept"/>
+                </t>
+              </td>
             </tr>
             <tr>
               <td>color</td>
               <td>
                 <xref target="RFC8984" section="4.2.11" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>COLOR</td>
+              <td>
+                <t>
+                  <xref target="ical-prop-color"/>
+                </t>
+              </td>
             </tr>
             <tr>
               <td>created</td>
               <td>
                 <xref target="RFC8984" section="4.1.5" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>CREATED</td>
+              <td>
+                <t>
+                  <xref target="ical-prop-created"/>
+                </t>
+              </td>
             </tr>
             <tr>
               <td>entries</td>
               <td>
                 <xref target="RFC8984" section="5.3.1" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>VEVENT or VTODO (component)</td>
+              <td>
+                <t>
+                  <xref target="jscal-event-and-task">Event and Task object</xref>, and remarks below</t>
+              </td>
             </tr>
             <tr>
               <td>keywords</td>
               <td>
                 <xref target="RFC8984" section="4.2.9" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>CATEGORIES</td>
+              <td>
+                <t>
+                  <xref target="ical-prop-categories"/>
+                </t>
+              </td>
             </tr>
             <tr>
               <td>links</td>
               <td>
                 <xref target="RFC8984" section="4.2.7" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>URL, or other</td>
+              <td>
+                <t>
+                  <xref target="jscal-link">Link object</xref>
+                </t>
+              </td>
             </tr>
             <tr>
               <td>locale</td>
@@ -5322,43 +5353,71 @@ URL:https://example.com/calendar/birtdays.ics
               <td>
                 <xref target="RFC8984" section="4.1.4" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>PRODID</td>
+              <td>
+                <t>
+                  <xref target="ical-prop-prodid"/>, and remarks below</t>
+              </td>
             </tr>
             <tr>
               <td>source</td>
               <td>
                 <xref target="RFC8984" section="5.3.2" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>SOURCE</td>
+              <td>
+                <t>
+                  <xref target="ical-prop-source"/>
+                </t>
+              </td>
             </tr>
             <tr>
               <td>title</td>
               <td>
                 <xref target="RFC8984" section="4.2.1" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>NAME</td>
+              <td>
+                <t>
+                  <xref target="ical-prop-name"/>
+                </t>
+              </td>
             </tr>
             <tr>
               <td>uid</td>
               <td>
                 <xref target="RFC8984" section="4.1.2" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>UID</td>
+              <td>
+                <t>
+                  <xref target="ical-prop-uid"/>
+                </t>
+              </td>
             </tr>
             <tr>
               <td>updated</td>
               <td>
                 <xref target="RFC8984" section="4.1.6" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>LAST-MODIFIED</td>
+              <td>
+                <t>
+                  <xref target="ical-prop-last-modified"/>
+                </t>
+              </td>
             </tr>
           </tbody>
         </table>
+        <t>Remarks:</t>
+        <ul>
+          <li>
+            <t>The prodId property value of the Group object is expected to be equal to the prodId property value of all the Group entries. They all convert to the same, single PRODID property in the VCALENDAR component. How to convert unequal prodId property values is implementation-specific. </t>
+          </li>
+          <li>
+            <t>The method property value in all the Group entries is expected to be equal. How to convert entries with unequal method property values is implementation-specific.</t>
+          </li>
+        </ul>
       </section>
       <section anchor="jscal-link">
         <name>Link</name>
@@ -5368,8 +5427,8 @@ URL:https://example.com/calendar/birtdays.ics
             <tr>
               <th>Name</th>
               <th>Reference</th>
-              <th>iCalendar Element</th>
-              <th>None</th>
+              <th>Property (or other)</th>
+              <th>See</th>
             </tr>
           </thead>
           <tbody>
@@ -5440,8 +5499,8 @@ URL:https://example.com/calendar/birtdays.ics
             <tr>
               <th>Name</th>
               <th>Reference</th>
-              <th>iCalendar Element</th>
-              <th>None</th>
+              <th>Property (or other)</th>
+              <th>See</th>
             </tr>
           </thead>
           <tbody>
@@ -5512,8 +5571,8 @@ URL:https://example.com/calendar/birtdays.ics
             <tr>
               <th>Name</th>
               <th>Reference</th>
-              <th>iCalendar Element</th>
-              <th>None</th>
+              <th>Property (or other)</th>
+              <th>See</th>
             </tr>
           </thead>
           <tbody>
@@ -5736,8 +5795,8 @@ URL:https://example.com/calendar/birtdays.ics
             <tr>
               <th>Name</th>
               <th>Reference</th>
-              <th>iCalendar Element</th>
-              <th>None</th>
+              <th>Property (or other)</th>
+              <th>See</th>
             </tr>
           </thead>
           <tbody>
@@ -5797,8 +5856,8 @@ URL:https://example.com/calendar/birtdays.ics
             <tr>
               <th>Name</th>
               <th>Reference</th>
-              <th>iCalendar Element</th>
-              <th>None</th>
+              <th>Property (or other)</th>
+              <th>See</th>
             </tr>
           </thead>
           <tbody>
@@ -5869,8 +5928,8 @@ URL:https://example.com/calendar/birtdays.ics
             <tr>
               <th>Name</th>
               <th>Reference</th>
-              <th>iCalendar Element</th>
-              <th>None</th>
+              <th>Property (or other)</th>
+              <th>See</th>
             </tr>
           </thead>
           <tbody>
