@@ -6440,9 +6440,6 @@ URL:https://example.com/calendar/birtdays.ics
           <name>ATTACH</name>
           <ul>
             <li>
-              <xref target="RFC5545" section="3.2.7" sectionFormat="comma">ENCODING</xref>
-            </li>
-            <li>
               <xref target="RFC8607" section="4.2" sectionFormat="comma">FILENAME</xref>
             </li>
             <li>
@@ -6496,22 +6493,6 @@ URL:https://example.com/calendar/birtdays.ics
             </li>
             <li>
               <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>EXDATE</name>
-          <ul>
-            <li>
-              <xref target="RFC5545" section="3.2.19" sectionFormat="comma">TZID</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>FREEBUSY</name>
-          <ul>
-            <li>
-              <xref target="RFC5545" section="3.2.9" sectionFormat="comma">FBTYPE</xref>
             </li>
           </ul>
         </section>
@@ -6582,14 +6563,6 @@ URL:https://example.com/calendar/birtdays.ics
           </ul>
         </section>
         <section>
-          <name>RDATE</name>
-          <ul>
-            <li>
-              <xref target="RFC5545" section="3.2.19" sectionFormat="comma">TZID</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
           <name>RECURRENCE-ID</name>
           <ul>
             <li>
@@ -6600,9 +6573,6 @@ URL:https://example.com/calendar/birtdays.ics
         <section>
           <name>RELATED-TO</name>
           <ul>
-            <li>
-              <xref target="RFC5545" section="3.2.15" sectionFormat="comma">RELTYPE</xref>
-            </li>
             <li>
               <xref target="RFC9253" section="6.2" sectionFormat="comma">GAP</xref>
             </li>
@@ -6630,9 +6600,6 @@ URL:https://example.com/calendar/birtdays.ics
         <section>
           <name>STRUCTURED-DATA</name>
           <ul>
-            <li>
-              <xref target="RFC5545" section="3.2.7" sectionFormat="comma">ENCODING</xref>
-            </li>
             <li>
               <xref target="RFC9073" section="5.2" sectionFormat="comma">SCHEMA</xref>
             </li>
@@ -6668,14 +6635,6 @@ URL:https://example.com/calendar/birtdays.ics
           <ul>
             <li>
               <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>XML</name>
-          <ul>
-            <li>
-              <xref target="RFC5545" section="3.2.7" sectionFormat="comma">ENCODING</xref>
             </li>
           </ul>
         </section>
