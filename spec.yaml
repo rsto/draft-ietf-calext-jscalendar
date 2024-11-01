@@ -1112,27 +1112,11 @@ icalendar:
           convert:
             property: links
             object: Participant
-        SCHEDULE-AGENT:
-          convert:
-            property: iCalProps
-            note: TBD -- need scheduleForceAgent on Event and Todo?
-        SCHEDULE-FORCE-SEND:
-          convert:
-            property: iCalProps
-            note: TBD -- need scheduleForceSend on Event and Todo?
-        SCHEDULE-STATUS:
-          convert:
-            property: iCalProps
-            note: TBD -- need scheduleStatus on Event and Todo?
-        SENT-BY:
-          convert:
-            property: sentBy
-            object: Participant
-            note: TBD - different semantics
-        LANGUAGE:
-          convert:
-            property: language
-            note: TBD - different semantics
+        SCHEDULE-AGENT: {}
+        SCHEDULE-FORCE-SEND: {}
+        SCHEDULE-STATUS: {}
+        SENT-BY: {}
+        LANGUAGE: {}
       rfc: RFC5545
       section: 3.8.4.3
       status: current
