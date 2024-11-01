@@ -179,7 +179,6 @@ icalendar:
           required: true
         DURATION: {}
         PROXIMITY: {}
-        REFID: {}
         RELATED-TO:
           convert:
             property: relatedTo
@@ -504,7 +503,6 @@ icalendar:
         NAME:
           convert:
             property: name
-        REFID: {}
         STRUCTURED-DATA:
           convert:
             property: links
