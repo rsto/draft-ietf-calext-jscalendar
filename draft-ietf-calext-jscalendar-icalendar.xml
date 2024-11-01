@@ -6434,6 +6434,252 @@ URL:https://example.com/calendar/birtdays.ics
           </ul>
         </section>
       </section>
+      <section>
+        <name>iCalendar Parameters by Property</name>
+        <section>
+          <name>ATTACH</name>
+          <ul>
+            <li>
+              <xref target="RFC5545" section="3.2.7" sectionFormat="comma">ENCODING</xref>
+            </li>
+            <li>
+              <xref target="RFC8607" section="4.2" sectionFormat="comma">FILENAME</xref>
+            </li>
+            <li>
+              <xref target="RFC8607" section="4.3" sectionFormat="comma">MANAGED-ID</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>CATEGORIES</name>
+          <ul>
+            <li>
+              <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>COMMENT</name>
+          <ul>
+            <li>
+              <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
+            </li>
+            <li>
+              <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>CONFERENCE</name>
+          <ul>
+            <li>
+              <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>CONTACT</name>
+          <ul>
+            <li>
+              <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
+            </li>
+            <li>
+              <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>DESCRIPTION</name>
+          <ul>
+            <li>
+              <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
+            </li>
+            <li>
+              <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>EXDATE</name>
+          <ul>
+            <li>
+              <xref target="RFC5545" section="3.2.19" sectionFormat="comma">TZID</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>FREEBUSY</name>
+          <ul>
+            <li>
+              <xref target="RFC5545" section="3.2.9" sectionFormat="comma">FBTYPE</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>IMAGE</name>
+          <ul>
+            <li>
+              <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>LINK</name>
+          <ul>
+            <li>
+              <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>LOCATION</name>
+          <ul>
+            <li>
+              <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
+            </li>
+            <li>
+              <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>NAME</name>
+          <ul>
+            <li>
+              <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
+            </li>
+            <li>
+              <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>ORGANIZER</name>
+          <ul>
+            <li>
+              <xref target="RFC6638" section="7.1" sectionFormat="comma">SCHEDULE-AGENT</xref>
+            </li>
+            <li>
+              <xref target="RFC6638" section="7.2" sectionFormat="comma">SCHEDULE-FORCE-SEND</xref>
+            </li>
+            <li>
+              <xref target="RFC6638" section="7.3" sectionFormat="comma">SCHEDULE-STATUS</xref>
+            </li>
+            <li>
+              <xref target="RFC5545" section="3.2.18" sectionFormat="comma">SENT-BY</xref>
+            </li>
+            <li>
+              <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>PARTICIPANT-TYPE</name>
+          <ul>
+            <li>
+              <xref target="RFC9073" section="5.1" sectionFormat="comma">ORDER</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>RDATE</name>
+          <ul>
+            <li>
+              <xref target="RFC5545" section="3.2.19" sectionFormat="comma">TZID</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>RECURRENCE-ID</name>
+          <ul>
+            <li>
+              <xref target="RFC5545" section="3.2.13" sectionFormat="comma">RANGE</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>RELATED-TO</name>
+          <ul>
+            <li>
+              <xref target="RFC5545" section="3.2.15" sectionFormat="comma">RELTYPE</xref>
+            </li>
+            <li>
+              <xref target="RFC9253" section="6.2" sectionFormat="comma">GAP</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>REQUEST-STATUS</name>
+          <ul>
+            <li>
+              <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>RESOURCES</name>
+          <ul>
+            <li>
+              <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
+            </li>
+            <li>
+              <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>STRUCTURED-DATA</name>
+          <ul>
+            <li>
+              <xref target="RFC5545" section="3.2.7" sectionFormat="comma">ENCODING</xref>
+            </li>
+            <li>
+              <xref target="RFC9073" section="5.2" sectionFormat="comma">SCHEMA</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>STYLED-DESCRIPTION</name>
+          <ul>
+            <li>
+              <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
+            </li>
+            <li>
+              <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
+            </li>
+            <li>
+              <xref target="RFC9073" section="5.3" sectionFormat="comma">DERIVED</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>SUMMARY</name>
+          <ul>
+            <li>
+              <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
+            </li>
+            <li>
+              <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>TZNAME</name>
+          <ul>
+            <li>
+              <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>XML</name>
+          <ul>
+            <li>
+              <xref target="RFC5545" section="3.2.7" sectionFormat="comma">ENCODING</xref>
+            </li>
+          </ul>
+        </section>
+      </section>
     </section>
   </back>
 </rfc>
