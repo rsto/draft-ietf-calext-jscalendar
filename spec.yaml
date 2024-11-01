@@ -806,7 +806,7 @@ icalendar:
           convert:
             property: sentBy
             object: Participant
-            note: TBC - different semantics
+            note: TBD - different semantics
         CN:
           convert:
             property: name
@@ -818,7 +818,7 @@ icalendar:
         LANGUAGE:
           convert:
             property: language
-            note: TBC - different semantics
+            note: TBD - different semantics
         EMAIL:
           convert:
             property: email
@@ -1115,24 +1115,24 @@ icalendar:
         SCHEDULE-AGENT:
           convert:
             property: iCalProps
-            note: TBC -- need scheduleForceAgent on Event and Todo?
+            note: TBD -- need scheduleForceAgent on Event and Todo?
         SCHEDULE-FORCE-SEND:
           convert:
             property: iCalProps
-            note: TBC -- need scheduleForceSend on Event and Todo?
+            note: TBD -- need scheduleForceSend on Event and Todo?
         SCHEDULE-STATUS:
           convert:
             property: iCalProps
-            note: TBC -- need scheduleStatus on Event and Todo?
+            note: TBD -- need scheduleStatus on Event and Todo?
         SENT-BY:
           convert:
             property: sentBy
             object: Participant
-            note: TBC - different semantics
+            note: TBD - different semantics
         LANGUAGE:
           convert:
             property: language
-            note: TBC - different semantics
+            note: TBD - different semantics
       rfc: RFC5545
       section: 3.8.4.3
       status: current

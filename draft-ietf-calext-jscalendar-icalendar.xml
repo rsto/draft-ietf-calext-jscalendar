@@ -2663,7 +2663,7 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
                   <xref target="RFC5545" section="3.2.10" sectionFormat="comma"/>
                 </td>
                 <td>language</td>
-                <td>TBC - different semantics</td>
+                <td>TBD - different semantics</td>
               </tr>
               <tr>
                 <td>MEMBER</td>
@@ -2727,7 +2727,7 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
                   <xref target="RFC5545" section="3.2.18" sectionFormat="comma"/>
                 </td>
                 <td>sentBy</td>
-                <td>TBC - different semantics</td>
+                <td>TBD - different semantics</td>
               </tr>
             </tbody>
           </table>
@@ -3763,7 +3763,7 @@ END:VLOCATION
                   <xref target="RFC5545" section="3.2.10" sectionFormat="comma"/>
                 </td>
                 <td>language</td>
-                <td>TBC - different semantics</td>
+                <td>TBD - different semantics</td>
               </tr>
               <tr>
                 <td>SENT-BY</td>
@@ -3771,7 +3771,7 @@ END:VLOCATION
                   <xref target="RFC5545" section="3.2.18" sectionFormat="comma"/>
                 </td>
                 <td>sentBy</td>
-                <td>TBC - different semantics</td>
+                <td>TBD - different semantics</td>
               </tr>
             </tbody>
           </table>
