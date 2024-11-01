@@ -5421,7 +5421,7 @@ URL:https://example.com/calendar/birtdays.ics
       </section>
       <section anchor="jscal-link">
         <name>Link</name>
-        <t>The <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref> converts one of the following properties: <xref target="ical-prop-attach">ATTACH</xref>, <xref target="ical-prop-image">IMAGE</xref>, <xref target="ical-prop-link">LINK</xref>, <xref target="ical-prop-structured-data">STRUCTURED-DATA</xref>, or <xref target="ical-prop-url">URL</xref>. Which iCalendar property to choose is implementation-specific. As a guideline:</t>
+        <t>The <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref> converts either an <xref target="ical-prop-attach">ATTACH property</xref>, an <xref target="ical-prop-image">IMAGE property</xref>, a <xref target="ical-prop-link">LINK property</xref>, a <xref target="ical-prop-structured-data">STRUCTURED-DATA property</xref>, or an <xref target="ical-prop-url">URL property</xref>. Which iCalendar property to choose is implementation-specific. As a guideline:</t>
         <ul>
           <li>Choose IMAGE, if the display property is set or the rel property value is "icon".</li>
           <li>Choose LINK, if the rel property is set to any other value.</li>
