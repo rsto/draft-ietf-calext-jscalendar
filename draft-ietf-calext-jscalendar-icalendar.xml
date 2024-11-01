@@ -5785,7 +5785,9 @@ URL:https://example.com/calendar/birtdays.ics
         </table>
         <t>Remarks:</t>
         <ul>
-          <li><t>The "optional" role converts to the "OPT-PARTICIPANT" ROLE parameter value, the "chair" role to "CHAIR", "informational" to "NON-PARTICIPANT". The "attendee" role does convert to the ROLE parameter, it is implied by the ATTENDEE property. The "owner" role does not convert to the ROLE parameter, if the property value of the ATTENDEE is equal to the value of the ORGANIZER property in the same component. All other roles require a PARTICIPANT component and convert to the PARTICIPANT-TYPE property in that component.</t></li>
+          <li>
+            <t>The "optional" role converts to the "OPT-PARTICIPANT" ROLE parameter value, the "chair" role to "CHAIR", "informational" to "NON-PARTICIPANT". The "attendee" role does convert to the ROLE parameter, it is implied by the ATTENDEE property. The "owner" role does not convert to the ROLE parameter, if the property value of the ATTENDEE is equal to the value of the ORGANIZER property in the same component. All other roles require a PARTICIPANT component and convert to the PARTICIPANT-TYPE property in that component.</t>
+          </li>
         </ul>
         <t>The following Participant properties convert to the PARTICIPANT or VRESOURCE component:</t>
         <table>
@@ -5805,7 +5807,9 @@ URL:https://example.com/calendar/birtdays.ics
                 <xref target="RFC8984" section="4.2.2" sectionFormat="comma"/>
               </td>
               <td>DESCRIPTION</td>
-              <td><xref target="ical-prop-description"/></td>
+              <td>
+                <xref target="ical-prop-description"/>
+              </td>
             </tr>
             <tr>
               <td>language</td>
@@ -5841,7 +5845,11 @@ URL:https://example.com/calendar/birtdays.ics
                 <xref target="RFC8984" section="4.2.5" sectionFormat="comma"/>
               </td>
               <td>NAME</td>
-              <td><t><xref target="ical-prop-name"/></t></td>
+              <td>
+                <t>
+                  <xref target="ical-prop-name"/>
+                </t>
+              </td>
             </tr>
             <tr>
               <td>participationComment</td>
@@ -5849,7 +5857,11 @@ URL:https://example.com/calendar/birtdays.ics
                 <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
               </td>
               <td>COMMENT</td>
-              <td><t><xref target="ical-prop-comment"/></t></td>
+              <td>
+                <t>
+                  <xref target="ical-prop-comment"/>
+                </t>
+              </td>
             </tr>
             <tr>
               <td>percentComplete</td>
@@ -5857,7 +5869,11 @@ URL:https://example.com/calendar/birtdays.ics
                 <xref target="RFC8984" section="5.2.4" sectionFormat="comma"/>
               </td>
               <td>PERCENT-COMPLETE</td>
-              <td><t><xref target="ical-prop-percent-complete"/></t></td>
+              <td>
+                <t>
+                  <xref target="ical-prop-percent-complete"/>
+                </t>
+              </td>
             </tr>
             <tr>
               <td>progress</td>
@@ -5881,13 +5897,17 @@ URL:https://example.com/calendar/birtdays.ics
                 <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
               </td>
               <td>PARTICIPANT-TYPE</td>
-              <td><xref target="ical-prop-participant-type"/></td>
+              <td>
+                <xref target="ical-prop-participant-type"/>
+              </td>
             </tr>
           </tbody>
         </table>
       </section>
       <section anchor="jscal-timezone">
         <name>TimeZone</name>
+        <t>The <xref target="RFC8984" section="4.7.2" sectionFormat="parens">TimeZone object</xref> converts to a <xref target="ical-comp-vtimezone">VTIMEZONE component</xref>.</t>
+        <t>Its properties convert as follows:</t>
         <table>
           <name>Properties of the TimeZone object</name>
           <thead>
@@ -5904,51 +5924,73 @@ URL:https://example.com/calendar/birtdays.ics
               <td>
                 <xref target="RFC8984" section="4.7.2" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>TZID-ALIAS-OF</td>
+              <td>
+                <t>
+                  <xref target="ical-prop-tzid-alias-of"/>
+                </t>
+              </td>
             </tr>
             <tr>
               <td>daylight</td>
               <td>
                 <xref target="RFC8984" section="4.7.2" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>DAYLIGHT (component)</td>
+              <td>
+                <t>TimeZoneRule below</t>
+              </td>
             </tr>
             <tr>
               <td>standard</td>
               <td>
                 <xref target="RFC8984" section="4.7.2" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>STANDARD (component)</td>
+              <td>
+                <t>TimeZoneRule below</t>
+              </td>
             </tr>
             <tr>
               <td>tzId</td>
               <td>
                 <xref target="RFC8984" section="4.7.2" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>TZID</td>
+              <td>
+                <t>
+                  <xref target="ical-prop-tzid"/>
+                </t>
+              </td>
             </tr>
             <tr>
               <td>url</td>
               <td>
                 <xref target="RFC8984" section="4.7.2" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>TZURL</td>
+              <td>
+                <t>
+                  <xref target="ical-prop-tzurl"/>
+                </t>
+              </td>
             </tr>
             <tr>
               <td>validUntil</td>
               <td>
                 <xref target="RFC8984" section="4.7.2" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>TZUNTIL</td>
+              <td>
+                <t>
+                  <xref target="ical-prop-tzuntil"/>
+                </t>
+              </td>
             </tr>
           </tbody>
         </table>
+        <t>The <xref target="RFC8984" section="4.7.2" sectionFormat="parens">TimeZoneRule object</xref> converts to a <xref target="ical-comp-vtimezone">DAYLIGHT or STANDARD component</xref>.</t>
+        <t>Its properties convert as follows:</t>
         <table>
           <name>Properties of the TimeZoneRule object</name>
           <thead>
@@ -5965,56 +6007,84 @@ URL:https://example.com/calendar/birtdays.ics
               <td>
                 <xref target="RFC8984" section="4.7.2" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>COMMENT</td>
+              <td>
+                <t>
+                  <xref target="ical-prop-comment"/>
+                </t>
+              </td>
             </tr>
             <tr>
               <td>names</td>
               <td>
                 <xref target="RFC8984" section="4.7.2" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>TZNAME</td>
+              <td>
+                <t>
+                  <xref target="ical-prop-tzname"/>
+                </t>
+              </td>
             </tr>
             <tr>
               <td>offsetFrom</td>
               <td>
                 <xref target="RFC8984" section="4.7.2" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>TZOFFSETFROM</td>
+              <td>
+                <t>
+                  <xref target="ical-prop-tzoffsetfrom"/>
+                </t>
+              </td>
             </tr>
             <tr>
               <td>offsetTo</td>
               <td>
                 <xref target="RFC8984" section="4.7.2" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>TZOFFSETTO</td>
+              <td>
+                <t>
+                  <xref target="ical-prop-tzoffsetto"/>
+                </t>
+              </td>
             </tr>
             <tr>
               <td>recurrenceOverrides</td>
               <td>
                 <xref target="RFC8984" section="4.3.5" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>RDATE</td>
+              <td>
+                <t>
+                  <xref target="ical-prop-rdate"/>
+                </t>
+              </td>
             </tr>
             <tr>
               <td>recurrenceRules</td>
               <td>
                 <xref target="RFC8984" section="4.3.3" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>RRULE</td>
+              <td>
+                <t>
+                  <xref target="ical-prop-rrule"/>
+                </t>
+              </td>
             </tr>
             <tr>
               <td>start</td>
               <td>
                 <xref target="RFC8984" section="4.7.2" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>DTSTART</td>
+              <td>
+                <t>
+                  <xref target="ical-prop-dtstart"/>
+                </t>
+              </td>
             </tr>
           </tbody>
         </table>
