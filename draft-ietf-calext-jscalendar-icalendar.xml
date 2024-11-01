@@ -6295,5 +6295,145 @@ URL:https://example.com/calendar/birtdays.ics
         </reference>
       </references>
     </references>
+    <section anchor="appendix-discrepancies">
+      <name>Unsupported Elements</name>
+      <section>
+        <name>iCalendar Properties by Component</name>
+        <section>
+          <name>PARTICIPANT</name>
+          <ul>
+            <li>
+              <xref target="RFC5545" section="3.8.1.2" sectionFormat="comma">CATEGORIES</xref>
+            </li>
+            <li>
+              <xref target="RFC5545" section="3.8.4.2" sectionFormat="comma">CONTACT</xref>
+            </li>
+            <li>
+              <xref target="RFC5545" section="3.8.7.1" sectionFormat="comma">CREATED</xref>
+            </li>
+            <li>
+              <xref target="RFC5545" section="3.8.7.3" sectionFormat="comma">LAST-MODIFIED</xref>
+            </li>
+            <li>
+              <xref target="RFC5545" section="3.8.1.9" sectionFormat="comma">PRIORITY</xref>
+            </li>
+            <li>
+              <xref target="RFC5545" section="3.8.4.5" sectionFormat="comma">RELATED-TO</xref>
+            </li>
+            <li>
+              <xref target="RFC5545" section="3.8.8.3" sectionFormat="comma">REQUEST-STATUS</xref>
+            </li>
+            <li>
+              <xref target="RFC5545" section="3.8.1.10" sectionFormat="comma">RESOURCES</xref>
+            </li>
+            <li>
+              <xref target="RFC5545" section="3.8.1.11" sectionFormat="comma">STATUS</xref>
+            </li>
+            <li>
+              <xref target="RFC9073" section="6.5" sectionFormat="comma">STYLED-DESCRIPTION</xref>
+            </li>
+            <li>
+              <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma">UID</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>VALARM</name>
+          <ul>
+            <li>
+              <xref target="RFC5545" section="3.8.1.1" sectionFormat="comma">ATTACH</xref>
+            </li>
+            <li>
+              <xref target="RFC5545" section="3.8.4.1" sectionFormat="comma">ATTENDEE</xref>
+            </li>
+            <li>
+              <xref target="RFC5545" section="3.8.1.5" sectionFormat="comma">DESCRIPTION</xref>
+            </li>
+            <li>
+              <xref target="RFC5545" section="3.8.2.5" sectionFormat="comma">DURATION</xref>
+            </li>
+            <li>
+              <xref target="RFC9074" section="8.1" sectionFormat="comma">PROXIMITY</xref>
+            </li>
+            <li>
+              <xref target="RFC5545" section="3.8.6.2" sectionFormat="comma">REPEAT</xref>
+            </li>
+            <li>
+              <xref target="RFC9073" section="6.5" sectionFormat="comma">STYLED-DESCRIPTION</xref>
+            </li>
+            <li>
+              <xref target="RFC5545" section="3.8.1.12" sectionFormat="comma">SUMMARY</xref>
+            </li>
+            <li>
+              <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma">UID</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>VCALENDAR</name>
+          <ul>
+            <li>
+              <xref target="RFC5545" section="3.7.1" sectionFormat="comma">CALSCALE</xref>
+            </li>
+            <li>
+              <xref target="RFC7986" section="5.7" sectionFormat="comma">REFRESH-INTERVAL</xref>
+            </li>
+            <li>
+              <xref target="RFC5545" section="3.7.4" sectionFormat="comma">VERSION</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>VEVENT</name>
+          <ul>
+            <li>
+              <xref target="RFC5545" section="3.8.4.2" sectionFormat="comma">CONTACT</xref>
+            </li>
+            <li>
+              <xref target="RFC9253" section="8.3" sectionFormat="comma">REFID</xref>
+            </li>
+            <li>
+              <xref target="RFC5545" section="3.8.1.10" sectionFormat="comma">RESOURCES</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>VLOCATION</name>
+          <ul>
+            <li>
+              <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma">UID</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>VRESOURCE</name>
+          <ul>
+            <li>
+              <xref target="RFC9073" section="6.3" sectionFormat="comma">RESOURCE-TYPE</xref>
+            </li>
+            <li>
+              <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma">UID</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>VTODO</name>
+          <ul>
+            <li>
+              <xref target="RFC5545" section="3.8.2.1" sectionFormat="comma">COMPLETED</xref>
+            </li>
+            <li>
+              <xref target="RFC5545" section="3.8.4.2" sectionFormat="comma">CONTACT</xref>
+            </li>
+            <li>
+              <xref target="RFC9253" section="8.3" sectionFormat="comma">REFID</xref>
+            </li>
+            <li>
+              <xref target="RFC5545" section="3.8.1.10" sectionFormat="comma">RESOURCES</xref>
+            </li>
+          </ul>
+        </section>
+      </section>
+    </section>
   </back>
 </rfc>
