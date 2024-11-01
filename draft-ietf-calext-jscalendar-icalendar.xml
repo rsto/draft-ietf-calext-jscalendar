@@ -6091,13 +6091,15 @@ URL:https://example.com/calendar/birtdays.ics
       </section>
       <section anchor="jscal-virtual-location">
         <name>VirtualLocation</name>
+        <t>The <xref target="RFC8984" section="4.2.6" sectionFormat="parens">VirtualLocation object</xref> converts to a <xref target="ical-prop-conference">CONFERENCE property</xref>.</t>
+        <t>The uri property converts to the CONFERENCE property value. Its other properties convert as follows:</t>
         <table>
           <name>Properties of the VirtualLocation object</name>
           <thead>
             <tr>
               <th>Name</th>
               <th>Reference</th>
-              <th>Property (or other)</th>
+              <th>Parameter (or other)</th>
               <th>See</th>
             </tr>
           </thead>
@@ -6115,24 +6117,20 @@ URL:https://example.com/calendar/birtdays.ics
               <td>
                 <xref target="RFC8984" section="4.2.6" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>FEATURE</td>
+              <td>
+                <xref target="ical-prop-conference"/>
+              </td>
             </tr>
             <tr>
               <td>name</td>
               <td>
                 <xref target="RFC8984" section="4.2.5" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
-            </tr>
-            <tr>
-              <td>uri</td>
+              <td>LABEL</td>
               <td>
-                <xref target="RFC8984" section="4.2.6" sectionFormat="comma"/>
+                <xref target="ical-prop-conference"/>
               </td>
-              <td>TBD</td>
-              <td/>
             </tr>
           </tbody>
         </table>
