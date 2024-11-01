@@ -743,10 +743,7 @@ icalendar:
       section: 3.8.1.1
       status: current
       parameters:
-        ENCODING:
-          convert:
-            property: iCalParams
-            note: If unequal to BASE64
+        ENCODING: {}
         FILENAME: {}
         FMTTYPE:
           convert:
@@ -1023,9 +1020,7 @@ icalendar:
             property: display
             object: Link
         ENCODING:
-          convert:
-            property: iCalParams
-            note: If unequal to BASE64
+          convert: {}
         FMTTYPE:
           convert:
             property: contentType
@@ -1264,10 +1259,7 @@ icalendar:
         - TEXT
     STRUCTURED-DATA:
       parameters:
-        ENCODING:
-          convert:
-            property: iCalParams
-            note: If unequal to BASE64
+        ENCODING: {}
         FMTTYPE:
           convert:
             property: contentType
@@ -1396,10 +1388,7 @@ icalendar:
         - TEXT
     XML:
       parameters:
-        ENCODING:
-          convert:
-            property: iCalParams
-            note: If unequal to BASE64
+        ENCODING: {}
       rfc: RFC6321
       section: '4.2'
       status: current

@@ -1,17 +1,12 @@
 <xroot>
-{% for comp_name, comp in spec.icalendar.components | dictsort %}
-{% if comp.convert %}
+{% for prop in props %}
 <section>
-  <name>{{ comp_name }}</name>
-  <t><xref target="{{ comp.rfc }}" section="{{ comp.section }}" sectionFormat="comma">{{ comp_name }}</xref></t>
+  <name>{{ prop.name }}</name>
   <ul>
-    {% for prop_name, prop in comp.properties | dictsort %}
-      {% if not prop.convert %}
-    <li><xref target="{{ spec.icalendar.properties[prop_name].rfc }}" section="{{ spec.icalendar.properties[prop_name].section }}" sectionFormat="comma">{{ prop_name }}</xref></li>
-    {% endif %}
+    {% for param in prop.parameters %}
+    <li><xref target="{{ param.rfc }}" section="{{ param.section }}" sectionFormat="comma">{{ param.name }}</xref></li>
     {% endfor %}
   </ul>
 </section>
-{% endif %}
 {% endfor %}
 </xroot>
