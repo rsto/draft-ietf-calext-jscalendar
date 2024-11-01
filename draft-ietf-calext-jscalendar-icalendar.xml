@@ -510,11 +510,11 @@ END:VCALENDAR
         </section>
         <section anchor="generating-jscalendar-ids">
           <name>JSCalendar Ids</name>
-          <t>In many places in JSCalendar, a JSON map is used where the map keys are of type Id (<xref target="RFC8984" section="1.4.1"/>.  If an iCalendar property or component converts to a value in these JSON maps, then an implementation needs to choose an identifier as key.</t>
-          <t>This document defines the new <xref target="ical-param-jsid">JSID</xref> parameter and <xref target="ical-prop-jsid">JSID property</xref>, which allow to set a JSCalendar Id value when converting from JSCalendar to iCalendar.  If they are set on a property or the component, then its value <bcp14>MUST</bcp14> be used a map key when converting from iCalendar to JSCalendar.  If no such parameter or property is set, then an implementation is free to choose any identifier as map key, as long the following requirements are met:</t>
+          <t>JSCalendar generally uses JSON objects to represent a collection of same-typed values. The keys are of type <xref target="RFC8984" section="1.4.1" sectionFormat="parens">Id</xref>, the values are JSCalendar object types.  If an iCalendar element converts to a value in such a collection, then an implementation needs to choose an identifier as key.</t>
+          <t>This document defines the new <xref target="ical-param-jsid">JSID</xref> parameter and <xref target="ical-prop-jsid">JSID property</xref>, which allow to set a JSCalendar Id value when converting from JSCalendar to iCalendar.  If they are set on a property or the component, then its value <bcp14>MUST</bcp14> be used as key when converting that element from iCalendar to JSCalendar.  If no such parameter or property is set, then an implementation is free to choose any identifier, as long the following requirements are met:</t>
           <ul>
             <li>The identifier <bcp14>MUST</bcp14> be a valid Id value.</li>
-            <li>The identifiers for the exact same iCalendar object <bcp14>MUST</bcp14> stay the same, irrespective of the order in which properties and subcomponents are processed.</li>
+            <li>The identifiers for the exact same iCalendar element <bcp14>MUST</bcp14> stay the same, irrespective of the order in which components, properties and parameters are processed.</li>
           </ul>
         </section>
         <section anchor="ical-timezone-identifiers">
