@@ -877,7 +877,6 @@ END:VALARM
           <name>VEVENT</name>
           <t>The <xref target="RFC5545" section="3.6.1" sectionFormat="parens">VEVENT component</xref> converts to a <xref target="RFC8984" section="2.1" sectionFormat="parens">Event object</xref>.</t>
           <t>VEVENT components with different UID property values in the same iCalendar object convert to different entries in the Group.  They sort in the same order as in the VCALENDAR component.</t>
-          <t>The following example illustrates how to convert the VEVENT component:</t>
           <t>Its properties convert as follows:</t>
           <table anchor="ical-comp-vevent-props">
             <name>Properties of the VEVENT component</name>
@@ -1316,6 +1315,7 @@ END:VALARM
             </tbody>
           </table>
           <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the Event object.</t>
+          <t>The following example illustrates how to convert the VEVENT component:</t>
           <figure anchor="test-ical-comp-vevent">
             <name>Converting the VEVENT component</name>
             <sourcecode type="text/calendar"><![CDATA[
