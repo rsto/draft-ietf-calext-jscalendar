@@ -6435,6 +6435,33 @@ URL:https://example.com/calendar/birtdays.ics
         </section>
       </section>
       <section>
+        <name>iCalendar Properties by Value Type</name>
+        <section>
+          <name>LINK</name>
+          <ul>
+            <li>
+              <xref target="RFC9253" section="7" sectionFormat="comma">XML-REFERENCE</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>RDATE</name>
+          <ul>
+            <li>
+              <xref target="RFC5545" section="3.3.9" sectionFormat="comma">PERIOD</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>STRUCTURED-DATA</name>
+          <ul>
+            <li>
+              <xref target="RFC9073" section="6.6" sectionFormat="comma">TEXT</xref>
+            </li>
+          </ul>
+        </section>
+      </section>
+      <section>
         <name>iCalendar Parameters by Property</name>
         <section>
           <name>ATTACH</name>
@@ -6469,17 +6496,6 @@ URL:https://example.com/calendar/birtdays.ics
         <section>
           <name>CONFERENCE</name>
           <ul>
-            <li>
-              <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>CONTACT</name>
-          <ul>
-            <li>
-              <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
-            </li>
             <li>
               <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
             </li>
