@@ -519,7 +519,7 @@ END:VCALENDAR
         <section anchor="generating-jscalendar-ids">
           <name>JSCalendar Ids</name>
           <t>JSCalendar generally uses JSON objects to represent a collection of same-typed values. The keys are of type <xref target="RFC8984" section="1.4.1" sectionFormat="parens">Id</xref>, the values are JSCalendar object types.  If an iCalendar element converts to a value in such a collection, then an implementation needs to choose an identifier as key.</t>
-          <t>This document defines the new <xref target="ical-param-jsid">JSID</xref> parameter and <xref target="ical-prop-jsid">JSID property</xref>, which allow to set a JSCalendar Id value when converting from JSCalendar to iCalendar.  If they are set on a property or the component, then its value <bcp14>MUST</bcp14> be used as key when converting that element from iCalendar to JSCalendar.  If no such parameter or property is set, then an implementation is free to choose any identifier, as long the following requirements are met:</t>
+          <t>This document defines the new <xref target="ical-param-jscalid">JSCALID</xref> parameter and <xref target="ical-prop-jscalid">JSCALID property</xref>, which allow to set a JSCalendar Id value when converting from JSCalendar to iCalendar.  If they are set on a property or the component, then its value <bcp14>MUST</bcp14> be used as key when converting that element from iCalendar to JSCalendar.  If no such parameter or property is set, then an implementation is free to choose any identifier, as long the following requirements are met:</t>
           <ul>
             <li>The identifier <bcp14>MUST</bcp14> be a valid Id value.</li>
             <li>The identifiers for the exact same iCalendar element <bcp14>MUST</bcp14> stay the same, irrespective of the order in which components, properties and parameters are processed.</li>
@@ -6116,15 +6116,15 @@ URL:https://example.com/calendar/birtdays.ics
       <name>Updates to iCalendar</name>
       <section anchor="new-icalendar-parameters">
         <name>New iCalendar parameters</name>
-        <section anchor="ical-param-jsid">
-          <name>JSID</name>
+        <section anchor="ical-param-jscalid">
+          <name>JSCALID</name>
           <t>TBD</t>
         </section>
       </section>
       <section anchor="new-icalendar-properties">
         <name>New iCalendar properties</name>
-        <section anchor="ical-prop-jsid">
-          <name>JSID</name>
+        <section anchor="ical-prop-jscalid">
+          <name>JSCALID</name>
           <t>TBD</t>
         </section>
         <section anchor="ical-prop-jsprop">
