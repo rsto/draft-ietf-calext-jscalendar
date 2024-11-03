@@ -2535,7 +2535,7 @@ ACTION:AUDIO
           <t>
               The <xref target="RFC5545" section="3.8.1.1" sectionFormat="parens">ATTACH property</xref> in a VEVENT, VTODO, VRESOURCE, PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the links property of the Event, Task, Participant, or Location object.
           </t>
-          <t>The property value converts to the href property of the Link object. A value of type URI converts as-is. A value of type BINARY converts to a URI in the "data" URL scheme (<xref target="RFC2397"/>. If the FMTTYPE parameter is set on the ATTACH property, then the parameter value <bcp14>SHOULD</bcp14> be set in the mediatype part of the data URL.</t>
+          <t>The property value converts to the href property of the Link object. A value of type URI converts as-is. A value of type BINARY converts to a URI in the "data" URL scheme (<xref target="RFC2397"/>. If the FMTTYPE parameter is set on the ATTACH property, then the parameter value <bcp14>SHOULD</bcp14> be set in the <tt>mediatype</tt> part of the data URL.</t>
           <t>The ATTACH property parameters convert as follows:</t>
           <table>
             <name>Parameters of the ATTACH property</name>
@@ -3987,7 +3987,7 @@ RDATE:20230805T170000Z
             The <xref target="RFC5545" section="3.8.4.5" sectionFormat="parens">RELATED-TO property</xref> in a VEVENT, VTODO, or VALARM component converts to a <xref target="RFC8984" section="1.4.10" sectionFormat="parens">Relation object</xref>.  The converted object is set in the relatedTo property of the <xref target="RFC8984" section="4.1.3" sectionFormat="parens">Event or Task object</xref>, or the <xref target="RFC8984" section="4.5.2" sectionFormat="parens">Alert object</xref>.
           </t>
           <t>The property value in a VEVENT or VTODO converts as-is to the key of the Relation object in the relatedTo property. The property value in a VALARM converts to the same value as the key of that Alert object, which represents the VALARM component having that property value set in the UID property. Any RELTYPE parameters convert to the relations property in that Relation object. The parameter values convert in lowercase.</t>
-          <t>The <xref target="RFC9253" section="6.2" sectionFormat="parens">GAP parameter</xref> does not convert a standard JSCalendar element. Implementations <bcp14>MAY</bcp14> convert it to th<xref target="jscal-prop-icalproperty">iCalProperty property</xref> of the Relation object.</t>
+          <t>The <xref target="RFC9253" section="6.2" sectionFormat="parens">GAP parameter</xref> does not convert a standard JSCalendar element. Implementations <bcp14>MAY</bcp14> convert it to the <xref target="jscal-prop-icalproperty">iCalProperty property</xref> of the Relation object.</t>
           <t>The following examples illustrate how to convert the RELATED-TO property:</t>
           <figure anchor="test-ical-prop-related-to">
             <name>Converting the RELATED-TO property in a VEVENT</name>
@@ -4342,7 +4342,7 @@ STRUCTURED-DATA;FMTTYPE=application/ld+json;
             <li>The FMTTYPE parameter either <bcp14>MUST NOT</bcp14> not be set, or its value <bcp14>MUST</bcp14> be a <xref target="RFC6838">media type</xref> with top-level type "text".</li>
             <li>Its DERIVED parameter value <bcp14>MUST NOT</bcp14> be TRUE.</li>
           </ul>
-          <t>If the DERIVED parameter value is TRUE, then the property does not convert to the descrition property. Instead, an non-derived STYLED-DESCRIPTION property or the DESCRIPTION property is expected to contain the description. Implementations MAY preserve the property in the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref>.</t>
+          <t>If the DERIVED parameter value is TRUE, then the property does not convert to the description property. Instead, an non-derived STYLED-DESCRIPTION property or the DESCRIPTION property is expected to contain the description. Implementations MAY preserve the property in the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref>.</t>
           <t>Its parameters convert as follows:</t>
           <table>
             <name>Parameters of the STYLED-DESCRIPTION property</name>
