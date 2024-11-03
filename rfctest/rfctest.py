@@ -118,7 +118,7 @@ class Test:
             if not self._advance_state(TestState.DIFF, until_state):
                 return
             self.jdiff = self.jgroup.diff_json(self.jresp)
-        except (BackendError, ParseError, ValueError) as e:
+        except Exception as e:
             self.error = e
 
     def outcome(self) -> TestOutcome:
