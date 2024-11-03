@@ -534,9 +534,9 @@ END:VCALENDAR
           <t>If the TZID parameter value is equal to a name in the <xref target="TZDB">IANA Time Zone Database</xref> then the timezone identifier is that verbatim name.</t>
           <t>If the TZID parameter value is unequal to an IANA timezone name then implementations <bcp14>MAY</bcp14> determine the name of an IANA timezone which has the same timezone rules over the timespan of the calendar object. Otherwise, the non-IANA timezone identifier is represented in JSCalendar as a string starting with the / (SLASH) character, followed by the TZID parameter value. The corresponding VTIMEZONE <bcp14>MUST</bcp14> be converted to the timeZones property with the prefixed identifier as key. See <xref target="test-ical-comp-vtimezone"/> for an example.</t>
         </section>
-        <section anchor="convert-date-and-datetime">
+        <section anchor="convert-date-and-date-time">
           <name>DATE and DATE-TIME</name>
-          <t>iCalendar provides the DATE and DATE-TIME value types to distinguish date-only from datetime values. JSCalendar only supports datetime values.  A property value of type DATE-TIME converts to either a LocalDateTime or UTCDateTime, depending on the JSCalendar property definition. A DATE value type converts to a LocalDateTime with zero time.</t>
+          <t>iCalendar provides the DATE and DATE-TIME value types to distinguish date-only from date-time values. JSCalendar only supports date-time values.  A property value of type DATE-TIME converts to either a LocalDateTime or UTCDateTime, depending on the JSCalendar property definition. A DATE value type converts to a LocalDateTime with zero time.</t>
         </section>
       </section>
       <section anchor="ical-components">
@@ -3196,7 +3196,7 @@ DTSTAMP:20240304T132000Z
           <name>DTSTART</name>
           <t>
               The <xref target="RFC5545" section="3.8.2.4" sectionFormat="parens">DTSTART property</xref> in a VEVENT, VTODO, DAYLIGHT or STANDARD component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">start property</xref> of the Event, Task, or TimeZoneRule object.</t>
-          <t>See <xref target="convert-date-and-datetime"/> how to convert DATE and DATE-TIME values.</t>
+          <t>See <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values.</t>
           <t>For VEVENT and VTODO components, the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DTSTART property converts to the timeZone property of the Event or Task object.  In addition, if the value type of the DTSTART property is DATE, then the value of the <xref target="RFC8984" section="4.2.4" sectionFormat="parens">showWithoutTime property</xref> is "true".</t>
           <t>The following examples illustrate how to convert the DTSTART property for the VEVENT and VTODO components. See <xref target="ical-comp-vtimezone"/> for examples how to convert the DTSTART property for the DAYLIGHT and STANDARD components.</t>
           <figure anchor="test-ical-prop-dtstart-tzid">
@@ -3249,7 +3249,7 @@ DTSTART;VALUE=DATE:20240921
           <t>
               The <xref target="RFC5545" section="3.8.2.3" sectionFormat="parens">DUE property</xref> in a VTODO component converts to the <xref target="RFC8984" section="5.2.1" sectionFormat="parens">due property</xref> of the Task object.</t>
           <t>
-                See <xref target="convert-date-and-datetime"/> how to convert DATE and DATE-TIME values.</t>
+                See <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values.</t>
           <t>If the VTODO component does not contain a DTSTART property, then the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DUE property converts to the timeZone property of the Task object. If instead the VTODO component contains both the DUE and DTSTART properties, then the timezone identifier of the DUE property does not convert to a standard JSCalendar element. The value of the due property <bcp14>MUST</bcp14> denote the date and time relative to the timezone of the DTSTART property.</t>
           <t>If the value type of the DUE property is DATE, then the value of the <xref target="RFC8984" section="4.2.4" sectionFormat="parens">showWithoutTime property</xref> is "true".</t>
           <t>The following examples illustrate how to convert the DUE property:</t>
@@ -3319,7 +3319,7 @@ DURATION:PT1H
           <t>
             The <xref target="RFC5545" section="3.8.5.1" sectionFormat="parens">EXDATE property</xref> of value type DATE or DATE-TIME in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="1.4.9" sectionFormat="parens">PatchObject object</xref>.  The converted object is set in the recurrenceOverrides property of the Event or Task object.
           </t>
-          <t>The property value converts to the key in the recurrenceOverrides property value. See <xref target="convert-date-and-datetime"/> how to convert DATE and DATE-TIME values. The datetime <bcp14>MUST</bcp14> be relative to the timezone identified by the timeZone property of the Event or Task.  The PatchObject value <bcp14>MUST</bcp14> set the excluded property to "true" and <bcp14>MUST NOT</bcp14> set any other property.</t>
+          <t>The property value converts to the key in the recurrenceOverrides property value. See <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values. The date-time <bcp14>MUST</bcp14> be relative to the timezone identified by the timeZone property of the Event or Task.  The PatchObject value <bcp14>MUST</bcp14> set the excluded property to "true" and <bcp14>MUST NOT</bcp14> set any other property.</t>
           <t>An EXDATE property of value type PERIOD does not convert to a standard JSCalendar element.  Implementations <bcp14>MAY</bcp14> convert it to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the Event or Task object.</t>
           <t>The following example illustrates how to convert the EXDATE property:</t>
           <figure anchor="test-ical-prop-exdate">
@@ -3949,7 +3949,7 @@ BEGIN:VEVENT
           <t>
               The <xref target="RFC5545" section="3.8.5.2" sectionFormat="parens">RDATE property</xref> of type DATE or DATE-TIME in a VEVENT, VTODO, DAYLIGHT or STANDARD component converts to a <xref target="RFC8984" section="1.4.9" sectionFormat="parens">PatchObject object</xref>.  The converted object is set in the recurrenceOverrides property of the Event, Task, or TimeZoneRule object.
           </t>
-          <t>The property value converts to the key in the recurrenceOverrides property value. See <xref target="convert-date-and-datetime"/> how to convert DATE and DATE-TIME values. For Event Task objects, the datetime <bcp14>MUST</bcp14> be relative to the timezone identified by the timeZone property, for TimeZoneRule objects the datetime is relative to the UTC offset specified in the offsetFrom property.  The PatchObject value <bcp14>MUST</bcp14> be an empty JSON object.</t>
+          <t>The property value converts to the key in the recurrenceOverrides property value. See <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values. For Event Task objects, the date-time <bcp14>MUST</bcp14> be relative to the timezone identified by the timeZone property, for TimeZoneRule objects the date-time is relative to the UTC offset specified in the offsetFrom property.  The PatchObject value <bcp14>MUST</bcp14> be an empty JSON object.</t>
           <t>An RDATE property of value type PERIOD does not convert to a standard JSCalendar element.  Implementations <bcp14>MAY</bcp14> convert it to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the Event, Task, or TimeZoneRule object.</t>
           <t>The following example illustrates how to convert the RDATE property:</t>
           <figure anchor="test-ical-prop-rdate">
@@ -3977,7 +3977,7 @@ RDATE:20230805T170000Z
         <section anchor="ical-prop-recurrence-id">
           <name>RECURRENCE-ID</name>
           <t>The <xref target="RFC5545" section="3.8.4.4" sectionFormat="parens">RECURRENCE-ID property</xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.3.1" sectionFormat="parens">recurrenceId property</xref> of the Event or Task object. The <xref target="ical-timezone-identifiers">timezone identifier</xref> of the RECURRENCE-ID property converts to the recurrenceIdTimeZone property.</t>
-          <t>See <xref target="convert-date-and-datetime"/> how to convert DATE and DATE-TIME values.</t>
+          <t>See <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values.</t>
           <t>The <xref target="RFC5545" section="3.2.13" sectionFormat="parens">RANGE parameter</xref> does not convert to a standard JSCalendar element. Implementations <bcp14>MAY</bcp14> preserve it in the <xref target="jscal-prop-icalcomponent">iCalComponent</xref> property.</t>
           <t>See <xref target="ical-recurring-components"/> for further requirements and examples.</t>
         </section>
@@ -4564,7 +4564,7 @@ TRIGGER;VALUE=DATE-TIME:20250302T010203Z
         <section anchor="ical-prop-tzuntil">
           <name>TZUNTIL</name>
           <t>The <xref target="RFC7808" section="7.1" sectionFormat="parens">TZUNTIL property</xref> in a VTIMEZONE component converts to the <xref target="RFC8984" section="4.7.2" sectionFormat="parens">validUntil property</xref>.</t>
-          <t>See <xref target="convert-date-and-datetime"/> how to convert DATE and DATE-TIME values.</t>
+          <t>See <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values.</t>
           <t>See <xref target="test-ical-comp-vtimezone"/> for an example.</t>
         </section>
         <section anchor="ical-prop-tzurl">
@@ -5119,7 +5119,7 @@ URL:https://example.com/calendar/birtdays.ics
             <t>The descriptionContentType property value determines if to convert the description property to the DESCRIPTION or STYLED-DESCRIPTION property. A description of content type "text/plain" converts to the DESCRIPTION property. Any other description converts to a STYLED-DESCRIPTION; in this case, a plain text version of the rich-text description <bcp14>SHOULD</bcp14> be set in the DESCRIPTION property and its DERIVED parameter <bcp14>MUST</bcp14> be set to "TRUE".</t>
           </li>
           <li>
-            <t>The entries in the recurrenceOverrides property convert depending on the contents of the patch object value. A patch object that sets the excluded property to "true" converts to an EXDATE property for the datetime of that recurrence instance. An empty patch object converts to an RDATE property. Any other patch object converts to a recurrence override component in the embedding VCALENDAR component.</t>
+            <t>The entries in the recurrenceOverrides property convert depending on the contents of the patch object value. A patch object that sets the excluded property to "true" converts to an EXDATE property for the date-time of that recurrence instance. An empty patch object converts to an RDATE property. Any other patch object converts to a recurrence override component in the embedding VCALENDAR component.</t>
           </li>
           <li>
             <t>The replyTo property converts to the ORGANIZER property. If the replyTo property value only defines a single scheduling method then the URI value of that method converts to the ORGANIZER property value. If the replyTo property defines multiple scheduling methods, and a Participant object with a calendarAddress property value matching one of the replyTo URIs exists in the same Event or Task, then the URI matching the calendarAddress property converts to the ORGANIZER property value. Otherwise choosing the ORGANIZER property value is implementation-specific. TBD how to convert other replyTo methods.</t>
