@@ -2664,14 +2664,6 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
                 <td/>
               </tr>
               <tr>
-                <td>LANGUAGE</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.10" sectionFormat="comma"/>
-                </td>
-                <td>language</td>
-                <td>TBD - different semantics</td>
-              </tr>
-              <tr>
                 <td>MEMBER</td>
                 <td>
                   <xref target="RFC5545" section="3.2.11" sectionFormat="comma"/>
@@ -2726,14 +2718,6 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
                 </td>
                 <td>scheduleStatus</td>
                 <td/>
-              </tr>
-              <tr>
-                <td>SENT-BY</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.18" sectionFormat="comma"/>
-                </td>
-                <td>sentBy</td>
-                <td>TBD - different semantics</td>
               </tr>
             </tbody>
           </table>
@@ -6502,6 +6486,17 @@ URL:https://example.com/calendar/birtdays.ics
               </li>
               <li>
                 <xref target="RFC8607" section="4.3" sectionFormat="comma">MANAGED-ID</xref>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <name>ATTENDEE</name>
+            <ul>
+              <li>
+                <xref target="RFC5545" section="3.2.18" sectionFormat="comma">SENT-BY</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
               </li>
             </ul>
           </section>
