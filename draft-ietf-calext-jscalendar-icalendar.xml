@@ -59,7 +59,8 @@
       <section anchor="scope-and-goals">
         <name>Scope and Goals</name>
         <t>This document outlines how to convert calendaring information between the iCalendar and JSCalendar data formats.  It describes which elements are common to both, but also highlights where the two formats differ. For each common element, it defines a conversion rule and includes an example how to convert this element. All iCalendar and JSCalendar elements currently registered at IANA are in scope, but not all of these elements are common to both formats.</t>
-        <t>For elements that have no counterpart in the other format, it is the goal of this document to define how to preserve them during conversion, but in general it is not the goal to achieve this by defining new standard elements. Instead, this document defines special-purpose properties to preserve arbitrary elements. As an exception to this rule, this document does defines a few new properties and parameters for iCalendar and JSCalendar, especially those that are relevant to support scheduling calendar objects using <xref target="RFC5546">iTIP</xref>. <xref target="updates-icalendar"/> and <xref target="updates-jscalendar"/> define both the conversion-specific and standard elements.</t>
+        <t>For elements that have no counterpart in the other format, it is the goal of this document to define how to preserve them during conversion, but in general it is not the goal to achieve this by defining new standard elements. Instead, this document defines special-purpose properties to preserve arbitrary elements. These conversion-specific properties are defined in Section <xref target="ical-prop-jsprop" format="counter"/> for iCalendar, and Sections <xref target="jscal-prop-icalcomponent" format="counter"/> and <xref target="jscal-prop-icalproperty" format="counter"/> for JSCalendar. <xref target="appendix-discrepancies"/> further outlines the discrepancies between the two formats.</t>
+        <t>As an exception to this rule, this document does defines a few new properties and parameters for iCalendar and JSCalendar, especially those that are relevant to support scheduling calendar objects using <xref target="RFC5546">iTIP</xref>. <xref target="updates-icalendar"/> and <xref target="updates-jscalendar"/> define both the conversion-specific and standard elements.</t>
       </section>
       <section>
         <name>How to Read the Examples</name>
@@ -6266,6 +6267,7 @@ URL:https://example.com/calendar/birtdays.ics
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7265.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7529.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7808.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7953.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7986.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8288.xml"/>
@@ -6301,363 +6303,388 @@ URL:https://example.com/calendar/birtdays.ics
       </references>
     </references>
     <section anchor="appendix-discrepancies">
-      <name>Unsupported Elements</name>
+      <name>Discrepancies between iCalendar and JSCalendar</name>
+      <t>This section highlights iCalendar and JSCalendar elements for which no conversion rule to a standard element is defined in this document. This is informational; implementations <bcp14>MAY</bcp14> convert these elements, for example by use of the special-purpose properties defined in this document, or some vendor-specific extension properties. Alternatively newer standards might define new standard elements and register them at IANA.</t>
       <section>
-        <name>iCalendar Properties by Component</name>
+        <name>Unsupported iCalendar Elements</name>
         <section>
-          <name>PARTICIPANT</name>
+          <name>Components</name>
+          <t>The following components do not convert to a standard element in JSCalendar:</t>
           <ul>
             <li>
-              <xref target="RFC5545" section="3.8.1.2" sectionFormat="comma">CATEGORIES</xref>
+              <xref target="RFC7953" section="3.1" sectionFormat="comma">AVAILABLE</xref>
             </li>
             <li>
-              <xref target="RFC5545" section="3.8.4.2" sectionFormat="comma">CONTACT</xref>
+              <xref target="RFC7953" section="3.1" sectionFormat="comma">VAVAILABILITY</xref>
             </li>
             <li>
-              <xref target="RFC5545" section="3.8.7.1" sectionFormat="comma">CREATED</xref>
+              <xref target="RFC5545" section="3.6.4" sectionFormat="comma">VFREEBUSY</xref>
             </li>
             <li>
-              <xref target="RFC5545" section="3.8.7.3" sectionFormat="comma">LAST-MODIFIED</xref>
-            </li>
-            <li>
-              <xref target="RFC5545" section="3.8.1.9" sectionFormat="comma">PRIORITY</xref>
-            </li>
-            <li>
-              <xref target="RFC5545" section="3.8.4.5" sectionFormat="comma">RELATED-TO</xref>
-            </li>
-            <li>
-              <xref target="RFC5545" section="3.8.8.3" sectionFormat="comma">REQUEST-STATUS</xref>
-            </li>
-            <li>
-              <xref target="RFC5545" section="3.8.1.10" sectionFormat="comma">RESOURCES</xref>
-            </li>
-            <li>
-              <xref target="RFC5545" section="3.8.1.11" sectionFormat="comma">STATUS</xref>
-            </li>
-            <li>
-              <xref target="RFC9073" section="6.5" sectionFormat="comma">STYLED-DESCRIPTION</xref>
-            </li>
-            <li>
-              <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma">UID</xref>
+              <xref target="RFC5545" section="3.6.3" sectionFormat="comma">VJOURNAL</xref>
             </li>
           </ul>
         </section>
         <section>
-          <name>VALARM</name>
-          <ul>
-            <li>
-              <xref target="RFC5545" section="3.8.1.1" sectionFormat="comma">ATTACH</xref>
-            </li>
-            <li>
-              <xref target="RFC5545" section="3.8.4.1" sectionFormat="comma">ATTENDEE</xref>
-            </li>
-            <li>
-              <xref target="RFC5545" section="3.8.1.5" sectionFormat="comma">DESCRIPTION</xref>
-            </li>
-            <li>
-              <xref target="RFC5545" section="3.8.2.5" sectionFormat="comma">DURATION</xref>
-            </li>
-            <li>
-              <xref target="RFC9074" section="8.1" sectionFormat="comma">PROXIMITY</xref>
-            </li>
-            <li>
-              <xref target="RFC5545" section="3.8.6.2" sectionFormat="comma">REPEAT</xref>
-            </li>
-            <li>
-              <xref target="RFC9073" section="6.5" sectionFormat="comma">STYLED-DESCRIPTION</xref>
-            </li>
-            <li>
-              <xref target="RFC5545" section="3.8.1.12" sectionFormat="comma">SUMMARY</xref>
-            </li>
-            <li>
-              <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma">UID</xref>
-            </li>
-          </ul>
+          <name>Properties by Component</name>
+          <t>The following components are defined to contain the listed properties. But these properties do not convert to a standard JSCalendar element.</t>
+          <section>
+            <name>PARTICIPANT</name>
+            <ul>
+              <li>
+                <xref target="RFC5545" section="3.8.1.2" sectionFormat="comma">CATEGORIES</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.8.4.2" sectionFormat="comma">CONTACT</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.8.7.1" sectionFormat="comma">CREATED</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.8.7.3" sectionFormat="comma">LAST-MODIFIED</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.8.1.9" sectionFormat="comma">PRIORITY</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.8.4.5" sectionFormat="comma">RELATED-TO</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.8.8.3" sectionFormat="comma">REQUEST-STATUS</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.8.1.10" sectionFormat="comma">RESOURCES</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.8.1.11" sectionFormat="comma">STATUS</xref>
+              </li>
+              <li>
+                <xref target="RFC9073" section="6.5" sectionFormat="comma">STYLED-DESCRIPTION</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma">UID</xref>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <name>VALARM</name>
+            <ul>
+              <li>
+                <xref target="RFC5545" section="3.8.1.1" sectionFormat="comma">ATTACH</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.8.4.1" sectionFormat="comma">ATTENDEE</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.8.1.5" sectionFormat="comma">DESCRIPTION</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.8.2.5" sectionFormat="comma">DURATION</xref>
+              </li>
+              <li>
+                <xref target="RFC9074" section="8.1" sectionFormat="comma">PROXIMITY</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.8.6.2" sectionFormat="comma">REPEAT</xref>
+              </li>
+              <li>
+                <xref target="RFC9073" section="6.5" sectionFormat="comma">STYLED-DESCRIPTION</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.8.1.12" sectionFormat="comma">SUMMARY</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma">UID</xref>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <name>VCALENDAR</name>
+            <ul>
+              <li>
+                <xref target="RFC5545" section="3.7.1" sectionFormat="comma">CALSCALE</xref>
+              </li>
+              <li>
+                <xref target="RFC7986" section="5.7" sectionFormat="comma">REFRESH-INTERVAL</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.7.4" sectionFormat="comma">VERSION</xref>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <name>VEVENT</name>
+            <ul>
+              <li>
+                <xref target="RFC5545" section="3.8.4.2" sectionFormat="comma">CONTACT</xref>
+              </li>
+              <li>
+                <xref target="RFC9253" section="8.3" sectionFormat="comma">REFID</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.8.1.10" sectionFormat="comma">RESOURCES</xref>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <name>VLOCATION</name>
+            <ul>
+              <li>
+                <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma">UID</xref>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <name>VRESOURCE</name>
+            <ul>
+              <li>
+                <xref target="RFC9073" section="6.3" sectionFormat="comma">RESOURCE-TYPE</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma">UID</xref>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <name>VTODO</name>
+            <ul>
+              <li>
+                <xref target="RFC5545" section="3.8.2.1" sectionFormat="comma">COMPLETED</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.8.4.2" sectionFormat="comma">CONTACT</xref>
+              </li>
+              <li>
+                <xref target="RFC9253" section="8.3" sectionFormat="comma">REFID</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.8.1.10" sectionFormat="comma">RESOURCES</xref>
+              </li>
+            </ul>
+          </section>
         </section>
         <section>
-          <name>VCALENDAR</name>
-          <ul>
-            <li>
-              <xref target="RFC5545" section="3.7.1" sectionFormat="comma">CALSCALE</xref>
-            </li>
-            <li>
-              <xref target="RFC7986" section="5.7" sectionFormat="comma">REFRESH-INTERVAL</xref>
-            </li>
-            <li>
-              <xref target="RFC5545" section="3.7.4" sectionFormat="comma">VERSION</xref>
-            </li>
-          </ul>
+          <name>Properties by Value Type</name>
+          <t>The following properties convert to a standard JSCalendar element for some other value type, but they do not for the listed value types.</t>
+          <section>
+            <name>LINK</name>
+            <ul>
+              <li>
+                <xref target="RFC9253" section="7" sectionFormat="comma">XML-REFERENCE</xref>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <name>RDATE</name>
+            <ul>
+              <li>
+                <xref target="RFC5545" section="3.3.9" sectionFormat="comma">PERIOD</xref>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <name>STRUCTURED-DATA</name>
+            <ul>
+              <li>
+                <xref target="RFC9073" section="6.6" sectionFormat="comma">TEXT</xref>
+              </li>
+            </ul>
+          </section>
         </section>
         <section>
-          <name>VEVENT</name>
-          <ul>
-            <li>
-              <xref target="RFC5545" section="3.8.4.2" sectionFormat="comma">CONTACT</xref>
-            </li>
-            <li>
-              <xref target="RFC9253" section="8.3" sectionFormat="comma">REFID</xref>
-            </li>
-            <li>
-              <xref target="RFC5545" section="3.8.1.10" sectionFormat="comma">RESOURCES</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>VLOCATION</name>
-          <ul>
-            <li>
-              <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma">UID</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>VRESOURCE</name>
-          <ul>
-            <li>
-              <xref target="RFC9073" section="6.3" sectionFormat="comma">RESOURCE-TYPE</xref>
-            </li>
-            <li>
-              <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma">UID</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>VTODO</name>
-          <ul>
-            <li>
-              <xref target="RFC5545" section="3.8.2.1" sectionFormat="comma">COMPLETED</xref>
-            </li>
-            <li>
-              <xref target="RFC5545" section="3.8.4.2" sectionFormat="comma">CONTACT</xref>
-            </li>
-            <li>
-              <xref target="RFC9253" section="8.3" sectionFormat="comma">REFID</xref>
-            </li>
-            <li>
-              <xref target="RFC5545" section="3.8.1.10" sectionFormat="comma">RESOURCES</xref>
-            </li>
-          </ul>
-        </section>
-      </section>
-      <section>
-        <name>iCalendar Properties by Value Type</name>
-        <section>
-          <name>LINK</name>
-          <ul>
-            <li>
-              <xref target="RFC9253" section="7" sectionFormat="comma">XML-REFERENCE</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>RDATE</name>
-          <ul>
-            <li>
-              <xref target="RFC5545" section="3.3.9" sectionFormat="comma">PERIOD</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>STRUCTURED-DATA</name>
-          <ul>
-            <li>
-              <xref target="RFC9073" section="6.6" sectionFormat="comma">TEXT</xref>
-            </li>
-          </ul>
-        </section>
-      </section>
-      <section>
-        <name>iCalendar Parameters by Property</name>
-        <section>
-          <name>ATTACH</name>
-          <ul>
-            <li>
-              <xref target="RFC8607" section="4.2" sectionFormat="comma">FILENAME</xref>
-            </li>
-            <li>
-              <xref target="RFC8607" section="4.3" sectionFormat="comma">MANAGED-ID</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>CATEGORIES</name>
-          <ul>
-            <li>
-              <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>COMMENT</name>
-          <ul>
-            <li>
-              <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
-            </li>
-            <li>
-              <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>CONFERENCE</name>
-          <ul>
-            <li>
-              <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>DESCRIPTION</name>
-          <ul>
-            <li>
-              <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
-            </li>
-            <li>
-              <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>IMAGE</name>
-          <ul>
-            <li>
-              <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>LINK</name>
-          <ul>
-            <li>
-              <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>LOCATION</name>
-          <ul>
-            <li>
-              <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
-            </li>
-            <li>
-              <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>NAME</name>
-          <ul>
-            <li>
-              <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
-            </li>
-            <li>
-              <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>ORGANIZER</name>
-          <ul>
-            <li>
-              <xref target="RFC6638" section="7.1" sectionFormat="comma">SCHEDULE-AGENT</xref>
-            </li>
-            <li>
-              <xref target="RFC6638" section="7.2" sectionFormat="comma">SCHEDULE-FORCE-SEND</xref>
-            </li>
-            <li>
-              <xref target="RFC6638" section="7.3" sectionFormat="comma">SCHEDULE-STATUS</xref>
-            </li>
-            <li>
-              <xref target="RFC5545" section="3.2.18" sectionFormat="comma">SENT-BY</xref>
-            </li>
-            <li>
-              <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>PARTICIPANT-TYPE</name>
-          <ul>
-            <li>
-              <xref target="RFC9073" section="5.1" sectionFormat="comma">ORDER</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>RECURRENCE-ID</name>
-          <ul>
-            <li>
-              <xref target="RFC5545" section="3.2.13" sectionFormat="comma">RANGE</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>RELATED-TO</name>
-          <ul>
-            <li>
-              <xref target="RFC9253" section="6.2" sectionFormat="comma">GAP</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>REQUEST-STATUS</name>
-          <ul>
-            <li>
-              <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>RESOURCES</name>
-          <ul>
-            <li>
-              <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
-            </li>
-            <li>
-              <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>STRUCTURED-DATA</name>
-          <ul>
-            <li>
-              <xref target="RFC9073" section="5.2" sectionFormat="comma">SCHEMA</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>STYLED-DESCRIPTION</name>
-          <ul>
-            <li>
-              <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
-            </li>
-            <li>
-              <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
-            </li>
-            <li>
-              <xref target="RFC9073" section="5.3" sectionFormat="comma">DERIVED</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>SUMMARY</name>
-          <ul>
-            <li>
-              <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
-            </li>
-            <li>
-              <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>TZNAME</name>
-          <ul>
-            <li>
-              <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
-            </li>
-          </ul>
+          <name>Parameters by Property</name>
+          <t>The following properties are defined to contain the listed parameters. But these parameters do not convert to a standard JSCalendar element.</t>
+          <section>
+            <name>ATTACH</name>
+            <ul>
+              <li>
+                <xref target="RFC8607" section="4.2" sectionFormat="comma">FILENAME</xref>
+              </li>
+              <li>
+                <xref target="RFC8607" section="4.3" sectionFormat="comma">MANAGED-ID</xref>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <name>CATEGORIES</name>
+            <ul>
+              <li>
+                <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <name>COMMENT</name>
+            <ul>
+              <li>
+                <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <name>CONFERENCE</name>
+            <ul>
+              <li>
+                <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <name>DESCRIPTION</name>
+            <ul>
+              <li>
+                <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <name>IMAGE</name>
+            <ul>
+              <li>
+                <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <name>LINK</name>
+            <ul>
+              <li>
+                <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <name>LOCATION</name>
+            <ul>
+              <li>
+                <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <name>NAME</name>
+            <ul>
+              <li>
+                <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <name>ORGANIZER</name>
+            <ul>
+              <li>
+                <xref target="RFC6638" section="7.1" sectionFormat="comma">SCHEDULE-AGENT</xref>
+              </li>
+              <li>
+                <xref target="RFC6638" section="7.2" sectionFormat="comma">SCHEDULE-FORCE-SEND</xref>
+              </li>
+              <li>
+                <xref target="RFC6638" section="7.3" sectionFormat="comma">SCHEDULE-STATUS</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.2.18" sectionFormat="comma">SENT-BY</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <name>PARTICIPANT-TYPE</name>
+            <ul>
+              <li>
+                <xref target="RFC9073" section="5.1" sectionFormat="comma">ORDER</xref>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <name>RECURRENCE-ID</name>
+            <ul>
+              <li>
+                <xref target="RFC5545" section="3.2.13" sectionFormat="comma">RANGE</xref>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <name>RELATED-TO</name>
+            <ul>
+              <li>
+                <xref target="RFC9253" section="6.2" sectionFormat="comma">GAP</xref>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <name>REQUEST-STATUS</name>
+            <ul>
+              <li>
+                <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <name>RESOURCES</name>
+            <ul>
+              <li>
+                <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <name>STRUCTURED-DATA</name>
+            <ul>
+              <li>
+                <xref target="RFC9073" section="5.2" sectionFormat="comma">SCHEMA</xref>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <name>STYLED-DESCRIPTION</name>
+            <ul>
+              <li>
+                <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
+              </li>
+              <li>
+                <xref target="RFC9073" section="5.3" sectionFormat="comma">DERIVED</xref>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <name>SUMMARY</name>
+            <ul>
+              <li>
+                <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <name>TZNAME</name>
+            <ul>
+              <li>
+                <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
+              </li>
+            </ul>
+          </section>
         </section>
       </section>
     </section>
