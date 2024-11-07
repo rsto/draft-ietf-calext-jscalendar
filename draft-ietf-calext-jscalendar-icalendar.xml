@@ -3772,6 +3772,16 @@ END:VLOCATION
                 </td>
                 <td/>
               </tr>
+              <tr>
+                <td>SCHEDULE-STATUS</td>
+                <td>
+                  <xref target="RFC6638" section="7.3" sectionFormat="comma"/>
+                </td>
+                <td>
+                  <xref target="jscal-prop-schedule-status">scheduleStatus</xref>
+                </td>
+                <td/>
+              </tr>
             </tbody>
           </table>
           <t>The following examples illustrate how to convert the ORGANIZER property:</t>
@@ -6267,6 +6277,22 @@ URL:https://example.com/calendar/birtdays.ics
             </dd>
           </dl>
         </section>
+        <section anchor="jscal-prop-schedule-status">
+          <name>scheduleStatus (Event, Task)</name>
+          <dl newline="true">
+            <dt>Name:</dt>
+            <dd>scheduleStatus</dd>
+            <dt>Context:</dt>
+            <dd>Event, Task</dd>
+            <dt>Type:</dt>
+            <dd>
+              <tt>String[]</tt> (optional)</dd>
+            <dt>Description:</dt>
+            <dd>
+              <t>The scheduling client or server can set this property to a list of status codes, returned from processing the most recent scheduling message sent to the organizer defined in the replyTo property. The status codes <bcp14>MUST</bcp14> be valid "statcode" values as defined in the ABNF in <xref target="RFC5545" section="3.8.8.3"/>.  Servers <bcp14>MUST</bcp14> only add or change this property when they send a scheduling message to the organizer. Clients <bcp14>SHOULD NOT</bcp14> change or remove this property if it was provided by the server. Clients <bcp14>MAY</bcp14> add, change, or remove the property for participants where the client is handling the scheduling. This property <bcp14>MUST NOT</bcp14> be included in scheduling messages.</t>
+            </dd>
+          </dl>
+        </section>
       </section>
     </section>
     <section anchor="IANA">
@@ -6620,9 +6646,6 @@ URL:https://example.com/calendar/birtdays.ics
           <section>
             <name>ORGANIZER</name>
             <ul>
-              <li>
-                <xref target="RFC6638" section="7.3" sectionFormat="comma">SCHEDULE-STATUS</xref>
-              </li>
               <li>
                 <xref target="RFC5545" section="3.2.18" sectionFormat="comma">SENT-BY</xref>
               </li>
