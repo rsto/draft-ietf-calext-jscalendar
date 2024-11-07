@@ -704,7 +704,7 @@ END:VCALENDAR
           </table>
           <t>Its components convert as follows:</t>
           <table anchor="ical-comp-participant-comps">
-            <name>Components of the  PARTICIPANT component</name>
+            <name>Components of the PARTICIPANT component</name>
             <thead>
               <tr>
                 <th>Name</th>
@@ -720,7 +720,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC9073" section="7.2" sectionFormat="comma"/>
                 </td>
-                <td>locations</td>
+                <td><xref target="jscal-prop-locations">locations</xref></td>
                 <td>
                   <xref target="ical-comp-vlocation"/>
                 </td>
@@ -6116,14 +6116,14 @@ URL:https://example.com/calendar/birtdays.ics
     <section anchor="updates-icalendar">
       <name>Updates to iCalendar</name>
       <section anchor="new-icalendar-parameters">
-        <name>New iCalendar parameters</name>
+        <name>New Parameters</name>
         <section anchor="ical-param-jscalid">
           <name>JSCALID</name>
           <t>TBD</t>
         </section>
       </section>
       <section anchor="new-icalendar-properties">
-        <name>New iCalendar properties</name>
+        <name>New Properties</name>
         <section anchor="ical-prop-jscalid">
           <name>JSCALID</name>
           <t>TBD</t>
@@ -6137,7 +6137,7 @@ URL:https://example.com/calendar/birtdays.ics
     <section anchor="updates-jscalendar">
       <name>Updates to JSCalendar</name>
       <section anchor="new-jscalendar-properties">
-        <name>New JSCalendar properties</name>
+        <name>New Properties</name>
         <section anchor="jscal-prop-icalcomponent">
           <name>iCalComponent</name>
           <dl newline="true">
@@ -6204,7 +6204,7 @@ URL:https://example.com/calendar/birtdays.ics
           <dl newline="true">
             <dt>Name:</dt>
             <dd>locations</dd>
-            <dt>Context</dt>
+            <dt>Context:</dt>
             <dd>Participant</dd>
             <dt>Type:</dt>
             <dd>
