@@ -1098,9 +1098,13 @@ icalendar:
           convert:
             property: links
             object: Participant
-        SCHEDULE-AGENT: {}
-        SCHEDULE-FORCE-SEND: {}
-        SCHEDULE-STATUS: {}
+        SCHEDULE-AGENT:
+          convert:
+            property: scheduleAgent
+        SCHEDULE-FORCE-SEND:
+            property: scheduleForceSend
+        SCHEDULE-STATUS:
+            property: scheduleStatus
         SENT-BY: {}
         LANGUAGE: {}
       rfc: RFC5545

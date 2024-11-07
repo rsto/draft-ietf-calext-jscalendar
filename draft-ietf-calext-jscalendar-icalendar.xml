@@ -720,7 +720,9 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC9073" section="7.2" sectionFormat="comma"/>
                 </td>
-                <td><xref target="jscal-prop-locations">locations</xref></td>
+                <td>
+                  <xref target="jscal-prop-locations">locations</xref>
+                </td>
                 <td>
                   <xref target="ical-comp-vlocation"/>
                 </td>
@@ -3750,6 +3752,16 @@ END:VLOCATION
                 <td>links</td>
                 <td/>
               </tr>
+              <tr>
+                <td>SCHEDULE-AGENT</td>
+                <td>
+                  <xref target="RFC6638" section="7.1" sectionFormat="comma"/>
+                </td>
+                <td>
+                  <xref target="jscal-prop-schedule-agent">scheduleAgent</xref>
+                </td>
+                <td/>
+              </tr>
             </tbody>
           </table>
           <t>The following examples illustrate how to convert the ORGANIZER property:</t>
@@ -6213,6 +6225,22 @@ URL:https://example.com/calendar/birtdays.ics
             <dd>This represents locations associated with the participant. In contrast to the locationId property, this allows to associate multiple locations with the Participant object. It also allow to more clearly express that a location just is relevant for a single participant.</dd>
           </dl>
         </section>
+        <section anchor="jscal-prop-schedule-agent">
+          <name>scheduleAgent (Event, Task)</name>
+          <dl newline="true">
+            <dt>Name:</dt>
+            <dd>scheduleAgent</dd>
+            <dt>Context:</dt>
+            <dd>Event, Task</dd>
+            <dt>Type:</dt>
+            <dd>
+              <tt>String</tt> (optional, default "server")</dd>
+            <dt>Description:</dt>
+            <dd>
+              <t>This allows a scheduling client to indicate who is responsible for sending scheduling messages to the organizer in the replyTo property.  If this property is set, then the replyTo property <bcp14>MUST</bcp14> be set. The same values as for the scheduleAgent property of the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref> are allowed, the "none" value indicates that no scheduling message is to be sent to the organizer. The property <bcp14>MUST NOT</bcp14> be preserved in the JSCalendar object on the server or appear in a scheduling message.</t>
+            </dd>
+          </dl>
+        </section>
       </section>
     </section>
     <section anchor="IANA">
@@ -6566,9 +6594,6 @@ URL:https://example.com/calendar/birtdays.ics
           <section>
             <name>ORGANIZER</name>
             <ul>
-              <li>
-                <xref target="RFC6638" section="7.1" sectionFormat="comma">SCHEDULE-AGENT</xref>
-              </li>
               <li>
                 <xref target="RFC6638" section="7.2" sectionFormat="comma">SCHEDULE-FORCE-SEND</xref>
               </li>
