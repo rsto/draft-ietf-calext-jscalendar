@@ -3762,6 +3762,16 @@ END:VLOCATION
                 </td>
                 <td/>
               </tr>
+              <tr>
+                <td>SCHEDULE-FORCE-SEND</td>
+                <td>
+                  <xref target="RFC6638" section="7.2" sectionFormat="comma"/>
+                </td>
+                <td>
+                  <xref target="jscal-prop-schedule-force-send">scheduleForceSend</xref>
+                </td>
+                <td/>
+              </tr>
             </tbody>
           </table>
           <t>The following examples illustrate how to convert the ORGANIZER property:</t>
@@ -6237,7 +6247,23 @@ URL:https://example.com/calendar/birtdays.ics
               <tt>String</tt> (optional, default "server")</dd>
             <dt>Description:</dt>
             <dd>
-              <t>This allows a scheduling client to indicate who is responsible for sending scheduling messages to the organizer in the replyTo property.  If this property is set, then the replyTo property <bcp14>MUST</bcp14> be set. The same values as for the scheduleAgent property of the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref> are allowed, the "none" value indicates that no scheduling message is to be sent to the organizer. The property <bcp14>MUST NOT</bcp14> be preserved in the JSCalendar object on the server or appear in a scheduling message.</t>
+              <t>A scheduling client can set this property to indicate who is responsible for sending scheduling messages to the organizer in the replyTo property.  The same values as for the scheduleAgent property of the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref> are allowed, the "none" value indicates that no scheduling message is to be sent to the organizer. The property <bcp14>MUST NOT</bcp14> be preserved in the JSCalendar object on the server or appear in a scheduling message. If this property is set, then the replyTo property <bcp14>MUST</bcp14> be set.</t>
+            </dd>
+          </dl>
+        </section>
+        <section anchor="jscal-prop-schedule-force-send">
+          <name>scheduleForceSend (Event, Task)</name>
+          <dl newline="true">
+            <dt>Name:</dt>
+            <dd>scheduleForceSend</dd>
+            <dt>Context:</dt>
+            <dd>Event, Task</dd>
+            <dt>Type:</dt>
+            <dd>
+              <tt>Boolean</tt> (optional, default "false")</dd>
+            <dt>Description:</dt>
+            <dd>
+              <t>A scheduling client can set this property to true to request that the server send a scheduling message to the organizer defined in the replyTo property, when it would not normally do so (e.g., if no significant change is made the object or the scheduleAgent is set to client). The property <bcp14>MUST NOT</bcp14> be preserved in the JSCalendar object on the server or appear in a scheduling message. If this property is set, then the replyTo property <bcp14>MUST</bcp14> be set.</t>
             </dd>
           </dl>
         </section>
@@ -6594,9 +6620,6 @@ URL:https://example.com/calendar/birtdays.ics
           <section>
             <name>ORGANIZER</name>
             <ul>
-              <li>
-                <xref target="RFC6638" section="7.2" sectionFormat="comma">SCHEDULE-FORCE-SEND</xref>
-              </li>
               <li>
                 <xref target="RFC6638" section="7.3" sectionFormat="comma">SCHEDULE-STATUS</xref>
               </li>
