@@ -2042,6 +2042,17 @@ DTSTART;TZID=CustomTz:20080708T130000
                 <td/>
               </tr>
               <tr>
+                <td>COMPLETED</td>
+                <td>
+                  <xref target="RFC5545" section="3.8.2.1" sectionFormat="comma"/>
+                </td>
+                <td>completed</td>
+                <td>
+                  <xref target="ical-prop-completed"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
                 <td>CONCEPT</td>
                 <td>
                   <xref target="RFC9253" section="8.1" sectionFormat="comma"/>
@@ -2962,6 +2973,28 @@ COMMENT:I'll think about it
     "participationComment": "I'll think about it",
     "...": ""
   }
+}
+]]></sourcecode>
+          </figure>
+        </section>
+        <section anchor="ical-prop-completed">
+          <name>COMPLETED</name>
+          <t>
+            The <xref target="RFC5545" section="3.8.2.1" sectionFormat="parens">COMPLETED property</xref> in a VTODO component converts to the <xref target="jscal-prop-completed">completed property</xref> of the Task object.
+          </t>
+          <t>The following example illustrates how to convert the COMPLETED property:</t>
+          <figure anchor="test-ical-prop-completed">
+            <name>Converting the COMPLETED property</name>
+            <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VTODO
+COMPLETED:20241108T111029Z
+...
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+{
+  "@type": "Task",
+  "completed": "2024-11-08T11:10:29Z",
+  "...": ""
 }
 ]]></sourcecode>
           </figure>
@@ -6170,6 +6203,20 @@ URL:https://example.com/calendar/birtdays.ics
       <name>Updates to JSCalendar</name>
       <section anchor="new-jscalendar-properties">
         <name>New Properties</name>
+        <section anchor="jscal-prop-completed">
+          <name>completed</name>
+          <dl newline="true">
+            <dt>Name:</dt>
+            <dd>completed</dd>
+            <dt>Context:</dt>
+            <dd>Task</dd>
+            <dt>Type:</dt>
+            <dd>
+              <tt>UTCDateTime</tt> (optional)</dd>
+            <dt>Description:</dt>
+            <dd>This is the date and time when the task was completed.</dd>
+          </dl>
+        </section>
         <section anchor="jscal-prop-icalcomponent">
           <name>iCalComponent</name>
           <dl newline="true">
@@ -6499,9 +6546,6 @@ URL:https://example.com/calendar/birtdays.ics
           <section>
             <name>VTODO</name>
             <ul>
-              <li>
-                <xref target="RFC5545" section="3.8.2.1" sectionFormat="comma">COMPLETED</xref>
-              </li>
               <li>
                 <xref target="RFC5545" section="3.8.4.2" sectionFormat="comma">CONTACT</xref>
               </li>
