@@ -2619,6 +2619,7 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
             The <xref target="RFC5545" section="3.8.4.1" sectionFormat="parens">ATTENDEE property</xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref>.  The converted object is set in the participants property of the Event or Task object.
           </t>
           <t>The property value converts to both the calendarAddress and sendTo properties of the Participant object. If the CAL-ADDRESS value is in the "mailto" scheme, then it converts to the "imip" method in the sendTo property, otherwise it converts to the "other" method.</t>
+          <t>An ATTENDEE property and a PARTICIPANT component in the same iCalendar component convert to the same Participant object, if their converted calendarAddress property values are equal after <xref target="RFC3986" section="6" sectionFormat="parens">URI normalization</xref>. How to deal with conflicting values when converting other Participant properties is implementation-specific.</t>
           <t>The ATTENDEE property parameters convert as follows:</t>
           <table>
             <name>Parameters of the ATTENDEE property</name>
@@ -2739,7 +2740,84 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
           </table>
           <t>If no ROLE parameter is set, then the "attendee" role in the roles property <bcp14>MUST</bcp14> be set.</t>
           <t>Every calendar address value of the DELEGATED-FROM, DELEGATED-TO, or MEMBER parameters converts to the identifier of an Participant object. This identifier is determined by finding that Participant object in the participants property, which has a calendarAddress property value matching the parameter value. If no such Participant object exists after all properties and components have been converted, then a new Participant object having that calendarAddress property value is created. If multiple Participant objects match, then choosing the Participant identifier is implementation-specific.</t>
-          <t>An ATTENDEE property and a PARTICIPANT component in the same iCalendar component convert to the same Participant object, if their converted calendarAddress property values are equal after <xref target="RFC3986" section="6" sectionFormat="parens">URI normalization</xref>. How to deal with conflicting values when converting other Participant properties is implementation-specific.</t>
+          <t>The PARTSTAT of an ATTENDEE property in a VTODO component converts not only to the participationStatus property of the Participant object, but also to its progress property if the PARTSTAT parameter value is specific for VTODO components:</t>
+          <table anchor="ical-prop-attendee-param-partstat">
+            <name>Converting the PARTSTAT parameter in a VTODO component to Participant properties</name>
+            <thead>
+              <tr>
+                <th>PARTSTAT</th>
+                <th>Reference</th>
+                <th>participationStatus</th>
+                <th>progress</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>NEEDS-ACTION</td>
+                <td>
+                  <xref target="RFC5545" section="3.2.12" sectionFormat="comma"/>
+                </td>
+                <td>needs-action</td>
+                <td/>
+              </tr>
+              <tr>
+                <td>ACCEPTED</td>
+                <td>
+                  <xref target="RFC5545" section="3.2.12" sectionFormat="comma"/>
+                </td>
+                <td>accepted</td>
+                <td/>
+              </tr>
+              <tr>
+                <td>DECLINED</td>
+                <td>
+                  <xref target="RFC5545" section="3.2.12" sectionFormat="comma"/>
+                </td>
+                <td>declined</td>
+                <td/>
+              </tr>
+              <tr>
+                <td>TENTATIVE</td>
+                <td>
+                  <xref target="RFC5545" section="3.2.12" sectionFormat="comma"/>
+                </td>
+                <td>tentative</td>
+                <td/>
+              </tr>
+              <tr>
+                <td>DELEGATED</td>
+                <td>
+                  <xref target="RFC5545" section="3.2.12" sectionFormat="comma"/>
+                </td>
+                <td>delegated</td>
+                <td/>
+              </tr>
+              <tr>
+                <td>COMPLETED</td>
+                <td>
+                  <xref target="RFC5545" section="3.2.12" sectionFormat="comma"/>
+                </td>
+                <td>accepted</td>
+                <td>completed</td>
+              </tr>
+              <tr>
+                <td>IN-PROCESS</td>
+                <td>
+                  <xref target="RFC5545" section="3.2.12" sectionFormat="comma"/>
+                </td>
+                <td>accepted</td>
+                <td>in-process</td>
+              </tr>
+              <tr>
+                <td>FAILED</td>
+                <td>
+                  <xref target="I-D.ietf-calext-ical-tasks" section="11.1" sectionFormat="comma"/>
+                </td>
+                <td>accepted</td>
+                <td>failed</td>
+              </tr>
+            </tbody>
+          </table>
           <t>The following examples illustrate how to convert the ATTENDEE property:</t>
           <figure anchor="test-ical-prop-attendee">
             <name>Converting the ATTENDEE property</name>
@@ -2786,6 +2864,29 @@ ATTENDEE;PARTSTAT=TENTATIVE:mailto:foo@example.com
     "...": ""
   },
   "o4": {
+    "...": ""
+  }
+}
+]]></sourcecode>
+          </figure>
+          <figure anchor="test-ical-prop-attendee-vtodo-partstat">
+            <name>Converting the ATTENDEE property with a VTODO-specific participation status</name>
+            <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VTODO
+ATTENDEE;PARTSTAT=IN-PROCESS:mailto:foo@example.com
+...
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"@type": "Task",
+"participants": {
+  "1": {
+    "@type": "Participant",
+    "calendarAddress": "mailto:foo@example.com",
+    "participationStatus": "accepted",
+    "progress": "in-process",
+    "...": ""
+  },
+  "o": {
     "...": ""
   }
 }
@@ -5753,6 +5854,16 @@ URL:https://example.com/calendar/birtdays.ics
               </td>
             </tr>
             <tr>
+              <td>progress</td>
+              <td>
+                <xref target="RFC8984" section="5.2.5" sectionFormat="comma"/>
+              </td>
+              <td>PARTSTAT</td>
+              <td>
+                <xref target="ical-prop-attendee"/>, and remarks below
+              </td>
+            </tr>
+            <tr>
               <td>roles</td>
               <td>
                 <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
@@ -5829,6 +5940,9 @@ URL:https://example.com/calendar/birtdays.ics
         <ul>
           <li>
             <t>The "optional" role converts to the "OPT-PARTICIPANT" ROLE parameter value, the "chair" role to "CHAIR", "informational" to "NON-PARTICIPANT". The "attendee" role does convert to the ROLE parameter, it is implied by the ATTENDEE property. The "owner" role does not convert to the ROLE parameter, if the property value of the ATTENDEE is equal to the value of the ORGANIZER property in the same component. All other roles require a PARTICIPANT component and convert to the PARTICIPANT-TYPE property in that component.</t>
+          </li>
+          <li>
+            <t>The progress property converts to the PARTSTAT parameter as outlined in <xref target="ical-prop-attendee-param-partstat"/>.</t>
           </li>
         </ul>
         <t>The following Participant properties convert to the PARTICIPANT or VRESOURCE component:</t>
@@ -5916,14 +6030,6 @@ URL:https://example.com/calendar/birtdays.ics
                   <xref target="ical-prop-percent-complete"/>
                 </t>
               </td>
-            </tr>
-            <tr>
-              <td>progress</td>
-              <td>
-                <xref target="RFC8984" section="5.2.5" sectionFormat="comma"/>
-              </td>
-              <td>TBD</td>
-              <td/>
             </tr>
             <tr>
               <td>progressUpdated</td>
@@ -6397,6 +6503,19 @@ URL:https://example.com/calendar/birtdays.ics
             <date day="22" month="July" year="2024"/>
           </front>
           <seriesInfo name="Internet-Draft" value="draft-ietf-jmap-calendars"/>
+        </reference>
+        <reference anchor="I-D.ietf-calext-ical-tasks" target="https://datatracker.ietf.org/doc/draft-ietf-calext-ical-tasks">
+          <front>
+            <title>Task Extensions to iCalendar</title>
+            <author fullname="Michael Douglass" initials="M." surname="Douglass">
+              <organization>Bedework Commercial Services</organization>
+            </author>
+            <author fullname="Adrian Apthorp" initials="A." surname="Apthorp">
+              <organization>DHL Express</organization>
+            </author>
+            <date day="30" month="July" year="2024"/>
+          </front>
+          <seriesInfo name="Internet-Draft" value="draft-ietf-calext-ical-tasks"/>
         </reference>
       </references>
     </references>
