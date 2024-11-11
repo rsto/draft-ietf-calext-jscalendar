@@ -3626,7 +3626,6 @@ LAST-MODIFIED:20240914T231257Z
             The <xref target="RFC9253" section="8.2" sectionFormat="parens">LINK property</xref> in a VEVENT, VTODO, VCALENDAR, VRESOURCE, PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref> under the following conditions:</t>
           <ul>
             <li>The property value type is URI.</li>
-            <li>The LINKREL parameter either is not set, or the parameter value is a registered relation type as defined in <xref target="RFC8288" section="2.1.1" sectionFormat="parens"/>.</li>
           </ul>
           <t>The converted object is set in the links property of the Event, Task, Group, Participant, or Location object. The LINK property value converts to the href property of the Link object.</t>
           <t>Its parameters convert as follows:</t>
@@ -3662,7 +3661,9 @@ LAST-MODIFIED:20240914T231257Z
                 <td>
                   <xref target="RFC9253" section="6.1" sectionFormat="comma"/>
                 </td>
-                <td>rel</td>
+                <td>
+                  <xref target="jscal-prop-link-rel">rel</xref>
+                </td>
                 <td/>
               </tr>
             </tbody>
@@ -6443,6 +6444,19 @@ URL:https://example.com/calendar/birtdays.ics
             <dt>Description:</dt>
             <dd>
               <t>This property represents the <xref target="RFC6638" section="7.3" sectionFormat="parens">SCHEDULE-STATUS parameter</xref> specified on an ORGANIZER property. In context of scheduling as outlined in <xref target="RFC6638"/>, the scheduling client or server can set this property to a list of status codes, returned from processing the most recent scheduling message sent to the organizer defined in the replyTo property. The status codes <bcp14>MUST</bcp14> be valid "statcode" values as defined in the ABNF in <xref target="RFC5545" section="3.8.8.3"/>.  Servers <bcp14>MUST</bcp14> only add or change this property when they send a scheduling message to the organizer. Clients <bcp14>SHOULD NOT</bcp14> change or remove this property if it was provided by the server. Clients <bcp14>MAY</bcp14> add, change, or remove the property for participants where the client is handling the scheduling. This property <bcp14>MUST NOT</bcp14> be included in scheduling messages.</t>
+            </dd>
+          </dl>
+        </section>
+      </section>
+      <section anchor="updated-jscalendar-properties">
+        <name>Updated Properties</name>
+        <section anchor="jscal-prop-link-rel">
+          <name>rel (Link)</name>
+          <t>This document modifies the definition of the "rel" property of the Link object. The original specification in <xref target="RFC8984" section="1.4.11"/> restricts that its values <bcp14>MUST</bcp14> be a registered relation type as defined in <xref target="RFC8288"/>. The new definition allows the value also to be an extension relation type to improve interoperability with the <xref target="RFC9253" section="6.1" sectionFormat="parens">LINKREL</xref> parameter in iCalendar. The new definition of the Link "rel" property is:</t>
+          <dl newline="true">
+            <dt>rel: String (optional)</dt>
+            <dd>
+              <t>This identifies the relation of the linked resource to the object. If set, the value <bcp14>MUST</bcp14> either be a registered relation type or an extension relation type, as defined in <xref target="RFC8288" section="2.1"/>.</t>
             </dd>
           </dl>
         </section>
