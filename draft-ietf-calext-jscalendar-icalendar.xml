@@ -6396,7 +6396,7 @@ URL:https://example.com/calendar/birtdays.ics
             <dd>
               <tt>Id[Location]</tt> (optional)</dd>
             <dt>Description:</dt>
-            <dd>This represents locations associated with the participant. In contrast to the locationId property, this allows to associate multiple locations with the Participant object. It also allow to more clearly express that a location just is relevant for a single participant.</dd>
+            <dd>This represents locations associated with the participant. In contrast to the locationId property, this allows to associate multiple locations with the Participant object, and to express that a location just is relevant for this participant.</dd>
           </dl>
         </section>
         <section anchor="jscal-prop-schedule-agent">
