@@ -1516,7 +1516,7 @@ END:VLOCATION
         </section>
         <section anchor="ical-comp-vresource">
           <name>VRESOURCE</name>
-          <t>The <xref target="RFC9073" section="7.3" sectionFormat="parens">VRESOURCE component</xref> converts to a <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref>.</t>
+          <t>The <xref target="RFC9073" section="7.3" sectionFormat="parens">VRESOURCE component</xref> converts to a <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref>. The kind property value of the Participant object <bcp14>MUST</bcp14> be "resource".</t>
           <t>Its properties convert as follows:</t>
           <table anchor="ical-comp-vresource-props">
             <name>Properties of the VRESOURCE component</name>
@@ -1632,7 +1632,7 @@ END:VRESOURCE
       "@type": "Participant",
       "description": "A contact",
       "iCalComponent": {
-        "name": "participant",
+        "name": "vresource",
         "properties": [
           [
             "uid",
