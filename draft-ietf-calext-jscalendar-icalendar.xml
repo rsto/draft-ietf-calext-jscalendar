@@ -754,6 +754,7 @@ END:PARTICIPANT
       "@type": "Participant",
       "description": "A contact",
       "iCalComponent": {
+        "@type": "ICalComponent",
         "name": "participant",
         "properties": [
           [
@@ -4487,16 +4488,18 @@ STRUCTURED-DATA;FMTTYPE=application/ld+json;
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "links": {
-  "@type": "Link",
-  "contentType": "application/ld+json",
-  "href": "data:application/ld+json;base64,InRydW5jYXRlZC4uLiIK",
-  "iCalProperty": {
-    "@type": "ICalProperty",
-    "name": "structured-data",
-    "parameters": {
-      "schema": "https://schema.org/FlightReservation"
-    },
-    "valueType": "binary"
+  "l1": {
+    "@type": "Link",
+    "contentType": "application/ld+json",
+    "href": "data:application/ld+json;base64,InRydW5jYXRlZC4uLiIK",
+    "iCalProperty": {
+      "@type": "ICalProperty",
+      "name": "structured-data",
+      "parameters": {
+        "schema": "https://schema.org/FlightReservation"
+      },
+      "valueType": "binary"
+    }
   }
 }
 ]]></sourcecode>
