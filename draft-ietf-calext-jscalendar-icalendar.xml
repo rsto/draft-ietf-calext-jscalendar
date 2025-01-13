@@ -418,10 +418,10 @@ BEGIN:VEVENT
         </section>
         <section anchor="ical-recurring-components">
           <name>Recurring Components</name>
-          <t>Components in an iCalendar object generally convert to distinct JSCalendar objects. For example, two VEVENT components with different UID property values in the same iCalendar object convert to two separate Event objects in the Group object's entries. This rule does not apply to recurrence overrides, defined as follows.</t>
+          <t>Components in an iCalendar object generally convert to distinct JSCalendar objects. For example, two VEVENT components with different UID property values in the same iCalendar object convert to two separate Event objects in the Group object's entries. As an exception to this rule, this does not apply to recurrence overrides, defined as follows.</t>
           <t>A VEVENT (or VTODO) component is a recurrence override if it has the RECURRENCE-ID property set, and the iCalendar object contains a VEVENT (or VTODO) component that does not have the RECURRENCE-ID but the RRULE property set, and the UID property values of the two components are equal. The component without the RECURRENCE-ID property is in that case referred to as the "main component".</t>
           <t>The main component converts to an entry in the Group object's entries property.</t>
-          <t>The recurrence override converts to the recurrenceOverrides property of the converted main component. Its RECURRENCE-ID property value converts to the key in the recurrenceOverrides property. The value of the recurrenceOverrides property at that key is the PatchObject that transform the converted main component into the converted recurrence override. The recurrenceId and recurrenceIdTimeZone properties <bcp14>MUST NOT</bcp14> be set in the PatchObject.</t>
+          <t>The recurrence override converts to the recurrenceOverrides property of the converted main component. Its RECURRENCE-ID property value converts to the key in the recurrenceOverrides property. The value of the recurrenceOverrides property at that key is a PatchObject that transform the converted main component into the converted recurrence override. The recurrenceId and recurrenceIdTimeZone properties <bcp14>MUST NOT</bcp14> be set in the PatchObject.</t>
           <t>The following example illustrates how to convert a main component and its recurrence override:</t>
           <figure anchor="test-ical-comp-vevent-recurrence-overrides">
             <name>Converting VEVENT recurrence overrides</name>
