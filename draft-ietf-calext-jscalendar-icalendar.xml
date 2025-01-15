@@ -345,7 +345,7 @@ SUMMARY:he
           </table>
           <t>Its components convert as follows:</t>
           <table anchor="ical-comp-vcalendar-comps">
-            <name>Components of the  VCALENDAR component</name>
+            <name>Components of the VCALENDAR component</name>
             <thead>
               <tr>
                 <th>Name</th>
@@ -392,6 +392,7 @@ SUMMARY:he
             </tbody>
           </table>
           <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">iCalComponent property</xref> of the Group object.</t>
+          <t>The order of elements in the "entries" property is implementation-specific, e.g. entries need not be in the same order as their source components in the iCalendar object.</t>
           <t>The following example illustrates how to convert the VCALENDAR component:</t>
           <figure anchor="test-ical-comp-vcalendar">
             <name>Converting the VCALENDAR component</name>
@@ -468,7 +469,7 @@ END:VCALENDAR
 }
 ]]></sourcecode>
           </figure>
-          <t>A VEVENT (or VTODO) component is a stand-alone recurrence instance if it has the RECURRENCE-ID property set and the iCalendar object does not contain its related main component. Each stand-alone recurrence instance converts to a distinct Event (or Task) object in the Group object's entries property.  The recurrenceId property <bcp14>MUST</bcp14> be set, the recurrenceIdTimeZone property <bcp14>MUST</bcp14> be set if not "null". The converted objects sort in order of appearance of the iCalendar components.</t>
+          <t>A VEVENT (or VTODO) component is a stand-alone recurrence instance if it has the RECURRENCE-ID property set and the iCalendar object does not contain its related main component. Each stand-alone recurrence instance converts to a distinct Event (or Task) object in the Group object's entries property.  The recurrenceId property <bcp14>MUST</bcp14> be set, the recurrenceIdTimeZone property <bcp14>MUST</bcp14> be set if not "null".</t>
           <t>The following example illustrates how to convert stand-alone recurrence instances:</t>
           <figure anchor="test-ical-comp-vevent-recurrence-instances">
             <name>Converting VEVENT recurrence instances</name>
