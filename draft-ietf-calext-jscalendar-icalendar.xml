@@ -769,7 +769,8 @@ END:PARTICIPANT
       "links": {
         "l4": {
           "@type": "Link",
-          "href": "http://dir.example.com/vcard/contacts/contact1.vcf"
+          "href": "http://dir.example.com/vcard/contacts/contact1.vcf",
+          "...": ""
         }
       },
       "roles": {
@@ -1494,10 +1495,7 @@ END:VLOCATION
       "21": {
         "@type": "Link",
         "href": "http://dir.example.com/venues/big-hall.vcf",
-        "iCalProperty": {
-          "@type": "ICalProperty",
-          "name": "structured-data"
-        }
+        "...": ""
       }
     },
     "iCalComponent": {
@@ -1633,8 +1631,17 @@ END:VRESOURCE
   "participants": {
     "p2": {
       "@type": "Participant",
-      "description": "A contact",
+      "name": "The projector",
+      "kind": "resource",
+      "links": {
+        "l4": {
+          "@type": "Link",
+          "href": "http://dir.example.com/projectors/3d.vcf",
+          "...": ""
+        }
+      },
       "iCalComponent": {
+        "@type": "ICalComponent",
         "name": "vresource",
         "properties": [
           [
@@ -1650,15 +1657,7 @@ END:VRESOURCE
             "projector"
           ]
         ]
-      },
-      "kind": "resource",
-      "links": {
-        "l4": {
-          "@type": "Link",
-          "href": "http://dir.example.com/projectors/3d.vcf"
-        }
-      },
-      "name": "The projector"
+      }
     }
   }
 }
