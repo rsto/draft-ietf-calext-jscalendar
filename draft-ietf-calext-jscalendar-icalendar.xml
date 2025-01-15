@@ -1502,6 +1502,7 @@ END:VLOCATION
     },
     "iCalComponent": {
       "@type": "ICalComponent",
+      "name": "vlocation",
       "properties": [
         [
           "uid",
