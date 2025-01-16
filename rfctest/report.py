@@ -252,12 +252,6 @@ class HTMLReporter:
                 f'<h4 style="text-align: center;">{captions[i]}</h4>',
                 file=self.file,
             )
-            if len(highlight[i]):
-                print('<ul>', file=self.file)
-                for path in highlight[i]:
-                    print('<li>' + path.encode() + '</li>', file=self.file)
-                print('</ul>', file=self.file)
-
             print('<p class="sourcecode">', file=self.file)
             self.jhighlighter.print(jvals[i], highlight={"highlight": highlight[i]})
             print("</p>", file=self.file)
