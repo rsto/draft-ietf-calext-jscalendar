@@ -95,14 +95,22 @@ class VObject:
                 if not prop.name in have_props:
                     comp.props.append(prop)
 
-            match comp.name:
-                case "VCALENDAR":
-                    add_default(Property("PRODID", "-//FOO//bar//EN"))
-                    add_default(Property("VERSION", "2.0"))
-                case "VEVENT":
-                    add_default(Property("DTSTAMP", "20060102T030405Z"))
-                    add_default(Property("UID", f"{uuid.uuid4()}"))
+            if comp.name == "VCALENDAR":
+                add_default(Property("PRODID", "-//FOO//bar//EN"))
+                add_default(Property("VERSION", "2.0"))
+            if comp.name == "VEVENT" or comp.name == "VTODO":
+                add_default(Property("DTSTAMP", "20060102T030405Z"))
+                add_default(Property("UID", f"{uuid.uuid4()}"))
+                if comp.name == "VEVENT":
                     add_default(Property("DTSTART", "20060102T030405Z"))
+                if "ATTENDEE" in have_props:
+                    add_default(
+                        Property("ORGANIZER", f"mailto:{uuid.uuid4()}@example.com")
+                    )
+                elif "ORGANIZER" in have_props:
+                    add_default(
+                        Property("ATTENDEE", f"mailto:{uuid.uuid4()}@example.com")
+                    )
         return vobj
 
     def to_vcalendar(self) -> VObject:
