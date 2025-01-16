@@ -71,12 +71,8 @@ class JSONHighlighter:
         for tok in json.JSONEncoder(sort_keys=True, separators=(",", ": ")).iterencode(
             data
         ):
-            # JSONEncoder returns a single token for the first item in
-            # an array, e.g.
-            #    >>> [tok for tok in json.JSONEncoder().iterencode([1])]
-            #    ['[1', ']']
-            # so we'll need to split that token into two to produce '['.
-            if tok[0] == "[" and len(tok):
+            # Split start of array and ',' from the actual array element.
+            if tok[0] in "[," and len(tok) > 1:
                 tok_stack.append(tok[1:])
                 tok_stack.append(tok[0])
             else:
