@@ -1619,7 +1619,7 @@ BEGIN:VEVENT
 BEGIN:VRESOURCE
 UID:456789-abcdef-98765432
 NAME:The projector
-RESOURCE-TYPE:projector
+RESOURCE-TYPE:PROJECTOR
 STRUCTURED-DATA;VALUE=URI:http://dir.example.com/projectors/3d.vcf
 END:VRESOURCE
 ...
@@ -1654,7 +1654,7 @@ END:VRESOURCE
             "resource-type",
             {},
             "text",
-            "projector"
+            "PROJECTOR"
           ]
         ]
       }
