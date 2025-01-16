@@ -271,7 +271,7 @@ class JDiff:
             "links": lambda v: v.get("href"),
             "locations": lambda v: v.get("name"),
             "virtualLocations": lambda v: v.get("uri"),
-            "participants": lambda v: v.get("scheduleId"),
+            "participants": lambda v: v.get("calendarAddress"),
         }
         pkey = prop_keys.get(apath[-1]) if len(apath) and len(bpath) else None
         if pkey and apath[-1] == bpath[-1]:
