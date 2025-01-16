@@ -2530,6 +2530,7 @@ ACTION:AUDIO
   "a": {
     "@type": "Alert",
     "iCalComponent": {
+      "@type": "ICalComponent",
       "name": "valarm",
       "properties": [
         [
@@ -2609,7 +2610,8 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
   "a": {
     "@type": "Link",
     "href": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQAAAAA3bvkkAAAAAmJLR0QAAd2KE6QAAAAKSURBVAjXY2gAAACCAIHdQ2r0AAAAAElFTkSuQmCC",
-    "contentType": "image/png"
+    "contentType": "image/png",
+    "...": ""
   }
 }
 ]]></sourcecode>
