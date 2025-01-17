@@ -2827,6 +2827,7 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
             <name>Converting the ATTENDEE property</name>
             <sourcecode type="text/calendar"><![CDATA[
 ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
+ORGANIZER:mailto:organizer@example.com
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "participants": {
@@ -2843,6 +2844,8 @@ ATTENDEE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
     }
   },
   "o4": {
+    "@type": "Participant",
+    "calendarAddress": "mailto:organizer@example.com",
     "...": ""
   }
 }
@@ -2877,7 +2880,8 @@ ATTENDEE;PARTSTAT=TENTATIVE:mailto:foo@example.com
             <name>Converting the ATTENDEE property with a VTODO-specific participation status</name>
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VTODO
-ATTENDEE;PARTSTAT=IN-PROCESS:mailto:foo@example.com
+ATTENDEE;PARTSTAT=COMPLETED:mailto:foo@example.com
+ORGANIZER:mailto:organizer@example.com
 ...
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
@@ -2887,10 +2891,12 @@ ATTENDEE;PARTSTAT=IN-PROCESS:mailto:foo@example.com
     "@type": "Participant",
     "calendarAddress": "mailto:foo@example.com",
     "participationStatus": "accepted",
-    "progress": "in-process",
+    "progress": "completed",
     "...": ""
   },
   "o": {
+    "@type": "Participant",
+    "calendarAddress": "mailto:organizer@example.com",
     "...": ""
   }
 }
