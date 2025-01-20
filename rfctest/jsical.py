@@ -198,25 +198,25 @@ class JDiff:
 
     @classmethod
     def diff_json(cls, a: dict, b: dict) -> JDiff:
-        ao, unq, bo = JDiff._jval(a, b, JPath([]), JPath([]))
+        ao, unq, bo = JDiff._diff_jval(a, b, JPath([]), JPath([]))
         return JDiff(ao, unq, bo)
 
     @staticmethod
-    def _jval(
+    def _diff_jval(
         a, b, apath: JPath, bpath: JPath
     ) -> tuple[list[JPath], list[JPath], list[JPath]]:
         if type(a) != type(b):
             return [], [(apath, bpath)], []
         if isinstance(a, dict):
-            return JDiff._dict(a, b, apath, bpath)
+            return JDiff._diff_dict(a, b, apath, bpath)
         if isinstance(a, list):
-            return JDiff._array(a, b, apath, bpath)
+            return JDiff._diff_array(a, b, apath, bpath)
         if a != b:
             return [], [(apath, bpath)], []
         return [], [], []
 
     @staticmethod
-    def _array(
+    def _diff_array(
         a: list, b: list, apath: JPath, bpath: JPath
     ) -> tuple[list[JPath], list[JPath], list[JPath]]:
         n = min(len(a), len(b))
@@ -224,14 +224,16 @@ class JDiff:
         b_only = [bpath + [f"{i}"] for i in range(n, len(b))]
         unequal = []
         for i in range(n):
-            ao, unq, bo = JDiff._jval(a[i], b[i], apath + [f"{i}"], bpath + [f"{i}"])
+            ao, unq, bo = JDiff._diff_jval(
+                a[i], b[i], apath + [f"{i}"], bpath + [f"{i}"]
+            )
             a_only.extend(ao)
             unequal.extend(unq)
             b_only.extend(bo)
         return a_only, unequal, b_only
 
     @staticmethod
-    def _dict(
+    def _diff_dict(
         a: dict, b: dict, apath: JPath, bpath: JPath
     ) -> tuple[list[JPath], list[JPath], list[JPath]]:
         extra = a.pop("...", None)
@@ -244,7 +246,9 @@ class JDiff:
 
         unequal = []
         for akey, bkey in both:
-            ao, unq, bo = JDiff._jval(a[akey], b[bkey], apath + [akey], bpath + [bkey])
+            ao, unq, bo = JDiff._diff_jval(
+                a[akey], b[bkey], apath + [akey], bpath + [bkey]
+            )
             a_only.extend(ao)
             unequal.extend(unq)
             b_only.extend(bo)
