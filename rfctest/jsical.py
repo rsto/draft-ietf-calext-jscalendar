@@ -147,6 +147,8 @@ class VObject:
         stack = [VObject(None)]
         comp = stack[0]
         for line in map(str.strip, lines):
+            if not line:
+                continue
             if line == "...":
                 comp.allow_any = True
                 continue
