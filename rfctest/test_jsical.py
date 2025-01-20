@@ -48,11 +48,11 @@ class TestVObject(unittest.TestCase):
 
     def test_parse_folded(self):
         self.assertEqual(
-            VObject.parse("UI\n  D:1\n"),
+            VObject.parse("UI\n D:1\n"),
             VObject("VEVENT", props=[Property("UID", "1")], allow_any=True),
         )
         self.assertEqual(
-            VObject.parse("SUMMARY:hello\n   world\n"),
+            VObject.parse("SUMMARY:hello\n  world\n"),
             VObject(
                 "VEVENT", props=[Property("SUMMARY", "hello world")], allow_any=True
             ),
