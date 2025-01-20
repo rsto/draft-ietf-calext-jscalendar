@@ -139,7 +139,8 @@ class TestJObject(unittest.TestCase):
     def test_to_group(self):
         data = {"@type": "Event", "uid": "1"}
         self.assertEqual(
-            JObject(data).to_group(), JObject({"@type": "Group", "entries": [data]})
+            JObject(data).to_group(),
+            JObject({"@type": "Group", "entries": [data], "...": ""}),
         )
 
 
