@@ -3277,12 +3277,12 @@ DTEND;TZID=Asia/Bangkok:20241018T020325
             <name>Converting the DTEND property with DATE value type</name>
             <sourcecode type="text/calendar"><![CDATA[
 DTSTART;VALUE=DATE:20240102
-DTEND;VALUE=DATE:20240112
+DTEND;VALUE=DATE:20240107
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "start": "2024-01-02T00:00:00",
 "timeZone": null,
-"duration": "P1W2D",
+"duration": "P5D",
 "showWithoutTime": true
 ]]></sourcecode>
           </figure>
