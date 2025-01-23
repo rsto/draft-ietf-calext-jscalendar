@@ -3408,9 +3408,11 @@ DTSTART;VALUE=DATE:20240921
           <figure anchor="test-ical-prop-due-tzid">
             <name>Converting the DUE property with TZID parameter</name>
             <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VTODO
 DUE;TZID=Europe/Berlin:20240921T105302
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
+"@type": "Task",
 "due": "2024-09-21T10:53:02",
 "timeZone": "Europe/Berlin",
 "showWithoutTime": false
@@ -3419,10 +3421,12 @@ DUE;TZID=Europe/Berlin:20240921T105302
           <figure anchor="test-ical-prop-due-utc">
             <name>Converting the DUE property with UTC time</name>
             <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VTODO
 DUE:20240921T105302Z
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
-"start": "2024-09-21T10:53:02",
+"@type": "Task",
+"due": "2024-09-21T10:53:02",
 "timeZone": "Etc/UTC",
 "showWithoutTime": false
 ]]></sourcecode>
@@ -3430,10 +3434,12 @@ DUE:20240921T105302Z
           <figure anchor="test-ical-prop-due-float">
             <name>Converting the DUE property with floating time</name>
             <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VTODO
 DUE:20240921T105302
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
-"start": "2024-09-21T10:53:02",
+"@type": "Task",
+"due": "2024-09-21T10:53:02",
 "timeZone": null,
 "showWithoutTime": false
 ]]></sourcecode>
@@ -3441,10 +3447,12 @@ DUE:20240921T105302
           <figure anchor="test-ical-prop-due-date">
             <name>Converting the DUE property with value type DATE</name>
             <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VTODO
 DUE;VALUE=DATE:20240921
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
-"start": "2024-09-21T00:00:00",
+"@type": "Task",
+"due": "2024-09-21T00:00:00",
 "timeZone": null,
 "showWithoutTime": true
 ]]></sourcecode>
