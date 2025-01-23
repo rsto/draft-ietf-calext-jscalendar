@@ -3944,7 +3944,6 @@ END:VLOCATION
             <name>Converting an ORGANIZER property</name>
             <sourcecode type="text/calendar"><![CDATA[
 ORGANIZER:mailto:foo@example.com
-...
 ATTENDEE;RSVP=TRUE;PARTSTAT=NEEDS-ACTION:mailto:bar@example.com
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
@@ -3961,6 +3960,7 @@ ATTENDEE;RSVP=TRUE;PARTSTAT=NEEDS-ACTION:mailto:bar@example.com
   },
   "b": {
     "@type": "Participant",
+    "calendarAddress": "mailto:bar@example.com",
     "...": ""
   }
 }
