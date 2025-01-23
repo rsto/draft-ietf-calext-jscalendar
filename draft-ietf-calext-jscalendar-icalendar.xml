@@ -3520,7 +3520,7 @@ EXDATE:20230801T130000Z
           <t>
             The <xref target="RFC5545" section="3.8.1.6" sectionFormat="parens">GEO property</xref> in a VLOCATION component converts to the <xref target="RFC8984" section="4.2.5" sectionFormat="parens">"coordinates" property</xref> of the Location object.
           </t>
-          <t>The pair of FLOAT values converts to an URI with the <xref target="RFC5870">"geo" scheme</xref>.  The first FLOAT value converts to the "coord-a" part of the URI, the second FLOAT value to the "coord-b" part. A preceding plus sign (+) of the FLOAT value <bcp14>MUST</bcp14> be omitted, a preceding minus sign (-) <bcp14>MUST</bcp14> be preserved.  The third, altitude coordinate <bcp14>MUST NOT</bcp14> be set, unless its value is known.</t>
+          <t>The pair of FLOAT values converts to an URI with the <xref target="RFC5870">"geo" scheme</xref>.  The first FLOAT value converts to the "coord-a" part of the URI, the second FLOAT value to the "coord-b" part. A preceding plus sign (+) of the FLOAT value <bcp14>MUST</bcp14> be omitted, a preceding minus sign (-) <bcp14>MUST</bcp14> be preserved.  The optional "coord-c" part of the URI <bcp14>MUST</bcp14> be omitted.</t>
           <t>The following examples illustrate how to convert the GEO property:</t>
           <figure anchor="test-ical-prop-geo">
             <name>Converting the GEO property in a VEVENT</name>
