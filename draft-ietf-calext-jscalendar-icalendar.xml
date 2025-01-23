@@ -3359,7 +3359,7 @@ DTSTART;TZID=Europe/Berlin:20240921T105302
             <sourcecode type="json"><![CDATA[
 "start": "2024-09-21T10:53:02",
 "timeZone": "Europe/Berlin",
-"showWithoutTime": "false"
+"showWithoutTime": false
 ]]></sourcecode>
           </figure>
           <figure anchor="test-ical-prop-dtstart-utc">
@@ -3370,7 +3370,7 @@ DTSTART:20240921T105302Z
             <sourcecode type="json"><![CDATA[
 "start": "2024-09-21T10:53:02",
 "timeZone": "Etc/UTC",
-"showWithoutTime": "false"
+"showWithoutTime": false
 ]]></sourcecode>
           </figure>
           <figure anchor="test-ical-prop-dtstart-float">
@@ -3381,7 +3381,7 @@ DTSTART:20240921T105302
             <sourcecode type="json"><![CDATA[
 "start": "2024-09-21T10:53:02",
 "timeZone": null,
-"showWithoutTime": "false"
+"showWithoutTime": false
 ]]></sourcecode>
           </figure>
           <figure anchor="test-ical-prop-dtstart-date">
@@ -3392,7 +3392,7 @@ DTSTART;VALUE=DATE:20240921
             <sourcecode type="json"><![CDATA[
 "start": "2024-09-21T00:00:00",
 "timeZone": null,
-"showWithoutTime": "true"
+"showWithoutTime": true
 ]]></sourcecode>
           </figure>
         </section>
@@ -3413,7 +3413,7 @@ DUE;TZID=Europe/Berlin:20240921T105302
             <sourcecode type="json"><![CDATA[
 "due": "2024-09-21T10:53:02",
 "timeZone": "Europe/Berlin",
-"showWithoutTime": "false"
+"showWithoutTime": false
 ]]></sourcecode>
           </figure>
           <figure anchor="test-ical-prop-due-utc">
@@ -3424,7 +3424,7 @@ DUE:20240921T105302Z
             <sourcecode type="json"><![CDATA[
 "start": "2024-09-21T10:53:02",
 "timeZone": "Etc/UTC",
-"showWithoutTime": "false"
+"showWithoutTime": false
 ]]></sourcecode>
           </figure>
           <figure anchor="test-ical-prop-due-float">
@@ -3435,7 +3435,7 @@ DUE:20240921T105302
             <sourcecode type="json"><![CDATA[
 "start": "2024-09-21T10:53:02",
 "timeZone": null,
-"showWithoutTime": "false"
+"showWithoutTime": false
 ]]></sourcecode>
           </figure>
           <figure anchor="test-ical-prop-due-date">
@@ -3446,7 +3446,7 @@ DUE;VALUE=DATE:20240921
             <sourcecode type="json"><![CDATA[
 "start": "2024-09-21T00:00:00",
 "timeZone": null,
-"showWithoutTime": "true"
+"showWithoutTime": true
 ]]></sourcecode>
           </figure>
         </section>
