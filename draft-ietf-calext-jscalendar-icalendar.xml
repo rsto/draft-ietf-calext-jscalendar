@@ -3692,14 +3692,15 @@ LAST-MODIFIED:20240914T231257Z
           <figure anchor="test-ical-prop-link">
             <name>Converting the LINK property to a Link object</name>
             <sourcecode type="text/calendar"><![CDATA[
-LINK;LABEL=Venue;VALUE=URI:https://example.com/events
+LINK;LINKREL=SOURCE;LABEL=Venue;VALUE=URI:https://example.com/events
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "links": {
   "l1": {
     "@type": "Link",
     "href": "https://example.com/events",
-    "title": "Venue"
+    "title": "Venue",
+    "rel": "source"
   }
 }
 ]]></sourcecode>
