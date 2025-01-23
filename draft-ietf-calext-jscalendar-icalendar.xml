@@ -3645,10 +3645,7 @@ LAST-MODIFIED:20240914T231257Z
         <section anchor="ical-prop-link">
           <name>LINK</name>
           <t>
-            The <xref target="RFC9253" section="8.2" sectionFormat="parens">LINK property</xref> in a VEVENT, VTODO, VCALENDAR, VRESOURCE, PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref> under the following conditions:</t>
-          <ul>
-            <li>The property value type is URI.</li>
-          </ul>
+            The <xref target="RFC9253" section="8.2" sectionFormat="parens">LINK property</xref> of type URI in a VEVENT, VTODO, VCALENDAR, VRESOURCE, PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.</t>
           <t>The converted object is set in the "links" property of the Event, Task, Group, Participant, or Location object. The LINK property value converts to the "href" property of the Link object.</t>
           <t>Its parameters convert as follows:</t>
           <table>
