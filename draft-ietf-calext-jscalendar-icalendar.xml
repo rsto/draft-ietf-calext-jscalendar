@@ -3994,6 +3994,7 @@ ATTENDEE;RSVP=TRUE;PARTSTAT=NEEDS-ACTION:mailto:bar@example.com
   },
   "b": {
     "@type": "Participant",
+    "calendarAddress": "mailto:bar@example.com",
     "...": ""
   }
 }
@@ -4016,11 +4017,13 @@ CALENDAR-ADDRESS:mailto:foo@example.com
 ...
 END:PARTICIPANT
 ATTENDEE;RSVP=YES;PARTSTAT=NEEDS-ACTION:mailto:foo@example.com
+ORGANIZER:mailto:bar@example.com
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "participants": {
   "a": {
     "@type": "Participant",
+    "calendarAddress": "mailto:foo@example.com",
     "roles": {
       "attendee": true,
       "contact": true
@@ -4028,6 +4031,8 @@ ATTENDEE;RSVP=YES;PARTSTAT=NEEDS-ACTION:mailto:foo@example.com
     "...": ""
   },
   "b": {
+    "@type": "Participant",
+    "calendarAddress": "mailto:bar@example.com",
     "...": ""
   }
 }
