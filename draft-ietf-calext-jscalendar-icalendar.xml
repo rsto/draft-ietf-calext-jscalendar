@@ -69,8 +69,13 @@
         <t>Later sections contain examples that illustrate how to convert between the iCalendar and JSCalendar data formats.  The notation of these examples is such that their main points should be clear to the reader, but their contents can also be parsed for automated testing.  The authors of this document implemented a tool that extracts these examples for interoperation testing.  The following sections define the notation for such examples.</t>
         <section anchor="notation-icalendar">
           <name>iCalendar Examples</name>
-          <t>An iCalendar example contains either an extract or a complete representation of iCalendar data.  It always represents an iCalendar object, even if the example only depicts non-VCALENDAR components or properties.</t>
-          <t>An example that only contains iCalendar properties implicitly represents a VEVENT component that is part of a VCALENDAR component.  An example that only contains one or more non-VCALENDAR components implicitly represents a VCALENDAR component that contains them.  Implicit components are assumed to contain mandatory properties with some value, but the actual value is irrelevant for the main point of the example. Notably, if an implicit component includes an ATTENDEE but not an ORGANIZER property, then an ORGANIZER property implicitly is present, too. The same applies for an example with an ORGANIZER but no ATTENDEE property.</t>
+          <t>An iCalendar example contains either an extract or a complete representation of iCalendar data.  It always represents an iCalendar object, even if the example only depicts non-VCALENDAR components or properties. The following rules apply:</t>
+          <ul>
+            <li>An example that only contains iCalendar properties implicitly represents a VEVENT component that is part of a VCALENDAR component.</li>
+            <li>An example that only contains one or more non-VCALENDAR components implicitly represents a VCALENDAR component that contains them.</li>
+            <li>An example that only contains a VCALENDAR component but no contained components implicitly represents a VCALENDAR component that contains a VEVENT component.</li>
+            <li>Implicit components (those without a BEGIN and END, or omitted completely) are assumed to contain all mandatory properties with some value, but the actual value is irrelevant for the example.</li>
+          </ul>
           <t>
             <xref target="example-notation-icalendar-implicit-explicit"/> contains three examples, all of which represent the same iCalendar data.  In the first example, both the VEVENT component and VCALENDAR component are implicit.  In the second example, only the VCALENDAR component and its mandatory properties are implicit.  The third example depicts a complete VCALENDAR component, nothing is implicit.</t>
           <figure anchor="example-notation-icalendar-implicit-explicit">
