@@ -354,9 +354,7 @@ icalendar:
           convert:
             property: links
             object: Link
-        LAST-MODIFIED:
-          convert:
-            property: updated
+        LAST-MODIFIED: {}
         LINK:
           convert:
             property: links
@@ -646,9 +644,7 @@ icalendar:
           convert:
             property: links
             object: Link
-        LAST-MODIFIED:
-          convert:
-            property: updated
+        LAST-MODIFIED: {}
         LINK:
           convert:
             property: links
