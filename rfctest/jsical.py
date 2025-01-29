@@ -85,6 +85,8 @@ class VObject:
 
     def with_default_props(self) -> VObject:
         vobj = copy.deepcopy(self)
+        if vobj.name == "VCALENDAR" and not vobj.comps:
+            vobj.comps.append(VObject("VEVENT"))
         comps = [vobj]
         while comps:
             comp = comps.pop()
