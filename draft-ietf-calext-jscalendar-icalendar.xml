@@ -3035,7 +3035,7 @@ COLOR:#ffa07a
               The <xref target="RFC5545" section="3.8.1.4" sectionFormat="parens">COMMENT property</xref> in an <xref target="RFC5546">iTIP-scheduled</xref> VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">"participationComment" property</xref> of that Participant object, which represents the source of this scheduling message, if any. It otherwise converts to the <xref target="jscal-prop-icalcomponent">iCalComponent/properties property</xref> of the Event or Task object.
             </t>
           <t>
-                Multiple COMMENT properties in a DAYLIGHT or STANDARD component convert in order of appearance in the "comments" property. Converting multiple COMMENT properties to the single-valued participationComment property is implementation-specific.</t>
+                Multiple COMMENT properties in a DAYLIGHT or STANDARD component convert in any order to the multi-valued "comments" property. Converting multiple COMMENT properties to the single-valued participationComment property is implementation-specific.</t>
           <t>The following examples illustrate how to convert the COMMENT property:</t>
           <figure anchor="test-ical-prop-comment-daylight">
             <name>Converting the COMMENT property in a DAYLIGHT component</name>
