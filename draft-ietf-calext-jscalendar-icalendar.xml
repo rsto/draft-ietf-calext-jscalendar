@@ -3847,32 +3847,33 @@ NAME:Company Vacation Days
 }
 ]]></sourcecode>
           </figure>
-          <figure anchor="test-ical-prop-name-vlocation-participant">
-            <name>Converting the NAME property in the VLOCATION and PARTICIPANT components</name>
+          <figure anchor="test-ical-prop-name-vlocation-vresource">
+            <name>Converting the NAME property in the VLOCATION and VRESOURCE components</name>
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VEVENT
-BEGIN:PARTICIPANT
-NAME:John Doe
-...
-END:PARTICIPANT
 BEGIN:VLOCATION
-NAME:Fred's Bar
+NAME:Room B
 ...
 END:VLOCATION
+BEGIN:VRESOURCE
+NAME:Whiteboard
+...
+END:VRESOURCE
 ...
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "locations": {
   "1": {
     "@type": "Location",
-    "name": "Fred's Bar",
+    "name": "Room B",
     "...": ""
   }
 },
 "participants": {
   "1": {
     "@type": "Participant",
-    "name": "John Doe",
+    "kind": "resource",
+    "name": "Whiteboard",
     "...": ""
   }
 }
