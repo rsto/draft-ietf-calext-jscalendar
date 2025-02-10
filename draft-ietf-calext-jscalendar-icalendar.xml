@@ -4253,6 +4253,7 @@ END:VALARM
     },
     "relatedTo": {
       "1": {
+        "@type": "Relation",
         "relation": {
           "snooze": true
         }
