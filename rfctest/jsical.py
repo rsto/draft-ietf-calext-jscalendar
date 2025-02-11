@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import collections
 import copy
 import itertools
 import json
@@ -22,6 +23,13 @@ class Parameter:
     def __str__(self):
         return f"{self.name}={self.value}"
 
+    def normalize(self):
+        self.name = self.name.upper()
+
+    @staticmethod
+    def _key(param):
+        return (param.name, param.value)
+
 
 @dataclass
 class Property:
@@ -32,6 +40,16 @@ class Property:
     def __str__(self):
         params = "".join(f";{p}" for p in self.params)
         return f"{self.name}{params}:{self.value}"
+
+    @staticmethod
+    def _key(prop):
+        return (prop.name, prop.value, (Parameter._key(param) for param in prop.params))
+
+    def normalize(self):
+        self.name = self.name.upper()
+        for param in self.params:
+            param.normalize()
+        self.params.sort(key=Parameter._key)
 
     @classmethod
     def parse(cls, line: str) -> Property:
@@ -60,10 +78,10 @@ class Property:
 
 
 @dataclass
-class VObject:
+class Component:
     name: str
     props: list[Property] = field(default_factory=list)
-    comps: list[VObject] = field(default_factory=list)
+    comps: list[Component] = field(default_factory=list)
     allow_any: bool = False
 
     def format(self, include_any=True) -> str:
@@ -83,10 +101,27 @@ class VObject:
     def __str__(self):
         return self.format(include_any=True)
 
-    def with_default_props(self) -> VObject:
+    @staticmethod
+    def _key(comp):
+        return (
+            comp.name,
+            [Property._key(p) for p in comp.props],
+            [Component._key(c) for c in comp.comps],
+        )
+
+    def normalize(self):
+        self.name = self.name.upper()
+        for prop in self.props:
+            prop.normalize()
+        self.props.sort(key=Property._key)
+        for comp in self.comps:
+            comp.normalize()
+        self.comps.sort(key=Component._key)
+
+    def with_default_props(self) -> Component:
         vobj = copy.deepcopy(self)
         if vobj.name == "VCALENDAR" and not vobj.comps:
-            vobj.comps.append(VObject("VEVENT"))
+            vobj.comps.append(Component("VEVENT"))
         comps = [vobj]
         while comps:
             comp = comps.pop()
@@ -115,7 +150,7 @@ class VObject:
                     )
         return vobj
 
-    def to_vcalendar(self) -> VObject:
+    def to_vcalendar(self) -> Component:
         vobj = copy.deepcopy(self)
         default_parent = {
             "AVAILABLE": "VAVAILABILITY",
@@ -134,29 +169,31 @@ class VObject:
             "VTODO": "VCALENDAR",
         }
         while parent_name := default_parent.get(vobj.name):
-            parent = VObject(parent_name, allow_any=True)
+            parent = Component(parent_name, allow_any=True)
             parent.comps.append(vobj)
             vobj = parent
         if vobj.name != "VCALENDAR":
-            vobj = VObject("VCALENDAR", comps=[vobj])
+            vobj = Component("VCALENDAR", comps=[vobj])
         return vobj
 
     @classmethod
-    def parse(cls, s: str, default_name="VEVENT") -> VObject:
+    def parse(cls, s: str, strict=False) -> Component:
         # Unfold and split lines
         lines = re.split(r"\r?\n", re.sub(r"\r?\n([ ]|\t)", "", s))
         # Parse example
-        stack = [VObject(None)]
+        stack = [Component(None)]
         comp = stack[0]
         for line in map(str.strip, lines):
             if not line:
                 continue
             if line == "...":
+                if strict:
+                    raise ParseError(f"Line '...' not allowed in strict mode")
                 comp.allow_any = True
                 continue
             prop = Property.parse(line)
             if prop.name == "BEGIN":
-                comp.comps.append(VObject(prop.value))
+                comp.comps.append(Component(prop.value))
                 stack.append(comp)
                 comp = comp.comps[-1]
             elif prop.name == "END":
@@ -170,20 +207,172 @@ class VObject:
         comp = stack[0]
         if len(comp.comps) == 1 and not comp.props:
             comp = comp.comps[0]
+        elif strict and not comp.name:
+            raise ParseError(f"No iCalendar object found")
         else:
             if not comp.comps:
                 comp.allow_any = True
-            comp.name = default_name
+            comp.name = "VEVENT"
         return comp
 
+@dataclass
+class PropertyDiff:
+    del_param_a: list[int]
+    add_param_b: list[int]
+    diff_params: list[tuple[int, int]]
+    set_value_b: bool
 
-class JPath(UserList):
+    def __init__(self, a: Property, b: Property):
+        self.set_value_b = a.value != b.value
+
+        a_params = collections.defaultdict(list)
+        for p in enumerate(a.params):
+            a_params[p[1].name].append(p)
+
+        b_params = collections.defaultdict(list)
+        for p in enumerate(b.params):
+            b_params[p[1].name].append(p)
+
+        def _aonly(a, b):
+            l = []
+            for k in set(a.keys()) - set(b.keys()):
+                l.extend([t[0] for t in a[k]])
+            return l
+
+        self.del_param_a = _aonly(a_params, b_params)
+        self.add_param_b = _aonly(b_params, a_params)
+
+        self.diff_params = []
+        for name in set(a_params.keys()) & set(b_params.keys()):
+            for (idx_a, param_a), (idx_b, param_b) in zip(a_params[name], b_params[name]):
+                if param_a.value != param_b.value:
+                    self.diff_params.append((idx_a, idx_b))
+            len_a = len(a_params[name])
+            len_b = len(b_params[name])
+            if len_a > len_b:
+                self.del_param_a.extend(
+                    idx for (idx, param) in a_params[name][len_a - len_b :]
+                )
+            elif len_b > len_a:
+                self.add_param_b.extend(
+                    idx for (idx, param) in b_params[name][len_b - len_a :]
+                )
+
+        self.del_param_a.sort()
+        self.add_param_b.sort()
+        self.diff_params.sort()
+
+    def empty(self) -> bool:
+        return (
+            not self.del_param_a
+            and not self.add_param_b
+            and not self.diff_params
+            and not self.set_value_b
+        )
+
+
+@dataclass
+class ComponentDiff:
+    del_comp_a: list[int]
+    del_prop_a: list[int]
+
+    diff_comps: list[tuple[int, int, ComponentDiff]]
+    diff_props: list[tuple[int, int]]
+
+    add_comp_b: list[int]
+    add_prop_b: list[int]
+
+    def __init__(self, a: Component, b: Component):
+        a_props = collections.defaultdict(list)
+        for p in enumerate(a.props):
+            a_props[p[1].name].append(p)
+
+        b_props = collections.defaultdict(list)
+        for p in enumerate(b.props):
+            b_props[p[1].name].append(p)
+
+        a_comps = collections.defaultdict(list)
+        for p in enumerate(a.comps):
+            a_comps[p[1].name].append(p)
+
+        b_comps = collections.defaultdict(list)
+        for p in enumerate(b.comps):
+            b_comps[p[1].name].append(p)
+
+        def _aonly(a, b):
+            l = []
+            for k in set(a.keys()) - set(b.keys()):
+                l.extend([t[0] for t in a[k]])
+            return l
+
+        self.del_prop_a = _aonly(a_props, b_props)
+        self.del_comp_a = _aonly(a_comps, b_comps)
+        if not a.allow_any:
+            self.add_prop_b = _aonly(b_props, a_props)
+            self.add_comp_b = _aonly(b_comps, a_comps)
+        else:
+            self.add_prop_b = []
+            self.add_comp_b = []
+
+        self.diff_comps = []
+        for name in set(a_comps.keys()) & set(b_comps.keys()):
+            for (idx_a, comp_a), (idx_b, comp_b) in zip(a_comps[name], b_comps[name]):
+                diff = ComponentDiff(comp_a, comp_b)
+                if not diff.empty():
+                    self.diff_comps.append((idx_a, idx_b, diff))
+            len_a = len(a_comps[name])
+            len_b = len(b_comps[name])
+            if len_a > len_b:
+                self.del_comp_a.extend(
+                    idx for (idx, comp) in a_comps[name][len_a - len_b :]
+                )
+            elif len_b > len_a:
+                self.add_comp_b.extend(
+                    idx for (idx, comp) in b_comps[name][len_b - len_a :]
+                )
+
+        self.diff_props = []
+        for name in set(a_props.keys()) & set(b_props.keys()):
+            for (idx_a, prop_a), (idx_b, prop_b) in zip(a_props[name], b_props[name]):
+                diff = PropertyDiff(prop_a, prop_b)
+                if not diff.empty():
+                    self.diff_props.append((idx_a, idx_b, diff))
+            len_a = len(a_props[name])
+            len_b = len(b_props[name])
+            if len_a > len_b:
+                self.del_prop_a.extend(
+                    idx for (idx, prop) in a_props[name][len_a - len_b :]
+                )
+            elif len_b > len_a:
+                self.add_prop_b.extend(
+                    idx for (idx, prop) in b_props[name][len_b - len_a :]
+                )
+
+        self.del_prop_a.sort()
+        self.del_comp_a.sort()
+        self.add_prop_b.sort()
+        self.add_comp_b.sort()
+        self.diff_comps.sort(key=lambda v: (v[0], v[1]))
+        self.diff_props.sort(key=lambda v: (v[0], v[1]))
+
+    def empty(self) -> bool:
+        return (
+            not self.del_comp_a
+            and not self.del_prop_a
+            and not self.add_comp_b
+            and not self.add_comp_b
+            and not self.diff_comps
+            and not self.diff_props
+        )
+
+
+class JsonPath(UserList):
     def __init__(self, data):
         super().__init__(data)
 
     @classmethod
-    def decode(cls, s: str) -> JPath:
-        return JPath(
+    def decode(cls, s: str) -> JsonPath:
+        return JsonPath(
             list(s.replace("~1", "/").replace("~0", "~") for s in s.split("/"))
         )
 
@@ -192,75 +381,77 @@ class JPath(UserList):
 
 
 @dataclass
-class JDiff:
-    a_only: list[JPath]
-    unequal: list[tuple[JPath]]
-    b_only: list[JPath]
+class JsonDiff:
+    missing: list[JsonPath]
+    notequal: list[tuple[JsonPath]]
+    unexpected: list[JsonPath]
 
     def empty(self) -> bool:
-        return not self.a_only and not self.unequal and not self.b_only
+        return not self.missing and not self.notequal and not self.unexpected
 
     @classmethod
-    def diff_json(cls, a: dict, b: dict) -> JDiff:
-        ao, unq, bo = JDiff._diff_jval(a, b, JPath([]), JPath([]))
-        return JDiff(ao, unq, bo)
+    def diff_json(cls, a: dict, b: dict) -> JsonDiff:
+        missing, notequal, unexpected = JsonDiff._diff_jval(
+            a, b, JsonPath([]), JsonPath([])
+        )
+        return JsonDiff(missing, notequal, unexpected)
 
     @staticmethod
     def _diff_jval(
-        a, b, apath: JPath, bpath: JPath
-    ) -> tuple[list[JPath], list[JPath], list[JPath]]:
+        a, b, apath: JsonPath, bpath: JsonPath
+    ) -> tuple[list[JsonPath], list[JsonPath], list[JsonPath]]:
         if type(a) != type(b):
             return [], [(apath, bpath)], []
         if isinstance(a, dict):
-            return JDiff._diff_dict(a, b, apath, bpath)
+            return JsonDiff._diff_dict(a, b, apath, bpath)
         if isinstance(a, list):
-            return JDiff._diff_array(a, b, apath, bpath)
+            return JsonDiff._diff_array(a, b, apath, bpath)
         if a != b:
             return [], [(apath, bpath)], []
         return [], [], []
 
     @staticmethod
     def _diff_array(
-        a: list, b: list, apath: JPath, bpath: JPath
-    ) -> tuple[list[JPath], list[JPath], list[JPath]]:
+        a: list, b: list, apath: JsonPath, bpath: JsonPath
+    ) -> tuple[list[JsonPath], list[JsonPath], list[JsonPath]]:
         n = min(len(a), len(b))
-        a_only = [apath + [f"{i}"] for i in range(n, len(a))]
-        b_only = [bpath + [f"{i}"] for i in range(n, len(b))]
-        unequal = []
+        missing = [apath + [f"{i}"] for i in range(n, len(a))]
+        unexpected = [bpath + [f"{i}"] for i in range(n, len(b))]
+        notequal = []
         for i in range(n):
-            ao, unq, bo = JDiff._diff_jval(
+            miss, neq, unex = JsonDiff._diff_jval(
                 a[i], b[i], apath + [f"{i}"], bpath + [f"{i}"]
             )
-            a_only.extend(ao)
-            unequal.extend(unq)
-            b_only.extend(bo)
-        return a_only, unequal, b_only
+            missing.extend(miss)
+            notequal.extend(neq)
+            unexpected.extend(unex)
+        return missing, notequal, unexpected
 
     @staticmethod
     def _diff_dict(
-        a: dict, b: dict, apath: JPath, bpath: JPath
-    ) -> tuple[list[JPath], list[JPath], list[JPath]]:
+        a: dict, b: dict, apath: JsonPath, bpath: JsonPath
+    ) -> tuple[list[JsonPath], list[JsonPath], list[JsonPath]]:
         extra = a.pop("...", None)
-        akeys, both, bkeys = JDiff._split_keys(a, b, apath, bpath)
-        a_only = [apath + [key] for key in akeys]
-        b_only = [bpath + [key] for key in bkeys]
+        akeys, both, bkeys = JsonDiff._split_keys(a, b, apath, bpath)
+        missing = [apath + [key] for key in akeys]
+        unexpected = [bpath + [key] for key in bkeys]
         if extra is not None:
             a["..."] = extra
-            b_only.clear()
+            unexpected.clear()
 
-        unequal = []
+        notequal = []
         for akey, bkey in both:
-            ao, unq, bo = JDiff._diff_jval(
+            miss, neq, unex = JsonDiff._diff_jval(
                 a[akey], b[bkey], apath + [akey], bpath + [bkey]
             )
-            a_only.extend(ao)
-            unequal.extend(unq)
-            b_only.extend(bo)
-        return a_only, unequal, b_only
+            missing.extend(miss)
+            notequal.extend(neq)
+            unexpected.extend(unex)
+        return missing, notequal, unexpected
 
     @staticmethod
     def _split_keys(
-        a: dict, b: dict, apath: JPath, bpath: JPath
+        a: dict, b: dict, apath: JsonPath, bpath: JsonPath
     ) -> tuple[list[str], list[(str, str)], list[str]]:
         """Split the keys of objects a and b into three lists.
 
@@ -305,7 +496,7 @@ class JDiff:
         # Traverse lists
         if isinstance(data, list):
             for v in data:
-                JDiff._normalize(v)
+                JsonDiff._normalize(v)
             return
 
         # Ignore basic types
@@ -402,7 +593,7 @@ class JDiff:
 
         # Normalize subobjects
         for v in data.values():
-            JDiff._normalize(v)
+            JsonDiff._normalize(v)
 
         # Add back localizations and recurrenceOverrides
         if localizations is not None:
@@ -413,7 +604,7 @@ class JDiff:
     @staticmethod
     def normalize_json(data: dict) -> dict:
         data = copy.deepcopy(data)
-        JDiff._normalize(data)
+        JsonDiff._normalize(data)
         return data
 
 
@@ -453,11 +644,46 @@ class JObject:
     def to_json(self) -> dict:
         return copy.deepcopy(self.data)
 
-    def diff_json(self, data: dict) -> JDiff:
-        return JDiff.diff_json(self.data, data)
+    def diff_json(self, data: dict) -> JsonDiff:
+        return JsonDiff.diff_json(self.data, data)
 
     def normalized(self) -> JObject:
-        return JObject(JDiff.normalize_json(self.data))
+        return JObject(JsonDiff.normalize_json(self.data))
+
+    def with_default_props(self) -> JObject:
+        def add_default_props(jval: dict):
+            if isinstance(jval, list):
+                for v in jval:
+                    add_default_props(v)
+            elif isinstance(jval, dict):
+                if "@type" in jval and "..." in jval:
+                    del jval["..."]
+                    match jval.get("@type", None):
+                        case "Event":
+                            if not "uid" in jval:
+                                jval["uid"] = f"{uuid.uuid4()}"
+                            if not "updated" in jval:
+                                jval["updated"] = "2006-01-02T03:04:05Z"
+                            if not "start" in jval:
+                                jval["start"] = "2006-01-02T03:04:05"
+                        case "Group":
+                            if not "entries" in jval:
+                                jval["entries"] = [{"@type": "Event", "...": ""}]
+                        case "Link":
+                            if not "href" in jval:
+                                jval["href"] = f"https://example.com/{uuid.uuid4()}"
+                        case "Task":
+                            if not "uid" in jval:
+                                jval["uid"] = f"{uuid.uuid4()}"
+                            if not "updated" in jval:
+                                jval["updated"] = "2006-01-02T03:04:05Z"
+                        # FIXME to be continued
+                for v in jval.values():
+                    add_default_props(v)
+
+        data = copy.deepcopy(self.data)
+        add_default_props(data)
+        return JObject(data)
 
     @classmethod
     def parse(cls, s: str, default_type="Event") -> JObject:
