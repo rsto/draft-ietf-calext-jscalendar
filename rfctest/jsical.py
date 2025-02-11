@@ -142,7 +142,7 @@ class VObject:
         return vobj
 
     @classmethod
-    def parse(cls, s: str, default_name="VEVENT") -> VObject:
+    def parse(cls, s: str, strict=False) -> VObject:
         # Unfold and split lines
         lines = re.split(r"\r?\n", re.sub(r"\r?\n([ ]|\t)", "", s))
         # Parse example
@@ -152,6 +152,10 @@ class VObject:
             if not line:
                 continue
             if line == "...":
+                if strict:
+                    raise ParseError(
+                        f"Line '...' not allowed in strict mode"
+                    )
                 comp.allow_any = True
                 continue
             prop = Property.parse(line)
@@ -170,10 +174,14 @@ class VObject:
         comp = stack[0]
         if len(comp.comps) == 1 and not comp.props:
             comp = comp.comps[0]
+        elif strict and not comp.name:
+            raise ParseError(
+                f"No iCalendar object found"
+            )
         else:
             if not comp.comps:
                 comp.allow_any = True
-            comp.name = default_name
+            comp.name = "VEVENT"
         return comp
 
 
@@ -458,6 +466,41 @@ class JObject:
 
     def normalized(self) -> JObject:
         return JObject(JDiff.normalize_json(self.data))
+
+    def with_default_props(self) -> JObject:
+        def add_default_props(jval: dict):
+            if isinstance(jval, list):
+                for v in jval:
+                    add_default_props(v)
+            elif isinstance(jval, dict):
+                if "@type" in jval and "..." in jval:
+                    del jval["..."]
+                    match jval.get("@type", None):
+                        case "Event":
+                            if not "uid" in jval:
+                                jval["uid"] = f"{uuid.uuid4()}"
+                            if not "updated" in jval:
+                                jval["updated"] = "2006-01-02T03:04:05Z"
+                            if not "start" in jval:
+                                jval["start"] = "2006-01-02T03:04:05"
+                        case "Group":
+                            if not "entries" in jval:
+                                jval["entries"] = [{"@type": "Event", "...": ""}]
+                        case "Link":
+                            if not "href" in jval:
+                                jval["href"] = f"https://example.com/{uuid.uuid4()}"
+                        case "Task":
+                            if not "uid" in jval:
+                                jval["uid"] = f"{uuid.uuid4()}"
+                            if not "updated" in jval:
+                                jval["updated"] = "2006-01-02T03:04:05Z"
+                        # FIXME to be continued
+                for v in jval.values():
+                    add_default_props(v)
+
+        data = copy.deepcopy(self.data)
+        add_default_props(data)
+        return JObject(data)
 
     @classmethod
     def parse(cls, s: str, default_type="Event") -> JObject:
