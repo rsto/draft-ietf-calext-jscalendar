@@ -43,7 +43,7 @@ class Property:
 
     @staticmethod
     def _key(prop):
-        return (prop.name, prop.value, (Parameter._key(param) for param in prop.params))
+        return (prop.name, prop.value, [Parameter._key(param) for param in prop.params])
 
     def normalize(self):
         self.name = self.name.upper()
