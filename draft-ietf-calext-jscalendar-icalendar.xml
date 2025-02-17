@@ -4575,7 +4575,7 @@ STRUCTURED-DATA;FMTTYPE=application/ld+json;
             <name>Converting the STYLED-DESCRIPTION property</name>
             <sourcecode type="text/calendar"><![CDATA[
 STYLED-DESCRIPTION;VALUE=TEXT;FMTTYPE=text/html:
- <!DOCTYPE html><html><body>hello,<b>world</b></body></html>
+ <!DOCTYPE html><html><body>hello\,<b>world</b></body></html>
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "description": "<!DOCTYPE html><html><body>hello,<b>world</b></body></html>",
