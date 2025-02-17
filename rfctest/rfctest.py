@@ -344,15 +344,15 @@ class HTMLReporter:
   <summary>Test Details</summary>
   <h3>Original examples</h3>
   <h4>iCalendar</h4>
-  <pre>{test.icaltext}</pre>
+  <pre>{html.escape(test.icaltext)}</pre>
   <h4>JSCalendar</h4>
-  <pre>{test.jscaltext}</pre>
+  <pre>{html.escape(test.jscaltext)}</pre>
   <h3>Parsed iCalendar example</h3>
-  <pre>{test.vobject}</pre>
+  <pre>{html.escape(str(test.vobject))}</pre>
   <h3>Parsed JSCalendar example</h3>
-  <pre>{test.jgroup}</pre>
+  <pre>{html.escape(str(test.jgroup))}</pre>
   <h3>Expanded iCalendar example</h3>
-  <pre>{test.expanded_ical}</pre>
+  <pre>{html.escape(test.expanded_ical)}</pre>
 </details>""",
             file=self.file,
         )
@@ -402,11 +402,11 @@ class HTMLReporter:
         print("<details><summary>Details</summary>", file=self.file)
         if test.i2jresult.response:
             print(f"<h3>Backend response</h3>", file=self.file)
-            print(f"<pre>{test.i2jresult.response.decode()}</pre>", file=self.file)
+            print(f"<pre>{html.escape(test.i2jresult.response.decode())}</pre>", file=self.file)
         if test.i2jresult.json_response:
             print(f"<h3>Normalized backend response</h3>", file=self.file)
             s = json.dumps(test.i2jresult.json_response, indent=2)
-            print(f"<pre>{s}</pre>", file=self.file)
+            print(f"<pre>{html.escape(s)}</pre>", file=self.file)
         print("</details>", file=self.file)
 
     def _print_json_diff(
@@ -444,19 +444,19 @@ class HTMLReporter:
             print(f"<pre>{test.j2iresult.error}</pre>", file=self.file)
         if not test.j2iresult.ical_diff.empty():
             print(f"<h3>Expected</h3>", file=self.file)
-            print(f"<pre>{test.vobject}</pre>", file=self.file)
+            print(f"<pre>{html.escape(str(test.vobject))}</pre>", file=self.file)
             print(f"<h3>Got</h3>", file=self.file)
-            print(f"<pre>{test.j2iresult.ical_response}</pre>", file=self.file)
+            print(f"<pre>{html.escape(str(test.j2iresult.ical_response))}</pre>", file=self.file)
 
 
         print("<details>", file=self.file)
         print("<summary>Details</summary>", file=self.file)
         if test.j2iresult.response:
             print(f"<h3>Backend response</h3>", file=self.file)
-            print(f"<pre>{test.j2iresult.response.decode()}</pre>", file=self.file)
+            print(f"<pre>{html.escape(test.j2iresult.response.decode())}</pre>", file=self.file)
         if test.j2iresult.ical_response:
             print(f"<h3>Normalized backend response</h3>", file=self.file)
-            print(f"<pre>{test.j2iresult.ical_response}</pre>", file=self.file)
+            print(f"<pre>{html.escape(str(test.j2iresult.ical_response))}</pre>", file=self.file)
         print("</details>", file=self.file)
 
 
