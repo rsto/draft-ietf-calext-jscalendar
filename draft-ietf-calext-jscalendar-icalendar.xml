@@ -5025,22 +5025,6 @@ URL:https://example.com/calendar/birtdays.ics
               </td>
             </tr>
             <tr>
-              <td>locale</td>
-              <td>
-                <xref target="RFC8984" section="4.2.8" sectionFormat="comma"/>
-              </td>
-              <td>TBD</td>
-              <td/>
-            </tr>
-            <tr>
-              <td>localizations</td>
-              <td>
-                <xref target="RFC8984" section="4.6.1" sectionFormat="comma"/>
-              </td>
-              <td>TBD</td>
-              <td/>
-            </tr>
-            <tr>
               <td>locations</td>
               <td>
                 <xref target="RFC8984" section="4.2.5" sectionFormat="comma"/>
@@ -5193,14 +5177,6 @@ URL:https://example.com/calendar/birtdays.ics
               </td>
             </tr>
             <tr>
-              <td>sentBy</td>
-              <td>
-                <xref target="RFC8984" section="4.4.5" sectionFormat="comma"/>
-              </td>
-              <td>TBD</td>
-              <td/>
-            </tr>
-            <tr>
               <td>sequence</td>
               <td>
                 <xref target="RFC8984" section="4.1.7" sectionFormat="comma"/>
@@ -5211,14 +5187,6 @@ URL:https://example.com/calendar/birtdays.ics
                   <xref target="ical-prop-sequence"/>
                 </t>
               </td>
-            </tr>
-            <tr>
-              <td>showWithoutTime</td>
-              <td>
-                <xref target="RFC8984" section="4.2.4" sectionFormat="comma"/>
-              </td>
-              <td>TBD</td>
-              <td/>
             </tr>
             <tr>
               <td>start</td>
@@ -5291,14 +5259,6 @@ URL:https://example.com/calendar/birtdays.ics
                   <xref target="ical-prop-dtstamp"/>, <xref target="ical-prop-last-modified"/>
                 </t>
               </td>
-            </tr>
-            <tr>
-              <td>useDefaultAlerts</td>
-              <td>
-                <xref target="RFC8984" section="4.5.1" sectionFormat="comma"/>
-              </td>
-              <td>TBD</td>
-              <td/>
             </tr>
             <tr>
               <td>virtualLocations</td>
@@ -5516,14 +5476,6 @@ URL:https://example.com/calendar/birtdays.ics
                   <xref target="jscal-link">Link object</xref>
                 </t>
               </td>
-            </tr>
-            <tr>
-              <td>locale</td>
-              <td>
-                <xref target="RFC8984" section="4.2.8" sectionFormat="comma"/>
-              </td>
-              <td>TBD</td>
-              <td/>
             </tr>
             <tr>
               <td>prodId</td>
@@ -6952,7 +6904,27 @@ URL:https://example.com/calendar/birtdays.ics
       </section>
       <section>
         <name>Unsupported JSCalendar Elements</name>
-        <t>Unfinished JSCalendar elements and conversion rules are marked with the term "TBD" in <xref target="jscal-to-icalendar"/>.</t>
+        <section>
+          <name>Common Properties</name>
+          <t>The following properties are listed in <xref target="RFC8984" section="4" sectionFormat="comma"/> as being common to the Event, Task and (with restrictions) Group objects, but they do not convert to a standard iCalendar element.</t>
+          <ul>
+            <li>
+              <xref target="RFC8984" section="4.2.8" sectionFormat="comma">locale</xref>
+            </li>
+            <li>
+              <xref target="RFC8984" section="4.6.1" sectionFormat="comma">localizations</xref>
+            </li>
+            <li>
+              <xref target="RFC8984" section="4.4.5" sectionFormat="comma">sentBy</xref>
+            </li>
+            <li>
+              <xref target="RFC8984" section="4.2.4" sectionFormat="comma">showWithoutTime</xref>
+            </li>
+            <li>
+              <xref target="RFC8984" section="4.5.1" sectionFormat="comma">useDefaultAlerts</xref>
+            </li>
+          </ul>
+        </section>
       </section>
     </section>
   </back>
