@@ -2459,8 +2459,6 @@ DUE:20060102T030405Z
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VEVENT
 BEGIN:VALARM
-TRIGGER:-PT5M
-ACTION:DISPLAY
 ACKNOWLEDGED:20241002T114703Z
 ...
 ]]></sourcecode>
@@ -2507,7 +2505,6 @@ ACKNOWLEDGED:20241002T114703Z
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VEVENT
 BEGIN:VALARM
-TRIGGER:-PT5M
 ACTION:DISPLAY
 ...
 ]]></sourcecode>
@@ -2526,7 +2523,6 @@ ACTION:DISPLAY
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VEVENT
 BEGIN:VALARM
-TRIGGER:-PT5M
 ACTION:AUDIO
 ...
 ]]></sourcecode>
