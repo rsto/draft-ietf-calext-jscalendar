@@ -61,12 +61,12 @@
       </section>
       <section anchor="scope-and-goals">
         <name>Scope and Goals</name>
-        <t>This document outlines how to convert calendaring information between the iCalendar and JSCalendar data formats.  It describes which elements are common to both, but also highlights where the two formats differ. For each common element, it defines a conversion rule and includes an example how to convert this element. All iCalendar and JSCalendar elements currently registered at IANA are in scope, but not all of these elements are common to both formats.</t>
+        <t>This document outlines how to convert calendaring information between the iCalendar and JSCalendar data formats.  It describes which elements are common to both, but also highlights where the two formats differ. For each common element, it defines a conversion rule and includes an example of how to convert that element. All iCalendar and JSCalendar elements currently registered at IANA are in scope, but not all of these elements are common to both formats.</t>
         <t>For elements that have no counterpart in the other format, it is the goal of this document to define how to preserve them during conversion, but in general it is not the goal to achieve this by defining new standard elements. Instead, this document defines special-purpose properties to preserve arbitrary elements. These conversion-specific properties are defined in Section <xref target="ical-prop-jsprop" format="counter"/> for iCalendar, and Sections <xref target="jscal-prop-icalcomponent" format="counter"/> and <xref target="jscal-prop-icalproperty" format="counter"/> for JSCalendar. <xref target="appendix-discrepancies"/> further outlines the discrepancies between the two formats.</t>
       </section>
       <section>
         <name>How to Read the Examples</name>
-        <t>Later sections contain examples that illustrate how to convert between the iCalendar and JSCalendar data formats.  The notation of these examples is such that their main points should be clear to the reader, but their contents can also be parsed for automated testing.  The authors of this document implemented a tool that extracts these examples for interoperation testing.  The following sections define the notation for such examples.</t>
+        <t>Later sections contain examples that illustrate how to convert between the iCalendar and JSCalendar data formats.  The notation of these examples is such that their main points should be clear to the reader, but their contents can also be parsed for automated testing. The following sections define the notation for such examples.</t>
         <section anchor="notation-icalendar">
           <name>iCalendar Examples</name>
           <t>An iCalendar example contains either an extract or a complete representation of iCalendar data.  It always represents an iCalendar object, even if the example only depicts non-VCALENDAR components or properties. The following rules apply:</t>
@@ -789,7 +789,7 @@ END:PARTICIPANT
         </section>
         <section anchor="ical-comp-valarm">
           <name>VALARM</name>
-          <t>The <xref target="RFC5545" section="3.6.6" sectionFormat="parens">VALARM component</xref> converts to a <xref target="RFC8984" section="4.5.2" sectionFormat="parens">Alert object</xref>.</t>
+          <t>The <xref target="RFC5545" section="3.6.6" sectionFormat="parens">VALARM component</xref> converts to an <xref target="RFC8984" section="4.5.2" sectionFormat="parens">Alert object</xref>.</t>
           <t>Its properties convert as follows:</t>
           <table anchor="ical-comp-valarm-props">
             <name>Properties of the VALARM component</name>
@@ -895,7 +895,6 @@ END:VALARM
         <section anchor="ical-comp-vevent">
           <name>VEVENT</name>
           <t>The <xref target="RFC5545" section="3.6.1" sectionFormat="parens">VEVENT component</xref> converts to a <xref target="RFC8984" section="2.1" sectionFormat="parens">Event object</xref>.</t>
-          <t>VEVENT components with different UID property values in the same iCalendar object convert to different entries in the Group.  They sort in the same order as in the VCALENDAR component.</t>
           <t>Its properties convert as follows:</t>
           <table anchor="ical-comp-vevent-props">
             <name>Properties of the VEVENT component</name>
@@ -1334,6 +1333,7 @@ END:VALARM
             </tbody>
           </table>
           <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">"iCalComponent" property</xref> of the Event object.</t>
+          <t>VEVENT components with different UID property values in the same iCalendar object convert to different entries in the Group.  They sort in the same order as in the VCALENDAR component.</t>
           <t>The following example illustrates how to convert the VEVENT component:</t>
           <figure anchor="test-ical-comp-vevent">
             <name>Converting the VEVENT component</name>
@@ -1357,7 +1357,6 @@ END:VCALENDAR
   "entries": [
     {
       "@type": "Event",
-      "showWithoutTime": false,
       "start": "2006-01-02T03:04:05",
       "timeZone": "Etc/UTC",
       "uid": "DE935D01-3DF7-4201-B61A-D77D05C8B21A",
@@ -1968,7 +1967,6 @@ DTSTART;TZID=CustomTz:20080708T130000
         <section anchor="ical-comp-vtodo">
           <name>VTODO</name>
           <t>The <xref target="RFC5545" section="3.6.2" sectionFormat="parens">VTODO component</xref> converts to a <xref target="RFC8984" section="2.2" sectionFormat="parens">Task object</xref>.</t>
-          <t>VTODO components with different UID property values in the same iCalendar object convert to different entries in the Group.  They sort in the same order as in the VCALENDAR component.</t>
           <t>Its properties convert as follows:</t>
           <table anchor="ical-comp-vtodo-props">
             <name>Properties of the VTODO component</name>
@@ -2418,6 +2416,7 @@ DTSTART;TZID=CustomTz:20080708T130000
             </tbody>
           </table>
           <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">"iCalComponent" property</xref> of the Task object.</t>
+          <t>VTODO components with different UID property values in the same iCalendar object convert to different entries in the Group.  They sort in the same order as in the VCALENDAR component.</t>
           <t>The following example illustrates how to convert the VTODO component:</t>
           <figure anchor="test-ical-comp-vtodo">
             <name>Converting the VTODO component</name>
@@ -2744,7 +2743,7 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
             </tbody>
           </table>
           <t>If no ROLE parameter is set, then the "attendee" role in the "roles" property <bcp14>MUST</bcp14> be set.</t>
-          <t>Every calendar address value of the DELEGATED-FROM, DELEGATED-TO, or MEMBER parameters converts to the identifier of an Participant object. This identifier is determined by finding that Participant object in the "participants" property, which has a calendarAddress property value matching the parameter value. If no such Participant object exists after all properties and components have been converted, then a new Participant object having that calendarAddress property value is created. If multiple Participant objects match, then choosing the Participant identifier is implementation-specific.</t>
+          <t>Every calendar address value of the DELEGATED-FROM, DELEGATED-TO, or MEMBER parameters converts to the identifier of a Participant object. This identifier is determined by finding that Participant object in the "participants" property, which has a calendarAddress property value matching the parameter value. If no such Participant object exists after all properties and components have been converted, then a new Participant object having that calendarAddress property value is created. If multiple Participant objects match, then choosing the Participant identifier is implementation-specific.</t>
           <t>The PARTSTAT of an ATTENDEE property in a VTODO component converts not only to the "participationStatus" property of the Participant object, but also to its progress property if the PARTSTAT parameter value is specific for VTODO components:</t>
           <table anchor="ical-prop-attendee-param-partstat">
             <name>Converting the PARTSTAT parameter in a VTODO component to Participant properties</name>
@@ -3477,7 +3476,7 @@ DURATION:PT1H
         <section anchor="ical-prop-exdate">
           <name>EXDATE</name>
           <t>
-            The <xref target="RFC5545" section="3.8.5.1" sectionFormat="parens">EXDATE property</xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="1.4.9" sectionFormat="parens">PatchObject object</xref>.  The converted object is set in the "recurrenceOverrides" property of the Event or Task object.
+            The <xref target="RFC5545" section="3.8.5.1" sectionFormat="parens">EXDATE property</xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="1.4.9" sectionFormat="parens">PatchObject value</xref>.  The converted object is set in the "recurrenceOverrides" property of the Event or Task object.
           </t>
           <t>The property value converts to the key in the "recurrenceOverrides" property value. See <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values. The date-time <bcp14>MUST</bcp14> be relative to the timezone identified by the "timeZone" property of the Event or Task.  The PatchObject value <bcp14>MUST</bcp14> set the "excluded" property to "true" and <bcp14>MUST NOT</bcp14> set any other property.</t>
           <t>The following example illustrates how to convert the EXDATE property:</t>
@@ -3520,7 +3519,7 @@ EXDATE:20230801T130000Z
           <t>
             The <xref target="RFC5545" section="3.8.1.6" sectionFormat="parens">GEO property</xref> in a VLOCATION component converts to the <xref target="RFC8984" section="4.2.5" sectionFormat="parens">"coordinates" property</xref> of the Location object.
           </t>
-          <t>The pair of FLOAT values converts to an URI with the <xref target="RFC5870">"geo" scheme</xref>.  The first FLOAT value converts to the "coord-a" part of the URI, the second FLOAT value to the "coord-b" part. A preceding plus sign (+) of the FLOAT value <bcp14>MUST</bcp14> be omitted, a preceding minus sign (-) <bcp14>MUST</bcp14> be preserved.  The optional "coord-c" part of the URI <bcp14>MUST</bcp14> be omitted.</t>
+          <t>The pair of FLOAT values converts to a URI with the <xref target="RFC5870">"geo" scheme</xref>.  The first FLOAT value converts to the "coord-a" part of the URI, the second FLOAT value to the "coord-b" part. A preceding plus sign (+) of the FLOAT value <bcp14>MUST</bcp14> be omitted, a preceding minus sign (-) <bcp14>MUST</bcp14> be preserved.  The optional "coord-c" part of the URI <bcp14>MUST</bcp14> be omitted.</t>
           <t>The following examples illustrate how to convert the GEO property:</t>
           <figure anchor="test-ical-prop-geo">
             <name>Converting the GEO property in a VEVENT</name>
@@ -3600,7 +3599,7 @@ GEO:48.858222;2.2945
               </tr>
             </tbody>
           </table>
-          <t>Implementations <bcp14>MAY</bcp14> preserve the fact that the Link object got converted from an IMAGE property. To so, they <bcp14>MUST</bcp14> set the <xref target="jscal-prop-icalproperty">iCalProperty</xref> on the Link object.</t>
+          <t>Implementations <bcp14>MAY</bcp14> preserve the fact that the Link object got converted from an IMAGE property. To do so, they <bcp14>MUST</bcp14> set the <xref target="jscal-prop-icalproperty">iCalProperty</xref> on the Link object.</t>
           <t>The following example illustrates how to convert the IMAGE property:</t>
           <figure anchor="test-ical-prop-image">
             <name>Converting the IMAGE property</name>
@@ -4145,7 +4144,7 @@ BEGIN:VEVENT
         <section anchor="ical-prop-rdate">
           <name>RDATE</name>
           <t>
-              The <xref target="RFC5545" section="3.8.5.2" sectionFormat="parens">RDATE property</xref> of type DATE or DATE-TIME in a VEVENT, VTODO, DAYLIGHT or STANDARD component converts to a <xref target="RFC8984" section="1.4.9" sectionFormat="parens">PatchObject object</xref>.  The converted object is set in the "recurrenceOverrides" property of the Event, Task, or TimeZoneRule object.
+              The <xref target="RFC5545" section="3.8.5.2" sectionFormat="parens">RDATE property</xref> of type DATE or DATE-TIME in a VEVENT, VTODO, DAYLIGHT or STANDARD component converts to a <xref target="RFC8984" section="1.4.9" sectionFormat="parens">PatchObject value</xref>.  The converted object is set in the "recurrenceOverrides" property of the Event, Task, or TimeZoneRule object.
           </t>
           <t>The property value converts to the key in the "recurrenceOverrides" property value. See <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values. For Event Task objects, the date-time <bcp14>MUST</bcp14> be relative to the timezone identified by the "timeZone" property, for TimeZoneRule objects the date-time is relative to the UTC offset specified in the "offsetFrom" property.  The PatchObject value <bcp14>MUST</bcp14> be an empty JSON object.</t>
           <t>An RDATE property of value type PERIOD does not convert to a standard JSCalendar element.  Implementations <bcp14>MAY</bcp14> convert it to the <xref target="jscal-prop-icalcomponent">"iCalComponent" property</xref> of the Event, Task, or TimeZoneRule object.</t>
@@ -4185,7 +4184,7 @@ RDATE:20230805T170000Z
             The <xref target="RFC5545" section="3.8.4.5" sectionFormat="parens">RELATED-TO property</xref> in a VEVENT, VTODO, or VALARM component converts to a <xref target="RFC8984" section="1.4.10" sectionFormat="parens">Relation object</xref>.  The converted object is set in the "relatedTo" property of the <xref target="RFC8984" section="4.1.3" sectionFormat="parens">Event or Task object</xref>, or the <xref target="RFC8984" section="4.5.2" sectionFormat="parens">Alert object</xref>.
           </t>
           <t>The property value in a VEVENT or VTODO converts as-is to the key of the Relation object in the "relatedTo" property. The property value in a VALARM converts to the same value as the key of that Alert object, which represents the VALARM component having that property value set in the UID property. Any RELTYPE parameters convert to the "relations" property in that Relation object. The parameter values convert in lowercase.</t>
-          <t>The <xref target="RFC9253" section="6.2" sectionFormat="parens">GAP parameter</xref> does not convert a standard JSCalendar element. Implementations <bcp14>MAY</bcp14> convert it to the <xref target="jscal-prop-icalproperty">"iCalProperty" property</xref> of the Relation object.</t>
+          <t>The <xref target="RFC9253" section="6.2" sectionFormat="parens">GAP parameter</xref> does not convert to a standard JSCalendar element. Implementations <bcp14>MAY</bcp14> convert it to the <xref target="jscal-prop-icalproperty">"iCalProperty" property</xref> of the Relation object.</t>
           <t>The following examples illustrate how to convert the RELATED-TO property:</t>
           <figure anchor="test-ical-prop-related-to">
             <name>Converting the RELATED-TO property in a VEVENT</name>
@@ -4507,7 +4506,7 @@ SOURCE;VALUE=URI:https://example.com/holidays.ics
               </tr>
             </tbody>
           </table>
-          <t>Implementations <bcp14>MAY</bcp14> preserve the fact that the Link object got converted from a STRUCTURED-DATA property. To so, they <bcp14>MUST</bcp14> set the <xref target="jscal-prop-icalproperty">iCalProperty</xref> on the Link object.</t>
+          <t>Implementations <bcp14>MAY</bcp14> preserve the fact that the Link object got converted from a STRUCTURED-DATA property. To do so, they <bcp14>MUST</bcp14> set the <xref target="jscal-prop-icalproperty">iCalProperty</xref> on the Link object.</t>
           <t>The following example illustrates how to convert the STRUCTURED-DATA property:</t>
           <figure anchor="test-ical-prop-structured-data">
             <name>Converting the STRUCTURED-DATA property</name>
@@ -4540,7 +4539,7 @@ STRUCTURED-DATA;FMTTYPE=application/ld+json;
           <t>The <xref target="RFC9073" section="6.5" sectionFormat="parens">STYLED-DESCRIPTION property</xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.2.2" sectionFormat="parens">"description" property</xref> of the Event or Task object under the following conditions:</t>
           <ul>
             <li>The property value type <bcp14>MUST</bcp14> be TEXT.</li>
-            <li>The FMTTYPE parameter either <bcp14>MUST NOT</bcp14> not be set, or its value <bcp14>MUST</bcp14> be a <xref target="RFC6838">media type</xref> with top-level type "text".</li>
+            <li>The FMTTYPE parameter either <bcp14>MUST NOT</bcp14> be set, or its value <bcp14>MUST</bcp14> be a <xref target="RFC6838">media type</xref> with top-level type "text".</li>
             <li>Its DERIVED parameter value <bcp14>MUST NOT</bcp14> be TRUE. If the value is TRUE, then another property in the same component is expected to contain its description.</li>
           </ul>
           <t>If these conditions are not met, implementations MAY preserve the property in the <xref target="jscal-prop-icalcomponent">"iCalComponent" property</xref>.</t>
@@ -4797,18 +4796,18 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             The <xref target="RFC5545" section="3.8.4.6" sectionFormat="parens">URL property</xref> in a VEVENT, VTODO, VCALENDAR, or PARTICIPANT component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the "links" property of the Event, Task, Group, or Participant object.
           </t>
           <t>The property value converts to the "href" property of the Link object.</t>
-          <t>Implementations <bcp14>MAY</bcp14> preserve the fact that the Link object got converted from an URL property. To so, they <bcp14>MUST</bcp14> set the <xref target="jscal-prop-icalproperty">iCalProperty</xref> on the Link object.</t>
+          <t>Implementations <bcp14>MAY</bcp14> preserve the fact that the Link object got converted from a URL property. To do so, they <bcp14>MUST</bcp14> set the <xref target="jscal-prop-icalproperty">iCalProperty</xref> on the Link object.</t>
           <t>The following example illustrates how to convert the URL property:</t>
           <figure anchor="test-ical-prop-url">
             <name>Converting the IMAGE property</name>
             <sourcecode type="text/calendar"><![CDATA[
-URL:https://example.com/calendar/birtdays.ics
+URL:https://example.com/calendar/birthdays.ics
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "links": {
   "3": {
     "@type": "Link",
-    "href": "https://example.com/calendar/birtdays.ics",
+    "href": "https://example.com/calendar/birthdays.ics",
     "iCalProperty": {
       "@type": "ICalProperty",
       "name": "url"
@@ -5277,10 +5276,10 @@ URL:https://example.com/calendar/birtdays.ics
         <t>Remarks:</t>
         <ul>
           <li>
-            <t>The descriptionContentType property value determines if to convert the "description" property to the DESCRIPTION or STYLED-DESCRIPTION property. A description of content type "text/plain" converts to the DESCRIPTION property. Any other description converts to a STYLED-DESCRIPTION; in this case, a plain text version of the rich-text description <bcp14>SHOULD</bcp14> be set in the DESCRIPTION property and its DERIVED parameter <bcp14>MUST</bcp14> be set to "TRUE".</t>
+            <t>The descriptionContentType property value determines if the "description" property converts to the DESCRIPTION or STYLED-DESCRIPTION property. A description of content type "text/plain" converts to the DESCRIPTION property. Any other description converts to a STYLED-DESCRIPTION; in this case, a plain text version of the rich-text description <bcp14>SHOULD</bcp14> be set in the DESCRIPTION property and its DERIVED parameter <bcp14>MUST</bcp14> be set to "TRUE". How to derive plain text from rich-text is implementation-specific.</t>
           </li>
           <li>
-            <t>The entries in the "recurrenceOverrides" property convert depending on the contents of the patch object value. A patch object that sets the "excluded" property to "true" converts to an EXDATE property for the date-time of that recurrence instance. An empty patch object converts to an RDATE property. Any other patch object converts to a recurrence override component in the embedding VCALENDAR component.</t>
+            <t>The entries in the "recurrenceOverrides" property convert depending on the contents of the PatchObject value. A PatchObject that sets the "excluded" property to "true" converts to an EXDATE property for the date-time of that recurrence instance. An empty PatchObject converts to an RDATE property. Any other PatchObject converts to a recurrence override component in the embedding VCALENDAR component.</t>
           </li>
           <li>
             <t>The replyTo property converts to the ORGANIZER property. If the "replyTo" property value only defines a single scheduling method then the URI value of that method converts to the ORGANIZER property value. If the "replyTo" property defines multiple scheduling methods, and a Participant object with a calendarAddress property value matching one of the replyTo URIs exists in the same Event or Task, then the URI matching the "calendarAddress" property converts to the ORGANIZER property value. Otherwise choosing the ORGANIZER property value is implementation-specific. TBD how to convert other replyTo methods.</t>
@@ -5636,9 +5635,9 @@ URL:https://example.com/calendar/birtdays.ics
         <name>Location</name>
         <t>The <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref> converts to either a <xref target="ical-prop-location">LOCATION</xref>, <xref target="ical-prop-geo">GEO</xref>, or <xref target="ical-prop-geo">DTEND</xref> property, or it converts to a <xref target="ical-comp-vlocation">VLOCATION component</xref>. Which iCalendar element to choose is implementation-specific. As a guideline:</t>
         <ul>
-          <li>Choose LOCATION, if only the "title" property is set and the iCalendar component not already contains a LOCATION property. The title property converts to the LOCATION property value.</li>
-          <li>Choose GEO, if only the "coordinates" property is set the iCalendar component not already contains a GEO property. The coordinates property converts to the GEO property value. TBD - How to convert arbitrary geo: URIs?</li>
-          <li>Choose DTEND, if the embedding object is an Event, only the timeZone and the relativeTo properties are set, the "relativeTo" property value is "end" and the iCalendar component not already contains a DTEND property. The timeZone property converts to the TZID parameter of the DTEND property. The duration of the embedding Event object determines the DTEND property value.</li>
+          <li>Choose LOCATION, if only the "title" property is set and the iCalendar component does not already contain a LOCATION property. The title property converts to the LOCATION property value.</li>
+          <li>Choose GEO, if only the "coordinates" property is set and the iCalendar component does not already contain a GEO property. The coordinates property converts to the GEO property value. TBD - How to convert arbitrary geo: URIs?</li>
+          <li>Choose DTEND, if the embedding object is an Event, only the timeZone and the relativeTo properties are set, the "relativeTo" property value is "end" and the iCalendar component does not already contain a DTEND property. The timeZone property converts to the TZID parameter of the DTEND property. The duration of the embedding Event object determines the DTEND property value.</li>
           <li>Choose the VLOCATION component otherwise.</li>
         </ul>
         <t>Implementations <bcp14>MAY</bcp14> convert one of the Location objects that convert to a VLOCATION also to the LOCATION property; converting the title or description property to the LOCATION property value is a reasonable choice. The DERIVED parameter <bcp14>MUST</bcp14> be set on the LOCATION property.</t>
@@ -5802,14 +5801,6 @@ URL:https://example.com/calendar/birtdays.ics
               </td>
             </tr>
             <tr>
-              <td>invitedBy</td>
-              <td>
-                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
-              </td>
-              <td>TBD</td>
-              <td/>
-            </tr>
-            <tr>
               <td>memberOf</td>
               <td>
                 <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
@@ -5912,20 +5903,12 @@ URL:https://example.com/calendar/birtdays.ics
               <td>TBD</td>
               <td/>
             </tr>
-            <tr>
-              <td>sentBy</td>
-              <td>
-                <xref target="RFC8984" section="4.4.5" sectionFormat="comma"/>
-              </td>
-              <td>TBD</td>
-              <td/>
-            </tr>
           </tbody>
         </table>
         <t>Remarks:</t>
         <ul>
           <li>
-            <t>The "optional" role converts to the "OPT-PARTICIPANT" ROLE parameter value, the "chair" role to "CHAIR", "informational" to "NON-PARTICIPANT". The "attendee" role does convert to the ROLE parameter, it is implied by the ATTENDEE property. The "owner" role does not convert to the ROLE parameter, if the property value of the ATTENDEE is equal to the value of the ORGANIZER property in the same component. All other roles require a PARTICIPANT component and convert to the PARTICIPANT-TYPE property in that component.</t>
+            <t>The "optional" role converts to the "OPT-PARTICIPANT" ROLE parameter value, the "chair" role to "CHAIR", "informational" to "NON-PARTICIPANT". The "attendee" role does not convert to the ROLE parameter, it is implied by the ATTENDEE property. The "owner" role does not convert to the ROLE parameter, if the property value of the ATTENDEE is equal to the value of the ORGANIZER property in the same component. All other roles require a PARTICIPANT component and convert to the PARTICIPANT-TYPE property in that component.</t>
           </li>
           <li>
             <t>The progress property converts to the PARTSTAT parameter as outlined in <xref target="ical-prop-attendee-param-partstat"/>.</t>
@@ -6321,7 +6304,7 @@ URL:https://example.com/calendar/birtdays.ics
               <tt>ICalComponent</tt> (optional)</dd>
             <dt>Description</dt>
             <dd>
-              <t>This contains information about an iCalendar component that got partially or fully converted to JSCalendar.  It allows to preserve the name of the iCalendar component and some or all of its properties and subcomponents.</t>
+              <t>This contains information about an iCalendar component that got partially or fully converted to JSCalendar.  It allows for preserving the name of the iCalendar component and some or all of its properties and subcomponents.</t>
               <t>An ICalComponent object has the following properties:</t>
               <dl>
                 <dt>@type: String (mandatory)</dt>
@@ -6355,7 +6338,7 @@ URL:https://example.com/calendar/birtdays.ics
               <tt>ICalProperty</tt> (optional)</dd>
             <dt>Description:</dt>
             <dd>
-              <t>This contains conversion-related information about an iCalendar property that got partially or fully converted to JSCalendar.  It allows to preserve the name of the "iCalendar" property and some or all of its parameters.</t>
+              <t>This contains conversion-related information about an iCalendar property that got partially or fully converted to JSCalendar.  It allows for preserving the name of the "iCalendar" property and some or all of its parameters.</t>
               <t>An ICalProperty object has the following properties:</t>
               <dl>
                 <dt>@type: String (mandatory)</dt>
@@ -6381,7 +6364,7 @@ URL:https://example.com/calendar/birtdays.ics
             <dd>
               <tt>Id[Location]</tt> (optional)</dd>
             <dt>Description:</dt>
-            <dd>This represents locations associated with the participant. In contrast to the "locationId" property, this allows to associate multiple locations with the Participant object, and to express that a location just is relevant for this participant.</dd>
+            <dd>This represents locations associated with the participant. In contrast to the single-valued "locationId" property, this allows for associating multiple locations with the Participant object, and to express that a location only is relevant for this participant.</dd>
           </dl>
         </section>
         <section anchor="jscal-prop-schedule-agent">
@@ -6396,7 +6379,7 @@ URL:https://example.com/calendar/birtdays.ics
               <tt>String</tt> (optional, default "server")</dd>
             <dt>Description:</dt>
             <dd>
-              <t>This property represents the <xref target="RFC6638" section="7.1" sectionFormat="parens">SCHEDULE-AGENT parameter</xref> specified on an ORGANIZER property. In context of scheduling as outlined in <xref target="RFC6638"/>, a scheduling client can set this property to indicate who is responsible for sending scheduling messages to the organizer in the "replyTo" property. The same values as for the "scheduleAgent" property of the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref> are allowed, the "none" value indicates that no scheduling message is to be sent to the organizer. The property <bcp14>MUST NOT</bcp14> be preserved in the JSCalendar object on the server or appear in a scheduling message. If this property is set, then the "replyTo" property <bcp14>MUST</bcp14> be set.</t>
+              <t>This property represents the <xref target="RFC6638" section="7.1" sectionFormat="parens">SCHEDULE-AGENT parameter</xref> specified on an ORGANIZER property. In the context of scheduling as outlined in <xref target="RFC6638"/>, a scheduling client can set this property to indicate who is responsible for sending scheduling messages to the organizer in the "replyTo" property. The same values as for the "scheduleAgent" property of the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref> are allowed, the "none" value indicates that no scheduling message is to be sent to the organizer. The property <bcp14>MUST NOT</bcp14> be preserved in the JSCalendar object on the server or appear in a scheduling message. If this property is set, then the "replyTo" property <bcp14>MUST</bcp14> be set.</t>
             </dd>
           </dl>
         </section>
@@ -6412,7 +6395,7 @@ URL:https://example.com/calendar/birtdays.ics
               <tt>Boolean</tt> (optional, default "false")</dd>
             <dt>Description:</dt>
             <dd>
-              <t>This property represents the <xref target="RFC6638" section="7.2" sectionFormat="parens">SCHEDULE-FORCE-SEND parameter</xref> specified on an ORGANIZER property. In context of scheduling as outlined in <xref target="RFC6638"/>, a scheduling client can set this property to true to request that the server send a scheduling message to the organizer defined in the "replyTo" property, when it would not normally do so (e.g., if no significant change is made the object or the scheduleAgent is set to client). The property <bcp14>MUST NOT</bcp14> be preserved in the JSCalendar object on the server or appear in a scheduling message. If this property is set, then the "replyTo" property <bcp14>MUST</bcp14> be set.</t>
+              <t>This property represents the <xref target="RFC6638" section="7.2" sectionFormat="parens">SCHEDULE-FORCE-SEND parameter</xref> specified on an ORGANIZER property. In the context of scheduling as outlined in <xref target="RFC6638"/>, a scheduling client can set this property to true to request that the server send a scheduling message to the organizer defined in the "replyTo" property, when it would not normally do so (e.g., if no significant change is made to the object or the scheduleAgent is set to "client"). The property <bcp14>MUST NOT</bcp14> be preserved in the JSCalendar object on the server or appear in a scheduling message. If this property is set, then the "replyTo" property <bcp14>MUST</bcp14> be set.</t>
             </dd>
           </dl>
         </section>
@@ -6428,7 +6411,7 @@ URL:https://example.com/calendar/birtdays.ics
               <tt>String[]</tt> (optional)</dd>
             <dt>Description:</dt>
             <dd>
-              <t>This property represents the <xref target="RFC6638" section="7.3" sectionFormat="parens">SCHEDULE-STATUS parameter</xref> specified on an ORGANIZER property. In context of scheduling as outlined in <xref target="RFC6638"/>, the scheduling client or server can set this property to a list of status codes, returned from processing the most recent scheduling message sent to the organizer defined in the "replyTo" property. The status codes <bcp14>MUST</bcp14> be valid "statcode" values as defined in the ABNF in <xref target="RFC5545" section="3.8.8.3"/>.  Servers <bcp14>MUST</bcp14> only add or change this property when they send a scheduling message to the organizer. Clients <bcp14>SHOULD NOT</bcp14> change or remove this property if it was provided by the server. Clients <bcp14>MAY</bcp14> add, change, or remove the property for participants where the client is handling the scheduling. This property <bcp14>MUST NOT</bcp14> be included in scheduling messages.</t>
+              <t>This property represents the <xref target="RFC6638" section="7.3" sectionFormat="parens">SCHEDULE-STATUS parameter</xref> specified on an ORGANIZER property. In the context of scheduling as outlined in <xref target="RFC6638"/>, the scheduling client or server can set this property to a list of status codes, returned from processing the most recent scheduling message sent to the organizer defined in the "replyTo" property. The status codes <bcp14>MUST</bcp14> be valid "statcode" values as defined in the ABNF in <xref target="RFC5545" section="3.8.8.3"/>.  Servers <bcp14>MUST</bcp14> only add or change this property when they send a scheduling message to the organizer. Clients <bcp14>SHOULD NOT</bcp14> change or remove this property if it was provided by the server. Clients <bcp14>MAY</bcp14> add, change, or remove the property for participants where the client is handling the scheduling. This property <bcp14>MUST NOT</bcp14> be included in scheduling messages.</t>
             </dd>
           </dl>
         </section>
@@ -6906,7 +6889,7 @@ URL:https://example.com/calendar/birtdays.ics
         <name>Unsupported JSCalendar Elements</name>
         <section>
           <name>Common Properties</name>
-          <t>The following properties are listed in <xref target="RFC8984" section="4" sectionFormat="comma"/> as being common to the Event, Task and (with restrictions) Group objects, but they do not convert to a standard iCalendar element.</t>
+          <t>The following properties are defined in <xref target="RFC8984" section="4" sectionFormat="comma"/> for the Event, Task and (with restrictions) Group objects, but they do not convert to a standard iCalendar element.</t>
           <ul>
             <li>
               <xref target="RFC8984" section="4.2.8" sectionFormat="comma">locale</xref>
@@ -6922,6 +6905,19 @@ URL:https://example.com/calendar/birtdays.ics
             </li>
             <li>
               <xref target="RFC8984" section="4.5.1" sectionFormat="comma">useDefaultAlerts</xref>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <name>Participant Properties</name>
+          <t>The following properties are defined for the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref> but do not convert to standard Calendar elements.</t>
+          <ul>
+            <li>
+              <xref target="RFC8984" section="4.4.6" sectionFormat="comma">invitedBy</xref>
+            </li>
+            <li>
+              <xref target="RFC8984" section="4.4.6" sectionFormat="comma">sentBy</xref>
             </li>
           </ul>
         </section>
