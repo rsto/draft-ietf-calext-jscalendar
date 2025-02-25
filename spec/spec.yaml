@@ -98,6 +98,7 @@ icalendar:
           convert:
             property: roles
         PRIORITY: {}
+        REASON: {}
         REQUEST-STATUS: {}
         RELATED-TO: {}
         RESOURCES: {}
@@ -545,6 +546,20 @@ icalendar:
       rfc: RFC9073
       section: '7.3'
       status: current
+    VSTATUS:
+      properties:
+        COMMENT: {}
+        DESCRIPTION: {}
+        DTSTAMP: {}
+        REASON: {}
+        STATUS:
+          required: true
+        STYLED-DESCRIPTION: {}
+        SUBSTATE: {}
+        SUMMARY: {}
+      rfc: draft-ietf-calext-ical-tasks
+      section: '14.1'
+      status: current
     VTIMEZONE:
       convert:
         object: TimeZone
@@ -628,6 +643,9 @@ icalendar:
         DURATION:
           convert:
             property: duration
+        ESTIMATED-DURATION:
+          convert:
+            property: estimatedDuration
         EXDATE:
           convert:
             property: recurrenceOverrides
@@ -697,6 +715,7 @@ icalendar:
         SUMMARY:
           convert:
             property: title
+        TASK-MODE: {}
         TRANSP:
           convert:
             property: freeBusyStatus
@@ -970,6 +989,13 @@ icalendar:
       status: current
       types:
         - DURATION
+    ESTIMATED-DURATION:
+      parameters: {}
+      rfc: draft-ietf-calext-ical-tasks
+      section: 12.1
+      status: current
+      types:
+        - DURATION
     EXDATE:
       parameters:
         TZID: {}
@@ -1154,6 +1180,13 @@ icalendar:
         - DATE-TIME
         - DATE
         - PERIOD
+    REASON:
+      parameters: {}
+      rfc: draft-ietf-calext-ical-tasks
+      section: 12.2
+      status: current
+      types:
+        - URI
     RECURRENCE-ID:
       parameters:
         TZID:
@@ -1279,12 +1312,26 @@ icalendar:
       types:
         - TEXT
         - URI
+    SUBSTATE:
+      parameters: {}
+      rfc: draft-ietf-calext-ical-tasks
+      section: 12.3
+      status: current
+      types:
+        - TEXT
     SUMMARY:
       parameters:
         ALTREP: {}
         LANGUAGE: {}
       rfc: RFC5545
       section: 3.8.1.12
+      status: current
+      types:
+        - TEXT
+    TASK-MODE:
+      parameters: {}
+      rfc: draft-ietf-calext-ical-tasks
+      section: 12.4
       status: current
       types:
         - TEXT
