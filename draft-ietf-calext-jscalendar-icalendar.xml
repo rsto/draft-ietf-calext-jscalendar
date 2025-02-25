@@ -6408,7 +6408,7 @@ END:X-BAZ
               <tt>ICalProperty</tt> (optional)</dd>
             <dt>Description:</dt>
             <dd>
-              <t>This contains conversion-related information about an iCalendar property that got partially or fully converted to JSCalendar.  It allows for preserving the name of the "iCalendar" property and some or all of its parameters.</t>
+              <t>This contains conversion-related information about an iCalendar property that got partially or fully converted to a JSCalendar object.  It allows for preserving the name of the "iCalendar" property and some or all of its parameters.</t>
               <t>An ICalProperty object has the following properties:</t>
               <dl>
                 <dt>@type: String (mandatory)</dt>
@@ -6422,6 +6422,28 @@ END:X-BAZ
               </dl>
             </dd>
           </dl>
+          <t>The example in <xref target="test-jscal-prop-icalproperty"/> describes how to convert an unknown parameter to the "iCalProperty" property. The ATTACH property converts to a Link object. To preserve the unknown "X-FOO" parameter, the "iCalProperty" property is set on the Link object.</t>
+          <figure anchor="test-jscal-prop-icalproperty">
+            <name>Converting the STRUCTURED-DATA property</name>
+            <sourcecode type="text/calendar"><![CDATA[
+ATTACH;X-FOO=bar:https://example.com/example.jpg
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"links": {
+  "l1": {
+    "@type": "Link",
+    "href": "https://example.com/example.jpg",
+    "iCalProperty": {
+      "@type": "ICalProperty",
+      "name": "attach",
+      "parameters": {
+        "x-foo": "bar"
+      }
+    }
+  }
+}
+]]></sourcecode>
+          </figure>
         </section>
         <section anchor="jscal-prop-locations">
           <name>locations (Participant)</name>
