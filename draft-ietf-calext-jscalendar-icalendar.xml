@@ -3662,7 +3662,7 @@ LAST-MODIFIED:20240914T231257Z
         <section anchor="ical-prop-link">
           <name>LINK</name>
           <t>
-            The <xref target="RFC9253" section="8.2" sectionFormat="parens">LINK property</xref> of type URI in a VEVENT, VTODO, VCALENDAR, VRESOURCE, PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.</t>
+            A <xref target="RFC9253" section="8.2" sectionFormat="parens">LINK property</xref> of type URI in a VEVENT, VTODO, VCALENDAR, VRESOURCE, PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.</t>
           <t>The converted object is set in the "links" property of the Event, Task, Group, Participant, or Location object. The LINK property value converts to the "href" property of the Link object.</t>
           <t>Its parameters convert as follows:</t>
           <table>
@@ -4158,7 +4158,7 @@ BEGIN:VEVENT
         <section anchor="ical-prop-rdate">
           <name>RDATE</name>
           <t>
-              The <xref target="RFC5545" section="3.8.5.2" sectionFormat="parens">RDATE property</xref> of type DATE or DATE-TIME in a VEVENT, VTODO, DAYLIGHT or STANDARD component converts to a <xref target="RFC8984" section="1.4.9" sectionFormat="parens">PatchObject value</xref>.  The converted object is set in the "recurrenceOverrides" property of the Event, Task, or TimeZoneRule object.
+              A <xref target="RFC5545" section="3.8.5.2" sectionFormat="parens">RDATE property</xref> of type DATE or DATE-TIME in a VEVENT, VTODO, DAYLIGHT or STANDARD component converts to a <xref target="RFC8984" section="1.4.9" sectionFormat="parens">PatchObject value</xref>.  The converted object is set in the "recurrenceOverrides" property of the Event, Task, or TimeZoneRule object.
           </t>
           <t>The property value converts to the key in the "recurrenceOverrides" property value. See <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values. For Event Task objects, the date-time <bcp14>MUST</bcp14> be relative to the timezone identified by the "timeZone" property, for TimeZoneRule objects the date-time is relative to the UTC offset specified in the "offsetFrom" property.  The PatchObject value <bcp14>MUST</bcp14> be an empty JSON object.</t>
           <t>An RDATE property of value type PERIOD does not convert to a standard JSCalendar element.  Implementations <bcp14>MAY</bcp14> convert it to the <xref target="jscal-prop-icalcomponent">"iCalComponent" property</xref> of the Event, Task, or TimeZoneRule object.</t>
@@ -4495,7 +4495,7 @@ SOURCE;VALUE=URI:https://example.com/holidays.ics
         <section anchor="ical-prop-structured-data">
           <name>STRUCTURED-DATA</name>
           <t>
-            The <xref target="RFC9073" section="6.6" sectionFormat="parens">STRUCTURED-DATA property</xref> of type URI or BINARY in a VEVENT, VTODO, VCALENDAR, VRESOURCE, PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the "links" property of the Event, Task, Group, Participant, or Location object.
+            A <xref target="RFC9073" section="6.6" sectionFormat="parens">STRUCTURED-DATA property</xref> of type URI or BINARY in a VEVENT, VTODO, VCALENDAR, VRESOURCE, PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the "links" property of the Event, Task, Group, Participant, or Location object.
           </t>
           <t>The property value converts to the "href" property of the Link object. A value of type URI converts as-is. See <xref target="ical-prop-attach"/> how to convert a BINARY value.</t>
           <t>Its parameters convert as follows:</t>
