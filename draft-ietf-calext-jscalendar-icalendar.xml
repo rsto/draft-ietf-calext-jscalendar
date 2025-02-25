@@ -2143,6 +2143,17 @@ DTSTART;TZID=CustomTz:20080708T130000
                 <td/>
               </tr>
               <tr>
+                <td>ESTIMATED-DURATION</td>
+                <td>
+                  <xref target="I-D.ietf-calext-ical-tasks" section="12.1" sectionFormat="comma"/>
+                </td>
+                <td>estimatedDuration</td>
+                <td>
+                  <xref target="ical-prop-estimated-duration"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
                 <td>EXDATE</td>
                 <td>
                   <xref target="RFC5545" section="3.8.5.1" sectionFormat="comma"/>
@@ -3481,6 +3492,24 @@ DURATION:PT1H
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "duration": "PT1H"
+]]></sourcecode>
+          </figure>
+        </section>
+        <section anchor="ical-prop-estimated-duration">
+          <name>ESTIMATED-DURATION</name>
+          <t>
+            The <xref target="I-D.ietf-calext-ical-tasks" section="12.1" sectionFormat="parens">ESTIMATED-DURATION property</xref> in a VTODO component converts to the <xref target="RFC8984" section="5.2.3" sectionFormat="parens">"estimatedDuration" property</xref> of the Task object.
+          </t>
+          <t>The following example illustrates how to convert the ESTIMATED-DURATION property:</t>
+          <figure anchor="test-ical-prop-estimated-duration">
+            <name>Converting the ESTIMATED-DURATION</name>
+            <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VTODO
+ESTIMATED-DURATION:P2D
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"@type": "Task",
+"estimatedDuration": "P2D"
 ]]></sourcecode>
           </figure>
         </section>
@@ -5351,8 +5380,12 @@ URL:https://example.com/calendar/birthdays.ics
               <td>
                 <xref target="RFC8984" section="5.2.3" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>ESTIMATED-DURATION</td>
+              <td>
+                <t>
+                  <xref target="ical-prop-estimated-duration"/>
+                </t>
+              </td>
             </tr>
             <tr>
               <td>percentComplete</td>
