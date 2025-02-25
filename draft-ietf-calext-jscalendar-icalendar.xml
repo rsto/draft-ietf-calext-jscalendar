@@ -6587,6 +6587,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             <li>
               <xref target="RFC5545" section="3.6.3" sectionFormat="comma">VJOURNAL</xref>
             </li>
+            <li>
+              <xref target="I-D.ietf-calext-ical-tasks" section="14.1" sectionFormat="comma">VSTATUS</xref>
+            </li>
           </ul>
         </section>
         <section>
@@ -6609,6 +6612,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
               </li>
               <li>
                 <xref target="RFC5545" section="3.8.1.9" sectionFormat="comma">PRIORITY</xref>
+              </li>
+              <li>
+                <xref target="I-D.ietf-calext-ical-tasks" section="12.2" sectionFormat="comma">REASON</xref>
               </li>
               <li>
                 <xref target="RFC5545" section="3.8.4.5" sectionFormat="comma">RELATED-TO</xref>
@@ -6720,6 +6726,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
               </li>
               <li>
                 <xref target="RFC5545" section="3.8.1.10" sectionFormat="comma">RESOURCES</xref>
+              </li>
+              <li>
+                <xref target="I-D.ietf-calext-ical-tasks" section="12.4" sectionFormat="comma">TASK-MODE</xref>
               </li>
             </ul>
           </section>
