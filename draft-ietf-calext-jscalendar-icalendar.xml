@@ -3456,6 +3456,20 @@ DUE;VALUE=DATE:20240921
 "showWithoutTime": true
 ]]></sourcecode>
           </figure>
+          <figure anchor="test-ical-prop-due-and-dtstart-date">
+            <name>Converting the DUE property with value type DATE in combination with DTSTART</name>
+            <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VTODO
+DTSTART;VALUE=DATE:20250220
+DUE;VALUE=DATE:20250221
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"@type": "Task",
+"start": "2025-02-20T00:00:00",
+"due": "2025-02-21T00:00:00",
+"showWithoutTime": true
+]]></sourcecode>
+          </figure>
         </section>
         <section anchor="ical-prop-duration">
           <name>DURATION</name>
