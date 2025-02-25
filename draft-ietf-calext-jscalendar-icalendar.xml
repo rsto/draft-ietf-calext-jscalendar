@@ -76,8 +76,7 @@
             <li>An example that only contains a VCALENDAR component but no contained components implicitly represents a VCALENDAR component that contains a VEVENT component.</li>
             <li>Implicit components (those without a BEGIN and END, or omitted completely) are assumed to contain all mandatory properties with some value, but the actual value is irrelevant for the example.</li>
           </ul>
-          <t>
-            <xref target="example-notation-icalendar-implicit-explicit"/> contains three examples, all of which represent the same iCalendar data.  In the first example, both the VEVENT component and VCALENDAR component are implicit.  In the second example, only the VCALENDAR component and its mandatory properties are implicit.  The third example depicts a complete VCALENDAR component, nothing is implicit.</t>
+          <t><xref target="example-notation-icalendar-implicit-explicit"/> contains three examples, all of which represent the same iCalendar data.  In the first example, both the VEVENT component and VCALENDAR component are implicit.  In the second example, only the VCALENDAR component and its mandatory properties are implicit.  The third example depicts a complete VCALENDAR component, nothing is implicit.</t>
           <figure anchor="example-notation-icalendar-implicit-explicit">
             <name>Examples for implicit and explicit iCalendar component notation</name>
             <sourcecode type="text/calendar"><![CDATA[
@@ -129,8 +128,7 @@ SUMMARY:he
           <t>A JSCalendar example always represents a Group object, even if the example only depicts one of the Group entries or properties.</t>
           <t>JSCalendar objects are depicted either explicitly or implicitly. An explicit JSCalendar object starts and ends with braces.  An implicit JSCalendar object omits braces, it only consists of JSON name/value pairs, separated by comma.</t>
           <t>An implicit JSCalendar object is assumed to be of type Event, unless it contains the <tt>@type</tt> property with a different value.  It is assumed to contain all mandatory properties with some value; if they are not depicted, their actual value is irrelevant for the main point of the example.</t>
-          <t>
-            <xref target="example-notation-jscalendar-implicit-explicit"/> illustrates this with multiple examples, all of which represent the same JSCalendar data.  The first example contains an implicit JSCalendar object of type Event.  The second example contains an implicit JSCalendar object with a <tt>@type</tt> property.  The third example contains an explicit Event object but the Group object containing it is omitted.  The fourth example contains the full Group object, nothing is omitted.</t>
+          <t><xref target="example-notation-jscalendar-implicit-explicit"/> illustrates this with multiple examples, all of which represent the same JSCalendar data.  The first example contains an implicit JSCalendar object of type Event.  The second example contains an implicit JSCalendar object with a <tt>@type</tt> property.  The third example contains an explicit Event object but the Group object containing it is omitted.  The fourth example contains the full Group object, nothing is omitted.</t>
           <figure anchor="example-notation-jscalendar-implicit-explicit">
             <name>Examples for implicit and explicit JSCalendar object notation</name>
             <sourcecode type="json"><![CDATA[
@@ -187,8 +185,7 @@ SUMMARY:he
         <name>General rules</name>
         <section anchor="ical-comp-vcalendar">
           <name>iCalendar Objects</name>
-          <t>
-            <xref target="RFC5545" section="3.4"/> allows for an iCalendar stream to contain one or more iCalendar objects.  In contrast, this specification only defines conversion for streams consisting of a single iCalendar object. Converting streams of multiple iCalendar objects is implementation-specific.  All following sections of this document use the terms "iCalendar object" and "VCALENDAR component" interchangeably.</t>
+          <t><xref target="RFC5545" section="3.4"/> allows for an iCalendar stream to contain one or more iCalendar objects.  In contrast, this specification only defines conversion for streams consisting of a single iCalendar object. Converting streams of multiple iCalendar objects is implementation-specific.  All following sections of this document use the terms "iCalendar object" and "VCALENDAR component" interchangeably.</t>
           <t>The <xref target="RFC5545" section="3.4" sectionFormat="parens">VCALENDAR component</xref> converts to a <xref target="RFC8984" section="2.3" sectionFormat="parens">Group object</xref>.</t>
           <t>Its properties convert as follows:</t>
           <table anchor="ical-comp-vcalendar-props">
@@ -4877,8 +4874,7 @@ URL:https://example.com/calendar/birthdays.ics
               </td>
               <td>RELATED-TO</td>
               <td>
-                <t>
-                  <xref target="ical-prop-related-to"/>, and remarks below</t>
+                <t><xref target="ical-prop-related-to"/>, and remarks below</t>
               </td>
             </tr>
             <tr>
@@ -4963,8 +4959,7 @@ URL:https://example.com/calendar/birthdays.ics
               </td>
               <td>DESCRIPTION, or STYLED-DESCRIPTION</td>
               <td>
-                <t>
-                  <xref target="ical-prop-description"/>, <xref target="ical-prop-styled-description"/>, and remarks below</t>
+                <t><xref target="ical-prop-description"/>, <xref target="ical-prop-styled-description"/>, and remarks below</t>
               </td>
             </tr>
             <tr>
@@ -4974,8 +4969,7 @@ URL:https://example.com/calendar/birthdays.ics
               </td>
               <td>FMTTYPE (parameter) of STYLED-DESCRIPTION</td>
               <td>
-                <t>
-                  <xref target="ical-prop-styled-description"/>, and remarks below</t>
+                <t><xref target="ical-prop-styled-description"/>, and remarks below</t>
               </td>
             </tr>
             <tr>
@@ -4985,8 +4979,7 @@ URL:https://example.com/calendar/birthdays.ics
               </td>
               <td/>
               <td>
-                <t>
-                  <xref target="ical-prop-exdate"/>, and remarks about recurrenceOverrides below</t>
+                <t><xref target="ical-prop-exdate"/>, and remarks about recurrenceOverrides below</t>
               </td>
             </tr>
             <tr>
@@ -5056,9 +5049,7 @@ URL:https://example.com/calendar/birthdays.ics
               </td>
               <td>METHOD of iCalendar object</td>
               <td>
-                <t>
-                  <xref target="ical-prop-method"/>, and <xref target="jscal-group">Group object</xref>
-                </t>
+                <t><xref target="ical-prop-method"/>, and <xref target="jscal-group">Group object</xref></t>
               </td>
             </tr>
             <tr>
@@ -5104,9 +5095,7 @@ URL:https://example.com/calendar/birthdays.ics
               </td>
               <td>PRODID of iCalendar object</td>
               <td>
-                <t>
-                  <xref target="ical-prop-prodid"/>, and <xref target="jscal-group">Group object</xref>
-                </t>
+                <t><xref target="ical-prop-prodid"/>, and <xref target="jscal-group">Group object</xref></t>
               </td>
             </tr>
             <tr>
@@ -5139,8 +5128,7 @@ URL:https://example.com/calendar/birthdays.ics
                 <xref target="RFC8984" section="4.3.5" sectionFormat="comma"/>
               </td>
               <td>RDATE, EXDATE or recurrence override component</td>
-              <td>
-                <xref target="ical-recurring-components"/>, and remarks below</td>
+              <td><xref target="ical-recurring-components"/>, and remarks below</td>
             </tr>
             <tr>
               <td>recurrenceRules</td>
@@ -5173,8 +5161,7 @@ URL:https://example.com/calendar/birthdays.ics
               </td>
               <td>ORGANIZER</td>
               <td>
-                <t>
-                  <xref target="ical-prop-organizer"/>, and remarks below</t>
+                <t><xref target="ical-prop-organizer"/>, and remarks below</t>
               </td>
             </tr>
             <tr>
@@ -5220,9 +5207,7 @@ URL:https://example.com/calendar/birthdays.ics
               </td>
               <td>TZID (parameter) of DTSTART and DUE</td>
               <td>
-                <t>
-                  <xref target="ical-prop-dtstart"/>, <xref target="ical-prop-due"/>
-                </t>
+                <t><xref target="ical-prop-dtstart"/>, <xref target="ical-prop-due"/></t>
               </td>
             </tr>
             <tr>
@@ -5268,9 +5253,7 @@ URL:https://example.com/calendar/birthdays.ics
               </td>
               <td>DTSTAMP, and LAST-MODIFIED</td>
               <td>
-                <t>
-                  <xref target="ical-prop-dtstamp"/>, <xref target="ical-prop-last-modified"/>
-                </t>
+                <t><xref target="ical-prop-dtstamp"/>, <xref target="ical-prop-last-modified"/></t>
               </td>
             </tr>
             <tr>
@@ -5318,9 +5301,7 @@ URL:https://example.com/calendar/birthdays.ics
               </td>
               <td>DURATION, or DTEND</td>
               <td>
-                <t>
-                  <xref target="ical-prop-duration"/>, <xref target="ical-prop-dtend"/>
-                </t>
+                <t><xref target="ical-prop-duration"/>, <xref target="ical-prop-dtend"/></t>
               </td>
             </tr>
             <tr>
@@ -5462,8 +5443,7 @@ URL:https://example.com/calendar/birthdays.ics
               </td>
               <td>VEVENT or VTODO (component)</td>
               <td>
-                <t>
-                  <xref target="jscal-event-and-task">Event and Task object</xref>, and remarks below</t>
+                <t><xref target="jscal-event-and-task">Event and Task object</xref>, and remarks below</t>
               </td>
             </tr>
             <tr>
@@ -5497,8 +5477,7 @@ URL:https://example.com/calendar/birthdays.ics
               </td>
               <td>PRODID</td>
               <td>
-                <t>
-                  <xref target="ical-prop-prodid"/>, and remarks below</t>
+                <t><xref target="ical-prop-prodid"/>, and remarks below</t>
               </td>
             </tr>
             <tr>
@@ -5617,8 +5596,7 @@ URL:https://example.com/calendar/birthdays.ics
                 <xref target="RFC8984" section="1.4.11" sectionFormat="comma"/>
               </td>
               <td>LINKREL</td>
-              <td>
-                <xref target="ical-prop-link"/>, and remarks below</td>
+              <td><xref target="ical-prop-link"/>, and remarks below</td>
             </tr>
             <tr>
               <td>size</td>
@@ -5850,8 +5828,7 @@ URL:https://example.com/calendar/birthdays.ics
                 <xref target="RFC8984" section="5.2.5" sectionFormat="comma"/>
               </td>
               <td>PARTSTAT</td>
-              <td>
-                <xref target="ical-prop-attendee"/>, and remarks below
+              <td><xref target="ical-prop-attendee"/>, and remarks below
               </td>
             </tr>
             <tr>
@@ -5860,8 +5837,7 @@ URL:https://example.com/calendar/birthdays.ics
                 <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
               </td>
               <td>ROLE, or PARTICIPANT-TYPE property of the PARTICIPANT component</td>
-              <td>
-                <xref target="ical-prop-attendee"/>, <xref target="ical-prop-participant-type"/>, and remarks below</td>
+              <td><xref target="ical-prop-attendee"/>, <xref target="ical-prop-participant-type"/>, and remarks below</td>
             </tr>
             <tr>
               <td>scheduleAgent</td>
@@ -6300,8 +6276,7 @@ URL:https://example.com/calendar/birthdays.ics
             <dt>Context:</dt>
             <dd>Task</dd>
             <dt>Type:</dt>
-            <dd>
-              <tt>UTCDateTime</tt> (optional)</dd>
+            <dd><tt>UTCDateTime</tt> (optional)</dd>
             <dt>Description:</dt>
             <dd>This is the date and time when the task was completed.</dd>
           </dl>
@@ -6314,8 +6289,7 @@ URL:https://example.com/calendar/birthdays.ics
             <dt>Context:</dt>
             <dd>Any JSCalendar object</dd>
             <dt>Type:</dt>
-            <dd>
-              <tt>ICalComponent</tt> (optional)</dd>
+            <dd><tt>ICalComponent</tt> (optional)</dd>
             <dt>Description</dt>
             <dd>
               <t>This contains information about an iCalendar component that got converted to JSCalendar.  It allows for preserving the name of the iCalendar component and some or all of its properties and subcomponents.</t>
@@ -6404,8 +6378,7 @@ END:X-BAZ
             <dt>Context:</dt>
             <dd>Any JSCalendar object</dd>
             <dt>Type:</dt>
-            <dd>
-              <tt>ICalProperty</tt> (optional)</dd>
+            <dd><tt>ICalProperty</tt> (optional)</dd>
             <dt>Description:</dt>
             <dd>
               <t>This contains conversion-related information about an iCalendar property that got partially or fully converted to a JSCalendar object.  It allows for preserving the name of the "iCalendar" property and some or all of its parameters.</t>
@@ -6453,8 +6426,7 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             <dt>Context:</dt>
             <dd>Participant</dd>
             <dt>Type:</dt>
-            <dd>
-              <tt>Id[Location]</tt> (optional)</dd>
+            <dd><tt>Id[Location]</tt> (optional)</dd>
             <dt>Description:</dt>
             <dd>This represents locations associated with the participant. In contrast to the single-valued "locationId" property, this allows for associating multiple locations with the Participant object, and to express that a location only is relevant for this participant.</dd>
           </dl>
@@ -6467,8 +6439,7 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             <dt>Context:</dt>
             <dd>Event, Task</dd>
             <dt>Type:</dt>
-            <dd>
-              <tt>String</tt> (optional, default "server")</dd>
+            <dd><tt>String</tt> (optional, default "server")</dd>
             <dt>Description:</dt>
             <dd>
               <t>This property represents the <xref target="RFC6638" section="7.1" sectionFormat="parens">SCHEDULE-AGENT parameter</xref> specified on an ORGANIZER property. In the context of scheduling as outlined in <xref target="RFC6638"/>, a scheduling client can set this property to indicate who is responsible for sending scheduling messages to the organizer in the "replyTo" property. The same values as for the "scheduleAgent" property of the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref> are allowed, the "none" value indicates that no scheduling message is to be sent to the organizer. The property <bcp14>MUST NOT</bcp14> be preserved in the JSCalendar object on the server or appear in a scheduling message. If this property is set, then the "replyTo" property <bcp14>MUST</bcp14> be set.</t>
@@ -6483,8 +6454,7 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             <dt>Context:</dt>
             <dd>Event, Task</dd>
             <dt>Type:</dt>
-            <dd>
-              <tt>Boolean</tt> (optional, default "false")</dd>
+            <dd><tt>Boolean</tt> (optional, default "false")</dd>
             <dt>Description:</dt>
             <dd>
               <t>This property represents the <xref target="RFC6638" section="7.2" sectionFormat="parens">SCHEDULE-FORCE-SEND parameter</xref> specified on an ORGANIZER property. In the context of scheduling as outlined in <xref target="RFC6638"/>, a scheduling client can set this property to true to request that the server send a scheduling message to the organizer defined in the "replyTo" property, when it would not normally do so (e.g., if no significant change is made to the object or the scheduleAgent is set to "client"). The property <bcp14>MUST NOT</bcp14> be preserved in the JSCalendar object on the server or appear in a scheduling message. If this property is set, then the "replyTo" property <bcp14>MUST</bcp14> be set.</t>
@@ -6499,8 +6469,7 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             <dt>Context:</dt>
             <dd>Event, Task</dd>
             <dt>Type:</dt>
-            <dd>
-              <tt>String[]</tt> (optional)</dd>
+            <dd><tt>String[]</tt> (optional)</dd>
             <dt>Description:</dt>
             <dd>
               <t>This property represents the <xref target="RFC6638" section="7.3" sectionFormat="parens">SCHEDULE-STATUS parameter</xref> specified on an ORGANIZER property. In the context of scheduling as outlined in <xref target="RFC6638"/>, the scheduling client or server can set this property to a list of status codes, returned from processing the most recent scheduling message sent to the organizer defined in the "replyTo" property. The status codes <bcp14>MUST</bcp14> be valid "statcode" values as defined in the ABNF in <xref target="RFC5545" section="3.8.8.3"/>.  Servers <bcp14>MUST</bcp14> only add or change this property when they send a scheduling message to the organizer. Clients <bcp14>SHOULD NOT</bcp14> change or remove this property if it was provided by the server. Clients <bcp14>MAY</bcp14> add, change, or remove the property for participants where the client is handling the scheduling. This property <bcp14>MUST NOT</bcp14> be included in scheduling messages.</t>
