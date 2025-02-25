@@ -6318,7 +6318,7 @@ URL:https://example.com/calendar/birthdays.ics
               <tt>ICalComponent</tt> (optional)</dd>
             <dt>Description</dt>
             <dd>
-              <t>This contains information about an iCalendar component that got partially or fully converted to JSCalendar.  It allows for preserving the name of the iCalendar component and some or all of its properties and subcomponents.</t>
+              <t>This contains information about an iCalendar component that got converted to JSCalendar.  It allows for preserving the name of the iCalendar component and some or all of its properties and subcomponents.</t>
               <t>An ICalComponent object has the following properties:</t>
               <dl>
                 <dt>@type: String (mandatory)</dt>
@@ -6326,7 +6326,7 @@ URL:https://example.com/calendar/birthdays.ics
                 <dt>name: String (mandatory)</dt>
                 <dd>This is the name of the iCalendar component in lowercase.</dd>
                 <dt>components: *[][] (optional)</dt>
-                <dd>This contains subcomponents of the iCalendar component. The value <bcp14>MUST</bcp14> be a list of iCalendar components formatted in jCal as defined in <xref target="RFC7265" section="3.3" sectionFormat="of"/>.
+                <dd>This contains subcomponents of the iCalendar component which did not convert to standard JSCalendar elements. The value <bcp14>MUST</bcp14> be a list of iCalendar components formatted in jCal as defined in <xref target="RFC7265" section="3.3" sectionFormat="of"/>.
                 </dd>
                 <dt>convertedProperties: String[ICalProperty] (optional)</dt>
                 <dd>
@@ -6334,11 +6334,67 @@ URL:https://example.com/calendar/birthdays.ics
                   <t>The key <bcp14>MUST</bcp14> be a valid key of a PatchObject as defined in <xref target="RFC8984" section="1.4.9" sectionFormat="of"/>.  The key <bcp14>MUST NOT</bcp14> point into a nested property, unless there is no way to otherwise preserve the "iCalendar" property elements. For example, if a VEVENT contains an ATTENDEE property, then any iCalendar information about the ATTENDEE property <bcp14>MUST</bcp14> be set in the "iCalProperty" property of the converted Participant object (see <xref target="ical-prop-attendee"/>).  In contrast, information about a RDATE property contained in a VEVENT would be located by a key pointing into the <tt>recurrenceOverrides</tt> property of the Event object (see <xref target="ical-prop-rdate"/>).</t>
                 </dd>
                 <dt>properties: *[][] (optional)</dt>
-                <dd>This contains properties of the iCalendar component. The value <bcp14>MUST</bcp14> be a list of iCalendar properties formatted in jCal as defined in <xref target="RFC7265" section="3.4" sectionFormat="of"/>.
+                <dd>This contains properties of the iCalendar component which did not convert to standard JSCalendar elements. The value <bcp14>MUST</bcp14> be a list of iCalendar properties formatted in jCal as defined in <xref target="RFC7265" section="3.4" sectionFormat="of"/>.
               </dd>
               </dl>
             </dd>
           </dl>
+          <t>The example in <xref target="test-jscal-prop-icalcomponent"/> describes how to convert unknown iCalendar elements to the "iCalComponent" property. The "X-FOO" parameter set on the SUMMARY property illustrates how to preserve an unknown iCalendar parameter on a property that does convert to a standard JSCalendar element. The "X-BAR" property and "X-BAZ" component illustrate how to convert entirely unknown iCalendar elements.</t>
+          <figure anchor="test-jscal-prop-icalcomponent">
+            <name>Converting unknown iCalendar elements to the iCalComponent property</name>
+            <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VEVENT
+SUMMARY;X-FOO=bar:test
+...
+X-BAR:bam
+...
+BEGIN:X-BAZ
+UID:507A08F9-81D8-4D16-9480-D6D75E977943
+END:X-BAZ
+...
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+{
+  "@type": "Event",
+  "title": "test",
+  "iCalComponent": {
+    "@type": "ICalComponent",
+    "name": "vevent",
+    "convertedProperties": {
+      "title": {
+        "@type": "ICalProperty",
+        "name": "summary",
+        "parameters": {
+          "x-foo": "bar"
+        }
+      }
+    },
+    "properties": [
+      [
+        "x-bar",
+        {},
+        "unknown",
+        "bam"
+      ]
+    ],
+    "components": [
+      [
+        "x-baz",
+        [
+          [
+            "uid",
+            {},
+            "text",
+            "507A08F9-81D8-4D16-9480-D6D75E977943"
+          ]
+        ],
+        []
+      ]
+    ]
+  }
+}
+]]></sourcecode>
+          </figure>
         </section>
         <section anchor="jscal-prop-icalproperty">
           <name>iCalProperty</name>
@@ -6922,7 +6978,6 @@ URL:https://example.com/calendar/birthdays.ics
             </li>
           </ul>
         </section>
-
         <section>
           <name>Participant Properties</name>
           <t>The following properties are defined for the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref> but do not convert to standard Calendar elements.</t>
