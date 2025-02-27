@@ -341,7 +341,7 @@ class HTMLReporter:
         print(
             f"""
 <details>
-  <summary>Test Details</summary>
+  <summary>Test Input</summary>
   <h3>Original examples</h3>
   <h4>iCalendar</h4>
   <pre>{html.escape(test.icaltext)}</pre>
@@ -399,7 +399,7 @@ class HTMLReporter:
                     ("Expected", "Response"),
                 )
 
-        print("<details><summary>Details</summary>", file=self.file)
+        print("<details><summary>Test Output</summary>", file=self.file)
         if test.i2jresult.response:
             print(f"<h3>Backend response</h3>", file=self.file)
             print(f"<pre>{html.escape(test.i2jresult.response.decode())}</pre>", file=self.file)
@@ -450,7 +450,7 @@ class HTMLReporter:
 
 
         print("<details>", file=self.file)
-        print("<summary>Details</summary>", file=self.file)
+        print("<summary>Test Output</summary>", file=self.file)
         if test.j2iresult.response:
             print(f"<h3>Backend response</h3>", file=self.file)
             print(f"<pre>{html.escape(test.j2iresult.response.decode())}</pre>", file=self.file)
