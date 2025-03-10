@@ -522,7 +522,7 @@ END:VCALENDAR
         <section anchor="generating-jscalendar-ids">
           <name>JSCalendar Ids</name>
           <t>JSCalendar generally uses JSON objects to represent a collection of same-typed values. The keys are of type <xref target="RFC8984" section="1.4.1" sectionFormat="parens">Id</xref>, the values are JSCalendar object types.  If an iCalendar element converts to a value in such a collection, then an implementation needs to choose an identifier as key.</t>
-          <t>This document defines the new <xref target="ical-param-jscalid">JSCALID</xref> parameter and <xref target="ical-prop-jscalid">JSCALID property</xref>, which allow to set a JSCalendar Id value when converting from JSCalendar to iCalendar.  If they are set on a property or the component, then its value <bcp14>MUST</bcp14> be used as key when converting that element from iCalendar to JSCalendar.  If no such parameter or property is set, then an implementation is free to choose any identifier, as long the following requirements are met:</t>
+          <t>This document defines the new <xref target="ical-param-jskey">JSKEY</xref> parameter and <xref target="ical-prop-jskey">JSKEY property</xref>, which allow to set a JSCalendar Id value when converting from JSCalendar to iCalendar.  If they are set on a property or the component, then its value <bcp14>MUST</bcp14> be used as key when converting that element from iCalendar to JSCalendar.  If no such parameter or property is set, then an implementation is free to choose any identifier, as long the following requirements are met:</t>
           <ul>
             <li>The identifier <bcp14>MUST</bcp14> be a valid Id value.</li>
             <li>The identifiers for the exact same iCalendar element <bcp14>MUST</bcp14> stay the same, irrespective of the order in which components, properties and parameters are processed.</li>
@@ -6282,22 +6282,236 @@ URL:https://example.com/calendar/birthdays.ics
     </section>
     <section anchor="updates-icalendar">
       <name>Updates to iCalendar</name>
-      <section anchor="new-icalendar-parameters">
-        <name>New Parameters</name>
-        <section anchor="ical-param-jscalid">
-          <name>JSCALID</name>
-          <t>TBD</t>
-        </section>
-      </section>
       <section anchor="new-icalendar-properties">
         <name>New Properties</name>
-        <section anchor="ical-prop-jscalid">
-          <name>JSCALID</name>
-          <t>TBD</t>
+        <section anchor="ical-prop-jskey">
+          <name>JSKEY</name>
+          <dl newline="true">
+            <dt>Property Name:</dt>
+            <dd>JSKEY</dd>
+            <dt>Purpose:</dt>
+            <dd>This property preserves the key of a JSCalendar object value in iCalendar.</dd>
+            <dt>Value type:</dt>
+            <dd>TEXT; also see "Format Definition" below for value restrictions.</dd>
+            <dt>Property Parameters:</dt>
+            <dd>
+              IANA and non-standard property parameters can be specified on this property.
+        </dd>
+            <dt>Conformance:</dt>
+            <dd>This property can be specified at most once in any calendar component.</dd>
+            <dt>Description:</dt>
+            <dd>
+              <t>This property specifies the JSON object key of the JSCalendar object to which an iCalendar component converts to. For example, this property set in a VALARM component within a VEVENT component defines the key of the Alert object value in the Event object's "alerts" property (see <xref target="test-ical-prop-jskey-alert"/>).</t>
+              <t>The value of the JSKEY property <bcp14>MUST</bcp14> be a valid key according to the definition of the JSCalendar property to which the component converts to. Typically, this requires the value to be a valid <xref target="RFC8984" section="1.4.1" sectionFormat="parens">Id</xref>, but e.g. a VTIMEZONE component converting to the "timeZones" property requires the value to be a valid <xref target="RFC8984" section="4.7.2" sectionFormat="parens">TimeZoneId</xref>.</t>
+            </dd>
+            <dt>Format Definition:</dt>
+            <dd>
+              <t>This property is defined by the following notation:</t>
+              <sourcecode type="abnf"><![CDATA[
+jskey-prop = "JSKEY" *(";" other-param) ":" TEXT CRLF
+]]></sourcecode>
+            </dd>
+            <dt anchor="ical-prop-jskey-examples">Example(s):</dt>
+            <dd>
+              <t>The following example illustrates how to convert the JSKEY property set in a VALARM component.</t>
+              <figure anchor="test-ical-prop-jskey-alert">
+                <name>Converting the JSKEY property of a VALARM component</name>
+                <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VEVENT
+...
+BEGIN:VALARM
+JSKEY:myalert1
+...
+END:VALARM
+]]></sourcecode>
+                <sourcecode type="json"><![CDATA[
+"@type": "Event",
+"alerts": {
+  "myalert1": {
+    "@type": "Alert",
+    "...": ""
+  }
+}
+]]></sourcecode>
+              </figure>
+            </dd>
+          </dl>
         </section>
         <section anchor="ical-prop-jsprop">
           <name>JSPROP</name>
-          <t>TBD</t>
+          <dl newline="true">
+            <dt>Property Name:</dt>
+            <dd>JSPROP</dd>
+            <dt>Purpose:</dt>
+            <dd>This property represents a JSCalendar property in iCalendar.</dd>
+            <dt>Value type:</dt>
+            <dd>TEXT; also see "Format Definition" below for value restrictions.</dd>
+            <dt>Property Parameters:</dt>
+            <dd>
+              The <xref target="ical-param-jsptr">JSPTR parameter</xref> <bcp14>MUST</bcp14> be specified on this property. Other IANA and non-standard property parameters can be specified on this property.
+        </dd>
+            <dt>Conformance:</dt>
+            <dd>This property can be specified multiple times in any calendar component.</dd>
+            <dt>Description:</dt>
+            <dd>
+              <t>This property converts an arbitrary JSCalendar property from and to iCalendar.  The iCalendar property value is the JSON-encoded value of the JSCalendar property, represented as a TEXT value.  The JSON value <bcp14>MUST NOT</bcp14> contain insignificant whitespace as defined in <xref target="RFC8259" format="default" sectionFormat="of" derivedContent="RFC8259" section="2"/>.  The value of the JSPTR parameter points to the JSCalendar property within the JSCalendar object.</t>
+              <t>The root of the JSON pointer is always the JSCalendar object to which the calendar component converts to, even if the JSON pointer starts with the SOLIDUS (U+002F) character.  The pointer <bcp14>MUST NOT</bcp14> reference into an array.</t>
+              <t>All JSPROP properties in a calendar component together form a PatchObject as defined in <xref target="RFC8984"/>.  For each JSPROP property, the value of its JSPTR parameter corresponds to a key in the PatchObject, the value of the JSPROP property corresponds to the value for that key.  When converting from iCalendar to JSCalendar, the PatchObject <bcp14>MUST</bcp14> only be applied after all other iCalendar properties have been converted.  The PatchObject <bcp14>MUST</bcp14> be valid, an invalid PatchObject <bcp14>MUST</bcp14> be ignored.</t>
+            </dd>
+            <dt>Format Definition:</dt>
+            <dd>
+              <t>This property is defined by the following notation:</t>
+              <sourcecode type="abnf"><![CDATA[
+jsprop = "JSPROP" jsprop-param ":" TEXT CRLF
+
+jsprop-param  = *(
+            ; The following are MANDATORY and MUST NOT
+            ; occur more than once
+            ( ";" jsptr-param )
+            ;
+            ; The following is OPTIONAL
+            ; and MAY occur more than once.
+            ;
+            (";" other-param)
+            ;
+            )
+]]></sourcecode>
+            </dd>
+            <dt anchor="ical-prop-jsprop-examples">Example(s):</dt>
+            <dd>
+              <t>The following example illustrates how to convert a JSPROP property with a JSON boolean value</t>
+              <figure anchor="test-ical-prop-jsprop-boolean">
+                <name>Converting the JSPROP property with a JSON boolean value</name>
+                <sourcecode type="text/calendar"><![CDATA[
+JSPROP;JSPTR="example.com:foo":true
+]]></sourcecode>
+                <sourcecode type="json"><![CDATA[
+"example.com:foo": true
+]]></sourcecode>
+              </figure>
+              <t>The following example illustrates how to convert a JSPROP property with a JSON object value</t>
+              <figure anchor="test-ical-prop-jsprop-object">
+                <name>Converting the JSPROP property with a JSON object value</name>
+                <sourcecode type="text/calendar"><![CDATA[
+JSPROP;JSPTR="example.com:foo":{"bar":1234\,"baz":"bam"}
+]]></sourcecode>
+                <sourcecode type="json"><![CDATA[
+"example.com:foo": {
+  "bar": 1234,
+  "baz": "bam"
+}
+]]></sourcecode>
+              </figure>
+              <t>The following example illustrates how to convert a JSPROP property that points to a property within a JSCalendar Alert. The JSON pointer in the JSPTR parameter is relative to the Alert object.</t>
+              <figure anchor="test-ical-prop-jsprop-alert">
+                <name>Converting the JSPROP property within a VALARM component</name>
+                <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VEVENT
+...
+BEGIN:VALARM
+JSPROP;JSPTR="example.com:foo":"bar"
+...
+END:VALARM
+]]></sourcecode>
+                <sourcecode type="json"><![CDATA[
+"@type": "Event",
+"alerts": {
+  "a1": {
+    "@type": "Alert",
+    "example.com:foo": "bar",
+    "...": ""
+  }
+}
+]]></sourcecode>
+              </figure>
+              <t>The following example illustrates how to convert a JSPROP property that points to a property within a JSCalendar Link. The JSON pointer in the JSPTR parameter is relative to the Event object because the Link object converts to an iCalendar property. The <xref target="ical-param-jskey">JSKEY parameter</xref> on the ATTACH property ensures that the JSON path remains valid during conversion.</t>
+              <figure anchor="test-ical-prop-jsprop-link">
+                <name>Converting the JSPROP property within a VALARM component</name>
+                <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VEVENT
+...
+ATTACH;JSKEY=mylink1:https://www.rfc-editor.org/rfc/rfc8984.html
+JSPROP;JSPTR="mylink1/example.com:foo":"bar"
+...
+]]></sourcecode>
+                <sourcecode type="json"><![CDATA[
+"@type": "Event",
+"links": {
+  "mylink1": {
+    "@type": "Link",
+    "example.com:foo": "bar",
+    "...": ""
+  }
+}
+]]></sourcecode>
+              </figure>
+            </dd>
+          </dl>
+        </section>
+      </section>
+      <section anchor="new-icalendar-parameters">
+        <name>New Parameters</name>
+        <section anchor="ical-param-jskey">
+          <name>JSKEY</name>
+          <dl newline="true">
+            <dt>Parameter Name:</dt>
+            <dd>JSKEY</dd>
+            <dt>Format Definition:</dt>
+            <dd>
+              <sourcecode type="abnf"><![CDATA[
+jskey-param  = "JSKEY" "=" param-value
+]]></sourcecode>
+            </dd>
+            <dt>Description:</dt>
+            <dd>
+              <t>This parameter specifies the JSON object key of the JSCalendar object to which an iCalendar property converts to. For example, this parameter set on an ATTACH property within a VEVENT component defines the key of the Link object value in the Event object's "links" property (see below for an example).</t>
+              <t>The value of the JSKEY parameter <bcp14>MUST</bcp14> be a valid key according to the definition of the JSCalendar property to which the property that this parameter is set on converts to. Typically, this requires the value to be a valid <xref target="RFC8984" section="1.4.1" sectionFormat="parens">Id</xref>.</t>
+            </dd>
+            <dt>Example(s):</dt>
+            <dd>
+              <figure anchor="test-ical-param-jskey-attach">
+                <name>Converting the JSKEY parameter on an ATTACH property</name>
+                <sourcecode type="text/calendar"><![CDATA[
+ATTACH;JSKEY=mylink1:https://example.com
+]]></sourcecode>
+                <sourcecode type="json"><![CDATA[
+"links": {
+  "mylink1": {
+    "@type": "Link",
+    "href": "https://example.com"
+  }
+}
+]]></sourcecode>
+              </figure>
+            </dd>
+          </dl>
+        </section>
+        <section anchor="ical-param-jsptr">
+          <name>JSPTR</name>
+          <dl newline="true">
+            <dt>Parameter Name:</dt>
+            <dd>JSPTR</dd>
+            <dt>Format Definition:</dt>
+            <dd>
+              <sourcecode type="abnf"><![CDATA[
+jsptr-param  = "JSPTR" "=" quoted-string
+]]></sourcecode>
+            </dd>
+            <dt>Description:</dt>
+            <dd>This parameter is specified on a <xref target="ical-prop-jsprop">JSPROP</xref> property.  Its value is a JSON pointer <xref target="RFC6901"/> that points to a JSCalendar property.
+        </dd>
+            <dt>Description:</dt>
+            <dd>
+              <t>This parameter has a single value that <bcp14>MUST</bcp14> be a valid JSON pointer as defined in <xref target="RFC6901"/>. The value <bcp14>MUST</bcp14> be quoted to preserve its case-sensitivity and it <bcp14>MUST NOT</bcp14> contain the DQUOTE character. See <xref target="RFC5545" section="3.2"/> for how to format parameter values.</t>
+            </dd>
+            <dt>Example(s):</dt>
+            <dd>
+              <sourcecode type="text/plain"><![CDATA[
+JSPROP;JSPTR="example.com:foo":"bar"
+]]></sourcecode>
+              <t>For further examples, see <xref target="ical-prop-jsprop-examples"/>.</t>
+            </dd>
+          </dl>
         </section>
       </section>
     </section>
@@ -6548,12 +6762,14 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5870.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6638.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6838.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6901.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7265.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7529.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7808.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7953.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7986.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8259.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8288.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8607.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8984.xml"/>
