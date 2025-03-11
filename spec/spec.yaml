@@ -512,37 +512,16 @@ icalendar:
       section: '7.2'
       status: current
     VRESOURCE:
-      convert:
-        object: Participant
       properties:
-        ATTACH:
-          convert:
-            property: links
-            object: Link
-        DESCRIPTION:
-          convert:
-            property: description
-        GEO:
-          convert:
-            property: locations
-        IMAGE:
-          convert:
-            property: links
-            object: Link
-        LINK:
-          convert:
-            property: links
-            object: Link
-        NAME:
-          convert:
-            property: name
+        ATTACH: {}
+        DESCRIPTION: {}
+        GEO: {}
+        IMAGE: {}
+        LINK: {}
+        NAME: {}
         RESOURCE-TYPE: {}
-        STRUCTURED-DATA:
-          convert:
-            property: links
-            object: Link
-        UID:
-          required: true
+        STRUCTURED-DATA: {}
+        UID: {}
       rfc: RFC9073
       section: '7.3'
       status: current

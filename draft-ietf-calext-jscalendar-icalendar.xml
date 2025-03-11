@@ -1516,155 +1516,6 @@ END:VLOCATION
 ]]></sourcecode>
           </figure>
         </section>
-        <section anchor="ical-comp-vresource">
-          <name>VRESOURCE</name>
-          <t>The <xref target="RFC9073" section="7.3" sectionFormat="parens">VRESOURCE component</xref> converts to a <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref>. The kind property value of the Participant object <bcp14>MUST</bcp14> be "resource".</t>
-          <t>Its properties convert as follows:</t>
-          <table anchor="ical-comp-vresource-props">
-            <name>Properties of the VRESOURCE component</name>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Participant property</th>
-                <th>See</th>
-                <th>Note</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>ATTACH</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.1" sectionFormat="comma"/>
-                </td>
-                <td>links</td>
-                <td>
-                  <xref target="ical-prop-attach"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>DESCRIPTION</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.5" sectionFormat="comma"/>
-                </td>
-                <td>description</td>
-                <td>
-                  <xref target="ical-prop-description"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>GEO</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.6" sectionFormat="comma"/>
-                </td>
-                <td>locations</td>
-                <td>
-                  <xref target="ical-prop-geo"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>IMAGE</td>
-                <td>
-                  <xref target="RFC7986" section="5.10" sectionFormat="comma"/>
-                </td>
-                <td>links</td>
-                <td>
-                  <xref target="ical-prop-image"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>LINK</td>
-                <td>
-                  <xref target="RFC9253" section="8.2" sectionFormat="comma"/>
-                </td>
-                <td>links</td>
-                <td>
-                  <xref target="ical-prop-link"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>NAME</td>
-                <td>
-                  <xref target="RFC7986" section="5.1" sectionFormat="comma"/>
-                </td>
-                <td>name</td>
-                <td>
-                  <xref target="ical-prop-name"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>STRUCTURED-DATA</td>
-                <td>
-                  <xref target="RFC9073" section="6.6" sectionFormat="comma"/>
-                </td>
-                <td>links</td>
-                <td>
-                  <xref target="ical-prop-structured-data"/>
-                </td>
-                <td/>
-              </tr>
-            </tbody>
-          </table>
-          <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">"iCalComponent" property</xref> of the Participant object. This includes mandatory properties such as <xref target="RFC5545" section="3.8.4.7" sectionFormat="parens">UID</xref>.</t>
-          <t>The following example illustrates how to convert the VRESOURCE component:</t>
-          <figure anchor="test-ical-comp-vresource">
-            <name>Converting the VRESOURCE component</name>
-            <sourcecode type="text/calendar"><![CDATA[
-BEGIN:VEVENT
-BEGIN:VRESOURCE
-UID:456789-abcdef-98765432
-NAME:The projector
-RESOURCE-TYPE:PROJECTOR
-STRUCTURED-DATA;VALUE=URI:http://dir.example.com/projectors/3d.vcf
-END:VRESOURCE
-...
-]]></sourcecode>
-            <sourcecode type="json"><![CDATA[
-{
-  "...": "",
-  "@type": "Event",
-  "participants": {
-    "p2": {
-      "@type": "Participant",
-      "name": "The projector",
-      "kind": "resource",
-      "links": {
-        "l4": {
-          "@type": "Link",
-          "href": "http://dir.example.com/projectors/3d.vcf",
-          "...": ""
-        }
-      },
-      "iCalComponent": {
-        "@type": "ICalComponent",
-        "name": "vresource",
-        "properties": [
-          [
-            "uid",
-            {},
-            "text",
-            "456789-abcdef-98765432"
-          ],
-          [
-            "resource-type",
-            {},
-            "text",
-            "PROJECTOR"
-          ]
-        ]
-      }
-    }
-  }
-}
-]]></sourcecode>
-          </figure>
-        </section>
         <section anchor="ical-comp-vtimezone">
           <name>VTIMEZONE</name>
           <t>The <xref target="RFC5545" section="3.6.5" sectionFormat="parens">VTIMEZONE component</xref> converts to a <xref target="RFC8984" section="4.7.2" sectionFormat="parens">TimeZone object</xref>.</t>
@@ -5755,16 +5606,13 @@ URL:https://example.com/calendar/birthdays.ics
       </section>
       <section anchor="jscal-participant">
         <name>Participant</name>
-        <t>The <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref> either converts to one of an <xref target="ical-prop-attendee">ATTENDEE property</xref>, a <xref target="ical-comp-participant">PARTICIPANT component</xref>, or a <xref target="ical-comp-vresource">VRESOURCE component</xref>; or it converts to both an ATTENDEE property and a PARTICIPANT component:</t>
+        <t>The <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref> converts to both an <xref target="ical-prop-attendee">ATTENDEE property</xref> and a <xref target="ical-comp-participant">PARTICIPANT component</xref>:</t>
         <ul>
           <li>
-            <t>It converts to an ATTENDEE property if at least one of the <xref target="I-D.ietf-jmap-calendars" section="5.1.1" sectionFormat="parens">calendarAddress</xref> or <xref target="RFC8984" section="4.4.6" sectionFormat="parens">sendTo</xref> properties is set. The calendarAddress property converts to the ATTENDEE property value, if set; otherwise one of the scheduling methods in the "sendTo" property converts to the ATTENDEE property value.</t>
+            <t>It converts to an ATTENDEE property if any of the <xref target="I-D.ietf-jmap-calendars" section="5.1.1" sectionFormat="parens">calendarAddress</xref> or <xref target="RFC8984" section="4.4.6" sectionFormat="parens">sendTo</xref> properties are set. The calendarAddress property converts to the ATTENDEE property value, if set; otherwise one of the scheduling methods in the "sendTo" property converts to the ATTENDEE property value.</t>
           </li>
           <li>
-            <t>It converts to a PARTICIPANT component if it converts to an ATTENDEE property but not all of its properties convert to ATTENDEE property parameters as depicted in <xref target="jscal-participant-props-attendee"/>. In this case the CALENDAR-ADDRESS property value of the PARTICIPANT <bcp14>MUST</bcp14> be set to the ATTENDEE property value. Alternatively, the Participant object also converts to a PARTICIPANT component if it does not convert to an ATTENDEE property but its kind property value is unequal to "resource".</t>
-          </li>
-          <li>
-            <t>It converts to a VRESOURCE component if it does not convert to an ATTENDEE property and its kind property value is "resource".</t>
+            <t>It converts to a PARTICIPANT component if any of the Participant properties in <xref target="jscal-participant-props-participant"/> are set. If the Participant object also converts to an ATTENDEE property, then the CALENDAR-ADDRESS property value of the PARTICIPANT componnent <bcp14>MUST</bcp14> match the ATTENDEE property value.</t>
           </li>
         </ul>
         <t>The following Participant properties convert to the ATTENDEE property. How to convert these properties if the Participant does not convert to an ATTENDEE is implementation-specific.</t>
@@ -5942,7 +5790,7 @@ URL:https://example.com/calendar/birthdays.ics
           </li>
         </ul>
         <t>The following Participant properties convert to the PARTICIPANT or VRESOURCE component:</t>
-        <table>
+        <table anchor="jscal-participant-props-participant">
           <name>Properties of the Participant object that convert to the PARTICIPANT or VRESOURCE component</name>
           <thead>
             <tr>
@@ -6835,6 +6683,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             </li>
             <li>
               <xref target="RFC5545" section="3.6.3" sectionFormat="comma">VJOURNAL</xref>
+            </li>
+            <li>
+              <xref target="RFC9073" section="7.3" sectionFormat="comma">VRESOURCE</xref>
             </li>
             <li>
               <xref target="I-D.ietf-calext-ical-tasks" section="14.1" sectionFormat="comma">VSTATUS</xref>
