@@ -5745,14 +5745,6 @@ URL:https://example.com/calendar/birthdays.ics
               </td>
             </tr>
             <tr>
-              <td>scheduleSequence</td>
-              <td>
-                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
-              </td>
-              <td>TBD</td>
-              <td/>
-            </tr>
-            <tr>
               <td>scheduleStatus</td>
               <td>
                 <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
@@ -5761,14 +5753,6 @@ URL:https://example.com/calendar/birthdays.ics
               <td>
                 <xref target="ical-prop-attendee"/>
               </td>
-            </tr>
-            <tr>
-              <td>scheduleUpdated</td>
-              <td>
-                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
-              </td>
-              <td>TBD</td>
-              <td/>
             </tr>
             <tr>
               <td>sendTo</td>
@@ -5891,6 +5875,30 @@ URL:https://example.com/calendar/birthdays.ics
               <td>PARTICIPANT-TYPE</td>
               <td>
                 <xref target="ical-prop-participant-type"/>
+              </td>
+            </tr>
+            <tr>
+              <td>scheduleSequence</td>
+              <td>
+                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
+              </td>
+              <td>SEQUENCE</td>
+              <td>
+                <t>
+                  <xref target="ical-prop-sequence"/>
+                </t>
+              </td>
+            </tr>
+            <tr>
+              <td>scheduleUpdated</td>
+              <td>
+                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
+              </td>
+              <td>DTSTAMP</td>
+              <td>
+                <t>
+                  <xref target="ical-prop-dtstamp"/>
+                </t>
               </td>
             </tr>
           </tbody>
