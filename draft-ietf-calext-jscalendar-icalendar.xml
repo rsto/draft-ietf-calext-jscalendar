@@ -2409,7 +2409,7 @@ ACTION:AUDIO
         <section anchor="ical-prop-attach">
           <name>ATTACH</name>
           <t>
-              The <xref target="RFC5545" section="3.8.1.1" sectionFormat="parens">ATTACH property</xref> in a VEVENT, VTODO, VRESOURCE, PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the "links" property of the Event, Task, Participant, or Location object.
+              The <xref target="RFC5545" section="3.8.1.1" sectionFormat="parens">ATTACH property</xref> in a VEVENT, VTODO, PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the "links" property of the Event, Task, Participant, or Location object.
           </t>
           <t>The property value converts to the "href" property of the Link object. A value of type URI converts as-is. A value of type BINARY converts to a URI in the "data" URL scheme (<xref target="RFC2397"/>. If the FMTTYPE parameter is set on the ATTACH property, then the parameter value <bcp14>SHOULD</bcp14> be set in the <tt>mediatype</tt> part of the data URL.</t>
           <t>The ATTACH property parameters convert as follows:</t>
@@ -3085,7 +3085,7 @@ CREATED:20240329T133000Z
         </section>
         <section anchor="ical-prop-description">
           <name>DESCRIPTION</name>
-          <t>The <xref target="RFC5545" section="3.8.1.5" sectionFormat="parens">DESCRIPTION property</xref> in a VEVENT, VTODO, VCALENDAR, VLOCATION, VRESOURCE, or PARTICIPANT component converts to the <xref target="RFC8984" section="4.2.2" sectionFormat="parens">"description" property</xref> of the Event, Task, Group, Location, Link, or Participant object, unless its DERIVED parameter value is TRUE.</t>
+          <t>The <xref target="RFC5545" section="3.8.1.5" sectionFormat="parens">DESCRIPTION property</xref> in a VEVENT, VTODO, VCALENDAR, VLOCATION, or PARTICIPANT component converts to the <xref target="RFC8984" section="4.2.2" sectionFormat="parens">"description" property</xref> of the Event, Task, Group, Location, Link, or Participant object, unless its DERIVED parameter value is TRUE.</t>
           <t>If the DERIVED parameter value is TRUE, then the property does not convert to the "description" property. Instead, a non-derived STYLED-DESCRIPTION property is expected to contain the description. Implementations MAY preserve the property in the <xref target="jscal-prop-icalcomponent">"iCalComponent" property</xref>.</t>
           <t>The following example illustrates how to convert the DESCRIPTION property:</t>
           <figure anchor="test-ical-prop-description">
@@ -3422,7 +3422,7 @@ EXDATE:20230801T130000Z
         <section anchor="ical-prop-geo">
           <name>GEO</name>
           <t>
-            The <xref target="RFC5545" section="3.8.1.6" sectionFormat="parens">GEO property</xref> in a VEVENT, VTODO, PARTICIPANT or VRESOURCE component converts to a <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>.  The converted object is set in the "locations" property of the Event, Task, or Participant object.
+            The <xref target="RFC5545" section="3.8.1.6" sectionFormat="parens">GEO property</xref> in a VEVENT, VTODO, or PARTICIPANT component converts to a <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>.  The converted object is set in the "locations" property of the Event, Task, or Participant object.
           </t>
           <t>
             The <xref target="RFC5545" section="3.8.1.6" sectionFormat="parens">GEO property</xref> in a VLOCATION component converts to the <xref target="RFC8984" section="4.2.5" sectionFormat="parens">"coordinates" property</xref> of the Location object.
@@ -3466,7 +3466,7 @@ GEO:48.858222;2.2945
         <section anchor="ical-prop-image">
           <name>IMAGE</name>
           <t>
-            The <xref target="RFC7986" section="5.10" sectionFormat="parens">IMAGE property</xref> in a VEVENT, VTODO, VLOCATION, or VRESOURCE component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the "links" property of the Event, Task, Location, or Participant object.
+            The <xref target="RFC7986" section="5.10" sectionFormat="parens">IMAGE property</xref> in a VEVENT, VTODO, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the "links" property of the Event, Task, Location, or Participant object.
           </t>
           <t>The property value converts to the "href" property of the Link object. A value of type URI converts as-is. See <xref target="ical-prop-attach"/> how to convert a BINARY value. If the DISPLAY parameter is set, then the "rel" property of the Link object <bcp14>MUST</bcp14> be set to "icon".</t>
           <t>Its parameters convert as follows:</t>
@@ -3556,7 +3556,7 @@ LAST-MODIFIED:20240914T231257Z
         <section anchor="ical-prop-link">
           <name>LINK</name>
           <t>
-            A <xref target="RFC9253" section="8.2" sectionFormat="parens">LINK property</xref> of type URI in a VEVENT, VTODO, VCALENDAR, VRESOURCE, PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.</t>
+            A <xref target="RFC9253" section="8.2" sectionFormat="parens">LINK property</xref> of type URI in a VEVENT, VTODO, VCALENDAR, PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.</t>
           <t>The converted object is set in the "links" property of the Event, Task, Group, Participant, or Location object. The LINK property value converts to the "href" property of the Link object.</t>
           <t>Its parameters convert as follows:</t>
           <table>
@@ -3729,7 +3729,7 @@ BEGIN:VEVENT
         <section anchor="ical-prop-name">
           <name>NAME</name>
           <t>
-            The <xref target="RFC7986" section="5.1" sectionFormat="parens">NAME property</xref> in a VLOCATION or VRESOURCE component converts to the "name" property of the <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location</xref> or <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant</xref> object.
+            The <xref target="RFC7986" section="5.1" sectionFormat="parens">NAME property</xref> in a VLOCATION component converts to the "name" property of the <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location</xref> or <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant</xref> object.
           </t>
           <t>
             The <xref target="RFC7986" section="5.1" sectionFormat="parens">NAME property</xref> in a VCALENDAR component converts to the <xref target="RFC8984" section="4.2.1" sectionFormat="parens">"title" property</xref> of the Group object.
@@ -3750,18 +3750,14 @@ NAME:Company Vacation Days
 }
 ]]></sourcecode>
           </figure>
-          <figure anchor="test-ical-prop-name-vlocation-vresource">
-            <name>Converting the NAME property in the VLOCATION and VRESOURCE components</name>
+          <figure anchor="test-ical-prop-name-vlocation">
+            <name>Converting the NAME property in the VLOCATION component</name>
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VEVENT
 BEGIN:VLOCATION
 NAME:Room B
 ...
 END:VLOCATION
-BEGIN:VRESOURCE
-NAME:Whiteboard
-...
-END:VRESOURCE
 ...
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
@@ -3769,14 +3765,6 @@ END:VRESOURCE
   "1": {
     "@type": "Location",
     "name": "Room B",
-    "...": ""
-  }
-},
-"participants": {
-  "1": {
-    "@type": "Participant",
-    "kind": "resource",
-    "name": "Whiteboard",
     "...": ""
   }
 }
@@ -4401,7 +4389,7 @@ SOURCE;VALUE=URI:https://example.com/holidays.ics
         <section anchor="ical-prop-structured-data">
           <name>STRUCTURED-DATA</name>
           <t>
-            A <xref target="RFC9073" section="6.6" sectionFormat="parens">STRUCTURED-DATA property</xref> of type URI or BINARY in a VEVENT, VTODO, VCALENDAR, VRESOURCE, PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the "links" property of the Event, Task, Group, Participant, or Location object.
+            A <xref target="RFC9073" section="6.6" sectionFormat="parens">STRUCTURED-DATA property</xref> of type URI or BINARY in a VEVENT, VTODO, VCALENDAR, PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the "links" property of the Event, Task, Group, Participant, or Location object.
           </t>
           <t>The property value converts to the "href" property of the Link object. A value of type URI converts as-is. See <xref target="ical-prop-attach"/> how to convert a BINARY value.</t>
           <t>Its parameters convert as follows:</t>
@@ -5802,9 +5790,9 @@ URL:https://example.com/calendar/birthdays.ics
             <t>The progress property converts to the PARTSTAT parameter as outlined in <xref target="ical-prop-attendee-param-partstat"/>.</t>
           </li>
         </ul>
-        <t>The following Participant properties convert to the PARTICIPANT or VRESOURCE component:</t>
+        <t>The following Participant properties convert to the PARTICIPANT component:</t>
         <table anchor="jscal-participant-props-participant">
-          <name>Properties of the Participant object that convert to the PARTICIPANT or VRESOURCE component</name>
+          <name>Properties of the Participant object that convert to the PARTICIPANT component</name>
           <thead>
             <tr>
               <th>Name</th>
@@ -6836,17 +6824,6 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
           <section>
             <name>VLOCATION</name>
             <ul>
-              <li>
-                <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma">UID</xref>
-              </li>
-            </ul>
-          </section>
-          <section>
-            <name>VRESOURCE</name>
-            <ul>
-              <li>
-                <xref target="RFC9073" section="6.3" sectionFormat="comma">RESOURCE-TYPE</xref>
-              </li>
               <li>
                 <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma">UID</xref>
               </li>
