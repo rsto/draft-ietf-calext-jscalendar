@@ -772,7 +772,11 @@ END:PARTICIPANT
         "l4": {
           "@type": "Link",
           "href": "http://dir.example.com/vcard/contacts/contact1.vcf",
-          "...": ""
+          "iCalProperty": {
+            "@type": "ICalProperty",
+            "name": "structured-data",
+            "valueType": "uri"
+          }
         }
       },
       "roles": {
