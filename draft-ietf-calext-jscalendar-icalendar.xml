@@ -5788,7 +5788,7 @@ URL:https://example.com/calendar/birthdays.ics
         <t>Remarks:</t>
         <ul>
           <li>
-            <t>The "optional" role converts to the "OPT-PARTICIPANT" ROLE parameter value, the "chair" role to "CHAIR", "informational" to "NON-PARTICIPANT". The "attendee" role does not convert to the ROLE parameter, it is implied by the ATTENDEE property. The "owner" role does not convert to the ROLE parameter, if the property value of the ATTENDEE is equal to the value of the ORGANIZER property in the same component. All other roles require a PARTICIPANT component and convert to the PARTICIPANT-TYPE property in that component.</t>
+            <t>The "optional" role converts to the "OPT-PARTICIPANT" ROLE parameter value, the "chair" role to "CHAIR", "informational" to "NON-PARTICIPANT". The "attendee" role does not convert to the ROLE parameter: it either is implied if the Participant object converts to an ATTENDEE, otherwise implementations <bcp14>MAY</bcp14> preserve it using the <xref target="ical-prop-jsprop">JSPROP</xref> property. The "owner" role does not convert to any standard iCalendar element: it either is implied if the property value of the ATTENDEE is equal to the value of the ORGANIZER property in the same component, otherwise implementations <bcp14>MAY</bcp14> preserve it using the <xref target="ical-prop-jsprop">JSPROP</xref> property. All other roles require a PARTICIPANT component and convert to the PARTICIPANT-TYPE property in that component.</t>
           </li>
           <li>
             <t>The progress property converts to the PARTSTAT parameter as outlined in <xref target="ical-prop-attendee-param-partstat"/>.</t>
