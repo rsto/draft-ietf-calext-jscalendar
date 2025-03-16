@@ -638,17 +638,6 @@ END:VCALENDAR
                 <td/>
               </tr>
               <tr>
-                <td>LOCATION</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.7" sectionFormat="comma"/>
-                </td>
-                <td>locations</td>
-                <td>
-                  <xref target="ical-prop-location"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
                 <td>PARTICIPANT-TYPE</td>
                 <td>
                   <xref target="RFC9073" section="6.2" sectionFormat="comma"/>
@@ -700,34 +689,6 @@ END:VCALENDAR
                 <td>links</td>
                 <td>
                   <xref target="ical-prop-url"/>
-                </td>
-                <td/>
-              </tr>
-            </tbody>
-          </table>
-          <t>Its components convert as follows:</t>
-          <table anchor="ical-comp-participant-comps">
-            <name>Components of the PARTICIPANT component</name>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Participant property</th>
-                <th>See</th>
-                <th>Note</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>VLOCATION</td>
-                <td>
-                  <xref target="RFC9073" section="7.2" sectionFormat="comma"/>
-                </td>
-                <td>
-                  <xref target="jscal-prop-locations">locations</xref>
-                </td>
-                <td>
-                  <xref target="ical-comp-vlocation"/>
                 </td>
                 <td/>
               </tr>
@@ -1899,17 +1860,6 @@ DTSTART;TZID=CustomTz:20080708T130000
                 <td/>
               </tr>
               <tr>
-                <td>COMPLETED</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.2.1" sectionFormat="comma"/>
-                </td>
-                <td>completed</td>
-                <td>
-                  <xref target="ical-prop-completed"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
                 <td>CONCEPT</td>
                 <td>
                   <xref target="RFC9253" section="8.1" sectionFormat="comma"/>
@@ -2970,28 +2920,6 @@ COMMENT:I'll think about it
 ]]></sourcecode>
           </figure>
         </section>
-        <section anchor="ical-prop-completed">
-          <name>COMPLETED</name>
-          <t>
-            The <xref target="RFC5545" section="3.8.2.1" sectionFormat="parens">COMPLETED property</xref> in a VTODO component converts to the <xref target="jscal-prop-completed">"completed" property</xref> of the Task object.
-          </t>
-          <t>The following example illustrates how to convert the COMPLETED property:</t>
-          <figure anchor="test-ical-prop-completed">
-            <name>Converting the COMPLETED property</name>
-            <sourcecode type="text/calendar"><![CDATA[
-BEGIN:VTODO
-COMPLETED:20241108T111029Z
-...
-  ]]></sourcecode>
-            <sourcecode type="json"><![CDATA[
-{
-  "@type": "Task",
-  "completed": "2024-11-08T11:10:29Z",
-  "...": ""
-}
-]]></sourcecode>
-          </figure>
-        </section>
         <section anchor="ical-prop-concept">
           <name>CONCEPT</name>
           <t>
@@ -3590,16 +3518,6 @@ LAST-MODIFIED:20240914T231257Z
                 <td>title</td>
                 <td/>
               </tr>
-              <tr>
-                <td>LINKREL</td>
-                <td>
-                  <xref target="RFC9253" section="6.1" sectionFormat="comma"/>
-                </td>
-                <td>
-                  <xref target="jscal-prop-link-rel">rel</xref>
-                </td>
-                <td/>
-              </tr>
             </tbody>
           </table>
           <t>A LINK property with a value type other than URI or an unregistered LINK parameter value does not convert to a standard JSCalendar element. Implementations <bcp14>MAY</bcp14> convert it to the <xref target="jscal-prop-icalcomponent">"iCalComponent" property</xref>.</t>
@@ -3650,7 +3568,7 @@ LINK;LINKREL="https://example.com/linkrel/costStructure";
         <section anchor="ical-prop-location">
           <name>LOCATION</name>
           <t>
-            The <xref target="RFC5545" section="3.8.1.7" sectionFormat="parens">LOCATION property</xref> in a VEVENT, VTODO, or PARTICIPANT component converts to a <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>, unless its DERIVED parameter value is TRUE. The converted object is set in the "locations" property of the Event, Task, or Participant object.
+            The <xref target="RFC5545" section="3.8.1.7" sectionFormat="parens">LOCATION property</xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>, unless its DERIVED parameter value is TRUE. The converted object is set in the "locations" property of the Event or Task.
           </t>
           <t>The property value converts to the "title" property of the Location object.</t>
           <t>If the DERIVED parameter value is TRUE, then the property does not convert to a Location object. Instead, a VLOCATION component is expected to represent the location. Implementations <bcp14>MAY</bcp14> preserve the property in the <xref target="jscal-prop-icalcomponent">"iCalComponent" property</xref>.</t>
@@ -3809,36 +3727,6 @@ END:VLOCATION
                   <xref target="RFC5545" section="3.2.6" sectionFormat="comma"/>
                 </td>
                 <td>links</td>
-                <td/>
-              </tr>
-              <tr>
-                <td>SCHEDULE-AGENT</td>
-                <td>
-                  <xref target="RFC6638" section="7.1" sectionFormat="comma"/>
-                </td>
-                <td>
-                  <xref target="jscal-prop-schedule-agent">scheduleAgent</xref>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>SCHEDULE-FORCE-SEND</td>
-                <td>
-                  <xref target="RFC6638" section="7.2" sectionFormat="comma"/>
-                </td>
-                <td>
-                  <xref target="jscal-prop-schedule-force-send">scheduleForceSend</xref>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>SCHEDULE-STATUS</td>
-                <td>
-                  <xref target="RFC6638" section="7.3" sectionFormat="comma"/>
-                </td>
-                <td>
-                  <xref target="jscal-prop-schedule-status">scheduleStatus</xref>
-                </td>
                 <td/>
               </tr>
             </tbody>
@@ -6396,19 +6284,6 @@ JSPROP;JSPTR="example.com:foo":"bar"
       <name>Updates to JSCalendar</name>
       <section anchor="new-jscalendar-properties">
         <name>New Properties</name>
-        <section anchor="jscal-prop-completed">
-          <name>completed</name>
-          <dl newline="true">
-            <dt>Name:</dt>
-            <dd>completed</dd>
-            <dt>Context:</dt>
-            <dd>Task</dd>
-            <dt>Type:</dt>
-            <dd><tt>UTCDateTime</tt> (optional)</dd>
-            <dt>Description:</dt>
-            <dd>This is the date and time when the task was completed.</dd>
-          </dl>
-        </section>
         <section anchor="jscal-prop-icalcomponent">
           <name>iCalComponent</name>
           <dl newline="true">
@@ -6546,77 +6421,6 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
 ]]></sourcecode>
           </figure>
         </section>
-        <section anchor="jscal-prop-locations">
-          <name>locations (Participant)</name>
-          <dl newline="true">
-            <dt>Name:</dt>
-            <dd>locations</dd>
-            <dt>Context:</dt>
-            <dd>Participant</dd>
-            <dt>Type:</dt>
-            <dd><tt>Id[Location]</tt> (optional)</dd>
-            <dt>Description:</dt>
-            <dd>This represents locations associated with the participant. In contrast to the single-valued "locationId" property, this allows for associating multiple locations with the Participant object, and to express that a location only is relevant for this participant.</dd>
-          </dl>
-        </section>
-        <section anchor="jscal-prop-schedule-agent">
-          <name>scheduleAgent (Event, Task)</name>
-          <dl newline="true">
-            <dt>Name:</dt>
-            <dd>scheduleAgent</dd>
-            <dt>Context:</dt>
-            <dd>Event, Task</dd>
-            <dt>Type:</dt>
-            <dd><tt>String</tt> (optional, default "server")</dd>
-            <dt>Description:</dt>
-            <dd>
-              <t>This property represents the <xref target="RFC6638" section="7.1" sectionFormat="parens">SCHEDULE-AGENT parameter</xref> specified on an ORGANIZER property. In the context of scheduling as outlined in <xref target="RFC6638"/>, a scheduling client can set this property to indicate who is responsible for sending scheduling messages to the organizer in the "replyTo" property. The same values as for the "scheduleAgent" property of the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref> are allowed, the "none" value indicates that no scheduling message is to be sent to the organizer. The property <bcp14>MUST NOT</bcp14> be preserved in the JSCalendar object on the server or appear in a scheduling message. If this property is set, then the "replyTo" property <bcp14>MUST</bcp14> be set.</t>
-            </dd>
-          </dl>
-        </section>
-        <section anchor="jscal-prop-schedule-force-send">
-          <name>scheduleForceSend (Event, Task)</name>
-          <dl newline="true">
-            <dt>Name:</dt>
-            <dd>scheduleForceSend</dd>
-            <dt>Context:</dt>
-            <dd>Event, Task</dd>
-            <dt>Type:</dt>
-            <dd><tt>Boolean</tt> (optional, default "false")</dd>
-            <dt>Description:</dt>
-            <dd>
-              <t>This property represents the <xref target="RFC6638" section="7.2" sectionFormat="parens">SCHEDULE-FORCE-SEND parameter</xref> specified on an ORGANIZER property. In the context of scheduling as outlined in <xref target="RFC6638"/>, a scheduling client can set this property to true to request that the server send a scheduling message to the organizer defined in the "replyTo" property, when it would not normally do so (e.g., if no significant change is made to the object or the scheduleAgent is set to "client"). The property <bcp14>MUST NOT</bcp14> be preserved in the JSCalendar object on the server or appear in a scheduling message. If this property is set, then the "replyTo" property <bcp14>MUST</bcp14> be set.</t>
-            </dd>
-          </dl>
-        </section>
-        <section anchor="jscal-prop-schedule-status">
-          <name>scheduleStatus (Event, Task)</name>
-          <dl newline="true">
-            <dt>Name:</dt>
-            <dd>scheduleStatus</dd>
-            <dt>Context:</dt>
-            <dd>Event, Task</dd>
-            <dt>Type:</dt>
-            <dd><tt>String[]</tt> (optional)</dd>
-            <dt>Description:</dt>
-            <dd>
-              <t>This property represents the <xref target="RFC6638" section="7.3" sectionFormat="parens">SCHEDULE-STATUS parameter</xref> specified on an ORGANIZER property. In the context of scheduling as outlined in <xref target="RFC6638"/>, the scheduling client or server can set this property to a list of status codes, returned from processing the most recent scheduling message sent to the organizer defined in the "replyTo" property. The status codes <bcp14>MUST</bcp14> be valid "statcode" values as defined in the ABNF in <xref target="RFC5545" section="3.8.8.3"/>.  Servers <bcp14>MUST</bcp14> only add or change this property when they send a scheduling message to the organizer. Clients <bcp14>SHOULD NOT</bcp14> change or remove this property if it was provided by the server. Clients <bcp14>MAY</bcp14> add, change, or remove the property for participants where the client is handling the scheduling. This property <bcp14>MUST NOT</bcp14> be included in scheduling messages.</t>
-            </dd>
-          </dl>
-        </section>
-      </section>
-      <section anchor="updated-jscalendar-properties">
-        <name>Updated Properties</name>
-        <section anchor="jscal-prop-link-rel">
-          <name>rel (Link)</name>
-          <t>This document modifies the definition of the "rel" property of the Link object. The original specification in <xref target="RFC8984" section="1.4.11"/> restricts that its values <bcp14>MUST</bcp14> be a registered relation type as defined in <xref target="RFC8288"/>. The new definition allows the value also to be an extension relation type to improve interoperability with the <xref target="RFC9253" section="6.1" sectionFormat="parens">LINKREL</xref> parameter in iCalendar. The new definition of the Link "rel" property is:</t>
-          <dl newline="true">
-            <dt>rel: String (optional)</dt>
-            <dd>
-              <t>This identifies the relation of the linked resource to the object. If set, the value <bcp14>MUST</bcp14> either be a registered relation type or an extension relation type, as defined in <xref target="RFC8288" section="2.1"/>.</t>
-            </dd>
-          </dl>
-        </section>
       </section>
     </section>
     <section anchor="IANA">
@@ -6740,6 +6544,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
                 <xref target="RFC5545" section="3.8.7.3" sectionFormat="comma">LAST-MODIFIED</xref>
               </li>
               <li>
+                <xref target="RFC5545" section="3.8.1.7" sectionFormat="comma">LOCATION</xref>
+              </li>
+              <li>
                 <xref target="RFC5545" section="3.8.1.9" sectionFormat="comma">PRIORITY</xref>
               </li>
               <li>
@@ -6837,6 +6644,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             <name>VTODO</name>
             <ul>
               <li>
+                <xref target="RFC5545" section="3.8.2.1" sectionFormat="comma">COMPLETED</xref>
+              </li>
+              <li>
                 <xref target="RFC5545" section="3.8.4.2" sectionFormat="comma">CONTACT</xref>
               </li>
               <li>
@@ -6847,6 +6657,18 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
               </li>
               <li>
                 <xref target="I-D.ietf-calext-ical-tasks" section="12.4" sectionFormat="comma">TASK-MODE</xref>
+              </li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <name>Subcomponents by Component</name>
+          <t>The following components are defined to contain the listed subcomponents. But these subcomponents do not convert to a standard JSCalendar element.</t>
+          <section>
+            <name>PARTICIPANT</name>
+            <ul>
+              <li>
+                <xref target="RFC9073" section="7.2" sectionFormat="comma">VLOCATION</xref>
               </li>
             </ul>
           </section>
@@ -6956,6 +6778,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
               <li>
                 <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
               </li>
+              <li>
+                <xref target="RFC9253" section="6.1" sectionFormat="comma">LINKREL</xref>
+              </li>
             </ul>
           </section>
           <section>
@@ -6988,6 +6813,15 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
               </li>
               <li>
                 <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
+              </li>
+              <li>
+                <xref target="RFC6638" section="7.1" sectionFormat="comma">SCHEDULE-AGENT</xref>
+              </li>
+              <li>
+                <xref target="RFC6638" section="7.2" sectionFormat="comma">SCHEDULE-FORCE-SEND</xref>
+              </li>
+              <li>
+                <xref target="RFC6638" section="7.3" sectionFormat="comma">SCHEDULE-STATUS</xref>
               </li>
             </ul>
           </section>

@@ -90,9 +90,7 @@ icalendar:
           convert:
             property: links
             object: Link
-        LOCATION:
-          convert:
-            property: locations
+        LOCATION: {}
         PARTICIPANT-TYPE:
           required: true
           convert:
@@ -1046,10 +1044,7 @@ icalendar:
             property: title
             object: Link
         LANGUAGE: {}
-        LINKREL:
-          convert:
-            property: rel
-            object: Link
+        LINKREL: {}
       rfc: RFC9253
       section: '8.2'
       status: current
@@ -1099,13 +1094,9 @@ icalendar:
           convert:
             property: links
             object: Participant
-        SCHEDULE-AGENT:
-          convert:
-            property: scheduleAgent
-        SCHEDULE-FORCE-SEND:
-            property: scheduleForceSend
-        SCHEDULE-STATUS:
-            property: scheduleStatus
+        SCHEDULE-AGENT: {}
+        SCHEDULE-FORCE-SEND: {}
+        SCHEDULE-STATUS: {}
         SENT-BY: {}
         LANGUAGE: {}
       rfc: RFC5545
