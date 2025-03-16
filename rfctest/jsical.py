@@ -7,6 +7,7 @@ import json
 import re
 import uuid
 
+
 from collections import UserList
 from dataclasses import dataclass, field
 
@@ -103,11 +104,8 @@ class Component:
 
     @staticmethod
     def _key(comp):
-        return (
-            comp.name,
-            [Property._key(p) for p in comp.props],
-            [Component._key(c) for c in comp.comps],
-        )
+        uids = list(filter(lambda prop: prop.name == "UID", comp.props))
+        return (comp.name, uids[0].name if uids else "")
 
     def normalize(self):
         self.name = self.name.upper()
@@ -215,6 +213,7 @@ class Component:
             comp.name = "VEVENT"
         return comp
 
+
 @dataclass
 class PropertyDiff:
     del_param_a: list[int]
@@ -244,7 +243,9 @@ class PropertyDiff:
 
         self.diff_params = []
         for name in set(a_params.keys()) & set(b_params.keys()):
-            for (idx_a, param_a), (idx_b, param_b) in zip(a_params[name], b_params[name]):
+            for (idx_a, param_a), (idx_b, param_b) in zip(
+                a_params[name], b_params[name]
+            ):
                 if param_a.value != param_b.value:
                     self.diff_params.append((idx_a, idx_b))
             len_a = len(a_params[name])
@@ -283,6 +284,12 @@ class ComponentDiff:
     add_prop_b: list[int]
 
     def __init__(self, a: Component, b: Component):
+        a = copy.deepcopy(a)
+        a.normalize()
+
+        b = copy.deepcopy(b)
+        b.normalize()
+
         a_props = collections.defaultdict(list)
         for p in enumerate(a.props):
             a_props[p[1].name].append(p)
