@@ -6529,7 +6529,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
           <name>Properties by Component</name>
           <t>The following components are defined to contain the listed properties. But these properties do not convert to a standard JSCalendar element.</t>
           <section>
-            <name>PARTICIPANT</name>
+            <name>
+              <xref target="RFC9073" section="7.1" sectionFormat="comma">PARTICIPANT</xref>
+            </name>
             <ul>
               <li>
                 <xref target="RFC5545" section="3.8.1.2" sectionFormat="comma">CATEGORIES</xref>
@@ -6573,7 +6575,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             </ul>
           </section>
           <section>
-            <name>VALARM</name>
+            <name>
+              <xref target="RFC5545" section="3.6.6" sectionFormat="comma">VALARM</xref>
+            </name>
             <ul>
               <li>
                 <xref target="RFC5545" section="3.8.1.1" sectionFormat="comma">ATTACH</xref>
@@ -6605,7 +6609,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             </ul>
           </section>
           <section>
-            <name>VCALENDAR</name>
+            <name>
+              <xref target="RFC5545" section="3.4" sectionFormat="comma">VCALENDAR</xref>
+            </name>
             <ul>
               <li>
                 <xref target="RFC5545" section="3.7.1" sectionFormat="comma">CALSCALE</xref>
@@ -6619,7 +6625,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             </ul>
           </section>
           <section>
-            <name>VEVENT</name>
+            <name>
+              <xref target="RFC5545" section="3.6.1" sectionFormat="comma">VEVENT</xref>
+            </name>
             <ul>
               <li>
                 <xref target="RFC5545" section="3.8.4.2" sectionFormat="comma">CONTACT</xref>
@@ -6633,7 +6641,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             </ul>
           </section>
           <section>
-            <name>VLOCATION</name>
+            <name>
+              <xref target="RFC9073" section="7.2" sectionFormat="comma">VLOCATION</xref>
+            </name>
             <ul>
               <li>
                 <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma">UID</xref>
@@ -6641,7 +6651,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             </ul>
           </section>
           <section>
-            <name>VTODO</name>
+            <name>
+              <xref target="RFC5545" section="3.6.2" sectionFormat="comma">VTODO</xref>
+            </name>
             <ul>
               <li>
                 <xref target="RFC5545" section="3.8.2.1" sectionFormat="comma">COMPLETED</xref>
@@ -6665,7 +6677,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
           <name>Subcomponents by Component</name>
           <t>The following components are defined to contain the listed subcomponents. But these subcomponents do not convert to a standard JSCalendar element.</t>
           <section>
-            <name>PARTICIPANT</name>
+            <name>
+              <xref target="RFC9073" section="7.1" sectionFormat="comma">PARTICIPANT</xref>
+            </name>
             <ul>
               <li>
                 <xref target="RFC9073" section="7.2" sectionFormat="comma">VLOCATION</xref>
@@ -6677,7 +6691,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
           <name>Properties by Value Type</name>
           <t>The following properties convert to a standard JSCalendar element for some other value type, but they do not for the listed value types.</t>
           <section>
-            <name>LINK</name>
+            <name>
+              <xref target="RFC9253" section="8.2" sectionFormat="comma">LINK</xref>
+            </name>
             <ul>
               <li>
                 <xref target="RFC9253" section="7" sectionFormat="comma">XML-REFERENCE</xref>
@@ -6685,7 +6701,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             </ul>
           </section>
           <section>
-            <name>RDATE</name>
+            <name>
+              <xref target="RFC5545" section="3.8.5.2" sectionFormat="comma">RDATE</xref>
+            </name>
             <ul>
               <li>
                 <xref target="RFC5545" section="3.3.9" sectionFormat="comma">PERIOD</xref>
@@ -6693,7 +6711,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             </ul>
           </section>
           <section>
-            <name>STRUCTURED-DATA</name>
+            <name>
+              <xref target="RFC9073" section="6.6" sectionFormat="comma">STRUCTURED-DATA</xref>
+            </name>
             <ul>
               <li>
                 <xref target="RFC9073" section="6.6" sectionFormat="comma">TEXT</xref>
@@ -6705,7 +6725,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
           <name>Parameters by Property</name>
           <t>The following properties are defined to contain the listed parameters. But these parameters do not convert to a standard JSCalendar element.</t>
           <section>
-            <name>ATTACH</name>
+            <name>
+              <xref target="RFC5545" section="3.8.1.1" sectionFormat="comma">ATTACH</xref>
+            </name>
             <ul>
               <li>
                 <xref target="RFC8607" section="4.2" sectionFormat="comma">FILENAME</xref>
@@ -6716,7 +6738,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             </ul>
           </section>
           <section>
-            <name>ATTENDEE</name>
+            <name>
+              <xref target="RFC5545" section="3.8.4.1" sectionFormat="comma">ATTENDEE</xref>
+            </name>
             <ul>
               <li>
                 <xref target="RFC5545" section="3.2.18" sectionFormat="comma">SENT-BY</xref>
@@ -6727,7 +6751,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             </ul>
           </section>
           <section>
-            <name>CATEGORIES</name>
+            <name>
+              <xref target="RFC5545" section="3.8.1.2" sectionFormat="comma">CATEGORIES</xref>
+            </name>
             <ul>
               <li>
                 <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
@@ -6735,7 +6761,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             </ul>
           </section>
           <section>
-            <name>COMMENT</name>
+            <name>
+              <xref target="RFC5545" section="3.8.1.4" sectionFormat="comma">COMMENT</xref>
+            </name>
             <ul>
               <li>
                 <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
@@ -6746,7 +6774,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             </ul>
           </section>
           <section>
-            <name>CONFERENCE</name>
+            <name>
+              <xref target="RFC7986" section="5.11" sectionFormat="comma">CONFERENCE</xref>
+            </name>
             <ul>
               <li>
                 <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
@@ -6754,7 +6784,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             </ul>
           </section>
           <section>
-            <name>DESCRIPTION</name>
+            <name>
+              <xref target="RFC5545" section="3.8.1.5" sectionFormat="comma">DESCRIPTION</xref>
+            </name>
             <ul>
               <li>
                 <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
@@ -6765,7 +6797,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             </ul>
           </section>
           <section>
-            <name>IMAGE</name>
+            <name>
+              <xref target="RFC7986" section="5.10" sectionFormat="comma">IMAGE</xref>
+            </name>
             <ul>
               <li>
                 <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
@@ -6773,7 +6807,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             </ul>
           </section>
           <section>
-            <name>LINK</name>
+            <name>
+              <xref target="RFC9253" section="8.2" sectionFormat="comma">LINK</xref>
+            </name>
             <ul>
               <li>
                 <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
@@ -6784,7 +6820,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             </ul>
           </section>
           <section>
-            <name>LOCATION</name>
+            <name>
+              <xref target="RFC5545" section="3.8.1.7" sectionFormat="comma">LOCATION</xref>
+            </name>
             <ul>
               <li>
                 <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
@@ -6795,7 +6833,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             </ul>
           </section>
           <section>
-            <name>NAME</name>
+            <name>
+              <xref target="RFC7986" section="5.1" sectionFormat="comma">NAME</xref>
+            </name>
             <ul>
               <li>
                 <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
@@ -6806,7 +6846,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             </ul>
           </section>
           <section>
-            <name>ORGANIZER</name>
+            <name>
+              <xref target="RFC5545" section="3.8.4.3" sectionFormat="comma">ORGANIZER</xref>
+            </name>
             <ul>
               <li>
                 <xref target="RFC5545" section="3.2.18" sectionFormat="comma">SENT-BY</xref>
@@ -6826,7 +6868,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             </ul>
           </section>
           <section>
-            <name>PARTICIPANT-TYPE</name>
+            <name>
+              <xref target="RFC9073" section="6.2" sectionFormat="comma">PARTICIPANT-TYPE</xref>
+            </name>
             <ul>
               <li>
                 <xref target="RFC9073" section="5.1" sectionFormat="comma">ORDER</xref>
@@ -6834,7 +6878,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             </ul>
           </section>
           <section>
-            <name>RECURRENCE-ID</name>
+            <name>
+              <xref target="RFC5545" section="3.8.4.4" sectionFormat="comma">RECURRENCE-ID</xref>
+            </name>
             <ul>
               <li>
                 <xref target="RFC5545" section="3.2.13" sectionFormat="comma">RANGE</xref>
@@ -6842,7 +6888,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             </ul>
           </section>
           <section>
-            <name>RELATED-TO</name>
+            <name>
+              <xref target="RFC5545" section="3.8.4.5" sectionFormat="comma">RELATED-TO</xref>
+            </name>
             <ul>
               <li>
                 <xref target="RFC9253" section="6.2" sectionFormat="comma">GAP</xref>
@@ -6850,7 +6898,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             </ul>
           </section>
           <section>
-            <name>REQUEST-STATUS</name>
+            <name>
+              <xref target="RFC5545" section="3.8.8.3" sectionFormat="comma">REQUEST-STATUS</xref>
+            </name>
             <ul>
               <li>
                 <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
@@ -6858,7 +6908,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             </ul>
           </section>
           <section>
-            <name>RESOURCES</name>
+            <name>
+              <xref target="RFC5545" section="3.8.1.10" sectionFormat="comma">RESOURCES</xref>
+            </name>
             <ul>
               <li>
                 <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
@@ -6869,7 +6921,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             </ul>
           </section>
           <section>
-            <name>STRUCTURED-DATA</name>
+            <name>
+              <xref target="RFC9073" section="6.6" sectionFormat="comma">STRUCTURED-DATA</xref>
+            </name>
             <ul>
               <li>
                 <xref target="RFC9073" section="5.2" sectionFormat="comma">SCHEMA</xref>
@@ -6877,7 +6931,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             </ul>
           </section>
           <section>
-            <name>STYLED-DESCRIPTION</name>
+            <name>
+              <xref target="RFC9073" section="6.5" sectionFormat="comma">STYLED-DESCRIPTION</xref>
+            </name>
             <ul>
               <li>
                 <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
@@ -6891,7 +6947,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             </ul>
           </section>
           <section>
-            <name>SUMMARY</name>
+            <name>
+              <xref target="RFC5545" section="3.8.1.12" sectionFormat="comma">SUMMARY</xref>
+            </name>
             <ul>
               <li>
                 <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
@@ -6902,7 +6960,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             </ul>
           </section>
           <section>
-            <name>TZNAME</name>
+            <name>
+              <xref target="RFC5545" section="3.8.3.2" sectionFormat="comma">TZNAME</xref>
+            </name>
             <ul>
               <li>
                 <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
