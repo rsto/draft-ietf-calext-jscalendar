@@ -5333,10 +5333,10 @@ URL:https://example.com/calendar/birthdays.ics
         <name>Link</name>
         <t>The <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref> converts either an <xref target="ical-prop-attach">ATTACH property</xref>, an <xref target="ical-prop-image">IMAGE property</xref>, a <xref target="ical-prop-link">LINK property</xref>, a <xref target="ical-prop-structured-data">STRUCTURED-DATA property</xref>, or an <xref target="ical-prop-url">URL property</xref>. Which iCalendar property to choose is implementation-specific. As a guideline:</t>
         <ul>
+          <li>Choose the iCalendar property name indicated in the Link object's <xref target="jscal-prop-icalproperty">iCalProperty</xref> property, if set.</li>
           <li>Choose IMAGE, if the "display" property is set or the "rel" property value is "icon".</li>
           <li>Choose LINK, if the "rel" property is set to any other value.</li>
           <li>Choose URL, if only the "href" property is set and its value links to a dynamic rendition of the calendar object.</li>
-          <li>TBD - Choose STRUCTURED-DATA, if the "schema" property is set.</li>
           <li>Choose ATTACH otherwise.</li>
         </ul>
         <t>The href property converts to the "iCalendar" property value. The other Link properties convert as follows:</t>
@@ -5351,14 +5351,6 @@ URL:https://example.com/calendar/birthdays.ics
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>cid</td>
-              <td>
-                <xref target="RFC8984" section="1.4.11" sectionFormat="comma"/>
-              </td>
-              <td>TBD</td>
-              <td/>
-            </tr>
             <tr>
               <td>contentType</td>
               <td>
@@ -5396,14 +5388,6 @@ URL:https://example.com/calendar/birthdays.ics
               <td>
                 <xref target="ical-prop-attach"/>
               </td>
-            </tr>
-            <tr>
-              <td>title</td>
-              <td>
-                <xref target="RFC8984" section="4.2.1" sectionFormat="comma"/>
-              </td>
-              <td>TBD</td>
-              <td/>
             </tr>
           </tbody>
         </table>
@@ -6994,6 +6978,19 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
           <ul>
             <li>
               <xref target="RFC8984" section="4.2.8" sectionFormat="comma">locale</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>
+            <xref target="RFC8984" section="1.4.11" sectionFormat="comma">Link</xref>
+          </name>
+          <ul>
+            <li>
+              <xref target="RFC8984" section="1.4.11" sectionFormat="comma">cid</xref>
+            </li>
+            <li>
+              <xref target="RFC8984" section="1.4.11" sectionFormat="comma">title</xref>
             </li>
           </ul>
         </section>
