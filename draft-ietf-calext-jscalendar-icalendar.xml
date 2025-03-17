@@ -5171,14 +5171,6 @@ URL:https://example.com/calendar/birthdays.ics
                 </t>
               </td>
             </tr>
-            <tr>
-              <td>progressUpdated</td>
-              <td>
-                <xref target="RFC8984" section="5.2.6" sectionFormat="comma"/>
-              </td>
-              <td>TBD</td>
-              <td/>
-            </tr>
           </tbody>
         </table>
       </section>
@@ -6971,10 +6963,12 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
         </section>
       </section>
       <section>
-        <name>Unsupported JSCalendar Elements</name>
+        <name>Unsupported JSCalendar Properties</name>
+        <t>The following properties are defined for the respective object type, but they do not convert to a standard iCalendar element.</t>
         <section>
-          <name>Common Properties</name>
-          <t>The following properties are defined in <xref target="RFC8984" section="4" sectionFormat="comma"/> for the Event, Task and (with restrictions) Group objects, but they do not convert to a standard iCalendar element.</t>
+          <name>
+            <xref target="RFC8984" section="4" sectionFormat="comma">Event and Task</xref>
+          </name>
           <ul>
             <li>
               <xref target="RFC8984" section="4.2.8" sectionFormat="comma">locale</xref>
@@ -6994,14 +6988,35 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
           </ul>
         </section>
         <section>
-          <name>Participant Properties</name>
-          <t>The following properties are defined for the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref> but do not convert to standard Calendar elements.</t>
+          <name>
+            <xref target="RFC8984" section="5.3" sectionFormat="comma">Group</xref>
+          </name>
+          <ul>
+            <li>
+              <xref target="RFC8984" section="4.2.8" sectionFormat="comma">locale</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>
+            <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant</xref>
+          </name>
           <ul>
             <li>
               <xref target="RFC8984" section="4.4.6" sectionFormat="comma">invitedBy</xref>
             </li>
             <li>
               <xref target="RFC8984" section="4.4.6" sectionFormat="comma">sentBy</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>
+            <xref target="RFC8984" section="5.2" sectionFormat="parens">Task</xref>
+          </name>
+          <ul>
+            <li>
+              <xref target="RFC8984" section="5.2.6" sectionFormat="comma">progressUpdated</xref>
             </li>
           </ul>
         </section>
