@@ -506,6 +506,10 @@ icalendar:
             object: Link
         UID:
           required: true
+        URL:
+          convert:
+            property: links
+            object: Link
       rfc: RFC9073
       section: '7.2'
       status: current
