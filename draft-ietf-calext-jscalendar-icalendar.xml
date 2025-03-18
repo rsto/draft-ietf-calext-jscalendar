@@ -46,9 +46,6 @@
     <abstract>
       <t>This document defines how to convert calendaring information between the JSCalendar and iCalendar data formats. It considers every JSCalendar and iCalendar element registered at IANA at the time of publication. It defines conversion rules for all elements that are common to both formats, as well as how convert arbitrary or unknown JSCalendar and iCalendar elements.</t>
     </abstract>
-    <note removeInRFC="true">
-      <t>This document is unfinished. The term TBD stands for any unknown item.</t>
-    </note>
   </front>
   <middle>
     <section>
@@ -5398,7 +5395,7 @@ URL:https://example.com/calendar/birthdays.ics
         <t>The <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref> converts to either a <xref target="ical-prop-location">LOCATION</xref>, <xref target="ical-prop-geo">GEO</xref>, or <xref target="ical-prop-geo">DTEND</xref> property, or it converts to a <xref target="ical-comp-vlocation">VLOCATION component</xref>. Which iCalendar element to choose is implementation-specific. As a guideline:</t>
         <ul>
           <li>Choose LOCATION, if only the "title" property is set and the iCalendar component does not already contain a LOCATION property. The title property converts to the LOCATION property value.</li>
-          <li>Choose GEO, if only the "coordinates" property is set and the iCalendar component does not already contain a GEO property. The coordinates property converts to the GEO property value. TBD - How to convert arbitrary geo: URIs?</li>
+          <li>Choose GEO, if only the "coordinates" property is set, the <xref target="RFC5870" section="3.3" sectionFormat="parens">"geo-path"</xref> of its URI value only contains "coord-a" (latitude) and "coord-b" (longitude), and the iCalendar component does not already contain a GEO property. The coordinates property converts to the GEO property value.</li>
           <li>Choose DTEND, if the embedding object is an Event, only the timeZone and the relativeTo properties are set, the "relativeTo" property value is "end" and the iCalendar component does not already contain a DTEND property. The timeZone property converts to the TZID parameter of the DTEND property. The duration of the embedding Event object determines the DTEND property value.</li>
           <li>Choose the VLOCATION component otherwise.</li>
         </ul>
@@ -5421,8 +5418,7 @@ URL:https://example.com/calendar/birthdays.ics
                 <xref target="RFC8984" section="4.2.5" sectionFormat="comma"/>
               </td>
               <td>GEO</td>
-              <td>
-                <xref target="ical-prop-geo"/>
+              <td><xref target="ical-prop-geo"/>, and remarks below
               </td>
             </tr>
             <tr>
@@ -5469,6 +5465,10 @@ URL:https://example.com/calendar/birthdays.ics
             </tr>
           </tbody>
         </table>
+        <t>Remarks:</t>
+        <ul>
+          <li>The "coordinates" property converts to the GEO property if the <xref target="RFC5870" section="3.3" sectionFormat="parens">"geo-path"</xref> of its URI value only contains "coord-a" (latitude) and "coord-b" (longitude). Otherwise implementations <bcp14>MAY</bcp14> convert it to the <xref target="ical-prop-jsprop">JSPROP property</xref>.</li>
+        </ul>
         <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the VLOCATION component or the component to which the Location converts to as a property.</t>
       </section>
       <section anchor="jscal-participant">
