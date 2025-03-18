@@ -3510,7 +3510,7 @@ LAST-MODIFIED:20240914T231257Z
               </tr>
             </tbody>
           </table>
-          <t>A LINK property with a value type other than URI or an unregistered LINK parameter value does not convert to a standard JSCalendar element. Implementations <bcp14>MAY</bcp14> convert it to the <xref target="jscal-prop-icalcomponent">"iCalComponent" property</xref>.</t>
+          <t>A LINK property with a value type other than URI or an unregistered LINKREL parameter value does not convert to a standard JSCalendar element. Implementations <bcp14>MAY</bcp14> convert it to the <xref target="jscal-prop-icalcomponent">"iCalComponent" property</xref>.</t>
           <t>The following examples illustrate how to convert the LINK property:</t>
           <figure anchor="test-ical-prop-link">
             <name>Converting the LINK property to a Link object</name>
