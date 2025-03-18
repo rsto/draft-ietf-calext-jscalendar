@@ -186,8 +186,7 @@ SUMMARY:he
         <section anchor="ical-comp-vcalendar">
           <name>iCalendar Objects</name>
           <t><xref target="RFC5545" section="3.4"/> allows for an iCalendar stream to contain one or more iCalendar objects.  In contrast, this specification only defines conversion for streams consisting of a single iCalendar object. Converting streams of multiple iCalendar objects is implementation-specific.  All following sections of this document use the terms "iCalendar object" and "VCALENDAR component" interchangeably.</t>
-          <t>The <xref target="RFC5545" section="3.4" sectionFormat="parens">VCALENDAR component</xref> converts to a <xref target="RFC8984" section="2.3" sectionFormat="parens">Group object</xref>.</t>
-          <t>Its properties convert as follows:</t>
+          <t>The <xref target="RFC5545" section="3.4" sectionFormat="parens">VCALENDAR component</xref> converts to a <xref target="RFC8984" section="2.3" sectionFormat="parens">Group object</xref>.  Its properties convert as follows:</t>
           <table anchor="ical-comp-vcalendar-props">
             <name>Properties of the VCALENDAR component</name>
             <thead>
@@ -546,8 +545,7 @@ END:VCALENDAR
         <name>Components</name>
         <section anchor="ical-comp-participant">
           <name>PARTICIPANT</name>
-          <t>The <xref target="RFC9073" section="7.1" sectionFormat="parens">PARTICIPANT component</xref> converts to a <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref>.</t>
-          <t>Its properties convert as follows:</t>
+          <t>The <xref target="RFC9073" section="7.1" sectionFormat="parens">PARTICIPANT component</xref> converts to a <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref>.  Its properties convert as follows:</t>
           <table anchor="ical-comp-participant-props">
             <name>Properties of the PARTICIPANT component</name>
             <thead>
@@ -751,8 +749,7 @@ END:PARTICIPANT
         </section>
         <section anchor="ical-comp-valarm">
           <name>VALARM</name>
-          <t>The <xref target="RFC5545" section="3.6.6" sectionFormat="parens">VALARM component</xref> converts to an <xref target="RFC8984" section="4.5.2" sectionFormat="parens">Alert object</xref>.</t>
-          <t>Its properties convert as follows:</t>
+          <t>The <xref target="RFC5545" section="3.6.6" sectionFormat="parens">VALARM component</xref> converts to an <xref target="RFC8984" section="4.5.2" sectionFormat="parens">Alert object</xref>.  Its properties convert as follows:</t>
           <table anchor="ical-comp-valarm-props">
             <name>Properties of the VALARM component</name>
             <thead>
@@ -856,8 +853,7 @@ END:VALARM
         </section>
         <section anchor="ical-comp-vevent">
           <name>VEVENT</name>
-          <t>The <xref target="RFC5545" section="3.6.1" sectionFormat="parens">VEVENT component</xref> converts to a <xref target="RFC8984" section="2.1" sectionFormat="parens">Event object</xref>.</t>
-          <t>Its properties convert as follows:</t>
+          <t>The <xref target="RFC5545" section="3.6.1" sectionFormat="parens">VEVENT component</xref> converts to a <xref target="RFC8984" section="2.1" sectionFormat="parens">Event object</xref>.  Its properties convert as follows:</t>
           <table anchor="ical-comp-vevent-props">
             <name>Properties of the VEVENT component</name>
             <thead>
@@ -1336,8 +1332,7 @@ END:VCALENDAR
         </section>
         <section anchor="ical-comp-vlocation">
           <name>VLOCATION</name>
-          <t>The <xref target="RFC9073" section="7.2" sectionFormat="parens">VLOCATION component</xref> converts to a <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>.</t>
-          <t>Its properties convert as follows:</t>
+          <t>The <xref target="RFC9073" section="7.2" sectionFormat="parens">VLOCATION component</xref> converts to a <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>.  Its properties convert as follows:</t>
           <table anchor="ical-comp-vlocation-props">
             <name>Properties of the VLOCATION component</name>
             <thead>
@@ -1483,8 +1478,7 @@ END:VLOCATION
         </section>
         <section anchor="ical-comp-vtimezone">
           <name>VTIMEZONE</name>
-          <t>The <xref target="RFC5545" section="3.6.5" sectionFormat="parens">VTIMEZONE component</xref> converts to a <xref target="RFC8984" section="4.7.2" sectionFormat="parens">TimeZone object</xref>.</t>
-          <t>Its properties convert as follows:</t>
+          <t>The <xref target="RFC5545" section="3.6.5" sectionFormat="parens">VTIMEZONE component</xref> converts to a <xref target="RFC8984" section="4.7.2" sectionFormat="parens">TimeZone object</xref>.  Its properties convert as follows:</t>
           <table anchor="ical-comp-vtimezone-props">
             <name>Properties of the VTIMEZONE component</name>
             <thead>
@@ -1779,8 +1773,7 @@ DTSTART;TZID=CustomTz:20080708T130000
         </section>
         <section anchor="ical-comp-vtodo">
           <name>VTODO</name>
-          <t>The <xref target="RFC5545" section="3.6.2" sectionFormat="parens">VTODO component</xref> converts to a <xref target="RFC8984" section="2.2" sectionFormat="parens">Task object</xref>.</t>
-          <t>Its properties convert as follows:</t>
+          <t>The <xref target="RFC5545" section="3.6.2" sectionFormat="parens">VTODO component</xref> converts to a <xref target="RFC8984" section="2.2" sectionFormat="parens">Task object</xref>.  Its properties convert as follows:</t>
           <table anchor="ical-comp-vtodo-props">
             <name>Properties of the VTODO component</name>
             <thead>
@@ -4623,8 +4616,7 @@ URL:https://example.com/calendar/birthdays.ics
       <name>Converting JSCalendar to iCalendar</name>
       <section anchor="jscal-alert">
         <name>Alert</name>
-        <t>The <xref target="RFC8984" section="4.5.2" sectionFormat="parens">Alert object</xref> converts to a <xref target="ical-comp-valarm">VALARM component</xref>.</t>
-        <t>Its properties convert as follows:</t>
+        <t>The <xref target="RFC8984" section="4.5.2" sectionFormat="parens">Alert object</xref> converts to a <xref target="ical-comp-valarm">VALARM component</xref>.  Its properties convert as follows:</t>
         <table>
           <name>Properties of the Alert object</name>
           <thead>
@@ -5178,8 +5170,7 @@ URL:https://example.com/calendar/birthdays.ics
       </section>
       <section anchor="jscal-group">
         <name>Group</name>
-        <t>The <xref target="RFC8984" section="2.3" sectionFormat="parens">Group object</xref> converts to a <xref target="ical-comp-vcalendar">VCALENDAR component</xref>.</t>
-        <t>Its properties convert as follows:</t>
+        <t>The <xref target="RFC8984" section="2.3" sectionFormat="parens">Group object</xref> converts to a <xref target="ical-comp-vcalendar">VCALENDAR component</xref>.  Its properties convert as follows:</t>
         <table>
           <name>Properties of the Group object</name>
           <thead>
@@ -5781,8 +5772,7 @@ URL:https://example.com/calendar/birthdays.ics
       </section>
       <section anchor="jscal-timezone">
         <name>TimeZone</name>
-        <t>The <xref target="RFC8984" section="4.7.2" sectionFormat="parens">TimeZone object</xref> converts to a <xref target="ical-comp-vtimezone">VTIMEZONE component</xref>.</t>
-        <t>Its properties convert as follows:</t>
+        <t>The <xref target="RFC8984" section="4.7.2" sectionFormat="parens">TimeZone object</xref> converts to a <xref target="ical-comp-vtimezone">VTIMEZONE component</xref>.  Its properties convert as follows:</t>
         <table>
           <name>Properties of the TimeZone object</name>
           <thead>
@@ -5865,8 +5855,7 @@ URL:https://example.com/calendar/birthdays.ics
           </tbody>
         </table>
         <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the VTIMEZONE component.</t>
-        <t>The <xref target="RFC8984" section="4.7.2" sectionFormat="parens">TimeZoneRule object</xref> converts to a <xref target="ical-comp-vtimezone">DAYLIGHT or STANDARD component</xref>.</t>
-        <t>Its properties convert as follows:</t>
+        <t>The <xref target="RFC8984" section="4.7.2" sectionFormat="parens">TimeZoneRule object</xref> converts to a <xref target="ical-comp-vtimezone">DAYLIGHT or STANDARD component</xref>.  Its properties convert as follows:</t>
         <table>
           <name>Properties of the TimeZoneRule object</name>
           <thead>
