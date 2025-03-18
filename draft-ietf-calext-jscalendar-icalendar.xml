@@ -4941,9 +4941,9 @@ URL:https://example.com/calendar/birthdays.ics
               <td>
                 <xref target="RFC8984" section="4.4.4" sectionFormat="comma"/>
               </td>
-              <td>ORGANIZER</td>
+              <td>ORGANIZER, or JSPROP</td>
               <td>
-                <t><xref target="ical-prop-organizer"/>, and remarks below</t>
+                <t><xref target="ical-prop-organizer"/>, <xref target="ical-prop-jsprop"/>, and remarks below</t>
               </td>
             </tr>
             <tr>
@@ -5060,13 +5060,15 @@ URL:https://example.com/calendar/birthdays.ics
           <li>
             <t>The entries in the "recurrenceOverrides" property convert depending on the contents of the PatchObject value. A PatchObject that sets the "excluded" property to "true" converts to an EXDATE property for the date-time of that recurrence instance. An empty PatchObject converts to an RDATE property. Any other PatchObject converts to a recurrence override component in the embedding VCALENDAR component.</t>
           </li>
-        </ul>
-        <t>The replyTo property converts to the ORGANIZER property as follows:</t>
-        <ul>
-          <li>If the "replyTo" property value only defines a single scheduling method then the URI value of that method converts to the ORGANIZER property value.</li>
-          <li>If the "replyTo" property defines multiple scheduling methods, and a Participant object with a calendarAddress property value matching one of the replyTo URIs exists in the same Event or Task, then the URI matching the "calendarAddress" property converts to the ORGANIZER property value. Otherwise, choosing the ORGANIZER property value is implementation-specific.</li>
-          <li>TBD - how to preserve multiple replyTo methods?</li>
-          <li>TBD - how to preserve method name of converted replyTo value?</li>
+          <li>
+            <t>The replyTo property converts to the ORGANIZER or the <xref target="ical-prop-jsprop">JSPROP</xref> property, or both. The "web" scheduling method never converts to the ORGANIZER property. Any other scheduling methods in the replyTo property convert to the ORGANIZER property value as follows:</t>
+            <ul>
+              <li>If there is only a single scheduling method, then convert its URI value.</li>
+              <li>If there are multiple scheduling methods and one of their URI values match a Participant object's calendarAddress property value, use that URI.</li>
+              <li>Otherwise, choose the URI of any scheduling method. The "imip" scheduling method typically is a good choice.</li>
+            </ul>
+            <t>Implementations <bcp14>MAY</bcp14> convert any scheduling methods that did not convert to the ORGANIZER property to the JSPROP property instead. Each scheduling method converts to a separate JSPROP property. Implementations that want to preserve the the scheduling method name of the URI that converted to the ORGANIZER property, <bcp14>MAY</bcp14> convert that scheduling method to both the ORGANIZER and tis JSPROP property. Typically, this is not necessary, e.g. a URI in the "mailto" scheme implies the "imip" scheduling method.</t>
+          </li>
         </ul>
         <t>Properties specific to the Event object type convert to iCalendar properties as follows:</t>
         <table anchor="jscal-event-props">
@@ -5474,12 +5476,13 @@ URL:https://example.com/calendar/birthdays.ics
         <t>The <xref target="RFC8984" section="4.4.6" sectionFormat="parens">Participant object</xref> converts to both an <xref target="ical-prop-attendee">ATTENDEE property</xref> and a <xref target="ical-comp-participant">PARTICIPANT component</xref>:</t>
         <ul>
           <li>
-            <t>It converts to an ATTENDEE property if <xref target="RFC8984" section="4.4.6" sectionFormat="parens">sendTo</xref> property is set. The calendarAddress property converts to the ATTENDEE property value, if set; otherwise one of the scheduling methods in the "sendTo" property converts to the ATTENDEE property value.</t>
+            <t>It converts to an ATTENDEE property if the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">sendTo</xref> property is set. The calendarAddress property converts to the ATTENDEE property value, if set; otherwise one of the scheduling methods in the "sendTo" property converts to the ATTENDEE property value. Typically, the "imip" scheduling method is a good choice.</t>
           </li>
           <li>
             <t>It converts to a PARTICIPANT component if any of the Participant properties in <xref target="jscal-participant-props-participant"/> are set. If the Participant object also converts to an ATTENDEE property, then the CALENDAR-ADDRESS property value of the PARTICIPANT componnent <bcp14>MUST</bcp14> match the ATTENDEE property value.</t>
           </li>
         </ul>
+        <t>Implementations <bcp14>MAY</bcp14> convert any scheduling methods in the sendTo property that did not convert to the ATTENDEE property to the JSPROP property instead. Each scheduling method converts to a separate JSPROP property. Implementations that want to preserve the the scheduling method name of the URI that converted to the ATTENDEE property, <bcp14>MAY</bcp14> convert that scheduling method to both the ATTENDEE and the JSPROP property. Typically, this is not necessary, e.g. a URI in the "mailto" scheme implies the "imip" scheduling method.</t>
         <t>The following Participant properties convert to the ATTENDEE property. How to convert these properties if the Participant does not convert to an ATTENDEE is implementation-specific.</t>
         <table anchor="jscal-participant-props-attendee">
           <name>Properties of the Participant object that convert to the ATTENDEE property</name>
@@ -5624,8 +5627,9 @@ URL:https://example.com/calendar/birthdays.ics
               <td>
                 <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
               </td>
-              <td>TBD</td>
-              <td/>
+              <td>ATTENDEE or JSPROP</td>
+              <td><xref target="ical-prop-attendee"/>, <xref target="ical-prop-jsprop"/>, and the start of this section
+              </td>
             </tr>
           </tbody>
         </table>
@@ -5661,14 +5665,6 @@ URL:https://example.com/calendar/birthdays.ics
               </td>
             </tr>
             <tr>
-              <td>language</td>
-              <td>
-                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
-              </td>
-              <td>TBD</td>
-              <td/>
-            </tr>
-            <tr>
               <td>links</td>
               <td>
                 <xref target="RFC8984" section="4.2.7" sectionFormat="comma"/>
@@ -5679,14 +5675,6 @@ URL:https://example.com/calendar/birthdays.ics
                   <xref target="jscal-link">Link object</xref>
                 </t>
               </td>
-            </tr>
-            <tr>
-              <td>locationId</td>
-              <td>
-                <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
-              </td>
-              <td>TBD</td>
-              <td/>
             </tr>
             <tr>
               <td>name</td>
@@ -5723,14 +5711,6 @@ URL:https://example.com/calendar/birthdays.ics
                   <xref target="ical-prop-percent-complete"/>
                 </t>
               </td>
-            </tr>
-            <tr>
-              <td>progressUpdated</td>
-              <td>
-                <xref target="RFC8984" section="5.2.6" sectionFormat="comma"/>
-              </td>
-              <td>TBD</td>
-              <td/>
             </tr>
             <tr>
               <td>roles</td>
@@ -6996,6 +6976,15 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
           <ul>
             <li>
               <xref target="RFC8984" section="4.4.6" sectionFormat="comma">invitedBy</xref>
+            </li>
+            <li>
+              <xref target="RFC8984" section="4.4.6" sectionFormat="comma">language</xref>
+            </li>
+            <li>
+              <xref target="RFC8984" section="4.4.6" sectionFormat="comma">locationId</xref>
+            </li>
+            <li>
+              <xref target="RFC8984" section="5.2.6" sectionFormat="comma">progressUpdated</xref>
             </li>
             <li>
               <xref target="RFC8984" section="4.4.6" sectionFormat="comma">sentBy</xref>
