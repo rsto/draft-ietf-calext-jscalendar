@@ -4684,6 +4684,7 @@ URL:https://example.com/calendar/birthdays.ics
             <t>The value of the RELATED-TO property is the UID property value of that VALARM component, to which the related  Alert object converts to. Consequently, the UID property for such a VALARM <bcp14>MUST</bcp14> be set, otherwise the UID property <bcp14>SHOULD</bcp14> be set.</t>
           </li>
         </ul>
+        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the VALARM component.</t>
       </section>
       <section anchor="jscal-event-and-task">
         <name>Event and Task</name>
@@ -5173,6 +5174,7 @@ URL:https://example.com/calendar/birthdays.ics
             </tr>
           </tbody>
         </table>
+        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the VEVENT or VTODO component.</t>
       </section>
       <section anchor="jscal-group">
         <name>Group</name>
@@ -5328,6 +5330,7 @@ URL:https://example.com/calendar/birthdays.ics
             <t>The method property value in all the Group entries is expected to be equal. How to convert entries with unequal method property values is implementation-specific.</t>
           </li>
         </ul>
+        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the VCALENDAR component.</t>
       </section>
       <section anchor="jscal-link">
         <name>Link</name>
@@ -5395,6 +5398,7 @@ URL:https://example.com/calendar/birthdays.ics
         <ul>
           <li>The LINKREL parameter <bcp14>SHOULD</bcp14> be omitted if the Link object converts to an IMAGE property and the "rel" property value is "icon".</li>
         </ul>
+        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the same component to which the Link object converts to as a property.</t>
       </section>
       <section anchor="jscal-location">
         <name>Location</name>
@@ -5472,6 +5476,7 @@ URL:https://example.com/calendar/birthdays.ics
             </tr>
           </tbody>
         </table>
+        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the VLOCATION component or the component to which the Location converts to as a property.</t>
       </section>
       <section anchor="jscal-participant">
         <name>Participant</name>
@@ -5772,6 +5777,7 @@ URL:https://example.com/calendar/birthdays.ics
             </tr>
           </tbody>
         </table>
+        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the PARTICIPANT component or the component to which the Participant converts to as a property.</t>
       </section>
       <section anchor="jscal-timezone">
         <name>TimeZone</name>
@@ -5858,6 +5864,7 @@ URL:https://example.com/calendar/birthdays.ics
             </tr>
           </tbody>
         </table>
+        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the VTIMEZONE component.</t>
         <t>The <xref target="RFC8984" section="4.7.2" sectionFormat="parens">TimeZoneRule object</xref> converts to a <xref target="ical-comp-vtimezone">DAYLIGHT or STANDARD component</xref>.</t>
         <t>Its properties convert as follows:</t>
         <table>
@@ -5957,6 +5964,7 @@ URL:https://example.com/calendar/birthdays.ics
             </tr>
           </tbody>
         </table>
+        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the STANDARD or DAYLIGHT component.</t>
       </section>
       <section anchor="jscal-virtual-location">
         <name>VirtualLocation</name>
@@ -6003,6 +6011,7 @@ URL:https://example.com/calendar/birthdays.ics
             </tr>
           </tbody>
         </table>
+        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the component to which the VirtualLocation converts to as a property.</t>
       </section>
     </section>
     <section anchor="updates-icalendar">
