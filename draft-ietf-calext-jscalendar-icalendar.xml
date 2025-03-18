@@ -5470,22 +5470,6 @@ URL:https://example.com/calendar/birthdays.ics
                 <xref target="ical-prop-name"/>
               </td>
             </tr>
-            <tr>
-              <td>relativeTo</td>
-              <td>
-                <xref target="RFC8984" section="4.5.2" sectionFormat="comma"/>
-              </td>
-              <td>TBD</td>
-              <td/>
-            </tr>
-            <tr>
-              <td>timeZone</td>
-              <td>
-                <xref target="RFC8984" section="4.7.1" sectionFormat="comma"/>
-              </td>
-              <td>TBD</td>
-              <td/>
-            </tr>
           </tbody>
         </table>
       </section>
@@ -6991,6 +6975,19 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             </li>
             <li>
               <xref target="RFC8984" section="1.4.11" sectionFormat="comma">title</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>
+            <xref target="RFC8984" section="4.2.5" sectionFormat="comma">Location</xref>
+          </name>
+          <ul>
+            <li>
+              <xref target="RFC8984" section="4.5.2" sectionFormat="comma">relativeTo</xref>
+            </li>
+            <li>
+              <xref target="RFC8984" section="4.7.1" sectionFormat="comma">timeZone</xref>
             </li>
           </ul>
         </section>
