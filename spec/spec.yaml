@@ -86,10 +86,7 @@ icalendar:
           convert:
               property: locations
         LAST-MODIFIED: {}
-        LINK:
-          convert:
-            property: links
-            object: Link
+        LINK: {}
         LOCATION: {}
         PARTICIPANT-TYPE:
           required: true
@@ -244,10 +241,7 @@ icalendar:
         LAST-MODIFIED:
           convert:
             property: updated
-        LINK:
-          convert:
-            property: links
-            object: Link
+        LINK: {}
         METHOD:
           convert:
             property: entries/*/method
@@ -354,10 +348,7 @@ icalendar:
             property: links
             object: Link
         LAST-MODIFIED: {}
-        LINK:
-          convert:
-            property: links
-            object: Link
+        LINK: {}
         LOCATION:
           convert:
             property: locations
@@ -490,10 +481,7 @@ icalendar:
           convert:
             property: links
             object: Link
-        LINK:
-          convert:
-            property: links
-            object: Link
+        LINK: {}
         LOCATION-TYPE:
           convert:
             property: locationTypes
@@ -644,10 +632,7 @@ icalendar:
             property: links
             object: Link
         LAST-MODIFIED: {}
-        LINK:
-          convert:
-            property: links
-            object: Link
+        LINK: {}
         LOCATION:
           convert:
             property: locations
@@ -2555,7 +2540,7 @@ jscalendar:
         Link:
           convert:
             parameter: LINKREL
-            property: LINK
+            property: ATTACH
       rfc: RFC8984
       sections:
         - 1.4.11

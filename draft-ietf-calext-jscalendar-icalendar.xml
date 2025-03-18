@@ -263,17 +263,6 @@ SUMMARY:he
                 <td/>
               </tr>
               <tr>
-                <td>LINK</td>
-                <td>
-                  <xref target="RFC9253" section="8.2" sectionFormat="comma"/>
-                </td>
-                <td>links</td>
-                <td>
-                  <xref target="ical-prop-link"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
                 <td>METHOD</td>
                 <td>
                   <xref target="RFC5545" section="3.7.2" sectionFormat="comma"/>
@@ -618,17 +607,6 @@ END:VCALENDAR
                 <td>locations</td>
                 <td>
                   <xref target="ical-prop-geo"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>LINK</td>
-                <td>
-                  <xref target="RFC9253" section="8.2" sectionFormat="comma"/>
-                </td>
-                <td>links</td>
-                <td>
-                  <xref target="ical-prop-link"/>
                 </td>
                 <td/>
               </tr>
@@ -1073,17 +1051,6 @@ END:VALARM
                 <td/>
               </tr>
               <tr>
-                <td>LINK</td>
-                <td>
-                  <xref target="RFC9253" section="8.2" sectionFormat="comma"/>
-                </td>
-                <td>links</td>
-                <td>
-                  <xref target="ical-prop-link"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
                 <td>LOCATION</td>
                 <td>
                   <xref target="RFC5545" section="3.8.1.7" sectionFormat="comma"/>
@@ -1383,17 +1350,6 @@ END:VCALENDAR
                 <td>links</td>
                 <td>
                   <xref target="ical-prop-image"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>LINK</td>
-                <td>
-                  <xref target="RFC9253" section="8.2" sectionFormat="comma"/>
-                </td>
-                <td>links</td>
-                <td>
-                  <xref target="ical-prop-link"/>
                 </td>
                 <td/>
               </tr>
@@ -2004,17 +1960,6 @@ DTSTART;TZID=CustomTz:20080708T130000
                 <td/>
               </tr>
               <tr>
-                <td>LINK</td>
-                <td>
-                  <xref target="RFC9253" section="8.2" sectionFormat="comma"/>
-                </td>
-                <td>links</td>
-                <td>
-                  <xref target="ical-prop-link"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
                 <td>LOCATION</td>
                 <td>
                   <xref target="RFC5545" section="3.8.1.7" sectionFormat="comma"/>
@@ -2377,6 +2322,14 @@ ACTION:AUDIO
                 <td/>
               </tr>
               <tr>
+                <td>LINKREL</td>
+                <td>
+                  <xref target="RFC9253" section="6.1" sectionFormat="comma"/>
+                </td>
+                <td>rel</td>
+                <td>See remarks below</td>
+              </tr>
+              <tr>
                 <td>SIZE</td>
                 <td>
                   <xref target="RFC8607" section="4.1" sectionFormat="comma"/>
@@ -2386,6 +2339,10 @@ ACTION:AUDIO
               </tr>
             </tbody>
           </table>
+          <t>Remarks:</t>
+          <ul>
+            <li>The LINKREL parameter value is defined to be either an URI or an <xref target="RFC5545" section="3.1" sectionFormat="parens">"iana-token"</xref>. Only parameter values of form "iana-token" convert to the "rel" property of the Link object.</li>
+          </ul>
           <t>The following examples illustrate how to convert the ATTACH property:</t>
           <figure anchor="test-ical-prop-attach-uri">
             <name>Converting the ATTACH property with URI value</name>
@@ -3420,6 +3377,14 @@ GEO:48.858222;2.2945
                 <td/>
               </tr>
               <tr>
+                <td>LINKREL</td>
+                <td>
+                  <xref target="RFC9253" section="6.1" sectionFormat="comma"/>
+                </td>
+                <td>rel</td>
+                <td>See remarks below</td>
+              </tr>
+              <tr>
                 <td>SIZE</td>
                 <td>
                   <xref target="RFC8607" section="4.1" sectionFormat="comma"/>
@@ -3429,6 +3394,10 @@ GEO:48.858222;2.2945
               </tr>
             </tbody>
           </table>
+          <t>Remarks:</t>
+          <ul>
+            <li>The LINKREL parameter value is defined to be either an URI or an <xref target="RFC5545" section="3.1" sectionFormat="parens">"iana-token"</xref>. Only parameter values of form "iana-token" convert to the "rel" property of the Link object.</li>
+          </ul>
           <t>Implementations <bcp14>MAY</bcp14> preserve the fact that the Link object got converted from an IMAGE property. To do so, they <bcp14>MUST</bcp14> set the <xref target="jscal-prop-icalproperty">iCalProperty</xref> on the Link object.</t>
           <t>The following example illustrates how to convert the IMAGE property:</t>
           <figure anchor="test-ical-prop-image">
@@ -3472,86 +3441,6 @@ LAST-MODIFIED:20240914T231257Z
             <sourcecode type="json"><![CDATA[
 "@type": "Group",
 "updated": "2024-09-14T23:12:57Z"
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-prop-link">
-          <name>LINK</name>
-          <t>
-            A <xref target="RFC9253" section="8.2" sectionFormat="parens">LINK property</xref> of type URI in a VEVENT, VTODO, VCALENDAR, PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.</t>
-          <t>The converted object is set in the "links" property of the Event, Task, Group, Participant, or Location object. The LINK property value converts to the "href" property of the Link object.</t>
-          <t>Its parameters convert as follows:</t>
-          <table>
-            <name>Parameters of the LINK property</name>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Property</th>
-                <th>Note</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>FMTTYPE</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.8" sectionFormat="comma"/>
-                </td>
-                <td>contentType</td>
-                <td/>
-              </tr>
-              <tr>
-                <td>LABEL</td>
-                <td>
-                  <xref target="RFC7986" section="6.4" sectionFormat="comma"/>
-                </td>
-                <td>title</td>
-                <td/>
-              </tr>
-            </tbody>
-          </table>
-          <t>A LINK property with a value type other than URI or an unregistered LINKREL parameter value does not convert to a standard JSCalendar element. Implementations <bcp14>MAY</bcp14> convert it to the <xref target="jscal-prop-icalcomponent">"iCalComponent" property</xref>.</t>
-          <t>The following examples illustrate how to convert the LINK property:</t>
-          <figure anchor="test-ical-prop-link">
-            <name>Converting the LINK property to a Link object</name>
-            <sourcecode type="text/calendar"><![CDATA[
-LINK;LINKREL=SOURCE;LABEL=Venue;VALUE=URI:https://example.com/events
-  ]]></sourcecode>
-            <sourcecode type="json"><![CDATA[
-"links": {
-  "l1": {
-    "@type": "Link",
-    "href": "https://example.com/events",
-    "title": "Venue",
-    "rel": "source"
-  }
-}
-]]></sourcecode>
-          </figure>
-          <figure anchor="test-ical-prop-link-xml-reference">
-            <name>Converting the LINK property to iCalComponent</name>
-            <sourcecode type="text/calendar"><![CDATA[
-BEGIN:VEVENT
-LINK;LINKREL="https://example.com/linkrel/costStructure";
- VALUE=XML-REFERENCE:
- https://example.com/xmlDocs/bidFramework.xml#xpointer(id("cost"))
-...
-  ]]></sourcecode>
-            <sourcecode type="json"><![CDATA[
-"iCalComponent": {
-  "@type": "ICalComponent",
-  "name": "vevent",
-  "properties": [
-    [
-      "link",
-      {
-        "linkrel": "https://example.com/linkrel/costStructure"
-      },
-      "xml-reference",
-      "https://example.com/xmlDocs/bidFramework.xml#xpointer(id(\"cost\"))"
-    ]
-  ]
-}
 ]]></sourcecode>
           </figure>
         </section>
@@ -5324,11 +5213,10 @@ URL:https://example.com/calendar/birthdays.ics
       </section>
       <section anchor="jscal-link">
         <name>Link</name>
-        <t>The <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref> converts either an <xref target="ical-prop-attach">ATTACH property</xref>, an <xref target="ical-prop-image">IMAGE property</xref>, a <xref target="ical-prop-link">LINK property</xref>, a <xref target="ical-prop-structured-data">STRUCTURED-DATA property</xref>, or an <xref target="ical-prop-url">URL property</xref>. Which iCalendar property to choose is implementation-specific. As a guideline:</t>
+        <t>The <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref> converts either an <xref target="ical-prop-attach">ATTACH property</xref>, an <xref target="ical-prop-image">IMAGE property</xref>, a <xref target="ical-prop-structured-data">STRUCTURED-DATA property</xref>, or an <xref target="ical-prop-url">URL property</xref>. Which iCalendar property to choose is implementation-specific. As a guideline:</t>
         <ul>
           <li>Choose the iCalendar property name indicated in the Link object's <xref target="jscal-prop-icalproperty">iCalProperty</xref> property, if set.</li>
           <li>Choose IMAGE, if the "display" property is set or the "rel" property value is "icon".</li>
-          <li>Choose LINK, if the "rel" property is set to any other value.</li>
           <li>Choose URL, if only the "href" property is set and its value links to a dynamic rendition of the calendar object.</li>
           <li>Choose ATTACH otherwise.</li>
         </ul>
@@ -5370,7 +5258,7 @@ URL:https://example.com/calendar/birthdays.ics
                 <xref target="RFC8984" section="1.4.11" sectionFormat="comma"/>
               </td>
               <td>LINKREL</td>
-              <td><xref target="ical-prop-link"/>, and remarks below</td>
+              <td><xref target="RFC9253" section="6.1"/>, and remarks below</td>
             </tr>
             <tr>
               <td>size</td>
@@ -5386,7 +5274,7 @@ URL:https://example.com/calendar/birthdays.ics
         </table>
         <t>Remarks:</t>
         <ul>
-          <li>The LINKREL parameter <bcp14>SHOULD</bcp14> be omitted if the Link object converts to an IMAGE property and the "rel" property value is "icon".</li>
+          <li>The LINKREL parameter <bcp14>MUST</bcp14> be omitted if the Link object converts to an IMAGE property and the "rel" property value is "icon".</li>
         </ul>
         <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the same component to which the Link object converts to as a property.</t>
       </section>
@@ -6475,6 +6363,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
                 <xref target="RFC5545" section="3.8.7.3" sectionFormat="comma">LAST-MODIFIED</xref>
               </li>
               <li>
+                <xref target="RFC9253" section="8.2" sectionFormat="comma">LINK</xref>
+              </li>
+              <li>
                 <xref target="RFC5545" section="3.8.1.7" sectionFormat="comma">LOCATION</xref>
               </li>
               <li>
@@ -6546,6 +6437,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
                 <xref target="RFC5545" section="3.7.1" sectionFormat="comma">CALSCALE</xref>
               </li>
               <li>
+                <xref target="RFC9253" section="8.2" sectionFormat="comma">LINK</xref>
+              </li>
+              <li>
                 <xref target="RFC7986" section="5.7" sectionFormat="comma">REFRESH-INTERVAL</xref>
               </li>
               <li>
@@ -6562,6 +6456,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
                 <xref target="RFC5545" section="3.8.4.2" sectionFormat="comma">CONTACT</xref>
               </li>
               <li>
+                <xref target="RFC9253" section="8.2" sectionFormat="comma">LINK</xref>
+              </li>
+              <li>
                 <xref target="RFC9253" section="8.3" sectionFormat="comma">REFID</xref>
               </li>
               <li>
@@ -6574,6 +6471,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
               <xref target="RFC9073" section="7.2" sectionFormat="comma">VLOCATION</xref>
             </name>
             <ul>
+              <li>
+                <xref target="RFC9253" section="8.2" sectionFormat="comma">LINK</xref>
+              </li>
               <li>
                 <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma">UID</xref>
               </li>
@@ -6589,6 +6489,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
               </li>
               <li>
                 <xref target="RFC5545" section="3.8.4.2" sectionFormat="comma">CONTACT</xref>
+              </li>
+              <li>
+                <xref target="RFC9253" section="8.2" sectionFormat="comma">LINK</xref>
               </li>
               <li>
                 <xref target="RFC9253" section="8.3" sectionFormat="comma">REFID</xref>
@@ -6619,16 +6522,6 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
         <section>
           <name>Properties by Value Type</name>
           <t>The following properties convert to a standard JSCalendar element for some other value type, but they do not for the listed value types.</t>
-          <section>
-            <name>
-              <xref target="RFC9253" section="8.2" sectionFormat="comma">LINK</xref>
-            </name>
-            <ul>
-              <li>
-                <xref target="RFC9253" section="7" sectionFormat="comma">XML-REFERENCE</xref>
-              </li>
-            </ul>
-          </section>
           <section>
             <name>
               <xref target="RFC5545" section="3.8.5.2" sectionFormat="comma">RDATE</xref>
