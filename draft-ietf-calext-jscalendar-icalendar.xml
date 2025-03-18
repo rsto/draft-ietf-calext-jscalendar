@@ -2355,7 +2355,7 @@ ACTION:AUDIO
           <t>
               The <xref target="RFC5545" section="3.8.1.1" sectionFormat="parens">ATTACH property</xref> in a VEVENT, VTODO, PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the "links" property of the Event, Task, Participant, or Location object.
           </t>
-          <t>The property value converts to the "href" property of the Link object. A value of type URI converts as-is. A value of type BINARY converts to a URI in the "data" URL scheme (<xref target="RFC2397"/>. If the FMTTYPE parameter is set on the ATTACH property, then the parameter value <bcp14>SHOULD</bcp14> be set in the <tt>mediatype</tt> part of the data URL.</t>
+          <t>The property value converts to the "href" property of the Link object. A value of type URI converts as-is. A value of type BINARY converts to a URI in the "data" URL scheme (<xref target="RFC2397"/>. If the FMTTYPE parameter is set on the ATTACH property, then the parameter value <bcp14>MUST</bcp14> be set in the <tt>mediatype</tt> part of the data URL.</t>
           <t>The ATTACH property parameters convert as follows:</t>
           <table>
             <name>Parameters of the ATTACH property</name>
@@ -4670,7 +4670,7 @@ URL:https://example.com/calendar/birthdays.ics
         <t>Remarks:</t>
         <ul>
           <li>
-            <t>The value of the RELATED-TO property is the UID property value of that VALARM component, to which the related  Alert object converts to. Consequently, the UID property for such a VALARM <bcp14>MUST</bcp14> be set, otherwise the UID property <bcp14>SHOULD</bcp14> be set.</t>
+            <t>The value of the RELATED-TO property is the UID property value of that VALARM component, to which the related  Alert object converts to. Consequently, the UID property for such a VALARM <bcp14>MUST</bcp14> be set, otherwise the UID property <bcp14>MAY</bcp14> be set.</t>
           </li>
         </ul>
         <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the VALARM component.</t>
@@ -5052,7 +5052,7 @@ URL:https://example.com/calendar/birthdays.ics
         <t>Remarks:</t>
         <ul>
           <li>
-            <t>The descriptionContentType property value determines if the "description" property converts to the DESCRIPTION or STYLED-DESCRIPTION property. A description of content type "text/plain" converts to the DESCRIPTION property. Any other description converts to a STYLED-DESCRIPTION; in this case, a plain text version of the rich-text description <bcp14>SHOULD</bcp14> be set in the DESCRIPTION property and its DERIVED parameter <bcp14>MUST</bcp14> be set to "TRUE". How to derive plain text from rich-text is implementation-specific.</t>
+            <t>The descriptionContentType property value determines if the "description" property converts to the DESCRIPTION or STYLED-DESCRIPTION property. A description of content type "text/plain" converts to the DESCRIPTION property. Any other description converts to the STYLED-DESCRIPTION property, in which case a plain text version of the rich-text description <bcp14>MAY</bcp14> be set additionally in the DESCRIPTION property, having its DERIVED parameter set to "TRUE". How to derive plain text from rich-text is implementation-specific.</t>
           </li>
           <li>
             <t>The entries in the "recurrenceOverrides" property convert depending on the contents of the PatchObject value. A PatchObject that sets the "excluded" property to "true" converts to an EXDATE property for the date-time of that recurrence instance. An empty PatchObject converts to an RDATE property. Any other PatchObject converts to a recurrence override component in the embedding VCALENDAR component.</t>
