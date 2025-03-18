@@ -5469,7 +5469,7 @@ URL:https://example.com/calendar/birthdays.ics
         <ul>
           <li>The "coordinates" property converts to the GEO property if the <xref target="RFC5870" section="3.3" sectionFormat="parens">"geo-path"</xref> of its URI value only contains "coord-a" (latitude) and "coord-b" (longitude). Otherwise implementations <bcp14>MAY</bcp14> convert it to the <xref target="ical-prop-jsprop">JSPROP property</xref>.</li>
         </ul>
-        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the VLOCATION component or the component to which the Location converts to as a property.</t>
+        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the VLOCATION component, or the component which the Location converts to as a property.</t>
       </section>
       <section anchor="jscal-participant">
         <name>Participant</name>
@@ -5748,7 +5748,7 @@ URL:https://example.com/calendar/birthdays.ics
             </tr>
           </tbody>
         </table>
-        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the PARTICIPANT component or the component to which the Participant converts to as a property.</t>
+        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the PARTICIPANT component, or the component which the Participant converts to as a property.</t>
       </section>
       <section anchor="jscal-timezone">
         <name>TimeZone</name>
