@@ -5951,14 +5951,6 @@ URL:https://example.com/calendar/birthdays.ics
           </thead>
           <tbody>
             <tr>
-              <td>description</td>
-              <td>
-                <xref target="RFC8984" section="4.2.2" sectionFormat="comma"/>
-              </td>
-              <td>TBD</td>
-              <td/>
-            </tr>
-            <tr>
               <td>features</td>
               <td>
                 <xref target="RFC8984" section="4.2.6" sectionFormat="comma"/>
@@ -6998,6 +6990,16 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
           <ul>
             <li>
               <xref target="RFC8984" section="5.2.6" sectionFormat="comma">progressUpdated</xref>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <name>
+            <xref target="RFC8984" section="4.2.6" sectionFormat="comma">VirtualLocation</xref>
+          </name>
+          <ul>
+            <li>
+              <xref target="RFC8984" section="4.2.2" sectionFormat="comma">description</xref>
             </li>
           </ul>
         </section>
