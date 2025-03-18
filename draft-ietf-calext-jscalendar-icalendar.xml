@@ -6008,7 +6008,7 @@ END:VALARM
 ]]></sourcecode>
               </figure>
               <t>The following example illustrates how to convert a JSPROP property that points to a property within a JSCalendar Link. The JSON pointer in the JSPTR parameter is relative to the Event object because the Link object converts to an iCalendar property. The <xref target="ical-param-jskey">JSKEY parameter</xref> on the ATTACH property ensures that the JSON path remains valid during conversion.</t>
-              <figure anchor="test-ical-prop-jsprop-link">
+              <figure anchor="test-ical-prop-jsprop-valarm">
                 <name>Converting the JSPROP property within a VALARM component</name>
                 <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VEVENT
