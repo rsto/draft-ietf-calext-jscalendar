@@ -175,6 +175,10 @@ SUMMARY:he
           </figure>
         </section>
       </section>
+      <section>
+        <name>Lossy versus Lossless Conversion</name>
+        <t>TBD</t>
+      </section>
     </section>
     <section anchor="convert-icalendar-to-jscalendar">
       <name>Converting iCalendar to JSCalendar</name>
@@ -6315,7 +6319,8 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
     </references>
     <section anchor="appendix-discrepancies">
       <name>Discrepancies between iCalendar and JSCalendar</name>
-      <t>This section highlights iCalendar and JSCalendar elements for which no conversion rule to a standard element is defined in this document. This is informational; implementations <bcp14>MAY</bcp14> convert these elements, for example by use of the special-purpose properties defined in this document, or some vendor-specific extension properties. Alternatively newer standards might define new standard elements and register them at IANA.</t>
+      <t>This section highlights iCalendar and JSCalendar elements for which no conversion rule to a standard element is defined in this document. This is informational and only complete at the time of publication of this document.</t>
+      <t>Implementations <bcp14>MAY</bcp14> choose to convert the following elements, for example using the properties defined in <xref target="updates-icalendar"/> and <xref target="updates-jscalendar"/>, or they might convert them to some vendor-specific extension properties. Later RFC documents might also define new standard elements and register them at IANA, either extending this list of inconvertible elements, or rather reduce it by introducing a standard element to convert to.</t>
       <section>
         <name>Unsupported iCalendar Elements</name>
         <section>
