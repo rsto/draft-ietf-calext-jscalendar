@@ -14,10 +14,10 @@
 <?rfc sortrefs="yes"?>
 <?rfc symrefs="yes"?>
 <?rfc iprnotified="no"?>
-<rfc xmlns:xi="http://www.w3.org/2001/XInclude" ipr="trust200902" category="std" consensus="true" docName="draft-ietf-calext-jscalendar-icalendar-10" obsoletes="" updates="" submissionType="IETF" xml:lang="en" tocInclude="true" symRefs="true" sortRefs="true" version="3">
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" ipr="trust200902" category="std" consensus="true" docName="draft-ietf-calext-jscalendar-icalendar-11" obsoletes="" updates="" submissionType="IETF" xml:lang="en" tocInclude="true" symRefs="true" sortRefs="true" version="3">
   <front>
     <title abbrev="JSCalendar">JSCalendar: Converting from and to iCalendar</title>
-    <seriesInfo name="Internet-Draft" value="draft-ietf-calext-jscalendar-icalendar-10"/>
+    <seriesInfo name="Internet-Draft" value="draft-ietf-calext-jscalendar-icalendar-11"/>
     <author initials="R." surname="Stepanek" fullname="Robert Stepanek">
       <organization>Fastmail</organization>
       <address>
@@ -33,7 +33,7 @@
         <uri>https://www.fastmail.com</uri>
       </address>
     </author>
-    <date year="2025" month="February" day="26"/>
+    <date year="2025" month="March" day="19"/>
     <area>Applications</area>
     <workgroup>Calendaring extensions</workgroup>
     <keyword>JSON</keyword>
