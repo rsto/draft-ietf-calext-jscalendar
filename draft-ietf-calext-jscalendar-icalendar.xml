@@ -2310,7 +2310,7 @@ ACTION:AUDIO
           <t>
               The <xref target="RFC5545" section="3.8.1.1" sectionFormat="parens">ATTACH property</xref> in a VEVENT, VTODO, PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the "links" property of the Event, Task, Participant, or Location object.
           </t>
-          <t>The property value converts to the "href" property of the Link object. A value of type URI converts as-is. A value of type BINARY converts to a URI in the "data" URL scheme (<xref target="RFC2397"/>. If the FMTTYPE parameter is set on the ATTACH property, then the parameter value <bcp14>MUST</bcp14> be set in the <tt>mediatype</tt> part of the data URL.</t>
+          <t>The property value converts to the "href" property of the Link object. A value of type URI converts as-is. A value of type BINARY converts to a URI in the "data" URL scheme (<xref target="RFC2397"/>. If the FMTTYPE parameter is set on the ATTACH property, then the parameter value <bcp14>MUST</bcp14> be set in the "mediatype" part of the data URL.</t>
           <t>The ATTACH property parameters convert as follows:</t>
           <table>
             <name>Parameters of the ATTACH property</name>
@@ -5377,7 +5377,7 @@ URL:https://example.com/calendar/birthdays.ics
             <t>It converts to an ATTENDEE property if the <xref target="RFC8984" section="4.4.6" sectionFormat="parens">sendTo</xref> property is set. The calendarAddress property converts to the ATTENDEE property value, if set; otherwise one of the scheduling methods in the "sendTo" property converts to the ATTENDEE property value. Typically, the "imip" scheduling method is a good choice.</t>
           </li>
           <li>
-            <t>It converts to a PARTICIPANT component if any of the Participant properties in <xref target="jscal-participant-props-participant"/> are set. If the Participant object also converts to an ATTENDEE property, then the CALENDAR-ADDRESS property value of the PARTICIPANT componnent <bcp14>MUST</bcp14> match the ATTENDEE property value.</t>
+            <t>It converts to a PARTICIPANT component if any of the Participant properties in <xref target="jscal-participant-props-participant"/> are set. If the Participant object also converts to an ATTENDEE property, then the CALENDAR-ADDRESS property value of the PARTICIPANT component <bcp14>MUST</bcp14> match the ATTENDEE property value.</t>
           </li>
         </ul>
         <t>Implementations <bcp14>MAY</bcp14> convert any scheduling methods in the sendTo property that did not convert to the ATTENDEE property to the JSPROP property instead. Each scheduling method converts to a separate JSPROP property. Implementations that want to preserve the the scheduling method name of the URI that converted to the ATTENDEE property, <bcp14>MAY</bcp14> convert that scheduling method to both the ATTENDEE and the JSPROP property. Typically, this is not necessary, e.g. a URI in the "mailto" scheme implies the "imip" scheduling method.</t>
@@ -6269,6 +6269,7 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5545.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5546.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5870.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6047.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6638.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6838.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6901.xml"/>
