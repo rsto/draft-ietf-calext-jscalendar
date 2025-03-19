@@ -177,7 +177,13 @@ SUMMARY:he
       </section>
       <section>
         <name>Lossy versus Lossless Conversion</name>
-        <t>TBD</t>
+        <t>This document outlines how to convert iCalendar elements to JSCalendar elements, and the other way round. Many of these can be represented by standard elements in both formats, meaning that they are registered in the iCalendar and JSCalendar IANA registries and differ from the special-purpose elements introduced in <xref target="updates-icalendar"/> and <xref target="updates-jscalendar"/>. Still, a number of elements in either format have no standard counterpart in the other. When converting between between iCalendar and JSCalendar, implementations <bcp14>MAY</bcp14> choose to only convert elements that have standard element in the target format, or aim to preserve as many elements as possible.</t>
+        <t>When to choose between lossy and lossless conversion is implementation-specific. For example:</t>
+        <ul>
+          <li>For lossy conversion, an implementation that internally stores calendar data in JSCalendar format might only want to convert to a subset of iCalendar elements for <xref target="RFC6047">iMIP scheduling</xref>. In this case, it might not make use any of the conversion-specific iCalendar properties introduced in <xref target="updates-icalendar"/>.</li>
+          <li>For lossless conversion, an implementation that internally stores calendar data in iCalendar format might want to convert without loss to JSCalendar when updating calendar events with <xref target="I-D.ietf-jmap-calendars">JMAP</xref>. For that, it can use the conversion-specific properties defined in <xref target="updates-jscalendar"/>.</li>
+        </ul>
+        <t>All the examples in this document illustrate lossless conversion, if not explicitly stated otherwise in the example.</t>
       </section>
     </section>
     <section anchor="convert-icalendar-to-jscalendar">
