@@ -2829,11 +2829,8 @@ BEGIN:VCALENDAR
 BEGIN:VTIMEZONE
 TZID:NonIana
 BEGIN:DAYLIGHT
-TZOFFSETFROM:-0400
-TZOFFSETTO:-0300
-DTSTART:20010503T000000
+...
 COMMENT:take note of this
-COMMENT:and this
 END:DAYLIGHT
 END:VTIMEZONE
 ...
@@ -2848,12 +2845,12 @@ END:VTIMEZONE
         {
           "@type": "TimeZoneRule",
           "comments": [
-            "take note of this",
-            "and this"
+            "take note of this"
           ],
           "...": ""
         }
       ],
+      "tzId": "NonIana",
       "...": ""
     }
   },
