@@ -2636,7 +2636,7 @@ DTSTAMP:20230723T125201Z
 ...
 END:PARTICIPANT
 ATTENDEE;RSVP=TRUE;PARTSTAT=TENTATIVE:mailto:foo@example.com
-ORGANIZER:mailto:bar@example.com
+ORGANIZER:mailto:organizer@example.com
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "participants": {
@@ -2652,9 +2652,12 @@ ORGANIZER:mailto:bar@example.com
     "...": ""
   },
   "o4": {
-    "calendarAddress": "mailto:bar@example.com",
+    "calendarAddress": "mailto:organizer@example.com",
     "...": ""
   }
+},
+"replyTo": {
+  "imip": "mailto:organizer@example.com"
 }
 ]]></sourcecode>
           </figure>
