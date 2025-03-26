@@ -150,6 +150,8 @@ class Component:
                 add_default(Property("TZOFFSETFROM", "-0400"))
                 add_default(Property("TZOFFSETTO", "-0300"))
                 add_default(Property("DTSTART", "20010503T000000"))
+            elif comp.name == "PARTICIPANT":
+                add_default(Property("UID", f"{uuid.uuid4()}"))
             elif comp.name == "VTIMEZONE":
                 add_default(Property("TZID", f"{uuid.uuid4()}"))
 

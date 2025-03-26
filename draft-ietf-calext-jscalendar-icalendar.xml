@@ -2862,7 +2862,6 @@ END:VTIMEZONE
             <name>Converting the COMMENT property in a PARTICIPANT component</name>
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:PARTICIPANT
-UID:127ABD62-D07A-4F39-AA62-530E37A8DF78
 COMMENT:I'll think about it
 ...
   ]]></sourcecode>
