@@ -3336,7 +3336,8 @@ GEO:+45.5;-93.3
 "locations": {
   "d4": {
     "@type": "Location",
-    "coordinates": "geo:45.5,-93.3"
+    "coordinates": "geo:45.5,-93.3",
+    "...": ""
   }
 }
 ]]></sourcecode>
@@ -3480,7 +3481,8 @@ LOCATION:Conference Room - F123\, Bldg. 002
 "locations": {
   "f45": {
     "@type": "Location",
-    "title": "Conference Room - F123, Bldg. 002"
+    "name": "Conference Room - F123, Bldg. 002",
+    "...": ""
   }
 }
 ]]></sourcecode>
@@ -5301,12 +5303,13 @@ URL:https://example.com/calendar/birthdays.ics
         <name>Location</name>
         <t>The <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref> converts to either a <xref target="ical-prop-location">LOCATION</xref>, <xref target="ical-prop-geo">GEO</xref>, or <xref target="ical-prop-geo">DTEND</xref> property, or it converts to a <xref target="ical-comp-vlocation">VLOCATION component</xref>. Which iCalendar element to choose is implementation-specific. As a guideline:</t>
         <ul>
-          <li>Choose LOCATION, if only the "title" property is set and the iCalendar component does not already contain a LOCATION property. The title property converts to the LOCATION property value.</li>
-          <li>Choose GEO, if only the "coordinates" property is set, the <xref target="RFC5870" section="3.3" sectionFormat="parens">"geo-path"</xref> of its URI value only contains "coord-a" (latitude) and "coord-b" (longitude), and the iCalendar component does not already contain a GEO property. The coordinates property converts to the GEO property value.</li>
-          <li>Choose DTEND, if the embedding object is an Event, only the timeZone and the relativeTo properties are set, the "relativeTo" property value is "end" and the iCalendar component does not already contain a DTEND property. The timeZone property converts to the TZID parameter of the DTEND property. The duration of the embedding Event object determines the DTEND property value.</li>
+          <li>If the "iCalProperty" or "iCalComponent" property on the Location object is set, try to convert the object back to the named iCalendar element.</li>
+          <li>Choose DTEND, if the embedding object is an Event, only the "timeZone" and the "relativeTo" properties are set, the "relativeTo" property value is "end" and the iCalendar component does not already contain a DTEND property. The "timeZone" property converts to the TZID parameter of the DTEND property. The duration of the embedding Event object determines the DTEND property value.</li>
+          <li>Choose LOCATION, if only the "name" property or optionally also the "coordinates" property is set and the iCalendar component does not already contain a LOCATION property. The "name" property converts to the LOCATION property value.</li>
+          <li>Choose GEO, if only the "coordinates" property or optionally also the "name" property is set, the <xref target="RFC5870" section="3.3" sectionFormat="parens">"geo-path"</xref> of its URI value only contains "coord-a" (latitude) and "coord-b" (longitude), and the iCalendar component does not already contain a GEO property. The "coordinates" property converts to the GEO property value.</li>
           <li>Choose the VLOCATION component otherwise.</li>
         </ul>
-        <t>Implementations <bcp14>MAY</bcp14> convert one of the Location objects that convert to a VLOCATION also to the LOCATION property; converting the title or description property to the LOCATION property value is a reasonable choice. The DERIVED parameter <bcp14>MUST</bcp14> be set on the LOCATION property.</t>
+        <t>Implementations <bcp14>MAY</bcp14> convert one of the Location objects to bothh a VLOCATION component and the LOCATION and GEO properties; In this case, the DERIVED parameter <bcp14>MUST</bcp14> be set on the LOCATION and GEO properties.</t>
         <t>The properties convert to a VLOCATION component as follows:</t>
         <table>
           <name>Properties of the Location object</name>
