@@ -3050,7 +3050,17 @@ DTEND;VALUE=DATE:20240107
 "start": "2024-01-02T00:00:00",
 "timeZone": null,
 "duration": "P5D",
-"showWithoutTime": true
+"showWithoutTime": true,
+"iCalComponent": {
+  "@type": "ICalComponent",
+  "name": "vevent",
+  "convertedProperties": {
+    "duration": {
+      "@type": "ICalProperty",
+      "name": "dtend"
+    }
+  }
+}
 ]]></sourcecode>
           </figure>
         </section>
