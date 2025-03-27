@@ -3386,7 +3386,7 @@ GEO:48.858222;2.2945
                   <xref target="RFC7986" section="6.1" sectionFormat="comma"/>
                 </td>
                 <td>display</td>
-                <td/>
+                <td>See remarks below</td>
               </tr>
               <tr>
                 <td>FMTTYPE</td>
@@ -3417,6 +3417,7 @@ GEO:48.858222;2.2945
           <t>Remarks:</t>
           <ul>
             <li>The LINKREL parameter value is defined to be either an URI or an <xref target="RFC5545" section="3.1" sectionFormat="parens">"iana-token"</xref>. Only parameter values of form "iana-token" convert to the "rel" property of the Link object.</li>
+            <li>The DISPLAY parameter value is a list of enumerated values, but the Link object's "display" property is a single enumerated value. How to convert multi-valued DISPLAY parameter values is implementation-specific.</li>
           </ul>
           <t>Implementations <bcp14>MAY</bcp14> preserve the fact that the Link object got converted from an IMAGE property. To do so, they <bcp14>MUST</bcp14> set the <xref target="jscal-prop-icalproperty">iCalProperty</xref> on the Link object.</t>
           <t>The following example illustrates how to convert the IMAGE property:</t>
@@ -5270,7 +5271,7 @@ URL:https://example.com/calendar/birthdays.ics
               </td>
               <td>DISPLAY</td>
               <td>
-                <xref target="ical-prop-image"/>
+                <xref target="ical-prop-image"/>, and remarks below
               </td>
             </tr>
             <tr>
@@ -6649,6 +6650,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             <ul>
               <li>
                 <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
+              </li>
+              <li>
+                <xref target="RFC7986" section="6.1" sectionFormat="comma">DISPLAY</xref> (if the parameter value contains more than one "displayval").
               </li>
             </ul>
           </section>
