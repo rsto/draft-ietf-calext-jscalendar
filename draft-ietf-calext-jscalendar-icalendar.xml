@@ -3320,7 +3320,10 @@ EXDATE:20230801T130000Z
         <section anchor="ical-prop-geo">
           <name>GEO</name>
           <t>
-            The <xref target="RFC5545" section="3.8.1.6" sectionFormat="parens">GEO property</xref> in a VEVENT, VTODO, or PARTICIPANT component converts to a <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>.  The converted object is set in the "locations" property of the Event, Task, or Participant object.
+            The <xref target="RFC5545" section="3.8.1.6" sectionFormat="parens">GEO property</xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>.  If the VEVENT or VTODO component also contains the <xref target="ical-prop-location">LOCATION property</xref>, then the GEO and LOCATION properties convert to the same Location object.  The converted object is set in the "locations" property of the Event or Task object.
+          </t>
+          <t>
+            The <xref target="RFC5545" section="3.8.1.6" sectionFormat="parens">GEO property</xref> in a PARTICIPANT component converts to a <xref target="RFC8984" section="4.2.5" sectionFormat="parens">Location object</xref>.  The converted object is set in the "locations" property of the Participant object.
           </t>
           <t>
             The <xref target="RFC5545" section="3.8.1.6" sectionFormat="parens">GEO property</xref> in a VLOCATION component converts to the <xref target="RFC8984" section="4.2.5" sectionFormat="parens">"coordinates" property</xref> of the Location object.
@@ -3330,13 +3333,30 @@ EXDATE:20230801T130000Z
           <figure anchor="test-ical-prop-geo">
             <name>Converting the GEO property in a VEVENT</name>
             <sourcecode type="text/calendar"><![CDATA[
-GEO:+45.5;-93.3
+GEO:45.5;-93.3
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "locations": {
   "d4": {
     "@type": "Location",
     "coordinates": "geo:45.5,-93.3",
+    "...": ""
+  }
+}
+]]></sourcecode>
+          </figure>
+          <figure anchor="test-ical-prop-geo-and-location">
+            <name>Converting the GEO and LOCATION properties in a VEVENT</name>
+            <sourcecode type="text/calendar"><![CDATA[
+LOCATION:Taj Mahal
+GEO:27.175;78.041944
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"locations": {
+  "2": {
+    "@type": "Location",
+    "name": "Taj Mahal",
+    "coordinates": "geo:27.175,78.041944",
     "...": ""
   }
 }
@@ -3356,7 +3376,11 @@ GEO:48.858222;2.2945
   "2": {
     "@type": "Location",
     "name": "Eiffel Tower",
-    "coordinates": "geo:48.858222,2.2945"
+    "coordinates": "geo:48.858222,2.2945",
+    "iCalComponent": {
+      "@type": "ICalComponent",
+      "name": "vlocation"
+    }
   }
 }
 ]]></sourcecode>
@@ -3588,7 +3612,10 @@ END:VLOCATION
   "1": {
     "@type": "Location",
     "name": "Room B",
-    "...": ""
+    "iCalComponent": {
+      "@type": "ICalComponent",
+      "name": "vlocation"
+    }
   }
 }
 ]]></sourcecode>
@@ -5307,10 +5334,11 @@ URL:https://example.com/calendar/birthdays.ics
           <li>If the "iCalProperty" or "iCalComponent" property on the Location object is set, convert the object back to the named iCalendar element.</li>
           <li>Choose DTEND if the embedding object is an Event, only the "timeZone" and the "relativeTo" properties are set, the "relativeTo" property value is "end" and the iCalendar component does not already contain a DTEND property. The "timeZone" property converts to the TZID parameter of the DTEND property. The duration of the embedding Event object determines the DTEND property value.</li>
           <li>Choose LOCATION if the "name" property is set and the iCalendar component does not already contain a LOCATION property. The "name" property converts to the LOCATION property value.</li>
-          <li>Choose GEO if the "coordinates" property is set, the <xref target="RFC5870" section="3.3" sectionFormat="parens">"geo-path"</xref> of its URI value only contains "coord-a" (latitude) and "coord-b" (longitude), and the iCalendar component does not already contain a GEO property. The "coordinates" property converts to the GEO property value.</li>
+          <li>Choose GEO if the "coordinates" property is set and the iCalendar component does not already contain a GEO property. The "coordinates" property converts to the GEO property value.</li>
           <li>Choose the VLOCATION component otherwise.</li>
         </ul>
         <t>Implementations <bcp14>MAY</bcp14> convert one of the Location objects to bothh a VLOCATION component and the LOCATION and GEO properties; In this case, the DERIVED parameter <bcp14>MUST</bcp14> be set on the LOCATION and GEO properties.</t>
+        <t>If the <xref target="RFC5870" section="3.3" sectionFormat="parens">"geo-path"</xref> of the "coordinates" property URI value contains anything in addition to the "coord-a" (latitude) and "coord-b" (longitude) parts, then the exact coordinates can not be represented in GEO property values. Implementations <bcp14>MAY</bcp14> convert such "coordinates" property values to both a GEO property having only the latitude and longitude set, as well as the <xref target="ical-prop-jsprop">JSPROP</xref> property of the VLOCATION. In this case, they <bcp14>MUST</bcp14> set the DERIVED parameter value of the GEO property to TRUE.</t>
         <t>The properties convert to a VLOCATION component as follows:</t>
         <table>
           <name>Properties of the Location object</name>
