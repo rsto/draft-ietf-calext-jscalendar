@@ -59,7 +59,7 @@
       <section anchor="scope-and-goals">
         <name>Scope and Goals</name>
         <t>This document outlines how to convert calendaring information between the iCalendar and JSCalendar data formats.  It describes which elements are common to both, but also highlights where the two formats differ. For each common element, it defines a conversion rule and includes an example of how to convert that element. All iCalendar and JSCalendar elements currently registered at IANA are in scope, but not all of these elements are common to both formats.</t>
-        <t>For elements that have no counterpart in the other format, it is the goal of this document to define how to preserve them during conversion, but in general it is not the goal to achieve this by defining new standard elements. Instead, this document defines special-purpose properties to preserve arbitrary elements. These conversion-specific properties are defined in Section <xref target="ical-prop-jsprop" format="counter"/> for iCalendar, and Sections <xref target="jscal-prop-icalcomponent" format="counter"/> and <xref target="jscal-prop-icalproperty" format="counter"/> for JSCalendar. <xref target="appendix-discrepancies"/> further outlines the discrepancies between the two formats.</t>
+        <t>For elements that have no counterpart in the other format, it is the goal of this document to define how to preserve them during conversion, but in general it is not the goal to achieve this by defining new standard elements. Instead, this document defines special-purpose properties to preserve arbitrary elements. These conversion-specific properties are defined in Section <xref target="ical-prop-jscal-prop" format="counter"/> for iCalendar, and Sections <xref target="jscal-prop-icalcomponent" format="counter"/> and <xref target="jscal-prop-icalproperty" format="counter"/> for JSCalendar. <xref target="appendix-discrepancies"/> further outlines the discrepancies between the two formats.</t>
       </section>
       <section>
         <name>How to Read the Examples</name>
@@ -506,7 +506,7 @@ END:VCALENDAR
         <section anchor="generating-jscalendar-ids">
           <name>JSCalendar Ids</name>
           <t>JSCalendar generally uses JSON objects to represent a collection of same-typed values. The keys are of type <xref target="RFC8984" section="1.4.1" sectionFormat="parens">Id</xref>, the values are JSCalendar object types.  If an iCalendar element converts to a value in such a collection, then an implementation needs to choose an identifier as key.</t>
-          <t>This document defines the new <xref target="ical-param-jskey">JSKEY</xref> parameter and <xref target="ical-prop-jskey">JSKEY property</xref>, which allow to set a JSCalendar Id value when converting from JSCalendar to iCalendar.  If they are set on a property or the component, then its value <bcp14>MUST</bcp14> be used as key when converting that element from iCalendar to JSCalendar.  If no such parameter or property is set, then an implementation is free to choose any identifier, as long the following requirements are met:</t>
+          <t>This document defines the new <xref target="ical-param-jscal-id">JSCAL-ID</xref> parameter and <xref target="ical-prop-jscal-id">JSCAL-ID property</xref>, which allow to set a JSCalendar Id value when converting from JSCalendar to iCalendar.  If they are set on a property or the component, then its value <bcp14>MUST</bcp14> be used as key when converting that element from iCalendar to JSCalendar.  If no such parameter or property is set, then an implementation is free to choose any identifier, as long the following requirements are met:</t>
           <ul>
             <li>The identifier <bcp14>MUST</bcp14> be a valid Id value.</li>
             <li>The identifiers for the exact same iCalendar element <bcp14>MUST</bcp14> stay the same, irrespective of the order in which components, properties and parameters are processed.</li>
@@ -3900,7 +3900,7 @@ RDATE:20230805T170000Z
           <t>
             The <xref target="RFC5545" section="3.8.4.5" sectionFormat="parens">RELATED-TO property</xref> in a VEVENT, VTODO, or VALARM component converts to a <xref target="RFC8984" section="1.4.10" sectionFormat="parens">Relation object</xref>.  The converted object is set in the "relatedTo" property of the <xref target="RFC8984" section="4.1.3" sectionFormat="parens">Event or Task object</xref>, or the <xref target="RFC8984" section="4.5.2" sectionFormat="parens">Alert object</xref>.
           </t>
-          <t>The property value in a VEVENT or VTODO converts as-is to the key of the Relation object in the "relatedTo" property. The property value in a VALARM converts to the same value as the key of that Alert object, which represents the VALARM component having that property value set in the UID property. Any RELTYPE parameters convert to the "relations" property in that Relation object. The parameter values convert in lowercase.</t>
+          <t>The property value in a VEVENT or VTODO converts as-is to the id of the Relation object in the "relatedTo" property. The property value in a VALARM converts to the same value as the id of that Alert object, which represents the VALARM component having that property value set in the UID property. Any RELTYPE parameters convert to the "relations" property in that Relation object. The parameter values convert in lowercase.</t>
           <t>The <xref target="RFC9253" section="6.2" sectionFormat="parens">GAP parameter</xref> does not convert to a standard JSCalendar element. Implementations <bcp14>MAY</bcp14> convert it to the <xref target="jscal-prop-icalproperty">"iCalProperty" property</xref> of the Relation object.</t>
           <t>The following examples illustrate how to convert the RELATED-TO property:</t>
           <figure anchor="test-ical-prop-related-to">
@@ -4578,7 +4578,7 @@ URL:https://example.com/calendar/birthdays.ics
             <t>The value of the RELATED-TO property is the UID property value of that VALARM component, to which the related  Alert object converts to. Consequently, the UID property for such a VALARM <bcp14>MUST</bcp14> be set, otherwise the UID property <bcp14>MAY</bcp14> be set.</t>
           </li>
         </ul>
-        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the VALARM component.</t>
+        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jscal-prop">JSCAL-PROP properties</xref> in the VALARM component.</t>
       </section>
       <section anchor="jscal-event-and-task">
         <name>Event and Task</name>
@@ -4843,9 +4843,9 @@ URL:https://example.com/calendar/birthdays.ics
               <td>
                 <xref target="RFC8984" section="4.4.4" sectionFormat="comma"/>
               </td>
-              <td>ORGANIZER, or JSPROP</td>
+              <td>ORGANIZER, or JSCAL-PROP</td>
               <td>
-                <t><xref target="ical-prop-organizer"/>, <xref target="ical-prop-jsprop"/>, and remarks below</t>
+                <t><xref target="ical-prop-organizer"/>, <xref target="ical-prop-jscal-prop"/>, and remarks below</t>
               </td>
             </tr>
             <tr>
@@ -4963,13 +4963,13 @@ URL:https://example.com/calendar/birthdays.ics
             <t>The entries in the "recurrenceOverrides" property convert depending on the contents of the PatchObject value. A PatchObject that sets the "excluded" property to "true" converts to an EXDATE property for the date-time of that recurrence instance. An empty PatchObject converts to an RDATE property. Any other PatchObject converts to a recurrence override component in the embedding VCALENDAR component.</t>
           </li>
           <li>
-            <t>The replyTo property converts to the ORGANIZER or the <xref target="ical-prop-jsprop">JSPROP</xref> property, or both. The "web" scheduling method never converts to the ORGANIZER property. Any other scheduling methods in the replyTo property convert to the ORGANIZER property value as follows:</t>
+            <t>The replyTo property converts to the ORGANIZER or the <xref target="ical-prop-jscal-prop">JSCAL-PROP</xref> property, or both. The "web" scheduling method never converts to the ORGANIZER property. Any other scheduling methods in the replyTo property convert to the ORGANIZER property value as follows:</t>
             <ul>
               <li>If there is only a single scheduling method, then convert its URI value.</li>
               <li>If there are multiple scheduling methods and one of their URI values match a Participant object's calendarAddress property value, use that URI.</li>
               <li>Otherwise, choose the URI of any scheduling method. The "imip" scheduling method typically is a good choice.</li>
             </ul>
-            <t>Implementations <bcp14>MAY</bcp14> convert any scheduling methods that did not convert to the ORGANIZER property to the JSPROP property instead. Each scheduling method converts to a separate JSPROP property. Implementations that want to preserve the the scheduling method name of the URI that converted to the ORGANIZER property, <bcp14>MAY</bcp14> convert that scheduling method to both the ORGANIZER and tis JSPROP property. Typically, this is not necessary, e.g. a URI in the "mailto" scheme implies the "imip" scheduling method.</t>
+            <t>Implementations <bcp14>MAY</bcp14> convert any scheduling methods that did not convert to the ORGANIZER property to the JSCAL-PROP property instead. Each scheduling method converts to a separate JSCAL-PROP property. Implementations that want to preserve the the scheduling method name of the URI that converted to the ORGANIZER property, <bcp14>MAY</bcp14> convert that scheduling method to both the ORGANIZER and tis JSCAL-PROP property. Typically, this is not necessary, e.g. a URI in the "mailto" scheme implies the "imip" scheduling method.</t>
           </li>
         </ul>
         <t>Properties specific to the Event object type convert to iCalendar properties as follows:</t>
@@ -5070,7 +5070,7 @@ URL:https://example.com/calendar/birthdays.ics
             </tr>
           </tbody>
         </table>
-        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the VEVENT or VTODO component.</t>
+        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jscal-prop">JSCAL-PROP properties</xref> in the VEVENT or VTODO component.</t>
       </section>
       <section anchor="jscal-group">
         <name>Group</name>
@@ -5213,7 +5213,7 @@ URL:https://example.com/calendar/birthdays.ics
             <t>The method property value in all the Group entries is expected to be equal. How to convert entries with unequal method property values is implementation-specific.</t>
           </li>
         </ul>
-        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the VCALENDAR component.</t>
+        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jscal-prop">JSCAL-PROP properties</xref> in the VCALENDAR component.</t>
       </section>
       <section anchor="jscal-link">
         <name>Link</name>
@@ -5280,7 +5280,7 @@ URL:https://example.com/calendar/birthdays.ics
         <ul>
           <li>The LINKREL parameter <bcp14>MUST</bcp14> be omitted if the Link object converts to an IMAGE property and the "rel" property value is "icon".</li>
         </ul>
-        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the same component to which the Link object converts to as a property.</t>
+        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jscal-prop">JSCAL-PROP properties</xref> in the same component to which the Link object converts to as a property.</t>
       </section>
       <section anchor="jscal-location">
         <name>Location</name>
@@ -5293,7 +5293,7 @@ URL:https://example.com/calendar/birthdays.ics
           <li>Choose the VLOCATION component otherwise.</li>
         </ul>
         <t>Implementations <bcp14>MAY</bcp14> convert one of the Location objects to bothh a VLOCATION component and the LOCATION and GEO properties; In this case, the DERIVED parameter <bcp14>MUST</bcp14> be set on the LOCATION and GEO properties.</t>
-        <t>If the <xref target="RFC5870" section="3.3" sectionFormat="parens">"geo-path"</xref> of the "coordinates" property URI value contains anything in addition to the "coord-a" (latitude) and "coord-b" (longitude) parts, then the exact coordinates can not be represented in GEO property values. Implementations <bcp14>MAY</bcp14> convert such "coordinates" property values to both a GEO property having only the latitude and longitude set, as well as the <xref target="ical-prop-jsprop">JSPROP</xref> property of the VLOCATION. In this case, they <bcp14>MUST</bcp14> set the DERIVED parameter value of the GEO property to TRUE.</t>
+        <t>If the <xref target="RFC5870" section="3.3" sectionFormat="parens">"geo-path"</xref> of the "coordinates" property URI value contains anything in addition to the "coord-a" (latitude) and "coord-b" (longitude) parts, then the exact coordinates can not be represented in GEO property values. Implementations <bcp14>MAY</bcp14> convert such "coordinates" property values to both a GEO property having only the latitude and longitude set, as well as the <xref target="ical-prop-jscal-prop">JSCAL-PROP</xref> property of the VLOCATION. In this case, they <bcp14>MUST</bcp14> set the DERIVED parameter value of the GEO property to TRUE.</t>
         <t>The properties convert to a VLOCATION component as follows:</t>
         <table>
           <name>Properties of the Location object</name>
@@ -5361,9 +5361,9 @@ URL:https://example.com/calendar/birthdays.ics
         </table>
         <t>Remarks:</t>
         <ul>
-          <li>The "coordinates" property converts to the GEO property if the <xref target="RFC5870" section="3.3" sectionFormat="parens">"geo-path"</xref> of its URI value only contains "coord-a" (latitude) and "coord-b" (longitude). Otherwise implementations <bcp14>MAY</bcp14> convert it to the <xref target="ical-prop-jsprop">JSPROP property</xref>.</li>
+          <li>The "coordinates" property converts to the GEO property if the <xref target="RFC5870" section="3.3" sectionFormat="parens">"geo-path"</xref> of its URI value only contains "coord-a" (latitude) and "coord-b" (longitude). Otherwise implementations <bcp14>MAY</bcp14> convert it to the <xref target="ical-prop-jscal-prop">JSCAL-PROP property</xref>.</li>
         </ul>
-        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the VLOCATION component, or the component which the Location converts to as a property.</t>
+        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jscal-prop">JSCAL-PROP properties</xref> in the VLOCATION component, or the component which the Location converts to as a property.</t>
         <t>The following example illustrates how to convert a Location "coordinates" property value that can not be represented in GEO property values without loss.</t>
           <figure anchor="test-jscal-location-coordinates">
             <name>Converting the Location "coordinates" property without loss</name>
@@ -5382,7 +5382,7 @@ BEGIN:VEVENT
 GEO;DERIVED=TRUE:48.198634;16.371648
 BEGIN:VLOCATION
 NAME:Karlskirche
-JSPROP;JSPTR="coordinates":geo:48.198634\,16.371648\;crs=wgs84\;u=40
+JSCAL-PROP;JSCAL-PATH="coordinates":geo:48.198634\,16.371648\;crs=wgs84\;u=40
 ...
   ]]></sourcecode>
           </figure>
@@ -5398,7 +5398,7 @@ JSPROP;JSPTR="coordinates":geo:48.198634\,16.371648\;crs=wgs84\;u=40
             <t>It converts to a PARTICIPANT component if any of the Participant properties in <xref target="jscal-participant-props-participant"/> are set. If the Participant object also converts to an ATTENDEE property, then the CALENDAR-ADDRESS property value of the PARTICIPANT component <bcp14>MUST</bcp14> match the ATTENDEE property value.</t>
           </li>
         </ul>
-        <t>Implementations <bcp14>MAY</bcp14> convert any scheduling methods in the sendTo property that did not convert to the ATTENDEE property to the JSPROP property instead. Each scheduling method converts to a separate JSPROP property. Implementations that want to preserve the the scheduling method name of the URI that converted to the ATTENDEE property, <bcp14>MAY</bcp14> convert that scheduling method to both the ATTENDEE and the JSPROP property. Typically, this is not necessary, e.g. a URI in the "mailto" scheme implies the "imip" scheduling method.</t>
+        <t>Implementations <bcp14>MAY</bcp14> convert any scheduling methods in the sendTo property that did not convert to the ATTENDEE property to the JSCAL-PROP property instead. Each scheduling method converts to a separate JSCAL-PROP property. Implementations that want to preserve the the scheduling method name of the URI that converted to the ATTENDEE property, <bcp14>MAY</bcp14> convert that scheduling method to both the ATTENDEE and the JSCAL-PROP property. Typically, this is not necessary, e.g. a URI in the "mailto" scheme implies the "imip" scheduling method.</t>
         <t>The following Participant properties convert to the ATTENDEE property. How to convert these properties if the Participant does not convert to an ATTENDEE is implementation-specific.</t>
         <table anchor="jscal-participant-props-attendee">
           <name>Properties of the Participant object that convert to the ATTENDEE property</name>
@@ -5543,8 +5543,8 @@ JSPROP;JSPTR="coordinates":geo:48.198634\,16.371648\;crs=wgs84\;u=40
               <td>
                 <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
               </td>
-              <td>ATTENDEE or JSPROP</td>
-              <td><xref target="ical-prop-attendee"/>, <xref target="ical-prop-jsprop"/>, and the start of this section
+              <td>ATTENDEE or JSCAL-PROP</td>
+              <td><xref target="ical-prop-attendee"/>, <xref target="ical-prop-jscal-prop"/>, and the start of this section
               </td>
             </tr>
           </tbody>
@@ -5552,7 +5552,7 @@ JSPROP;JSPTR="coordinates":geo:48.198634\,16.371648\;crs=wgs84\;u=40
         <t>Remarks:</t>
         <ul>
           <li>
-            <t>The "optional" role converts to the "OPT-PARTICIPANT" ROLE parameter value, the "chair" role to "CHAIR", "informational" to "NON-PARTICIPANT". The "attendee" role does not convert to the ROLE parameter: it either is implied if the Participant object converts to an ATTENDEE, otherwise implementations <bcp14>MAY</bcp14> preserve it using the <xref target="ical-prop-jsprop">JSPROP</xref> property. The "owner" role does not convert to any standard iCalendar element: it either is implied if the property value of the ATTENDEE is equal to the value of the ORGANIZER property in the same component, otherwise implementations <bcp14>MAY</bcp14> preserve it using the <xref target="ical-prop-jsprop">JSPROP</xref> property. All other roles require a PARTICIPANT component and convert to the PARTICIPANT-TYPE property in that component.</t>
+            <t>The "optional" role converts to the "OPT-PARTICIPANT" ROLE parameter value, the "chair" role to "CHAIR", "informational" to "NON-PARTICIPANT". The "attendee" role does not convert to the ROLE parameter: it either is implied if the Participant object converts to an ATTENDEE, otherwise implementations <bcp14>MAY</bcp14> preserve it using the <xref target="ical-prop-jscal-prop">JSCAL-PROP</xref> property. The "owner" role does not convert to any standard iCalendar element: it either is implied if the property value of the ATTENDEE is equal to the value of the ORGANIZER property in the same component, otherwise implementations <bcp14>MAY</bcp14> preserve it using the <xref target="ical-prop-jscal-prop">JSCAL-PROP</xref> property. All other roles require a PARTICIPANT component and convert to the PARTICIPANT-TYPE property in that component.</t>
           </li>
           <li>
             <t>The progress property converts to the PARTSTAT parameter as outlined in <xref target="ical-prop-attendee-param-partstat"/>.</t>
@@ -5664,7 +5664,7 @@ JSPROP;JSPTR="coordinates":geo:48.198634\,16.371648\;crs=wgs84\;u=40
             </tr>
           </tbody>
         </table>
-        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the PARTICIPANT component, or the component which the Participant converts to as a property.</t>
+        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jscal-prop">JSCAL-PROP properties</xref> in the PARTICIPANT component, or the component which the Participant converts to as a property.</t>
       </section>
       <section anchor="jscal-timezone">
         <name>TimeZone</name>
@@ -5750,7 +5750,7 @@ JSPROP;JSPTR="coordinates":geo:48.198634\,16.371648\;crs=wgs84\;u=40
             </tr>
           </tbody>
         </table>
-        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the VTIMEZONE component.</t>
+        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jscal-prop">JSCAL-PROP properties</xref> in the VTIMEZONE component.</t>
         <t>The <xref target="RFC8984" section="4.7.2" sectionFormat="parens">TimeZoneRule object</xref> converts to a <xref target="ical-comp-vtimezone">DAYLIGHT or STANDARD component</xref>.  Its properties convert as follows:</t>
         <table>
           <name>Properties of the TimeZoneRule object</name>
@@ -5849,7 +5849,7 @@ JSPROP;JSPTR="coordinates":geo:48.198634\,16.371648\;crs=wgs84\;u=40
             </tr>
           </tbody>
         </table>
-        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the STANDARD or DAYLIGHT component.</t>
+        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jscal-prop">JSCAL-PROP properties</xref> in the STANDARD or DAYLIGHT component.</t>
       </section>
       <section anchor="jscal-virtual-location">
         <name>VirtualLocation</name>
@@ -5888,20 +5888,20 @@ JSPROP;JSPTR="coordinates":geo:48.198634\,16.371648\;crs=wgs84\;u=40
             </tr>
           </tbody>
         </table>
-        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the component to which the VirtualLocation converts to as a property.</t>
+        <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jscal-prop">JSCAL-PROP properties</xref> in the component to which the VirtualLocation converts to as a property.</t>
       </section>
     </section>
     <section anchor="updates-icalendar">
       <name>Updates to iCalendar</name>
       <section anchor="new-icalendar-properties">
         <name>New Properties</name>
-        <section anchor="ical-prop-jskey">
-          <name>JSKEY</name>
+        <section anchor="ical-prop-jscal-id">
+          <name>JSCAL-ID</name>
           <dl newline="true">
             <dt>Property Name:</dt>
-            <dd>JSKEY</dd>
+            <dd>JSCAL-ID</dd>
             <dt>Purpose:</dt>
-            <dd>This property preserves the key of a JSCalendar object value in iCalendar.</dd>
+            <dd>This property preserves the identifier of a JSCalendar object value in iCalendar.</dd>
             <dt>Value type:</dt>
             <dd>TEXT; also see "Format Definition" below for value restrictions.</dd>
             <dt>Property Parameters:</dt>
@@ -5912,26 +5912,26 @@ JSPROP;JSPTR="coordinates":geo:48.198634\,16.371648\;crs=wgs84\;u=40
             <dd>This property can be specified at most once in any calendar component.</dd>
             <dt>Description:</dt>
             <dd>
-              <t>This property specifies the JSON object key of the JSCalendar object to which an iCalendar component converts to. For example, this property set in a VALARM component within a VEVENT component defines the key of the Alert object value in the Event object's "alerts" property (see <xref target="test-ical-prop-jskey-alert"/>).</t>
-              <t>The value of the JSKEY property <bcp14>MUST</bcp14> be a valid key according to the definition of the JSCalendar property to which the component converts to. Typically, this requires the value to be a valid <xref target="RFC8984" section="1.4.1" sectionFormat="parens">Id</xref>, but e.g. a VTIMEZONE component converting to the "timeZones" property requires the value to be a valid <xref target="RFC8984" section="4.7.2" sectionFormat="parens">TimeZoneId</xref>.</t>
+              <t>This property specifies the JSON object key of the JSCalendar object to which an iCalendar component converts to. For example, this property set in a VALARM component within a VEVENT component defines the identifier of the Alert object value in the Event object's "alerts" property (see <xref target="test-ical-prop-jscal-id-alert"/>).</t>
+              <t>The value of the JSCAL-ID property <bcp14>MUST</bcp14> be a valid object key according to the definition of the JSCalendar property to which the component converts to. Typically, this requires the value to be a valid <xref target="RFC8984" section="1.4.1" sectionFormat="parens">Id</xref>, but e.g. a VTIMEZONE component converting to the "timeZones" property requires the value to be a valid <xref target="RFC8984" section="4.7.2" sectionFormat="parens">TimeZoneId</xref>.</t>
             </dd>
             <dt>Format Definition:</dt>
             <dd>
               <t>This property is defined by the following notation:</t>
               <sourcecode type="abnf"><![CDATA[
-jskey-prop = "JSKEY" *(";" other-param) ":" TEXT CRLF
+jscal-id-prop = "JSCAL-ID" *(";" other-param) ":" TEXT CRLF
 ]]></sourcecode>
             </dd>
-            <dt anchor="ical-prop-jskey-examples">Example(s):</dt>
+            <dt anchor="ical-prop-jscal-id-examples">Example(s):</dt>
             <dd>
-              <t>The following example illustrates how to convert the JSKEY property set in a VALARM component.</t>
-              <figure anchor="test-ical-prop-jskey-alert">
-                <name>Converting the JSKEY property of a VALARM component</name>
+              <t>The following example illustrates how to convert the JSCAL-ID property set in a VALARM component.</t>
+              <figure anchor="test-ical-prop-jscal-id-alert">
+                <name>Converting the JSCAL-ID property of a VALARM component</name>
                 <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VEVENT
 ...
 BEGIN:VALARM
-JSKEY:myalert1
+JSCAL-ID:myalert1
 ...
 END:VALARM
 ]]></sourcecode>
@@ -5948,37 +5948,37 @@ END:VALARM
             </dd>
           </dl>
         </section>
-        <section anchor="ical-prop-jsprop">
-          <name>JSPROP</name>
+        <section anchor="ical-prop-jscal-prop">
+          <name>JSCAL-PROP</name>
           <dl newline="true">
             <dt>Property Name:</dt>
-            <dd>JSPROP</dd>
+            <dd>JSCAL-PROP</dd>
             <dt>Purpose:</dt>
             <dd>This property represents a JSCalendar property in iCalendar.</dd>
             <dt>Value type:</dt>
             <dd>TEXT; also see "Format Definition" below for value restrictions.</dd>
             <dt>Property Parameters:</dt>
             <dd>
-              The <xref target="ical-param-jsptr">JSPTR parameter</xref> <bcp14>MUST</bcp14> be specified on this property. Other IANA and non-standard property parameters can be specified on this property.
+              The <xref target="ical-param-jscal-path">JSCAL-PATH parameter</xref> <bcp14>MUST</bcp14> be specified on this property. Other IANA and non-standard property parameters can be specified on this property.
         </dd>
             <dt>Conformance:</dt>
             <dd>This property can be specified multiple times in any calendar component.</dd>
             <dt>Description:</dt>
             <dd>
-              <t>This property converts an arbitrary JSCalendar property from and to iCalendar.  The iCalendar property value is the JSON-encoded value of the JSCalendar property, represented as a TEXT value.  The JSON value <bcp14>MUST NOT</bcp14> contain insignificant whitespace as defined in <xref target="RFC8259" format="default" sectionFormat="of" derivedContent="RFC8259" section="2"/>.  The value of the JSPTR parameter points to the JSCalendar property within the JSCalendar object.</t>
+              <t>This property converts an arbitrary JSCalendar property from and to iCalendar.  The iCalendar property value is the JSON-encoded value of the JSCalendar property, represented as a TEXT value.  The JSON value <bcp14>MUST NOT</bcp14> contain insignificant whitespace as defined in <xref target="RFC8259" format="default" sectionFormat="of" derivedContent="RFC8259" section="2"/>.  The value of the JSCAL-PATH parameter points to the JSCalendar property within the JSCalendar object.</t>
               <t>The root of the JSON pointer is always the JSCalendar object to which the calendar component converts to, even if the JSON pointer starts with the SOLIDUS (U+002F) character.  The pointer <bcp14>MUST NOT</bcp14> reference into an array.</t>
-              <t>All JSPROP properties in a calendar component together form a PatchObject as defined in <xref target="RFC8984"/>.  For each JSPROP property, the value of its JSPTR parameter corresponds to a key in the PatchObject, the value of the JSPROP property corresponds to the value for that key.  When converting from iCalendar to JSCalendar, the PatchObject <bcp14>MUST</bcp14> only be applied after all other iCalendar properties have been converted.  The PatchObject <bcp14>MUST</bcp14> be valid, an invalid PatchObject <bcp14>MUST</bcp14> be ignored.</t>
+              <t>All JSCAL-PROP properties in a calendar component together form a PatchObject as defined in <xref target="RFC8984"/>.  For each JSCAL-PROP property, the value of its JSCAL-PATH parameter corresponds to a key in the PatchObject, the value of the JSCAL-PROP property corresponds to the value for that key.  When converting from iCalendar to JSCalendar, the PatchObject <bcp14>MUST</bcp14> only be applied after all other iCalendar properties have been converted.  The PatchObject <bcp14>MUST</bcp14> be valid, an invalid PatchObject <bcp14>MUST</bcp14> be ignored.</t>
             </dd>
             <dt>Format Definition:</dt>
             <dd>
               <t>This property is defined by the following notation:</t>
               <sourcecode type="abnf"><![CDATA[
-jsprop = "JSPROP" jsprop-param ":" TEXT CRLF
+jscal-prop = "JSCAL-PROP" jscal-prop-param ":" TEXT CRLF
 
-jsprop-param  = *(
+jscal-prop-param  = *(
             ; The following are MANDATORY and MUST NOT
             ; occur more than once
-            ( ";" jsptr-param )
+            ( ";" jscal-path-param )
             ;
             ; The following is OPTIONAL
             ; and MAY occur more than once.
@@ -5988,23 +5988,23 @@ jsprop-param  = *(
             )
 ]]></sourcecode>
             </dd>
-            <dt anchor="ical-prop-jsprop-examples">Example(s):</dt>
+            <dt anchor="ical-prop-jscal-prop-examples">Example(s):</dt>
             <dd>
-              <t>The following example illustrates how to convert a JSPROP property with a JSON boolean value</t>
-              <figure anchor="test-ical-prop-jsprop-boolean">
-                <name>Converting the JSPROP property with a JSON boolean value</name>
+              <t>The following example illustrates how to convert a JSCAL-PROP property with a JSON boolean value</t>
+              <figure anchor="test-ical-prop-jscal-prop-boolean">
+                <name>Converting the JSCAL-PROP property with a JSON boolean value</name>
                 <sourcecode type="text/calendar"><![CDATA[
-JSPROP;JSPTR="example.com:foo":true
+JSCAL-PROP;JSCAL-PATH="example.com:foo":true
 ]]></sourcecode>
                 <sourcecode type="json"><![CDATA[
 "example.com:foo": true
 ]]></sourcecode>
               </figure>
-              <t>The following example illustrates how to convert a JSPROP property with a JSON object value</t>
-              <figure anchor="test-ical-prop-jsprop-object">
-                <name>Converting the JSPROP property with a JSON object value</name>
+              <t>The following example illustrates how to convert a JSCAL-PROP property with a JSON object value</t>
+              <figure anchor="test-ical-prop-jscal-prop-object">
+                <name>Converting the JSCAL-PROP property with a JSON object value</name>
                 <sourcecode type="text/calendar"><![CDATA[
-JSPROP;JSPTR="example.com:foo":{"bar":1234\,"baz":"bam"}
+JSCAL-PROP;JSCAL-PATH="example.com:foo":{"bar":1234\,"baz":"bam"}
 ]]></sourcecode>
                 <sourcecode type="json"><![CDATA[
 "example.com:foo": {
@@ -6013,14 +6013,14 @@ JSPROP;JSPTR="example.com:foo":{"bar":1234\,"baz":"bam"}
 }
 ]]></sourcecode>
               </figure>
-              <t>The following example illustrates how to convert a JSPROP property that points to a property within a JSCalendar Alert. The JSON pointer in the JSPTR parameter is relative to the Alert object.</t>
-              <figure anchor="test-ical-prop-jsprop-alert">
-                <name>Converting the JSPROP property within a VALARM component</name>
+              <t>The following example illustrates how to convert a JSCAL-PROP property that points to a property within a JSCalendar Alert. The JSON pointer in the JSCAL-PATH parameter is relative to the Alert object.</t>
+              <figure anchor="test-ical-prop-jscal-prop-alert">
+                <name>Converting the JSCAL-PROP property within a VALARM component</name>
                 <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VEVENT
 ...
 BEGIN:VALARM
-JSPROP;JSPTR="example.com:foo":"bar"
+JSCAL-PROP;JSCAL-PATH="example.com:foo":"bar"
 ...
 END:VALARM
 ]]></sourcecode>
@@ -6035,14 +6035,14 @@ END:VALARM
 }
 ]]></sourcecode>
               </figure>
-              <t>The following example illustrates how to convert a JSPROP property that points to a property within a JSCalendar Link. The JSON pointer in the JSPTR parameter is relative to the Event object because the Link object converts to an iCalendar property. The <xref target="ical-param-jskey">JSKEY parameter</xref> on the ATTACH property ensures that the JSON path remains valid during conversion.</t>
-              <figure anchor="test-ical-prop-jsprop-valarm">
-                <name>Converting the JSPROP property within a VALARM component</name>
+              <t>The following example illustrates how to convert a JSCAL-PROP property that points to a property within a JSCalendar Link. The JSON pointer in the JSCAL-PATH parameter is relative to the Event object because the Link object converts to an iCalendar property. The <xref target="ical-param-jscal-id">JSCAL-ID parameter</xref> on the ATTACH property ensures that the JSON path remains valid during conversion.</t>
+              <figure anchor="test-ical-prop-jscal-prop-valarm">
+                <name>Converting the JSCAL-PROP property within a VALARM component</name>
                 <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VEVENT
 ...
-ATTACH;JSKEY=mylink1:https://www.rfc-editor.org/rfc/rfc8984.html
-JSPROP;JSPTR="mylink1/example.com:foo":"bar"
+ATTACH;JSCAL-ID=mylink1:https://www.rfc-editor.org/rfc/rfc8984.html
+JSCAL-PROP;JSCAL-PATH="mylink1/example.com:foo":"bar"
 ...
 ]]></sourcecode>
                 <sourcecode type="json"><![CDATA[
@@ -6062,28 +6062,28 @@ JSPROP;JSPTR="mylink1/example.com:foo":"bar"
       </section>
       <section anchor="new-icalendar-parameters">
         <name>New Parameters</name>
-        <section anchor="ical-param-jskey">
-          <name>JSKEY</name>
+        <section anchor="ical-param-jscal-id">
+          <name>JSCAL-ID</name>
           <dl newline="true">
             <dt>Parameter Name:</dt>
-            <dd>JSKEY</dd>
+            <dd>JSCAL-ID</dd>
             <dt>Format Definition:</dt>
             <dd>
               <sourcecode type="abnf"><![CDATA[
-jskey-param  = "JSKEY" "=" param-value
+jscal-id-param  = "JSCAL-ID" "=" param-value
 ]]></sourcecode>
             </dd>
             <dt>Description:</dt>
             <dd>
-              <t>This parameter specifies the JSON object key of the JSCalendar object to which an iCalendar property converts to. For example, this parameter set on an ATTACH property within a VEVENT component defines the key of the Link object value in the Event object's "links" property (see below for an example).</t>
-              <t>The value of the JSKEY parameter <bcp14>MUST</bcp14> be a valid key according to the definition of the JSCalendar property to which the property that this parameter is set on converts to. Typically, this requires the value to be a valid <xref target="RFC8984" section="1.4.1" sectionFormat="parens">Id</xref>.</t>
+              <t>This parameter specifies the JSON object identifier of the JSCalendar object to which an iCalendar property converts to. For example, this parameter set on an ATTACH property within a VEVENT component defines the identifier of the Link object value in the Event object's "links" property (see below for an example).</t>
+              <t>The value of the JSCAL-ID parameter <bcp14>MUST</bcp14> be a valid key according to the definition of the JSCalendar property to which the property that this parameter is set on converts to. Typically, this requires the value to be a valid <xref target="RFC8984" section="1.4.1" sectionFormat="parens">Id</xref>.</t>
             </dd>
             <dt>Example(s):</dt>
             <dd>
-              <figure anchor="test-ical-param-jskey-attach">
-                <name>Converting the JSKEY parameter on an ATTACH property</name>
+              <figure anchor="test-ical-param-jscal-id-attach">
+                <name>Converting the JSCAL-ID parameter on an ATTACH property</name>
                 <sourcecode type="text/calendar"><![CDATA[
-ATTACH;JSKEY=mylink1:https://example.com
+ATTACH;JSCAL-ID=mylink1:https://example.com
 ]]></sourcecode>
                 <sourcecode type="json"><![CDATA[
 "links": {
@@ -6097,19 +6097,19 @@ ATTACH;JSKEY=mylink1:https://example.com
             </dd>
           </dl>
         </section>
-        <section anchor="ical-param-jsptr">
-          <name>JSPTR</name>
+        <section anchor="ical-param-jscal-path">
+          <name>JSCAL-PATH</name>
           <dl newline="true">
             <dt>Parameter Name:</dt>
-            <dd>JSPTR</dd>
+            <dd>JSCAL-PATH</dd>
             <dt>Format Definition:</dt>
             <dd>
               <sourcecode type="abnf"><![CDATA[
-jsptr-param  = "JSPTR" "=" quoted-string
+jscal-path-param  = "JSCAL-PATH" "=" quoted-string
 ]]></sourcecode>
             </dd>
             <dt>Description:</dt>
-            <dd>This parameter is specified on a <xref target="ical-prop-jsprop">JSPROP</xref> property.  Its value is a JSON pointer <xref target="RFC6901"/> that points to a JSCalendar property.
+            <dd>This parameter is specified on a <xref target="ical-prop-jscal-prop">JSCAL-PROP</xref> property.  Its value is a JSON pointer <xref target="RFC6901"/> that points to a JSCalendar property.
         </dd>
             <dt>Description:</dt>
             <dd>
@@ -6118,9 +6118,9 @@ jsptr-param  = "JSPTR" "=" quoted-string
             <dt>Example(s):</dt>
             <dd>
               <sourcecode type="text/plain"><![CDATA[
-JSPROP;JSPTR="example.com:foo":"bar"
+JSCAL-PROP;JSCAL-PATH="example.com:foo":"bar"
 ]]></sourcecode>
-              <t>For further examples, see <xref target="ical-prop-jsprop-examples"/>.</t>
+              <t>For further examples, see <xref target="ical-prop-jscal-prop-examples"/>.</t>
             </dd>
           </dl>
         </section>
