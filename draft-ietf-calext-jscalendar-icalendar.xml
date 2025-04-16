@@ -5382,7 +5382,7 @@ BEGIN:VEVENT
 GEO;DERIVED=TRUE:48.198634;16.371648
 BEGIN:VLOCATION
 NAME:Karlskirche
-JSCAL-PROP;JSCAL-PATH="coordinates":geo:48.198634\,16.371648\;crs=wgs84\;u=40
+JSCAL-PROP;JSCAL-PATH="coordinates":"geo:48.198634\,16.371648\;crs=wgs84\;u=40"
 ...
   ]]></sourcecode>
           </figure>
@@ -5965,9 +5965,9 @@ END:VALARM
             <dd>This property can be specified multiple times in any calendar component.</dd>
             <dt>Description:</dt>
             <dd>
-              <t>This property converts an arbitrary JSCalendar property from and to iCalendar.  The iCalendar property value is the JSON-encoded value of the JSCalendar property, represented as a TEXT value.  The JSON value <bcp14>MUST NOT</bcp14> contain insignificant whitespace as defined in <xref target="RFC8259" format="default" sectionFormat="of" derivedContent="RFC8259" section="2"/>.  The value of the JSCAL-PATH parameter points to the JSCalendar property within the JSCalendar object.</t>
+              <t>This property converts an arbitrary JSCalendar property from and to iCalendar.  The iCalendar property value is the JSON-encoded value of the JSCalendar property, represented as a TEXT value.  The JSON value <bcp14>MUST NOT</bcp14> be the null value, and it <bcp14>SHOULD NOT</bcp14> contain insignificant whitespace as defined in <xref target="RFC8259" format="default" sectionFormat="of" derivedContent="RFC8259" section="2"/>.  The value of the JSCAL-PATH parameter points to the JSCalendar property within the JSCalendar object.</t>
               <t>The root of the JSON pointer is always the JSCalendar object to which the calendar component converts to, even if the JSON pointer starts with the SOLIDUS (U+002F) character.  The pointer <bcp14>MUST NOT</bcp14> reference into an array.</t>
-              <t>All JSCAL-PROP properties in a calendar component together form a PatchObject as defined in <xref target="RFC8984"/>.  For each JSCAL-PROP property, the value of its JSCAL-PATH parameter corresponds to a key in the PatchObject, the value of the JSCAL-PROP property corresponds to the value for that key.  When converting from iCalendar to JSCalendar, the PatchObject <bcp14>MUST</bcp14> only be applied after all other iCalendar properties have been converted.  The PatchObject <bcp14>MUST</bcp14> be valid, an invalid PatchObject <bcp14>MUST</bcp14> be ignored.</t>
+              <t>All JSCAL-PROP properties in a calendar component together form a <xref target="RFC8984" section="1.4.9" sectionFormat="parens">PatchObject</xref>: the JSCAL-PATH parameter of a JSCAL-PROP property corresponds to a key in the PatchObject, the property value corresponds to the JSON value for that key. When converting from iCalendar to JSCalendar, the PatchObject <bcp14>MUST</bcp14> only be applied after all other iCalendar elements of the component have been converted.  Only new properties are allowed to be set, a JSON pointer in the PatchObject that points to an existing property <bcp14>MUST</bcp14> be ignored.</t>
             </dd>
             <dt>Format Definition:</dt>
             <dd>
