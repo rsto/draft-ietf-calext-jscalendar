@@ -306,17 +306,6 @@ SUMMARY:he
                 <td/>
               </tr>
               <tr>
-                <td>SOURCE</td>
-                <td>
-                  <xref target="RFC7986" section="5.8" sectionFormat="comma"/>
-                </td>
-                <td>source</td>
-                <td>
-                  <xref target="ical-prop-source"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
                 <td>UID</td>
                 <td>
                   <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma"/>
@@ -4184,28 +4173,6 @@ STATUS:IN-PROCESS
 ]]></sourcecode>
           </figure>
         </section>
-        <section anchor="ical-prop-source">
-          <name>SOURCE</name>
-          <t>
-            The <xref target="RFC7986" section="5.8" sectionFormat="parens">SOURCE property</xref> in a VCALENDAR component converts to the <xref target="RFC8984" section="5.3.2" sectionFormat="parens">"source" property</xref> of the Group object.
-          </t>
-          <t>The following example illustrates how to convert the SOURCE property:</t>
-          <figure anchor="test-ical-prop-source">
-            <name>Example for converting the SOURCE property</name>
-            <sourcecode type="text/calendar"><![CDATA[
-BEGIN:VCALENDAR
-SOURCE;VALUE=URI:https://example.com/holidays.ics
-...
-]]></sourcecode>
-            <sourcecode type="json"><![CDATA[
-{
-  "@type": "Group",
-  "source": "https://example.com/holidays.ics",
-  "...": ""
-}
-]]></sourcecode>
-          </figure>
-        </section>
         <section anchor="ical-prop-structured-data">
           <name>STRUCTURED-DATA</name>
           <t>
@@ -5197,18 +5164,6 @@ URL:https://example.com/calendar/birthdays.ics
               <td>PRODID</td>
               <td>
                 <t><xref target="ical-prop-prodid"/>, and remarks below</t>
-              </td>
-            </tr>
-            <tr>
-              <td>source</td>
-              <td>
-                <xref target="RFC8984" section="5.3.2" sectionFormat="comma"/>
-              </td>
-              <td>SOURCE</td>
-              <td>
-                <t>
-                  <xref target="ical-prop-source"/>
-                </t>
               </td>
             </tr>
             <tr>
@@ -6518,6 +6473,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
                 <xref target="RFC7986" section="5.7" sectionFormat="comma">REFRESH-INTERVAL</xref>
               </li>
               <li>
+                <xref target="RFC7986" section="5.8" sectionFormat="comma">SOURCE</xref>
+              </li>
+              <li>
                 <xref target="RFC5545" section="3.7.4" sectionFormat="comma">VERSION</xref>
               </li>
             </ul>
@@ -6903,6 +6861,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
           <ul>
             <li>
               <xref target="RFC8984" section="4.2.8" sectionFormat="comma">locale</xref>
+            </li>
+            <li>
+              <xref target="RFC8984" section="5.3.2" sectionFormat="comma">source</xref>
             </li>
           </ul>
         </section>
