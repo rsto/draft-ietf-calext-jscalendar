@@ -5311,8 +5311,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
           <li>Choose GEO if the "coordinates" property is set and the iCalendar component does not already contain a GEO property. The "coordinates" property converts to the GEO property value.</li>
           <li>Choose the VLOCATION component otherwise.</li>
         </ul>
-        <t>Implementations <bcp14>MAY</bcp14> convert one of the Location objects to bothh a VLOCATION component and the LOCATION and GEO properties; In this case, the DERIVED parameter <bcp14>MUST</bcp14> be set on the LOCATION and GEO properties.</t>
-        <t>If the <xref target="RFC5870" section="3.3" sectionFormat="parens">"geo-path"</xref> of the "coordinates" property URI value contains anything in addition to the "coord-a" (latitude) and "coord-b" (longitude) parts, then the exact coordinates can not be represented in GEO property values. Implementations <bcp14>MAY</bcp14> convert such "coordinates" property values to both a GEO property having only the latitude and longitude set, as well as the <xref target="ical-prop-jscal-prop">JSCAL-PROP</xref> property of the VLOCATION. In this case, they <bcp14>MUST</bcp14> set the DERIVED parameter value of the GEO property to TRUE.</t>
+        <t>Implementations <bcp14>MAY</bcp14> convert one of the Location objects to both a VLOCATION component and the LOCATION and GEO properties; In this case, the DERIVED parameter <bcp14>MUST</bcp14> be set on the LOCATION and GEO properties.</t>
         <t>The properties convert to a VLOCATION component as follows:</t>
         <table>
           <name>Properties of the Location object</name>
@@ -5380,7 +5379,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
         </table>
         <t>Remarks:</t>
         <ul>
-          <li>The "coordinates" property converts to the GEO property if the <xref target="RFC5870" section="3.3" sectionFormat="parens">"geo-path"</xref> of its URI value only contains "coord-a" (latitude) and "coord-b" (longitude). Otherwise implementations <bcp14>MAY</bcp14> convert it to the <xref target="ical-prop-jscal-prop">JSCAL-PROP property</xref>.</li>
+        <li>If the <xref target="RFC5870" section="3.3" sectionFormat="parens">"geo-path"</xref> of the "coordinates" property value contains anything other than latitude ("coord-a") or longitude ("coord-b"), then the coordinates can not be represented accurately in the GEO property value. Implementations <bcp14>MAY</bcp14> convert such "coordinates" property values to both a GEO property having only the latitude and longitude set, as well as the <xref target="ical-prop-jscal-prop">JSCAL-PROP</xref> property of the VLOCATION. In this case, they <bcp14>MUST</bcp14> set the DERIVED parameter value of the GEO property to TRUE.</li>
         </ul>
         <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jscal-prop">JSCAL-PROP properties</xref> in the VLOCATION component, or the component which the Location converts to as a property.</t>
         <t>The following example illustrates how to convert a Location "coordinates" property value that can not be represented in GEO property values without loss.</t>
