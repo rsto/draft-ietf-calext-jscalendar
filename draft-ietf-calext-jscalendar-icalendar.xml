@@ -3674,7 +3674,6 @@ END:VLOCATION
           </t>
           <t>If the CAL-ADDRESS property value is in the "mailto" scheme, then it converts to the "imip" method in the "replyTo" property, otherwise it converts to the "other" method. The property value also converts to the "calendarAddress" property of the Participant object. The "owner" role is set in the "roles" property of the Participant. In contrast to the ATTENDEE property, the property value does not convert to the "sendTo" property of the Participant object.</t>
           <t>An ORGANIZER property, an ATTENDEE property, and a PARTICIPANT component in the same iCalendar component all convert to the same Participant object, if their converted calendarAddress property values are equal after <xref target="RFC3986" section="6" sectionFormat="parens">URI normalization</xref>. How to deal with conflicting property values is implementation-specific.</t>
-          <t>Implementations <bcp14>MAY</bcp14> preserve arbitrary parameters of the ORGANIZER property, in which case they <bcp14>MUST</bcp14> convert these to the "replyTo" entry in the "convertedProperties" property of the Event or Task object's <xref target="jscal-prop-icalcomponent">"iCalComponent" property</xref>.</t>
           <t>The ORGANIZER property parameters convert as follows:</t>
           <table>
             <name>Parameters of the ORGANIZER property</name>
