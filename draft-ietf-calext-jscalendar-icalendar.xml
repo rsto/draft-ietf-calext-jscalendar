@@ -3958,7 +3958,6 @@ RDATE:20230805T170000Z
             The <xref target="RFC5545" section="3.8.4.5" sectionFormat="parens">RELATED-TO property</xref> in a VEVENT, VTODO, or VALARM component converts to a <xref target="RFC8984" section="1.4.10" sectionFormat="parens">Relation object</xref>.  The converted object is set in the "relatedTo" property of the <xref target="RFC8984" section="4.1.3" sectionFormat="parens">Event or Task object</xref>, or the <xref target="RFC8984" section="4.5.2" sectionFormat="parens">Alert object</xref>.
           </t>
           <t>The property value in a VEVENT or VTODO converts as-is to the id of the Relation object in the "relatedTo" property. The property value in a VALARM converts to the same value as the id of that Alert object, which represents the VALARM component having that property value set in the UID property. Any RELTYPE parameters convert to the "relations" property in that Relation object. The parameter values convert in lowercase.</t>
-          <t>The <xref target="RFC9253" section="6.2" sectionFormat="parens">GAP parameter</xref> does not convert to a standard JSCalendar element. Implementations <bcp14>MAY</bcp14> convert it to the <xref target="jscal-prop-icalproperty">"iCalProperty" property</xref> of the Relation object.</t>
           <t>The following examples illustrate how to convert the RELATED-TO property:</t>
           <figure anchor="test-ical-prop-related-to">
             <name>Converting the RELATED-TO property in a VEVENT</name>
