@@ -2439,14 +2439,6 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
                 <td/>
               </tr>
               <tr>
-                <td>DIR</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.6" sectionFormat="comma"/>
-                </td>
-                <td>links</td>
-                <td/>
-              </tr>
-              <tr>
                 <td>EMAIL</td>
                 <td>
                   <xref target="RFC7986" section="6.2" sectionFormat="comma"/>
@@ -6639,6 +6631,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
               <xref target="RFC5545" section="3.8.4.1" sectionFormat="comma">ATTENDEE</xref>
             </name>
             <ul>
+              <li>
+                <xref target="RFC5545" section="3.2.6" sectionFormat="comma">DIR</xref>
+              </li>
               <li>
                 <xref target="RFC5545" section="3.2.18" sectionFormat="comma">SENT-BY</xref>
               </li>
