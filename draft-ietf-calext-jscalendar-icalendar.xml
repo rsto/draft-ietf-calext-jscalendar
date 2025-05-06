@@ -327,17 +327,6 @@ SUMMARY:he
                 </td>
                 <td/>
               </tr>
-              <tr>
-                <td>URL</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.4.6" sectionFormat="comma"/>
-                </td>
-                <td>links</td>
-                <td>
-                  <xref target="ical-prop-url"/>
-                </td>
-                <td/>
-              </tr>
             </tbody>
           </table>
           <t>Its components convert as follows:</t>
@@ -643,17 +632,6 @@ END:VCALENDAR
                 <td/>
               </tr>
               <tr>
-                <td>STRUCTURED-DATA</td>
-                <td>
-                  <xref target="RFC9073" section="6.6" sectionFormat="comma"/>
-                </td>
-                <td>links</td>
-                <td>
-                  <xref target="ical-prop-structured-data"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
                 <td>SUMMARY</td>
                 <td>
                   <xref target="RFC5545" section="3.8.1.12" sectionFormat="comma"/>
@@ -661,17 +639,6 @@ END:VCALENDAR
                 <td>name</td>
                 <td>
                   <xref target="ical-prop-summary"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>URL</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.4.6" sectionFormat="comma"/>
-                </td>
-                <td>links</td>
-                <td>
-                  <xref target="ical-prop-url"/>
                 </td>
                 <td/>
               </tr>
@@ -685,8 +652,6 @@ END:VCALENDAR
 BEGIN:VEVENT
 BEGIN:PARTICIPANT
 UID:47AD2E1C-49D4-45DF-BD83-8398ACC7D8E2
-STRUCTURED-DATA;VALUE=URI:
- http://dir.example.com/vcard/contacts/contact1.vcf
 PARTICIPANT-TYPE:CONTACT
 DESCRIPTION:A contact
 END:PARTICIPANT
@@ -711,17 +676,6 @@ END:PARTICIPANT
             "47AD2E1C-49D4-45DF-BD83-8398ACC7D8E2"
           ]
         ]
-      },
-      "links": {
-        "l4": {
-          "@type": "Link",
-          "href": "http://dir.example.com/vcard/contacts/contact1.vcf",
-          "iCalProperty": {
-            "@type": "ICalProperty",
-            "name": "structured-data",
-            "valueType": "uri"
-          }
-        }
       },
       "roles": {
         "contact": true
@@ -1171,17 +1125,6 @@ END:VALARM
                 <td/>
               </tr>
               <tr>
-                <td>STRUCTURED-DATA</td>
-                <td>
-                  <xref target="RFC9073" section="6.6" sectionFormat="comma"/>
-                </td>
-                <td>links</td>
-                <td>
-                  <xref target="ical-prop-structured-data"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
                 <td>STYLED-DESCRIPTION</td>
                 <td>
                   <xref target="RFC9073" section="6.5" sectionFormat="comma"/>
@@ -1222,17 +1165,6 @@ END:VALARM
                 <td>uid</td>
                 <td>
                   <xref target="ical-prop-uid"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>URL</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.4.6" sectionFormat="comma"/>
-                </td>
-                <td>links</td>
-                <td>
-                  <xref target="ical-prop-url"/>
                 </td>
                 <td/>
               </tr>
@@ -1385,17 +1317,6 @@ END:VCALENDAR
                 </td>
                 <td/>
               </tr>
-              <tr>
-                <td>STRUCTURED-DATA</td>
-                <td>
-                  <xref target="RFC9073" section="6.6" sectionFormat="comma"/>
-                </td>
-                <td>links</td>
-                <td>
-                  <xref target="ical-prop-structured-data"/>
-                </td>
-                <td/>
-              </tr>
             </tbody>
           </table>
           <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalcomponent">"iCalComponent" property</xref> of the Location object. This includes mandatory properties such as <xref target="RFC5545" section="3.8.4.7" sectionFormat="parens">UID</xref>.</t>
@@ -1415,17 +1336,16 @@ END:VLOCATION
   "e4": {
     "@type": "Location",
     "name": "The venue",
-    "links": {
-      "21": {
-        "@type": "Link",
-        "href": "http://dir.example.com/venues/big-hall.vcf",
-        "...": ""
-      }
-    },
     "iCalComponent": {
       "@type": "ICalComponent",
       "name": "vlocation",
       "properties": [
+        [
+          "structured-data",
+          {},
+          "uri",
+          "http://dir.example.com/venues/big-hall.vcf"
+        ],
         [
           "uid",
           {},
@@ -2080,17 +2000,6 @@ DTSTART;TZID=CustomTz:20080708T130000
                 <td/>
               </tr>
               <tr>
-                <td>STRUCTURED-DATA</td>
-                <td>
-                  <xref target="RFC9073" section="6.6" sectionFormat="comma"/>
-                </td>
-                <td>links</td>
-                <td>
-                  <xref target="ical-prop-structured-data"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
                 <td>STYLED-DESCRIPTION</td>
                 <td>
                   <xref target="RFC9073" section="6.5" sectionFormat="comma"/>
@@ -2131,17 +2040,6 @@ DTSTART;TZID=CustomTz:20080708T130000
                 <td>uid</td>
                 <td>
                   <xref target="ical-prop-uid"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>URL</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.4.6" sectionFormat="comma"/>
-                </td>
-                <td>links</td>
-                <td>
-                  <xref target="ical-prop-url"/>
                 </td>
                 <td/>
               </tr>
@@ -4213,62 +4111,6 @@ SOURCE;VALUE=URI:https://example.com/holidays.ics
 ]]></sourcecode>
           </figure>
         </section>
-        <section anchor="ical-prop-structured-data">
-          <name>STRUCTURED-DATA</name>
-          <t>
-            A <xref target="RFC9073" section="6.6" sectionFormat="parens">STRUCTURED-DATA property</xref> of type URI or BINARY in a VEVENT, VTODO, VCALENDAR, PARTICIPANT, or VLOCATION component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the "links" property of the Event, Task, Group, Participant, or Location object.
-          </t>
-          <t>The property value converts to the "href" property of the Link object. A value of type URI converts as-is. See <xref target="ical-prop-attach"/> how to convert a BINARY value.</t>
-          <t>Its parameters convert as follows:</t>
-          <table>
-            <name>Parameters of the STRUCTURED-DATA property</name>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Property</th>
-                <th>Note</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>FMTTYPE</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.8" sectionFormat="comma"/>
-                </td>
-                <td>contentType</td>
-                <td/>
-              </tr>
-            </tbody>
-          </table>
-          <t>Implementations <bcp14>MAY</bcp14> preserve the fact that the Link object got converted from a STRUCTURED-DATA property. To do so, they <bcp14>MUST</bcp14> set the <xref target="jscal-prop-icalproperty">iCalProperty</xref> on the Link object.</t>
-          <t>The following example illustrates how to convert the STRUCTURED-DATA property:</t>
-          <figure anchor="test-ical-prop-structured-data">
-            <name>Converting the STRUCTURED-DATA property</name>
-            <sourcecode type="text/calendar"><![CDATA[
-STRUCTURED-DATA;FMTTYPE=application/ld+json;
- SCHEMA="https://schema.org/FlightReservation";
- ENCODING=BASE64;VALUE=BINARY:InRydW5jYXRlZC4uLiIK
-  ]]></sourcecode>
-            <sourcecode type="json"><![CDATA[
-"links": {
-  "l1": {
-    "@type": "Link",
-    "contentType": "application/ld+json",
-    "href": "data:application/ld+json;base64,InRydW5jYXRlZC4uLiIK",
-    "iCalProperty": {
-      "@type": "ICalProperty",
-      "name": "structured-data",
-      "parameters": {
-        "schema": "https://schema.org/FlightReservation"
-      },
-      "valueType": "binary"
-    }
-  }
-}
-]]></sourcecode>
-          </figure>
-        </section>
         <section anchor="ical-prop-styled-description">
           <name>STYLED-DESCRIPTION</name>
           <t>The <xref target="RFC9073" section="6.5" sectionFormat="parens">STYLED-DESCRIPTION property</xref> in a VEVENT or VTODO component converts to the <xref target="RFC8984" section="4.2.2" sectionFormat="parens">"description" property</xref> of the Event or Task object under the following conditions:</t>
@@ -4522,33 +4364,6 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "uid": "5ACEA86F-40CF-47EE-9CCA-7C85588A589F"
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-prop-url">
-          <name>URL</name>
-          <t>
-            The <xref target="RFC5545" section="3.8.4.6" sectionFormat="parens">URL property</xref> in a VEVENT, VTODO, VCALENDAR, or PARTICIPANT component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the "links" property of the Event, Task, Group, or Participant object.
-          </t>
-          <t>The property value converts to the "href" property of the Link object.</t>
-          <t>Implementations <bcp14>MAY</bcp14> preserve the fact that the Link object got converted from a URL property. To do so, they <bcp14>MUST</bcp14> set the <xref target="jscal-prop-icalproperty">iCalProperty</xref> on the Link object.</t>
-          <t>The following example illustrates how to convert the URL property:</t>
-          <figure anchor="test-ical-prop-url">
-            <name>Converting the IMAGE property</name>
-            <sourcecode type="text/calendar"><![CDATA[
-URL:https://example.com/calendar/birthdays.ics
-  ]]></sourcecode>
-            <sourcecode type="json"><![CDATA[
-"links": {
-  "3": {
-    "@type": "Link",
-    "href": "https://example.com/calendar/birthdays.ics",
-    "iCalProperty": {
-      "@type": "ICalProperty",
-      "name": "url"
-    }
-  }
-}
 ]]></sourcecode>
           </figure>
         </section>
@@ -5269,11 +5084,10 @@ URL:https://example.com/calendar/birthdays.ics
       </section>
       <section anchor="jscal-link">
         <name>Link</name>
-        <t>The <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref> converts either an <xref target="ical-prop-attach">ATTACH property</xref>, an <xref target="ical-prop-image">IMAGE property</xref>, a <xref target="ical-prop-structured-data">STRUCTURED-DATA property</xref>, or an <xref target="ical-prop-url">URL property</xref>. Which iCalendar property to choose is implementation-specific. As a guideline:</t>
+        <t>The <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref> converts either an <xref target="ical-prop-attach">ATTACH property</xref> or an <xref target="ical-prop-image">IMAGE property</xref>. Which iCalendar property to choose is implementation-specific. As a guideline:</t>
         <ul>
           <li>Choose the iCalendar property name indicated in the Link object's <xref target="jscal-prop-icalproperty">iCalProperty</xref> property, if set.</li>
           <li>Choose IMAGE, if the "display" property is set or the "rel" property value is "icon".</li>
-          <li>Choose URL, if only the "href" property is set and its value links to a dynamic rendition of the calendar object.</li>
           <li>Choose ATTACH otherwise.</li>
         </ul>
         <t>The href property converts to the "iCalendar" property value. The other Link properties convert as follows:</t>
@@ -6308,7 +6122,7 @@ END:X-BAZ
           </dl>
           <t>The example in <xref target="test-jscal-prop-icalproperty"/> describes how to convert an unknown parameter to the "iCalProperty" property. The ATTACH property converts to a Link object. To preserve the unknown "X-FOO" parameter, the "iCalProperty" property is set on the Link object.</t>
           <figure anchor="test-jscal-prop-icalproperty">
-            <name>Converting the STRUCTURED-DATA property</name>
+            <name>Converting the ATTACH property with an unknown parameter</name>
             <sourcecode type="text/calendar"><![CDATA[
 ATTACH;X-FOO=bar:https://example.com/example.jpg
   ]]></sourcecode>
@@ -6479,10 +6293,16 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
                 <xref target="RFC5545" section="3.8.1.11" sectionFormat="comma">STATUS</xref>
               </li>
               <li>
+                <xref target="RFC9074" section="6.6" sectionFormat="comma">STRUCTURED-DATA</xref>
+              </li>
+              <li>
                 <xref target="RFC9073" section="6.5" sectionFormat="comma">STYLED-DESCRIPTION</xref>
               </li>
               <li>
                 <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma">UID</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.8.4.6" sectionFormat="comma">URL</xref>
               </li>
             </ul>
           </section>
@@ -6535,6 +6355,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
                 <xref target="RFC7986" section="5.7" sectionFormat="comma">REFRESH-INTERVAL</xref>
               </li>
               <li>
+                <xref target="RFC5545" section="3.8.4.6" sectionFormat="comma">URL</xref>
+              </li>
+              <li>
                 <xref target="RFC5545" section="3.7.4" sectionFormat="comma">VERSION</xref>
               </li>
             </ul>
@@ -6556,6 +6379,12 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
               <li>
                 <xref target="RFC5545" section="3.8.1.10" sectionFormat="comma">RESOURCES</xref>
               </li>
+              <li>
+                <xref target="RFC9074" section="6.6" sectionFormat="comma">STRUCTURED-DATA</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.8.4.6" sectionFormat="comma">URL</xref>
+              </li>
             </ul>
           </section>
           <section>
@@ -6568,6 +6397,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
               </li>
               <li>
                 <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma">UID</xref>
+              </li>
+              <li>
+                <xref target="RFC9074" section="6.6" sectionFormat="comma">STRUCTURED-DATA</xref>
               </li>
             </ul>
           </section>
@@ -6592,7 +6424,13 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
                 <xref target="RFC5545" section="3.8.1.10" sectionFormat="comma">RESOURCES</xref>
               </li>
               <li>
+                <xref target="RFC9074" section="6.6" sectionFormat="comma">STRUCTURED-DATA</xref>
+              </li>
+              <li>
                 <xref target="I-D.ietf-calext-ical-tasks" section="12.4" sectionFormat="comma">TASK-MODE</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.8.4.6" sectionFormat="comma">URL</xref>
               </li>
             </ul>
           </section>
@@ -6621,16 +6459,6 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             <ul>
               <li>
                 <xref target="RFC5545" section="3.3.9" sectionFormat="comma">PERIOD</xref>
-              </li>
-            </ul>
-          </section>
-          <section>
-            <name>
-              <xref target="RFC9073" section="6.6" sectionFormat="comma">STRUCTURED-DATA</xref>
-            </name>
-            <ul>
-              <li>
-                <xref target="RFC9073" section="6.6" sectionFormat="comma">TEXT</xref>
               </li>
             </ul>
           </section>
@@ -6836,16 +6664,6 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
               </li>
               <li>
                 <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
-              </li>
-            </ul>
-          </section>
-          <section>
-            <name>
-              <xref target="RFC9073" section="6.6" sectionFormat="comma">STRUCTURED-DATA</xref>
-            </name>
-            <ul>
-              <li>
-                <xref target="RFC9073" section="5.2" sectionFormat="comma">SCHEMA</xref>
               </li>
             </ul>
           </section>

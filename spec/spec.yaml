@@ -101,20 +101,14 @@ icalendar:
           convert:
             property: scheduleSequence
         STATUS: {}
-        STRUCTURED-DATA:
-          convert:
-            property: links
-            object: Link
+        STRUCTURED-DATA: {}
         STYLED-DESCRIPTION: {}
         SUMMARY:
           convert:
             property: name
         UID:
           required: true
-        URL:
-          convert:
-            property: links
-            object: Link
+        URL: {}
       components:
           VLOCATION:
             convert:
@@ -259,10 +253,7 @@ icalendar:
         UID:
           convert:
             property: uid
-        URL:
-          convert:
-            property: links
-            object: Link
+        URL: {}
         VERSION:
           required: true
       components:
@@ -384,10 +375,7 @@ icalendar:
         STATUS:
           convert:
             property: status
-        STRUCTURED-DATA:
-          convert:
-            property: links
-            object: Link
+        STRUCTURED-DATA: {}
         STYLED-DESCRIPTION:
           convert:
             property: description
@@ -401,10 +389,7 @@ icalendar:
           required: true
           convert:
             property: uid
-        URL:
-          convert:
-            property: links
-            object: Link
+        URL: {}
       components:
           VALARM:
             convert:
@@ -488,16 +473,10 @@ icalendar:
         NAME:
           convert:
             property: name
-        STRUCTURED-DATA:
-          convert:
-            property: links
-            object: Link
+        STRUCTURED-DATA: {}
         UID:
           required: true
-        URL:
-          convert:
-            property: links
-            object: Link
+        URL: {}
       rfc: RFC9073
       section: '7.2'
       status: current
@@ -671,10 +650,7 @@ icalendar:
         STATUS:
           convert:
             property: progress
-        STRUCTURED-DATA:
-          convert:
-            property: links
-            object: Link
+        STRUCTURED-DATA: {}
         STYLED-DESCRIPTION:
           convert:
             property: description
@@ -688,10 +664,7 @@ icalendar:
         UID:
           convert:
             property: uid
-        URL:
-          convert:
-            property: links
-            object: Link
+        URL: {}
       components:
           VALARM:
             convert:
@@ -1243,13 +1216,6 @@ icalendar:
       types:
         - TEXT
     STRUCTURED-DATA:
-      parameters:
-        ENCODING: {}
-        FMTTYPE:
-          convert:
-            property: contentType
-            object: Link
-        SCHEMA: {}
       rfc: RFC9073
       section: '6.6'
       status: current
@@ -1371,13 +1337,7 @@ icalendar:
       status: current
       types:
         - TEXT
-    URL:
-      parameters: {}
-      rfc: RFC5545
-      section: 3.8.4.6
-      status: current
-      types:
-        - URI
+    URL: {}
     VERSION:
       parameters: {}
       rfc: RFC5545
