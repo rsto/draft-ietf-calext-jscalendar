@@ -4967,7 +4967,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               <li>If there are multiple scheduling methods and one of their URI values match a Participant object's calendarAddress property value, use that URI.</li>
               <li>Otherwise, choose the URI of any scheduling method. The "imip" scheduling method typically is a good choice.</li>
             </ul>
-            <t>Implementations <bcp14>MAY</bcp14> convert any scheduling methods that did not convert to the ORGANIZER property to the JSCAL-PROP property instead. Each scheduling method converts to a separate JSCAL-PROP property. Implementations that want to preserve the the scheduling method name of the URI that converted to the ORGANIZER property, <bcp14>MAY</bcp14> convert that scheduling method to both the ORGANIZER and tis JSCAL-PROP property. Typically, this is not necessary, e.g. a URI in the "mailto" scheme implies the "imip" scheduling method.</t>
+            <t>Implementations <bcp14>MAY</bcp14> convert the replyTo property to the JSCAL-PROP property. If so, they <bcp14>MUST</bcp14> convert the entire replyTo property value to a single JSCAL-PROP property.</t>
           </li>
         </ul>
         <t>Properties specific to the Event object type convert to iCalendar properties as follows:</t>
@@ -5417,7 +5417,7 @@ JSCAL-PROP;JSCAL-PATH="coordinates":"geo:48.198634\,16.371648\;crs=wgs84\;u=40"
             <t>It converts to a PARTICIPANT component if any of the Participant properties in <xref target="jscal-participant-props-participant"/> are set. If the Participant object also converts to an ATTENDEE property, then the CALENDAR-ADDRESS property value of the PARTICIPANT component <bcp14>MUST</bcp14> match the ATTENDEE property value.</t>
           </li>
         </ul>
-        <t>Implementations <bcp14>MAY</bcp14> convert any scheduling methods in the sendTo property that did not convert to the ATTENDEE property to the JSCAL-PROP property instead. Each scheduling method converts to a separate JSCAL-PROP property. Implementations that want to preserve the the scheduling method name of the URI that converted to the ATTENDEE property, <bcp14>MAY</bcp14> convert that scheduling method to both the ATTENDEE and the JSCAL-PROP property. Typically, this is not necessary, e.g. a URI in the "mailto" scheme implies the "imip" scheduling method.</t>
+        <t>Implementations <bcp14>MAY</bcp14> convert the sendTo property to the JSCAL-PROP property of the PARTICIPANT component. If so, they <bcp14>MUST</bcp14> convert the entire sendTo property value to a single JSCAL-PROP property.</t>
         <t>The following Participant properties convert to the ATTENDEE property. How to convert these properties if the Participant does not convert to an ATTENDEE is implementation-specific.</t>
         <table anchor="jscal-participant-props-attendee">
           <name>Properties of the Participant object that convert to the ATTENDEE property</name>
