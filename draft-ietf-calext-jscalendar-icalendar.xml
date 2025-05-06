@@ -73,7 +73,8 @@
             <li>An example that only contains a VCALENDAR component but no contained components implicitly represents a VCALENDAR component that contains a VEVENT component.</li>
             <li>Implicit components (those without a BEGIN and END, or omitted completely) are assumed to contain all mandatory properties with some value, but the actual value is irrelevant for the example.</li>
           </ul>
-          <t><xref target="example-notation-icalendar-implicit-explicit"/> contains three examples, all of which represent the same iCalendar data.  In the first example, both the VEVENT component and VCALENDAR component are implicit.  In the second example, only the VCALENDAR component and its mandatory properties are implicit.  The third example depicts a complete VCALENDAR component, nothing is implicit.</t>
+          <t>
+            <xref target="example-notation-icalendar-implicit-explicit"/> contains three examples, all of which represent the same iCalendar data.  In the first example, both the VEVENT component and VCALENDAR component are implicit.  In the second example, only the VCALENDAR component and its mandatory properties are implicit.  The third example depicts a complete VCALENDAR component, nothing is implicit.</t>
           <figure anchor="example-notation-icalendar-implicit-explicit">
             <name>Examples for implicit and explicit iCalendar component notation</name>
             <sourcecode type="text/calendar"><![CDATA[
@@ -125,7 +126,8 @@ SUMMARY:he
           <t>A JSCalendar example always represents a Group object, even if the example only depicts one of the Group entries or properties.</t>
           <t>JSCalendar objects are depicted either explicitly or implicitly. An explicit JSCalendar object starts and ends with braces.  An implicit JSCalendar object omits braces, it only consists of JSON name/value pairs, separated by comma.</t>
           <t>An implicit JSCalendar object is assumed to be of type Event, unless it contains the <tt>@type</tt> property with a different value.  It is assumed to contain all mandatory properties with some value; if they are not depicted, their actual value is irrelevant for the main point of the example.</t>
-          <t><xref target="example-notation-jscalendar-implicit-explicit"/> illustrates this with multiple examples, all of which represent the same JSCalendar data.  The first example contains an implicit JSCalendar object of type Event.  The second example contains an implicit JSCalendar object with a <tt>@type</tt> property.  The third example contains an explicit Event object but the Group object containing it is omitted.  The fourth example contains the full Group object, nothing is omitted.</t>
+          <t>
+            <xref target="example-notation-jscalendar-implicit-explicit"/> illustrates this with multiple examples, all of which represent the same JSCalendar data.  The first example contains an implicit JSCalendar object of type Event.  The second example contains an implicit JSCalendar object with a <tt>@type</tt> property.  The third example contains an explicit Event object but the Group object containing it is omitted.  The fourth example contains the full Group object, nothing is omitted.</t>
           <figure anchor="example-notation-jscalendar-implicit-explicit">
             <name>Examples for implicit and explicit JSCalendar object notation</name>
             <sourcecode type="json"><![CDATA[
@@ -192,7 +194,8 @@ SUMMARY:he
         <name>General rules</name>
         <section anchor="ical-comp-vcalendar">
           <name>iCalendar Objects</name>
-          <t><xref target="RFC5545" section="3.4"/> allows for an iCalendar stream to contain one or more iCalendar objects.  In contrast, this specification only defines conversion for streams consisting of a single iCalendar object. Converting streams of multiple iCalendar objects is implementation-specific.  All following sections of this document use the terms "iCalendar object" and "VCALENDAR component" interchangeably.</t>
+          <t>
+            <xref target="RFC5545" section="3.4"/> allows for an iCalendar stream to contain one or more iCalendar objects.  In contrast, this specification only defines conversion for streams consisting of a single iCalendar object. Converting streams of multiple iCalendar objects is implementation-specific.  All following sections of this document use the terms "iCalendar object" and "VCALENDAR component" interchangeably.</t>
           <t>The <xref target="RFC5545" section="3.4" sectionFormat="parens">VCALENDAR component</xref> converts to a <xref target="RFC8984" section="2.3" sectionFormat="parens">Group object</xref>.  Its properties convert as follows:</t>
           <table anchor="ical-comp-vcalendar-props">
             <name>Properties of the VCALENDAR component</name>
@@ -548,9 +551,9 @@ END:VCALENDAR
         <section anchor="ical-timezone-identifiers">
           <name>Timezone identifiers</name>
           <t>Converting temporal properties such as DTSTART, DTEND, and RECURRENCE-ID requires to not only determine the date and time of the property value, but also the timezone it references.</t>
-          <t>If the property value data type is <xref target="RFC5545" section="3.3.4" sectionFormat="parens">DATE</xref> or  <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #1: DATE WITH LOCAL TIME</xref> then the timezone identifier is the JSON null value in JSCalendar.</t>
-          <t>If the property value data type is <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #2: DATE WITH UTC TIME</xref> then the timezone identifier is the string "Etc/UTC" in JSCalendar.</t>
-          <t>If the property value data type is <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #3: DATE WITH LOCAL TIME AND TIME ZONE REFERENCE</xref> then the timezone identifier is determined by the TZID parameter value:</t>
+          <t>If the property value type is <xref target="RFC5545" section="3.3.4" sectionFormat="parens">DATE</xref> or  <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #1: DATE WITH LOCAL TIME</xref> then the timezone identifier is the JSON null value in JSCalendar.</t>
+          <t>If the property value type is <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #2: DATE WITH UTC TIME</xref> then the timezone identifier is the string "Etc/UTC" in JSCalendar.</t>
+          <t>If the property value type is <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #3: DATE WITH LOCAL TIME AND TIME ZONE REFERENCE</xref> then the timezone identifier is determined by the TZID parameter value:</t>
           <t>If the TZID parameter value is equal to a name in the <xref target="TZDB">IANA Time Zone Database</xref> then the timezone identifier is that verbatim name.</t>
           <t>If the TZID parameter value is unequal to an IANA timezone name then implementations <bcp14>MAY</bcp14> determine the name of an IANA timezone which has the same timezone rules over the timespan of the calendar object. Otherwise, the non-IANA timezone identifier is represented in JSCalendar as a string starting with the / (SLASH) character, followed by the TZID parameter value. The corresponding VTIMEZONE <bcp14>MUST</bcp14> be converted to the "timeZones" property with the prefixed identifier as key. See <xref target="test-ical-comp-vtimezone"/> for an example.</t>
         </section>
@@ -3471,8 +3474,8 @@ LAST-MODIFIED:20240914T231257Z
         </section>
         <section anchor="ical-prop-link">
           <name>LINK</name>
-          <t>A <xref target="RFC9253" section="8.2" sectionFormat="parens">LINK property</xref> with value data type URI in a VEVENT, VTODO, PARTICIPANT, VLOCATION, or VCALENDAR component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the "links" property of the Event, Task, Participant, Location, or Group object.</t>
-            <t>The property value converts to the "href" property of the Link object.</t>
+          <t>A <xref target="RFC9253" section="8.2" sectionFormat="parens">LINK property</xref> with value type URI in a VEVENT, VTODO, PARTICIPANT, VLOCATION, or VCALENDAR component converts to a <xref target="RFC8984" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the "links" property of the Event, Task, Participant, Location, or Group object.</t>
+          <t>The property value converts to the "href" property of the Link object.</t>
           <t>The LINK property parameters convert as follows:</t>
           <table>
             <name>Parameters of the LINK property</name>
@@ -3515,8 +3518,7 @@ LAST-MODIFIED:20240914T231257Z
           <ul>
             <li>The LINKREL parameter value is defined to be either an URI or an <xref target="RFC5545" section="3.1" sectionFormat="parens">"iana-token"</xref>. Only parameter values of form "iana-token" convert to the "rel" property of the Link object. The values convert to lowercase.</li>
           </ul>
-
-            <t>A LINK property with any other value data type does not convert to a standard JSCalendar element. Implementations <bcp14>MAY</bcp14> convert it to the <xref target="jscal-prop-icalcomponent">"iCalComponent" property</xref>.</t>
+          <t>A LINK property with any other value type does not convert to a standard JSCalendar element. Implementations <bcp14>MAY</bcp14> convert it to the <xref target="jscal-prop-icalcomponent">"iCalComponent" property</xref>.</t>
           <t>The following example illustrates how to convert the LINK property:</t>
           <figure anchor="test-ical-prop-link">
             <name>Converting the LINK property</name>
@@ -3919,10 +3921,10 @@ BEGIN:VEVENT
         <section anchor="ical-prop-rdate">
           <name>RDATE</name>
           <t>
-              A <xref target="RFC5545" section="3.8.5.2" sectionFormat="parens">RDATE property</xref> of type DATE or DATE-TIME in a VEVENT, VTODO, DAYLIGHT or STANDARD component converts to a <xref target="RFC8984" section="1.4.9" sectionFormat="parens">PatchObject value</xref>.  The converted object is set in the "recurrenceOverrides" property of the Event, Task, or TimeZoneRule object.
+              A <xref target="RFC5545" section="3.8.5.2" sectionFormat="parens">RDATE property</xref> with value type DATE or DATE-TIME in a VEVENT, VTODO, DAYLIGHT or STANDARD component converts to a <xref target="RFC8984" section="1.4.9" sectionFormat="parens">PatchObject value</xref>.  The converted object is set in the "recurrenceOverrides" property of the Event, Task, or TimeZoneRule object.
           </t>
           <t>The property value converts to the key in the "recurrenceOverrides" property value. See <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values. For Event Task objects, the date-time <bcp14>MUST</bcp14> be relative to the timezone identified by the "timeZone" property, for TimeZoneRule objects the date-time is relative to the UTC offset specified in the "offsetFrom" property.  The PatchObject value <bcp14>MUST</bcp14> be an empty JSON object.</t>
-          <t>An RDATE property of value type PERIOD does not convert to a standard JSCalendar element.  Implementations <bcp14>MAY</bcp14> convert it to the <xref target="jscal-prop-icalcomponent">"iCalComponent" property</xref> of the Event, Task, or TimeZoneRule object.</t>
+          <t>A RDATE property with value type PERIOD does not convert to a standard JSCalendar element.  Implementations <bcp14>MAY</bcp14> convert it to the <xref target="jscal-prop-icalcomponent">"iCalComponent" property</xref> of the Event, Task, or TimeZoneRule object.</t>
           <t>The following example illustrates how to convert the RDATE property:</t>
           <figure anchor="test-ical-prop-rdate">
             <name>Converting the RDATE property</name>
@@ -4061,7 +4063,7 @@ REQUEST-STATUS:2.0;Success
           <t>
             The <xref target="RFC5545" section="3.8.5.3" sectionFormat="parens">RRULE property</xref> in a VEVENT, VTODO, DAYLIGHT or STANDARD component converts to a <xref target="RFC8984" section="4.3.3" sectionFormat="parens">RecurrenceRule object</xref>.  The converted object is set in the "recurrenceRules" property of the Event, Task, or TimeZoneRule object.
           </t>
-          <t>The RECUR value data type converts to a RecurrenceRule object as follows:</t>
+          <t>The RECUR value type converts to a RecurrenceRule object as follows:</t>
           <table>
             <name>Converting the RECUR value type to a RecurrenceRule object</name>
             <thead>
@@ -4556,7 +4558,8 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td>RELATED-TO</td>
               <td>
-                <t><xref target="ical-prop-related-to"/>, and remarks below</t>
+                <t>
+                  <xref target="ical-prop-related-to"/>, and remarks below</t>
               </td>
             </tr>
             <tr>
@@ -4642,7 +4645,8 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td>DESCRIPTION, or STYLED-DESCRIPTION</td>
               <td>
-                <t><xref target="ical-prop-description"/>, <xref target="ical-prop-styled-description"/>, and remarks below</t>
+                <t>
+                  <xref target="ical-prop-description"/>, <xref target="ical-prop-styled-description"/>, and remarks below</t>
               </td>
             </tr>
             <tr>
@@ -4652,7 +4656,8 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td>FMTTYPE (parameter) of STYLED-DESCRIPTION</td>
               <td>
-                <t><xref target="ical-prop-styled-description"/>, and remarks below</t>
+                <t>
+                  <xref target="ical-prop-styled-description"/>, and remarks below</t>
               </td>
             </tr>
             <tr>
@@ -4662,7 +4667,8 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td/>
               <td>
-                <t><xref target="ical-prop-exdate"/>, and remarks about recurrenceOverrides below</t>
+                <t>
+                  <xref target="ical-prop-exdate"/>, and remarks about recurrenceOverrides below</t>
               </td>
             </tr>
             <tr>
@@ -4732,7 +4738,9 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td>METHOD of iCalendar object</td>
               <td>
-                <t><xref target="ical-prop-method"/>, and <xref target="jscal-group">Group object</xref></t>
+                <t>
+                  <xref target="ical-prop-method"/>, and <xref target="jscal-group">Group object</xref>
+                </t>
               </td>
             </tr>
             <tr>
@@ -4778,7 +4786,9 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td>PRODID of iCalendar object</td>
               <td>
-                <t><xref target="ical-prop-prodid"/>, and <xref target="jscal-group">Group object</xref></t>
+                <t>
+                  <xref target="ical-prop-prodid"/>, and <xref target="jscal-group">Group object</xref>
+                </t>
               </td>
             </tr>
             <tr>
@@ -4811,7 +4821,8 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
                 <xref target="RFC8984" section="4.3.5" sectionFormat="comma"/>
               </td>
               <td>RDATE, EXDATE or recurrence override component</td>
-              <td><xref target="ical-recurring-components"/>, and remarks below</td>
+              <td>
+                <xref target="ical-recurring-components"/>, and remarks below</td>
             </tr>
             <tr>
               <td>recurrenceRules</td>
@@ -4844,7 +4855,8 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td>ORGANIZER, or JSCAL-PROP</td>
               <td>
-                <t><xref target="ical-prop-organizer"/>, <xref target="ical-prop-jscal-prop"/>, and remarks below</t>
+                <t>
+                  <xref target="ical-prop-organizer"/>, <xref target="ical-prop-jscal-prop"/>, and remarks below</t>
               </td>
             </tr>
             <tr>
@@ -4890,7 +4902,9 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td>TZID (parameter) of DTSTART and DUE</td>
               <td>
-                <t><xref target="ical-prop-dtstart"/>, <xref target="ical-prop-due"/></t>
+                <t>
+                  <xref target="ical-prop-dtstart"/>, <xref target="ical-prop-due"/>
+                </t>
               </td>
             </tr>
             <tr>
@@ -4936,7 +4950,9 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td>DTSTAMP, and LAST-MODIFIED</td>
               <td>
-                <t><xref target="ical-prop-dtstamp"/>, <xref target="ical-prop-last-modified"/></t>
+                <t>
+                  <xref target="ical-prop-dtstamp"/>, <xref target="ical-prop-last-modified"/>
+                </t>
               </td>
             </tr>
             <tr>
@@ -4990,7 +5006,9 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td>DURATION, or DTEND</td>
               <td>
-                <t><xref target="ical-prop-duration"/>, <xref target="ical-prop-dtend"/></t>
+                <t>
+                  <xref target="ical-prop-duration"/>, <xref target="ical-prop-dtend"/>
+                </t>
               </td>
             </tr>
             <tr>
@@ -5128,7 +5146,8 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td>VEVENT or VTODO (component)</td>
               <td>
-                <t><xref target="jscal-event-and-task">Event and Task object</xref>, and remarks below</t>
+                <t>
+                  <xref target="jscal-event-and-task">Event and Task object</xref>, and remarks below</t>
               </td>
             </tr>
             <tr>
@@ -5162,7 +5181,8 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td>PRODID</td>
               <td>
-                <t><xref target="ical-prop-prodid"/>, and remarks below</t>
+                <t>
+                  <xref target="ical-prop-prodid"/>, and remarks below</t>
               </td>
             </tr>
             <tr>
@@ -5263,7 +5283,8 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
                 <xref target="RFC8984" section="1.4.11" sectionFormat="comma"/>
               </td>
               <td>DISPLAY</td>
-              <td><xref target="ical-prop-image"/>, and remarks below
+              <td>
+                <xref target="ical-prop-image"/>, and remarks below
               </td>
             </tr>
             <tr>
@@ -5272,7 +5293,8 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
                 <xref target="RFC8984" section="1.4.11" sectionFormat="comma"/>
               </td>
               <td>LINKREL</td>
-              <td><xref target="RFC9253" section="6.1"/>, and remarks below</td>
+              <td>
+                <xref target="RFC9253" section="6.1"/>, and remarks below</td>
             </tr>
             <tr>
               <td>size</td>
@@ -5332,7 +5354,8 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
                 <xref target="RFC8984" section="4.2.5" sectionFormat="comma"/>
               </td>
               <td>GEO</td>
-              <td><xref target="ical-prop-geo"/>, and remarks below
+              <td>
+                <xref target="ical-prop-geo"/>, and remarks below
               </td>
             </tr>
             <tr>
@@ -5517,7 +5540,8 @@ JSCAL-PROP;JSCAL-PATH="coordinates":"geo:48.198634\,16.371648\;crs=wgs84\;u=40"
                 <xref target="RFC8984" section="5.2.5" sectionFormat="comma"/>
               </td>
               <td>PARTSTAT</td>
-              <td><xref target="ical-prop-attendee"/>, and remarks below
+              <td>
+                <xref target="ical-prop-attendee"/>, and remarks below
               </td>
             </tr>
             <tr>
@@ -5526,7 +5550,8 @@ JSCAL-PROP;JSCAL-PATH="coordinates":"geo:48.198634\,16.371648\;crs=wgs84\;u=40"
                 <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
               </td>
               <td>ROLE, or PARTICIPANT-TYPE property of the PARTICIPANT component</td>
-              <td><xref target="ical-prop-attendee"/>, <xref target="ical-prop-participant-type"/>, and remarks below</td>
+              <td>
+                <xref target="ical-prop-attendee"/>, <xref target="ical-prop-participant-type"/>, and remarks below</td>
             </tr>
             <tr>
               <td>scheduleAgent</td>
@@ -5564,7 +5589,8 @@ JSCAL-PROP;JSCAL-PATH="coordinates":"geo:48.198634\,16.371648\;crs=wgs84\;u=40"
                 <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
               </td>
               <td>ATTENDEE or JSCAL-PROP</td>
-              <td><xref target="ical-prop-attendee"/>, <xref target="ical-prop-jscal-prop"/>, and the start of this section
+              <td>
+                <xref target="ical-prop-attendee"/>, <xref target="ical-prop-jscal-prop"/>, and the start of this section
               </td>
             </tr>
           </tbody>
@@ -5979,7 +6005,8 @@ END:VALARM
             <dd>TEXT; also see "Format Definition" below for value restrictions.</dd>
             <dt>Property Parameters:</dt>
             <dd>
-              The <xref target="ical-param-jscal-path">JSCAL-PATH parameter</xref> <bcp14>MUST</bcp14> be specified on this property. Other IANA and non-standard property parameters can be specified on this property.
+              The <xref target="ical-param-jscal-path">JSCAL-PATH parameter</xref>
+              <bcp14>MUST</bcp14> be specified on this property. Other IANA and non-standard property parameters can be specified on this property.
         </dd>
             <dt>Conformance:</dt>
             <dd>This property can be specified multiple times in any calendar component.</dd>
@@ -6158,7 +6185,8 @@ JSCAL-PROP;JSCAL-PATH="example.com:foo":"bar"
             <dt>Context:</dt>
             <dd>Any JSCalendar object</dd>
             <dt>Type:</dt>
-            <dd><tt>ICalComponent</tt> (optional)</dd>
+            <dd>
+              <tt>ICalComponent</tt> (optional)</dd>
             <dt>Description</dt>
             <dd>
               <t>This contains information about an iCalendar component that got converted to JSCalendar.  It allows for preserving the name of the iCalendar component and some or all of its properties and subcomponents.</t>
@@ -6248,7 +6276,8 @@ END:X-BAZ
             <dt>Context:</dt>
             <dd>Any JSCalendar object</dd>
             <dt>Type:</dt>
-            <dd><tt>ICalProperty</tt> (optional)</dd>
+            <dd>
+              <tt>ICalProperty</tt> (optional)</dd>
             <dt>Description:</dt>
             <dd>
               <t>This contains conversion-related information about an iCalendar property that got partially or fully converted to a JSCalendar object.  It allows for preserving the name of the "iCalendar" property and some or all of its parameters.</t>
@@ -6694,7 +6723,8 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
               <li>
                 <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
               </li>
-              <li><xref target="RFC7986" section="6.1" sectionFormat="comma">DISPLAY</xref> (if the parameter value contains more than one "displayval").
+              <li>
+                <xref target="RFC7986" section="6.1" sectionFormat="comma">DISPLAY</xref> (if the parameter value contains more than one "displayval").
               </li>
             </ul>
           </section>
