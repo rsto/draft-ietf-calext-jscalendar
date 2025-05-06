@@ -73,8 +73,7 @@
             <li>An example that only contains a VCALENDAR component but no contained components implicitly represents a VCALENDAR component that contains a VEVENT component.</li>
             <li>Implicit components (those without a BEGIN and END, or omitted completely) are assumed to contain all mandatory properties with some value, but the actual value is irrelevant for the example.</li>
           </ul>
-          <t>
-            <xref target="example-notation-icalendar-implicit-explicit"/> contains three examples, all of which represent the same iCalendar data.  In the first example, both the VEVENT component and VCALENDAR component are implicit.  In the second example, only the VCALENDAR component and its mandatory properties are implicit.  The third example depicts a complete VCALENDAR component, nothing is implicit.</t>
+          <t><xref target="example-notation-icalendar-implicit-explicit"/> contains three examples, all of which represent the same iCalendar data.  In the first example, both the VEVENT component and VCALENDAR component are implicit.  In the second example, only the VCALENDAR component and its mandatory properties are implicit.  The third example depicts a complete VCALENDAR component, nothing is implicit.</t>
           <figure anchor="example-notation-icalendar-implicit-explicit">
             <name>Examples for implicit and explicit iCalendar component notation</name>
             <sourcecode type="text/calendar"><![CDATA[
@@ -126,8 +125,7 @@ SUMMARY:he
           <t>A JSCalendar example always represents a Group object, even if the example only depicts one of the Group entries or properties.</t>
           <t>JSCalendar objects are depicted either explicitly or implicitly. An explicit JSCalendar object starts and ends with braces.  An implicit JSCalendar object omits braces, it only consists of JSON name/value pairs, separated by comma.</t>
           <t>An implicit JSCalendar object is assumed to be of type Event, unless it contains the <tt>@type</tt> property with a different value.  It is assumed to contain all mandatory properties with some value; if they are not depicted, their actual value is irrelevant for the main point of the example.</t>
-          <t>
-            <xref target="example-notation-jscalendar-implicit-explicit"/> illustrates this with multiple examples, all of which represent the same JSCalendar data.  The first example contains an implicit JSCalendar object of type Event.  The second example contains an implicit JSCalendar object with a <tt>@type</tt> property.  The third example contains an explicit Event object but the Group object containing it is omitted.  The fourth example contains the full Group object, nothing is omitted.</t>
+          <t><xref target="example-notation-jscalendar-implicit-explicit"/> illustrates this with multiple examples, all of which represent the same JSCalendar data.  The first example contains an implicit JSCalendar object of type Event.  The second example contains an implicit JSCalendar object with a <tt>@type</tt> property.  The third example contains an explicit Event object but the Group object containing it is omitted.  The fourth example contains the full Group object, nothing is omitted.</t>
           <figure anchor="example-notation-jscalendar-implicit-explicit">
             <name>Examples for implicit and explicit JSCalendar object notation</name>
             <sourcecode type="json"><![CDATA[
@@ -194,8 +192,7 @@ SUMMARY:he
         <name>General rules</name>
         <section anchor="ical-comp-vcalendar">
           <name>iCalendar Objects</name>
-          <t>
-            <xref target="RFC5545" section="3.4"/> allows for an iCalendar stream to contain one or more iCalendar objects.  In contrast, this specification only defines conversion for streams consisting of a single iCalendar object. Converting streams of multiple iCalendar objects is implementation-specific.  All following sections of this document use the terms "iCalendar object" and "VCALENDAR component" interchangeably.</t>
+          <t><xref target="RFC5545" section="3.4"/> allows for an iCalendar stream to contain one or more iCalendar objects.  In contrast, this specification only defines conversion for streams consisting of a single iCalendar object. Converting streams of multiple iCalendar objects is implementation-specific.  All following sections of this document use the terms "iCalendar object" and "VCALENDAR component" interchangeably.</t>
           <t>The <xref target="RFC5545" section="3.4" sectionFormat="parens">VCALENDAR component</xref> converts to a <xref target="RFC8984" section="2.3" sectionFormat="parens">Group object</xref>.  Its properties convert as follows:</t>
           <table anchor="ical-comp-vcalendar-props">
             <name>Properties of the VCALENDAR component</name>
@@ -4558,8 +4555,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td>RELATED-TO</td>
               <td>
-                <t>
-                  <xref target="ical-prop-related-to"/>, and remarks below</t>
+                <t><xref target="ical-prop-related-to"/>, and remarks below</t>
               </td>
             </tr>
             <tr>
@@ -4645,8 +4641,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td>DESCRIPTION, or STYLED-DESCRIPTION</td>
               <td>
-                <t>
-                  <xref target="ical-prop-description"/>, <xref target="ical-prop-styled-description"/>, and remarks below</t>
+                <t><xref target="ical-prop-description"/>, <xref target="ical-prop-styled-description"/>, and remarks below</t>
               </td>
             </tr>
             <tr>
@@ -4656,8 +4651,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td>FMTTYPE (parameter) of STYLED-DESCRIPTION</td>
               <td>
-                <t>
-                  <xref target="ical-prop-styled-description"/>, and remarks below</t>
+                <t><xref target="ical-prop-styled-description"/>, and remarks below</t>
               </td>
             </tr>
             <tr>
@@ -4667,8 +4661,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td/>
               <td>
-                <t>
-                  <xref target="ical-prop-exdate"/>, and remarks about recurrenceOverrides below</t>
+                <t><xref target="ical-prop-exdate"/>, and remarks about recurrenceOverrides below</t>
               </td>
             </tr>
             <tr>
@@ -4738,9 +4731,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td>METHOD of iCalendar object</td>
               <td>
-                <t>
-                  <xref target="ical-prop-method"/>, and <xref target="jscal-group">Group object</xref>
-                </t>
+                <t><xref target="ical-prop-method"/>, and <xref target="jscal-group">Group object</xref></t>
               </td>
             </tr>
             <tr>
@@ -4786,9 +4777,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td>PRODID of iCalendar object</td>
               <td>
-                <t>
-                  <xref target="ical-prop-prodid"/>, and <xref target="jscal-group">Group object</xref>
-                </t>
+                <t><xref target="ical-prop-prodid"/>, and <xref target="jscal-group">Group object</xref></t>
               </td>
             </tr>
             <tr>
@@ -4821,8 +4810,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
                 <xref target="RFC8984" section="4.3.5" sectionFormat="comma"/>
               </td>
               <td>RDATE, EXDATE or recurrence override component</td>
-              <td>
-                <xref target="ical-recurring-components"/>, and remarks below</td>
+              <td><xref target="ical-recurring-components"/>, and remarks below</td>
             </tr>
             <tr>
               <td>recurrenceRules</td>
@@ -4855,8 +4843,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td>ORGANIZER, or JSCAL-PROP</td>
               <td>
-                <t>
-                  <xref target="ical-prop-organizer"/>, <xref target="ical-prop-jscal-prop"/>, and remarks below</t>
+                <t><xref target="ical-prop-organizer"/>, <xref target="ical-prop-jscal-prop"/>, and remarks below</t>
               </td>
             </tr>
             <tr>
@@ -4902,9 +4889,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td>TZID (parameter) of DTSTART and DUE</td>
               <td>
-                <t>
-                  <xref target="ical-prop-dtstart"/>, <xref target="ical-prop-due"/>
-                </t>
+                <t><xref target="ical-prop-dtstart"/>, <xref target="ical-prop-due"/></t>
               </td>
             </tr>
             <tr>
@@ -4950,9 +4935,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td>DTSTAMP, and LAST-MODIFIED</td>
               <td>
-                <t>
-                  <xref target="ical-prop-dtstamp"/>, <xref target="ical-prop-last-modified"/>
-                </t>
+                <t><xref target="ical-prop-dtstamp"/>, <xref target="ical-prop-last-modified"/></t>
               </td>
             </tr>
             <tr>
@@ -5006,9 +4989,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td>DURATION, or DTEND</td>
               <td>
-                <t>
-                  <xref target="ical-prop-duration"/>, <xref target="ical-prop-dtend"/>
-                </t>
+                <t><xref target="ical-prop-duration"/>, <xref target="ical-prop-dtend"/></t>
               </td>
             </tr>
             <tr>
@@ -5146,8 +5127,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td>VEVENT or VTODO (component)</td>
               <td>
-                <t>
-                  <xref target="jscal-event-and-task">Event and Task object</xref>, and remarks below</t>
+                <t><xref target="jscal-event-and-task">Event and Task object</xref>, and remarks below</t>
               </td>
             </tr>
             <tr>
@@ -5181,8 +5161,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td>PRODID</td>
               <td>
-                <t>
-                  <xref target="ical-prop-prodid"/>, and remarks below</t>
+                <t><xref target="ical-prop-prodid"/>, and remarks below</t>
               </td>
             </tr>
             <tr>
@@ -5283,8 +5262,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
                 <xref target="RFC8984" section="1.4.11" sectionFormat="comma"/>
               </td>
               <td>DISPLAY</td>
-              <td>
-                <xref target="ical-prop-image"/>, and remarks below
+              <td><xref target="ical-prop-image"/>, and remarks below
               </td>
             </tr>
             <tr>
@@ -5293,8 +5271,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
                 <xref target="RFC8984" section="1.4.11" sectionFormat="comma"/>
               </td>
               <td>LINKREL</td>
-              <td>
-                <xref target="RFC9253" section="6.1"/>, and remarks below</td>
+              <td><xref target="RFC9253" section="6.1"/>, and remarks below</td>
             </tr>
             <tr>
               <td>size</td>
@@ -5354,8 +5331,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
                 <xref target="RFC8984" section="4.2.5" sectionFormat="comma"/>
               </td>
               <td>GEO</td>
-              <td>
-                <xref target="ical-prop-geo"/>, and remarks below
+              <td><xref target="ical-prop-geo"/>, and remarks below
               </td>
             </tr>
             <tr>
@@ -5540,8 +5516,7 @@ JSCAL-PROP;JSCAL-PATH="coordinates":"geo:48.198634\,16.371648\;crs=wgs84\;u=40"
                 <xref target="RFC8984" section="5.2.5" sectionFormat="comma"/>
               </td>
               <td>PARTSTAT</td>
-              <td>
-                <xref target="ical-prop-attendee"/>, and remarks below
+              <td><xref target="ical-prop-attendee"/>, and remarks below
               </td>
             </tr>
             <tr>
@@ -5550,8 +5525,7 @@ JSCAL-PROP;JSCAL-PATH="coordinates":"geo:48.198634\,16.371648\;crs=wgs84\;u=40"
                 <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
               </td>
               <td>ROLE, or PARTICIPANT-TYPE property of the PARTICIPANT component</td>
-              <td>
-                <xref target="ical-prop-attendee"/>, <xref target="ical-prop-participant-type"/>, and remarks below</td>
+              <td><xref target="ical-prop-attendee"/>, <xref target="ical-prop-participant-type"/>, and remarks below</td>
             </tr>
             <tr>
               <td>scheduleAgent</td>
@@ -5589,8 +5563,7 @@ JSCAL-PROP;JSCAL-PATH="coordinates":"geo:48.198634\,16.371648\;crs=wgs84\;u=40"
                 <xref target="RFC8984" section="4.4.6" sectionFormat="comma"/>
               </td>
               <td>ATTENDEE or JSCAL-PROP</td>
-              <td>
-                <xref target="ical-prop-attendee"/>, <xref target="ical-prop-jscal-prop"/>, and the start of this section
+              <td><xref target="ical-prop-attendee"/>, <xref target="ical-prop-jscal-prop"/>, and the start of this section
               </td>
             </tr>
           </tbody>
@@ -6185,8 +6158,7 @@ JSCAL-PROP;JSCAL-PATH="example.com:foo":"bar"
             <dt>Context:</dt>
             <dd>Any JSCalendar object</dd>
             <dt>Type:</dt>
-            <dd>
-              <tt>ICalComponent</tt> (optional)</dd>
+            <dd><tt>ICalComponent</tt> (optional)</dd>
             <dt>Description</dt>
             <dd>
               <t>This contains information about an iCalendar component that got converted to JSCalendar.  It allows for preserving the name of the iCalendar component and some or all of its properties and subcomponents.</t>
@@ -6276,8 +6248,7 @@ END:X-BAZ
             <dt>Context:</dt>
             <dd>Any JSCalendar object</dd>
             <dt>Type:</dt>
-            <dd>
-              <tt>ICalProperty</tt> (optional)</dd>
+            <dd><tt>ICalProperty</tt> (optional)</dd>
             <dt>Description:</dt>
             <dd>
               <t>This contains conversion-related information about an iCalendar property that got partially or fully converted to a JSCalendar object.  It allows for preserving the name of the "iCalendar" property and some or all of its parameters.</t>
@@ -6723,8 +6694,7 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
               <li>
                 <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
               </li>
-              <li>
-                <xref target="RFC7986" section="6.1" sectionFormat="comma">DISPLAY</xref> (if the parameter value contains more than one "displayval").
+              <li><xref target="RFC7986" section="6.1" sectionFormat="comma">DISPLAY</xref> (if the parameter value contains more than one "displayval").
               </li>
             </ul>
           </section>
