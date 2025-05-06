@@ -2903,7 +2903,7 @@ CONCEPT:https://example.com/event-types/arts/literature
                 <td>
                   <xref target="RFC7986" section="6.4" sectionFormat="comma"/>
                 </td>
-                <td>name</td>
+                <td>description</td>
                 <td/>
               </tr>
             </tbody>
@@ -2913,13 +2913,14 @@ CONCEPT:https://example.com/event-types/arts/literature
             <name>Converting the CONFERENCE property</name>
             <sourcecode type="text/calendar"><![CDATA[
 CONFERENCE;VALUE=URI;FEATURE=AUDIO,VIDEO;
- LABEL=Attendee dial-in:https://chat.example.com/audio?id=123456
+ LABEL="Web video chat, access code=76543"
+ :https://chat.example.com/audio?id=123456
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "virtualLocations": {
   "b2": {
     "@type": "VirtualLocation",
-    "name": "Attendee dial-in",
+    "description": "Web video chat, access code=76543",
     "uri": "https://chat.example.com/audio?id=123456",
     "features": {
       "audio": true,
@@ -5893,7 +5894,7 @@ JSCAL-PROP;JSCAL-PATH="coordinates":"geo:48.198634\,16.371648\;crs=wgs84\;u=40"
               </td>
             </tr>
             <tr>
-              <td>name</td>
+              <td>description</td>
               <td>
                 <xref target="RFC8984" section="4.2.5" sectionFormat="comma"/>
               </td>
@@ -6947,7 +6948,7 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
           </name>
           <ul>
             <li>
-              <xref target="RFC8984" section="4.2.2" sectionFormat="comma">description</xref>
+              <xref target="RFC8984" section="4.2.2" sectionFormat="comma">name</xref>
             </li>
           </ul>
         </section>
