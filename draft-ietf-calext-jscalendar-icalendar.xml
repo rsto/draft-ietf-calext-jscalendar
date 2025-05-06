@@ -3935,6 +3935,7 @@ BEGIN:VEVENT
 ...
 BEGIN:VALARM
 UID:8297C37D-BA2D-4476-91AE-C1EAA364F8E1
+JSCAL-ID:alert1
 TRIGGER:-PT15M
 DESCRIPTION:Event reminder
 ACTION:DISPLAY
@@ -3943,6 +3944,7 @@ END:VALARM
 ...
 BEGIN:VALARM
 UID:DE7B5C34-83FF-47FE-BE9E-FF41AE6DD097
+JSCAL-ID:alert2
 TRIGGER;VALUE=DATE-TIME:20210302T152000Z
 RELATED-TO;RELTYPE=SNOOZE:8297C37D-BA2D-4476-91AE-C1EAA364F8E1
 DESCRIPTION:Event reminder
@@ -3952,7 +3954,7 @@ END:VALARM
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "alerts": {
-  "1": {
+  "alert1": {
     "@type": "Alert",
     "trigger": {
       "@type": "OffsetTrigger",
@@ -3960,14 +3962,14 @@ END:VALARM
     },
     "...": ""
   },
-  "2": {
+  "alert2": {
     "@type": "Alert",
     "trigger": {
       "@type": "AbsoluteTrigger",
       "when": "2021-03-02T15:20:00Z"
     },
     "relatedTo": {
-      "1": {
+      "alert1": {
         "@type": "Relation",
         "relation": {
           "snooze": true
@@ -6079,7 +6081,7 @@ END:VALARM
 BEGIN:VEVENT
 ...
 ATTACH;JSCAL-ID=mylink1:https://www.rfc-editor.org/rfc/rfc8984.html
-JSCAL-PROP;JSCAL-PATH="mylink1/example.com:foo":"bar"
+JSCAL-PROP;JSCAL-PATH="links/mylink1/example.com:foo":"bar"
 ...
 ]]></sourcecode>
                 <sourcecode type="json"><![CDATA[
@@ -6251,7 +6253,8 @@ END:X-BAZ
         []
       ]
     ]
-  }
+  },
+  "...": ""
 }
 ]]></sourcecode>
           </figure>
