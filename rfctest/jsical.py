@@ -10,6 +10,7 @@ import uuid
 
 from collections import UserList
 from dataclasses import dataclass, field
+from operator import itemgetter
 
 
 class ParseError(ValueError):
@@ -541,6 +542,15 @@ class JsonDiff:
                     data[k] = sorted(vals, key=cmp)
                 except (AttributeError, TypeError):
                     pass
+        elif typ == "ICalComponent":
+            ical_props = data.get("properties")
+            if ical_props:
+                # Sort jCal properties by name, value, value type
+                ical_props.sort(key=itemgetter(0, 3, 2))
+            ical_comps = data.get("components")
+            if ical_comps:
+                # Sort jCal components by name
+                ical_comps.sort(key=itemgetter(0))
         # Do not normalize localizations and recurrence overrides
         localizations = data.pop("localizations", None)
         recurrence_overrides = data.pop("recurrenceOverrides", None)
