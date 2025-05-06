@@ -2332,6 +2332,14 @@ ACTION:AUDIO
                 <td/>
               </tr>
               <tr>
+                <td>LABEL</td>
+                <td>
+                  <xref target="RFC7986" section="6.4" sectionFormat="comma"/>
+                </td>
+                <td>title</td>
+                <td/>
+              </tr>
+              <tr>
                 <td>LINKREL</td>
                 <td>
                   <xref target="RFC9253" section="6.1" sectionFormat="comma"/>
@@ -3413,6 +3421,14 @@ GEO:48.858222;2.2945
                 <td/>
               </tr>
               <tr>
+                <td>LABEL</td>
+                <td>
+                  <xref target="RFC7986" section="6.4" sectionFormat="comma"/>
+                </td>
+                <td>title</td>
+                <td/>
+              </tr>
+              <tr>
                 <td>LINKREL</td>
                 <td>
                   <xref target="RFC9253" section="6.1" sectionFormat="comma"/>
@@ -3440,7 +3456,7 @@ GEO:48.858222;2.2945
           <figure anchor="test-ical-prop-image">
             <name>Converting the IMAGE property</name>
             <sourcecode type="text/calendar"><![CDATA[
-IMAGE;VALUE=URI;DISPLAY=BADGE;FMTTYPE=image/png:
+IMAGE;VALUE=URI;DISPLAY=BADGE;LABEL=An image;FMTTYPE=image/png:
  https://example.com/images/party.png
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
@@ -3451,10 +3467,7 @@ IMAGE;VALUE=URI;DISPLAY=BADGE;FMTTYPE=image/png:
     "display": "badge",
     "rel": "icon",
     "contentType": "image/png",
-    "iCalProperty": {
-      "@type": "ICalProperty",
-      "name": "image"
-    }
+    "title": "An image"
   }
 }
 ]]></sourcecode>
@@ -5291,8 +5304,7 @@ URL:https://example.com/calendar/birthdays.ics
                 <xref target="RFC8984" section="1.4.11" sectionFormat="comma"/>
               </td>
               <td>DISPLAY</td>
-              <td>
-                <xref target="ical-prop-image"/>, and remarks below
+              <td><xref target="ical-prop-image"/>, and remarks below
               </td>
             </tr>
             <tr>
@@ -5309,6 +5321,16 @@ URL:https://example.com/calendar/birthdays.ics
                 <xref target="RFC8984" section="1.4.11" sectionFormat="comma"/>
               </td>
               <td>SIZE</td>
+              <td>
+                <xref target="ical-prop-attach"/>
+              </td>
+            </tr>
+            <tr>
+              <td>title</td>
+              <td>
+                <xref target="RFC7986" section="6.4" sectionFormat="comma"/>
+              </td>
+              <td>LABEL</td>
               <td>
                 <xref target="ical-prop-attach"/>
               </td>
@@ -5404,9 +5426,9 @@ URL:https://example.com/calendar/birthdays.ics
         </ul>
         <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jscal-prop">JSCAL-PROP properties</xref> in the VLOCATION component, or the component which the Location converts to as a property.</t>
         <t>The following example illustrates how to convert a Location "coordinates" property value that can not be represented in GEO property values without loss.</t>
-          <figure anchor="test-jscal-location-coordinates">
-            <name>Converting the Location "coordinates" property without loss</name>
-            <sourcecode type="json"><![CDATA[
+        <figure anchor="test-jscal-location-coordinates">
+          <name>Converting the Location "coordinates" property without loss</name>
+          <sourcecode type="json"><![CDATA[
 "locations": {
   "1": {
     "@type": "Location",
@@ -5416,7 +5438,7 @@ URL:https://example.com/calendar/birthdays.ics
   }
 }
 ]]></sourcecode>
-            <sourcecode type="text/calendar"><![CDATA[
+          <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VEVENT
 GEO;DERIVED=TRUE:48.198634;16.371648
 BEGIN:VLOCATION
@@ -5424,7 +5446,7 @@ NAME:Karlskirche
 JSCAL-PROP;JSCAL-PATH="coordinates":"geo:48.198634\,16.371648\;crs=wgs84\;u=40"
 ...
   ]]></sourcecode>
-          </figure>
+        </figure>
       </section>
       <section anchor="jscal-participant">
         <name>Participant</name>
@@ -6699,8 +6721,7 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
               <li>
                 <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
               </li>
-              <li>
-                <xref target="RFC7986" section="6.1" sectionFormat="comma">DISPLAY</xref> (if the parameter value contains more than one "displayval").
+              <li><xref target="RFC7986" section="6.1" sectionFormat="comma">DISPLAY</xref> (if the parameter value contains more than one "displayval").
               </li>
             </ul>
           </section>
@@ -6911,9 +6932,6 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
           <ul>
             <li>
               <xref target="RFC8984" section="1.4.11" sectionFormat="comma">cid</xref>
-            </li>
-            <li>
-              <xref target="RFC8984" section="1.4.11" sectionFormat="comma">title</xref>
             </li>
           </ul>
         </section>

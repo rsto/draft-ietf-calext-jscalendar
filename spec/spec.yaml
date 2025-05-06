@@ -1976,7 +1976,9 @@ jscalendar:
           convert:
             component: PARTICIPANT
             property: DESCRIPTION
-        VirtualLocation: {}
+        VirtualLocation:
+          convert:
+            parameter: LABEL
       rfc: RFC8984
       sections:
         - 4.2.2
@@ -2816,7 +2818,9 @@ jscalendar:
         Group:
           convert:
             property: NAME
-        Link: {}
+        Link:
+          convert:
+            parameter: LABEL
       rfc: RFC8984
       sections:
         - 4.2.1
