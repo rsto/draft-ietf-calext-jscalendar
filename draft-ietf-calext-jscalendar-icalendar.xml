@@ -463,12 +463,10 @@ END:VCALENDAR
           "start": "2024-02-02T16:00:00"
         }
       },
-      "recurrenceRules": [
-        {
-          "@type": "RecurrenceRule",
-          "frequency": "daily"
-        }
-      ],
+      "recurrenceRule": {
+        "@type": "RecurrenceRule",
+        "frequency": "daily"
+      },
       "start": "2024-01-01T14:00:00",
       "timeZone": "Europe/Berlin",
       "uid": "F4257E1D-5461-4EF6-840F-9DFC653EB559"
@@ -1128,7 +1126,7 @@ END:VALARM
                 <td>
                   <xref target="RFC5545" section="3.8.5.3" sectionFormat="comma"/>
                 </td>
-                <td>recurrenceRules</td>
+                <td>recurrenceRule</td>
                 <td>
                   <xref target="ical-prop-rrule"/>
                 </td>
@@ -1730,7 +1728,7 @@ END:VLOCATION
                 <td>
                   <xref target="RFC5545" section="3.8.5.3" sectionFormat="comma"/>
                 </td>
-                <td>recurrenceRules</td>
+                <td>recurrenceRule</td>
                 <td>
                   <xref target="ical-prop-rrule"/>
                 </td>
@@ -2903,12 +2901,10 @@ EXDATE:20230801T130000Z
             <sourcecode type="json"><![CDATA[
 "start": "2023-01-01T13:00:00",
 "timeZone": "Etc/UTC",
-"recurrenceRules": [
-  {
-    "@type": "RecurrenceRule",
-    "frequency": "monthly"
-  }
-],
+"recurrenceRule": {
+  "@type": "RecurrenceRule",
+  "frequency": "monthly"
+},
 "recurrenceOverrides": {
   "2023-08-01T13:00:00": {
     "excluded": true
@@ -3557,12 +3553,10 @@ RDATE:20230805T170000Z
             <sourcecode type="json"><![CDATA[
 "start": "2023-01-01T13:00:00",
 "timeZone": "Etc/UTC",
-"recurrenceRules": [
-  {
-    "@type": "RecurrenceRule",
-    "frequency": "monthly"
-  }
-],
+"recurrenceRule": {
+  "@type": "RecurrenceRule",
+  "frequency": "monthly"
+},
 "recurrenceOverrides": {
   "2023-08-05T17:00:00": {}
 }
@@ -3681,7 +3675,7 @@ REQUEST-STATUS:2.0;Success
         <section anchor="ical-prop-rrule">
           <name>RRULE</name>
           <t>
-            The <xref target="RFC5545" section="3.8.5.3" sectionFormat="parens">RRULE property</xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="4.3.3" sectionFormat="parens">RecurrenceRule object</xref>.  The converted object is set in the "recurrenceRules" property of the Event or Task object.
+            The <xref target="RFC5545" section="3.8.5.3" sectionFormat="parens">RRULE property</xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="4.3.3" sectionFormat="parens">RecurrenceRule object</xref>.  The converted object is set in the "recurrenceRule" property of the Event or Task object.
           </t>
           <t>The RECUR value type converts to a RecurrenceRule object as follows:</t>
           <table>
@@ -3776,30 +3770,28 @@ RRULE:FREQ=YEARLY
  ;UNTIL=20240930T120000Z
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
-"recurrenceRules": [
-  {
-    "@type": "RecurrenceRule",
-    "frequency": "yearly",
-    "interval": 2,
-    "byMonth": [
-      "1"
-    ],
-    "byDay": [
-      {
-        "@type": "NDay",
-        "day": "su"
-      }
-    ],
-    "byHour": [
-      8,
-      9
-    ],
-    "byMinute": [
-      30
-    ],
-    "until": "2024-09-30T14:00:00"
-  }
-],
+"recurrenceRule": {
+  "@type": "RecurrenceRule",
+  "frequency": "yearly",
+  "interval": 2,
+  "byMonth": [
+    "1"
+  ],
+  "byDay": [
+    {
+      "@type": "NDay",
+      "day": "su"
+    }
+  ],
+  "byHour": [
+    8,
+    9
+  ],
+  "byMinute": [
+    30
+  ],
+  "until": "2024-09-30T14:00:00"
+},
 "start": "2024-01-01T01:00:00",
 "timeZone": "Europe/Berlin"
 ]]></sourcecode>
@@ -4376,7 +4368,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               <td><xref target="ical-recurring-components"/>, and remarks below</td>
             </tr>
             <tr>
-              <td>recurrenceRules</td>
+              <td>recurrenceRule</td>
               <td>
                 <xref target="RFC8984" section="4.3.3" sectionFormat="comma"/>
               </td>
@@ -4930,7 +4922,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
         </table>
         <t>Remarks:</t>
         <ul>
-        <li>If the <xref target="RFC5870" section="3.3" sectionFormat="parens">"geo-path"</xref> of the "coordinates" property value contains anything other than latitude ("coord-a") or longitude ("coord-b"), then the coordinates can not be represented accurately in the GEO property value. Implementations <bcp14>MAY</bcp14> convert such "coordinates" property values to both a GEO property having only the latitude and longitude set, as well as the <xref target="ical-prop-jsprop">JSPROP</xref> property of the VLOCATION. In this case, they <bcp14>MUST</bcp14> set the DERIVED parameter value of the GEO property to TRUE.</li>
+          <li>If the <xref target="RFC5870" section="3.3" sectionFormat="parens">"geo-path"</xref> of the "coordinates" property value contains anything other than latitude ("coord-a") or longitude ("coord-b"), then the coordinates can not be represented accurately in the GEO property value. Implementations <bcp14>MAY</bcp14> convert such "coordinates" property values to both a GEO property having only the latitude and longitude set, as well as the <xref target="ical-prop-jsprop">JSPROP</xref> property of the VLOCATION. In this case, they <bcp14>MUST</bcp14> set the DERIVED parameter value of the GEO property to TRUE.</li>
         </ul>
         <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the VLOCATION component, or the component which the Location converts to as a property.</t>
         <t>The following example illustrates how to convert a Location "coordinates" property value that can not be represented in GEO property values without loss.</t>
@@ -6073,8 +6065,7 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
               <li>
                 <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
               </li>
-              <li>
-                <xref target="RFC9253" section="6.1" sectionFormat="comma">LINKREL</xref> (if the parameter value does not conform to the "reg-rel-type" ABNF in <xref target="RFC8288" section="3.3" sectionFormat="comma"/>).
+              <li><xref target="RFC9253" section="6.1" sectionFormat="comma">LINKREL</xref> (if the parameter value does not conform to the "reg-rel-type" ABNF in <xref target="RFC8288" section="3.3" sectionFormat="comma"/>).
               </li>
             </ul>
           </section>
