@@ -1045,7 +1045,7 @@ END:VALARM
                 <td>
                   <xref target="RFC5545" section="3.8.4.3" sectionFormat="comma"/>
                 </td>
-                <td>replyTo</td>
+                <td>organizerCalendarAddress</td>
                 <td>
                   <xref target="ical-prop-organizer"/>
                 </td>
@@ -1647,7 +1647,7 @@ END:VLOCATION
                 <td>
                   <xref target="RFC5545" section="3.8.4.3" sectionFormat="comma"/>
                 </td>
-                <td>replyTo</td>
+                <td>organizerCalendarAddress</td>
                 <td>
                   <xref target="ical-prop-organizer"/>
                 </td>
@@ -2038,10 +2038,8 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
         <section anchor="ical-prop-attendee">
           <name>ATTENDEE</name>
           <t>
-            The <xref target="RFC5545" section="3.8.4.1" sectionFormat="parens">ATTENDEE property</xref> in a VEVENT or VTODO component converts to a <xref target="jscalendarbis" section="4.4.6" sectionFormat="parens">Participant object</xref>.  The converted object is set in the "participants" property of the Event or Task object.
-          </t>
-          <t>The property value converts to both the calendarAddress and sendTo properties of the Participant object. If the CAL-ADDRESS value is in the "mailto" scheme, then it converts to the "imip" method in the "sendTo" property, otherwise it converts to the "other" method.</t>
-          <t>An ATTENDEE property and a PARTICIPANT component in the same iCalendar component convert to the same Participant object, if their converted calendarAddress property values are equal after <xref target="RFC3986" section="6" sectionFormat="parens">URI normalization</xref>. How to deal with conflicting values when converting other Participant properties is implementation-specific.</t>
+            The <xref target="RFC5545" section="3.8.4.1" sectionFormat="parens">ATTENDEE property</xref> in a VEVENT or VTODO component converts to a <xref target="jscalendarbis" section="4.4.6" sectionFormat="parens">Participant object</xref>.  The converted object is set in the "participants" property of the Event or Task object. The property value converts to the calendarAddress property of the Participant object.</t>
+          <t>An ATTENDEE property and a PARTICIPANT component in the same iCalendar component convert to the same Participant object, if their converted calendarAddress property values are equal. How to deal with conflicting values is implementation-specific.</t>
           <t>The ATTENDEE property parameters convert as follows:</t>
           <table>
             <name>Parameters of the ATTENDEE property</name>
@@ -2249,9 +2247,6 @@ ORGANIZER:mailto:organizer@example.com
     "roles": {
       "attendee": true
     },
-    "sendTo": {
-      "imip": "mailto:hcabot@example.com"
-    },
     "expectReply": true
   },
   "o4": {
@@ -2262,9 +2257,7 @@ ORGANIZER:mailto:organizer@example.com
     }
   }
 },
-"replyTo": {
-  "imip": "mailto:organizer@example.com"
-}
+"organizerCalendarAddress": "mailto:organizer@example.com"
 ]]></sourcecode>
           </figure>
           <figure anchor="test-ical-prop-attendee-participant">
@@ -2283,9 +2276,6 @@ ORGANIZER:mailto:organizer@example.com
   "23": {
     "@type": "Participant",
     "calendarAddress": "mailto:foo@example.com",
-    "sendTo": {
-      "imip": "mailto:foo@example.com"
-    },
     "participationStatus": "tentative",
     "expectReply": true,
     "description": "some description",
@@ -2296,9 +2286,7 @@ ORGANIZER:mailto:organizer@example.com
     "...": ""
   }
 },
-"replyTo": {
-  "imip": "mailto:organizer@example.com"
-}
+"organizerCalendarAddress": "mailto:organizer@example.com"
 ]]></sourcecode>
           </figure>
           <figure anchor="test-ical-prop-attendee-vtodo-partstat">
@@ -2317,9 +2305,6 @@ ORGANIZER:mailto:organizer@example.com
     "calendarAddress": "mailto:foo@example.com",
     "participationStatus": "accepted",
     "progress": "completed",
-    "sendTo": {
-      "imip": "mailto:foo@example.com"
-    },
     "expectReply": true,
     "...": ""
   },
@@ -2329,9 +2314,7 @@ ORGANIZER:mailto:organizer@example.com
     "...": ""
   }
 },
-"replyTo": {
-  "imip": "mailto:organizer@example.com"
-}
+"organizerCalendarAddress": "mailto:organizer@example.com"
 ]]></sourcecode>
           </figure>
         </section>
@@ -3271,10 +3254,8 @@ END:VLOCATION
         <section anchor="ical-prop-organizer">
           <name>ORGANIZER</name>
           <t>
-            The <xref target="RFC5545" section="3.8.4.3" sectionFormat="parens">ORGANIZER property</xref> in a VEVENT or VTODO component converts to the <xref target="jscalendarbis" section="4.4.4" sectionFormat="parens">"replyTo" property</xref> of the Event or Task object. In addition, it converts to a Participant object in the  <xref target="jscalendarbis" section="4.4.6" sectionFormat="parens">"participants" property</xref>.
-          </t>
-          <t>If the CAL-ADDRESS property value is in the "mailto" scheme, then it converts to the "imip" method in the "replyTo" property, otherwise it converts to the "other" method. The property value also converts to the "calendarAddress" property of the Participant object. The "owner" role is set in the "roles" property of the Participant. In contrast to the ATTENDEE property, the property value does not convert to the "sendTo" property of the Participant object.</t>
-          <t>An ORGANIZER property, an ATTENDEE property, and a PARTICIPANT component in the same iCalendar component all convert to the same Participant object, if their converted calendarAddress property values are equal after <xref target="RFC3986" section="6" sectionFormat="parens">URI normalization</xref>. How to deal with conflicting property values is implementation-specific.</t>
+            The <xref target="RFC5545" section="3.8.4.3" sectionFormat="parens">ORGANIZER property</xref> in a VEVENT or VTODO component converts to the <xref target="jscalendarbis" section="4.4.4" sectionFormat="parens">"organizerCalendarAddress" property</xref> of the Event or Task object and to a Participant object in the  <xref target="jscalendarbis" section="4.4.6" sectionFormat="parens">"participants" property</xref>. The ORGANIZER property value converts to the "calendarAddress" property of the Participant, the "owner" role is set in Participant "roles" property.</t>
+          <t>An ORGANIZER property, an ATTENDEE property, and a PARTICIPANT component in the same iCalendar component all convert to the same Participant object, if their converted calendarAddress property values are equal. How to deal with conflicting property values is implementation-specific.</t>
           <t>The ORGANIZER property parameters convert as follows:</t>
           <table>
             <name>Parameters of the ORGANIZER property</name>
@@ -3313,9 +3294,7 @@ ORGANIZER:mailto:foo@example.com
 ATTENDEE;RSVP=TRUE;PARTSTAT=NEEDS-ACTION:mailto:bar@example.com
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
-"replyTo": {
-  "imip": "mailto:foo@example.com"
-},
+"organizerCalendarAddress": "mailto:foo@example.com",
 "participants": {
   "a": {
     "@type": "Participant",
@@ -3328,9 +3307,6 @@ ATTENDEE;RSVP=TRUE;PARTSTAT=NEEDS-ACTION:mailto:bar@example.com
     "@type": "Participant",
     "calendarAddress": "mailto:bar@example.com",
     "expectReply": true,
-    "sendTo": {
-      "imip": "mailto:bar@example.com"
-    },
     "...": ""
   }
 }
@@ -3345,9 +3321,7 @@ ATTENDEE;RSVP=FALSE;PARTSTAT=ACCEPTED;CN=Jane Doe:mailto:foo@example.com
 ATTENDEE;RSVP=TRUE;PARTSTAT=NEEDS-ACTION:mailto:bar@example.com
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
-"replyTo": {
-  "imip": "mailto:foo@example.com"
-},
+"organizerCalendarAddress": "mailto:foo@example.com",
 "participants": {
   "a": {
     "@type": "Participant",
@@ -3358,17 +3332,11 @@ ATTENDEE;RSVP=TRUE;PARTSTAT=NEEDS-ACTION:mailto:bar@example.com
       "attendee": true,
       "owner": true
     },
-    "expectReply": false,
-    "sendTo": {
-      "imip": "mailto:foo@example.com"
-    }
+    "expectReply": false
   },
   "b": {
     "@type": "Participant",
     "calendarAddress": "mailto:bar@example.com",
-    "sendTo": {
-      "imip": "mailto:bar@example.com"
-    },
     "expectReply": true,
     "...": ""
   }
@@ -4237,6 +4205,18 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
             </tr>
             <tr>
+              <td>organizerCalendarAddress</td>
+              <td>
+                <xref target="jscalendarbis" section="4.4.4" sectionFormat="comma"/>
+              </td>
+              <td>ORGANIZER</td>
+              <td>
+                <t>
+                  <xref target="ical-prop-organizer"/>
+                </t>
+              </td>
+            </tr>
+            <tr>
               <td>participants</td>
               <td>
                 <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma"/>
@@ -4336,16 +4316,6 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
                 <t>
                   <xref target="ical-prop-related-to"/>
                 </t>
-              </td>
-            </tr>
-            <tr>
-              <td>replyTo</td>
-              <td>
-                <xref target="jscalendarbis" section="4.4.4" sectionFormat="comma"/>
-              </td>
-              <td>ORGANIZER, or JSPROP</td>
-              <td>
-                <t><xref target="ical-prop-organizer"/>, <xref target="ical-prop-jsprop"/>, and remarks below</t>
               </td>
             </tr>
             <tr>
@@ -4449,15 +4419,6 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
           </li>
           <li>
             <t>The entries in the "recurrenceOverrides" property convert depending on the contents of the PatchObject value. A PatchObject that sets the "excluded" property to "true" converts to an EXDATE property for the date-time of that recurrence instance. An empty PatchObject converts to an RDATE property. Any other PatchObject converts to a recurrence override component in the embedding VCALENDAR component.</t>
-          </li>
-          <li>
-            <t>The replyTo property converts to the ORGANIZER or the <xref target="ical-prop-jsprop">JSPROP</xref> property, or both. The "web" scheduling method never converts to the ORGANIZER property. Any other scheduling methods in the replyTo property convert to the ORGANIZER property value as follows:</t>
-            <ul>
-              <li>If there is only a single scheduling method, then convert its URI value.</li>
-              <li>If there are multiple scheduling methods and one of their URI values match a Participant object's calendarAddress property value, use that URI.</li>
-              <li>Otherwise, choose the URI of any scheduling method. The "imip" scheduling method typically is a good choice.</li>
-            </ul>
-            <t>Implementations <bcp14>MAY</bcp14> convert the replyTo property to the JSPROP property. If so, they <bcp14>MUST</bcp14> convert the entire replyTo property value to a single JSPROP property.</t>
           </li>
         </ul>
         <t>Properties specific to the Event object type convert to iCalendar properties as follows:</t>
@@ -4839,7 +4800,9 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td>FMTTYPE (parameter) of STYLED-DESCRIPTION</td>
               <td>
-                <t><xref target="ical-prop-styled-description"/></t>
+                <t>
+                  <xref target="ical-prop-styled-description"/>
+                </t>
               </td>
             </tr>
             <tr>
@@ -4909,13 +4872,12 @@ JSPROP;JSPTR="coordinates":"geo:48.198634\,16.371648\;crs=wgs84\;u=40"
         <t>The <xref target="jscalendarbis" section="4.4.6" sectionFormat="parens">Participant object</xref> converts to both an <xref target="ical-prop-attendee">ATTENDEE property</xref> and a <xref target="ical-comp-participant">PARTICIPANT component</xref>:</t>
         <ul>
           <li>
-            <t>It converts to an ATTENDEE property if the <xref target="jscalendarbis" section="4.4.6" sectionFormat="parens">sendTo</xref> property is set. The calendarAddress property converts to the ATTENDEE property value, if set; otherwise one of the scheduling methods in the "sendTo" property converts to the ATTENDEE property value. Typically, the "imip" scheduling method is a good choice.</t>
+            <t>It converts to an ATTENDEE property if the <xref target="jscalendarbis" section="4.4.6" sectionFormat="parens">calendarAddress</xref> property is set.</t>
           </li>
           <li>
             <t>It converts to a PARTICIPANT component if any of the Participant properties in <xref target="jscal-participant-props-participant"/> are set. If the Participant object also converts to an ATTENDEE property, then the CALENDAR-ADDRESS property value of the PARTICIPANT component <bcp14>MUST</bcp14> match the ATTENDEE property value.</t>
           </li>
         </ul>
-        <t>Implementations <bcp14>MAY</bcp14> convert the sendTo property to the JSPROP property of the PARTICIPANT component. If so, they <bcp14>MUST</bcp14> convert the entire sendTo property value to a single JSPROP property.</t>
         <t>The following Participant properties convert to the ATTENDEE property. How to convert these properties if the Participant does not convert to an ATTENDEE is implementation-specific.</t>
         <table anchor="jscal-participant-props-attendee">
           <name>Properties of the Participant object that convert to the ATTENDEE property</name>
@@ -4928,6 +4890,16 @@ JSPROP;JSPTR="coordinates":"geo:48.198634\,16.371648\;crs=wgs84\;u=40"
             </tr>
           </thead>
           <tbody>
+            <tr>
+              <td>calendarAddress</td>
+              <td>
+                <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma"/>
+              </td>
+              <td>ATTENDEE</td>
+              <td>
+                <xref target="ical-prop-attendee"/>
+              </td>
+            </tr>
             <tr>
               <td>delegatedFrom</td>
               <td>
@@ -5023,7 +4995,9 @@ JSPROP;JSPTR="coordinates":"geo:48.198634\,16.371648\;crs=wgs84\;u=40"
                 <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma"/>
               </td>
               <td>ROLE</td>
-              <td><xref target="ical-prop-attendee"/></td>
+              <td>
+                <xref target="ical-prop-attendee"/>
+              </td>
             </tr>
             <tr>
               <td>scheduleAgent</td>
@@ -5053,15 +5027,6 @@ JSPROP;JSPTR="coordinates":"geo:48.198634\,16.371648\;crs=wgs84\;u=40"
               <td>SCHEDULE-STATUS</td>
               <td>
                 <xref target="ical-prop-attendee"/>
-              </td>
-            </tr>
-            <tr>
-              <td>sendTo</td>
-              <td>
-                <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma"/>
-              </td>
-              <td>ATTENDEE or JSPROP</td>
-              <td><xref target="ical-prop-attendee"/>, <xref target="ical-prop-jsprop"/>, and the start of this section
               </td>
             </tr>
           </tbody>
@@ -5104,7 +5069,9 @@ JSPROP;JSPTR="coordinates":"geo:48.198634\,16.371648\;crs=wgs84\;u=40"
               </td>
               <td>FMTTYPE (parameter) of STYLED-DESCRIPTION</td>
               <td>
-                <t><xref target="ical-prop-styled-description"/></t>
+                <t>
+                  <xref target="ical-prop-styled-description"/>
+                </t>
               </td>
             </tr>
             <tr>
@@ -5591,7 +5558,6 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
         <name>Normative References</name>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2397.xml"/>
-        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3986.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5234.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5545.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5546.xml"/>
