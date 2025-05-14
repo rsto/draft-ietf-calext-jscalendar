@@ -6241,9 +6241,6 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             <li>
               <xref target="jscalendarbis" section="4.2.4" sectionFormat="comma">showWithoutTime</xref>
             </li>
-            <li>
-              <xref target="jscalendarbis" section="4.5.1" sectionFormat="comma">useDefaultAlerts</xref>
-            </li>
           </ul>
         </section>
         <section>
