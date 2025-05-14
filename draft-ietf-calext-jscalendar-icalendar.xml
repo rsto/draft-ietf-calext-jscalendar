@@ -640,17 +640,6 @@ END:VCALENDAR
                 <td/>
               </tr>
               <tr>
-                <td>PARTICIPANT-TYPE</td>
-                <td>
-                  <xref target="RFC9073" section="6.2" sectionFormat="comma"/>
-                </td>
-                <td>roles</td>
-                <td>
-                  <xref target="ical-prop-participant-type"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
                 <td>SUMMARY</td>
                 <td>
                   <xref target="RFC5545" section="3.8.1.12" sectionFormat="comma"/>
@@ -671,7 +660,6 @@ END:VCALENDAR
 BEGIN:VEVENT
 BEGIN:PARTICIPANT
 UID:47AD2E1C-49D4-45DF-BD83-8398ACC7D8E2
-PARTICIPANT-TYPE:CONTACT
 DESCRIPTION:A contact
 END:PARTICIPANT
 ...
@@ -695,9 +683,6 @@ END:PARTICIPANT
             "47AD2E1C-49D4-45DF-BD83-8398ACC7D8E2"
           ]
         ]
-      },
-      "roles": {
-        "contact": true
       }
     }
   }
@@ -3369,47 +3354,6 @@ ATTENDEE;RSVP=TRUE;PARTSTAT=NEEDS-ACTION:mailto:bar@example.com
 ]]></sourcecode>
           </figure>
         </section>
-        <section anchor="ical-prop-participant-type">
-          <name>PARTICIPANT-TYPE</name>
-          <t>
-            The <xref target="RFC9073" section="6.2" sectionFormat="parens">PARTICIPANT-TYPE property</xref> in a PARTICIPANT component converts to the <xref target="jscalendarbis" section="4.4.6" sectionFormat="parens">"roles" property</xref> of the Participant object.
-          </t>
-          <t>The property value converts in lowercase.</t>
-          <t>The following example illustrates how to convert the PARTICIPANT-TYPE property:</t>
-          <figure anchor="test-ical-prop-participant-type">
-            <name>Converting the PARTICIPANT-TYPE property</name>
-            <sourcecode type="text/calendar"><![CDATA[
-BEGIN:PARTICIPANT
-PARTICIPANT-TYPE:CONTACT
-CALENDAR-ADDRESS:mailto:foo@example.com
-...
-END:PARTICIPANT
-ATTENDEE;RSVP=YES;PARTSTAT=NEEDS-ACTION:mailto:foo@example.com
-ORGANIZER:mailto:bar@example.com
-  ]]></sourcecode>
-            <sourcecode type="json"><![CDATA[
-"participants": {
-  "a": {
-    "@type": "Participant",
-    "calendarAddress": "mailto:foo@example.com",
-    "roles": {
-      "attendee": true,
-      "contact": true
-    },
-    "sendTo": {
-      "imip": "mailto:foo@example.com"
-    },
-    "...": ""
-  },
-  "b": {
-    "@type": "Participant",
-    "calendarAddress": "mailto:bar@example.com",
-    "...": ""
-  }
-}
-]]></sourcecode>
-          </figure>
-        </section>
         <section anchor="ical-prop-percent-complete">
           <name>PERCENT-COMPLETE</name>
           <t>
@@ -5046,8 +4990,8 @@ JSPROP;JSPTR="coordinates":"geo:48.198634\,16.371648\;crs=wgs84\;u=40"
               <td>
                 <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma"/>
               </td>
-              <td>ROLE, or PARTICIPANT-TYPE property of the PARTICIPANT component</td>
-              <td><xref target="ical-prop-attendee"/>, <xref target="ical-prop-participant-type"/>, and remarks below</td>
+              <td>ROLE</td>
+              <td><xref target="ical-prop-attendee"/></td>
             </tr>
             <tr>
               <td>scheduleAgent</td>
@@ -5093,7 +5037,7 @@ JSPROP;JSPTR="coordinates":"geo:48.198634\,16.371648\;crs=wgs84\;u=40"
         <t>Remarks:</t>
         <ul>
           <li>
-            <t>The "optional" role converts to the "OPT-PARTICIPANT" ROLE parameter value, the "chair" role to "CHAIR", "informational" to "NON-PARTICIPANT". The "attendee" role does not convert to the ROLE parameter: it either is implied if the Participant object converts to an ATTENDEE, otherwise implementations <bcp14>MAY</bcp14> preserve it using the <xref target="ical-prop-jsprop">JSPROP</xref> property. The "owner" role does not convert to any standard iCalendar element: it either is implied if the property value of the ATTENDEE is equal to the value of the ORGANIZER property in the same component, otherwise implementations <bcp14>MAY</bcp14> preserve it using the <xref target="ical-prop-jsprop">JSPROP</xref> property. All other roles require a PARTICIPANT component and convert to the PARTICIPANT-TYPE property in that component.</t>
+            <t>The "attendee" role does not convert to the ROLE parameter: it either is implied if the Participant object converts to an ATTENDEE, otherwise implementations <bcp14>MAY</bcp14> preserve it using the <xref target="ical-prop-jsprop">JSPROP</xref> property. The "owner" role does not convert to any standard iCalendar element: it either is implied if the property value of the ATTENDEE is equal to the value of the ORGANIZER property in the same component, otherwise implementations <bcp14>MAY</bcp14> preserve it using the <xref target="ical-prop-jsprop">JSPROP</xref> property.</t>
           </li>
           <li>
             <t>The progress property converts to the PARTSTAT parameter as outlined in <xref target="ical-prop-attendee-param-partstat"/>.</t>
@@ -5167,16 +5111,6 @@ JSPROP;JSPTR="coordinates":"geo:48.198634\,16.371648\;crs=wgs84\;u=40"
                 <t>
                   <xref target="ical-prop-percent-complete"/>
                 </t>
-              </td>
-            </tr>
-            <tr>
-              <td>roles</td>
-              <td>
-                <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma"/>
-              </td>
-              <td>PARTICIPANT-TYPE</td>
-              <td>
-                <xref target="ical-prop-participant-type"/>
               </td>
             </tr>
           </tbody>
@@ -5747,6 +5681,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
                 <xref target="RFC5545" section="3.8.1.7" sectionFormat="comma">LOCATION</xref>
               </li>
               <li>
+                <xref target="RFC9073" section="6.2" sectionFormat="comma">PARTICIPANT-TYPE</xref>
+              </li>
+              <li>
                 <xref target="RFC5545" section="3.8.1.9" sectionFormat="comma">PRIORITY</xref>
               </li>
               <li>
@@ -6082,16 +6019,6 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
               </li>
               <li>
                 <xref target="RFC6638" section="7.3" sectionFormat="comma">SCHEDULE-STATUS</xref>
-              </li>
-            </ul>
-          </section>
-          <section>
-            <name>
-              <xref target="RFC9073" section="6.2" sectionFormat="comma">PARTICIPANT-TYPE</xref>
-            </name>
-            <ul>
-              <li>
-                <xref target="RFC9073" section="5.1" sectionFormat="comma">ORDER</xref>
               </li>
             </ul>
           </section>
