@@ -950,7 +950,7 @@ END:VALARM
                 <td>
                   <xref target="RFC5545" section="3.8.2.2" sectionFormat="comma"/>
                 </td>
-                <td>duration</td>
+                <td>duration, endTimeZone</td>
                 <td>
                   <xref target="ical-prop-dtend"/>
                 </td>
@@ -2597,9 +2597,22 @@ DESCRIPTION:The pancakes there are delicious\; they are fluffy and sweet.
             The <xref target="RFC5545" section="3.8.2.2" sectionFormat="parens">DTEND property</xref> in a VEVENT component converts to the <xref target="jscalendarbis" section="5.1.2" sectionFormat="parens">"duration" property</xref> of the Event object.
           </t>
           <t>The duration is the timespan between the points in time of the DTSTART and DTEND property values when converted to UTC time.</t>
-          <t>If the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DTEND property differs from that of the DTSTART property, then the DTEND property also converts to a Location object. The timezone identifier converts to the "timeZone" property of the Location object. The relativeTo property of the Location is set to "end". The Location object is set in the "locations" property of the Event object.</t>
-          <t>Implementations <bcp14>MAY</bcp14> preserve the fact that the duration got determined by the DTEND property. How to do this depends on the timezone identifiers of the DTSTART and DTEND properties.  If the identifiers are equal, then implementations <bcp14>MUST</bcp14> set the <xref target="jscal-prop-icalcomponent">"iCalComponent" property</xref> in the Event object and there add an entry for the path "duration" in the "convertedProperties" property. If instead the timezone identifiers are not equal, then implementations <bcp14>MUST</bcp14> set the <xref target="jscal-prop-icalproperty">"iCalProperty" property</xref> of the Location object. In both cases, the value <bcp14>MUST</bcp14> be an ICalProperty object with the "name" property set to "dtend".</t>
+          <t>If the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DTEND property differs from that of the DTSTART property, then it converts to the "endTimeZone" property of the Event.</t>
+          <t>Implementations <bcp14>MAY</bcp14> preserve the fact that the duration got determined by the DTEND property. How to do this depends on the timezone identifiers of the DTSTART and DTEND properties: If the time zone identifiers are not equal, then the presence of the "endTimeZone" property implies that it converted from the DTEND property. If the time zone identifiers are equal, then implementations <bcp14>MAY</bcp14> set the <xref target="jscal-prop-icalcomponent">"iCalComponent" property</xref> in the Event object and there add an entry for the path "duration" in the "convertedProperties" property. The value <bcp14>MUST</bcp14> be an ICalProperty object with the "name" property set to "dtend".</t>
           <t>The following examples illustrate how to convert the DTEND property:</t>
+          <figure anchor="test-ical-prop-dtend-different-tzid">
+            <name>Converting the DTEND property with different timezone</name>
+            <sourcecode type="text/calendar"><![CDATA[
+DTSTART;TZID=Europe/Berlin:20241017T130000
+DTEND;TZID=Asia/Bangkok:20241018T040000
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"start": "2024-10-17T13:00:00",
+"timeZone": "Europe/Berlin",
+"duration": "PT10H",
+"endTimeZone": "Asia/Bangkok"
+]]></sourcecode>
+          </figure>
           <figure anchor="test-ical-prop-dtend-same-tzid">
             <name>Converting the DTEND property with same timezone</name>
             <sourcecode type="text/calendar"><![CDATA[
@@ -2615,29 +2628,6 @@ DTEND;TZID=Australia/Melbourne:20241002T140000
   "name": "vevent",
   "convertedProperties": {
     "duration": {
-      "@type": "ICalProperty",
-      "name": "dtend"
-    }
-  }
-}
-]]></sourcecode>
-          </figure>
-          <figure anchor="test-ical-prop-dtend-different-tzid">
-            <name>Converting the DTEND property with different timezone</name>
-            <sourcecode type="text/calendar"><![CDATA[
-DTSTART;TZID=Europe/Berlin:20241017T130000
-DTEND;TZID=Asia/Bangkok:20241018T040000
-  ]]></sourcecode>
-            <sourcecode type="json"><![CDATA[
-"start": "2024-10-17T13:00:00",
-"timeZone": "Europe/Berlin",
-"duration": "PT10H",
-"locations": {
-  "l5": {
-    "@type": "Location",
-    "timeZone": "Asia/Bangkok",
-    "relativeTo": "end",
-    "iCalProperty": {
       "@type": "ICalProperty",
       "name": "dtend"
     }
@@ -2778,9 +2768,8 @@ DTSTART;VALUE=DATE:20240921
           <name>DUE</name>
           <t>
               The <xref target="RFC5545" section="3.8.2.3" sectionFormat="parens">DUE property</xref> in a VTODO component converts to the <xref target="jscalendarbis" section="5.2.1" sectionFormat="parens">"due" property</xref> of the Task object.</t>
-          <t>
-                See <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values.</t>
-          <t>If the VTODO component does not contain a DTSTART property, then the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DUE property converts to the "timeZone" property of the Task object. If instead the VTODO component contains both the DUE and DTSTART properties, then the timezone identifier of the DUE property does not convert to a standard JSCalendar element. The value of the "due" property <bcp14>MUST</bcp14> denote the date and time relative to the timezone of the DTSTART property.</t>
+          <t>See <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values.</t>
+          <t>If the VTODO component does not contain a DTSTART property, then the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DUE property converts to the "timeZone" property of the Task object. If it contains both the DUE and DTSTART properties and the timezone identifier of the DUE property differs from that of the DTSTART property, then the TZID of the DUE property converts to the "endTimeZone" property of the Task.</t>
           <t>If the value type of the DUE property is DATE, then the value of the <xref target="jscalendarbis" section="4.2.4" sectionFormat="parens">"showWithoutTime" property</xref> is "true".</t>
           <t>The following examples illustrate how to convert the DUE property:</t>
           <figure anchor="test-ical-prop-due-tzid">
@@ -4222,6 +4211,16 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
             </tr>
             <tr>
+              <td>endTimeZone</td>
+              <td>
+                <xref target="jscalendarbis" section="5.1.3" sectionFormat="comma"/>
+              </td>
+              <td>TZID parameter of DTEND or DUE</td>
+              <td>
+                <t><xref target="ical-prop-dtend"/>, <xref target="ical-prop-due"/></t>
+              </td>
+            </tr>
+            <tr>
               <td>excluded</td>
               <td>
                 <xref target="jscalendarbis" section="4.3.6" sectionFormat="comma"/>
@@ -4849,7 +4848,6 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
         <t>The <xref target="jscalendarbis" section="4.2.5" sectionFormat="parens">Location object</xref> converts to either a <xref target="ical-prop-location">LOCATION</xref>, <xref target="ical-prop-geo">GEO</xref>, or <xref target="ical-prop-geo">DTEND</xref> property, or it converts to a <xref target="ical-comp-vlocation">VLOCATION component</xref>. Which iCalendar element to choose is implementation-specific. As a guideline:</t>
         <ul>
           <li>If the "iCalProperty" or "iCalComponent" property on the Location object is set, convert the object back to the named iCalendar element.</li>
-          <li>Choose DTEND if the embedding object is an Event, only the "timeZone" and the "relativeTo" properties are set, the "relativeTo" property value is "end" and the iCalendar component does not already contain a DTEND property. The "timeZone" property converts to the TZID parameter of the DTEND property. The duration of the embedding Event object determines the DTEND property value.</li>
           <li>Choose LOCATION if the "name" property is set and the iCalendar component does not already contain a LOCATION property. The "name" property converts to the LOCATION property value.</li>
           <li>Choose GEO if the "coordinates" property is set and the iCalendar component does not already contain a GEO property. The "coordinates" property converts to the GEO property value.</li>
           <li>Choose the VLOCATION component otherwise.</li>
@@ -6255,19 +6253,6 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
           <ul>
             <li>
               <xref target="jscalendarbis" section="4.2.8" sectionFormat="comma">locale</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>
-            <xref target="jscalendarbis" section="4.2.5" sectionFormat="comma">Location</xref>
-          </name>
-          <ul>
-            <li>
-              <xref target="jscalendarbis" section="4.5.2" sectionFormat="comma">relativeTo</xref>
-            </li>
-            <li>
-              <xref target="jscalendarbis" section="4.7.1" sectionFormat="comma">timeZone</xref>
             </li>
           </ul>
         </section>
