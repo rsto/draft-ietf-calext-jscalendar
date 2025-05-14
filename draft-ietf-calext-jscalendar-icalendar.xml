@@ -660,7 +660,7 @@ END:VCALENDAR
 BEGIN:VEVENT
 BEGIN:PARTICIPANT
 UID:47AD2E1C-49D4-45DF-BD83-8398ACC7D8E2
-DESCRIPTION:A contact
+DESCRIPTION:A participant
 END:PARTICIPANT
 ...
 ]]></sourcecode>
@@ -671,7 +671,7 @@ END:PARTICIPANT
   "participants": {
     "p32": {
       "@type": "Participant",
-      "description": "A contact",
+      "description": "A participant",
       "iCalComponent": {
         "@type": "ICalComponent",
         "name": "participant",
