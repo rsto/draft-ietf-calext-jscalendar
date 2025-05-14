@@ -585,17 +585,6 @@ END:VCALENDAR
                 <td/>
               </tr>
               <tr>
-                <td>COMMENT</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.4" sectionFormat="comma"/>
-                </td>
-                <td>participationComment</td>
-                <td>
-                  <xref target="ical-prop-comment"/>
-                </td>
-                <td>Only one comment supported</td>
-              </tr>
-              <tr>
                 <td>DESCRIPTION</td>
                 <td>
                   <xref target="RFC5545" section="3.8.1.5" sectionFormat="comma"/>
@@ -872,17 +861,6 @@ END:VALARM
                 <td>color</td>
                 <td>
                   <xref target="ical-prop-color"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>COMMENT</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.4" sectionFormat="comma"/>
-                </td>
-                <td>participants/*/participationComment</td>
-                <td>
-                  <xref target="ical-prop-comment"/>
                 </td>
                 <td/>
               </tr>
@@ -1452,17 +1430,6 @@ END:VLOCATION
                 <td>color</td>
                 <td>
                   <xref target="ical-prop-color"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>COMMENT</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.4" sectionFormat="comma"/>
-                </td>
-                <td>participants/*/participationComment</td>
-                <td>
-                  <xref target="ical-prop-comment"/>
                 </td>
                 <td/>
               </tr>
@@ -2414,34 +2381,6 @@ COLOR:#ffa07a
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "color": "#ffa07a"
-]]></sourcecode>
-          </figure>
-        </section>
-        <section anchor="ical-prop-comment">
-          <name>COMMENT</name>
-          <t>
-            The <xref target="RFC5545" section="3.8.1.4" sectionFormat="parens">COMMENT property</xref> in a PARTICIPANT component converts to the <xref target="jscalendarbis" section="4.4.6" sectionFormat="parens">"participationComment" property</xref>.
-          </t>
-          <t>
-              The <xref target="RFC5545" section="3.8.1.4" sectionFormat="parens">COMMENT property</xref> in an <xref target="RFC5546">iTIP-scheduled</xref> VEVENT or VTODO component converts to the <xref target="jscalendarbis" section="4.4.6" sectionFormat="parens">"participationComment" property</xref> of that Participant object, which represents the source of this scheduling message, if any. It otherwise converts to the <xref target="jscal-prop-icalcomponent">iCalComponent/properties property</xref> of the Event or Task object.
-            </t>
-          <t>Converting multiple COMMENT properties to the single-valued participationComment property is implementation-specific.</t>
-          <t>The following examples illustrate how to convert the COMMENT property:</t>
-          <figure anchor="test-ical-prop-comment-participant">
-            <name>Converting the COMMENT property in a PARTICIPANT component</name>
-            <sourcecode type="text/calendar"><![CDATA[
-BEGIN:PARTICIPANT
-COMMENT:I'll think about it
-...
-  ]]></sourcecode>
-            <sourcecode type="json"><![CDATA[
-"participants": {
-  "g2": {
-    "@type": "Participant",
-    "participationComment": "I'll think about it",
-    "...": ""
-  }
-}
 ]]></sourcecode>
           </figure>
         </section>
@@ -5064,18 +5003,6 @@ JSPROP;JSPTR="coordinates":"geo:48.198634\,16.371648\;crs=wgs84\;u=40"
               </td>
             </tr>
             <tr>
-              <td>participationComment</td>
-              <td>
-                <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma"/>
-              </td>
-              <td>COMMENT</td>
-              <td>
-                <t>
-                  <xref target="ical-prop-comment"/>
-                </t>
-              </td>
-            </tr>
-            <tr>
               <td>percentComplete</td>
               <td>
                 <xref target="jscalendarbis" section="5.2.4" sectionFormat="comma"/>
@@ -5525,7 +5452,6 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2397.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5234.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5545.xml"/>
-        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5546.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5870.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6047.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6638.xml"/>
@@ -5639,6 +5565,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
                 <xref target="RFC5545" section="3.8.1.2" sectionFormat="comma">CATEGORIES</xref>
               </li>
               <li>
+                <xref target="RFC5545" section="3.8.1.4" sectionFormat="comma">COMMENT</xref>
+              </li>
+              <li>
                 <xref target="RFC5545" section="3.8.4.2" sectionFormat="comma">CONTACT</xref>
               </li>
               <li>
@@ -5747,6 +5676,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             </name>
             <ul>
               <li>
+                <xref target="RFC5545" section="3.8.1.4" sectionFormat="comma">COMMENT</xref>
+              </li>
+              <li>
                 <xref target="RFC5545" section="3.8.4.2" sectionFormat="comma">CONTACT</xref>
               </li>
               <li>
@@ -5790,6 +5722,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
               <xref target="RFC5545" section="3.6.2" sectionFormat="comma">VTODO</xref>
             </name>
             <ul>
+              <li>
+                <xref target="RFC5545" section="3.8.1.4" sectionFormat="comma">COMMENT</xref>
+              </li>
               <li>
                 <xref target="RFC5545" section="3.8.2.1" sectionFormat="comma">COMPLETED</xref>
               </li>
@@ -5885,19 +5820,6 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
               <xref target="RFC5545" section="3.8.1.2" sectionFormat="comma">CATEGORIES</xref>
             </name>
             <ul>
-              <li>
-                <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
-              </li>
-            </ul>
-          </section>
-          <section>
-            <name>
-              <xref target="RFC5545" section="3.8.1.4" sectionFormat="comma">COMMENT</xref>
-            </name>
-            <ul>
-              <li>
-                <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
-              </li>
               <li>
                 <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
               </li>
