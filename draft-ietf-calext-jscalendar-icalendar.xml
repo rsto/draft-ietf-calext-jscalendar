@@ -2070,30 +2070,6 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
                 <td/>
               </tr>
               <tr>
-                <td>SCHEDULE-AGENT</td>
-                <td>
-                  <xref target="RFC6638" section="7.1" sectionFormat="comma"/>
-                </td>
-                <td>scheduleAgent</td>
-                <td/>
-              </tr>
-              <tr>
-                <td>SCHEDULE-FORCE-SEND</td>
-                <td>
-                  <xref target="RFC6638" section="7.2" sectionFormat="comma"/>
-                </td>
-                <td>scheduleForceSend</td>
-                <td/>
-              </tr>
-              <tr>
-                <td>SCHEDULE-STATUS</td>
-                <td>
-                  <xref target="RFC6638" section="7.3" sectionFormat="comma"/>
-                </td>
-                <td>scheduleStatus</td>
-                <td/>
-              </tr>
-              <tr>
                 <td>SENT-BY</td>
                 <td>
                   <xref target="RFC5545" section="3.2.18" sectionFormat="comma"/>
@@ -4894,36 +4870,6 @@ JSPROP;JSPTR="coordinates":"geo:48.198634\,16.371648\;crs=wgs84\;u=40"
               </td>
             </tr>
             <tr>
-              <td>scheduleAgent</td>
-              <td>
-                <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma"/>
-              </td>
-              <td>SCHEDULE-AGENT</td>
-              <td>
-                <xref target="ical-prop-attendee"/>
-              </td>
-            </tr>
-            <tr>
-              <td>scheduleForceSend</td>
-              <td>
-                <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma"/>
-              </td>
-              <td>SCHEDULE-FORCE-SEND</td>
-              <td>
-                <xref target="ical-prop-attendee"/>
-              </td>
-            </tr>
-            <tr>
-              <td>scheduleStatus</td>
-              <td>
-                <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma"/>
-              </td>
-              <td>SCHEDULE-STATUS</td>
-              <td>
-                <xref target="ical-prop-attendee"/>
-              </td>
-            </tr>
-            <tr>
               <td>sentBy</td>
               <td>
                 <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma"/>
@@ -5806,6 +5752,15 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             <ul>
               <li>
                 <xref target="RFC5545" section="3.2.6" sectionFormat="comma">DIR</xref>
+              </li>
+              <li>
+                <xref target="RFC6638" section="7.1" sectionFormat="comma">SCHEDULE-AGENT</xref>
+              </li>
+              <li>
+                <xref target="RFC6638" section="7.2" sectionFormat="comma">SCHEDULE-FORCE-SEND</xref>
+              </li>
+              <li>
+                <xref target="RFC6638" section="7.3" sectionFormat="comma">SCHEDULE-STATUS</xref>
               </li>
               <li>
                 <xref target="RFC5545" section="3.2.18" sectionFormat="comma">SENT-BY</xref>
