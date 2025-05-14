@@ -1003,17 +1003,6 @@ END:VALARM
                 <td/>
               </tr>
               <tr>
-                <td>EXRULE</td>
-                <td>
-                  <xref target="RFC2445" section="4.8.5.2" sectionFormat="comma"/>
-                </td>
-                <td>excludedRecurrenceRules</td>
-                <td>
-                  <xref target="ical-prop-exrule"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
                 <td>GEO</td>
                 <td>
                   <xref target="RFC5545" section="3.8.1.6" sectionFormat="comma"/>
@@ -1601,17 +1590,6 @@ END:VLOCATION
                 <td>recurrenceOverrides</td>
                 <td>
                   <xref target="ical-prop-exdate"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>EXRULE</td>
-                <td>
-                  <xref target="RFC2445" section="4.8.5.2" sectionFormat="comma"/>
-                </td>
-                <td>excludedRecurrenceRules</td>
-                <td>
-                  <xref target="ical-prop-exrule"/>
                 </td>
                 <td/>
               </tr>
@@ -2939,13 +2917,6 @@ EXDATE:20230801T130000Z
 ]]></sourcecode>
           </figure>
         </section>
-        <section anchor="ical-prop-exrule">
-          <name>EXRULE</name>
-          <t>
-            The <xref target="RFC2445" section="4.8.5.2" sectionFormat="parens">EXRULE property</xref> in a VEVENT or VTODO component converts to a <xref target="RFC8984" section="4.3.3" sectionFormat="parens">RecurrenceRule object</xref>.  The converted object is set in the "excludedRecurrenceRules" property of the Event or Task.
-          </t>
-          <t>See <xref target="ical-prop-rrule"/> for an example how to convert a recurrence rule.</t>
-        </section>
         <section anchor="ical-prop-geo">
           <name>GEO</name>
           <t>
@@ -4266,18 +4237,6 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               <td/>
               <td>
                 <t><xref target="ical-prop-exdate"/>, and remarks about recurrenceOverrides below</t>
-              </td>
-            </tr>
-            <tr>
-              <td>excludedRecurrenceRules</td>
-              <td>
-                <xref target="RFC8984" section="4.3.4" sectionFormat="comma"/>
-              </td>
-              <td>EXRULE</td>
-              <td>
-                <t>
-                  <xref target="ical-prop-exrule"/>
-                </t>
               </td>
             </tr>
             <tr>
@@ -5708,7 +5667,6 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
         <name>Normative References</name>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2397.xml"/>
-        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2445.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3986.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5234.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5545.xml"/>
