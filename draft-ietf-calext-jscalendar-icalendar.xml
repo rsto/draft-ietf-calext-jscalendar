@@ -6260,16 +6260,6 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
         </section>
         <section>
           <name>
-            <xref target="jscalendarbis" section="1.4.11" sectionFormat="comma">Link</xref>
-          </name>
-          <ul>
-            <li>
-              <xref target="jscalendarbis" section="1.4.11" sectionFormat="comma">cid</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>
             <xref target="jscalendarbis" section="4.2.5" sectionFormat="comma">Location</xref>
           </name>
           <ul>
