@@ -2643,7 +2643,7 @@ DTSTART;VALUE=DATE:20240921
           <t>
               The <xref target="RFC5545" section="3.8.2.3" sectionFormat="parens">DUE property</xref> in a VTODO component converts to the <xref target="jscalendarbis" section="5.2.1" sectionFormat="parens">"due" property</xref> of the Task object.</t>
           <t>See <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values.</t>
-          <t>If the VTODO component does not contain a DTSTART property, then the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DUE property converts to the "timeZone" property of the Task object. If it contains both the DUE and DTSTART properties and the timezone identifier of the DUE property differs from that of the DTSTART property, then the TZID of the DUE property converts to the "endTimeZone" property of the Task.</t>
+          <t>If the VTODO component does not contain a DTSTART property, then the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DUE property converts to the "timeZone" property of the Task object. If it contains both the DUE and DTSTART properties and the timezone identifier of the DUE property differs from that of the DTSTART property, then the "due" date-time property value <bcp14>MUST</bcp14> be relative to the time zone of DTSTART.</t>
           <t>If the value type of the DUE property is DATE, then the value of the <xref target="jscalendarbis" section="4.2.4" sectionFormat="parens">"showWithoutTime" property</xref> is "true".</t>
           <t>The following examples illustrate how to convert the DUE property:</t>
           <figure anchor="test-ical-prop-due-tzid">
@@ -4004,16 +4004,6 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
             </tr>
             <tr>
-              <td>endTimeZone</td>
-              <td>
-                <xref target="jscalendarbis" section="5.1.3" sectionFormat="comma"/>
-              </td>
-              <td>TZID parameter of DTEND or DUE</td>
-              <td>
-                <t><xref target="ical-prop-dtend"/>, <xref target="ical-prop-due"/></t>
-              </td>
-            </tr>
-            <tr>
               <td>freeBusyStatus</td>
               <td>
                 <xref target="jscalendarbis" section="4.4.2" sectionFormat="comma"/>
@@ -4296,6 +4286,16 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               <td>DURATION, or DTEND</td>
               <td>
                 <t><xref target="ical-prop-duration"/>, <xref target="ical-prop-dtend"/></t>
+              </td>
+            </tr>
+            <tr>
+              <td>endTimeZone</td>
+              <td>
+                <xref target="jscalendarbis" section="5.1.3" sectionFormat="comma"/>
+              </td>
+              <td>TZID parameter of DTEND</td>
+              <td>
+                <t><xref target="ical-prop-dtend"/>, <xref target="ical-prop-due"/></t>
               </td>
             </tr>
             <tr>
