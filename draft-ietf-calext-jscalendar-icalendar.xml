@@ -640,6 +640,17 @@ END:VCALENDAR
                 <td/>
               </tr>
               <tr>
+                <td>STYLED-DESCRIPTION</td>
+                <td>
+                  <xref target="RFC9073" section="6.5" sectionFormat="comma"/>
+                </td>
+                <td>description</td>
+                <td>
+                  <xref target="ical-prop-styled-description"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
                 <td>SUMMARY</td>
                 <td>
                   <xref target="RFC5545" section="3.8.1.12" sectionFormat="comma"/>
@@ -1329,6 +1340,17 @@ END:VCALENDAR
                 <td>name</td>
                 <td>
                   <xref target="ical-prop-name"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
+                <td>STYLED-DESCRIPTION</td>
+                <td>
+                  <xref target="RFC9073" section="6.5" sectionFormat="comma"/>
+                </td>
+                <td>description</td>
+                <td>
+                  <xref target="ical-prop-styled-description"/>
                 </td>
                 <td/>
               </tr>
@@ -3786,7 +3808,7 @@ SOURCE;VALUE=URI:https://example.com/holidays.ics
         </section>
         <section anchor="ical-prop-styled-description">
           <name>STYLED-DESCRIPTION</name>
-          <t>The <xref target="RFC9073" section="6.5" sectionFormat="parens">STYLED-DESCRIPTION property</xref> in a VEVENT or VTODO component converts to the <xref target="jscalendarbis" section="4.2.2" sectionFormat="parens">"description" property</xref> of the Event or Task object under the following conditions:</t>
+          <t>The <xref target="RFC9073" section="6.5" sectionFormat="parens">STYLED-DESCRIPTION property</xref> in a PARTICIPANT, VLOCATION, VEVENT or VTODO component converts to the <xref target="jscalendarbis" section="4.2.2" sectionFormat="parens">"description" property</xref> of the Participant, Location, Event or Task object under the following conditions:</t>
           <ul>
             <li>The property value type <bcp14>MUST</bcp14> be TEXT.</li>
             <li>The FMTTYPE parameter either <bcp14>MUST NOT</bcp14> be set, or its value <bcp14>MUST</bcp14> be a <xref target="RFC6838">media type</xref> with top-level type "text".</li>
@@ -4803,11 +4825,21 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>description</td>
               <td>
-                <xref target="jscalendarbis" section="4.2.2" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.2.5" sectionFormat="comma"/>
               </td>
-              <td>DESCRIPTION</td>
+              <td>DESCRIPTION, or STYLED-DESCRIPTION</td>
               <td>
-                <xref target="ical-prop-description"/>
+                <t><xref target="ical-prop-description"/>, <xref target="ical-prop-styled-description"/></t>
+              </td>
+            </tr>
+            <tr>
+              <td>descriptionContentType</td>
+              <td>
+                <xref target="jscalendarbis" section="4.2.5" sectionFormat="comma"/>
+              </td>
+              <td>FMTTYPE (parameter) of STYLED-DESCRIPTION</td>
+              <td>
+                <t><xref target="ical-prop-styled-description"/></t>
               </td>
             </tr>
             <tr>
@@ -5058,11 +5090,21 @@ JSPROP;JSPTR="coordinates":"geo:48.198634\,16.371648\;crs=wgs84\;u=40"
             <tr>
               <td>description</td>
               <td>
-                <xref target="jscalendarbis" section="4.2.2" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.4.5" sectionFormat="comma"/>
               </td>
-              <td>DESCRIPTION</td>
+              <td>DESCRIPTION, or STYLED-DESCRIPTION</td>
               <td>
-                <xref target="ical-prop-description"/>
+                <t><xref target="ical-prop-description"/>, <xref target="ical-prop-styled-description"/>, and remarks below</t>
+              </td>
+            </tr>
+            <tr>
+              <td>descriptionContentType</td>
+              <td>
+                <xref target="jscalendarbis" section="4.4.5" sectionFormat="comma"/>
+              </td>
+              <td>FMTTYPE (parameter) of STYLED-DESCRIPTION</td>
+              <td>
+                <t><xref target="ical-prop-styled-description"/></t>
               </td>
             </tr>
             <tr>
@@ -5703,9 +5745,6 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
               </li>
               <li>
                 <xref target="RFC9074" section="6.6" sectionFormat="comma">STRUCTURED-DATA</xref>
-              </li>
-              <li>
-                <xref target="RFC9073" section="6.5" sectionFormat="comma">STYLED-DESCRIPTION</xref>
               </li>
               <li>
                 <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma">UID</xref>
