@@ -6268,9 +6268,6 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
               <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma">language</xref>
             </li>
             <li>
-              <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma">locationId</xref>
-            </li>
-            <li>
               <xref target="jscalendarbis" section="5.2.6" sectionFormat="comma">progressUpdated</xref>
             </li>
             <li>
