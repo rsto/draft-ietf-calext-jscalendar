@@ -2126,6 +2126,14 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
                 <td>scheduleStatus</td>
                 <td/>
               </tr>
+              <tr>
+                <td>SENT-BY</td>
+                <td>
+                  <xref target="RFC5545" section="3.2.18" sectionFormat="comma"/>
+                </td>
+                <td>sentBy</td>
+                <td/>
+              </tr>
             </tbody>
           </table>
           <t>If no ROLE parameter is set, then the "attendee" role in the "roles" property <bcp14>MUST</bcp14> be set.</t>
@@ -4976,6 +4984,16 @@ JSPROP;JSPTR="coordinates":"geo:48.198634\,16.371648\;crs=wgs84\;u=40"
                 <xref target="ical-prop-attendee"/>
               </td>
             </tr>
+            <tr>
+              <td>sentBy</td>
+              <td>
+                <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma"/>
+              </td>
+              <td>SENT-BY</td>
+              <td>
+                <xref target="ical-prop-attendee"/>
+              </td>
+            </tr>
           </tbody>
         </table>
         <t>Remarks:</t>
@@ -6079,9 +6097,6 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
               <xref target="jscalendarbis" section="4.6.1" sectionFormat="comma">localizations</xref>
             </li>
             <li>
-              <xref target="jscalendarbis" section="4.4.5" sectionFormat="comma">sentBy</xref>
-            </li>
-            <li>
               <xref target="jscalendarbis" section="4.2.4" sectionFormat="comma">showWithoutTime</xref>
             </li>
           </ul>
@@ -6103,9 +6118,6 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
           <ul>
             <li>
               <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma">invitedBy</xref>
-            </li>
-            <li>
-              <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma">sentBy</xref>
             </li>
           </ul>
         </section>
