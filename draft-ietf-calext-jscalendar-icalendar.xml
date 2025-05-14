@@ -2753,7 +2753,7 @@ ESTIMATED-DURATION:P2D
           <t>
             The <xref target="RFC5545" section="3.8.5.1" sectionFormat="parens">EXDATE property</xref> in a VEVENT or VTODO component converts to a <xref target="jscalendarbis" section="1.4.9" sectionFormat="parens">PatchObject value</xref>.  The converted object is set in the "recurrenceOverrides" property of the Event or Task object.
           </t>
-          <t>The property value converts to the key in the "recurrenceOverrides" property value. See <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values. The date-time <bcp14>MUST</bcp14> be relative to the timezone identified by the "timeZone" property of the Event or Task.  The PatchObject value <bcp14>MUST</bcp14> set the "excluded" property to "true" and <bcp14>MUST NOT</bcp14> set any other property.</t>
+          <t>The property value converts to the key in the "recurrenceOverrides" property value. See <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values. The date-time <bcp14>MUST</bcp14> be relative to the timezone identified by the "timeZone" property of the Event or Task.  The PatchObject value <bcp14>MUST</bcp14> set the "excluded" member to "true" and <bcp14>MUST NOT</bcp14> set any other property.</t>
           <t>The following example illustrates how to convert the EXDATE property:</t>
           <figure anchor="test-ical-prop-exdate">
             <name>Converting the EXDATE property</name>
@@ -4019,16 +4019,6 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
             </tr>
             <tr>
-              <td>excluded</td>
-              <td>
-                <xref target="jscalendarbis" section="4.3.6" sectionFormat="comma"/>
-              </td>
-              <td/>
-              <td>
-                <t><xref target="ical-prop-exdate"/>, and remarks about recurrenceOverrides below</t>
-              </td>
-            </tr>
-            <tr>
               <td>freeBusyStatus</td>
               <td>
                 <xref target="jscalendarbis" section="4.4.2" sectionFormat="comma"/>
@@ -4288,7 +4278,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <t>The descriptionContentType property value determines if the "description" property converts to the DESCRIPTION or STYLED-DESCRIPTION property. A description of content type "text/plain" converts to the DESCRIPTION property. Any other description converts to the STYLED-DESCRIPTION property, in which case a plain text version of the rich-text description <bcp14>MAY</bcp14> be set additionally in the DESCRIPTION property, having its DERIVED parameter set to "TRUE". How to derive plain text from rich-text is implementation-specific.</t>
           </li>
           <li>
-            <t>The entries in the "recurrenceOverrides" property convert depending on the contents of the PatchObject value. A PatchObject that sets the "excluded" property to "true" converts to an EXDATE property for the date-time of that recurrence instance. An empty PatchObject converts to an RDATE property. Any other PatchObject converts to a recurrence override component in the embedding VCALENDAR component.</t>
+            <t>The entries in the "recurrenceOverrides" property convert depending on the contents of the PatchObject value. A PatchObject that sets the "excluded" member to "true" converts to an EXDATE property for the date-time of that recurrence instance. An empty PatchObject converts to an RDATE property. Any other PatchObject converts to a recurrence override component in the embedding VCALENDAR component.</t>
           </li>
         </ul>
         <t>Properties specific to the Event object type convert to iCalendar properties as follows:</t>
