@@ -2411,7 +2411,7 @@ CONCEPT:https://example.com/event-types/arts/literature
                 <td>
                   <xref target="RFC7986" section="6.4" sectionFormat="comma"/>
                 </td>
-                <td>description</td>
+                <td>name</td>
                 <td/>
               </tr>
             </tbody>
@@ -2428,7 +2428,7 @@ CONFERENCE;VALUE=URI;FEATURE=AUDIO,VIDEO;
 "virtualLocations": {
   "b2": {
     "@type": "VirtualLocation",
-    "description": "Web video chat, access code=76543",
+    "name": "Web video chat, access code=76543",
     "uri": "https://chat.example.com/audio?id=123456",
     "features": {
       "audio": true,
@@ -4975,7 +4975,7 @@ JSPROP;JSPTR="coordinates":"geo:48.198634\,16.371648\;crs=wgs84\;u=40"
               </td>
             </tr>
             <tr>
-              <td>description</td>
+              <td>name</td>
               <td>
                 <xref target="jscalendarbis" section="4.2.5" sectionFormat="comma"/>
               </td>
@@ -5979,7 +5979,7 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
           </name>
           <ul>
             <li>
-              <xref target="jscalendarbis" section="4.2.2" sectionFormat="comma">name</xref>
+              <xref target="jscalendarbis" section="4.2.7" sectionFormat="comma">description</xref>
             </li>
           </ul>
         </section>
