@@ -6265,23 +6265,7 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
               <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma">invitedBy</xref>
             </li>
             <li>
-              <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma">language</xref>
-            </li>
-            <li>
-              <xref target="jscalendarbis" section="5.2.6" sectionFormat="comma">progressUpdated</xref>
-            </li>
-            <li>
               <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma">sentBy</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>
-            <xref target="jscalendarbis" section="5.2" sectionFormat="parens">Task</xref>
-          </name>
-          <ul>
-            <li>
-              <xref target="jscalendarbis" section="5.2.6" sectionFormat="comma">progressUpdated</xref>
             </li>
           </ul>
         </section>
