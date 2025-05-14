@@ -611,7 +611,7 @@ END:VCALENDAR
                 <td>
                   <xref target="RFC5545" section="3.8.7.2" sectionFormat="comma"/>
                 </td>
-                <td>scheduleUpdated</td>
+                <td>updated</td>
                 <td>
                   <xref target="ical-prop-dtstamp"/>
                 </td>
@@ -647,17 +647,6 @@ END:VCALENDAR
                 <td>roles</td>
                 <td>
                   <xref target="ical-prop-participant-type"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>SEQUENCE</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.7.4" sectionFormat="comma"/>
-                </td>
-                <td>scheduleSequence</td>
-                <td>
-                  <xref target="ical-prop-sequence"/>
                 </td>
                 <td/>
               </tr>
@@ -961,7 +950,7 @@ END:VALARM
                 <td>
                   <xref target="RFC5545" section="3.8.7.2" sectionFormat="comma"/>
                 </td>
-                <td>updated, scheduleUpdated</td>
+                <td>updated</td>
                 <td>
                   <xref target="ical-prop-dtstamp"/>
                 </td>
@@ -1530,7 +1519,7 @@ END:VLOCATION
                 <td>
                   <xref target="RFC5545" section="3.8.7.2" sectionFormat="comma"/>
                 </td>
-                <td>updated, scheduleUpdated</td>
+                <td>updated</td>
                 <td>
                   <xref target="ical-prop-dtstamp"/>
                 </td>
@@ -2276,7 +2265,7 @@ ORGANIZER:mailto:organizer@example.com
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:PARTICIPANT
 CALENDAR-ADDRESS:mailto:foo@example.com
-DTSTAMP:20230723T125201Z
+DESCRIPTION:some description
 ...
 END:PARTICIPANT
 ATTENDEE;RSVP=TRUE;PARTSTAT=TENTATIVE:mailto:foo@example.com
@@ -2291,8 +2280,8 @@ ORGANIZER:mailto:organizer@example.com
       "imip": "mailto:foo@example.com"
     },
     "participationStatus": "tentative",
-    "scheduleUpdated": "2023-07-23T12:52:01Z",
     "expectReply": true,
+    "description": "some description",
     "...": ""
   },
   "o4": {
@@ -2663,11 +2652,6 @@ DTEND;VALUE=DATE:20240107
           <name>DTSTAMP</name>
           <t>
               The <xref target="RFC5545" section="3.8.7.2" sectionFormat="parens">DTSTAMP property</xref> in a VEVENT or VTODO component converts to the <xref target="jscalendarbis" section="4.1.6" sectionFormat="parens">"updated" property</xref> of the Event or Task object.</t>
-          <t>An Event or Task object which has the "method" property set might represent an iTIP reply of one of the participants in the object. In this case the value of the DTSTAMP property also converts to the <xref target="jscalendarbis" section="4.4.6" sectionFormat="parens">"scheduleUpdated" property</xref> of that Participant object, which represents the participant from which the iTIP reply originated.
-            </t>
-          <t>
-              The DTSTAMP property in a PARTICIPANT component converts to the <xref target="jscalendarbis" section="4.4.6" sectionFormat="parens">"scheduleUpdated" property</xref> of the Participant object.
-            </t>
           <t>The following examples illustrate how to convert the DTSTAMP property:</t>
           <figure anchor="test-ical-prop-dtstamp-vevent-method">
             <name>Converting the DTSTAMP property in a VEVENT component</name>
@@ -2705,7 +2689,7 @@ DTSTAMP:20240304T132000Z
 "participants": {
   "f4": {
     "@type": "Participant",
-    "scheduleUpdated": "2024-03-04T13:20:00Z",
+    "updated": "2024-03-04T13:20:00Z",
     "...": ""
   }
 }
@@ -3788,9 +3772,7 @@ RRULE:FREQ=YEARLY
         </section>
         <section anchor="ical-prop-sequence">
           <name>SEQUENCE</name>
-          <t>
-              The <xref target="RFC5545" section="3.8.7.4" sectionFormat="parens">SEQUENCE property</xref> in a VEVENT or VTODO component converts to the <xref target="jscalendarbis" section="4.1.7" sectionFormat="parens">"sequence" property</xref> of the Event or Task object. The SEQUENCE property in a PARTICIPANT component converts to the <xref target="jscalendarbis" section="4.4.6" sectionFormat="parens">"scheduleSequence" property</xref> of the Participant object.
-          </t>
+          <t>The <xref target="RFC5545" section="3.8.7.4" sectionFormat="parens">SEQUENCE property</xref> in a VEVENT or VTODO component converts to the <xref target="jscalendarbis" section="4.1.7" sectionFormat="parens">"sequence" property</xref> of the Event or Task object.</t>
           <t>The following example illustrates how to convert the SEQUENCE property:</t>
           <figure anchor="test-ical-prop-sequence">
             <name>Example for converting the SEQUENCE property</name>
@@ -5195,30 +5177,6 @@ JSPROP;JSPTR="coordinates":"geo:48.198634\,16.371648\;crs=wgs84\;u=40"
               <td>PARTICIPANT-TYPE</td>
               <td>
                 <xref target="ical-prop-participant-type"/>
-              </td>
-            </tr>
-            <tr>
-              <td>scheduleSequence</td>
-              <td>
-                <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma"/>
-              </td>
-              <td>SEQUENCE</td>
-              <td>
-                <t>
-                  <xref target="ical-prop-sequence"/>
-                </t>
-              </td>
-            </tr>
-            <tr>
-              <td>scheduleUpdated</td>
-              <td>
-                <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma"/>
-              </td>
-              <td>DTSTAMP</td>
-              <td>
-                <t>
-                  <xref target="ical-prop-dtstamp"/>
-                </t>
               </td>
             </tr>
           </tbody>
