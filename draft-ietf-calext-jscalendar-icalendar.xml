@@ -161,7 +161,7 @@ SUMMARY:he
 }
 ]]></sourcecode>
           </figure>
-          <t>A property with name <tt>"..."</tt> and value <tt>""</tt> stands for additional properties that might be present in a JSCalendar object, but which are irrelevant for this example.  This includes mandatory properties. <xref target="example-notation-jscalendar-dotdotdot"/> illustrates this as an alternative representation for the examples of <xref target="example-notation-jscalendar-implicit-explicit"/>.</t>
+          <t>A property with name <tt>"..."</tt> and value <tt>""</tt> stands for additional properties that might be present in a JSCalendar object but are irrelevant for this example, including mandatory properties. The <tt>"..."</tt> property requires the <tt>"@type"</tt> property to be set. <xref target="example-notation-jscalendar-dotdotdot"/> illustrates this as an alternative representation for the examples of <xref target="example-notation-jscalendar-implicit-explicit"/>.</t>
           <figure anchor="example-notation-jscalendar-dotdotdot">
             <name>Example for additional properties represented by <tt>...</tt>
             </name>
@@ -412,7 +412,6 @@ BEGIN:VEVENT
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 {
-  "...": "",
   "@type": "Group",
   "entries": [
     {
@@ -420,7 +419,8 @@ BEGIN:VEVENT
       "@type": "Event"
     }
   ],
-  "uid": "41aa02b6-42d0-4f45-8cb4-8b5075be2e14"
+  "uid": "41aa02b6-42d0-4f45-8cb4-8b5075be2e14",
+  "...": "",
 }
 ]]></sourcecode>
           </figure>
@@ -452,7 +452,6 @@ END:VCALENDAR
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 {
-  "...": "",
   "@type": "Group",
   "entries": [
     {
@@ -471,7 +470,8 @@ END:VCALENDAR
       "timeZone": "Europe/Berlin",
       "uid": "F4257E1D-5461-4EF6-840F-9DFC653EB559"
     }
-  ]
+  ],
+  "...": ""
 }
 ]]></sourcecode>
           </figure>
@@ -497,7 +497,6 @@ END:VCALENDAR
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 {
-  "...": "",
   "@type": "Group",
   "entries": [
     {
@@ -518,7 +517,8 @@ END:VCALENDAR
       "timeZone": "Europe/Berlin",
       "uid": "F4257E1D-5461-4EF6-840F-9DFC653EB559"
     }
-  ]
+  ],
+  "...": ""
 }
 ]]></sourcecode>
           </figure>
@@ -2210,6 +2210,7 @@ ORGANIZER:mailto:organizer@example.com
     "...": ""
   },
   "o4": {
+    "@type": "Participant",
     "calendarAddress": "mailto:organizer@example.com",
     "...": ""
   }
@@ -3056,10 +3057,12 @@ END:VLOCATION
             <sourcecode type="json"><![CDATA[
 "locations": {
   "1": {
+    "@type": "Location",
     "name": "Fred's Bar",
     "...": ""
   },
   "2": {
+    "@type": "Location",
     "name": "XYZ Parking",
     "...": ""
   },
