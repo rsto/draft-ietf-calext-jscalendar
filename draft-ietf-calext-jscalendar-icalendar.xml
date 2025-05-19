@@ -3018,10 +3018,8 @@ LINK;LINKREL=source;LABEL=Venue;VALUE=URI:
         <section anchor="ical-prop-location">
           <name>LOCATION</name>
           <t>
-            The <xref target="RFC5545" section="3.8.1.7" sectionFormat="parens">LOCATION property</xref> in a VEVENT or VTODO component converts to a <xref target="jscalendarbis" section="4.2.5" sectionFormat="parens">Location object</xref>, unless its DERIVED parameter value is TRUE. The converted object is set in the "locations" property of the Event or Task.
-          </t>
-          <t>The property value converts to the "title" property of the Location object.</t>
-          <t>If the DERIVED parameter value is TRUE, then the property does not convert to a Location object. Instead, a VLOCATION component is expected to represent the location.</t>
+            The <xref target="RFC5545" section="3.8.1.7" sectionFormat="parens">LOCATION property</xref> in a VEVENT or VTODO component converts to a <xref target="jscalendarbis" section="4.2.5" sectionFormat="parens">Location object</xref>, unless its DERIVED parameter value is TRUE. The converted object is set in the "locations" property of the Event or Task. The property value converts to the "title" property of the Location object. If the DERIVED parameter value is TRUE, then the property does not convert to a Location object. Instead, a VLOCATION component is expected to convert to a Location object.</t>
+          <t>If the calendar component contains multiple VLOCATION components, then the LOCATION property also converts to the "mainLocationId" property of the Event or Task object. If the LOCATION property is not derived, then the identifier of its Location object is set in the "mainLocationId". If instead the LOCATION property is derived and its property value matches the NAME property value of a VLOCATION component, then the "mainLocationId" property value matches the identifier of the Location object to which that VLOCATION component converts to.</t>
           <t>The following example illustrates how to convert the LOCATION property:</t>
           <figure anchor="test-ical-prop-location">
             <name>Converting the LOCATION property</name>
@@ -3035,6 +3033,37 @@ LOCATION:Conference Room - F123\, Bldg. 002
     "name": "Conference Room - F123, Bldg. 002",
     "...": ""
   }
+}
+]]></sourcecode>
+          </figure>
+          <t>The following example illustrates how to convert the LOCATION property and multiple VLOCATION components:</t>
+          <figure anchor="test-ical-prop-location-vlocation">
+            <name>Converting the LOCATION property and multiple VLOCATION components</name>
+            <sourcecode type="text/calendar"><![CDATA[
+LOCATION;DERIVED=TRUE:Fred's Bar
+BEGIN:VLOCATION
+NAME:Fred's Bar
+LOCATION-TYPE:bar
+...
+END:VLOCATION
+BEGIN:VLOCATION
+NAME:XYZ Parking
+LOCATION-TYPE:parking
+GEO:40.71427;-74.00597
+...
+END:VLOCATION
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"locations": {
+  "1": {
+    "name": "Fred's Bar",
+    "...": ""
+  },
+  "2": {
+    "name": "XYZ Parking",
+    "...": ""
+  },
+  "mainLocationId": "1"
 }
 ]]></sourcecode>
           </figure>
@@ -4052,6 +4081,18 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
             </tr>
             <tr>
+              <td>mainLocationId</td>
+              <td>
+                <xref target="jscalendarbis" section="4.2.6" sectionFormat="comma"/>
+              </td>
+              <td>LOCATION</td>
+              <td>
+                <t>
+                  <xref target="jscal-location">Location object</xref>
+                </t>
+              </td>
+            </tr>
+            <tr>
               <td>method</td>
               <td>
                 <xref target="jscalendarbis" section="4.1.8" sectionFormat="comma"/>
@@ -4612,7 +4653,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
         <t>The <xref target="jscalendarbis" section="4.2.5" sectionFormat="parens">Location object</xref> converts to either a <xref target="ical-prop-location">LOCATION</xref>, <xref target="ical-prop-geo">GEO</xref>, or <xref target="ical-prop-geo">DTEND</xref> property, or it converts to a <xref target="ical-comp-vlocation">VLOCATION component</xref>. Which iCalendar element to choose is implementation-specific. As a guideline:</t>
         <ul>
           <li>If the "iCalProperty" or "iCalComponent" property on the Location object is set, convert the object back to the named iCalendar element.</li>
-          <li>Choose LOCATION if the "name" property is set and the iCalendar component does not already contain a LOCATION property. The "name" property converts to the LOCATION property value.</li>
+          <li>Choose LOCATION if the key of the Location object in the "locations" property matches the "mainLocationId" property, or if the "name" property is set and the iCalendar component does not already contain a LOCATION property. The "name" property converts to the LOCATION property value.</li>
           <li>Choose GEO if the "coordinates" property is set and the iCalendar component does not already contain a GEO property. The "coordinates" property converts to the GEO property value.</li>
           <li>Choose the VLOCATION component otherwise.</li>
         </ul>
