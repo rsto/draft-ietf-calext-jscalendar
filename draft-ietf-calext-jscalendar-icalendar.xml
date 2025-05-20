@@ -3013,7 +3013,7 @@ IMAGE;VALUE=URI;DISPLAY=BADGE;LABEL=An image;FMTTYPE=image/png:
     "@type": "Link",
     "href": "https://example.com/images/party.png",
     "display": {
-      "badge": "true"
+      "badge": true
     },
     "rel": "icon",
     "contentType": "image/png",
