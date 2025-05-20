@@ -818,9 +818,8 @@ END:VALARM
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VCONFERENCE
 URI;VALUE=URI:https://chat.example.com/x?id=123456
-STYLED-DESCRIPTION;VALUE=TEXT;FMTTYPE=text/html:<body>Click <a
- href="https://chat.example.com/client">here</a> to download t
- he client..</body>
+STYLED-DESCRIPTION;VALUE=TEXT;FMTTYPE=text/html:<body>Click <a href="https://ch
+ at.example.com/client">here</a> to download the client...</body>
 ...
 END:VCONFERENCE
 CONFERENCE;VALUE=URI;FEATURE=AUDIO,VIDEO;
