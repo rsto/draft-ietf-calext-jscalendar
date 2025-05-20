@@ -2572,10 +2572,10 @@ CREATED:20240329T133000Z
           <figure anchor="test-ical-prop-description">
             <name>Converting the DESCRIPTION property</name>
             <sourcecode type="text/calendar"><![CDATA[
-DESCRIPTION:The pancakes there are delicious\; they are fluffy and sweet.
+DESCRIPTION:Their pancakes are delicious\; they are fluffy and sweet.
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
-"description": "The pancakes there are delicious; they are fluffy and sweet."
+"description": "Their pancakes are delicious; they are fluffy and sweet."
 ]]></sourcecode>
           </figure>
         </section>
