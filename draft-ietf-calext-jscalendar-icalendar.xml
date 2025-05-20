@@ -6015,9 +6015,6 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
               <li>
                 <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
               </li>
-              <li>
-                <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
-              </li>
             </ul>
           </section>
           <section>
@@ -6064,9 +6061,6 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             <ul>
               <li>
                 <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
-              </li>
-              <li>
-                <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
               </li>
             </ul>
           </section>
@@ -6144,9 +6138,6 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
                 <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
               </li>
               <li>
-                <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
-              </li>
-              <li>
                 <xref target="RFC9073" section="5.3" sectionFormat="comma">DERIVED</xref>
               </li>
             </ul>
@@ -6158,9 +6149,6 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             <ul>
               <li>
                 <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
-              </li>
-              <li>
-                <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
               </li>
             </ul>
           </section>
