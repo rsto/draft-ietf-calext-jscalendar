@@ -2525,7 +2525,7 @@ CONFERENCE;VALUE=URI;FEATURE=AUDIO,VIDEO;
           <name>COORDINATES</name>
           <t>
             The <xref target="icaljscalexts" section="4.1" sectionFormat="parens">COORDINATES property</xref> in a VLOCATION component converts to the <xref target="jscalendarbis" section="4.2.5" sectionFormat="parens">"coordinates" property</xref> of the Location object.</t>
-         <t>The following example illustrates how to convert the COORDINATES property:</t>
+          <t>The following example illustrates how to convert the COORDINATES property:</t>
           <figure anchor="test-ical-prop-coordinates">
             <name>Converting the COORDINATES property</name>
             <sourcecode type="text/calendar"><![CDATA[
@@ -3887,7 +3887,7 @@ SUMMARY:Birthday Party
 SUMMARY;LANGUAGE=fr:Fête d'anniversaire
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
-"title": "Fête d'anniversaire",
+"title": "F\u00eate d'anniversaire",
 "locale": "fr"
 ]]></sourcecode>
           </figure>
@@ -4224,9 +4224,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td>LANGUAGE (parameter) of either SUMMARY, or DESCRIPTION, or STYLED-DESCRIPTION (in order of preference)</td>
               <td>
-                <t>
-                  <xref target="ical-prop-summary"/>, <xref target="ical-prop-description"/>, <xref target="ical-prop-styled-description"/>
-                </t>
+                <t><xref target="ical-prop-summary"/>, <xref target="ical-prop-description"/>, <xref target="ical-prop-styled-description"/></t>
               </td>
             </tr>
             <tr>
@@ -4669,9 +4667,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td>LANGUAGE (parameter) of either NAME, or DESCRIPTION (in order of preference)</td>
               <td>
-                <t>
-                  <xref target="ical-prop-name"/>, <xref target="ical-prop-description"/>
-                </t>
+                <t><xref target="ical-prop-name"/>, <xref target="ical-prop-description"/></t>
               </td>
             </tr>
             <tr>
@@ -4848,8 +4844,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
                 <xref target="jscalendarbis" section="4.2.5" sectionFormat="comma"/>
               </td>
               <td>COORDINATES</td>
-              <td><xref target="ical-prop-coordinates"/>, <xref target="ical-prop-geo"/>
-              </td>
+              <td><xref target="ical-prop-coordinates"/>, <xref target="ical-prop-geo"/></td>
             </tr>
             <tr>
               <td>description</td>
@@ -5192,9 +5187,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
                 <xref target="jscalendarbis" section="4.2.7" sectionFormat="comma"/>
               </td>
               <td>DESCRIPTION, or STYLED-DESCRIPTION</td>
-              <td>
-                <xref target="ical-prop-description"/>, <xref target="ical-prop-styled-description"/>
-              </td>
+              <td><xref target="ical-prop-description"/>, <xref target="ical-prop-styled-description"/></td>
             </tr>
             <tr>
               <td>descriptionContenType</td>
