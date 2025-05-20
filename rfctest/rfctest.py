@@ -442,7 +442,7 @@ class HTMLReporter:
         )
         if test.j2iresult.error:
             print(f"<pre>{test.j2iresult.error}</pre>", file=self.file)
-        if not test.j2iresult.ical_diff.empty():
+        if test.j2iresult.ical_diff and not test.j2iresult.ical_diff.empty():
             print(f"<h3>Expected</h3>", file=self.file)
             print(f"<pre>{html.escape(str(test.vobject))}</pre>", file=self.file)
             print(f"<h3>Got</h3>", file=self.file)
