@@ -2779,6 +2779,7 @@ EXDATE:20230801T130000Z
         </section>
         <section anchor="ical-prop-geo">
           <name>GEO</name>
+          <t>A GEO property with the DERIVED parameter value "TRUE" does not convert to JSCalendar. For non-derived GEO properties, the following rules apply:</t>
           <t>
             The <xref target="RFC5545" section="3.8.1.6" sectionFormat="parens">GEO property</xref> in a VEVENT or VTODO component converts to a <xref target="jscalendarbis" section="4.2.5" sectionFormat="parens">Location object</xref>.  If the VEVENT or VTODO component also contains the <xref target="ical-prop-location">LOCATION property</xref>, then the GEO and LOCATION properties convert to the same Location object.  The converted object is set in the "locations" property of the Event or Task object.
           </t>
@@ -2789,6 +2790,11 @@ EXDATE:20230801T130000Z
             The <xref target="RFC5545" section="3.8.1.6" sectionFormat="parens">GEO property</xref> in a VLOCATION component converts to the <xref target="jscalendarbis" section="4.2.5" sectionFormat="parens">"coordinates" property</xref> of the Location object.
           </t>
           <t>The pair of FLOAT values converts to a URI with the <xref target="RFC5870">"geo" scheme</xref>.  The first FLOAT value converts to the "coord-a" part of the URI, the second FLOAT value to the "coord-b" part. A preceding plus sign (+) of the FLOAT value <bcp14>MUST</bcp14> be omitted, a preceding minus sign (-) <bcp14>MUST</bcp14> be preserved.  The optional "coord-c" part of the URI <bcp14>MUST</bcp14> be omitted.</t>
+          <t>Implementations <bcp14>MAY</bcp14> preserve the fact that the Location "coordinates" property converted from a GEO property. How to do so depends on how the GEO property converted to a Location object:</t>
+          <ul>
+            <li>If the GEO property converted from a VLOCATION component, then implementations <bcp14>MAY</bcp14> add a path to the "coordinates" property in the "iCalComponent/convertedProperties" property of the Location object.</li>
+            <li>Otherwise, implementations <bcp14>MAY</bcp14> set the "iCalProperty" property of the Location object. Alternatively they <bcp14>MAY</bcp14> add a "iCalComponent" property to the object that contains this Location object in its "locations" property, and point to the "coordinates" property in the "convertedProperties" property.</li>
+          </ul>
           <t>The following examples illustrate how to convert the GEO property:</t>
           <figure anchor="test-ical-prop-geo">
             <name>Converting the GEO property in a VEVENT</name>
@@ -2800,6 +2806,10 @@ GEO:45.5;-93.3
   "d4": {
     "@type": "Location",
     "coordinates": "geo:45.5,-93.3",
+    "iCalProperty": {
+      "@type": "ICalProperty",
+      "name": "geo"
+    },
     "...": ""
   }
 }
@@ -2818,6 +2828,16 @@ GEO:27.175;78.041944
     "name": "Taj Mahal",
     "coordinates": "geo:27.175,78.041944",
     "...": ""
+  }
+},
+"iCalComponent": {
+  "@type": "ICalComponent",
+  "name": "vevent",
+  "convertedProperties": {
+    "locations/2/coordinates": {
+      "@type": "ICalProperty",
+      "name": "geo"
+    }
   }
 }
 ]]></sourcecode>
@@ -2839,7 +2859,13 @@ GEO:48.858222;2.2945
     "coordinates": "geo:48.858222,2.2945",
     "iCalComponent": {
       "@type": "ICalComponent",
-      "name": "vlocation"
+      "name": "vlocation",
+      "convertedProperties": {
+        "coordinates": {
+          "@type": "ICalProperty",
+          "name": "geo"
+        }
+      }
     }
   }
 }
@@ -4740,7 +4766,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
         </table>
         <t>Remarks:</t>
         <ul>
-          <li>If the <xref target="RFC5870" section="3.3" sectionFormat="parens">"geo-path"</xref> of the "coordinates" property value contains anything other than latitude ("coord-a") or longitude ("coord-b"), then the coordinates can not be represented accurately in the GEO property value. Implementations <bcp14>MAY</bcp14> convert such "coordinates" property values to both a GEO property having only the latitude and longitude set, as well as the <xref target="ical-prop-jsprop">JSPROP</xref> property of the VLOCATION. In this case, they <bcp14>MUST</bcp14> set the DERIVED parameter value of the GEO property to TRUE.</li>
+          <li>If the <xref target="RFC5870" section="3.3" sectionFormat="parens">"geo-path"</xref> of the "coordinates" property value contains anything other than latitude ("coord-a") or longitude ("coord-b"), then the coordinates can not be represented accurately in the default GEO property value of type FLOAT. Implementations <bcp14>MAY</bcp14> convert such "coordinates" property values to both a GEO property having only the latitude and longitude set, as well as the <xref target="ical-prop-jsprop">JSPROP</xref> property of the VLOCATION. In this case, they <bcp14>MUST</bcp14> set the DERIVED parameter value of the GEO property to TRUE.</li>
         </ul>
         <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the VLOCATION component, or the component which the Location converts to as a property.</t>
         <t>The following example illustrates how to convert a Location "coordinates" property value that can not be represented in GEO property values without loss.</t>
@@ -5482,7 +5508,7 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
         </reference>
         <reference anchor="jscalendarbis" target="https://datatracker.ietf.org/doc/draft-ietf-calext-jscalendarbis/">
           <front>
-            <title>JSCalendar: A JSON Representation of Calendar Data </title>
+            <title>JSCalendar: A JSON Representation of Calendar Data</title>
             <author fullname="Neil Jenkins" initials="N.M." surname="Jenkins">
               <organization>Fastmail</organization>
             </author>
@@ -5492,6 +5518,16 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
             <date day="13" month="May" year="2025"/>
           </front>
           <seriesInfo name="Internet-Draft" value="draft-ietf-calext-jscalendarbis"/>
+        </reference>
+        <reference anchor="icaljscalexts" target="https://datatracker.ietf.org/doc/draft-stepanek-icalendar-jscalendar-extensions/">
+          <front>
+            <title>iCalendar Format Extensions for JSCalendar</title>
+            <author fullname="Robert Stepanek" initials="R." surname="Stepanek">
+              <organization>Fastmail</organization>
+            </author>
+            <date day="13" month="May" year="2025"/>
+          </front>
+          <seriesInfo name="Internet-Draft" value="draft-stepanek-icalendar-jscalendar-extensions"/>
         </reference>
       </references>
     </references>
