@@ -1245,6 +1245,17 @@ END:VCALENDAR
                 <td/>
               </tr>
               <tr>
+                <td>COORDINATES</td>
+                <td>
+                  <xref target="icaljscalexts" section="4.1" sectionFormat="comma"/>
+                </td>
+                <td>coordinates</td>
+                <td>
+                  <xref target="ical-prop-coordinates"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
                 <td>DESCRIPTION</td>
                 <td>
                   <xref target="RFC5545" section="3.8.1.5" sectionFormat="comma"/>
@@ -2435,6 +2446,31 @@ CONFERENCE;VALUE=URI;FEATURE=AUDIO,VIDEO;
       "audio": true,
       "video": true
     }
+  }
+}
+]]></sourcecode>
+          </figure>
+        </section>
+        <section anchor="ical-prop-coordinates">
+          <name>COORDINATES</name>
+          <t>
+            The <xref target="icaljscalexts" section="4.1" sectionFormat="parens">COORDINATES property</xref> in a VLOCATION component converts to the <xref target="jscalendarbis" section="4.2.5" sectionFormat="parens">"coordinates" property</xref> of the Location object.</t>
+         <t>The following example illustrates how to convert the COORDINATES property:</t>
+          <figure anchor="test-ical-prop-coordinates">
+            <name>Converting the COORDINATES property</name>
+            <sourcecode type="text/calendar"><![CDATA[
+BEGIN:VEVENT
+GEO;DERIVED=TRUE:48.198634;16.371648
+BEGIN:VLOCATION
+COORDINATES;VALUE=URI:geo:48.198634,16.371648;crs=wgs84;u=40
+...
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"locations": {
+  "1": {
+    "@type": "Location",
+    "coordinates": "geo:48.198634,16.371648;crs=wgs84;u=40",
+    "...": ""
   }
 }
 ]]></sourcecode>
@@ -4681,12 +4717,11 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
         <name>Location</name>
         <t>The <xref target="jscalendarbis" section="4.2.5" sectionFormat="parens">Location object</xref> converts to either a <xref target="ical-prop-location">LOCATION</xref>, <xref target="ical-prop-geo">GEO</xref>, or <xref target="ical-prop-geo">DTEND</xref> property, or it converts to a <xref target="ical-comp-vlocation">VLOCATION component</xref>. Which iCalendar element to choose is implementation-specific. As a guideline:</t>
         <ul>
-          <li>If the "iCalProperty" or "iCalComponent" property on the Location object is set, convert the object back to the named iCalendar element.</li>
+          <li>If the "iCalProperty" or "iCalComponent" property on the Location object is set, or the parent JSCalendar object contains an entry for that Location in the "convertedProperties" property of its "iCalComponent" property, then convert the object back to the named iCalendar element.</li>
           <li>Choose LOCATION if the key of the Location object in the "locations" property matches the "mainLocationId" property, or if the "name" property is set and the iCalendar component does not already contain a LOCATION property. The "name" property converts to the LOCATION property value.</li>
-          <li>Choose GEO if the "coordinates" property is set and the iCalendar component does not already contain a GEO property. The "coordinates" property converts to the GEO property value.</li>
           <li>Choose the VLOCATION component otherwise.</li>
         </ul>
-        <t>Implementations <bcp14>MAY</bcp14> convert one of the Location objects to both a VLOCATION component and the LOCATION and GEO properties; In this case, the DERIVED parameter <bcp14>MUST</bcp14> be set on the LOCATION and GEO properties.</t>
+        <t>Implementations <bcp14>MAY</bcp14> convert one of the Location objects to both a VLOCATION component and the LOCATION and GEO properties of the component that contains the VLOCATION component. In this case, the DERIVED parameter <bcp14>MUST</bcp14> be set on the LOCATION and GEO properties with value "TRUE".</t>
         <t>The properties convert to a VLOCATION component as follows:</t>
         <table>
           <name>Properties of the Location object</name>
@@ -4704,8 +4739,8 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               <td>
                 <xref target="jscalendarbis" section="4.2.5" sectionFormat="comma"/>
               </td>
-              <td>GEO</td>
-              <td><xref target="ical-prop-geo"/>, and remarks below
+              <td>COORDINATES</td>
+              <td><xref target="ical-prop-coordinates"/>, <xref target="ical-prop-geo"/>
               </td>
             </tr>
             <tr>
@@ -4764,33 +4799,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             </tr>
           </tbody>
         </table>
-        <t>Remarks:</t>
-        <ul>
-          <li>If the <xref target="RFC5870" section="3.3" sectionFormat="parens">"geo-path"</xref> of the "coordinates" property value contains anything other than latitude ("coord-a") or longitude ("coord-b"), then the coordinates can not be represented accurately in the default GEO property value of type FLOAT. Implementations <bcp14>MAY</bcp14> convert such "coordinates" property values to both a GEO property having only the latitude and longitude set, as well as the <xref target="ical-prop-jsprop">JSPROP</xref> property of the VLOCATION. In this case, they <bcp14>MUST</bcp14> set the DERIVED parameter value of the GEO property to TRUE.</li>
-        </ul>
         <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the VLOCATION component, or the component which the Location converts to as a property.</t>
-        <t>The following example illustrates how to convert a Location "coordinates" property value that can not be represented in GEO property values without loss.</t>
-        <figure anchor="test-jscal-location-coordinates">
-          <name>Converting the Location "coordinates" property without loss</name>
-          <sourcecode type="json"><![CDATA[
-"locations": {
-  "1": {
-    "@type": "Location",
-    "name": "Karlskirche",
-    "coordinates": "geo:48.198634,16.371648;crs=wgs84;u=40",
-    "...": ""
-  }
-}
-]]></sourcecode>
-          <sourcecode type="text/calendar"><![CDATA[
-BEGIN:VEVENT
-GEO;DERIVED=TRUE:48.198634;16.371648
-BEGIN:VLOCATION
-NAME:Karlskirche
-JSPROP;JSPTR="coordinates":"geo:48.198634\,16.371648\;crs=wgs84\;u=40"
-...
-  ]]></sourcecode>
-        </figure>
       </section>
       <section anchor="jscal-participant">
         <name>Participant</name>
