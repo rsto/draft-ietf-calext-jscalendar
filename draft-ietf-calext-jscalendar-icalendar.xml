@@ -2566,6 +2566,8 @@ CREATED:20240329T133000Z
           <name>DESCRIPTION</name>
           <t>The <xref target="RFC5545" section="3.8.1.5" sectionFormat="parens">DESCRIPTION property</xref> in a VEVENT, VTODO, VCALENDAR, VLOCATION, or PARTICIPANT component converts to the <xref target="jscalendarbis" section="4.2.2" sectionFormat="parens">"description" property</xref> of the Event, Task, Group, Location, Link, or Participant object, unless its DERIVED parameter value is TRUE.</t>
           <t>If the DERIVED parameter value is TRUE, then the property does not convert to the "description" property. Instead, a non-derived STYLED-DESCRIPTION property is expected to contain the description. Implementations MAY preserve the property in the <xref target="jscal-prop-icalcomponent">"iCalComponent" property</xref>.</t>
+          <t>If the LANGUAGE parameter is set and the DESCRIPTION property is set in a VEVENT or VTODO component, then the parameter value converts to the "locale" property of the Event or Task object, unless the SUMMARY property in the same component has the LANGUAGE parameter set.</t>
+          <t>If the LANGUAGE parameter is set and the DESCRIPTION property is set in a VCALENDAR component, then the parameter value converts to the "locale" property of the Group object, unless the NAME property in the same component has the LANGUAGE parameter set.</t>
           <t>The following example illustrates how to convert the DESCRIPTION property:</t>
           <figure anchor="test-ical-prop-description">
             <name>Converting the DESCRIPTION property</name>
@@ -3269,20 +3271,21 @@ BEGIN:VEVENT
             The <xref target="RFC7986" section="5.1" sectionFormat="parens">NAME property</xref> in a VLOCATION component converts to the "name" property of the <xref target="jscalendarbis" section="4.2.5" sectionFormat="parens">Location</xref> or <xref target="jscalendarbis" section="4.4.6" sectionFormat="parens">Participant</xref> object.
           </t>
           <t>
-            The <xref target="RFC7986" section="5.1" sectionFormat="parens">NAME property</xref> in a VCALENDAR component converts to the <xref target="jscalendarbis" section="4.2.1" sectionFormat="parens">"title" property</xref> of the Group object.
+            The <xref target="RFC7986" section="5.1" sectionFormat="parens">NAME property</xref> in a VCALENDAR component converts to the <xref target="jscalendarbis" section="4.2.1" sectionFormat="parens">"title" property</xref> of the Group object. If the LANGUAGE parameter is set, then the parameter value converts to the <xref target="jscalendarbis" section="4.2.9" sectionFormat="parens">"locale" property</xref> of the same object.
           </t>
           <t>The following examples illustrate how to convert the NAME property:</t>
           <figure anchor="test-ical-prop-name-vcalendar">
             <name>Converting the NAME property in a VCALENDAR component</name>
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VCALENDAR
-NAME:Company Vacation Days
+NAME;LANGUAGE=de:Feiertage Deutschland 2025
 ...
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 {
   "@type": "Group",
-  "title": "Company Vacation Days",
+  "title": "Feiertage Deutschland 2025",
+  "locale": "de",
   "...": ""
 }
 ]]></sourcecode>
@@ -3824,6 +3827,7 @@ SOURCE;VALUE=URI:https://example.com/holidays.ics
             <li>Its DERIVED parameter value <bcp14>MUST NOT</bcp14> be TRUE. If the value is TRUE, then another property in the same component is expected to contain the description.</li>
           </ul>
           <t>If these conditions are not met, implementations MAY preserve the property in the <xref target="jscal-prop-icalcomponent">"iCalComponent" property</xref>.</t>
+          <t>If the LANGUAGE parameter is set and the STYLED-DESCRIPTION property is set in a VEVENT or VTODO component, then the parameter value converts to the "locale" property of the Event or Task object, unless the SUMMARY or DESCRIPTION properties in the same component have the LANGUAGE parameter set.</t>
           <t>Its parameters convert as follows:</t>
           <table>
             <name>Parameters of the STYLED-DESCRIPTION property</name>
@@ -3862,7 +3866,7 @@ STYLED-DESCRIPTION;VALUE=TEXT;FMTTYPE=text/html:
         <section anchor="ical-prop-summary">
           <name>SUMMARY</name>
           <t>
-            The <xref target="RFC5545" section="3.8.1.12" sectionFormat="parens">SUMMARY property</xref> in a VEVENT or VTODO component converts to the <xref target="jscalendarbis" section="4.2.1" sectionFormat="parens">"title" property</xref> of the Event or Task object.
+            The <xref target="RFC5545" section="3.8.1.12" sectionFormat="parens">SUMMARY property</xref> in a VEVENT or VTODO component converts to the <xref target="jscalendarbis" section="4.2.1" sectionFormat="parens">"title" property</xref> of the Event or Task object. If the LANGUAGE parameter is set, then the parameter value converts to the <xref target="jscalendarbis" section="4.2.9" sectionFormat="parens">"locale" property</xref> of the same object.
           </t>
           <t>
             The <xref target="RFC5545" section="3.8.1.12" sectionFormat="parens">SUMMARY property</xref> in a PARTICIPANT component converts to the <xref target="jscalendarbis" section="4.2.5" sectionFormat="parens">"name" property</xref>.
@@ -3875,6 +3879,16 @@ SUMMARY:Birthday Party
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "title": "Birthday Party"
+]]></sourcecode>
+          </figure>
+          <figure anchor="test-ical-prop-summary-language">
+            <name>Converting the SUMMARY property with LANGUAGE parameter in a VEVENT</name>
+            <sourcecode type="text/calendar"><![CDATA[
+SUMMARY;LANGUAGE=fr:Fête d'anniversaire
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"title": "Fête d'anniversaire",
+"locale": "fr",
 ]]></sourcecode>
           </figure>
           <figure anchor="test-ical-prop-summary-participant">
@@ -4200,6 +4214,18 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               <td>
                 <t>
                   <xref target="jscal-link">Link object</xref>
+                </t>
+              </td>
+            </tr>
+            <tr>
+              <td>locale</td>
+              <td>
+                <xref target="jscalendarbis" section="4.2.9" sectionFormat="comma"/>
+              </td>
+              <td>LANGUAGE (parameter) of either SUMMARY, or DESCRIPTION, or STYLED-DESCRIPTION (in order of preference)</td>
+              <td>
+                <t>
+                  <xref target="ical-prop-summary"/>, <xref target="ical-prop-description"/>, <xref target="ical-prop-styled-description"/>
                 </t>
               </td>
             </tr>
@@ -4633,6 +4659,18 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               <td>
                 <t>
                   <xref target="jscal-link">Link object</xref>
+                </t>
+              </td>
+            </tr>
+            <tr>
+              <td>locale</td>
+              <td>
+                <xref target="jscalendarbis" section="4.2.9" sectionFormat="comma"/>
+              </td>
+              <td>LANGUAGE (parameter) of either NAME, or DESCRIPTION (in order of preference)</td>
+              <td>
+                <t>
+                  <xref target="ical-prop-name"/>, <xref target="ical-prop-description"/>
                 </t>
               </td>
             </tr>
@@ -6147,23 +6185,10 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
           </name>
           <ul>
             <li>
-              <xref target="jscalendarbis" section="4.2.8" sectionFormat="comma">locale</xref>
-            </li>
-            <li>
               <xref target="jscalendarbis" section="4.6.1" sectionFormat="comma">localizations</xref>
             </li>
             <li>
               <xref target="jscalendarbis" section="4.2.4" sectionFormat="comma">showWithoutTime</xref>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <name>
-            <xref target="jscalendarbis" section="5.3" sectionFormat="comma">Group</xref>
-          </name>
-          <ul>
-            <li>
-              <xref target="jscalendarbis" section="4.2.8" sectionFormat="comma">locale</xref>
             </li>
           </ul>
         </section>
