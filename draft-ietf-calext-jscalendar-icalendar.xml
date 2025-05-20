@@ -420,7 +420,7 @@ BEGIN:VEVENT
     }
   ],
   "uid": "41aa02b6-42d0-4f45-8cb4-8b5075be2e14",
-  "...": "",
+  "...": ""
 }
 ]]></sourcecode>
           </figure>
@@ -853,7 +853,7 @@ CONFERENCE;VALUE=URI;FEATURE=AUDIO,VIDEO;
   "1": {
     "@type": "VirtualLocation",
     "name": "Team meeting",
-    "description": "<body>Click <a href="https://chat.example.com/client">here</a> to download the client...</body>",
+    "description": "<body>Click <a href=\"https://chat.example.com/client\">here</a> to download the client...</body>",
     "descriptionContentType": "text/html",
     "uri": "https://chat.example.com/x?id=123456",
     "features": {
@@ -3888,7 +3888,7 @@ SUMMARY;LANGUAGE=fr:Fête d'anniversaire
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "title": "Fête d'anniversaire",
-"locale": "fr",
+"locale": "fr"
 ]]></sourcecode>
           </figure>
           <figure anchor="test-ical-prop-summary-participant">
