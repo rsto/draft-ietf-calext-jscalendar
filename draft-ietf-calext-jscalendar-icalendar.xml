@@ -596,28 +596,6 @@ END:VCALENDAR
                 <td/>
               </tr>
               <tr>
-                <td>DTSTAMP</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.7.2" sectionFormat="comma"/>
-                </td>
-                <td>updated</td>
-                <td>
-                  <xref target="ical-prop-dtstamp"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
-                <td>GEO</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.6" sectionFormat="comma"/>
-                </td>
-                <td>locations</td>
-                <td>
-                  <xref target="ical-prop-geo"/>
-                </td>
-                <td/>
-              </tr>
-              <tr>
                 <td>LINK</td>
                 <td>
                   <xref target="RFC9253" section="8.2" sectionFormat="comma"/>
@@ -2676,24 +2654,6 @@ DTSTAMP:20240304T132000Z
 }
 ]]></sourcecode>
           </figure>
-          <figure anchor="test-ical-prop-dtstamp-participant">
-            <name>Converting the DTSTAMP property in a PARTICIPANT component</name>
-            <sourcecode type="text/calendar"><![CDATA[
-BEGIN:VEVENT
-BEGIN:PARTICIPANT
-DTSTAMP:20240304T132000Z
-...
-  ]]></sourcecode>
-            <sourcecode type="json"><![CDATA[
-"participants": {
-  "f4": {
-    "@type": "Participant",
-    "updated": "2024-03-04T13:20:00Z",
-    "...": ""
-  }
-}
-]]></sourcecode>
-          </figure>
         </section>
         <section anchor="ical-prop-dtstart">
           <name>DTSTART</name>
@@ -3412,14 +3372,11 @@ ATTENDEE;RSVP=TRUE;PARTSTAT=NEEDS-ACTION:mailto:bar@example.com
           <t>
             The <xref target="RFC5545" section="3.8.1.8" sectionFormat="parens">PERCENT-COMPLETE property</xref> in a VTODO component converts to the <xref target="jscalendarbis" section="5.2.4" sectionFormat="parens">"percentComplete" property</xref> of the Task object.
           </t>
-          <t>A Task object which has the "method" property set might represent an iTIP reply of one of the participants in the object. In this case the value of the "percentComplete" property in the Task also converts to the <xref target="jscalendarbis" section="4.4.6" sectionFormat="parens">percentComplete</xref> of that Participant object, which represents the participant from which the iTIP reply originated.</t>
-          <t>The PERCENT-COMPLETE property in a PARTICIPANT component converts to the <xref target="jscalendarbis" section="4.4.6" sectionFormat="parens">"percentComplete" property</xref> of the Participant object.</t>
           <t>The following examples illustrate how to convert the PERCENT-COMPLETE property:</t>
           <figure anchor="test-ical-prop-percent-complete-method">
             <name>Converting the PERCENT-COMPLETE property in a VEVENT component</name>
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VCALENDAR
-METHOD:REPLY
 BEGIN:VTODO
 PERCENT-COMPLETE:53
 ...
@@ -3430,31 +3387,11 @@ PERCENT-COMPLETE:53
   "entries": [
     {
       "@type": "Task",
-      "method": "reply",
       "percentComplete": 53,
       "...": ""
     }
   ],
   "...": ""
-}
-]]></sourcecode>
-          </figure>
-          <figure anchor="test-ical-prop-percent-complete-participant">
-            <name>Converting the PERCENT-COMPLETE property in a PARTICIPANT component</name>
-            <sourcecode type="text/calendar"><![CDATA[
-BEGIN:VTODO
-BEGIN:PARTICIPANT
-PERCENT-COMPLETE:78
-...
-  ]]></sourcecode>
-            <sourcecode type="json"><![CDATA[
-"@type": "Task",
-"participants": {
-  "f4": {
-    "@type": "Participant",
-    "percentComplete": 78,
-    "...": ""
-  }
 }
 ]]></sourcecode>
           </figure>
