@@ -774,7 +774,8 @@ END:VALARM
         </section>
         <section anchor="ical-comp-vconference">
           <name>VCONFERENCE</name>
-          <t>The <xref target="icaljscalexts" section="6.1" sectionFormat="parens">VCONFERENCE component</xref> converts to a <xref target="jscalendarbis" section="4.2.7" sectionFormat="parens">VirtualLocation object</xref>.  It <bcp14>MUST</bcp14> convert to the same VirtualLocation to which its related <xref target="ical-prop-conference">CONFERENCE property</xref> converts. Its properties convert as follows:</t>
+          <t>The <xref target="icaljscalexts" section="6.1" sectionFormat="parens">VCONFERENCE component</xref> converts to a <xref target="jscalendarbis" section="4.2.7" sectionFormat="parens">VirtualLocation object</xref>.  It <bcp14>MUST</bcp14> convert to the same VirtualLocation to which its related <xref target="ical-prop-conference">CONFERENCE property</xref> converts. If no related CONFERENCE property is set in the calendar component, then implementations <bcp14>MUST NOT</bcp14> convert the VCONFERENCE component.</t>
+          <t>Its properties convert as follows:</t>
           <table anchor="ical-comp-vconference-props">
             <name>Properties of the VCONFERENCE component</name>
             <thead>
@@ -1221,6 +1222,17 @@ CONFERENCE;VALUE=URI;FEATURE=AUDIO,VIDEO;
                 <td>alerts</td>
                 <td>
                   <xref target="ical-comp-valarm"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
+                <td>VCONFERENCE</td>
+                <td>
+                  <xref target="icaljscalexts" section="5.1" sectionFormat="comma"/>
+                </td>
+                <td>virtualLocations</td>
+                <td>
+                  <xref target="ical-comp-vconference"/>
                 </td>
                 <td/>
               </tr>
@@ -1812,6 +1824,17 @@ END:VLOCATION
                 <td>alerts</td>
                 <td>
                   <xref target="ical-comp-valarm"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
+                <td>VCONFERENCE</td>
+                <td>
+                  <xref target="icaljscalexts" section="5.1" sectionFormat="comma"/>
+                </td>
+                <td>virtualLocations</td>
+                <td>
+                  <xref target="ical-comp-vconference"/>
                 </td>
                 <td/>
               </tr>
