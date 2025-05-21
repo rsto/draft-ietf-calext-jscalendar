@@ -635,33 +635,28 @@ END:VCALENDAR
           <figure anchor="test-ical-comp-participant">
             <name>Converting the PARTICIPANT component</name>
             <sourcecode type="text/calendar"><![CDATA[
-BEGIN:VEVENT
 BEGIN:PARTICIPANT
 UID:47AD2E1C-49D4-45DF-BD83-8398ACC7D8E2
 DESCRIPTION:A participant
-END:PARTICIPANT
 ...
+END:PARTICIPANT
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
-{
-  "...": "",
-  "@type": "Event",
-  "participants": {
-    "p32": {
-      "@type": "Participant",
-      "description": "A participant",
-      "iCalComponent": {
-        "@type": "ICalComponent",
-        "name": "participant",
-        "properties": [
-          [
-            "uid",
-            {},
-            "text",
-            "47AD2E1C-49D4-45DF-BD83-8398ACC7D8E2"
-          ]
+"participants": {
+  "p32": {
+    "@type": "Participant",
+    "description": "A participant",
+    "iCalComponent": {
+      "@type": "ICalComponent",
+      "name": "participant",
+      "properties": [
+        [
+          "uid",
+          {},
+          "text",
+          "47AD2E1C-49D4-45DF-BD83-8398ACC7D8E2"
         ]
-      }
+      ]
     }
   }
 }
@@ -734,39 +729,33 @@ END:PARTICIPANT
           <figure anchor="test-ical-comp-valarm">
             <name>Converting the VALARM component</name>
             <sourcecode type="text/calendar"><![CDATA[
-BEGIN:VEVENT
 BEGIN:VALARM
 TRIGGER:-PT30M
 ACTION:DISPLAY
 DESCRIPTION:Breakfast meeting
 END:VALARM
-...
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
-{
-  "...": "",
-  "@type": "Event",
-  "alerts": {
-    "a8": {
-      "@type": "Alert",
-      "iCalComponent": {
-        "@type": "ICalComponent",
-        "name": "valarm",
-        "properties": [
-          [
-            "description",
-            {},
-            "text",
-            "Breakfast meeting"
-          ]
+"alerts": {
+  "a8": {
+    "@type": "Alert",
+    "iCalComponent": {
+      "@type": "ICalComponent",
+      "name": "valarm",
+      "properties": [
+        [
+          "description",
+          {},
+          "text",
+          "Breakfast meeting"
         ]
-      },
-      "trigger": {
-        "@type": "OffsetTrigger",
-        "offset": "-PT30M"
-      },
-      "action": "display"
-    }
+      ]
+    },
+    "trigger": {
+      "@type": "OffsetTrigger",
+      "offset": "-PT30M"
+    },
+    "action": "display"
   }
 }
 ]]></sourcecode>
@@ -2941,16 +2930,6 @@ GEO:27.175;78.041944
     "coordinates": "geo:27.175,78.041944",
     "...": ""
   }
-},
-"iCalComponent": {
-  "@type": "ICalComponent",
-  "name": "vevent",
-  "convertedProperties": {
-    "locations/2/coordinates": {
-      "@type": "ICalProperty",
-      "name": "geo"
-    }
-  }
 }
 ]]></sourcecode>
           </figure>
@@ -3181,11 +3160,13 @@ LOCATION:Conference Room - F123\, Bldg. 002
             <sourcecode type="text/calendar"><![CDATA[
 LOCATION;DERIVED=TRUE:Fred's Bar
 BEGIN:VLOCATION
+JSID:1
 NAME:Fred's Bar
 LOCATION-TYPE:bar
 ...
 END:VLOCATION
 BEGIN:VLOCATION
+JSID:2
 NAME:XYZ Parking
 LOCATION-TYPE:parking
 GEO:40.71427;-74.00597
@@ -3203,9 +3184,9 @@ END:VLOCATION
     "@type": "Location",
     "name": "XYZ Parking",
     "...": ""
-  },
-  "mainLocationId": "1"
-}
+  }
+},
+"mainLocationId": "1"
 ]]></sourcecode>
           </figure>
         </section>
@@ -3887,7 +3868,7 @@ SUMMARY:Birthday Party
 SUMMARY;LANGUAGE=fr:Fête d'anniversaire
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
-"title": "F\u00eate d'anniversaire",
+"title": "Fête d'anniversaire",
 "locale": "fr"
 ]]></sourcecode>
           </figure>
