@@ -2577,8 +2577,6 @@ CREATED:20240329T133000Z
           <name>DESCRIPTION</name>
           <t>The <xref target="RFC5545" section="3.8.1.5" sectionFormat="parens">DESCRIPTION property</xref> in a VEVENT, VTODO, VCALENDAR, VLOCATION, or PARTICIPANT component converts to the <xref target="jscalendarbis" section="4.2.2" sectionFormat="parens">"description" property</xref> of the Event, Task, Group, Location, Link, or Participant object, unless its DERIVED parameter value is TRUE.</t>
           <t>If the DERIVED parameter value is TRUE, then the property does not convert to the "description" property. Instead, a non-derived STYLED-DESCRIPTION property is expected to contain the description. Implementations MAY preserve the property in the <xref target="jscal-prop-icalcomponent">"iCalComponent" property</xref>.</t>
-          <t>If the LANGUAGE parameter is set and the DESCRIPTION property is set in a VEVENT or VTODO component, then the parameter value converts to the "locale" property of the Event or Task object, unless the SUMMARY property in the same component has the LANGUAGE parameter set.</t>
-          <t>If the LANGUAGE parameter is set and the DESCRIPTION property is set in a VCALENDAR component, then the parameter value converts to the "locale" property of the Group object, unless the NAME property in the same component has the LANGUAGE parameter set.</t>
           <t>The following example illustrates how to convert the DESCRIPTION property:</t>
           <figure anchor="test-ical-prop-description">
             <name>Converting the DESCRIPTION property</name>
@@ -3808,7 +3806,6 @@ SOURCE;VALUE=URI:https://example.com/holidays.ics
             <li>Its DERIVED parameter value <bcp14>MUST NOT</bcp14> be TRUE. If the value is TRUE, then another property in the same component is expected to contain the description.</li>
           </ul>
           <t>If these conditions are not met, implementations MAY preserve the property in the <xref target="jscal-prop-icalcomponent">"iCalComponent" property</xref>.</t>
-          <t>If the LANGUAGE parameter is set and the STYLED-DESCRIPTION property is set in a VEVENT or VTODO component, then the parameter value converts to the "locale" property of the Event or Task object, unless the SUMMARY or DESCRIPTION properties in the same component have the LANGUAGE parameter set.</t>
           <t>Its parameters convert as follows:</t>
           <table>
             <name>Parameters of the STYLED-DESCRIPTION property</name>
@@ -4203,7 +4200,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               <td>
                 <xref target="jscalendarbis" section="4.2.9" sectionFormat="comma"/>
               </td>
-              <td>LANGUAGE (parameter) of either SUMMARY, or DESCRIPTION, or STYLED-DESCRIPTION (in order of preference)</td>
+              <td>LANGUAGE (parameter) of SUMMARY property</td>
               <td>
                 <t><xref target="ical-prop-summary"/>, <xref target="ical-prop-description"/>, <xref target="ical-prop-styled-description"/></t>
               </td>
@@ -6004,6 +6001,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
               <li>
                 <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
               </li>
+              <li>
+                <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
+              </li>
             </ul>
           </section>
           <section>
@@ -6128,6 +6128,9 @@ ATTACH;X-FOO=bar:https://example.com/example.jpg
               </li>
               <li>
                 <xref target="RFC9073" section="5.3" sectionFormat="comma">DERIVED</xref>
+              </li>
+              <li>
+                <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
               </li>
             </ul>
           </section>
