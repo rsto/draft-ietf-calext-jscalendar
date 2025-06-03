@@ -4372,8 +4372,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td>SHOW-WITHOUT-TIME</td>
               <td>
-                <t>
-                  <xref target="ical-prop-show-without-time"/>, and remarks below
+                <t><xref target="ical-prop-show-without-time"/>, and remarks below
                 </t>
               </td>
             </tr>
@@ -4620,6 +4619,16 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
             </tr>
             <tr>
+              <td>description</td>
+              <td>
+                <xref target="jscalendarbis" section="4.2.2" sectionFormat="comma"/>
+              </td>
+              <td>DESCRIPTION, or STYLED-DESCRIPTION</td>
+              <td>
+                <t><xref target="ical-prop-description"/>, <xref target="ical-prop-styled-description"/>, and remarks below</t>
+              </td>
+            </tr>
+            <tr>
               <td>entries</td>
               <td>
                 <xref target="jscalendarbis" section="5.3.1" sectionFormat="comma"/>
@@ -4725,6 +4734,9 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
         </table>
         <t>Remarks:</t>
         <ul>
+          <li>
+            <t>The "descriptionContentType" property value determines if the "description" property converts to the DESCRIPTION or STYLED-DESCRIPTION property. A description of content type "text/plain" converts to the DESCRIPTION property. Any other description converts to the STYLED-DESCRIPTION property, in which case a plain text version of the rich-text description <bcp14>MAY</bcp14> be set additionally in the DESCRIPTION property, having its DERIVED parameter set to "TRUE". How to derive plain text from rich-text is implementation-specific.</t>
+          </li>
           <li>
             <t>The prodId property value of the Group object is expected to be equal to the "prodId" property value of all the Group entries. They all convert to the same, single PRODID property in the VCALENDAR component. How to convert unequal prodId property values is implementation-specific. </t>
           </li>
