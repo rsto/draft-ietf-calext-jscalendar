@@ -542,7 +542,9 @@ END:VCALENDAR
         </section>
         <section anchor="convert-date-and-date-time">
           <name>DATE and DATE-TIME</name>
-          <t>iCalendar provides the DATE and DATE-TIME value types to distinguish date-only from date-time values. JSCalendar only supports date-time values.  A property value of type DATE-TIME converts to either a LocalDateTime or UTCDateTime, depending on the JSCalendar property definition. A DATE value type converts to a LocalDateTime with zero time.</t>
+          <t>iCalendar provides the DATE and DATE-TIME value types to distinguish date-only from date-time values. JSCalendar only supports date-time values.</t>
+          <t>When converting from iCalendar to JSCalendar, a property value of type DATE-TIME converts to either a LocalDateTime or UTCDateTime, depending on the JSCalendar property definition. A DATE value type converts to a LocalDateTime with zero time.</t>
+          <t><xref target="jscal-event-and-task"/> defines which iCalendar value type to choose when converting from JSCalendar to iCalendar.</t>
         </section>
       </section>
       <section anchor="ical-components">
@@ -4086,6 +4088,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
       <section anchor="jscal-event-and-task">
         <name>Event and Task</name>
         <t>The <xref target="jscalendarbis" section="2.1" sectionFormat="parens">Event object</xref> converts to a <xref target="ical-comp-vevent">VEVENT component</xref>, the <xref target="jscalendarbis" section="2.2" sectionFormat="parens">Task object</xref> converts to a <xref target="ical-comp-vtodo">VTODO component</xref>.</t>
+        <t>In the iCalendar component, the value data types of the DTSTART, DUE and RECURRENCE-ID properties all <bcp14>MUST</bcp14> be of the same form, either DATE, or DATE WITH LOCAL TIME, or DATE WITH UTC TIME (see <xref target="RFC5545" section="3.3.5"/>). It <bcp14>MUST</bcp14> be DATE if the "showWithoutTime" property value is "true", the "timeZone" property value is null, and the time component is zero in the values of the "start", due", "duration", "estimatedDuration", "recurrenceId" properties, and the "until" property of the RecurrenceRule object, and in any key of the "recurrenceOverrides" property value. Otherwise, it <bcp14>MAY</bcp14> be DATE WITH UTC TIME if the "timeZone" property value is "Etc/UTC" and the "endTimeZone" property value is null. It <bcp14>MUST</bcp14> be DATE WITH LOCAL TIME in all other cases.</t>
         <t>
             The following table defines how to convert properties that are common to both the Event and Task object types. <xref target="jscal-event-props"/> and <xref target="jscal-task-props"/> later in this section define how to convert properties specific to either Event or Task objects.</t>
         <table anchor="jscal-event-and-task-props">
@@ -4455,7 +4458,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <t>The entries in the "recurrenceOverrides" property convert depending on the contents of the PatchObject value. A PatchObject that sets the "excluded" member to "true" converts to an EXDATE property for the date-time of that recurrence instance. An empty PatchObject converts to an RDATE property. Any other PatchObject converts to a recurrence override component in the embedding VCALENDAR component.</t>
           </li>
           <li>
-            <t>The "showWithoutTime" only converts to the SHOW-WITHOUT-TIME property under the following conditions: the property value is "true" and either the "timeZone" property value is not null or the time component is non-zero in the "start", "due" or "duration" property values.</t>
+            <t>The "showWithoutTime" property only converts to the SHOW-WITHOUT-TIME property if the value data type of the DTSTART or DUE properties is of form DATE WITH UTC TIME or DATE WITH LOCAL TIME.</t>
           </li>
         </ul>
         <t>Properties specific to the Event object type convert to iCalendar properties as follows:</t>
