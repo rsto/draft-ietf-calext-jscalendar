@@ -814,8 +814,8 @@ STYLED-DESCRIPTION;VALUE=TEXT;FMTTYPE=text/html:<body>Click <a href="https://ch
  at.example.com/client">here</a> to download the client...</body>
 ...
 END:VCONFERENCE
-CONFERENCE;VALUE=URI;FEATURE=AUDIO,VIDEO;
- LABEL=Team meeting:https://chat.example.com/x?id=123456
+CONFERENCE;VALUE=URI;LABEL=Team meeting:
+ https://chat.example.com/x?id=123456
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "virtualLocations": {
@@ -824,11 +824,7 @@ CONFERENCE;VALUE=URI;FEATURE=AUDIO,VIDEO;
     "name": "Team meeting",
     "description": "<body>Click <a href=\"https://chat.example.com/client\">here</a> to download the client...</body>",
     "descriptionContentType": "text/html",
-    "uri": "https://chat.example.com/x?id=123456",
-    "features": {
-      "audio": true,
-      "video": true
-    }
+    "uri": "https://chat.example.com/x?id=123456"
   }
 }
 ]]></sourcecode>
