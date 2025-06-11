@@ -237,10 +237,12 @@ class PropertyDiff:
         a_params = collections.defaultdict(list)
         for p in enumerate(a.params):
             a_params[p[1].name].append(p)
+        a_params.pop("JSID", None)
 
         b_params = collections.defaultdict(list)
         for p in enumerate(b.params):
             b_params[p[1].name].append(p)
+        b_params.pop("JSID", None)
 
         def _aonly(a, b):
             l = []
@@ -303,10 +305,12 @@ class ComponentDiff:
         a_props = collections.defaultdict(list)
         for p in enumerate(a.props):
             a_props[p[1].name].append(p)
+        a_props.pop("JSID", None)
 
         b_props = collections.defaultdict(list)
         for p in enumerate(b.props):
             b_props[p[1].name].append(p)
+        b_props.pop("JSID", None)
 
         a_comps = collections.defaultdict(list)
         for p in enumerate(a.comps):
