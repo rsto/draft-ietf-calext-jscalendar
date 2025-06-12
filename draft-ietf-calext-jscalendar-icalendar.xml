@@ -3559,6 +3559,25 @@ END:VALARM
       "@type": "OffsetTrigger",
       "offset": "-PT15M"
     },
+    "acknowledged": "2021-03-02T15:15:14Z",
+    "iCalComponent": {
+      "@type": "ICalComponent",
+      "name": "valarm",
+      "properties": [
+        [
+          "description",
+          {},
+          "text",
+          "Event reminder"
+        ],
+        [
+          "uid",
+          {},
+          "text",
+          "8297C37D-BA2D-4476-91AE-C1EAA364F8E1"
+        ]
+      ]
+    },
     "...": ""
   },
   "alert2": {
@@ -3574,6 +3593,24 @@ END:VALARM
           "snooze": true
         }
       }
+    },
+    "iCalComponent": {
+      "@type": "ICalComponent",
+      "name": "valarm",
+      "properties": [
+        [
+          "description",
+          {},
+          "text",
+          "Event reminder"
+        ],
+        [
+          "uid",
+          {},
+          "text",
+          "DE7B5C34-83FF-47FE-BE9E-FF41AE6DD097"
+        ]
+      ]
     },
     "...": ""
   }
