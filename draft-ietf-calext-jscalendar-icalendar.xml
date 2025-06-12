@@ -3198,7 +3198,6 @@ END:VLOCATION
 BEGIN:VEVENT
 BEGIN:VLOCATION
 LOCATION-TYPE:hotel,restaurant
-LOCATION-TYPE:bar
 ...
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
@@ -3206,7 +3205,6 @@ LOCATION-TYPE:bar
   "1": {
     "@type": "Location",
     "locationTypes": {
-      "bar": true,
       "hotel": true,
       "restaurant": true
     },
