@@ -5354,8 +5354,8 @@ END:VALARM
 ]]></sourcecode>
               </figure>
               <t>The following example illustrates how to convert a JSPROP property that points to a property within a JSCalendar Link. The JSON pointer in the JSPTR parameter is relative to the Event object because the Link object converts to an iCalendar property. The <xref target="ical-param-jsid">JSID parameter</xref> on the ATTACH property ensures that the JSON path remains valid during conversion.</t>
-              <figure anchor="test-ical-prop-jsprop-valarm">
-                <name>Converting the JSPROP property within a VALARM component</name>
+              <figure anchor="test-ical-prop-jsprop-link-object">
+                <name>Converting the JSPROP property within a Link object</name>
                 <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VEVENT
 ...
@@ -5368,6 +5368,7 @@ JSPROP;JSPTR="links/mylink1/example.com:foo":"bar"
 "links": {
   "mylink1": {
     "@type": "Link",
+    "href": "https://www.rfc-editor.org/rfc/rfc8984.html",
     "example.com:foo": "bar",
     "...": ""
   }
