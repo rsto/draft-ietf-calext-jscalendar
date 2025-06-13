@@ -59,7 +59,7 @@
       <section anchor="scope-and-goals">
         <name>Scope and Goals</name>
         <t>This document outlines how to convert calendaring information between the iCalendar and JSCalendar data formats.  It describes which elements are common to both, but also highlights where the two formats differ. For each common element, it defines a conversion rule and includes an example of how to convert that element. All iCalendar and JSCalendar elements currently registered at IANA are in scope, but not all of these elements are common to both formats.</t>
-        <t>For elements that have no counterpart in the other format, it is the goal of this document to define how to preserve them during conversion, but in general it is not the goal to achieve this by defining new standard elements. Instead, this document defines special-purpose properties to preserve arbitrary elements. These conversion-specific properties are defined in Section <xref target="ical-prop-jsprop" format="counter"/> for iCalendar, and Sections <xref target="jscal-prop-icalcomponent" format="counter"/> and <xref target="jscal-prop-icalproperty" format="counter"/> for JSCalendar. <xref target="appendix-discrepancies"/> further outlines the discrepancies between the two formats.</t>
+        <t>For elements that have no counterpart in the other format, it is the goal of this document to define how to preserve them during conversion, but in general it is not the goal to achieve this by defining new standard elements. Instead, this document defines special-purpose properties to preserve arbitrary elements. These conversion-specific properties are defined in Section <xref target="ical-prop-jsprop" format="counter"/> for iCalendar, and <xref target="jscal-prop-icalcomponent"/> for JSCalendar. <xref target="appendix-discrepancies"/> further outlines the discrepancies between the two formats.</t>
       </section>
       <section>
         <name>How to Read the Examples</name>
@@ -2891,7 +2891,7 @@ EXDATE:20230801T130000Z
           <t>Implementations <bcp14>MAY</bcp14> preserve the fact that the Location "coordinates" property converted from a GEO property. How to do so depends on how the GEO property converted to a Location object:</t>
           <ul>
             <li>If the GEO property converted from a VLOCATION component, then implementations <bcp14>MAY</bcp14> add a path to the "coordinates" property in the "iCalComponent/convertedProperties" property of the Location object.</li>
-            <li>Otherwise, implementations <bcp14>MAY</bcp14> set the "iCalProperty" property of the Location object. Alternatively they <bcp14>MAY</bcp14> add a "iCalComponent" property to the object that contains this Location object in its "locations" property, and point to the "coordinates" property in the "convertedProperties" property.</li>
+            <li>TBD</li>
           </ul>
           <t>The following examples illustrate how to convert the GEO property:</t>
           <figure anchor="test-ical-prop-geo">
@@ -2903,12 +2903,15 @@ GEO:45.5;-93.3
 "locations": {
   "d4": {
     "@type": "Location",
-    "coordinates": "geo:45.5,-93.3",
-    "iCalProperty": {
-      "@type": "ICalProperty",
+    "coordinates": "geo:45.5,-93.3"
+  }
+},
+"iCalComponent": {
+  "name": "vevent",
+  "convertedProperties": {
+    "locations/d4/coordinates": {
       "name": "geo"
-    },
-    "...": ""
+    }
   }
 }
 ]]></sourcecode>
@@ -4791,9 +4794,9 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
         <name>Link</name>
         <t>The <xref target="jscalendarbis" section="1.4.11" sectionFormat="parens">Link object</xref> converts either an <xref target="ical-prop-attach">ATTACH property</xref> or an <xref target="ical-prop-image">IMAGE property</xref>. Which iCalendar property to choose is implementation-specific. As a guideline:</t>
         <ul>
-          <li>Choose the iCalendar property name indicated in the Link object's <xref target="jscal-prop-icalproperty">iCalProperty</xref> property, if set.</li>
+          <li>Choose the iCalendar property name indicated in the <xref target="jscal-prop-icalcomponent">iCalComponent</xref> of the JSCalendar object that contains this Link object, if set.</li>
           <li>Choose IMAGE, if the "rel" property value is "icon".</li>
-          <li> Choose LINK, if the "rel" property is set to any value other than "icon".</li>
+          <li>Choose LINK, if the "rel" property is set to any value other than "icon".</li>
           <li>Choose ATTACH otherwise.</li>
         </ul>
         <t>The href property converts to the "iCalendar" property value. The other Link properties convert as follows:</t>
@@ -4867,7 +4870,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
         <name>Location</name>
         <t>The <xref target="jscalendarbis" section="4.2.5" sectionFormat="parens">Location object</xref> converts to either a <xref target="ical-prop-location">LOCATION</xref>, <xref target="ical-prop-geo">GEO</xref>, or <xref target="ical-prop-geo">DTEND</xref> property, or it converts to a <xref target="ical-comp-vlocation">VLOCATION component</xref>. Which iCalendar element to choose is implementation-specific. As a guideline:</t>
         <ul>
-          <li>If the "iCalProperty" or "iCalComponent" property on the Location object is set, or the parent JSCalendar object contains an entry for that Location in the "convertedProperties" property of its "iCalComponent" property, then convert the object back to the named iCalendar element.</li>
+          <li>If the "iCalComponent" property on the Location object is set, or the parent JSCalendar object contains an entry for that Location in the "convertedProperties" property of its "iCalComponent" property, then convert the object back to the named iCalendar element.</li>
           <li>Choose LOCATION if the key of the Location object in the "locations" property matches the "mainLocationId" property, or if the "name" property is set and the iCalendar component does not already contain a LOCATION property. The "name" property converts to the LOCATION property value.</li>
           <li>Choose the VLOCATION component otherwise.</li>
         </ul>
@@ -5505,8 +5508,8 @@ JSPROP;JSPTR="example.com:foo":"bar"
               <t>This contains information about an iCalendar component that got converted to JSCalendar.  It allows for preserving the name of the iCalendar component and some or all of its properties and subcomponents.</t>
               <t>An ICalComponent object has the following properties:</t>
               <dl>
-                <dt>@type: String (mandatory)</dt>
-                <dd>This specifies the type of this object. This <bcp14>MUST</bcp14> be ICalComponent.</dd>
+                <dt>@type: String</dt>
+                <dd>This specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>ICalComponent</tt>, if set.</dd>
                 <dt>name: String (mandatory)</dt>
                 <dd>This is the name of the iCalendar component in lowercase.</dd>
                 <dt>components: *[][] (optional)</dt>
@@ -5514,12 +5517,24 @@ JSPROP;JSPTR="example.com:foo":"bar"
                 </dd>
                 <dt>convertedProperties: String[ICalProperty] (optional)</dt>
                 <dd>
-                  <t>This contains conversion-related information about the component's properties that got partially or fully converted to JSCalendar.  Each key defines the path to a property of the JSCalendar object on which the "iCalComponent" property is set on.  The value for each key contains information about the "iCalendar" property which converted to the "object" property located at that key (see <xref target="jscal-prop-icalproperty"/>).</t>
-                  <t>The key <bcp14>MUST</bcp14> be a valid key of a PatchObject as defined in <xref target="jscalendarbis" section="1.4.9" sectionFormat="of"/>.  The key <bcp14>MUST NOT</bcp14> point into a nested property, unless there is no way to otherwise preserve the "iCalendar" property elements. For example, if a VEVENT contains an ATTENDEE property, then any iCalendar information about the ATTENDEE property <bcp14>MUST</bcp14> be set in the "iCalProperty" property of the converted Participant object (see <xref target="ical-prop-attendee"/>).  In contrast, information about a RDATE property contained in a VEVENT would be located by a key pointing into the <tt>recurrenceOverrides</tt> property of the Event object (see <xref target="ical-prop-rdate"/>).</t>
+                  <t>This contains conversion-related information about the component's properties that got partially or fully converted to JSCalendar.  Each key defines the path to a JSCalendar element.  The value for each key contains information about the iCalendar property which converted to the JSCalendar element located at that key. Unless otherwise defined for a specific iCalendar property, the path points to that JSCalendar object property to which the iCalendar property value converted to.</t>
+                  <t>The key <bcp14>MUST</bcp14> be a valid key of a PatchObject as defined in <xref target="jscalendarbis" section="1.4.9" sectionFormat="of"/>.  The key <bcp14>MAY</bcp14> point to the key in a nested object if the element at that key was converted from an iCalendar property of the component for which the "iCalComponent" property is set. It <bcp14>MUST NOT</bcp14> point into nested objects otherwise.</t>
+                  <t>TBD examples</t>
                 </dd>
                 <dt>properties: *[][] (optional)</dt>
                 <dd>This contains properties of the iCalendar component which did not convert to standard JSCalendar elements. The value <bcp14>MUST</bcp14> be a list of iCalendar properties formatted in jCal as defined in <xref target="RFC7265" section="3.4" sectionFormat="of"/>.
               </dd>
+            </dl>
+              <t>An ICalProperty object has the following properties:</t>
+              <dl>
+                <dt>@type: String</dt>
+                <dd>This specifies the type of this object. This <bcp14>MUST</bcp14> be <tt>ICalProperty</tt>, if set.</dd>
+                <dt>name: String (mandatory)</dt>
+                <dd>This is the name of the iCalendar property in lowercase.</dd>
+                <dt>valueType: String (optional)</dt>
+                <dd>This is the name of the iCalendar property value type in lowercase.</dd>
+                <dt>parameters: String[String] (optional)</dt>
+                <dd>This contains parameters of the iCalendar property. The value <bcp14>MUST</bcp14> comply with iCalendar parameters formatted in jCal as defined in <xref target="RFC7265" section="3.5" sectionFormat="of"/>.</dd>
               </dl>
             </dd>
           </dl>
