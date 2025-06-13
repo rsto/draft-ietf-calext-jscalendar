@@ -1402,6 +1402,7 @@ UID:4954DC22-5BD6-4E98-844D-0302982F54AC
 NAME:The venue
 STRUCTURED-DATA;VALUE=URI:
  http://dir.example.com/venues/big-hall.vcf
+...
 END:VLOCATION
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
@@ -3174,11 +3175,17 @@ END:VLOCATION
   "1": {
     "@type": "Location",
     "name": "Fred's Bar",
+    "locationTypes": {
+      "bar": true
+    },
     "...": ""
   },
   "2": {
     "@type": "Location",
     "name": "XYZ Parking",
+    "locationTypes": {
+      "parking": true
+    },
     "...": ""
   }
 },
