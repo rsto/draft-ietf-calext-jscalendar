@@ -2924,6 +2924,15 @@ GEO:27.175;78.041944
     "coordinates": "geo:27.175,78.041944",
     "...": ""
   }
+},
+"iCalComponent": {
+  "name": "vevent",
+  "convertedProperties": {
+    "locations/2/coordinates": {
+      "@type": "ICalProperty",
+      "name": "geo"
+    }
+  }
 }
 ]]></sourcecode>
           </figure>
