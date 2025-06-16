@@ -3171,7 +3171,7 @@ BEGIN:VLOCATION
 JSID:2
 NAME:XYZ Parking
 LOCATION-TYPE:parking
-GEO:40.71427;-74.00597
+COORDINATES;VALUE=URI:geo:40.71427,-74.00597
 ...
 END:VLOCATION
   ]]></sourcecode>
@@ -3191,6 +3191,7 @@ END:VLOCATION
     "locationTypes": {
       "parking": true
     },
+    "coordinates": "geo:40.71427,-74.00597",
     "...": ""
   }
 },
