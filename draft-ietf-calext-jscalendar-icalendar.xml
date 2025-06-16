@@ -3129,8 +3129,7 @@ LINK;LINKREL=source;LABEL=Venue;VALUE=URI:
         </section>
         <section anchor="ical-prop-location">
           <name>LOCATION</name>
-          <t>
-            The <xref target="RFC5545" section="3.8.1.7" sectionFormat="parens">LOCATION property</xref> in a VEVENT or VTODO component converts to a <xref target="jscalendarbis" section="4.2.5" sectionFormat="parens">Location object</xref>, unless its DERIVED parameter value is TRUE. The converted object is set in the "locations" property of the Event or Task. The property value converts to the "title" property of the Location object. If the DERIVED parameter value is TRUE, then the property does not convert to a Location object. Instead, a VLOCATION component is expected to convert to a Location object.</t>
+          <t>The <xref target="RFC5545" section="3.8.1.7" sectionFormat="parens">LOCATION property</xref> in a VEVENT or VTODO component converts to a <xref target="jscalendarbis" section="4.2.5" sectionFormat="parens">Location object</xref>, unless its DERIVED parameter value is TRUE. The converted object is set in the "locations" property of the Event or Task. The property value converts to the "title" property of the Location object.</t>
           <t>If the calendar component contains multiple VLOCATION components, then the LOCATION property also converts to the "mainLocationId" property of the Event or Task object. If the LOCATION property is not derived, then the identifier of its Location object is set in the "mainLocationId". If instead the LOCATION property is derived and its property value matches the NAME property value of a VLOCATION component, then the "mainLocationId" property value matches the identifier of the Location object to which that VLOCATION component converts to.</t>
           <t>The following example illustrates how to convert the LOCATION property:</t>
           <figure anchor="test-ical-prop-location">
@@ -5518,7 +5517,7 @@ JSPROP;JSPTR="example.com:foo":"bar"
                 <dt>properties: *[][] (optional)</dt>
                 <dd>This contains properties of the iCalendar component which did not convert to standard JSCalendar elements. The value <bcp14>MUST</bcp14> be a list of iCalendar properties formatted in jCal as defined in <xref target="RFC7265" section="3.4" sectionFormat="of"/>.
               </dd>
-            </dl>
+              </dl>
               <t>An ICalProperty object has the following properties:</t>
               <dl>
                 <dt>@type: String</dt>
