@@ -2540,7 +2540,6 @@ CONFERENCE;VALUE=URI;FEATURE=AUDIO,VIDEO;
             <name>Converting the COORDINATES property</name>
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VEVENT
-GEO;DERIVED=TRUE:48.198634;16.371648
 BEGIN:VLOCATION
 COORDINATES;VALUE=URI:geo:48.198634,16.371648;crs=wgs84;u=40
 ...
