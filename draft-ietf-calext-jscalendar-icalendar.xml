@@ -5180,10 +5180,10 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               <td>
                 <xref target="jscalendarbis" section="4.2.5" sectionFormat="comma"/>
               </td>
-              <td>NAME</td>
+              <td>SUMMARY</td>
               <td>
                 <t>
-                  <xref target="ical-prop-name"/>
+                  <xref target="ical-prop-summary"/>
                 </t>
               </td>
             </tr>
