@@ -2344,20 +2344,40 @@ ORGANIZER:mailto:organizer@example.com
           <t>
               The <xref target="RFC9073" section="6.4" sectionFormat="parens">CALENDAR-ADDRESS property</xref> in a PARTICIPANT component converts to the <xref target="jmap-calendars" section="5.1.1" sectionFormat="parens">"calendarAddress" property</xref> of the Participant object.
           </t>
+          <t>Implementations <bcp14>MAY</bcp14> preserve the fact that a Participant object's "calendarAddress" property converted from the CALENDAR-ADRESS property of a PARTICIPANT component, rather than an ATTENDEE property. In this case, they <bcp14>MUST</bcp14> add an entry for the "calendarAddress" property in the "iCalCompoent/convertedProperties" property of the Participant object.</t>
           <t>The following example illustrates how to convert the CALENDAR-ADDRESS property:</t>
           <figure anchor="test-ical-prop-calendar-address">
             <name>Converting the CALENDAR-ADDRESS property</name>
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:PARTICIPANT
 CALENDAR-ADDRESS:mailto:foo@example.com
+UID:47AD2E1C-49D4-45DF-BD83-8398ACC7D8E2
 ...
+END:PARTICIPANT
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "participants": {
   "a2": {
     "@type": "Participant",
     "calendarAddress": "mailto:foo@example.com",
-    "...": ""
+    "iCalComponent": {
+      "@type": "ICalComponent",
+      "name": "participant",
+      "convertedProperties": {
+        "calendarAddress": {
+          "@type": "ICalProperty",
+          "name": "calendar-address"
+        }
+      },
+      "properties": [
+        [
+          "uid",
+          {},
+          "text",
+          "47AD2E1C-49D4-45DF-BD83-8398ACC7D8E2"
+        ]
+      ]
+    }
   }
 }
 ]]></sourcecode>
@@ -3345,7 +3365,7 @@ END:VLOCATION
             <name>Converting an ORGANIZER property</name>
             <sourcecode type="text/calendar"><![CDATA[
 ORGANIZER:mailto:foo@example.com
-ATTENDEE;RSVP=TRUE;PARTSTAT=NEEDS-ACTION:mailto:bar@example.com
+ATTENDEE;RSVP=TRUE:mailto:bar@example.com
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "organizerCalendarAddress": "mailto:foo@example.com",
@@ -3370,9 +3390,9 @@ ATTENDEE;RSVP=TRUE;PARTSTAT=NEEDS-ACTION:mailto:bar@example.com
             <name>Converting an ORGANIZER and ATTENDEE property</name>
             <sourcecode type="text/calendar"><![CDATA[
 ORGANIZER:mailto:foo@example.com
-ATTENDEE;RSVP=FALSE;PARTSTAT=ACCEPTED;CN=Jane Doe:mailto:foo@example.com
+ATTENDEE;PARTSTAT=ACCEPTED;CN=Jane Doe:mailto:foo@example.com
 ...
-ATTENDEE;RSVP=TRUE;PARTSTAT=NEEDS-ACTION:mailto:bar@example.com
+ATTENDEE;RSVP=TRUE;PARTSTAT=TENTATIVE:mailto:bar@example.com
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "organizerCalendarAddress": "mailto:foo@example.com",
@@ -3392,6 +3412,7 @@ ATTENDEE;RSVP=TRUE;PARTSTAT=NEEDS-ACTION:mailto:bar@example.com
     "@type": "Participant",
     "calendarAddress": "mailto:bar@example.com",
     "expectReply": true,
+    "participationStatus": "tentative",
     "...": ""
   }
 }
