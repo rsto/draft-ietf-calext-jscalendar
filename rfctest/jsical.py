@@ -555,6 +555,12 @@ class JsonDiff:
             if ical_comps:
                 # Sort jCal components by name
                 ical_comps.sort(key=itemgetter(0))
+        elif typ == "Group":
+            entries = data.get("entries")
+            if isinstance(entries, list):
+                pass
+                entries.sort(key=lambda e: (e.get("uid"), e.get("start")))
+
         # Do not normalize localizations and recurrence overrides
         localizations = data.pop("localizations", None)
         recurrence_overrides = data.pop("recurrenceOverrides", None)
