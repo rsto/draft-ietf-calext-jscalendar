@@ -5619,54 +5619,6 @@ END:X-BAZ
 ]]></sourcecode>
           </figure>
         </section>
-        <section anchor="jscal-prop-icalproperty">
-          <name>iCalProperty</name>
-          <dl newline="true">
-            <dt>Name:</dt>
-            <dd>iCalProperty</dd>
-            <dt>Context:</dt>
-            <dd>Any JSCalendar object</dd>
-            <dt>Type:</dt>
-            <dd><tt>ICalProperty</tt> (optional)</dd>
-            <dt>Description:</dt>
-            <dd>
-              <t>This contains conversion-related information about an iCalendar property that got partially or fully converted to a JSCalendar object.  It allows for preserving the name of the "iCalendar" property and some or all of its parameters.</t>
-              <t>An ICalProperty object has the following properties:</t>
-              <dl>
-                <dt>@type: String (mandatory)</dt>
-                <dd>This specifies the type of this object. This <bcp14>MUST</bcp14> be ICalProperty.</dd>
-                <dt>name: String (mandatory)</dt>
-                <dd>This is the name of the "iCalendar" property in lowercase.</dd>
-                <dt>valueType: String (optional)</dt>
-                <dd>This is the name of the "iCalendar" property value type in lowercase.</dd>
-                <dt>parameters: String[String] (optional)</dt>
-                <dd>This contains parameters of the "iCalendar" property. The value <bcp14>MUST</bcp14> comply with iCalendar parameters formatted in jCal as defined in <xref target="RFC7265" section="3.5" sectionFormat="of"/>.</dd>
-              </dl>
-            </dd>
-          </dl>
-          <t>The example in <xref target="test-jscal-prop-icalproperty"/> describes how to convert an unknown parameter to the "iCalProperty" property. The ATTACH property converts to a Link object. To preserve the unknown "X-FOO" parameter, the "iCalProperty" property is set on the Link object.</t>
-          <figure anchor="test-jscal-prop-icalproperty">
-            <name>Converting the ATTACH property with an unknown parameter</name>
-            <sourcecode type="text/calendar"><![CDATA[
-ATTACH;X-FOO=bar:https://example.com/example.jpg
-  ]]></sourcecode>
-            <sourcecode type="json"><![CDATA[
-"links": {
-  "l1": {
-    "@type": "Link",
-    "href": "https://example.com/example.jpg",
-    "iCalProperty": {
-      "@type": "ICalProperty",
-      "name": "attach",
-      "parameters": {
-        "x-foo": "bar"
-      }
-    }
-  }
-}
-]]></sourcecode>
-          </figure>
-        </section>
       </section>
     </section>
     <section anchor="IANA">
