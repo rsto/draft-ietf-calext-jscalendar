@@ -3049,7 +3049,7 @@ GEO:48.858222;2.2945
           <figure anchor="test-ical-prop-image">
             <name>Converting the IMAGE property</name>
             <sourcecode type="text/calendar"><![CDATA[
-IMAGE;VALUE=URI;DISPLAY=BADGE;LABEL=An image;FMTTYPE=image/png:
+IMAGE;VALUE=URI;DISPLAY=BADGE,THUMBNAIL;LABEL=An image;FMTTYPE=image/png:
  https://example.com/images/party.png
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
@@ -3058,7 +3058,8 @@ IMAGE;VALUE=URI;DISPLAY=BADGE;LABEL=An image;FMTTYPE=image/png:
     "@type": "Link",
     "href": "https://example.com/images/party.png",
     "display": {
-      "badge": true
+      "badge": true,
+      "thumbnail": true
     },
     "rel": "icon",
     "contentType": "image/png",
