@@ -703,6 +703,8 @@ class JObject:
                             if not "start" in jval:
                                 jval["start"] = "2006-01-02T03:04:05"
                         case "Group":
+                            if not "uid" in jval:
+                                jval["uid"] = f"{uuid.uuid4()}"
                             if not "entries" in jval:
                                 jval["entries"] = [{"@type": "Event", "...": ""}]
                         case "Link":
