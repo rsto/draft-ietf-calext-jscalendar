@@ -22,7 +22,7 @@ class BackendError(Exception):
     def __init__(self, error):
         self.error = error
         if isinstance(error, urllib.error.HTTPError) and error.fp is not None:
-            self.body = error.fp.read().decode('utf-8')
+            self.body = error.fp.read().decode("utf-8")
 
     def __str__(self):
         if self.body:
@@ -411,7 +411,10 @@ class HTMLReporter:
         print("<details><summary>Test Output</summary>", file=self.file)
         if test.i2jresult.response:
             print(f"<h3>Backend response</h3>", file=self.file)
-            print(f"<pre>{html.escape(test.i2jresult.response.decode())}</pre>", file=self.file)
+            print(
+                f"<pre>{html.escape(test.i2jresult.response.decode())}</pre>",
+                file=self.file,
+            )
         if test.i2jresult.json_response:
             print(f"<h3>Normalized backend response</h3>", file=self.file)
             s = json.dumps(test.i2jresult.json_response, indent=2)
@@ -455,17 +458,25 @@ class HTMLReporter:
             print(f"<h3>Expected</h3>", file=self.file)
             print(f"<pre>{html.escape(str(test.vobject))}</pre>", file=self.file)
             print(f"<h3>Got</h3>", file=self.file)
-            print(f"<pre>{html.escape(str(test.j2iresult.ical_response))}</pre>", file=self.file)
-
+            print(
+                f"<pre>{html.escape(str(test.j2iresult.ical_response))}</pre>",
+                file=self.file,
+            )
 
         print("<details>", file=self.file)
         print("<summary>Test Output</summary>", file=self.file)
         if test.j2iresult.response:
             print(f"<h3>Backend response</h3>", file=self.file)
-            print(f"<pre>{html.escape(test.j2iresult.response.decode())}</pre>", file=self.file)
+            print(
+                f"<pre>{html.escape(test.j2iresult.response.decode())}</pre>",
+                file=self.file,
+            )
         if test.j2iresult.ical_response:
             print(f"<h3>Normalized backend response</h3>", file=self.file)
-            print(f"<pre>{html.escape(str(test.j2iresult.ical_response))}</pre>", file=self.file)
+            print(
+                f"<pre>{html.escape(str(test.j2iresult.ical_response))}</pre>",
+                file=self.file,
+            )
         print("</details>", file=self.file)
 
 

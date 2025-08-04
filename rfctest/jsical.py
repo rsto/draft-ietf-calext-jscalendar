@@ -706,7 +706,10 @@ class JObject:
                     match jval.get("@type", None):
                         case "Alert":
                             if not "trigger" in jval:
-                                jval["trigger"] = { "@type": "OffsetTrigger", "offset": "PT0S" }
+                                jval["trigger"] = {
+                                    "@type": "OffsetTrigger",
+                                    "offset": "PT0S",
+                                }
                         case "Event":
                             if not "uid" in jval:
                                 jval["uid"] = f"{uuid.uuid4()}"
