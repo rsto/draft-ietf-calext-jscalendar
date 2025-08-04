@@ -115,7 +115,9 @@ class Component:
         recurid = recurids[0].value if recurids else ""
         seqs = list(filter(lambda prop: prop.name == "SEQUENCE", comp.props))
         seq = seqs[0].value if seqs else ""
-        return (comp.name, uid, recurid, seq)
+        jsids = list(filter(lambda prop: prop.name == "JSID", comp.props))
+        jsid = jsids[0].value if jsids else ""
+        return (comp.name, uid, recurid, seq, jsid)
 
     def normalize(self):
         self.name = self.name.upper()
