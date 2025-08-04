@@ -2793,23 +2793,24 @@ EXDATE:20230801T130000Z
           </t>
           <t>The pair of FLOAT values converts to a URI with the <xref target="RFC5870">"geo" scheme</xref>.  The first FLOAT value converts to the "coord-a" part of the URI, the second FLOAT value to the "coord-b" part. A preceding plus sign (+) of the FLOAT value <bcp14>MUST</bcp14> be omitted, a preceding minus sign (-) <bcp14>MUST</bcp14> be preserved.  The optional "coord-c" part of the URI <bcp14>MUST</bcp14> be omitted.</t>
           <t>Implementations <bcp14>MAY</bcp14> preserve the fact that the coordinates converted from a GEO property by setting the JSON pointer path to the "coordinates" property in the "iCalComponent/convertedProperties" property. If the GEO property converted from a VEVENT or VTODO component, then the "iCalComponent" property <bcp14>MUST</bcp14> be that of the Event or Task object, for the VLOCATION component it <bcp14>MUST</bcp14> be the "iCalComponent" property of the Location object.</t>
-          <t>The following examples illustrate how to convert the GEO property:</t>
+          <t>The following examples illustrate how to convert the GEO property.</t>
           <figure anchor="test-ical-prop-geo">
-            <name>Converting the GEO property in a VEVENT</name>
+            <name>Converting the GEO property in a VEVENT. The JSID parameter is set to simplify testing.</name>
             <sourcecode type="text/calendar"><![CDATA[
-GEO:45.5;-93.3
+GEO;JSID=loc1:45.5;-93.3
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "locations": {
-  "d4": {
+  "loc1": {
     "@type": "Location",
     "coordinates": "geo:45.5,-93.3"
   }
 },
 "iCalComponent": {
+  "@type": "ICalComponent",
   "name": "vevent",
   "convertedProperties": {
-    "locations/d4/coordinates": {
+    "locations/loc1/coordinates": {
       "@type": "ICalProperty",
       "name": "geo"
     }
@@ -2818,14 +2819,14 @@ GEO:45.5;-93.3
 ]]></sourcecode>
           </figure>
           <figure anchor="test-ical-prop-geo-and-location">
-            <name>Converting the GEO and LOCATION properties in a VEVENT</name>
+            <name>Converting the GEO and LOCATION properties in a VEVENT. The JSID parameters are set to simplify testing.</name>
             <sourcecode type="text/calendar"><![CDATA[
-LOCATION:Taj Mahal
-GEO:27.175;78.041944
+LOCATION;JSID=loc1:Taj Mahal
+GEO;JSID=loc1:27.175;78.041944
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "locations": {
-  "2": {
+  "loc1": {
     "@type": "Location",
     "name": "Taj Mahal",
     "coordinates": "geo:27.175,78.041944",
@@ -2833,9 +2834,10 @@ GEO:27.175;78.041944
   }
 },
 "iCalComponent": {
+  "@type": "ICalComponent",
   "name": "vevent",
   "convertedProperties": {
-    "locations/2/coordinates": {
+    "locations/loc1/coordinates": {
       "@type": "ICalProperty",
       "name": "geo"
     }
