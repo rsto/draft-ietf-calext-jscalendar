@@ -493,32 +493,43 @@ class JsonDiff:
         Note that the keys in the middle list may differ for a and
         b for properties where the keys are of JSCalendar type Id."""
 
-        prop_keys = {
-            "alerts": lambda v: v.get("trigger", {}).get(
-                "offset", v.get("trigger", {}).get("when")
-            ),
-            "links": lambda v: v.get("href"),
-            "locations": lambda v: v.get("name"),
-            "virtualLocations": lambda v: v.get("uri"),
-            "participants": lambda v: v.get("calendarAddress"),
-        }
-        pkey = prop_keys.get(apath[-1]) if len(apath) and len(bpath) else None
-        if pkey and apath[-1] == bpath[-1]:
-            if len(a) == 1 and len(b) == 1:
-                return [], [(list(a)[0], list(b)[0])], []
-            apkeys = {
-                pkey(v): k for k, v in a.items() if isinstance(v, dict) and pkey(v)
+        if len(apath) and len(bpath) and apath[-1] == bpath[-1]:
+            # Pair the following objects not by verbatim key
+            # but by a key derived from their property values.
+            objkeys = {
+                "alerts": lambda v: v.get("trigger", {}).get(
+                    "offset", v.get("trigger", {}).get("when")
+                ),
+                "links": lambda v: v.get("href"),
+                "locations": lambda v: v.get("name"),
+                "virtualLocations": lambda v: v.get("uri"),
+                "participants": lambda v: v.get("calendarAddress"),
             }
-            bpkeys = {
-                pkey(v): k for k, v in b.items() if isinstance(v, dict) and pkey(v)
-            }
-            both = [(apkeys[p], bpkeys[p]) for p in set(apkeys) & set(bpkeys)]
-            akeys = set(a) - set(k[0] for k in both)
-            bkeys = set(b) - set(k[1] for k in both)
-        else:
-            akeys = list(set(a) - set(b))
-            both = [(key, key) for key in set(a) & set(b)]
-            bkeys = list(set(b) - set(a))
+            objkey = objkeys.get(apath[-1])
+            if objkey:
+                if len(a) == 1 and len(b) == 1:
+                    return [], [(list(a)[0], list(b)[0])], []
+                aobjkeys = {
+                    objkey(v): k
+                    for k, v in a.items()
+                    if isinstance(v, dict) and objkey(v)
+                }
+                bobjkeys = {
+                    objkey(v): k
+                    for k, v in b.items()
+                    if isinstance(v, dict) and objkey(v)
+                }
+                both = [
+                    (aobjkeys[p], bobjkeys[p]) for p in set(aobjkeys) & set(bobjkeys)
+                ]
+                akeys = set(a) - set(k[0] for k in both)
+                bkeys = set(b) - set(k[1] for k in both)
+                return akeys, both, bkeys
+
+        # Compare object members by verbatim key.
+        akeys = list(set(a) - set(b))
+        both = [(key, key) for key in set(a) & set(b)]
+        bkeys = list(set(b) - set(a))
         return akeys, both, bkeys
 
     @staticmethod
