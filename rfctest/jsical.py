@@ -29,7 +29,7 @@ class Parameter:
         self.name = self.name.upper()
 
     @staticmethod
-    def _key(param):
+    def _sortkey(param):
         return (param.name, param.value)
 
 
@@ -44,14 +44,18 @@ class Property:
         return f"{self.name}{params}:{self.value}"
 
     @staticmethod
-    def _key(prop):
-        return (prop.name, prop.value, [Parameter._key(param) for param in prop.params])
+    def _sortkey(prop):
+        return (
+            prop.name,
+            prop.value,
+            [Parameter._sortkey(param) for param in prop.params],
+        )
 
     def normalize(self):
         self.name = self.name.upper()
         for param in self.params:
             param.normalize()
-        self.params.sort(key=Parameter._key)
+        self.params.sort(key=Parameter._sortkey)
 
     @classmethod
     def parse(cls, line: str) -> Property:
@@ -104,18 +108,23 @@ class Component:
         return self.format(include_any=True)
 
     @staticmethod
-    def _key(comp):
+    def _sortkey(comp):
         uids = list(filter(lambda prop: prop.name == "UID", comp.props))
-        return (comp.name, uids[0].name if uids else "")
+        uid = uids[0].value if uids else ""
+        recurids = list(filter(lambda prop: prop.name == "RECURRENCE-ID", comp.props))
+        recurid = recurids[0].value if recurids else ""
+        seqs = list(filter(lambda prop: prop.name == "SEQUENCE", comp.props))
+        seq = seqs[0].value if seqs else ""
+        return (comp.name, uid, recurid, seq)
 
     def normalize(self):
         self.name = self.name.upper()
         for prop in self.props:
             prop.normalize()
-        self.props.sort(key=Property._key)
+        self.props.sort(key=Property._sortkey)
         for comp in self.comps:
             comp.normalize()
-        self.comps.sort(key=Component._key)
+        self.comps.sort(key=Component._sortkey)
 
     def with_default_props(self) -> Component:
         vobj = copy.deepcopy(self)
