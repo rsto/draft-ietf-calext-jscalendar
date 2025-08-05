@@ -5391,7 +5391,7 @@ JSPROP;JSPTR="example.com:foo":"bar"
                 <dd>This is the name of the iCalendar property in lowercase.</dd>
                 <dt>valueType: String (optional)</dt>
                 <dd>This is the name of the iCalendar property value type in lowercase.</dd>
-                <dt>parameters: String[String] (optional)</dt>
+                <dt>parameters: String[String|String[]] (optional)</dt>
                 <dd>This contains parameters of the iCalendar property. The value <bcp14>MUST</bcp14> comply with iCalendar parameters formatted in jCal as defined in <xref target="RFC7265" section="3.5" sectionFormat="of"/>.</dd>
               </dl>
             </dd>
