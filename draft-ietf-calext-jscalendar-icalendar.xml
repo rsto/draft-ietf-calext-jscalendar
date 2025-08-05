@@ -68,8 +68,9 @@
           <name>iCalendar Examples</name>
           <t>An iCalendar example contains either an extract or a complete representation of iCalendar data.  It always represents an iCalendar object, even if the example only depicts non-VCALENDAR components or properties. The following rules apply:</t>
           <ul>
-            <li>An example that only contains iCalendar properties implicitly represents a VEVENT component that is part of a VCALENDAR component.</li>
-            <li>An example that only contains one or more non-VCALENDAR components implicitly represents a VCALENDAR component that contains them.</li>
+            <li>An example that only contains iCalendar properties implicitly represents a VEVENT component having these properties set and that is part of a VCALENDAR component.</li>
+            <li>An example that only contains one or more VEVENT, VTODO, VJOURNAL, FREEBUSY or VTIMEZONE components implicitly represents a VCALENDAR component that contains them. An example that only contains one or more other components implicitly represents a VEVENT component having these components set and that is part of a VCALENDAR components.</li>
+            <li>An example that only contains NT or VTODO components implicitly represents a VCALENDAR component that contains them.</li>
             <li>An example that only contains a VCALENDAR component but no contained components implicitly represents a VCALENDAR component that contains a VEVENT component.</li>
             <li>Implicit components (those without a BEGIN and END, or omitted completely) are assumed to contain all mandatory properties with some value, but the actual value is irrelevant for the example.</li>
           </ul>
