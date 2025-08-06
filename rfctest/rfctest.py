@@ -379,7 +379,7 @@ class HTMLReporter:
         )
         if test.i2jresult.error:
             print(f"<pre>{test.i2jresult.error}</pre>", file=self.file)
-        if not test.i2jresult.json_diff.empty():
+        if test.i2jresult.json_diff and not test.i2jresult.json_diff.empty():
             a = test.jgroup.to_json()
             b = test.i2jresult.json_response
             jdiff = test.i2jresult.json_diff
