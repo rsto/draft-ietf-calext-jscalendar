@@ -526,12 +526,10 @@ END:VCALENDAR
         </section>
         <section anchor="generating-jscalendar-ids">
           <name>JSCalendar Ids</name>
-          <t>JSCalendar generally uses JSON objects to represent a collection of same-typed values. The keys are of type <xref target="jscalendarbis" section="1.4.1" sectionFormat="parens">Id</xref>, the values are JSCalendar object types.  If an iCalendar element converts to a value in such a collection, then an implementation needs to choose an identifier as key.</t>
-          <t>This document defines the new <xref target="ical-param-jsid">JSID</xref> parameter and <xref target="ical-prop-jsid">JSID property</xref>, which allow to set a JSCalendar Id value when converting from JSCalendar to iCalendar.  If they are set on a property or the component, then its value <bcp14>MUST</bcp14> be used as key when converting that element from iCalendar to JSCalendar.  If no such parameter or property is set, then an implementation is free to choose any identifier, as long the following requirements are met:</t>
-          <ul>
-            <li>The identifier <bcp14>MUST</bcp14> be a valid Id value.</li>
-            <li>The identifiers for the exact same iCalendar element <bcp14>MUST</bcp14> stay the same, irrespective of the order in which components, properties and parameters are processed.</li>
-          </ul>
+          <t>JSCalendar generally uses JSON objects to represent a collection of same-typed values. The keys are of type <xref target="jscalendarbis" section="1.4.1" sectionFormat="parens">Id</xref>, the values are JSCalendar object types.  If an iCalendar element converts to a value in such a collection then an implementation needs to choose an identifier as key.</t>
+          <t>If the <xref target="ical-param-jsid">JSID parameter</xref>r or <xref target="ical-prop-jsid">JSID property</xref> is set on a property or component, then its value <bcp14>MUST</bcp14> be used as key when converting that element from iCalendar to JSCalendar.  In absence of the JSID parameter or property key generation is implementation-specific.</t>
+          <t>Some sections later in this document describe key generation schemes for specific iCalendar elements by making use of <xref target="RFC9562" section="5.5" sectionFormat="parens">UUID Version 5 with SHA1 hash</xref>. The Namespace ID to generate such keys is "7f1e1965-ae73-4454-b088-232c90730ce2". These key generation schemes are not mandatory, nor is making use of that particular Namespace ID when using UUID Version 5 as keys.</t>
+          <t>Irrespective of the key generation scheme, all keys <bcp14>MUST</bcp14> be valid according to the definition of the Id type. For consistency, keys <bcp14>SHOULD</bcp14> be stable such that converting the same iCalendar data to JSCalendar multiple times produces the same keys.</t>
         </section>
         <section anchor="ical-timezone-identifiers">
           <name>Timezone identifiers</name>
@@ -552,7 +550,9 @@ END:VCALENDAR
         <name>Components</name>
         <section anchor="ical-comp-participant">
           <name>PARTICIPANT</name>
-          <t>The <xref target="RFC9073" section="7.1" sectionFormat="parens">PARTICIPANT component</xref> converts to a <xref target="jscalendarbis" section="4.4.6" sectionFormat="parens">Participant object</xref>.  Its properties convert as follows:</t>
+          <t>The <xref target="RFC9073" section="7.1" sectionFormat="parens">PARTICIPANT component</xref> in a VEVENT or VTODO component converts to a <xref target="jscalendarbis" section="4.4.6" sectionFormat="parens">Participant object</xref>.  The converted object is set in the "participants" property of the Event or Task object.</t>
+          <t>The key of the Participant object <bcp14>MUST</bcp14> be the value of the <xref target="ical-prop-jsid">JSID property</xref>, if set. If no JSID property but the CALENDAR-ADDRESS property is set, then the key <bcp14>MAY</bcp14> be a UUIDv5 generated from the property value (see <xref target="generating-jscalendar-ids"/>). Otherwise, the key <bcp14>MAY</bcp14> be the UID property value. When converting to iCalendar, implementations <bcp14>MAY</bcp14> omit setting the JSID property if key matches the UUIDv5 of the CALENDAR-ADDRESS property value or the key matches the UID property, and the key is not part of a JSON pointer in any JSPTR parameter value.</t>
+          <t>Its properties convert as follows:</t>
           <table anchor="ical-comp-participant-props">
             <name>Properties of the PARTICIPANT component</name>
             <thead>
@@ -646,7 +646,7 @@ END:PARTICIPANT
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "participants": {
-  "p32": {
+  "47AD2E1C-49D4-45DF-BD83-8398ACC7D8E2": {
     "@type": "Participant",
     "description": "A participant",
     "iCalComponent": {
@@ -668,7 +668,9 @@ END:PARTICIPANT
         </section>
         <section anchor="ical-comp-valarm">
           <name>VALARM</name>
-          <t>The <xref target="RFC5545" section="3.6.6" sectionFormat="parens">VALARM component</xref> converts to an <xref target="jscalendarbis" section="4.5.2" sectionFormat="parens">Alert object</xref>.  Its properties convert as follows:</t>
+          <t>The <xref target="RFC5545" section="3.6.6" sectionFormat="parens">VALARM component</xref> in a VEVENT or VTODO component converts to an <xref target="jscalendarbis" section="4.5.2" sectionFormat="parens">Alert object</xref>. The converted object is set in the "alerts" property of the Event or Task object.</t>
+          <t>The key of the Alert object <bcp14>MUST</bcp14> be the value of the <xref target="ical-prop-jsid">JSID property</xref>, if set. Otherwise, the key <bcp14>MAY</bcp14> be the value of the UID property. When converting to iCalendar, implementations <bcp14>MAY</bcp14> omit setting the JSID property if the key matches the value of the UID property, and the key is not part of a JSON pointer in any JSPTR parameter value.</t>
+          <t>Its properties convert as follows:</t>
           <table anchor="ical-comp-valarm-props">
             <name>Properties of the VALARM component</name>
             <thead>
@@ -733,6 +735,7 @@ END:PARTICIPANT
             <name>Converting the VALARM component</name>
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VALARM
+UID:04DC2968-6468-4B92-BC09-5A17D7D3D4E
 TRIGGER:-PT30M
 ACTION:DISPLAY
 DESCRIPTION:Breakfast meeting
@@ -740,7 +743,7 @@ END:VALARM
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "alerts": {
-  "a8": {
+  "04DC2968-6468-4B92-BC09-5A17D7D3D4E": {
     "@type": "Alert",
     "iCalComponent": {
       "@type": "ICalComponent",
@@ -751,6 +754,12 @@ END:VALARM
           {},
           "text",
           "Breakfast meeting"
+        ],
+        [
+          "uid",
+          {},
+          "text",
+          "04DC2968-6468-4B92-BC09-5A17D7D3D4E"
         ]
       ]
     },
@@ -1201,7 +1210,9 @@ END:VCALENDAR
         </section>
         <section anchor="ical-comp-vlocation">
           <name>VLOCATION</name>
-          <t>The <xref target="RFC9073" section="7.2" sectionFormat="parens">VLOCATION component</xref> converts to a <xref target="jscalendarbis" section="4.2.5" sectionFormat="parens">Location object</xref>.  Its properties convert as follows:</t>
+          <t>The <xref target="RFC9073" section="7.2" sectionFormat="parens">VLOCATION component</xref> in a VEVENT or VTODO component converts to a <xref target="jscalendarbis" section="4.2.5" sectionFormat="parens">Location object</xref>.  The converted object is set in the "locations" property of the Event or Task object.</t>
+          <t>The key of the Location object <bcp14>MUST</bcp14> be the value of the <xref target="ical-prop-jsid">JSID property</xref>, if set. Otherwise, the key <bcp14>MAY</bcp14> be the value of the UID property.  When converting to iCalendar, implementations <bcp14>MAY</bcp14> omit setting the JSID property if the key matches the value of the UID property, and the key is not part of a JSON pointer in any JSPTR parameter value.</t>
+          <t>Its properties convert as follows:</t>
           <table anchor="ical-comp-vlocation-props">
             <name>Properties of the VLOCATION component</name>
             <thead>
@@ -1308,7 +1319,7 @@ END:VLOCATION
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "locations": {
-  "e4": {
+  "4954DC22-5BD6-4E98-844D-0302982F54AC": {
     "@type": "Location",
     "name": "The venue",
     "iCalComponent": {
@@ -1788,7 +1799,7 @@ ACKNOWLEDGED:20241002T114703Z
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "alerts": {
-  "a": {
+  "1204B2FA-E4A0-4335-B7CD-0DDC09C9B890": {
     "@type": "Alert",
     "acknowledged": "2024-10-02T11:47:03Z",
     "...": ""
@@ -1834,7 +1845,7 @@ ACTION:DISPLAY
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "alerts": {
-  "a": {
+  "02E4CAD6-B7A7-4EE4-93A6-4AA5AFD080E2": {
     "@type": "Alert",
     "action": "display",
     "...": ""
@@ -1852,7 +1863,7 @@ ACTION:AUDIO
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "alerts": {
-  "a": {
+  "FC529A2B-D10F-461D-BDCF-55C77BB4B933": {
     "@type": "Alert",
     "iCalComponent": {
       "@type": "ICalComponent",
@@ -1877,7 +1888,8 @@ ACTION:AUDIO
           <t>
               The <xref target="RFC5545" section="3.8.1.1" sectionFormat="parens">ATTACH property</xref> in a VEVENT, VTODO, PARTICIPANT, VLOCATION, or VCALENDAR component converts to a <xref target="jscalendarbis" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the "links" property of the Event, Task, Participant, Location, or Group object.
           </t>
-          <t>The property value converts to the "href" property of the Link object. A value of type URI converts as-is. A value of type BINARY converts to a URI in the "data" URL scheme (<xref target="RFC2397"/>. If the FMTTYPE parameter is set on the ATTACH property, then the parameter value <bcp14>MUST</bcp14> be set in the "mediatype" part of the data URL.</t>
+          <t>The key of the Link object <bcp14>MUST</bcp14> be the value of the <xref target="ical-param-jsid">JSID parameter</xref>, if set. If no JSID parameter is set, then the key <bcp14>MAY</bcp14> be the UUIDv5 generated from the property value (see <xref target="generating-jscalendar-ids"/>). When converting to iCalendar, implementations <bcp14>MAY</bcp14> omit setting the JSID parameter if the key matches the UUIDv5 of the ATTACH property value and the key is not part of a JSON pointer in any JSPTR parameter value.</t>
+          <t>The ATTACH property value converts to the "href" property of the Link object. A value of type URI converts as-is. A value of type BINARY converts to a URI in the "data" URL scheme (<xref target="RFC2397"/>. If the FMTTYPE parameter is set on the ATTACH property, then the parameter value <bcp14>MUST</bcp14> be set in the "mediatype" part of the data URL.</t>
           <t>The ATTACH property parameters convert as follows:</t>
           <table>
             <name>Parameters of the ATTACH property</name>
@@ -1936,7 +1948,7 @@ ATTACH:https://example.com/foo.pdf
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "links": {
-  "a": {
+  "245708bf-8e07-5d3b-a5da-2974a63c3b91": {
     "@type": "Link",
     "href": "https://example.com/foo.pdf"
   }
@@ -1952,7 +1964,7 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "links": {
-  "a": {
+  "7beac36a-9287-57cb-96ab-dd2fc91163a2": {
     "@type": "Link",
     "href": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQAAAAA3bvkkAAAAAmJLR0QAAd2KE6QAAAAKSURBVAjXY2gAAACCAIHdQ2r0AAAAAElFTkSuQmCC",
     "contentType": "image/png",
@@ -1966,6 +1978,7 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
           <name>ATTENDEE</name>
           <t>
             The <xref target="RFC5545" section="3.8.4.1" sectionFormat="parens">ATTENDEE property</xref> in a VEVENT or VTODO component converts to a <xref target="jscalendarbis" section="4.4.6" sectionFormat="parens">Participant object</xref>.  The converted object is set in the "participants" property of the Event or Task object. The property value converts to the calendarAddress property of the Participant object.</t>
+          <t>The key of the Participant object <bcp14>MUST</bcp14> be the value of the <xref target="ical-param-jsid">JSID parameter</xref>, if set. If no JSID parameter is set, then the key <bcp14>MAY</bcp14> be the UUIDv5 generated from the property value (see <xref target="generating-jscalendar-ids"/>). When converting to iCalendar, implementations <bcp14>MAY</bcp14> omit setting the JSID parameter if the key matches the UUIDv5 of the ATTENDEE property value and the key is not part of a JSON pointer in any JSPTR parameter value.</t>
           <t>An ATTENDEE property and a PARTICIPANT component in the same iCalendar component convert to the same Participant object, if their converted calendarAddress property values are equal. How to deal with conflicting values is implementation-specific.</t>
           <t>The ATTENDEE property parameters convert as follows:</t>
           <table>
@@ -2149,7 +2162,7 @@ ORGANIZER:mailto:organizer@example.com
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "participants": {
-  "p3": {
+  "0b235cc4-f04d-5fc4-98a3-c066650b3fbf": {
     "@type": "Participant",
     "calendarAddress": "mailto:hcabot@example.com",
     "name": "Henry Cabot",
@@ -2159,7 +2172,7 @@ ORGANIZER:mailto:organizer@example.com
     },
     "expectReply": true
   },
-  "o4": {
+  "251d3e9f-d83f-534c-8c45-c2896c75670c": {
     "@type": "Participant",
     "calendarAddress": "mailto:organizer@example.com",
     "roles": {
@@ -2183,7 +2196,7 @@ ORGANIZER:mailto:organizer@example.com
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "participants": {
-  "23": {
+  "59eb121c-e8f2-558a-9049-ef750a5976bd": {
     "@type": "Participant",
     "calendarAddress": "mailto:foo@example.com",
     "participationStatus": "tentative",
@@ -2191,7 +2204,7 @@ ORGANIZER:mailto:organizer@example.com
     "description": "some description",
     "...": ""
   },
-  "o4": {
+  "251d3e9f-d83f-534c-8c45-c2896c75670c": {
     "@type": "Participant",
     "calendarAddress": "mailto:organizer@example.com",
     "...": ""
@@ -2211,7 +2224,7 @@ ORGANIZER:mailto:organizer@example.com
             <sourcecode type="json"><![CDATA[
 "@type": "Task",
 "participants": {
-  "1": {
+  "59eb121c-e8f2-558a-9049-ef750a5976bd": {
     "@type": "Participant",
     "calendarAddress": "mailto:foo@example.com",
     "participationStatus": "accepted",
@@ -2219,7 +2232,7 @@ ORGANIZER:mailto:organizer@example.com
     "expectReply": true,
     "...": ""
   },
-  "o": {
+  "251d3e9f-d83f-534c-8c45-c2896c75670c": {
     "@type": "Participant",
     "calendarAddress": "mailto:organizer@example.com",
     "...": ""
@@ -2247,7 +2260,7 @@ END:PARTICIPANT
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "participants": {
-  "a2": {
+  "59eb121c-e8f2-558a-9049-ef750a5976bd": {
     "@type": "Participant",
     "calendarAddress": "mailto:foo@example.com",
     "iCalComponent": {
@@ -2455,7 +2468,7 @@ COORDINATES;VALUE=URI:geo:48.198634,16.371648;crs=wgs84;u=40
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "locations": {
-  "1": {
+  "B995322D-2C00-4DE0-8958-DB6687CF3DB3": {
     "@type": "Location",
     "coordinates": "geo:48.198634,16.371648;crs=wgs84;u=40",
     "...": ""
@@ -2857,7 +2870,7 @@ GEO:48.858222;2.2945
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "locations": {
-  "2": {
+  "8FC58765-4559-49BC-8718-A5E46FC433B9": {
     "@type": "Location",
     "name": "Eiffel Tower",
     "coordinates": "geo:48.858222,2.2945",
@@ -2869,7 +2882,8 @@ GEO:48.858222;2.2945
           "@type": "ICalProperty",
           "name": "geo"
         }
-      }
+      },
+      "...": ""
     }
   }
 }
@@ -2881,7 +2895,8 @@ GEO:48.858222;2.2945
           <t>
             The <xref target="RFC7986" section="5.10" sectionFormat="parens">IMAGE property</xref> in a VEVENT, VTODO, VLOCATION, PARTICIPANT, or VCALENDAR component converts to a <xref target="jscalendarbis" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the "links" property of the Event, Task, Location, Participant, or Group object.
           </t>
-          <t>The property value converts to the "href" property of the Link object. A value of type URI converts as-is. See <xref target="ical-prop-attach"/> how to convert a BINARY value. If the DISPLAY parameter is set, then the "rel" property of the Link object <bcp14>MUST</bcp14> be set to "icon".</t>
+          <t>The key of the Link object <bcp14>MUST</bcp14> be the value of the <xref target="ical-param-jsid">JSID parameter</xref>, if set. If no JSID parameter is set, then the key <bcp14>MAY</bcp14> be the UUIDv5 generated from the property value (see <xref target="generating-jscalendar-ids"/>). When converting to iCalendar, implementations <bcp14>MAY</bcp14> omit setting the JSID parameter if the key matches the UUIDv5 of the IMAGE property value and the key is not part of a JSON pointer in any JSPTR parameter value.</t>
+          <t>The IMAGE property value converts to the "href" property of the Link object. A value of type URI converts as-is. See <xref target="ical-prop-attach"/> how to convert a BINARY value. If the DISPLAY parameter is set, then the "rel" property of the Link object <bcp14>MUST</bcp14> be set to "icon".</t>
           <t>Its parameters convert as follows:</t>
           <table>
             <name>Parameters of the IMAGE property</name>
@@ -2945,7 +2960,7 @@ IMAGE;VALUE=URI;DISPLAY=BADGE,THUMBNAIL;LABEL=An image;FMTTYPE=image/png:
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "links": {
-  "4": {
+  "2c42ac17-1eaf-5a75-a216-aef848785d79": {
     "@type": "Link",
     "href": "https://example.com/images/party.png",
     "display": {
@@ -2984,7 +2999,8 @@ LAST-MODIFIED:20240914T231257Z
         <section anchor="ical-prop-link">
           <name>LINK</name>
           <t>A <xref target="RFC9253" section="8.2" sectionFormat="parens">LINK property</xref> with value type URI in a VEVENT, VTODO, PARTICIPANT, VLOCATION, or VCALENDAR component converts to a <xref target="jscalendarbis" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the "links" property of the Event, Task, Participant, Location, or Group object.</t>
-          <t>The property value converts to the "href" property of the Link object.</t>
+          <t>The key of the Link object <bcp14>MUST</bcp14> be the value of the <xref target="ical-param-jsid">JSID parameter</xref>, if set. If no JSID parameter is set, then the key <bcp14>MAY</bcp14> be the UUIDv5 generated from the property value (see <xref target="generating-jscalendar-ids"/>). When converting to iCalendar, implementations <bcp14>MAY</bcp14> omit setting the JSID parameter if the key matches the UUIDv5 of the LINK property value and the key is not part of a JSON pointer in any JSPTR parameter value.</t>
+          <t>The LINK property value converts to the "href" property of the Link object.</t>
           <t>The LINK property parameters convert as follows:</t>
           <table>
             <name>Parameters of the LINK property</name>
@@ -3037,7 +3053,7 @@ LINK;LINKREL=source;LABEL=Venue;VALUE=URI:
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "links": {
-  "a": {
+  "63023b12-fcf4-53fa-841d-8c1684b9f80b": {
     "@type": "Link",
     "href": "https://example.com/events",
     "title": "Venue",
@@ -3049,7 +3065,9 @@ LINK;LINKREL=source;LABEL=Venue;VALUE=URI:
         </section>
         <section anchor="ical-prop-location">
           <name>LOCATION</name>
-          <t>The <xref target="RFC5545" section="3.8.1.7" sectionFormat="parens">LOCATION property</xref> in a VEVENT or VTODO component converts to a <xref target="jscalendarbis" section="4.2.5" sectionFormat="parens">Location object</xref>, unless its DERIVED parameter value is TRUE. The converted object is set in the "locations" property of the Event or Task. The property value converts to the "title" property of the Location object.</t>
+          <t>The <xref target="RFC5545" section="3.8.1.7" sectionFormat="parens">LOCATION property</xref> in a VEVENT or VTODO component converts to a <xref target="jscalendarbis" section="4.2.5" sectionFormat="parens">Location object</xref>, unless its DERIVED parameter value is TRUE. The converted object is set in the "locations" property of the Event or Task.</t>
+          <t>The key of the Location object <bcp14>MUST</bcp14> be the value of the <xref target="ical-param-jsid">JSID parameter</xref>, if set. If no JSID parameter is set, then the key <bcp14>MAY</bcp14> be the UUIDv5 generated from the property value (see <xref target="generating-jscalendar-ids"/>). When converting to iCalendar, implementations <bcp14>MAY</bcp14> omit setting the JSID parameter if the key matches the UUIDv5 of the LOCATION property value and the key is not part of a JSON pointer in any JSPTR parameter value.</t>
+          <t>The LOCATION property value converts to the "title" property of the Location object.</t>
           <t>If the calendar component contains multiple VLOCATION components, then the LOCATION property also converts to the "mainLocationId" property of the Event or Task object. If the LOCATION property is not derived, then the identifier of its Location object is set in the "mainLocationId". If instead the LOCATION property is derived and its property value matches the NAME property value of a VLOCATION component, then the "mainLocationId" property value matches the identifier of the Location object to which that VLOCATION component converts to.</t>
           <t>The following example illustrates how to convert the LOCATION property:</t>
           <figure anchor="test-ical-prop-location">
@@ -3059,7 +3077,7 @@ LOCATION:Conference Room - F123\, Bldg. 002
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "locations": {
-  "f45": {
+  "adde7a5b-2fb5-52aa-b760-595ea9edb80a": {
     "@type": "Location",
     "name": "Conference Room - F123, Bldg. 002",
     "...": ""
@@ -3073,13 +3091,13 @@ LOCATION:Conference Room - F123\, Bldg. 002
             <sourcecode type="text/calendar"><![CDATA[
 LOCATION;DERIVED=TRUE:Fred's Bar
 BEGIN:VLOCATION
-JSID:1
+UID:12D2B3EC-AC84-4B70-9EB6-CFE6AD5830B0
 NAME:Fred's Bar
 LOCATION-TYPE:bar
 ...
 END:VLOCATION
 BEGIN:VLOCATION
-JSID:2
+UID:6B1C3968-38D2-46AF-B436-BF3F72D459D4
 NAME:XYZ Parking
 LOCATION-TYPE:parking
 COORDINATES;VALUE=URI:geo:40.71427,-74.00597
@@ -3088,7 +3106,7 @@ END:VLOCATION
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "locations": {
-  "1": {
+  "12D2B3EC-AC84-4B70-9EB6-CFE6AD5830B0": {
     "@type": "Location",
     "name": "Fred's Bar",
     "locationTypes": {
@@ -3096,7 +3114,7 @@ END:VLOCATION
     },
     "...": ""
   },
-  "2": {
+  "6B1C3968-38D2-46AF-B436-BF3F72D459D4": {
     "@type": "Location",
     "name": "XYZ Parking",
     "locationTypes": {
@@ -3106,7 +3124,7 @@ END:VLOCATION
     "...": ""
   }
 },
-"mainLocationId": "1"
+"mainLocationId": "12D2B3EC-AC84-4B70-9EB6-CFE6AD5830B0"
 ]]></sourcecode>
           </figure>
         </section>
@@ -3126,7 +3144,7 @@ LOCATION-TYPE:hotel,restaurant
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "locations": {
-  "1": {
+  "0EA3F99A-835E-49CC-970C-8A4707A4C076": {
     "@type": "Location",
     "locationTypes": {
       "hotel": true,
@@ -3205,7 +3223,7 @@ END:VLOCATION
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "locations": {
-  "1": {
+  "8DE8404B-3BFA-443F-92B4-C678AD0F67DB": {
     "@type": "Location",
     "name": "Room B",
     "iCalComponent": {
@@ -3221,6 +3239,7 @@ END:VLOCATION
           <name>ORGANIZER</name>
           <t>
             The <xref target="RFC5545" section="3.8.4.3" sectionFormat="parens">ORGANIZER property</xref> in a VEVENT or VTODO component converts to the <xref target="jscalendarbis" section="4.4.4" sectionFormat="parens">"organizerCalendarAddress" property</xref> of the Event or Task object and to a Participant object in the  <xref target="jscalendarbis" section="4.4.6" sectionFormat="parens">"participants" property</xref>. The ORGANIZER property value converts to the "calendarAddress" property of the Participant, the "owner" role is set in Participant "roles" property.</t>
+          <t>The key of the Participant object <bcp14>MUST</bcp14> be the value of the <xref target="ical-param-jsid">JSID parameter</xref>, if set. If no JSID parameter is set, then the key <bcp14>MAY</bcp14> be the UUIDv5 generated from the property value (see <xref target="generating-jscalendar-ids"/>). When converting to iCalendar, implementations <bcp14>MAY</bcp14> omit setting the JSID parameter if the key matches the UUIDv5 of the ORGANIZER property value and the key is not part of a JSON pointer in any JSPTR parameter value.</t>
           <t>An ORGANIZER property, an ATTENDEE property, and a PARTICIPANT component in the same iCalendar component all convert to the same Participant object, if their converted calendarAddress property values are equal. How to deal with conflicting property values is implementation-specific.</t>
           <t>The ORGANIZER property parameters convert as follows:</t>
           <table>
@@ -3262,14 +3281,14 @@ ATTENDEE;RSVP=TRUE:mailto:bar@example.com
             <sourcecode type="json"><![CDATA[
 "organizerCalendarAddress": "mailto:foo@example.com",
 "participants": {
-  "a": {
+  "59eb121c-e8f2-558a-9049-ef750a5976bd": {
     "@type": "Participant",
     "calendarAddress": "mailto:foo@example.com",
     "roles": {
       "owner": true
     }
   },
-  "b": {
+  "5b6f4fa0-3695-53a7-904b-d0a6f8bc326f": {
     "@type": "Participant",
     "calendarAddress": "mailto:bar@example.com",
     "expectReply": true,
@@ -3289,7 +3308,7 @@ ATTENDEE;RSVP=TRUE;PARTSTAT=TENTATIVE:mailto:bar@example.com
             <sourcecode type="json"><![CDATA[
 "organizerCalendarAddress": "mailto:foo@example.com",
 "participants": {
-  "a": {
+  "59eb121c-e8f2-558a-9049-ef750a5976bd": {
     "@type": "Participant",
     "calendarAddress": "mailto:foo@example.com",
     "name": "Jane Doe",
@@ -3300,7 +3319,7 @@ ATTENDEE;RSVP=TRUE;PARTSTAT=TENTATIVE:mailto:bar@example.com
     },
     "expectReply": false
   },
-  "b": {
+  "5b6f4fa0-3695-53a7-904b-d0a6f8bc326f": {
     "@type": "Participant",
     "calendarAddress": "mailto:bar@example.com",
     "expectReply": true,
@@ -3837,7 +3856,7 @@ SUMMARY:John
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "participants": {
-  "1": {
+  "858DA9AE-695B-43CD-BA4E-294C945356BC": {
     "@type": "Participant",
     "name": "John",
     "...": ""
@@ -3922,7 +3941,7 @@ TRIGGER;RELATED=END:PT5M
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "alerts": {
-  "2d": {
+  "2D3D674B-E3E4-4C63-BBF5-4582ED49BCB7": {
     "@type": "Alert",
     "trigger": {
       "@type": "OffsetTrigger",
@@ -3945,7 +3964,7 @@ TRIGGER;VALUE=DATE-TIME:20250302T010203Z
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "alerts": {
-  "14": {
+  "6AB751CF-515B-4925-9B8D-5AA2185F3E64": {
     "@type": "Alert",
     "trigger": {
       "@type": "AbsoluteTrigger",
@@ -5153,14 +5172,15 @@ jsid-prop = "JSID" *(";" other-param) ":" TEXT CRLF
 BEGIN:VEVENT
 ...
 BEGIN:VALARM
-JSID:myalert1
+UID:52DFB000-3C49-4577-8003-3086001BD26A
+JSID:myalert
 ...
 END:VALARM
 ]]></sourcecode>
                 <sourcecode type="json"><![CDATA[
 "@type": "Event",
 "alerts": {
-  "myalert1": {
+  "myalert": {
     "@type": "Alert",
     "...": ""
   }
@@ -5249,7 +5269,7 @@ END:VALARM
                 <sourcecode type="json"><![CDATA[
 "@type": "Event",
 "alerts": {
-  "a1": {
+  "DB7A8058-2212-46D9-87C2-867C7F65D625": {
     "@type": "Alert",
     "example.com:foo": "bar",
     "...": ""
@@ -5488,6 +5508,7 @@ END:X-BAZ
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.9073.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.9074.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.9253.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.9562.xml"/>
         <reference anchor="TZDB" target="https://www.iana.org/time-zones">
           <front>
             <title>IANA Time Zone Database</title>
