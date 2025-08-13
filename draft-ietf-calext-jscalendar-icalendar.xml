@@ -2398,8 +2398,9 @@ CONCEPT:https://example.com/event-types/arts/literature
         </section>
         <section anchor="ical-prop-conference">
           <name>CONFERENCE</name>
-          <t>
-            The <xref target="RFC7986" section="5.11" sectionFormat="parens">CONFERENCE property</xref> in a VEVENT or VTODO component converts to a <xref target="jscalendarbis" section="4.2.6" sectionFormat="parens">VirtualLocation object</xref>.  The converted object is set in the "virtualLocations" property of the Event or Task object. The property value converts to the "uri" property of the VirtualLocation object.</t>
+          <t>The <xref target="RFC7986" section="5.11" sectionFormat="parens">CONFERENCE property</xref> in a VEVENT or VTODO component converts to a <xref target="jscalendarbis" section="4.2.6" sectionFormat="parens">VirtualLocation object</xref>.  The converted object is set in the "virtualLocations" property of the Event or Task object. The property value converts to the "uri" property of the VirtualLocation object.</t>
+          <t>The key of the VirtualLocation object <bcp14>MUST</bcp14> be the value of the <xref target="ical-param-jsid">JSID parameter</xref>, if set. If no JSID parameter is set, then the key <bcp14>MAY</bcp14> be the UUIDv5 generated from the property value (see <xref target="generating-jscalendar-ids"/>). When converting to iCalendar, implementations <bcp14>MAY</bcp14> omit setting the JSID parameter if the key matches the UUIDv5 of the CONFERENCE property value and the key is not part of a JSON pointer in any JSPTR parameter value.</t>
+          <t>The property value converts to the "uri" property of the VirtualLocation object.</t>
           <t>Its parameters convert as follows:</t>
           <table>
             <name>Parameters of the CONFERENCE property</name>
@@ -2440,7 +2441,7 @@ CONFERENCE;VALUE=URI;FEATURE=AUDIO,VIDEO;
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "virtualLocations": {
-  "b2": {
+  "67e4a1e9-cffc-5bd4-9602-1a5dfc8e1626": {
     "@type": "VirtualLocation",
     "name": "Web video chat, access code=76543",
     "uri": "https://chat.example.com/audio?id=123456",
@@ -2802,6 +2803,7 @@ EXDATE:20230801T130000Z
           <t>
             The <xref target="RFC5545" section="3.8.1.6" sectionFormat="parens">GEO property</xref> in a VEVENT or VTODO component converts to a <xref target="jscalendarbis" section="4.2.5" sectionFormat="parens">Location object</xref>.  If the VEVENT or VTODO component also contains the <xref target="ical-prop-location">LOCATION property</xref>, then the GEO and LOCATION properties convert to the same Location object.  The converted object is set in the "locations" property of the Event or Task object.
           </t>
+          <t>The key of the Location object <bcp14>MUST</bcp14> be the value of the <xref target="ical-param-jsid">JSID parameter</xref>, if set. If no JSID parameter is set, then the key <bcp14>MAY</bcp14> be the UUIDv5 generated from the property value (see <xref target="generating-jscalendar-ids"/>). When converting to iCalendar, implementations <bcp14>MAY</bcp14> omit setting the JSID parameter if the key matches the UUIDv5 of the GEO property value and the key is not part of a JSON pointer in any JSPTR parameter value.</t>
           <t>
             The <xref target="RFC5545" section="3.8.1.6" sectionFormat="parens">GEO property</xref> in a VLOCATION component converts to the <xref target="jscalendarbis" section="4.2.5" sectionFormat="parens">"coordinates" property</xref> of the Location object.
           </t>
