@@ -2187,6 +2187,7 @@ ORGANIZER:mailto:organizer@example.com
             <name>Converting the ATTENDEE property and PARTICIPANT component</name>
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:PARTICIPANT
+UID:6CF544E4-BBC7-45A2-97FF-DFD1908CCE40
 CALENDAR-ADDRESS:mailto:foo@example.com
 DESCRIPTION:some description
 ...
@@ -2202,6 +2203,18 @@ ORGANIZER:mailto:organizer@example.com
     "participationStatus": "tentative",
     "expectReply": true,
     "description": "some description",
+    "iCalComponent": {
+      "@type": "ICalComponent",
+      "name": "participant",
+      "properties": [
+        [
+          "uid",
+          {},
+          "text",
+          "6CF544E4-BBC7-45A2-97FF-DFD1908CCE40"
+        ]
+      ]
+    },
     "...": ""
   },
   "251d3e9f-d83f-534c-8c45-c2896c75670c": {
@@ -5184,6 +5197,13 @@ END:VALARM
 "alerts": {
   "myalert": {
     "@type": "Alert",
+    "iCalComponent": {
+      "@type": "ICalComponent",
+      "name": "valarm",
+      "properties": [
+        ["uid", {}, "text", "52DFB000-3C49-4577-8003-3086001BD26A"]
+      ]
+    },
     "...": ""
   }
 }
