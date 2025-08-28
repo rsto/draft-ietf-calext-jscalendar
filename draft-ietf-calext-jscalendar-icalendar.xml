@@ -2900,7 +2900,7 @@ GEO:48.858222;2.2945
             The <xref target="RFC7986" section="5.10" sectionFormat="parens">IMAGE property</xref> in a VEVENT, VTODO, VLOCATION, PARTICIPANT, or VCALENDAR component converts to a <xref target="jscalendarbis" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the "links" property of the Event, Task, Location, Participant, or Group object.
           </t>
           <t>The key of the Link object <bcp14>MUST</bcp14> be the value of the <xref target="ical-param-jsid">JSID parameter</xref>, if set. If no JSID parameter is set, then the key <bcp14>MAY</bcp14> be the UUIDv5 generated from the property value (see <xref target="generating-jscalendar-ids"/>). When converting to iCalendar, implementations <bcp14>MAY</bcp14> omit setting the JSID parameter if the key matches the UUIDv5 of the IMAGE property value and the key is not part of a JSON pointer in any JSPTR parameter value.</t>
-          <t>The IMAGE property value converts to the "href" property of the Link object. A value of type URI converts as-is. See <xref target="ical-prop-attach"/> how to convert a BINARY value. The "rel" property of the Link object <bcp14>MUST</bcp14> be set to "icon".</t>
+          <t>The IMAGE property value converts to the "href" property of the Link object. A value of type URI converts as-is. See <xref target="ical-prop-attach"/> how to convert a BINARY value.</t>
           <t>Its parameters convert as follows:</t>
           <table>
             <name>Parameters of the IMAGE property</name>
@@ -2963,7 +2963,6 @@ IMAGE;VALUE=URI;DISPLAY=BADGE,THUMBNAIL;LABEL=An image;FMTTYPE=image/png:
       "badge": true,
       "thumbnail": true
     },
-    "rel": "icon",
     "contentType": "image/png",
     "title": "An image"
   }
@@ -4722,8 +4721,8 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
         <t>The <xref target="jscalendarbis" section="1.4.11" sectionFormat="parens">Link object</xref> converts either an <xref target="ical-prop-attach">ATTACH property</xref> or an <xref target="ical-prop-image">IMAGE property</xref>. Which iCalendar property to choose is implementation-specific. As a guideline:</t>
         <ul>
           <li>Choose the iCalendar property name indicated in the <xref target="jscal-prop-icalcomponent">iCalComponent</xref> of the JSCalendar object that contains this Link object, if set.</li>
-          <li>Choose IMAGE, if the "rel" property value is "icon".</li>
-          <li>Choose LINK, if the "rel" property is set to any value other than "icon".</li>
+          <li>Choose IMAGE, if the "display" property is set.</li>
+          <li>Choose LINK, if the "rel" property is set.</li>
           <li>Choose ATTACH otherwise.</li>
         </ul>
         <t>The href property converts to the "iCalendar" property value. The other Link properties convert as follows:</t>
@@ -4763,7 +4762,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
                 <xref target="jscalendarbis" section="1.4.11" sectionFormat="comma"/>
               </td>
               <td>LINKREL</td>
-              <td><xref target="RFC9253" section="6.1"/>, and remarks below</td>
+              <td><xref target="RFC9253" section="6.1"/></td>
             </tr>
             <tr>
               <td>size</td>
@@ -4787,10 +4786,6 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             </tr>
           </tbody>
         </table>
-        <t>Remarks:</t>
-        <ul>
-          <li>The LINKREL parameter <bcp14>MUST</bcp14> be omitted if the Link object converts to an IMAGE property and the "rel" property value is "icon".</li>
-        </ul>
         <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the same component to which the Link object converts to as a property.</t>
       </section>
       <section anchor="jscal-location">
