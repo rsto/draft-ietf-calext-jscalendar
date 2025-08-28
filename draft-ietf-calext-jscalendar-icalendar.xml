@@ -5201,7 +5201,12 @@ END:VALARM
       "@type": "ICalComponent",
       "name": "valarm",
       "properties": [
-        ["uid", {}, "text", "52DFB000-3C49-4577-8003-3086001BD26A"]
+        [
+          "uid",
+          {},
+          "text",
+          "52DFB000-3C49-4577-8003-3086001BD26A"
+        ]
       ]
     },
     "...": ""
