@@ -1919,14 +1919,6 @@ ACTION:AUDIO
                 <td/>
               </tr>
               <tr>
-                <td>LINKREL</td>
-                <td>
-                  <xref target="RFC9253" section="6.1" sectionFormat="comma"/>
-                </td>
-                <td>rel</td>
-                <td>See remarks below</td>
-              </tr>
-              <tr>
                 <td>SIZE</td>
                 <td>
                   <xref target="RFC8607" section="4.1" sectionFormat="comma"/>
@@ -1937,9 +1929,6 @@ ACTION:AUDIO
             </tbody>
           </table>
           <t>Remarks:</t>
-          <ul>
-            <li>The LINKREL parameter value is defined to be either an URI or an <xref target="RFC5545" section="3.1" sectionFormat="parens">"iana-token"</xref>. Only parameter values of form "iana-token" convert to the "rel" property of the Link object. The values convert to lowercase.</li>
-          </ul>
           <t>The following examples illustrate how to convert the ATTACH property:</t>
           <figure anchor="test-ical-prop-attach-uri">
             <name>Converting the ATTACH property with URI value</name>
@@ -2949,14 +2938,6 @@ GEO:48.858222;2.2945
                 <td/>
               </tr>
               <tr>
-                <td>LINKREL</td>
-                <td>
-                  <xref target="RFC9253" section="6.1" sectionFormat="comma"/>
-                </td>
-                <td>rel</td>
-                <td/>
-              </tr>
-              <tr>
                 <td>SIZE</td>
                 <td>
                   <xref target="RFC8607" section="4.1" sectionFormat="comma"/>
@@ -3055,9 +3036,6 @@ LAST-MODIFIED:20240914T231257Z
             </tbody>
           </table>
           <t>Remarks:</t>
-          <ul>
-            <li>The LINKREL parameter value is defined to be either an URI or an <xref target="RFC5545" section="3.1" sectionFormat="parens">"iana-token"</xref>. Only parameter values of form "iana-token" convert to the "rel" property of the Link object. The values convert to lowercase.</li>
-          </ul>
           <t>A LINK property with any other value type does not convert to a standard JSCalendar element. Implementations <bcp14>MAY</bcp14> convert it to the <xref target="jscal-prop-icalcomponent">"iCalComponent" property</xref>.</t>
           <t>The following example illustrates how to convert the LINK property:</t>
           <figure anchor="test-ical-prop-link">
