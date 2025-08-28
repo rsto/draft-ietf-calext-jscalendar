@@ -2298,14 +2298,13 @@ END:PARTICIPANT
           <figure anchor="test-ical-prop-categories">
             <name>Converting the CATEGORIES property</name>
             <sourcecode type="text/calendar"><![CDATA[
-CATEGORIES:APPOINTMENT,EDUCATION
-CATEGORIES:meeting
+CATEGORIES:Favorites
+CATEGORIES:Meeting
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "keywords": {
-  "APPOINTMENT": true,
-  "EDUCATION": true,
-  "meeting": true
+  "Favorites": true,
+  "Meeting": true
 }
 ]]></sourcecode>
           </figure>
