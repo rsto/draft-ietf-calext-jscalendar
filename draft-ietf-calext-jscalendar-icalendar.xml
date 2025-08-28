@@ -2911,7 +2911,7 @@ GEO:48.858222;2.2945
             The <xref target="RFC7986" section="5.10" sectionFormat="parens">IMAGE property</xref> in a VEVENT, VTODO, VLOCATION, PARTICIPANT, or VCALENDAR component converts to a <xref target="jscalendarbis" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the "links" property of the Event, Task, Location, Participant, or Group object.
           </t>
           <t>The key of the Link object <bcp14>MUST</bcp14> be the value of the <xref target="ical-param-jsid">JSID parameter</xref>, if set. If no JSID parameter is set, then the key <bcp14>MAY</bcp14> be the UUIDv5 generated from the property value (see <xref target="generating-jscalendar-ids"/>). When converting to iCalendar, implementations <bcp14>MAY</bcp14> omit setting the JSID parameter if the key matches the UUIDv5 of the IMAGE property value and the key is not part of a JSON pointer in any JSPTR parameter value.</t>
-          <t>The IMAGE property value converts to the "href" property of the Link object. A value of type URI converts as-is. See <xref target="ical-prop-attach"/> how to convert a BINARY value. If the DISPLAY parameter is set, then the "rel" property of the Link object <bcp14>MUST</bcp14> be set to "icon".</t>
+          <t>The IMAGE property value converts to the "href" property of the Link object. A value of type URI converts as-is. See <xref target="ical-prop-attach"/> how to convert a BINARY value. The "rel" property of the Link object <bcp14>MUST</bcp14> be set to "icon".</t>
           <t>Its parameters convert as follows:</t>
           <table>
             <name>Parameters of the IMAGE property</name>
