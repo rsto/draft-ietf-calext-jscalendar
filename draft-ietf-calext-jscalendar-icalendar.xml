@@ -70,7 +70,7 @@
           <ul>
             <li>An example that only contains iCalendar properties implicitly represents a VEVENT component having these properties set and that is part of a VCALENDAR component.</li>
             <li>An example that only contains one or more VEVENT, VTODO, VJOURNAL, FREEBUSY or VTIMEZONE components implicitly represents a VCALENDAR component that contains them. An example that only contains one or more other components implicitly represents a VEVENT component having these components set and that is part of a VCALENDAR components.</li>
-            <li>An example that only contains NT or VTODO components implicitly represents a VCALENDAR component that contains them.</li>
+            <li>An example that only contains VEVENT or VTODO components implicitly represents a VCALENDAR component that contains them.</li>
             <li>An example that only contains a VCALENDAR component but no contained components implicitly represents a VCALENDAR component that contains a VEVENT component.</li>
             <li>Implicit components (those without a BEGIN and END, or omitted completely) are assumed to contain all mandatory properties with some value, but the actual value is irrelevant for the example.</li>
           </ul>
@@ -527,7 +527,7 @@ END:VCALENDAR
         <section anchor="generating-jscalendar-ids">
           <name>JSCalendar Ids</name>
           <t>JSCalendar generally uses JSON objects to represent a collection of same-typed values. The keys are of type <xref target="jscalendarbis" section="1.4.1" sectionFormat="parens">Id</xref>, the values are JSCalendar object types.  If an iCalendar element converts to a value in such a collection then an implementation needs to choose an identifier as key.</t>
-          <t>If the <xref target="ical-param-jsid">JSID parameter</xref>r or <xref target="ical-prop-jsid">JSID property</xref> is set on a property or component, then its value <bcp14>MUST</bcp14> be used as key when converting that element from iCalendar to JSCalendar.  In absence of the JSID parameter or property key generation is implementation-specific.</t>
+          <t>If the <xref target="ical-param-jsid">JSID parameter</xref> or <xref target="ical-prop-jsid">JSID property</xref> is set on a property or component, then its value <bcp14>MUST</bcp14> be used as key when converting that element from iCalendar to JSCalendar.  In absence of the JSID parameter or property key generation is implementation-specific.</t>
           <t>Some sections later in this document describe key generation schemes for specific iCalendar elements by making use of <xref target="RFC9562" section="5.5" sectionFormat="parens">UUID Version 5 with SHA1 hash</xref>. The Namespace ID to generate such keys is "7f1e1965-ae73-4454-b088-232c90730ce2". These key generation schemes are not mandatory, nor is making use of that particular Namespace ID when using UUID Version 5 (UUIDv5) as keys.</t>
           <t>Irrespective of the key generation scheme, all keys <bcp14>MUST</bcp14> be valid according to the definition of the Id type. For consistency, keys <bcp14>SHOULD</bcp14> be stable such that converting the same iCalendar data to JSCalendar multiple times produces the same keys.</t>
         </section>
@@ -2249,7 +2249,7 @@ ORGANIZER:mailto:organizer@example.com
           <t>
               The <xref target="RFC9073" section="6.4" sectionFormat="parens">CALENDAR-ADDRESS property</xref> in a PARTICIPANT component converts to the <xref target="jmap-calendars" section="5.1.1" sectionFormat="parens">"calendarAddress" property</xref> of the Participant object.
           </t>
-          <t>Implementations <bcp14>MAY</bcp14> preserve the fact that a Participant object's "calendarAddress" property converted from the CALENDAR-ADRESS property of a PARTICIPANT component, rather than an ATTENDEE property. In this case, they <bcp14>MUST</bcp14> add an entry for the "calendarAddress" property in the "iCalCompoent/convertedProperties" property of the Participant object.</t>
+          <t>Implementations <bcp14>MAY</bcp14> preserve the fact that a Participant object's "calendarAddress" property converted from the CALENDAR-ADRESS property of a PARTICIPANT component, rather than an ATTENDEE property. In this case, they <bcp14>MUST</bcp14> add an entry for the "calendarAddress" property in the "iCalComponent/convertedProperties" property of the Participant object.</t>
           <t>The following example illustrates how to convert the CALENDAR-ADDRESS property:</t>
           <figure anchor="test-ical-prop-calendar-address">
             <name>Converting the CALENDAR-ADDRESS property</name>
@@ -3328,7 +3328,7 @@ ATTENDEE;RSVP=TRUE;PARTSTAT=TENTATIVE:mailto:bar@example.com
           </t>
           <t>The following examples illustrate how to convert the PERCENT-COMPLETE property:</t>
           <figure anchor="test-ical-prop-percent-complete-method">
-            <name>Converting the PERCENT-COMPLETE property in a VEVENT component</name>
+            <name>Converting the PERCENT-COMPLETE property in a VTODO component</name>
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VCALENDAR
 BEGIN:VTODO
@@ -3436,7 +3436,7 @@ RDATE:20230805T170000Z
           <t>
             The <xref target="RFC5545" section="3.8.4.5" sectionFormat="parens">RELATED-TO property</xref> in a VEVENT, VTODO, or VALARM component converts to a <xref target="jscalendarbis" section="1.4.10" sectionFormat="parens">Relation object</xref>.  The converted object is set in the "relatedTo" property of the <xref target="jscalendarbis" section="4.1.3" sectionFormat="parens">Event or Task object</xref>, or the <xref target="jscalendarbis" section="4.5.2" sectionFormat="parens">Alert object</xref>.
           </t>
-          <t>The property value in a VEVENT or VTODO converts as-is to the id of the Relation object in the "relatedTo" property. The property value in a VALARM converts to the same value as the id of that Alert object, which represents the VALARM component having that property value set in the UID property. Any RELTYPE parameters convert to the "relations" property in that Relation object. The parameter values convert in lowercase.</t>
+          <t>The property value in a VEVENT or VTODO converts as-is to the id of the Relation object in the "relatedTo" property. The property value in a VALARM converts to the same value as the id of that Alert object, which represents the VALARM component having that property value set in the UID property. Any RELTYPE parameters convert to the "relation" property in that Relation object. The parameter values convert in lowercase.</t>
           <t>The following examples illustrate how to convert the RELATED-TO property:</t>
           <figure anchor="test-ical-prop-related-to">
             <name>Converting the RELATED-TO property in a VEVENT</name>
@@ -4789,7 +4789,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
       </section>
       <section anchor="jscal-location">
         <name>Location</name>
-        <t>The <xref target="jscalendarbis" section="4.2.5" sectionFormat="parens">Location object</xref> converts to either a <xref target="ical-prop-location">LOCATION</xref>, <xref target="ical-prop-geo">GEO</xref>, or <xref target="ical-prop-geo">DTEND</xref> property, or it converts to a <xref target="ical-comp-vlocation">VLOCATION component</xref>. Which iCalendar element to choose is implementation-specific. As a guideline:</t>
+        <t>The <xref target="jscalendarbis" section="4.2.5" sectionFormat="parens">Location object</xref> converts to either a <xref target="ical-prop-location">LOCATION</xref> or <xref target="ical-prop-geo">GEO</xref> property, or it converts to a <xref target="ical-comp-vlocation">VLOCATION component</xref>. Which iCalendar element to choose is implementation-specific. As a guideline:</t>
         <ul>
           <li>If the "iCalComponent" property on the Location object is set, or the parent JSCalendar object contains an entry for that Location in the "convertedProperties" property of its "iCalComponent" property, then convert the object back to the named iCalendar element.</li>
           <li>Choose LOCATION if the key of the Location object in the "locations" property matches the "mainLocationId" property, or if the "name" property is set and the iCalendar component does not already contain a LOCATION property. The "name" property converts to the LOCATION property value.</li>
