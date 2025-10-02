@@ -1995,7 +1995,7 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
                   <xref target="RFC5545" section="3.2.3" sectionFormat="comma"/>
                 </td>
                 <td>kind</td>
-                <td/>
+                <td>ROOM converts to "location"</td>
               </tr>
               <tr>
                 <td>DELEGATED-FROM</td>
