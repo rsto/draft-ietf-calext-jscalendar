@@ -3029,17 +3029,16 @@ LAST-MODIFIED:20240914T231257Z
                   <xref target="RFC9253" section="6.1" sectionFormat="comma"/>
                 </td>
                 <td>rel</td>
-                <td>See remarks below</td>
+                <td/>
               </tr>
             </tbody>
           </table>
-          <t>Remarks:</t>
           <t>A LINK property with any other value type does not convert to a standard JSCalendar element. Implementations <bcp14>MAY</bcp14> convert it to the <xref target="jscal-prop-icalcomponent">"iCalComponent" property</xref>.</t>
           <t>The following example illustrates how to convert the LINK property:</t>
           <figure anchor="test-ical-prop-link">
             <name>Converting the LINK property</name>
             <sourcecode type="text/calendar"><![CDATA[
-LINK;LINKREL=source;LABEL=Venue;VALUE=URI:
+LINK;LINKREL="https://example.com/linkrel/source";LABEL=Venue;VALUE=URI:
  https://example.com/events
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
@@ -3048,7 +3047,7 @@ LINK;LINKREL=source;LABEL=Venue;VALUE=URI:
     "@type": "Link",
     "href": "https://example.com/events",
     "title": "Venue",
-    "rel": "source"
+    "rel": "https://example.com/linkrel/source"
   }
 }
 ]]></sourcecode>
@@ -5525,7 +5524,6 @@ END:X-BAZ
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7986.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8259.xml"/>
-        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8288.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8607.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.9073.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.9074.xml"/>
@@ -5955,8 +5953,6 @@ END:X-BAZ
             <ul>
               <li>
                 <xref target="RFC5545" section="3.2.10" sectionFormat="comma">LANGUAGE</xref>
-              </li>
-              <li><xref target="RFC9253" section="6.1" sectionFormat="comma">LINKREL</xref> (if the parameter value does not conform to the "reg-rel-type" ABNF in <xref target="RFC8288" section="3.3" sectionFormat="comma"/>).
               </li>
             </ul>
           </section>
