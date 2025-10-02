@@ -4806,7 +4806,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
         <name>Location</name>
         <t>The <xref target="jscalendarbis" section="4.2.5" sectionFormat="parens">Location object</xref> converts to either a <xref target="ical-prop-location">LOCATION</xref> or <xref target="ical-prop-geo">GEO</xref> property, or it converts to a <xref target="ical-comp-vlocation">VLOCATION component</xref>. Which iCalendar element to choose is implementation-specific. As a guideline:</t>
         <ul>
-          <li>If the "iCalComponent" property on the Location object is set, or the parent JSCalendar object contains an entry for that Location in the "convertedProperties" property of its "iCalComponent" property, then convert the object back to the named iCalendar element.</li>
+          <li>If the "iCalComponent" property on the Location object is set, or the parent JSCalendar object contains an entry for that Location in the "convertedProperties" property of its "iCalComponent" property, then convert the object back to the named iCalendar component or property.</li>
           <li>Choose LOCATION if the key of the Location object in the "locations" property matches the "mainLocationId" property, or if the "name" property is set and the iCalendar component does not already contain a LOCATION property. The "name" property converts to the LOCATION property value.</li>
           <li>Choose the VLOCATION component otherwise.</li>
         </ul>
