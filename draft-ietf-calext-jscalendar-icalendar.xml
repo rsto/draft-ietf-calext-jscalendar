@@ -4267,6 +4267,18 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
             </tr>
             <tr>
+              <td>progress</td>
+              <td>
+                <xref target="jscalendarbis" section="5.2.5" sectionFormat="comma"/>
+              </td>
+              <td>STATUS</td>
+              <td>
+                <t>
+                  <xref target="ical-prop-status"/>
+                </t>
+              </td>
+            </tr>
+            <tr>
               <td>recurrenceId</td>
               <td>
                 <xref target="jscalendarbis" section="4.3.1" sectionFormat="comma"/>
@@ -4354,6 +4366,18 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               <td>
                 <t>
                   <xref target="ical-prop-dtstart"/>
+                </t>
+              </td>
+            </tr>
+            <tr>
+              <td>status</td>
+              <td>
+                <xref target="jscalendarbis" section="5.1.4" sectionFormat="comma"/>
+              </td>
+              <td>STATUS</td>
+              <td>
+                <t>
+                  <xref target="ical-prop-status"/>
                 </t>
               </td>
             </tr>
