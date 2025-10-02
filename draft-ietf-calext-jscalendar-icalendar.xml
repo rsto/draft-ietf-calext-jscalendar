@@ -3251,14 +3251,6 @@ END:VLOCATION
                 <td>name</td>
                 <td/>
               </tr>
-              <tr>
-                <td>DIR</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.6" sectionFormat="comma"/>
-                </td>
-                <td>links</td>
-                <td/>
-              </tr>
             </tbody>
           </table>
           <t>The following examples illustrate how to convert the ORGANIZER property:</t>
@@ -5984,6 +5976,9 @@ END:X-BAZ
               <xref target="RFC5545" section="3.8.4.3" sectionFormat="comma">ORGANIZER</xref>
             </name>
             <ul>
+              <li>
+                <xref target="RFC5545" section="3.2.6" sectionFormat="comma">DIR</xref>
+              </li>
               <li>
                 <xref target="RFC5545" section="3.2.18" sectionFormat="comma">SENT-BY</xref>
               </li>
