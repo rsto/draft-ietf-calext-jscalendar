@@ -550,7 +550,7 @@ END:VCALENDAR
         <name>Components</name>
         <section anchor="ical-comp-participant">
           <name>PARTICIPANT</name>
-          <t>The <xref target="RFC9073" section="7.1" sectionFormat="parens">PARTICIPANT component</xref> in a VEVENT or VTODO component converts to a <xref target="jscalendarbis" section="4.4.6" sectionFormat="parens">Participant object</xref>.  The converted object is set in the "participants" property of the Event or Task object.</t>
+          <t>The <xref target="RFC9073" section="7.1" sectionFormat="parens">PARTICIPANT component</xref> in a VEVENT or VTODO component converts to a <xref target="jscalendarbis" section="4.4.5" sectionFormat="parens">Participant object</xref>.  The converted object is set in the "participants" property of the Event or Task object.</t>
           <t>The key of the Participant object <bcp14>MUST</bcp14> be the value of the <xref target="ical-prop-jsid">JSID property</xref>, if set. If no JSID property but the CALENDAR-ADDRESS property is set, then the key <bcp14>MAY</bcp14> be a UUIDv5 generated from the property value (see <xref target="generating-jscalendar-ids"/>). Otherwise, the key <bcp14>MAY</bcp14> be the UID property value. When converting to iCalendar, implementations <bcp14>MAY</bcp14> omit setting the JSID property if key matches the UUIDv5 of the CALENDAR-ADDRESS property value or the key matches the UID property, and the key is not part of a JSON pointer in any JSPTR parameter value.</t>
           <t>Its properties convert as follows:</t>
           <table anchor="ical-comp-participant-props">
@@ -668,7 +668,7 @@ END:PARTICIPANT
         </section>
         <section anchor="ical-comp-valarm">
           <name>VALARM</name>
-          <t>The <xref target="RFC5545" section="3.6.6" sectionFormat="parens">VALARM component</xref> in a VEVENT or VTODO component converts to an <xref target="jscalendarbis" section="4.5.2" sectionFormat="parens">Alert object</xref>. The converted object is set in the "alerts" property of the Event or Task object.</t>
+          <t>The <xref target="RFC5545" section="3.6.6" sectionFormat="parens">VALARM component</xref> in a VEVENT or VTODO component converts to an <xref target="jscalendarbis" section="4.5.1" sectionFormat="parens">Alert object</xref>. The converted object is set in the "alerts" property of the Event or Task object.</t>
           <t>The key of the Alert object <bcp14>MUST</bcp14> be the value of the <xref target="ical-prop-jsid">JSID property</xref>, if set. Otherwise, the key <bcp14>MAY</bcp14> be the value of the UID property. When converting to iCalendar, implementations <bcp14>MAY</bcp14> omit setting the JSID property if the key matches the value of the UID property, and the key is not part of a JSON pointer in any JSPTR parameter value.</t>
           <t>Its properties convert as follows:</t>
           <table anchor="ical-comp-valarm-props">
@@ -1786,7 +1786,7 @@ DUE:20060102T030405Z
         <section anchor="ical-prop-acknowledged">
           <name>ACKNOWLEDGED</name>
           <t>
-            The <xref target="RFC9074" section="6.1" sectionFormat="parens">ACKNOWLEDGED property</xref> in a VALARM component converts to the <xref target="jscalendarbis" section="4.5.2" sectionFormat="parens">"acknowledged" property</xref> of the Alert object.
+            The <xref target="RFC9074" section="6.1" sectionFormat="parens">ACKNOWLEDGED property</xref> in a VALARM component converts to the <xref target="jscalendarbis" section="4.5.1" sectionFormat="parens">"acknowledged" property</xref> of the Alert object.
           </t>
           <t>The following example illustrates how to convert the ACKNOWLEDGED property:</t>
           <figure anchor="test-ical-prop-acknowledged">
@@ -1811,7 +1811,7 @@ ACKNOWLEDGED:20241002T114703Z
         <section anchor="ical-prop-action">
           <name>ACTION</name>
           <t>
-            The <xref target="RFC5545" section="3.8.6.1" sectionFormat="parens">ACTION property</xref> in a VALARM component converts to the <xref target="jscalendarbis" section="4.5.2" sectionFormat="parens">"action" property</xref> of the Alert object.
+            The <xref target="RFC5545" section="3.8.6.1" sectionFormat="parens">ACTION property</xref> in a VALARM component converts to the <xref target="jscalendarbis" section="4.5.1" sectionFormat="parens">"action" property</xref> of the Alert object.
           </t>
           <t>Its values convert as follows:</t>
           <table anchor="ical-prop-action-values">
@@ -1966,7 +1966,7 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
         <section anchor="ical-prop-attendee">
           <name>ATTENDEE</name>
           <t>
-            The <xref target="RFC5545" section="3.8.4.1" sectionFormat="parens">ATTENDEE property</xref> in a VEVENT or VTODO component converts to a <xref target="jscalendarbis" section="4.4.6" sectionFormat="parens">Participant object</xref>.  The converted object is set in the "participants" property of the Event or Task object. The property value converts to the calendarAddress property of the Participant object.</t>
+            The <xref target="RFC5545" section="3.8.4.1" sectionFormat="parens">ATTENDEE property</xref> in a VEVENT or VTODO component converts to a <xref target="jscalendarbis" section="4.4.5" sectionFormat="parens">Participant object</xref>.  The converted object is set in the "participants" property of the Event or Task object. The property value converts to the calendarAddress property of the Participant object.</t>
           <t>The key of the Participant object <bcp14>MUST</bcp14> be the value of the <xref target="ical-param-jsid">JSID parameter</xref>, if set. If no JSID parameter is set, then the key <bcp14>MAY</bcp14> be the UUIDv5 generated from the property value (see <xref target="generating-jscalendar-ids"/>). When converting to iCalendar, implementations <bcp14>MAY</bcp14> omit setting the JSID parameter if the key matches the UUIDv5 of the ATTENDEE property value and the key is not part of a JSON pointer in any JSPTR parameter value.</t>
           <t>An ATTENDEE property and a PARTICIPANT component in the same iCalendar component convert to the same Participant object, if their converted calendarAddress property values are equal. How to deal with conflicting values is implementation-specific.</t>
           <t>The ATTENDEE property parameters convert as follows:</t>
@@ -2291,7 +2291,7 @@ END:PARTICIPANT
         <section anchor="ical-prop-categories">
           <name>CATEGORIES</name>
           <t>
-            The <xref target="RFC5545" section="3.8.1.2" sectionFormat="parens">CATEGORIES property</xref> in a VEVENT, VTODO, or VCALENDAR component converts to the <xref target="jscalendarbis" section="4.2.9" sectionFormat="parens">"keywords" property</xref> of the Event, Task, or Group object.
+            The <xref target="RFC5545" section="3.8.1.2" sectionFormat="parens">CATEGORIES property</xref> in a VEVENT, VTODO, or VCALENDAR component converts to the <xref target="jscalendarbis" section="4.2.10" sectionFormat="parens">"keywords" property</xref> of the Event, Task, or Group object.
           </t>
           <t>The list of category values converts to a set of keywords. The values convert case-sensitively. All CATEGORIES properties in the same iCalendar component convert to the "keywords" property in the JSCalendar object.</t>
           <t>The following example illustrates how to convert the CATEGORIES property:</t>
@@ -2353,7 +2353,7 @@ CLASS:PRIVATE
         <section anchor="ical-prop-color">
           <name>COLOR</name>
           <t>
-            The <xref target="RFC7986" section="5.9" sectionFormat="parens">COLOR property</xref> in a VEVENT, VTODO, or VCALENDAR component converts to the <xref target="jscalendarbis" section="4.2.11" sectionFormat="parens">"color" property</xref> of the Event, Task, or Group object.
+            The <xref target="RFC7986" section="5.9" sectionFormat="parens">COLOR property</xref> in a VEVENT, VTODO, or VCALENDAR component converts to the <xref target="jscalendarbis" section="4.2.12" sectionFormat="parens">"color" property</xref> of the Event, Task, or Group object.
           </t>
           <t>Its value converts verbatim.</t>
           <t>The following examples illustrate how to convert the COLOR property:</t>
@@ -2379,7 +2379,7 @@ COLOR:#ffa07a
         <section anchor="ical-prop-concept">
           <name>CONCEPT</name>
           <t>
-            The <xref target="RFC9253" section="8.1" sectionFormat="parens">CONCEPT property</xref> in a VEVENT, VTODO, or VCALENDAR component converts to the <xref target="jscalendarbis" section="4.2.10" sectionFormat="parens">"categories" property</xref> of the Event, Task, or Group object.
+            The <xref target="RFC9253" section="8.1" sectionFormat="parens">CONCEPT property</xref> in a VEVENT, VTODO, or VCALENDAR component converts to the <xref target="jscalendarbis" section="4.2.11" sectionFormat="parens">"categories" property</xref> of the Event, Task, or Group object.
           </t>
           <t>The list of URI values converts to a set of URIs. Multiple occurrences of the CONCEPT property in the same iCalendar component convert to the same categories property in the JSCalendar object.</t>
           <t>The following example illustrates how to convert the CONCEPT property:</t>
@@ -2399,7 +2399,7 @@ CONCEPT:https://example.com/event-types/arts/literature
         </section>
         <section anchor="ical-prop-conference">
           <name>CONFERENCE</name>
-          <t>The <xref target="RFC7986" section="5.11" sectionFormat="parens">CONFERENCE property</xref> in a VEVENT or VTODO component converts to a <xref target="jscalendarbis" section="4.2.6" sectionFormat="parens">VirtualLocation object</xref>.  The converted object is set in the "virtualLocations" property of the Event or Task object. The property value converts to the "uri" property of the VirtualLocation object.</t>
+          <t>The <xref target="RFC7986" section="5.11" sectionFormat="parens">CONFERENCE property</xref> in a VEVENT or VTODO component converts to a <xref target="jscalendarbis" section="4.2.7" sectionFormat="parens">VirtualLocation object</xref>.  The converted object is set in the "virtualLocations" property of the Event or Task object. The property value converts to the "uri" property of the VirtualLocation object.</t>
           <t>The key of the VirtualLocation object <bcp14>MUST</bcp14> be the value of the <xref target="ical-param-jsid">JSID parameter</xref>, if set. If no JSID parameter is set, then the key <bcp14>MAY</bcp14> be the UUIDv5 generated from the property value (see <xref target="generating-jscalendar-ids"/>). When converting to iCalendar, implementations <bcp14>MAY</bcp14> omit setting the JSID parameter if the key matches the UUIDv5 of the CONFERENCE property value and the key is not part of a JSON pointer in any JSPTR parameter value.</t>
           <t>The property value converts to the "uri" property of the VirtualLocation object.</t>
           <t>Its parameters convert as follows:</t>
@@ -2482,7 +2482,7 @@ COORDINATES;VALUE=URI:geo:48.198634,16.371648;crs=wgs84;u=40
         <section anchor="ical-prop-created">
           <name>CREATED</name>
           <t>
-            The <xref target="RFC5545" section="3.8.7.1" sectionFormat="parens">CREATED property</xref> in a VEVENT, VTODO, or VCALENDAR component converts to the <xref target="jscalendarbis" section="4.1.5" sectionFormat="parens">"created" property</xref> of the Event, Task, or Group object.
+            The <xref target="RFC5545" section="3.8.7.1" sectionFormat="parens">CREATED property</xref> in a VEVENT, VTODO, or VCALENDAR component converts to the <xref target="jscalendarbis" section="4.1.4" sectionFormat="parens">"created" property</xref> of the Event, Task, or Group object.
           </t>
           <t>The following example illustrates how to convert the CREATED property:</t>
           <figure anchor="test-ical-prop-created">
@@ -2581,7 +2581,7 @@ DTEND;VALUE=DATE:20240107
         <section anchor="ical-prop-dtstamp">
           <name>DTSTAMP</name>
           <t>
-              The <xref target="RFC5545" section="3.8.7.2" sectionFormat="parens">DTSTAMP property</xref> in a VEVENT or VTODO component converts to the <xref target="jscalendarbis" section="4.1.6" sectionFormat="parens">"updated" property</xref> of the Event or Task object.</t>
+              The <xref target="RFC5545" section="3.8.7.2" sectionFormat="parens">DTSTAMP property</xref> in a VEVENT or VTODO component converts to the <xref target="jscalendarbis" section="4.1.5" sectionFormat="parens">"updated" property</xref> of the Event or Task object.</t>
           <t>The following examples illustrate how to convert the DTSTAMP property:</t>
           <figure anchor="test-ical-prop-dtstamp-vevent-method">
             <name>Converting the DTSTAMP property in a VEVENT component</name>
@@ -2611,7 +2611,7 @@ DTSTAMP:20240304T132000Z
         <section anchor="ical-prop-dtstart">
           <name>DTSTART</name>
           <t>
-              The <xref target="RFC5545" section="3.8.2.4" sectionFormat="parens">DTSTART property</xref> in a VEVENT or VTODO component converts to the <xref target="jscalendarbis" section="4.7.2" sectionFormat="parens">"start" property</xref> of the Event or Task object.</t>
+              The <xref target="RFC5545" section="3.8.2.4" sectionFormat="parens">DTSTART property</xref> in a VEVENT or VTODO component converts to the "start" property of the Event or Task object (Sections 5.1.1 and 5.2.2 of <xref target="jscalendarbis"/>).</t>
           <t>See <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values.</t>
           <t>For VEVENT and VTODO components, the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DTSTART property converts to the "timeZone" property of the Event or Task object.  In addition, if the value type of the DTSTART property is DATE, then the value of the <xref target="jscalendarbis" section="4.2.4" sectionFormat="parens">"showWithoutTime" property</xref> is "true".</t>
           <t>The following examples illustrate how to convert the DTSTART property for the VEVENT and VTODO components.</t>
@@ -2972,10 +2972,10 @@ IMAGE;VALUE=URI;DISPLAY=BADGE,THUMBNAIL;LABEL=An image;FMTTYPE=image/png:
         <section anchor="ical-prop-last-modified">
           <name>LAST-MODIFIED</name>
           <t>
-            The <xref target="RFC5545" section="3.8.7.3" sectionFormat="parens">LAST-MODIFIED property</xref> in a VCALENDAR component converts to the <xref target="jscalendarbis" section="4.1.6" sectionFormat="parens">"updated" property</xref> of the Group object.
+            The <xref target="RFC5545" section="3.8.7.3" sectionFormat="parens">LAST-MODIFIED property</xref> in a VCALENDAR component converts to the <xref target="jscalendarbis" section="4.1.5" sectionFormat="parens">"updated" property</xref> of the Group object.
           </t>
           <t>
-              The <xref target="RFC5545" section="3.8.7.3" sectionFormat="parens">LAST-MODIFIED property</xref> in a VEVENT or VTODO component does <em>not</em> convert to the <xref target="jscalendarbis" section="4.1.6" sectionFormat="parens">"updated" property</xref> of the Event or Task object. Implementations <bcp14>MAY</bcp14> instead preserve the LAST-MODIFIED property in the "iCalComponent" property.</t>
+              The <xref target="RFC5545" section="3.8.7.3" sectionFormat="parens">LAST-MODIFIED property</xref> in a VEVENT or VTODO component does <em>not</em> convert to the <xref target="jscalendarbis" section="4.1.5" sectionFormat="parens">"updated" property</xref> of the Event or Task object. Implementations <bcp14>MAY</bcp14> instead preserve the LAST-MODIFIED property in the "iCalComponent" property.</t>
           <t>The following example illustrates how to convert the LAST-MODIFIED property:</t>
           <figure anchor="test-ical-prop-last-modified">
             <name>Converting the IMAGE property</name>
@@ -3149,7 +3149,7 @@ LOCATION-TYPE:hotel,restaurant
         <section anchor="ical-prop-method">
           <name>METHOD</name>
           <t>
-              The <xref target="RFC5545" section="3.7.2" sectionFormat="parens">METHOD property</xref> in a VCALENDAR component converts to the <xref target="jscalendarbis" section="4.1.8" sectionFormat="parens">"method" property</xref> of all Event or Task objects that are listed in the Group object's entries property.
+              The <xref target="RFC5545" section="3.7.2" sectionFormat="parens">METHOD property</xref> in a VCALENDAR component converts to the <xref target="jscalendarbis" section="4.1.7" sectionFormat="parens">"method" property</xref> of all Event or Task objects that are listed in the Group object's entries property.
           </t>
           <t>The property value converts in lowercase.</t>
           <t>The following example illustrates how to convert the METHOD property:</t>
@@ -3179,7 +3179,7 @@ BEGIN:VEVENT
         <section anchor="ical-prop-name">
           <name>NAME</name>
           <t>
-            The <xref target="RFC7986" section="5.1" sectionFormat="parens">NAME property</xref> in a VLOCATION component converts to the "name" property of the <xref target="jscalendarbis" section="4.2.5" sectionFormat="parens">Location</xref> or <xref target="jscalendarbis" section="4.4.6" sectionFormat="parens">Participant</xref> object.
+            The <xref target="RFC7986" section="5.1" sectionFormat="parens">NAME property</xref> in a VLOCATION component converts to the "name" property of the <xref target="jscalendarbis" section="4.2.5" sectionFormat="parens">Location</xref> or <xref target="jscalendarbis" section="4.4.5" sectionFormat="parens">Participant</xref> object.
           </t>
           <t>
             The <xref target="RFC7986" section="5.1" sectionFormat="parens">NAME property</xref> in a VCALENDAR component converts to the <xref target="jscalendarbis" section="4.2.1" sectionFormat="parens">"title" property</xref> of the Group object. If the LANGUAGE parameter is set, then the parameter value converts to the <xref target="jscalendarbis" section="4.2.9" sectionFormat="parens">"locale" property</xref> of the same object.
@@ -3228,7 +3228,7 @@ END:VLOCATION
         <section anchor="ical-prop-organizer">
           <name>ORGANIZER</name>
           <t>
-            The <xref target="RFC5545" section="3.8.4.3" sectionFormat="parens">ORGANIZER property</xref> in a VEVENT or VTODO component converts to the <xref target="jscalendarbis" section="4.4.4" sectionFormat="parens">"organizerCalendarAddress" property</xref> of the Event or Task object and to a Participant object in the  <xref target="jscalendarbis" section="4.4.6" sectionFormat="parens">"participants" property</xref>. The ORGANIZER property value converts to the "calendarAddress" property of the Participant, the "owner" role is set in Participant "roles" property.</t>
+            The <xref target="RFC5545" section="3.8.4.3" sectionFormat="parens">ORGANIZER property</xref> in a VEVENT or VTODO component converts to the <xref target="jscalendarbis" section="4.4.4" sectionFormat="parens">"organizerCalendarAddress" property</xref> of the Event or Task object and to a Participant object in the  <xref target="jscalendarbis" section="4.4.5" sectionFormat="parens">"participants" property</xref>. The ORGANIZER property value converts to the "calendarAddress" property of the Participant, the "owner" role is set in Participant "roles" property.</t>
           <t>The key of the Participant object <bcp14>MUST</bcp14> be the value of the <xref target="ical-param-jsid">JSID parameter</xref>, if set. If no JSID parameter is set, then the key <bcp14>MAY</bcp14> be the UUIDv5 generated from the property value (see <xref target="generating-jscalendar-ids"/>). When converting to iCalendar, implementations <bcp14>MAY</bcp14> omit setting the JSID parameter if the key matches the UUIDv5 of the ORGANIZER property value and the key is not part of a JSON pointer in any JSPTR parameter value.</t>
           <t>An ORGANIZER property, an ATTENDEE property, and a PARTICIPANT component in the same iCalendar component all convert to the same Participant object, if their converted calendarAddress property values are equal. How to deal with conflicting property values is implementation-specific.</t>
           <t>The ORGANIZER property parameters convert as follows:</t>
@@ -3360,7 +3360,7 @@ PRIORITY:3
         <section anchor="ical-prop-prodid">
           <name>PRODID</name>
           <t>
-            The <xref target="RFC5545" section="3.7.3" sectionFormat="parens">PRODID property</xref> in a VCALENDAR component converts to the <xref target="jscalendarbis" section="4.1.4" sectionFormat="parens">"prodId" property</xref> of the Group object, and to the "prodId" property of all Event or Task objects that are listed in the Group object's entries property.</t>
+            The <xref target="RFC5545" section="3.7.3" sectionFormat="parens">PRODID property</xref> in a VCALENDAR component converts to the <xref target="jscalendarbis" section="4.1.3" sectionFormat="parens">"prodId" property</xref> of the Group object, and to the "prodId" property of all Event or Task objects that are listed in the Group object's entries property.</t>
           <t>The property value converts verbatim.</t>
           <t>The following example illustrates how to convert the PRODID property:</t>
           <figure anchor="test-ical-prop-prodid">
@@ -3425,7 +3425,7 @@ RDATE:20230805T170000Z
         <section anchor="ical-prop-related-to">
           <name>RELATED-TO</name>
           <t>
-            The <xref target="RFC5545" section="3.8.4.5" sectionFormat="parens">RELATED-TO property</xref> in a VEVENT, VTODO, or VALARM component converts to a <xref target="jscalendarbis" section="1.4.10" sectionFormat="parens">Relation object</xref>.  The converted object is set in the "relatedTo" property of the <xref target="jscalendarbis" section="4.1.3" sectionFormat="parens">Event or Task object</xref>, or the <xref target="jscalendarbis" section="4.5.2" sectionFormat="parens">Alert object</xref>.
+            The <xref target="RFC5545" section="3.8.4.5" sectionFormat="parens">RELATED-TO property</xref> in a VEVENT, VTODO, or VALARM component converts to a <xref target="jscalendarbis" section="1.4.10" sectionFormat="parens">Relation object</xref>.  The converted object is set in the "relatedTo" property of the <xref target="jscalendarbis" section="4.1.2" sectionFormat="parens">Event or Task object</xref>, or the <xref target="jscalendarbis" section="4.5.1" sectionFormat="parens">Alert object</xref>.
           </t>
           <t>The property value in a VEVENT or VTODO converts as-is to the id of the Relation object in the "relatedTo" property. The property value in a VALARM converts to the same value as the id of that Alert object, which represents the VALARM component having that property value set in the UID property. Any RELTYPE parameters convert to the "relation" property in that Relation object. The parameter values convert in lowercase.</t>
           <t>The following examples illustrate how to convert the RELATED-TO property:</t>
@@ -3669,7 +3669,7 @@ RRULE:FREQ=YEARLY
         </section>
         <section anchor="ical-prop-sequence">
           <name>SEQUENCE</name>
-          <t>The <xref target="RFC5545" section="3.8.7.4" sectionFormat="parens">SEQUENCE property</xref> in a VEVENT or VTODO component converts to the <xref target="jscalendarbis" section="4.1.7" sectionFormat="parens">"sequence" property</xref> of the Event or Task object.</t>
+          <t>The <xref target="RFC5545" section="3.8.7.4" sectionFormat="parens">SEQUENCE property</xref> in a VEVENT or VTODO component converts to the <xref target="jscalendarbis" section="4.1.6" sectionFormat="parens">"sequence" property</xref> of the Event or Task object.</t>
           <t>The following example illustrates how to convert the SEQUENCE property:</t>
           <figure anchor="test-ical-prop-sequence">
             <name>Example for converting the SEQUENCE property</name>
@@ -3703,7 +3703,7 @@ SHOW-WITHOUT-TIME;VALUE=BOOLEAN:TRUE
         <section anchor="ical-prop-status">
           <name>STATUS</name>
           <t>
-            The <xref target="RFC5545" section="3.8.1.11" sectionFormat="parens">STATUS property</xref> in a VEVENT component converts to the <xref target="jscalendarbis" section="5.1.3" sectionFormat="parens">"status" property</xref> of the Event object.
+            The <xref target="RFC5545" section="3.8.1.11" sectionFormat="parens">STATUS property</xref> in a VEVENT component converts to the <xref target="jscalendarbis" section="5.1.4" sectionFormat="parens">"status" property</xref> of the Event object.
 
             The STATUS property in a VTODO component converts to the <xref target="jscalendarbis" section="5.2.5" sectionFormat="parens">"progress" property</xref> of the Task object.
           </t>
@@ -3886,7 +3886,7 @@ TRANSP:TRANSPARENT
         <section anchor="ical-prop-trigger">
           <name>TRIGGER</name>
           <t>
-            The <xref target="RFC5545" section="3.8.6.3" sectionFormat="parens">TRIGGER property</xref> in a VALARM component converts to either an AbsoluteTrigger or OffsetTrigger object.  The converted object is set in the <xref target="jscalendarbis" section="4.5.2" sectionFormat="parens">"trigger" property</xref> of the Alert object.
+            The <xref target="RFC5545" section="3.8.6.3" sectionFormat="parens">TRIGGER property</xref> in a VALARM component converts to either an AbsoluteTrigger or OffsetTrigger object.  The converted object is set in the <xref target="jscalendarbis" section="4.5.1" sectionFormat="parens">"trigger" property</xref> of the Alert object.
           </t>
           <t>A property of value type DURATION converts an OffsetTrigger object. The property value converts to its offset property. A value of type DATE-TIME converts to an AbsoluteTrigger object. The property value converts to its when property.</t>
           <t>Its parameters convert as follows:</t>
@@ -3923,7 +3923,7 @@ TRIGGER;RELATED=END:PT5M
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "alerts": {
-  "2D3D674B-E3E4-4C63-BBF5-4582ED49BCB7": {
+  "2D3D674B-E3E4.4.53-BBF5-4582ED49BCB7": {
     "@type": "Alert",
     "trigger": {
       "@type": "OffsetTrigger",
@@ -3961,7 +3961,7 @@ TRIGGER;VALUE=DATE-TIME:20250302T010203Z
         <section anchor="ical-prop-uid">
           <name>UID</name>
           <t>
-            The <xref target="RFC5545" section="3.8.4.7" sectionFormat="parens">UID property</xref> in a VEVENT, VTODO, or VCALENDAR component converts to the <xref target="jscalendarbis" section="4.1.2" sectionFormat="parens">"uid" property</xref> of the Event, Task, or Group object.
+            The <xref target="RFC5545" section="3.8.4.7" sectionFormat="parens">UID property</xref> in a VEVENT, VTODO, or VCALENDAR component converts to the <xref target="jscalendarbis" section="4.1.1" sectionFormat="parens">"uid" property</xref> of the Event, Task, or Group object.
           </t>
           <t>The following example illustrates how to convert the UID property:</t>
           <figure anchor="test-ical-prop-uid">
@@ -3980,7 +3980,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
       <name>Converting JSCalendar to iCalendar</name>
       <section anchor="jscal-alert">
         <name>Alert</name>
-        <t>The <xref target="jscalendarbis" section="4.5.2" sectionFormat="parens">Alert object</xref> converts to a <xref target="ical-comp-valarm">VALARM component</xref>.  Its properties convert as follows:</t>
+        <t>The <xref target="jscalendarbis" section="4.5.1" sectionFormat="parens">Alert object</xref> converts to a <xref target="ical-comp-valarm">VALARM component</xref>.  Its properties convert as follows:</t>
         <table>
           <name>Properties of the Alert object</name>
           <thead>
@@ -3995,7 +3995,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>acknowledged</td>
               <td>
-                <xref target="jscalendarbis" section="4.5.2" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.5.1" sectionFormat="comma"/>
               </td>
               <td>ACKNOWLEDGED</td>
               <td>
@@ -4005,7 +4005,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>action</td>
               <td>
-                <xref target="jscalendarbis" section="4.5.2" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.5.1" sectionFormat="comma"/>
               </td>
               <td>ACTION</td>
               <td>
@@ -4015,7 +4015,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>relatedTo</td>
               <td>
-                <xref target="jscalendarbis" section="4.1.3" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.5.1" sectionFormat="comma"/>
               </td>
               <td>RELATED-TO</td>
               <td>
@@ -4025,7 +4025,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>trigger</td>
               <td>
-                <xref target="jscalendarbis" section="4.5.2" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.5.1" sectionFormat="comma"/>
               </td>
               <td>TRIGGER</td>
               <td>
@@ -4062,7 +4062,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>alerts</td>
               <td>
-                <xref target="jscalendarbis" section="4.5.2" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.5.1" sectionFormat="comma"/>
               </td>
               <td>VALARM (component)</td>
               <td>
@@ -4072,7 +4072,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>categories</td>
               <td>
-                <xref target="jscalendarbis" section="4.2.10" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.2.11" sectionFormat="comma"/>
               </td>
               <td>CONCEPT</td>
               <td>
@@ -4082,7 +4082,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>color</td>
               <td>
-                <xref target="jscalendarbis" section="4.2.11" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.2.12" sectionFormat="comma"/>
               </td>
               <td>COLOR</td>
               <td>
@@ -4092,7 +4092,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>created</td>
               <td>
-                <xref target="jscalendarbis" section="4.1.5" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.1.4" sectionFormat="comma"/>
               </td>
               <td>CREATED</td>
               <td>
@@ -4134,7 +4134,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>keywords</td>
               <td>
-                <xref target="jscalendarbis" section="4.2.9" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.2.10" sectionFormat="comma"/>
               </td>
               <td>CATEGORIES</td>
               <td>
@@ -4146,7 +4146,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>links</td>
               <td>
-                <xref target="jscalendarbis" section="4.2.7" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.2.8" sectionFormat="comma"/>
               </td>
               <td>ATTACH, or other</td>
               <td>
@@ -4192,7 +4192,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>method</td>
               <td>
-                <xref target="jscalendarbis" section="4.1.8" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.1.7" sectionFormat="comma"/>
               </td>
               <td>METHOD of iCalendar object</td>
               <td>
@@ -4214,7 +4214,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>participants</td>
               <td>
-                <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.4.5" sectionFormat="comma"/>
               </td>
               <td>ATTENDEE, or PARTICIPANT (component)</td>
               <td>
@@ -4250,7 +4250,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>prodId</td>
               <td>
-                <xref target="jscalendarbis" section="4.1.4" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.1.3" sectionFormat="comma"/>
               </td>
               <td>PRODID of iCalendar object</td>
               <td>
@@ -4296,7 +4296,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>recurrenceOverrides</td>
               <td>
-                <xref target="jscalendarbis" section="4.3.5" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.3.4" sectionFormat="comma"/>
               </td>
               <td>RDATE, EXDATE or recurrence override component</td>
               <td><xref target="ical-recurring-components"/>, and remarks below</td>
@@ -4316,7 +4316,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>relatedTo</td>
               <td>
-                <xref target="jscalendarbis" section="4.1.3" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.1.2" sectionFormat="comma"/>
               </td>
               <td>RELATED-TO</td>
               <td>
@@ -4328,7 +4328,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>sequence</td>
               <td>
-                <xref target="jscalendarbis" section="4.1.7" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.1.6" sectionFormat="comma"/>
               </td>
               <td>SEQUENCE</td>
               <td>
@@ -4349,33 +4349,9 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
             </tr>
             <tr>
-              <td>start</td>
-              <td>
-                <xref target="jscalendarbis" section="4.7.2" sectionFormat="comma"/>
-              </td>
-              <td>DTSTART</td>
-              <td>
-                <t>
-                  <xref target="ical-prop-dtstart"/>
-                </t>
-              </td>
-            </tr>
-            <tr>
-              <td>status</td>
-              <td>
-                <xref target="jscalendarbis" section="5.1.4" sectionFormat="comma"/>
-              </td>
-              <td>STATUS</td>
-              <td>
-                <t>
-                  <xref target="ical-prop-status"/>
-                </t>
-              </td>
-            </tr>
-            <tr>
               <td>timeZone</td>
               <td>
-                <xref target="jscalendarbis" section="4.7.1" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.6.1" sectionFormat="comma"/>
               </td>
               <td>TZID (parameter) of DTSTART and DUE</td>
               <td>
@@ -4397,7 +4373,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>uid</td>
               <td>
-                <xref target="jscalendarbis" section="4.1.2" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.1.1" sectionFormat="comma"/>
               </td>
               <td>UID</td>
               <td>
@@ -4409,7 +4385,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>updated</td>
               <td>
-                <xref target="jscalendarbis" section="4.1.6" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.1.5" sectionFormat="comma"/>
               </td>
               <td>DTSTAMP, and LAST-MODIFIED</td>
               <td>
@@ -4419,7 +4395,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>virtualLocations</td>
               <td>
-                <xref target="jscalendarbis" section="4.2.6" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.2.7" sectionFormat="comma"/>
               </td>
               <td>CONFERENCE</td>
               <td>
@@ -4475,9 +4451,21 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
             </tr>
             <tr>
+              <td>start</td>
+              <td>
+                <xref target="jscalendarbis" section="5.1.1" sectionFormat="comma"/>,
+              </td>
+              <td>DTSTART</td>
+              <td>
+                <t>
+                  <xref target="ical-prop-dtstart"/>
+                </t>
+              </td>
+            </tr>
+            <tr>
               <td>status</td>
               <td>
-                <xref target="jscalendarbis" section="5.1.3" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="5.1.4" sectionFormat="comma"/>
               </td>
               <td>STATUS</td>
               <td>
@@ -4548,6 +4536,19 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
                 </t>
               </td>
             </tr>
+            <tr>
+              <td>start</td>
+              <td>
+                <xref target="jscalendarbis" section="5.2.2" sectionFormat="comma"/>,
+              </td>
+              <td>DTSTART</td>
+              <td>
+                <t>
+                  <xref target="ical-prop-dtstart"/>
+                </t>
+              </td>
+            </tr>
+
           </tbody>
         </table>
         <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the VEVENT or VTODO component.</t>
@@ -4569,7 +4570,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>categories</td>
               <td>
-                <xref target="jscalendarbis" section="4.2.10" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.2.11" sectionFormat="comma"/>
               </td>
               <td>CONCEPT</td>
               <td>
@@ -4581,7 +4582,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>color</td>
               <td>
-                <xref target="jscalendarbis" section="4.2.11" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.2.12" sectionFormat="comma"/>
               </td>
               <td>COLOR</td>
               <td>
@@ -4593,7 +4594,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>created</td>
               <td>
-                <xref target="jscalendarbis" section="4.1.5" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.1.4" sectionFormat="comma"/>
               </td>
               <td>CREATED</td>
               <td>
@@ -4625,7 +4626,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>keywords</td>
               <td>
-                <xref target="jscalendarbis" section="4.2.9" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.2.10" sectionFormat="comma"/>
               </td>
               <td>CATEGORIES</td>
               <td>
@@ -4637,7 +4638,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>links</td>
               <td>
-                <xref target="jscalendarbis" section="4.2.7" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.2.8" sectionFormat="comma"/>
               </td>
               <td>ATTACH, or other</td>
               <td>
@@ -4659,7 +4660,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>prodId</td>
               <td>
-                <xref target="jscalendarbis" section="4.1.4" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.1.3" sectionFormat="comma"/>
               </td>
               <td>PRODID</td>
               <td>
@@ -4693,7 +4694,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>uid</td>
               <td>
-                <xref target="jscalendarbis" section="4.1.2" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.1.1" sectionFormat="comma"/>
               </td>
               <td>UID</td>
               <td>
@@ -4705,7 +4706,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>updated</td>
               <td>
-                <xref target="jscalendarbis" section="4.1.6" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.1.5" sectionFormat="comma"/>
               </td>
               <td>LAST-MODIFIED</td>
               <td>
@@ -4834,7 +4835,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>links</td>
               <td>
-                <xref target="jscalendarbis" section="4.2.7" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.2.8" sectionFormat="comma"/>
               </td>
               <td>ATTACH, or other</td>
               <td>
@@ -4869,10 +4870,10 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
       </section>
       <section anchor="jscal-participant">
         <name>Participant</name>
-        <t>The <xref target="jscalendarbis" section="4.4.6" sectionFormat="parens">Participant object</xref> converts to both an <xref target="ical-prop-attendee">ATTENDEE property</xref> and a <xref target="ical-comp-participant">PARTICIPANT component</xref>:</t>
+        <t>The <xref target="jscalendarbis" section="4.4.5" sectionFormat="parens">Participant object</xref> converts to both an <xref target="ical-prop-attendee">ATTENDEE property</xref> and a <xref target="ical-comp-participant">PARTICIPANT component</xref>:</t>
         <ul>
           <li>
-            <t>It converts to an ATTENDEE property if the <xref target="jscalendarbis" section="4.4.6" sectionFormat="parens">calendarAddress</xref> property is set.</t>
+            <t>It converts to an ATTENDEE property if the <xref target="jscalendarbis" section="4.4.5" sectionFormat="parens">calendarAddress</xref> property is set.</t>
           </li>
           <li>
             <t>It converts to a PARTICIPANT component if any of the Participant properties in <xref target="jscal-participant-props-participant"/> are set. If the Participant object also converts to an ATTENDEE property, then the CALENDAR-ADDRESS property value of the PARTICIPANT component <bcp14>MUST</bcp14> match the ATTENDEE property value.</t>
@@ -4893,7 +4894,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>calendarAddress</td>
               <td>
-                <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.4.5" sectionFormat="comma"/>
               </td>
               <td>ATTENDEE</td>
               <td>
@@ -4903,7 +4904,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>delegatedFrom</td>
               <td>
-                <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.4.5" sectionFormat="comma"/>
               </td>
               <td>DELEGATED-FROM</td>
               <td>
@@ -4913,7 +4914,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>delegatedTo</td>
               <td>
-                <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.4.5" sectionFormat="comma"/>
               </td>
               <td>DELEGATED-TO</td>
               <td>
@@ -4923,7 +4924,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>email</td>
               <td>
-                <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.4.5" sectionFormat="comma"/>
               </td>
               <td>EMAIL</td>
               <td>
@@ -4933,7 +4934,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>expectReply</td>
               <td>
-                <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.4.5" sectionFormat="comma"/>
               </td>
               <td>RSVP</td>
               <td>
@@ -4943,7 +4944,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>kind</td>
               <td>
-                <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.4.5" sectionFormat="comma"/>
               </td>
               <td>CUTYPE</td>
               <td>
@@ -4953,7 +4954,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>memberOf</td>
               <td>
-                <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.4.5" sectionFormat="comma"/>
               </td>
               <td>MEMBER</td>
               <td>
@@ -4963,7 +4964,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>name</td>
               <td>
-                <xref target="jscalendarbis" section="4.2.5" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.4.5" sectionFormat="comma"/>
               </td>
               <td>CN</td>
               <td>
@@ -4973,7 +4974,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>participationStatus</td>
               <td>
-                <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.4.5" sectionFormat="comma"/>
               </td>
               <td>PARTSTAT</td>
               <td>
@@ -4983,7 +4984,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>progress</td>
               <td>
-                <xref target="jscalendarbis" section="5.2.5" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.4.5" sectionFormat="comma"/>
               </td>
               <td>PARTSTAT</td>
               <td><xref target="ical-prop-attendee"/>, and remarks below
@@ -4992,7 +4993,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>roles</td>
               <td>
-                <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.4.5" sectionFormat="comma"/>
               </td>
               <td>ROLE</td>
               <td>
@@ -5002,7 +5003,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>sentBy</td>
               <td>
-                <xref target="jscalendarbis" section="4.4.6" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.4.5" sectionFormat="comma"/>
               </td>
               <td>SENT-BY</td>
               <td>
@@ -5069,7 +5070,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>name</td>
               <td>
-                <xref target="jscalendarbis" section="4.2.5" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.4.5" sectionFormat="comma"/>
               </td>
               <td>SUMMARY</td>
               <td>
@@ -5081,7 +5082,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>percentComplete</td>
               <td>
-                <xref target="jscalendarbis" section="5.2.4" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.4.5" sectionFormat="comma"/>
               </td>
               <td>PERCENT-COMPLETE</td>
               <td>
@@ -5096,7 +5097,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
       </section>
       <section anchor="jscal-virtual-location">
         <name>VirtualLocation</name>
-        <t>The <xref target="jscalendarbis" section="4.2.6" sectionFormat="parens">VirtualLocation object</xref> converts to a <xref target="ical-prop-conference">CONFERENCE property</xref>.</t>
+        <t>The <xref target="jscalendarbis" section="4.2.7" sectionFormat="parens">VirtualLocation object</xref> converts to a <xref target="ical-prop-conference">CONFERENCE property</xref>.</t>
         <t>The "uri" property converts to the CONFERENCE property value.</t>
         <t>The following properties convert to parameters of the CONFERENCE property:</t>
         <table>
@@ -5113,7 +5114,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>features</td>
               <td>
-                <xref target="jscalendarbis" section="4.2.6" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.2.7" sectionFormat="comma"/>
               </td>
               <td>FEATURE</td>
               <td>
@@ -5123,7 +5124,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <tr>
               <td>name</td>
               <td>
-                <xref target="jscalendarbis" section="4.2.5" sectionFormat="comma"/>
+                <xref target="jscalendarbis" section="4.2.7" sectionFormat="comma"/>
               </td>
               <td>LABEL</td>
               <td>
