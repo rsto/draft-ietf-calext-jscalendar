@@ -3923,7 +3923,7 @@ TRIGGER;RELATED=END:PT5M
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "alerts": {
-  "2D3D674B-E3E4.4.53-BBF5-4582ED49BCB7": {
+  "2D3D674B-E3E4-4C63-BBF5-4582ED49BCB7": {
     "@type": "Alert",
     "trigger": {
       "@type": "OffsetTrigger",
