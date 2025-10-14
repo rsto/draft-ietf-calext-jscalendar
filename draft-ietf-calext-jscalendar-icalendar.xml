@@ -2063,7 +2063,6 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
               </tr>
             </tbody>
           </table>
-          <t>If no ROLE parameter is set, then the "attendee" role in the "roles" property <bcp14>MUST</bcp14> be set.</t>
           <t>The PARTSTAT of an ATTENDEE property in a VTODO component converts not only to the "participationStatus" property of the Participant object, but also to its progress property if the PARTSTAT parameter value is specific for VTODO components:</t>
           <table anchor="ical-prop-attendee-param-partstat">
             <name>Converting the PARTSTAT parameter in a VTODO component to Participant properties</name>
@@ -2156,9 +2155,6 @@ ORGANIZER:mailto:organizer@example.com
     "calendarAddress": "mailto:hcabot@example.com",
     "name": "Henry Cabot",
     "participationStatus": "tentative",
-    "roles": {
-      "attendee": true
-    },
     "expectReply": true
   },
   "251d3e9f-d83f-534c-8c45-c2896c75670c": {
@@ -3296,7 +3292,6 @@ ATTENDEE;RSVP=TRUE;PARTSTAT=TENTATIVE:mailto:bar@example.com
     "name": "Jane Doe",
     "participationStatus": "accepted",
     "roles": {
-      "attendee": true,
       "owner": true
     },
     "expectReply": false
@@ -5015,7 +5010,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
         <t>Remarks:</t>
         <ul>
           <li>
-            <t>The "attendee" role does not convert to the ROLE parameter: it either is implied if the Participant object converts to an ATTENDEE, otherwise implementations <bcp14>MAY</bcp14> preserve it using the <xref target="ical-prop-jsprop">JSPROP</xref> property. The "owner" role does not convert to any standard iCalendar element: it either is implied if the property value of the ATTENDEE is equal to the value of the ORGANIZER property in the same component, otherwise implementations <bcp14>MAY</bcp14> preserve it using the <xref target="ical-prop-jsprop">JSPROP</xref> property.</t>
+            <t>The "owner" role does not convert to any standard iCalendar element: it either is implied if the property value of the ATTENDEE is equal to the value of the ORGANIZER property in the same component, otherwise implementations <bcp14>MAY</bcp14> preserve it using the <xref target="ical-prop-jsprop">JSPROP</xref> property.</t>
           </li>
           <li>
             <t>The progress property converts to the PARTSTAT parameter as outlined in <xref target="ical-prop-attendee-param-partstat"/>.</t>
