@@ -3470,7 +3470,7 @@ PRIORITY:3
         <section anchor="ical-prop-prodid">
           <name>PRODID</name>
           <t>
-            The <xref target="RFC5545" section="3.7.3" sectionFormat="parens">PRODID property</xref> in a VCALENDAR component converts to the <xref target="jscalendarbis" section="4.1.3" sectionFormat="parens">"prodId" property</xref> of the Group object, and to the "prodId" property of all Event or Task objects that are listed in the Group object's entries property.</t>
+              The <xref target="RFC5545" section="3.7.3" sectionFormat="parens">PRODID property</xref> in a VCALENDAR component converts to the <xref target="jscalendarbis" section="4.1.3" sectionFormat="parens">"prodId" property</xref> of the Group object. Implementations <bcp14>MAY</bcp14> additionally convert it also to the "prodId" property of all Event or Task objects that are listed in the Group object's "entries" property.</t>
           <t>The property value converts verbatim.</t>
           <t>The following example illustrates how to convert the PRODID property:</t>
           <figure anchor="test-ical-prop-prodid">
