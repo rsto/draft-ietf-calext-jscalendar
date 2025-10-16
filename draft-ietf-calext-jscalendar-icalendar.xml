@@ -535,9 +535,10 @@ END:VCALENDAR
           <name>Timezone identifiers</name>
           <t>Converting temporal properties such as DTSTART, DTEND, and RECURRENCE-ID requires to not only determine the date and time of the property value, but also the timezone it references.</t>
           <t>If the property value type is <xref target="RFC5545" section="3.3.4" sectionFormat="parens">DATE</xref> or  <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #1: DATE WITH LOCAL TIME</xref> then the timezone identifier is the JSON null value in JSCalendar.</t>
-          <t>If the property value type is <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #2: DATE WITH UTC TIME</xref> then the timezone identifier is the string "Etc/UTC" in JSCalendar.</t>
-          <t>If the property value type is <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #3: DATE WITH LOCAL TIME AND TIME ZONE REFERENCE</xref> then the timezone identifier is determined by the TZID parameter value:</t>
-          <t>If the TZID parameter value is equal to a name in the <xref target="TZDB">IANA Time Zone Database</xref> then the timezone identifier is that verbatim name. Otherwise, how to convert the TZID parameter value is implementation-specific: software libraries such as the <eref target="https://icu.unicode.org/">International Components for Unicode</eref> support converting Microsoft time zone names to IANA time zone identifiers. Alternatively, finding an IANA time zone for which the time zone offset changes match those of the custom time zone over the span of the event or task is typically possible.</t>
+          <t>If the property value type is <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #2: DATE WITH UTC TIME</xref> then the timezone identifier is "Etc/UTC" in JSCalendar.</t>
+          <t>If the property value type is <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #3: DATE WITH LOCAL TIME AND TIME ZONE REFERENCE</xref> then the timezone identifier is determined by the TZID parameter value as follows:</t>
+          <t>If the TZID parameter value is equal to a name in the <xref target="TZDB">IANA Time Zone Database</xref> then the timezone identifier is that verbatim name. Otherwise, how to convert the TZID parameter value is implementation-specific: software libraries such as the <eref target="https://icu.unicode.org/">International Components for Unicode</eref> support converting Microsoft time zone names to IANA time zone identifiers. Alternatively, an implementation might determine the name of an IANA time zone which has identical time zone rules over the time span of the calendar object.</t>
+          <t>Implementations <bcp14>MAY</bcp14> preserve a TZID parameter set to a non-IANA timezone identifier and its related VTIMEZONE by use of the "convertedProperties" and "components" properties (see <xref target="jscal-prop-icalcomponent"/>), but <bcp14>MUST NOT</bcp14> expect other implementations to consider them when processing the calendar object. See <xref target="test-ical-prop-dtstart-tzid-non-iana"/> for an example.</t>
         </section>
         <section anchor="convert-date-and-date-time">
           <name>DATE and DATE-TIME</name>
@@ -2679,6 +2680,29 @@ DTSTART;VALUE=DATE:20240921
 "start": "2024-09-21T00:00:00",
 "timeZone": null,
 "showWithoutTime": true
+]]></sourcecode>
+          </figure>
+          <figure anchor="test-ical-prop-dtstart-tzid-non-iana">
+            <name>Converting the DTSTART property with a non-IANA TZID parameter</name>
+            <sourcecode type="text/calendar"><![CDATA[
+DTSTART;TZID="W. Europe Standard Time":20241121T105302
+]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"start": "2024-11-21T10:53:02",
+"timeZone": "Europe/Berlin",
+"iCalComponent": {
+  "@type": "ICalComponent",
+  "name": "vevent",
+  "convertedProperties": {
+    "start": {
+      "@type": "ICalProperty",
+      "name": "dtstart",
+      "parameters": {
+        "tzid": "W. Europe Standard Time"
+      }
+    }
+  }
+}
 ]]></sourcecode>
           </figure>
         </section>
