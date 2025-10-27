@@ -27,6 +27,16 @@ class Parameter:
 
     def normalize(self):
         self.name = self.name.upper()
+        if not self.value:
+            return
+        if self.value[0] != '"':
+            if any(c in ":;,." or c.isspace() for c in self.value):
+                # Non-standard: quote any non-quoted string
+                # that either must be quoted or is likely
+                # to be quoted by most iCalendar generator
+                self.value = '"' + self.value + '"'
+            else:
+                self.value = self.value.upper()
 
     @staticmethod
     def _sortkey(param):
