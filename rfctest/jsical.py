@@ -176,6 +176,8 @@ class Component:
                 add_default(Property("UID", f"{uuid.uuid4()}"))
             elif comp.name == "VTIMEZONE":
                 add_default(Property("TZID", f"{uuid.uuid4()}"))
+            elif comp.name == "VALARM":
+                add_default(Property("TRIGGER", "PT0S"))
 
         return vobj
 
