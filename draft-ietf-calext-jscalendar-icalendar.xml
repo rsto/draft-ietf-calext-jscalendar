@@ -101,7 +101,7 @@ END:VEVENT
 END:VCALENDAR
 ]]></sourcecode>
           </figure>
-          <t>A line containing just the value <tt>...</tt> stands for any other properties that might be present in a component but are irrelevant for this example.  This includes mandatory properties as described for implicit components.  The line <tt>...</tt> at the end of the example additionally stands for any END content lines to complete components that started with BEGIN content lines, and any of their missing mandatory properties. <xref target="example-notation-icalendar-dotdotdot"/> illustrates this as an alternative representation for the examples of <xref target="example-notation-icalendar-implicit-explicit"/>.</t>
+	  <t>A line containing just the value <tt>...</tt> stands for any other properties that might be present in a component but are irrelevant for this example.  This includes mandatory properties as described for implicit components, but the value <tt>...</tt> does not represent a property in a component for which at least one same-named property is explicitly stated for that component in the example.  The line <tt>...</tt> at the end of the example additionally stands for any END content lines to complete components that started with BEGIN content lines, and any of their missing mandatory properties. <xref target="example-notation-icalendar-dotdotdot"/> illustrates this as an alternative representation for the examples of <xref target="example-notation-icalendar-implicit-explicit"/>.</t>
           <figure anchor="example-notation-icalendar-dotdotdot">
             <name>Example for additional properties and component ENDs represented by <tt>...</tt>
             </name>
