@@ -5600,9 +5600,89 @@ END:X-BAZ
     </section>
     <section anchor="IANA">
       <!-- All drafts are required to have an IANA considerations section.  See RFC 8126 for a guide.-->
-      <name>IANA Considerations</name>
-      <t>TBD</t>
-    </section>
+	    <name>IANA Considerations</name>
+	    <section>
+		    <name>Changes to the "iCalendar Element Registries"</name>
+        <t>IANA will add the following entries to the "Properties" registry:</t>
+        <dl spacing="compact">
+          <dt>Property</dt>
+          <dd>JSID</dd>
+          <dt>Status</dt>
+          <dd>Current</dd>
+          <dt>Reference</dt>
+          <dd>
+            <xref target="ical-prop-jsid"/>
+          </dd>
+        </dl>
+        <dl spacing="compact">
+          <dt>Property</dt>
+          <dd>JSPROP</dd>
+          <dt>Status</dt>
+          <dd>Current</dd>
+          <dt>Reference</dt>
+          <dd>
+            <xref target="ical-prop-jsprop"/>
+          </dd>
+        </dl>
+        <t>IANA will add the following entries to the "Parameters" registry:</t>
+        <dl spacing="compact">
+		<dt>Parameter</dt>
+          <dd>JSID</dd>
+          <dt>Status</dt>
+          <dd>Current</dd>
+          <dt>Reference</dt>
+          <dd>
+            <xref target="ical-param-jsid"/>
+          </dd>
+  </dl>
+        <dl spacing="compact">
+		<dt>Parameter</dt>
+          <dd>JSPTR</dd>
+          <dt>Status</dt>
+          <dd>Current</dd>
+          <dt>Reference</dt>
+          <dd>
+            <xref target="ical-param-jsptr"/>
+          </dd>
+        </dl>
+      </section>
+	    <section>
+		    <name>Changes to the "JSCalendar Registries"</name>
+        <t>IANA will add the following entries to the "JSCalendar Properties" registry:</t>
+        <dl spacing="compact">
+          <dt>Property Name</dt>
+	  <dd>iCalendar</dd>
+          <dt>Property Type</dt>
+	  <dd>ICalComponent</dd>
+          <dt>Property Context</dt>
+	  <dd>Event, Location, Participant, Task</dd>
+	  <dt>Reference</dt>
+	  <dd><xref target="jscal-prop-icalendar"/></dd>
+	  <dt>Intended Usage</dt>
+	  <dd>common</dd>
+	  <dt>Is Per-User</dt>
+	  <dd>no</dd>
+	  <dt>Change Controller</dt>
+          <dd>IETF</dd>
+        </dl>
+        <dl spacing="compact">
+          <dt>Property Name</dt>
+	  <dd>iCalendar</dd>
+          <dt>Property Type</dt>
+	  <dd>ICalComponent</dd>
+          <dt>Property Context</dt>
+	  <dd>Alert</dd>
+	  <dt>Reference</dt>
+	  <dd><xref target="jscal-prop-icalendar"/></dd>
+	  <dt>Intended Usage</dt>
+	  <dd>common</dd>
+	  <dt>Is Per-User</dt>
+	  <dd>yes</dd>
+	  <dt>Change Controller</dt>
+          <dd>IETF</dd>
+        </dl>
+</section>
+</section>
   </middle>
   <back>
     <references>
