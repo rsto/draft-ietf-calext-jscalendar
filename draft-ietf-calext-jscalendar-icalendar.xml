@@ -5704,7 +5704,6 @@ END:X-BAZ
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7986.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8259.xml"/>
-        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8607.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.9073.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.9074.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.9253.xml"/>
@@ -5729,7 +5728,7 @@ END:X-BAZ
             <author fullname="Michael Douglass" initials="M." surname="Douglass">
               <organization>Spherical Cow Group</organization>
             </author>
-            <date day="8" month="October" year="2025"/>
+            <date day="4" month="November" year="2025"/>
           </front>
           <seriesInfo name="Internet-Draft" value="draft-ietf-jmap-calendars"/>
         </reference>
@@ -5742,7 +5741,7 @@ END:X-BAZ
             <author fullname="Adrian Apthorp" initials="A." surname="Apthorp">
               <organization>DHL Express</organization>
             </author>
-            <date day="7" month="July" year="2025"/>
+            <date day="9" month="December" year="2025"/>
           </front>
           <seriesInfo name="Internet-Draft" value="draft-ietf-calext-ical-tasks"/>
         </reference>
@@ -5755,7 +5754,7 @@ END:X-BAZ
             <author fullname="Robert Stepanek" initials="R." surname="Stepanek">
               <organization>Fastmail</organization>
             </author>
-            <date day="16" month="October" year="2025"/>
+            <date day="14" month="January" year="2026"/>
           </front>
           <seriesInfo name="Internet-Draft" value="draft-ietf-calext-jscalendarbis"/>
         </reference>
@@ -5765,10 +5764,11 @@ END:X-BAZ
             <author fullname="Robert Stepanek" initials="R." surname="Stepanek">
               <organization>Fastmail</organization>
             </author>
-            <date day="16" month="October" year="2025"/>
+            <date day="19" month="January" year="2026"/>
           </front>
           <seriesInfo name="Internet-Draft" value="draft-stepanek-icalendar-jscalendar-extensions"/>
         </reference>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8607.xml"/>
       </references>
     </references>
     <section anchor="appendix-discrepancies">
