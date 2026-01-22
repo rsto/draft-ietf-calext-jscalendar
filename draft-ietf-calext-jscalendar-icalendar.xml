@@ -59,7 +59,7 @@
       <section anchor="scope-and-goals">
         <name>Scope and Goals</name>
         <t>This document outlines how to convert calendaring information between the iCalendar and JSCalendar data formats.  It describes which elements are common to both, but also highlights where the two formats differ. For each common element, it defines a conversion rule and includes an example of how to convert that element. All iCalendar and JSCalendar elements currently registered at IANA are in scope, but not all of these elements are common to both formats.</t>
-	<t>For elements that have no counterpart in the other format, it is the goal of this document to define how to preserve them during conversion, but in general it is not the goal to achieve this by defining new standard elements. Instead, this document updates <xref target="RFC5545"/> by defining iCalendar properties and parameters to preserve JSCalendar elements that have no equivalent in iCalendar. These conversion-specific properties are defined in Section <xref target="ical-prop-jsprop" format="counter"/> for iCalendar, and <xref target="jscal-prop-icalendar"/> for JSCalendar. <xref target="appendix-discrepancies"/> further outlines the discrepancies between the two formats.</t>
+        <t>For elements that have no counterpart in the other format, it is the goal of this document to define how to preserve them during conversion, but in general it is not the goal to achieve this by defining new standard elements. Instead, this document updates <xref target="RFC5545"/> by defining iCalendar properties and parameters to preserve JSCalendar elements that have no equivalent in iCalendar. These conversion-specific properties are defined in Section <xref target="ical-prop-jsprop" format="counter"/> for iCalendar, and <xref target="jscal-prop-icalendar"/> for JSCalendar. <xref target="appendix-discrepancies"/> further outlines the discrepancies between the two formats.</t>
       </section>
       <section>
         <name>How to Read the Examples</name>
@@ -101,7 +101,7 @@ END:VEVENT
 END:VCALENDAR
 ]]></sourcecode>
           </figure>
-	  <t>A line containing just the value <tt>...</tt> stands for any other properties that might be present in a component but are irrelevant for this example.  This includes mandatory properties as described for implicit components, but the value <tt>...</tt> does not represent a property in a component for which at least one same-named property is explicitly stated for that component in the example.  The line <tt>...</tt> at the end of the example additionally stands for any END content lines to complete components that started with BEGIN content lines, and any of their missing mandatory properties. <xref target="example-notation-icalendar-dotdotdot"/> illustrates this as an alternative representation for the examples of <xref target="example-notation-icalendar-implicit-explicit"/>.</t>
+          <t>A line containing just the value <tt>...</tt> stands for any other properties that might be present in a component but are irrelevant for this example.  This includes mandatory properties as described for implicit components, but the value <tt>...</tt> does not represent a property in a component for which at least one same-named property is explicitly stated for that component in the example.  The line <tt>...</tt> at the end of the example additionally stands for any END content lines to complete components that started with BEGIN content lines, and any of their missing mandatory properties. <xref target="example-notation-icalendar-dotdotdot"/> illustrates this as an alternative representation for the examples of <xref target="example-notation-icalendar-implicit-explicit"/>.</t>
           <figure anchor="example-notation-icalendar-dotdotdot">
             <name>Example for additional properties and component ENDs represented by <tt>...</tt>
             </name>
@@ -3275,7 +3275,7 @@ END:VLOCATION
           <name>ORGANIZER</name>
           <t>
               The <xref target="RFC5545" section="3.8.4.3" sectionFormat="parens">ORGANIZER property</xref> in a VEVENT or VTODO component converts to the <xref target="jscalendarbis" section="4.4.4" sectionFormat="parens">"organizerCalendarAddress" property</xref> of the Event or Task object.</t>
-            <t>It also converts to a Participant object in the <xref target="jscalendarbis" section="4.4.5" sectionFormat="parens">"participants" property</xref>, if any of its parameters convert to a Participant object property (see <xref target="ical-prop-organizer-parameters"/>), or if none of the ATTENDEE properties in the iCalendar component have the ROLE parameter set to "OWNER". The ORGANIZER property value converts to the "calendarAddress" property of the Participant, the "owner" role is set in Participant "roles" property.</t>
+          <t>It also converts to a Participant object in the <xref target="jscalendarbis" section="4.4.5" sectionFormat="parens">"participants" property</xref>, if any of its parameters convert to a Participant object property (see <xref target="ical-prop-organizer-parameters"/>), or if none of the ATTENDEE properties in the iCalendar component have the ROLE parameter set to "OWNER". The ORGANIZER property value converts to the "calendarAddress" property of the Participant, the "owner" role is set in Participant "roles" property.</t>
           <t>The key of the Participant object <bcp14>MUST</bcp14> be the value of the <xref target="ical-param-jsid">JSID parameter</xref>, if set. If no JSID parameter is set, then the key <bcp14>MAY</bcp14> be the UUIDv5 generated from the ORGANIZER property value (see <xref target="generating-jscalendar-ids"/>). When converting to iCalendar, implementations <bcp14>MAY</bcp14> omit setting the JSID parameter if the key matches the UUIDv5 of the ORGANIZER property value and the key is not part of a JSON pointer in any JSPTR parameter value.</t>
           <t>The ORGANIZER property parameters convert to the Participant object as follows:</t>
           <table anchor="ical-prop-organizer-parameters">
@@ -4562,8 +4562,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             </tr>
             <tr>
               <td>start</td>
-              <td>
-                <xref target="jscalendarbis" section="5.1.1" sectionFormat="comma"/>,
+              <td><xref target="jscalendarbis" section="5.1.1" sectionFormat="comma"/>,
               </td>
               <td>DTSTART</td>
               <td>
@@ -4648,8 +4647,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             </tr>
             <tr>
               <td>start</td>
-              <td>
-                <xref target="jscalendarbis" section="5.2.2" sectionFormat="comma"/>,
+              <td><xref target="jscalendarbis" section="5.2.2" sectionFormat="comma"/>,
               </td>
               <td>DTSTART</td>
               <td>
@@ -4658,7 +4656,6 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
                 </t>
               </td>
             </tr>
-
           </tbody>
         </table>
         <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the VEVENT or VTODO component.</t>
@@ -4887,7 +4884,9 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
                 <xref target="jscalendarbis" section="1.4.11" sectionFormat="comma"/>
               </td>
               <td>LINKREL</td>
-              <td><xref target="RFC9253" section="6.1"/></td>
+              <td>
+                <xref target="RFC9253" section="6.1"/>
+              </td>
             </tr>
             <tr>
               <td>size</td>
@@ -4985,7 +4984,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
           <li>
             <t>It if fully represented by the ORGANIZER property if its "calendarAddress" property value matches the "organizerCalendarAddress" property value, and it does not have any role but the "owner" role set, and it only has properties set that convert to ORGANIZER parameters (see <xref target="ical-prop-organizer-parameters"/>).
         </t>
-      </li>
+          </li>
           <li>
             <t>Otherwise, it converts to an ATTENDEE property if the "calendarAddress" property is set. The "calendarAddress" converts to the ATTENDEE property value.</t>
           </li>
@@ -5031,8 +5030,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
                 <xref target="jscalendarbis" section="4.4.5" sectionFormat="comma"/>
               </td>
               <td>EMAIL</td>
-              <td>
-                <xref target="ical-prop-attendee"/>, and remarks below
+              <td><xref target="ical-prop-attendee"/>, and remarks below
               </td>
             </tr>
             <tr>
@@ -5071,8 +5069,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
                 <xref target="jscalendarbis" section="4.4.5" sectionFormat="comma"/>
               </td>
               <td>CN</td>
-              <td>
-                <xref target="ical-prop-attendee"/>, and remarks below
+              <td><xref target="ical-prop-attendee"/>, and remarks below
               </td>
             </tr>
             <tr>
@@ -5100,8 +5097,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
                 <xref target="jscalendarbis" section="4.4.5" sectionFormat="comma"/>
               </td>
               <td>ROLE</td>
-              <td>
-                <xref target="ical-prop-attendee"/>, and remarks below
+              <td><xref target="ical-prop-attendee"/>, and remarks below
               </td>
             </tr>
             <tr>
@@ -5110,8 +5106,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
                 <xref target="jscalendarbis" section="4.4.5" sectionFormat="comma"/>
               </td>
               <td>SENT-BY</td>
-              <td>
-                <xref target="ical-prop-attendee"/>, and remarks below
+              <td><xref target="ical-prop-attendee"/>, and remarks below
               </td>
             </tr>
           </tbody>
@@ -5600,9 +5595,9 @@ END:X-BAZ
     </section>
     <section anchor="IANA">
       <!-- All drafts are required to have an IANA considerations section.  See RFC 8126 for a guide.-->
-	    <name>IANA Considerations</name>
-	    <section>
-		    <name>Changes to the "iCalendar Element Registries"</name>
+      <name>IANA Considerations</name>
+      <section>
+        <name>Changes to the "iCalendar Element Registries"</name>
         <t>IANA will add the following entries to the "Properties" registry:</t>
         <dl spacing="compact">
           <dt>Property</dt>
@@ -5626,7 +5621,7 @@ END:X-BAZ
         </dl>
         <t>IANA will add the following entries to the "Parameters" registry:</t>
         <dl spacing="compact">
-		<dt>Parameter</dt>
+          <dt>Parameter</dt>
           <dd>JSID</dd>
           <dt>Status</dt>
           <dd>Current</dd>
@@ -5634,9 +5629,9 @@ END:X-BAZ
           <dd>
             <xref target="ical-param-jsid"/>
           </dd>
-  </dl>
+        </dl>
         <dl spacing="compact">
-		<dt>Parameter</dt>
+          <dt>Parameter</dt>
           <dd>JSPTR</dd>
           <dt>Status</dt>
           <dd>Current</dd>
@@ -5646,43 +5641,47 @@ END:X-BAZ
           </dd>
         </dl>
       </section>
-	    <section>
-		    <name>Changes to the "JSCalendar Registries"</name>
+      <section>
+        <name>Changes to the "JSCalendar Registries"</name>
         <t>IANA will add the following entries to the "JSCalendar Properties" registry:</t>
         <dl spacing="compact">
           <dt>Property Name</dt>
-	  <dd>iCalendar</dd>
+          <dd>iCalendar</dd>
           <dt>Property Type</dt>
-	  <dd>ICalComponent</dd>
+          <dd>ICalComponent</dd>
           <dt>Property Context</dt>
-	  <dd>Event, Location, Participant, Task</dd>
-	  <dt>Reference</dt>
-	  <dd><xref target="jscal-prop-icalendar"/></dd>
-	  <dt>Intended Usage</dt>
-	  <dd>common</dd>
-	  <dt>Is Per-User</dt>
-	  <dd>no</dd>
-	  <dt>Change Controller</dt>
+          <dd>Event, Location, Participant, Task</dd>
+          <dt>Reference</dt>
+          <dd>
+            <xref target="jscal-prop-icalendar"/>
+          </dd>
+          <dt>Intended Usage</dt>
+          <dd>common</dd>
+          <dt>Is Per-User</dt>
+          <dd>no</dd>
+          <dt>Change Controller</dt>
           <dd>IETF</dd>
         </dl>
         <dl spacing="compact">
           <dt>Property Name</dt>
-	  <dd>iCalendar</dd>
+          <dd>iCalendar</dd>
           <dt>Property Type</dt>
-	  <dd>ICalComponent</dd>
+          <dd>ICalComponent</dd>
           <dt>Property Context</dt>
-	  <dd>Alert</dd>
-	  <dt>Reference</dt>
-	  <dd><xref target="jscal-prop-icalendar"/></dd>
-	  <dt>Intended Usage</dt>
-	  <dd>common</dd>
-	  <dt>Is Per-User</dt>
-	  <dd>yes</dd>
-	  <dt>Change Controller</dt>
+          <dd>Alert</dd>
+          <dt>Reference</dt>
+          <dd>
+            <xref target="jscal-prop-icalendar"/>
+          </dd>
+          <dt>Intended Usage</dt>
+          <dd>common</dd>
+          <dt>Is Per-User</dt>
+          <dd>yes</dd>
+          <dt>Change Controller</dt>
           <dd>IETF</dd>
         </dl>
-</section>
-</section>
+      </section>
+    </section>
   </middle>
   <back>
     <references>
