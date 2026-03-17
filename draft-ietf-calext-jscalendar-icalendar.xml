@@ -5461,27 +5461,26 @@ ATTACH;JSID=mylink1:https://example.com
         <section anchor="ical-param-jsptr">
           <name>JSPTR</name>
           <dl newline="true">
-            <dt>Parameter Name:</dt>
+            <dt>Parameter name:</dt>
             <dd>JSPTR</dd>
-            <dt>Format Definition:</dt>
+            <dt>Purpose:</dt>
+            <dd>To specify a pointer to a JSCalendar property.</dd>
+            <dt>Description:</dt>
             <dd>
-              <sourcecode type="abnf"><![CDATA[
+              <t>This parameter is set on a <xref target="ical-prop-jsprop">JSPROP</xref> property.  Its value points to a JSCalendar property.  The parameter has a single value that <bcp14>MUST</bcp14> be a valid PatchObject key as defined in <xref target="jscalendarbis" section="1.5.9"/>. The parameter value <bcp14>MUST</bcp14> be quoted.</t>
+            </dd>
+            <dt>Format definition:</dt>
+            <dd>
+              <sourcecode name="" type="abnf"><![CDATA[
 jsptr-param  = "JSPTR" "=" quoted-string
 ]]></sourcecode>
             </dd>
-            <dt>Description:</dt>
-            <dd>This parameter is specified on a <xref target="ical-prop-jsprop">JSPROP</xref> property.  Its value is a JSON pointer <xref target="RFC6901"/> that points to a JSCalendar property.
-        </dd>
-            <dt>Description:</dt>
-            <dd>
-              <t>This parameter has a single value that <bcp14>MUST</bcp14> be a valid JSON pointer as defined in <xref target="RFC6901"/>. The value <bcp14>MUST</bcp14> be quoted to preserve its case-sensitivity and it <bcp14>MUST NOT</bcp14> contain the DQUOTE character. See <xref target="RFC5545" section="3.2"/> for how to format parameter values.</t>
-            </dd>
             <dt>Example(s):</dt>
             <dd>
-              <sourcecode type="text/plain"><![CDATA[
+              <t>For further examples, see <xref target="ical-prop-jsprop-examples"/>.</t>
+              <sourcecode name="" type="text/plain"><![CDATA[
 JSPROP;JSPTR="example.com:foo":"bar"
 ]]></sourcecode>
-              <t>For further examples, see <xref target="ical-prop-jsprop-examples"/>.</t>
             </dd>
           </dl>
         </section>
