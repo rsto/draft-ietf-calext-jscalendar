@@ -5259,7 +5259,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             <dd>This property can be specified at most once in any calendar component.</dd>
             <dt>Description:</dt>
             <dd>
-              <t>This property specifies the JSON object key of the JSCalendar object to which an iCalendar component converts to. For example, this property set in a VALARM component within a VEVENT component defines the key of the Alert object value in the Event object's "alerts" property (see <xref target="test-ical-prop-jsid-alert"/>).</t>
+              <t>This property specifies the JSON object key of the JSCalendar object to which an iCalendar component converts to. For example, this property set in a VALARM component within a VEVENT component defines the key of the Alert object in the Event object's "alerts" property (see <xref target="test-ical-prop-jsid-alert"/>).</t>
               <t>The value of the JSID property <bcp14>MUST</bcp14> be a valid object key according to the definition of the JSCalendar property to which the component converts to.</t>
             </dd>
             <dt>Format Definition:</dt>
@@ -5436,7 +5436,7 @@ jsid-param  = "JSID" "=" param-value
             </dd>
             <dt>Description:</dt>
             <dd>
-              <t>This parameter specifies the JSON object key of the JSCalendar object to which an iCalendar property converts to. For example, this parameter set on an ATTACH property within a VEVENT component defines the key of the Link object value in the Event object's "links" property (see below for an example).</t>
+              <t>This parameter specifies the JSON object key of the JSCalendar object to which an iCalendar property converts to. For example, this parameter set on an ATTACH property within a VEVENT component defines the key of the Link object in the Event object's "links" property (see below for an example).</t>
               <t>The value of the JSID parameter <bcp14>MUST</bcp14> be a valid key according to the definition of the JSCalendar property to which the property that this parameter is set on converts to. Typically, this requires the value to be a valid <xref target="jscalendarbis" section="1.4.1" sectionFormat="parens">Id</xref>.</t>
             </dd>
             <dt>Example(s):</dt>
