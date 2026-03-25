@@ -4848,7 +4848,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
           <li>Choose LINK, if the "rel" property is set.</li>
           <li>Choose ATTACH otherwise.</li>
         </ul>
-        <t>The href property converts to the "iCalendar" property value. The other Link properties convert as follows:</t>
+        <t>The href property converts to the property value. The other Link properties convert as follows:</t>
         <table>
           <name>Properties of the Link object</name>
           <thead>
