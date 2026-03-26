@@ -4841,7 +4841,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
       </section>
       <section anchor="jscal-link">
         <name>Link</name>
-        <t>The <xref target="jscalendarbis" section="1.4.11" sectionFormat="parens">Link object</xref> converts either an <xref target="ical-prop-attach">ATTACH property</xref> or an <xref target="ical-prop-image">IMAGE property</xref>. Which iCalendar property to choose is implementation-specific. As a guideline:</t>
+        <t>The <xref target="jscalendarbis" section="1.4.11" sectionFormat="parens">Link object</xref> converts to either an <xref target="ical-prop-attach">ATTACH property</xref> or an <xref target="ical-prop-image">IMAGE property</xref>. Which iCalendar property to choose is implementation-specific. As a guideline:</t>
         <ul>
           <li>Choose the iCalendar property name indicated in the <xref target="jscal-prop-icalendar">iCalendar</xref> of the JSCalendar object that contains this Link object, if set.</li>
           <li>Choose IMAGE, if the "display" property is set.</li>
