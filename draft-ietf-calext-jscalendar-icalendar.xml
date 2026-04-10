@@ -438,6 +438,7 @@ BEGIN:VEVENT
             <name>Converting VEVENT recurrence overrides</name>
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VCALENDAR
+...
 BEGIN:VEVENT
 UID:F4257E1D-5461-4EF6-840F-9DFC653EB559
 RRULE:FREQ=DAILY
@@ -483,6 +484,7 @@ END:VCALENDAR
             <name>Converting VEVENT recurrence instances</name>
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VCALENDAR
+...
 BEGIN:VEVENT
 UID:F4257E1D-5461-4EF6-840F-9DFC653EB559
 RECURRENCE-ID;TZID=Europe/Berlin:20240202T140000
