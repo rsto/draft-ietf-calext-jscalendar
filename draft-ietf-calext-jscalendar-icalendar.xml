@@ -3318,6 +3318,7 @@ END:VLOCATION
               </tr>
             </tbody>
           </table>
+          <t>In addition, the SENT-BY parameter also converts to the "sentBy" property in the Event or Task object.</t>
           <t>An ORGANIZER property, an ATTENDEE property, and a PARTICIPANT component in the same iCalendar component all convert to the same Participant object, if their converted calendarAddress property values are equal. How to deal with conflicting property values is implementation-specific.</t>
           <t>The following examples illustrate how to convert the ORGANIZER property:</t>
           <figure anchor="test-ical-prop-organizer">
@@ -4435,6 +4436,17 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               <td>
                 <t>
                   <xref target="ical-prop-related-to"/>
+                </t>
+              </td>
+            </tr>
+            <tr>
+              <td>sentBy</td>
+              <td>
+                <xref target="jscalendarbis" section="3.4.5" sectionFormat="comma"/>
+              </td>
+              <td>SENT-BY (parameter) of ORGANIZER</td>
+              <td>
+                <t><xref target="ical-prop-organizer"/>
                 </t>
               </td>
             </tr>
