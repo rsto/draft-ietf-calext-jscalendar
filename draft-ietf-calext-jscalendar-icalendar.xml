@@ -3504,10 +3504,9 @@ BEGIN:VEVENT
         <section anchor="ical-prop-rdate">
           <name>RDATE</name>
           <t>
-              A <xref target="RFC5545" section="3.8.5.2" sectionFormat="parens">RDATE property</xref> with value type DATE or DATE-TIME in a VEVENT or VTODO component converts to a <xref target="jscalendarbis" section="1.4.9" sectionFormat="parens">PatchObject value</xref>.  The converted object is set in the "recurrenceOverrides" property of the Event or Task object.
+              A <xref target="RFC5545" section="3.8.5.2" sectionFormat="parens">RDATE property</xref> in a VEVENT or VTODO component converts to a <xref target="jscalendarbis" section="1.4.9" sectionFormat="parens">PatchObject value</xref>.  The converted object is set in the "recurrenceOverrides" property of the Event or Task object.
           </t>
-          <t>The property value converts to the key in the "recurrenceOverrides" property value. See <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values. The date-time <bcp14>MUST</bcp14> be relative to the timezone identified by the "timeZone" property of the Event or Task object. The PatchObject value <bcp14>MUST</bcp14> be an empty JSON object.</t>
-          <t>A RDATE property with value type PERIOD does not convert to a standard JSCalendar element.  Implementations <bcp14>MAY</bcp14> convert it to the <xref target="jscal-prop-icalendar">"iCalendar" property</xref> of the Event or Task object.</t>
+          <t>The property value of value type DATE or DATE-TIME and the period start of a PERIOD value converts to the key in the "recurrenceOverrides" property value. See <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values. The date-time <bcp14>MUST</bcp14> be relative to the timezone identified by the "timeZone" property of the Event or Task object. The duration of a PERIOD converts to the "duration" property of the PatchObject, otherwise the PatchObject value <bcp14>MUST</bcp14> be an empty JSON object.</t>
           <t>The following example illustrates how to convert the RDATE property:</t>
           <figure anchor="test-ical-prop-rdate">
             <name>Converting the RDATE property</name>
