@@ -147,6 +147,7 @@ class Component:
             comp = comps.pop()
             comps.extend(comp.comps)
             have_props = set(prop.name.upper() for prop in comp.props)
+            have_comps = set(comp.name.upper() for comp in comp.comps)
 
             def add_default(prop):
                 if not prop.name in have_props:
@@ -164,7 +165,7 @@ class Component:
                     add_default(
                         Property("ORGANIZER", f"mailto:{uuid.uuid4()}@example.com")
                     )
-                elif "ORGANIZER" in have_props:
+                elif "ORGANIZER" in have_props and not "PARTICIPANT" in have_comps:
                     add_default(
                         Property("ATTENDEE", f"mailto:{uuid.uuid4()}@example.com")
                     )

@@ -2279,12 +2279,13 @@ ORGANIZER:mailto:organizer@example.com
           <t>The following example illustrates how to convert the CALENDAR-ADDRESS property:</t>
           <figure anchor="test-ical-prop-calendar-address">
             <name>Converting the CALENDAR-ADDRESS property</name>
-            <sourcecode type="text/calendar"><![CDATA[
+	    <sourcecode type="text/calendar"><![CDATA[
 BEGIN:PARTICIPANT
 CALENDAR-ADDRESS:mailto:foo@example.com
 UID:47AD2E1C-49D4-45DF-BD83-8398ACC7D8E2
 ...
 END:PARTICIPANT
+ORGANIZER:mailto:organizer@example.com
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "participants": {
@@ -2309,8 +2310,14 @@ END:PARTICIPANT
         ]
       ]
     }
+  },
+  "251d3e9f-d83f-534c-8c45-c2896c75670c": {
+    "@type": "Participant",
+    "calendarAddress": "mailto:organizer@example.com",
+    "...": ""
   }
-}
+},
+"organizerCalendarAddress": "mailto:organizer@example.com"
 ]]></sourcecode>
           </figure>
         </section>
