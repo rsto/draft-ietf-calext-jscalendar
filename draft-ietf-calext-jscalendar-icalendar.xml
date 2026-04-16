@@ -3513,8 +3513,8 @@ BEGIN:VEVENT
           <t>
               A <xref target="RFC5545" section="3.8.5.2" sectionFormat="parens">RDATE property</xref> in a VEVENT or VTODO component converts to a <xref target="jscalendarbis" section="1.4.9" sectionFormat="parens">PatchObject value</xref>.  The converted object is set in the "recurrenceOverrides" property of the Event or Task object.
           </t>
-          <t>The property value of value type DATE or DATE-TIME and the period start of a PERIOD value converts to the key in the "recurrenceOverrides" property value. See <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values. The date-time <bcp14>MUST</bcp14> be relative to the timezone identified by the "timeZone" property of the Event or Task object. The duration of a PERIOD converts to the "duration" property of the PatchObject, otherwise the PatchObject value <bcp14>MUST</bcp14> be an empty JSON object.</t>
-          <t>The following example illustrates how to convert the RDATE property:</t>
+	  <t>The property value of value type DATE or DATE-TIME and the period start of a PERIOD value converts to the key in the "recurrenceOverrides" property value. See <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values. The date-time <bcp14>MUST</bcp14> be relative to the timezone identified by the "timeZone" property of the Event or Task object. The duration of a PERIOD converts to the "duration" property of the PatchObject, otherwise the PatchObject value <bcp14>MUST</bcp14> be an empty JSON object. Implementations <bcp14>MAY</bcp14> indicate the property name and value type in the in the <xref target="jscal-prop-icalendar">iCalendar</xref> property.</t>
+          <t>The following examples illustrate how to convert the RDATE property:</t>
           <figure anchor="test-ical-prop-rdate">
             <name>Converting the RDATE property</name>
             <sourcecode type="text/calendar"><![CDATA[
@@ -3531,6 +3531,40 @@ RDATE:20230805T170000Z
 },
 "recurrenceOverrides": {
   "2023-08-05T17:00:00": {}
+}
+]]></sourcecode>
+          </figure>
+          <figure anchor="test-ical-prop-rdate-period">
+            <name>Converting the RDATE property with value type PERIOD</name>
+            <sourcecode type="text/calendar"><![CDATA[
+DTSTART:20230101T130000Z
+DURATION:PT1H
+RRULE:FREQ=MONTHLY
+RDATE;VALUE=PERIOD:20231223T150000Z/PT2H
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"start": "2023-01-01T13:00:00",
+"duration": "PT1H",
+"timeZone": "Etc/UTC",
+"recurrenceRule": {
+  "@type": "RecurrenceRule",
+  "frequency": "monthly"
+},
+"recurrenceOverrides": {
+  "2023-12-23T15:00:00": {
+    "duration": "PT2H"
+  }
+},
+"iCalendar": {
+  "@type": "ICalComponent",
+  "convertedProperties": {
+    "recurrenceOverrides/2023-12-23T15:00:00": {
+      "@type": "ICalProperty",
+      "name": "rdate",
+      "valueType": "period"
+    }
+  },
+  "...": ""
 }
 ]]></sourcecode>
           </figure>
