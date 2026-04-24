@@ -748,6 +748,8 @@ class JObject:
                                 jval["uid"] = f"{uuid.uuid4()}"
                             if not "entries" in jval:
                                 jval["entries"] = [{"@type": "Event", "...": ""}]
+                            if not "version" in jval:
+                                jval["version"] = "2.0"
                         case "Link":
                             if not "href" in jval:
                                 jval["href"] = f"https://example.com/{uuid.uuid4()}"
