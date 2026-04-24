@@ -124,9 +124,9 @@ SUMMARY:he
         </section>
         <section anchor="notation-jscalendar">
           <name>JSCalendar Examples</name>
-          <t>A JSCalendar example always represents a Group object, even if the example only depicts one of the Group entries or properties.</t>
+	  <t>A JSCalendar example always represents a Group object, even if the example only depicts one of the Group entries or properties. E.g., an example containing only an Alert object is implied to be the sole value of the <tt>alerts</tt> property of an Event object, which is implied to be the sole list member in the <tt>entries</tt> property of a Group object. The Group object has its <tt>version</tt> property set to "2.0", unless the example explicitly defines a complete Group object.</t>
           <t>JSCalendar objects are depicted either explicitly or implicitly. An explicit JSCalendar object starts and ends with braces.  An implicit JSCalendar object omits braces, it only consists of JSON name/value pairs, separated by comma.</t>
-          <t>An implicit JSCalendar object is assumed to be of type Event, unless it contains the <tt>@type</tt> property with a different value.  It is assumed to contain all mandatory properties with some value; if they are not depicted, their actual value is irrelevant for the main point of the example.</t>
+	  <t>An implicit JSCalendar object is assumed to be of type Event, unless it contains the <tt>@type</tt> property with a different value.  It is assumed to contain all mandatory properties with some value; if they are not depicted, their actual value is irrelevant for the main point of the example.</t>
           <t><xref target="example-notation-jscalendar-implicit-explicit"/> illustrates this with multiple examples, all of which represent the same JSCalendar data.  The first example contains an implicit JSCalendar object of type Event.  The second example contains an implicit JSCalendar object with a <tt>@type</tt> property.  The third example contains an explicit Event object but the Group object containing it is omitted.  The fourth example contains the full Group object, nothing is omitted.</t>
           <figure anchor="example-notation-jscalendar-implicit-explicit">
             <name>Examples for implicit and explicit JSCalendar object notation</name>
@@ -150,6 +150,7 @@ SUMMARY:he
             <sourcecode type="json"><![CDATA[
 {
   "@type": "Group",
+  "version": "2.0",
   "entries": [
     {
       "@type": "Event",
