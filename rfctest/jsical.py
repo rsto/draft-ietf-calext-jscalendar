@@ -601,31 +601,18 @@ class JsonDiff:
         recurrence_overrides = data.pop("recurrenceOverrides", None)
         # Remove default and optional null values
         common_default_values = {
-            "alerts": None,  # null value
-            "categories": None,  # null value
             "description": "",
             "descriptionContentType": "text/plain",
             "duration": "PT0S",
             "excluded": False,
             "freeBusyStatus": "busy",
-            "keywords": None,  # null value
-            "links": None,  # null value
-            "locations": None,  # null value
-            "participants": None,  # null value
             "priority": 0,
             "privacy": "public",
-            "recurrenceIdTimeZone": None,
-            "recurrenceOverrides": None,  # null value
-            "recurrenceRules": None,  # null value
-            "relatedTo": None,  # null value
             "sequence": 0,
             "showWithoutTime": False,
             "status": "confirmed",
-            "timeZone": None,  # null value
-            "timeZones": None,  # null value
             "title": "",
             "useDefaultAlerts": False,
-            "virtualLocations": None,  # null value
         }
         default_values = {
             "Alert": {
