@@ -479,7 +479,7 @@ END:VCALENDAR
 }
 ]]></sourcecode>
           </figure>
-          <t>A VEVENT (or VTODO) component is a stand-alone recurrence instance if it has the RECURRENCE-ID property set and the iCalendar object does not contain its related main component. Each stand-alone recurrence instance converts to a distinct Event (or Task) object in the Group object's entries property.  The recurrenceId property <bcp14>MUST</bcp14> be set, the "recurrenceIdTimeZone" property <bcp14>MUST</bcp14> be set if not "null".</t>
+          <t>A VEVENT (or VTODO) component is a stand-alone recurrence instance if it has the RECURRENCE-ID property set and the iCalendar object does not contain its related main component. Each stand-alone recurrence instance converts to a distinct Event (or Task) object in the Group object's entries property.  The recurrenceId property <bcp14>MUST</bcp14> be set.</t>
           <t>The following example illustrates how to convert stand-alone recurrence instances:</t>
           <figure anchor="test-ical-comp-vevent-recurrence-instances">
             <name>Converting VEVENT recurrence instances</name>
@@ -538,7 +538,7 @@ END:VCALENDAR
         <section anchor="ical-timezone-identifiers">
           <name>Timezone identifiers</name>
           <t>Converting temporal properties such as DTSTART, DTEND, and RECURRENCE-ID requires to not only determine the date and time of the property value, but also the timezone it references.</t>
-          <t>If the property value type is <xref target="RFC5545" section="3.3.4" sectionFormat="parens">DATE</xref> or  <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #1: DATE WITH LOCAL TIME</xref> then the timezone identifier is the JSON null value in JSCalendar.</t>
+          <t>If the property value type is <xref target="RFC5545" section="3.3.4" sectionFormat="parens">DATE</xref> or  <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #1: DATE WITH LOCAL TIME</xref> then the timezone is not set in JSCalendar.</t>
           <t>If the property value type is <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #2: DATE WITH UTC TIME</xref> then the timezone identifier is "Etc/UTC" in JSCalendar.</t>
           <t>If the property value type is <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #3: DATE WITH LOCAL TIME AND TIME ZONE REFERENCE</xref> then the timezone identifier is determined by the TZID parameter value as follows:</t>
           <t>If the TZID parameter value is equal to a name in the <xref target="TZDB">IANA Time Zone Database</xref> then the timezone identifier is that verbatim name. Otherwise, how to convert the TZID parameter value is implementation-specific: software libraries such as the <eref target="https://icu.unicode.org/">International Components for Unicode</eref> support converting Microsoft time zone names to IANA time zone identifiers. Alternatively, an implementation might determine the name of an IANA time zone which has identical time zone rules over the time span of the calendar object.</t>
@@ -2596,7 +2596,6 @@ DTEND;VALUE=DATE:20240107
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "start": "2024-01-02T00:00:00",
-"timeZone": null,
 "duration": "P5D",
 "showWithoutTime": true,
 "iCalendar": {
@@ -2678,7 +2677,6 @@ DTSTART:20240921T105302
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "start": "2024-09-21T10:53:02",
-"timeZone": null,
 "showWithoutTime": false
 ]]></sourcecode>
           </figure>
@@ -2689,7 +2687,6 @@ DTSTART;VALUE=DATE:20240921
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "start": "2024-09-21T00:00:00",
-"timeZone": null,
 "showWithoutTime": true
 ]]></sourcecode>
           </figure>
@@ -2737,7 +2734,6 @@ DUE:20240921T105302
             <sourcecode type="json"><![CDATA[
 "@type": "Task",
 "due": "2024-09-21T10:53:02",
-"timeZone": null,
 "showWithoutTime": false
 ]]></sourcecode>
           </figure>
@@ -2750,7 +2746,6 @@ DUE;VALUE=DATE:20240921
             <sourcecode type="json"><![CDATA[
 "@type": "Task",
 "due": "2024-09-21T00:00:00",
-"timeZone": null,
 "showWithoutTime": true
 ]]></sourcecode>
           </figure>
@@ -4177,7 +4172,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
       <section anchor="jscal-event-and-task">
         <name>Event and Task</name>
         <t>The <xref target="jscalendarbis" section="2.1" sectionFormat="parens">Event object</xref> converts to a <xref target="ical-comp-vevent">VEVENT component</xref>, the <xref target="jscalendarbis" section="2.2" sectionFormat="parens">Task object</xref> converts to a <xref target="ical-comp-vtodo">VTODO component</xref>.</t>
-        <t>In the iCalendar component, the value data types of the DTSTART, DUE and RECURRENCE-ID properties all <bcp14>MUST</bcp14> be of the same form, either DATE, or DATE WITH LOCAL TIME, or DATE WITH UTC TIME (see <xref target="RFC5545" section="3.3.5"/>). It <bcp14>MUST</bcp14> be DATE if the "showWithoutTime" property value is "true", the "timeZone" property value is null, and the time component is zero in the values of the "start", due", "duration", "estimatedDuration", "recurrenceId" properties, and the "until" property of the RecurrenceRule object, and in any key of the "recurrenceOverrides" property value. Otherwise, it <bcp14>MAY</bcp14> be DATE WITH UTC TIME if the "timeZone" property value is "Etc/UTC" and the "endTimeZone" property value is null. It <bcp14>MUST</bcp14> be DATE WITH LOCAL TIME in all other cases.</t>
+        <t>In the iCalendar component, the value data types of the DTSTART, DUE and RECURRENCE-ID properties all <bcp14>MUST</bcp14> be of the same form, either DATE, or DATE WITH LOCAL TIME, or DATE WITH UTC TIME (see <xref target="RFC5545" section="3.3.5"/>). It <bcp14>MUST</bcp14> be DATE if the "showWithoutTime" property value is "true", the "timeZone" property value is not set, and the time component is zero in the values of the "start", due", "duration", "estimatedDuration", "recurrenceId" properties, and the "until" property of the RecurrenceRule object, and in any key of the "recurrenceOverrides" property value. Otherwise, it <bcp14>MAY</bcp14> be DATE WITH UTC TIME if the "timeZone" property value is "Etc/UTC" and the "endTimeZone" property value is not set. It <bcp14>MUST</bcp14> be DATE WITH LOCAL TIME in all other cases.</t>
         <t>
             The following table defines how to convert properties that are common to both the Event and Task object types. <xref target="jscal-event-props"/> and <xref target="jscal-task-props"/> later in this section define how to convert properties specific to either Event or Task objects.</t>
         <table anchor="jscal-event-and-task-props">
