@@ -1180,6 +1180,7 @@ END:VALARM
             <name>Converting the VEVENT component</name>
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VCALENDAR
+...
 BEGIN:VEVENT
 UID:DE935D01-3DF7-4201-B61A-D77D05C8B21A
 DTSTART:20060102T030405Z
@@ -2184,6 +2185,7 @@ DESCRIPTION:some description
 END:PARTICIPANT
 ATTENDEE;RSVP=TRUE;PARTSTAT=TENTATIVE:mailto:foo@example.com
 ORGANIZER:mailto:organizer@example.com
+...
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "participants": {
@@ -2287,6 +2289,7 @@ UID:47AD2E1C-49D4-45DF-BD83-8398ACC7D8E2
 ...
 END:PARTICIPANT
 ORGANIZER:mailto:organizer@example.com
+...
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "participants": {
@@ -2704,6 +2707,7 @@ DTSTART;VALUE=DATE:20240921
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VTODO
 DUE;TZID=Europe/Berlin:20240921T105302
+...
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "@type": "Task",
@@ -2717,6 +2721,7 @@ DUE;TZID=Europe/Berlin:20240921T105302
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VTODO
 DUE:20240921T105302Z
+...
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "@type": "Task",
@@ -2730,6 +2735,7 @@ DUE:20240921T105302Z
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VTODO
 DUE:20240921T105302
+...
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "@type": "Task",
@@ -2742,6 +2748,7 @@ DUE:20240921T105302
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VTODO
 DUE;VALUE=DATE:20240921
+...
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "@type": "Task",
@@ -2755,6 +2762,7 @@ DUE;VALUE=DATE:20240921
 BEGIN:VTODO
 DTSTART;VALUE=DATE:20250220
 DUE;VALUE=DATE:20250221
+...
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "@type": "Task",
@@ -2791,6 +2799,7 @@ DURATION:PT1H
             <sourcecode type="text/calendar"><![CDATA[
 BEGIN:VTODO
 ESTIMATED-DURATION:P2D
+...
 ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "@type": "Task",
@@ -3122,6 +3131,7 @@ LOCATION-TYPE:parking
 COORDINATES;VALUE=URI:geo:40.71427,-74.00597
 ...
 END:VLOCATION
+...
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
 "locations": {
