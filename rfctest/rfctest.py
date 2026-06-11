@@ -21,6 +21,7 @@ from .jsical import JsonDiff, JObject, JsonPath, Component, ComponentDiff, Parse
 class BackendError(Exception):
     def __init__(self, error):
         self.error = error
+        self.body = None
         if isinstance(error, urllib.error.HTTPError) and error.fp is not None:
             self.body = error.fp.read().decode("utf-8")
 
