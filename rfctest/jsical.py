@@ -63,9 +63,19 @@ class Property:
 
     def normalize(self):
         self.name = self.name.upper()
+        # Normalize parameters
         for param in self.params:
             param.normalize()
         self.params.sort(key=Parameter._sortkey)
+        # Remove VALUE parameters for default types
+        default_types = {
+            "COLOR": "TEXT",
+        }
+        default_type = default_types.get(self.name)
+        if default_type:
+            self.params = [
+                p for p in self.params if p.name != "VALUE" or p.value != default_type
+            ]
 
     @classmethod
     def parse(cls, line: str) -> Property:
