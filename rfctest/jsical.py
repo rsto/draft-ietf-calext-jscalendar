@@ -222,16 +222,22 @@ class Component:
     def parse(cls, s: str, strict=False) -> Component:
         # Unfold and split lines
         lines = re.split(r"\r?\n", re.sub(r"\r?\n([ ]|\t)", "", s))
+        lines = [line for line in map(str.strip, lines) if line]
         # Parse example
         stack = [Component(None)]
         comp = stack[0]
-        for line in map(str.strip, lines):
-            if not line:
-                continue
+        for i, line in enumerate(lines):
             if line == "...":
                 if strict:
                     raise ParseError(f"Line '...' not allowed in strict mode")
                 comp.allow_any = True
+                # A '...' at the end of the example completes the ENDs of all
+                # components that started with BEGIN and stands for any of their
+                # missing mandatory properties (Section 1.3.1), so mark every
+                # still-open ancestor as allowing any content too.
+                if i == len(lines) - 1:
+                    for ancestor in stack:
+                        ancestor.allow_any = True
                 continue
             prop = Property.parse(line)
             if prop.name == "BEGIN":
@@ -415,7 +421,7 @@ class ComponentDiff:
             not self.del_comp_a
             and not self.del_prop_a
             and not self.add_comp_b
-            and not self.add_comp_b
+            and not self.add_prop_b
             and not self.diff_comps
             and not self.diff_props
         )
