@@ -5550,7 +5550,7 @@ JSPROP;JSPTR="example.com:foo":"bar"
                 </dd>
                 <dt>convertedProperties: String[ICalProperty] (optional)</dt>
                 <dd>
-                  <t>This contains conversion-related information about the component's properties that got partially or fully converted to JSCalendar.  Each key defines the path to a JSCalendar element.  The value for each key contains information about the iCalendar property which converted to the JSCalendar element located at that key. Unless otherwise defined for a specific iCalendar property, the path points to that JSCalendar object property to which the iCalendar property value converted to.</t>
+                  <t>This contains conversion-related information about the component's properties that got partially or fully converted to JSCalendar.  Each key defines the path to a JSCalendar element.  The value for each key contains information about the iCalendar property which converted to the JSCalendar element located at that key. Unless otherwise defined for a specific iCalendar property, the path points to the JSCalendar property that the iCalendar property value converts to.</t>
                   <t>The key <bcp14>MUST</bcp14> be a valid key of a PatchObject as defined in <xref target="jscalendarbis" section="1.4.9" sectionFormat="of"/>.  The key <bcp14>MAY</bcp14> point to the key in a nested object if the element at that key was converted from an iCalendar property of the component for which the "iCalendar" property is set. It <bcp14>MUST NOT</bcp14> point into nested objects otherwise.</t>
                 </dd>
                 <dt>properties: *[][] (optional)</dt>
