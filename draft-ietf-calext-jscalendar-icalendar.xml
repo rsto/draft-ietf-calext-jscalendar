@@ -1892,7 +1892,7 @@ ACTION:AUDIO
         <section anchor="ical-prop-attach">
           <name>ATTACH</name>
           <t>
-              The <xref target="RFC5545" section="3.8.1.1" sectionFormat="parens">ATTACH property</xref> in a VEVENT, VTODO, PARTICIPANT, VLOCATION, or VCALENDAR component converts to a <xref target="jscalendarbis" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the Event, Task, Participant, Location, or Group object's "links" property.
+              The <xref target="RFC5545" section="3.8.1.1" sectionFormat="parens">ATTACH property</xref> in a VEVENT, VTODO, PARTICIPANT, VLOCATION, or VCALENDAR component converts to a <xref target="jscalendarbis" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the Event, Task, Participant, Location, or Group object's "links" property. The "rel" property value is set to "enclosure".
           </t>
           <t>The key of the Link object <bcp14>MUST</bcp14> be the value of the <xref target="ical-param-jsid">JSID parameter</xref>, if set. If no JSID parameter is set, then the key <bcp14>MAY</bcp14> be the UUIDv5 generated from the property value (see <xref target="generating-jscalendar-ids"/>). When converting to iCalendar, implementations <bcp14>MAY</bcp14> omit setting the JSID parameter if the key matches the UUIDv5 of the ATTACH property value and the key is not part of a JSON pointer in any JSPTR parameter value.</t>
           <t>The ATTACH property value converts to the Link object's "href" property. A value of type URI converts as-is. A value of type BINARY converts to a URI in the "data" URL scheme (<xref target="RFC2397"/>. If the FMTTYPE parameter is set on the ATTACH property, then the parameter value <bcp14>MUST</bcp14> be set in the "mediatype" part of the data URL.</t>
@@ -1945,7 +1945,8 @@ ATTACH:https://example.com/foo.pdf
 "links": {
   "245708bf-8e07-5d3b-a5da-2974a63c3b91": {
     "@type": "Link",
-    "href": "https://example.com/foo.pdf"
+    "href": "https://example.com/foo.pdf",
+    "rel": "enclosure"
   }
 }
 ]]></sourcecode>
@@ -1963,6 +1964,7 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
     "@type": "Link",
     "href": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQAAAAA3bvkkAAAAAmJLR0QAAd2KE6QAAAAKSURBVAjXY2gAAACCAIHdQ2r0AAAAAElFTkSuQmCC",
     "contentType": "image/png",
+    "rel": "enclosure",
     "...": ""
   }
 }
@@ -2934,7 +2936,7 @@ GEO:48.858222;2.2945
         <section anchor="ical-prop-image">
           <name>IMAGE</name>
           <t>
-            The <xref target="RFC7986" section="5.10" sectionFormat="parens">IMAGE property</xref> in a VEVENT, VTODO, VLOCATION, PARTICIPANT, or VCALENDAR component converts to a <xref target="jscalendarbis" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the Event, Task, Location, Participant, or Group object's "links" property.
+            The <xref target="RFC7986" section="5.10" sectionFormat="parens">IMAGE property</xref> in a VEVENT, VTODO, VLOCATION, PARTICIPANT, or VCALENDAR component converts to a <xref target="jscalendarbis" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the Event, Task, Location, Participant, or Group object's "links" property. The "rel" property value is set to "icon".
           </t>
           <t>The key of the Link object <bcp14>MUST</bcp14> be the value of the <xref target="ical-param-jsid">JSID parameter</xref>, if set. If no JSID parameter is set, then the key <bcp14>MAY</bcp14> be the UUIDv5 generated from the property value (see <xref target="generating-jscalendar-ids"/>). When converting to iCalendar, implementations <bcp14>MAY</bcp14> omit setting the JSID parameter if the key matches the UUIDv5 of the IMAGE property value and the key is not part of a JSON pointer in any JSPTR parameter value.</t>
           <t>The IMAGE property value converts to the Link object's "href" property. A value of type URI converts as-is. See <xref target="ical-prop-attach"/> how to convert a BINARY value.</t>
@@ -2996,6 +2998,7 @@ IMAGE;VALUE=URI;DISPLAY=BADGE,THUMBNAIL;LABEL=An image;FMTTYPE=image/png:
   "2c42ac17-1eaf-5a75-a216-aef848785d79": {
     "@type": "Link",
     "href": "https://example.com/images/party.png",
+    "rel": "icon",
     "display": {
       "badge": true,
       "thumbnail": true
@@ -4878,13 +4881,14 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
       </section>
       <section anchor="jscal-link">
         <name>Link</name>
-        <t>The <xref target="jscalendarbis" section="1.4.11" sectionFormat="parens">Link object</xref> converts to either an <xref target="ical-prop-attach">ATTACH property</xref> or an <xref target="ical-prop-image">IMAGE property</xref>. Which iCalendar property to choose is implementation-specific. As a guideline:</t>
-        <ul>
-          <li>Choose the iCalendar property name indicated in the <xref target="jscal-prop-icalendar">iCalendar</xref> of the JSCalendar object that contains this Link object, if set.</li>
-          <li>Choose IMAGE, if the "display" property is set.</li>
-          <li>Choose LINK, if the "rel" property is set.</li>
-          <li>Choose ATTACH otherwise.</li>
-        </ul>
+        <t>The <xref target="jscalendarbis" section="1.4.11" sectionFormat="parens">Link object</xref> converts to either an <xref target="ical-prop-attach">ATTACH property</xref> or an <xref target="ical-prop-image">IMAGE property</xref>. Which iCalendar property to choose is implementation-specific. As a guideline, stopping at the first matching criteria:</t>
+        <ol>
+            <li>Choose IMAGE if the "rel" property value is "icon".</li>
+            <li>Choose ATTACH if the "rel" property value is "enclosure".</li>
+            <li>Choose LINK if the "rel" property is set to some value other than "icon" or "enclosure".</li>
+            <li>Choose the iCalendar property name indicated in the <xref target="jscal-prop-icalendar">iCalendar</xref> of the JSCalendar object that contains this Link object, if set.</li>
+            <li>Choose ATTACH otherwise.</li>
+        </ol>
         <t>The "href" property converts to the property value. The other Link properties convert as follows:</t>
         <table>
           <name>Properties of the Link object</name>
@@ -4913,7 +4917,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
                 <xref target="jscalendarbis" section="1.4.11" sectionFormat="comma"/>
               </td>
               <td>DISPLAY</td>
-              <td><xref target="ical-prop-image"/>, and remarks below
+              <td><xref target="ical-prop-image"/>
               </td>
             </tr>
             <tr>
@@ -4921,9 +4925,9 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               <td>
                 <xref target="jscalendarbis" section="1.4.11" sectionFormat="comma"/>
               </td>
-              <td>LINKREL</td>
+              <td>LINKREL, or none</td>
               <td>
-                <xref target="RFC9253" section="6.1"/>
+                <xref target="RFC9253" section="6.1"/>, and remarks below
               </td>
             </tr>
             <tr>
@@ -4948,6 +4952,12 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
             </tr>
           </tbody>
         </table>
+        <t>Remarks:</t>
+        <ul>
+          <li>
+            <t>A "rel" property value of "enclosure" indicates that the Link object is an attachment. The Link object then converts to the ATTACH property and the LINKREL parameter <bcp14>MUST NOT</bcp14> be set on the ATTACH property. This rule does not apply if the Link object originally was converted from a LINK property.</t>
+          </li>
+        </ul>
         <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the same component to which the Link object converts to as a property.</t>
       </section>
       <section anchor="jscal-location">
@@ -5487,7 +5497,8 @@ ATTACH;JSID=mylink1:https://example.com
 "links": {
   "mylink1": {
     "@type": "Link",
-    "href": "https://example.com"
+    "href": "https://example.com",
+    "rel": "enclosure"
   }
 }
 ]]></sourcecode>
