@@ -363,6 +363,17 @@ SUMMARY:he
                 </td>
                 <td/>
               </tr>
+              <tr>
+                <td>URL</td>
+                <td>
+                  <xref target="RFC5545" section="3.8.4.6" sectionFormat="comma"/>
+                </td>
+                <td>links</td>
+                <td>
+                  <xref target="ical-prop-url"/>
+                </td>
+                <td/>
+              </tr>
             </tbody>
           </table>
           <t>Its components convert as follows:</t>
@@ -633,6 +644,17 @@ END:VCALENDAR
                 <td>name</td>
                 <td>
                   <xref target="ical-prop-summary"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
+                <td>URL</td>
+                <td>
+                  <xref target="RFC5545" section="3.8.4.6" sectionFormat="comma"/>
+                </td>
+                <td>links</td>
+                <td>
+                  <xref target="ical-prop-url"/>
                 </td>
                 <td/>
               </tr>
@@ -1145,6 +1167,17 @@ END:VALARM
                 </td>
                 <td/>
               </tr>
+              <tr>
+                <td>URL</td>
+                <td>
+                  <xref target="RFC5545" section="3.8.4.6" sectionFormat="comma"/>
+                </td>
+                <td>links</td>
+                <td>
+                  <xref target="ical-prop-url"/>
+                </td>
+                <td/>
+              </tr>
             </tbody>
           </table>
           <t>Its components convert as follows:</t>
@@ -1305,6 +1338,17 @@ END:VCALENDAR
                 <td>name</td>
                 <td>
                   <xref target="ical-prop-name"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
+                <td>URL</td>
+                <td>
+                  <xref target="RFC5545" section="3.8.4.6" sectionFormat="comma"/>
+                </td>
+                <td>links</td>
+                <td>
+                  <xref target="ical-prop-url"/>
                 </td>
                 <td/>
               </tr>
@@ -1726,6 +1770,17 @@ END:VLOCATION
                 <td>uid</td>
                 <td>
                   <xref target="ical-prop-uid"/>
+                </td>
+                <td/>
+              </tr>
+              <tr>
+                <td>URL</td>
+                <td>
+                  <xref target="RFC5545" section="3.8.4.6" sectionFormat="comma"/>
+                </td>
+                <td>links</td>
+                <td>
+                  <xref target="ical-prop-url"/>
                 </td>
                 <td/>
               </tr>
@@ -4114,6 +4169,30 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
 ]]></sourcecode>
           </figure>
         </section>
+        <section anchor="ical-prop-url">
+          <name>URL</name>
+          <t>
+              The <xref target="RFC5545" section="3.8.4.6" sectionFormat="parens">URL property</xref> in a VEVENT, VTODO, PARTICIPANT, VLOCATION, or VCALENDAR component converts to a <xref target="jscalendarbis" section="1.4.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the Event, Task, Participant, Location, or Group object's "links" property. The "rel" property value is set to "describedby".
+          </t>
+          <t>The key of the Link object <bcp14>MUST</bcp14> be the value of the <xref target="ical-param-jsid">JSID parameter</xref>, if set. If no JSID parameter is set, then the key <bcp14>MAY</bcp14> be the UUIDv5 generated from the property value (see <xref target="generating-jscalendar-ids"/>). When converting to iCalendar, implementations <bcp14>MAY</bcp14> omit setting the JSID parameter if the key matches the UUIDv5 of the URL property value and the key is not part of a JSON pointer in any JSPTR parameter value.</t>
+          <t>The URL property value converts to the Link object's "href" property.</t>
+          <t>The following example illustrates how to convert the URL property:</t>
+          <figure anchor="test-ical-prop-url">
+            <name>Converting the URL property</name>
+            <sourcecode type="text/calendar"><![CDATA[
+URL:https://example.com/myurl
+  ]]></sourcecode>
+            <sourcecode type="json"><![CDATA[
+"links": {
+  "6669391a-2c73-5b89-9cfe-7a6c95a855e3": {
+    "@type": "Link",
+    "href": "https://example.com/myurl",
+    "rel": "describedby"
+  }
+}
+]]></sourcecode>
+          </figure>
+        </section>
       </section>
     </section>
     <section anchor="jscal-to-icalendar">
@@ -4881,13 +4960,13 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
       </section>
       <section anchor="jscal-link">
         <name>Link</name>
-        <t>The <xref target="jscalendarbis" section="1.4.11" sectionFormat="parens">Link object</xref> converts to either an <xref target="ical-prop-attach">ATTACH property</xref> or an <xref target="ical-prop-image">IMAGE property</xref>. Which iCalendar property to choose is implementation-specific. As a guideline, stopping at the first matching criteria:</t>
+        <t>The <xref target="jscalendarbis" section="1.4.11" sectionFormat="parens">Link object</xref> converts to either an <xref target="ical-prop-attach">ATTACH property</xref> or an <xref target="ical-prop-image">IMAGE property</xref>, or a <xref target="ical-prop-link">LINK property</xref>, or an <xref target="ical-prop-url">URL property</xref>.</t>
+	<t>Which iCalendar property to choose is implementation-specific. As a guideline, stopping at the first matching criteria:</t>
         <ol>
-            <li>Choose IMAGE if the "rel" property value is "icon".</li>
             <li>Choose ATTACH if the "rel" property value is "enclosure".</li>
-            <li>Choose LINK if the "rel" property is set to some value other than "icon" or "enclosure".</li>
-            <li>Choose the iCalendar property name indicated in the <xref target="jscal-prop-icalendar">iCalendar</xref> of the JSCalendar object that contains this Link object, if set.</li>
-            <li>Choose ATTACH otherwise.</li>
+            <li>Choose IMAGE if the "rel" property value is "icon".</li>
+            <li>Choose URL if the "rel" property value is "describedby" and no URL property is set in the iCalendar component.</li>
+            <li>Choose LINK otherwise.</li>
         </ol>
         <t>The "href" property converts to the property value. The other Link properties convert as follows:</t>
         <table>
@@ -4908,7 +4987,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td>FMTTYPE</td>
               <td>
-                <xref target="ical-prop-attach"/>
+                <xref target="ical-prop-attach"/>, and remarks below
               </td>
             </tr>
             <tr>
@@ -4937,7 +5016,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td>SIZE</td>
               <td>
-                <xref target="ical-prop-attach"/>
+                <xref target="ical-prop-attach"/>, and remarks below
               </td>
             </tr>
             <tr>
@@ -4947,7 +5026,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
               </td>
               <td>LABEL</td>
               <td>
-                <xref target="ical-prop-attach"/>
+                <xref target="ical-prop-attach"/>, and remarks below
               </td>
             </tr>
           </tbody>
@@ -4955,8 +5034,11 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
         <t>Remarks:</t>
         <ul>
           <li>
-            <t>A "rel" property value of "enclosure" indicates that the Link object is an attachment. The Link object then converts to the ATTACH property and the LINKREL parameter <bcp14>MUST NOT</bcp14> be set on the ATTACH property. This rule does not apply if the Link object originally was converted from a LINK property.</t>
+            <t>The LINKREL parameter is not specified for the ATTACH, IMAGE and URL properties. For interoperability, implementations <bcp14>SHOULD NOT</bcp14> set the LINKREL parameter on these properties. Instead, implementations <bcp14>SHOULD</bcp14> only set the LINKREL parameter on the LINK property, or any future property that explicitly names the LINKREL parameter in its Property Parameters definition.</t>
           </li>
+          <li>
+            <t>The FMTTYPE, SIZE and LABEL parameters are not specified for the URL property. For interoperability, implementations <bcp14>SHOULD NOT</bcp14> set these parameters on the URL property. Instead, implementations <bcp14>SHOULD</bcp14> convert a Link object with link relation "describedby" to a LINK property if any of the "contentType", "size" or "title" properties are set.</t>
+            </li>
         </ul>
         <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the same component to which the Link object converts to as a property.</t>
       </section>
@@ -5906,9 +5988,6 @@ END:X-BAZ
               <li>
                 <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma">UID</xref>
               </li>
-              <li>
-                <xref target="RFC5545" section="3.8.4.6" sectionFormat="comma">URL</xref>
-              </li>
             </ul>
           </section>
           <section>
@@ -5960,9 +6039,6 @@ END:X-BAZ
                 <xref target="RFC7986" section="5.7" sectionFormat="comma">REFRESH-INTERVAL</xref>
               </li>
               <li>
-                <xref target="RFC5545" section="3.8.4.6" sectionFormat="comma">URL</xref>
-              </li>
-              <li>
                 <xref target="RFC5545" section="3.7.4" sectionFormat="comma">VERSION</xref>
               </li>
             </ul>
@@ -5992,9 +6068,6 @@ END:X-BAZ
               </li>
               <li>
                 <xref target="RFC9074" section="6.6" sectionFormat="comma">STRUCTURED-DATA</xref>
-              </li>
-              <li>
-                <xref target="RFC5545" section="3.8.4.6" sectionFormat="comma">URL</xref>
               </li>
             </ul>
           </section>
@@ -6051,9 +6124,6 @@ END:X-BAZ
               </li>
               <li>
                 <xref target="ical-tasks" section="12.4" sectionFormat="comma">TASK-MODE</xref>
-              </li>
-              <li>
-                <xref target="RFC5545" section="3.8.4.6" sectionFormat="comma">URL</xref>
               </li>
             </ul>
           </section>
