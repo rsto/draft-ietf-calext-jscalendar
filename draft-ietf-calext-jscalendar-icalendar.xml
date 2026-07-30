@@ -1964,19 +1964,19 @@ ACTION:AUDIO
             </thead>
             <tbody>
               <tr>
+                <td>FILENAME</td>
+                <td>
+                  <xref target="RFC8607" section="4.2" sectionFormat="comma"/>
+                </td>
+                <td>title</td>
+                <td/>
+              </tr>
+              <tr>
                 <td>FMTTYPE</td>
                 <td>
                   <xref target="RFC5545" section="3.2.8" sectionFormat="comma"/>
                 </td>
                 <td>contentType</td>
-                <td/>
-              </tr>
-              <tr>
-                <td>LABEL</td>
-                <td>
-                  <xref target="RFC7986" section="6.4" sectionFormat="comma"/>
-                </td>
-                <td>title</td>
                 <td/>
               </tr>
               <tr>
@@ -3016,19 +3016,19 @@ GEO:48.858222;2.2945
                 <td/>
               </tr>
               <tr>
+                <td>FILENAME</td>
+                <td>
+                  <xref target="RFC8607" section="4.2" sectionFormat="comma"/>
+                </td>
+                <td>title</td>
+                <td/>
+              </tr>
+              <tr>
                 <td>FMTTYPE</td>
                 <td>
                   <xref target="RFC5545" section="3.2.8" sectionFormat="comma"/>
                 </td>
                 <td>contentType</td>
-                <td/>
-              </tr>
-              <tr>
-                <td>LABEL</td>
-                <td>
-                  <xref target="RFC7986" section="6.4" sectionFormat="comma"/>
-                </td>
-                <td>title</td>
                 <td/>
               </tr>
               <tr>
@@ -3045,7 +3045,7 @@ GEO:48.858222;2.2945
           <figure anchor="test-ical-prop-image">
             <name>Converting the IMAGE property</name>
             <sourcecode type="text/calendar"><![CDATA[
-IMAGE;VALUE=URI;DISPLAY=BADGE,THUMBNAIL;LABEL=An image;FMTTYPE=image/png:
+IMAGE;VALUE=URI;DISPLAY=BADGE,THUMBNAIL;FILENAME=An image;FMTTYPE=image/png:
  https://example.com/images/party.png
   ]]></sourcecode>
             <sourcecode type="json"><![CDATA[
@@ -5024,9 +5024,9 @@ URL:https://example.com/myurl
               <td>
                 <xref target="RFC7986" section="6.4" sectionFormat="comma"/>
               </td>
-              <td>LABEL</td>
+              <td>FILENAME or LABEL</td>
               <td>
-                <xref target="ical-prop-attach"/>
+                <xref target="ical-prop-attach"/>, <xref target="ical-prop-link"/>, and remarks below
               </td>
             </tr>
           </tbody>
@@ -5034,7 +5034,10 @@ URL:https://example.com/myurl
         <t>Remarks:</t>
         <ul>
           <li>
-            <t>The LINKREL parameter is not specified for the ATTACH, IMAGE and URL properties. For interoperability, implementations <bcp14>SHOULD NOT</bcp14> set the LINKREL parameter on these properties. Instead, implementations <bcp14>SHOULD</bcp14> only set the LINKREL parameter on the LINK property, or any future property that explicitly names the LINKREL parameter in its Property Parameters definition.</t>
+            <t>The LINKREL parameter is not specified for the ATTACH, IMAGE and URL properties. For interoperability, implementations <bcp14>SHOULD NOT</bcp14> set the LINKREL parameter on these properties. Instead, implementations <bcp14>SHOULD</bcp14> only set the LINKREL parameter on the LINK property, or any future property that explicitly names the LINKREL parameter in its Property Parameters definition. As an exception to this rule, implementations <bcp14>MAY</bcp14> set the LINKREL parameter on ATTACH or IMAGE if the iCalendar property value type is BINARY.</t>
+          </li>
+          <li>
+            <t>The "title" property converts to the FILENAME parameter for the ATTACH and IMAGE properties. It converts to the LABEL parameter for the LINK and URL properties.</t>
           </li>
         </ul>
         <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the same component to which the Link object converts to as a property.</t>
@@ -6161,9 +6164,6 @@ END:X-BAZ
               <xref target="RFC5545" section="3.8.1.1" sectionFormat="comma">ATTACH</xref>
             </name>
             <ul>
-              <li>
-                <xref target="RFC8607" section="4.2" sectionFormat="comma">FILENAME</xref>
-              </li>
               <li>
                 <xref target="RFC8607" section="4.3" sectionFormat="comma">MANAGED-ID</xref>
               </li>
