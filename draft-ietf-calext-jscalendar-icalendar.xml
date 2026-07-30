@@ -4987,7 +4987,7 @@ URL:https://example.com/myurl
               </td>
               <td>FMTTYPE</td>
               <td>
-                <xref target="ical-prop-attach"/>, and remarks below
+                <xref target="ical-prop-attach"/>
               </td>
             </tr>
             <tr>
@@ -5016,7 +5016,7 @@ URL:https://example.com/myurl
               </td>
               <td>SIZE</td>
               <td>
-                <xref target="ical-prop-attach"/>, and remarks below
+                <xref target="ical-prop-attach"/>
               </td>
             </tr>
             <tr>
@@ -5026,7 +5026,7 @@ URL:https://example.com/myurl
               </td>
               <td>LABEL</td>
               <td>
-                <xref target="ical-prop-attach"/>, and remarks below
+                <xref target="ical-prop-attach"/>
               </td>
             </tr>
           </tbody>
@@ -5036,9 +5036,6 @@ URL:https://example.com/myurl
           <li>
             <t>The LINKREL parameter is not specified for the ATTACH, IMAGE and URL properties. For interoperability, implementations <bcp14>SHOULD NOT</bcp14> set the LINKREL parameter on these properties. Instead, implementations <bcp14>SHOULD</bcp14> only set the LINKREL parameter on the LINK property, or any future property that explicitly names the LINKREL parameter in its Property Parameters definition.</t>
           </li>
-          <li>
-            <t>The FMTTYPE, SIZE and LABEL parameters are not specified for the URL property. For interoperability, implementations <bcp14>SHOULD NOT</bcp14> set these parameters on the URL property. Instead, implementations <bcp14>SHOULD</bcp14> convert a Link object with link relation "describedby" to a LINK property if any of the "contentType", "size" or "title" properties are set.</t>
-            </li>
         </ul>
         <t>Other properties <bcp14>MAY</bcp14> be converted to <xref target="ical-prop-jsprop">JSPROP properties</xref> in the same component to which the Link object converts to as a property.</t>
       </section>
