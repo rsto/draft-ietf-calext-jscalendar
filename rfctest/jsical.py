@@ -639,6 +639,9 @@ class JsonDiff:
                 "duration": "PT0S",
                 "status": "confirmed",
             },
+            "Link": {
+                "rel": "enclosure",
+            },
             "OffsetTrigger": {
                 "relativeTo": "start",
             },

@@ -2000,8 +2000,7 @@ ATTACH:https://example.com/foo.pdf
 "links": {
   "245708bf-8e07-5d3b-a5da-2974a63c3b91": {
     "@type": "Link",
-    "href": "https://example.com/foo.pdf",
-    "rel": "enclosure"
+    "href": "https://example.com/foo.pdf"
   }
 }
 ]]></sourcecode>
@@ -2019,7 +2018,6 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
     "@type": "Link",
     "href": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQAAAAA3bvkkAAAAAmJLR0QAAd2KE6QAAAAKSURBVAjXY2gAAACCAIHdQ2r0AAAAAElFTkSuQmCC",
     "contentType": "image/png",
-    "rel": "enclosure",
     "...": ""
   }
 }
@@ -5579,8 +5577,7 @@ ATTACH;JSID=mylink1:https://example.com
 "links": {
   "mylink1": {
     "@type": "Link",
-    "href": "https://example.com",
-    "rel": "enclosure"
+    "href": "https://example.com"
   }
 }
 ]]></sourcecode>
