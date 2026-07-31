@@ -3274,7 +3274,7 @@ BEGIN:VEVENT
         <section anchor="ical-prop-name">
           <name>NAME</name>
           <t>
-            The <xref target="RFC7986" section="5.1" sectionFormat="parens">NAME property</xref> in a VLOCATION component converts to the <xref target="jscalendarbis" section="3.2.5" sectionFormat="parens">Location</xref> or <xref target="jscalendarbis" section="3.4.6" sectionFormat="parens">Participant</xref> object's "name" property.
+            The <xref target="RFC7986" section="5.1" sectionFormat="parens">NAME property</xref> in a VLOCATION component converts to the <xref target="jscalendarbis" section="3.2.5" sectionFormat="parens">Location</xref> object's "name" property.
           </t>
           <t>
             The <xref target="RFC7986" section="5.1" sectionFormat="parens">NAME property</xref> in a VCALENDAR component converts to the <xref target="jscalendarbis" section="3.2.1" sectionFormat="parens">"title" property</xref> of the Group object. If the LANGUAGE parameter is set, then the parameter value converts to the <xref target="jscalendarbis" section="3.2.9" sectionFormat="parens">"locale" property</xref> of the same object.
