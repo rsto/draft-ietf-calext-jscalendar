@@ -124,7 +124,7 @@ SUMMARY:he
         </section>
         <section anchor="notation-jscalendar">
           <name>JSCalendar Examples</name>
-	  <t>A JSCalendar example always represents a Group object, even if the example only depicts one of the Group entries or properties. E.g., an example containing only an Alert object is implied to be the sole value of the "alerts" property of an Event object, which is implied to be the sole list member in the "entries" property of a Group object. The Group object has its "version" property set to "2.0", unless the example explicitly defines a complete Group object.</t>
+	  <t>A JSCalendar example always represents a Group object, even if the example only depicts one of the Group entries or properties. E.g., an example containing only an Alert object is implied to be the sole value of the "alerts" property of an Event object, which is implied to be the sole list member in the "entries" property of a Group object. The Group object has its "version" property set to <tt>2.0</tt>, unless the example explicitly defines a complete Group object.</t>
           <t>JSCalendar objects are depicted either explicitly or implicitly. An explicit JSCalendar object starts and ends with braces.  An implicit JSCalendar object omits braces, it only consists of JSON name/value pairs, separated by comma.</t>
 	  <t>An implicit JSCalendar object is assumed to be of type Event, unless it contains the "@type" property with a different value.  It is assumed to contain all mandatory properties with some value; if they are not depicted, their actual value is irrelevant for the main point of the example.</t>
           <t><xref target="example-notation-jscalendar-implicit-explicit"/> illustrates this with multiple examples, all of which represent the same JSCalendar data.  The first example contains an implicit JSCalendar object of type Event.  The second example contains an implicit JSCalendar object with a "@type" property.  The third example contains an explicit Event object but the Group object containing it is omitted.  The fourth example contains the full Group object, nothing is omitted.</t>
@@ -543,14 +543,14 @@ END:VCALENDAR
           <name>JSCalendar Ids</name>
           <t>JSCalendar generally uses JSON objects to represent a collection of same-typed values. The keys are of type <xref target="jscalendarbis" section="1.5.1" sectionFormat="parens">Id</xref>, the values are JSCalendar object types.  If an iCalendar element converts to a value in such a collection then an implementation needs to choose an identifier as key.</t>
           <t>If the <xref target="ical-param-jsid">JSID parameter</xref> or <xref target="ical-prop-jsid">JSID property</xref> is set on a property or component, then its value <bcp14>MUST</bcp14> be used as key when converting that element from iCalendar to JSCalendar.  In absence of the JSID parameter or property key generation is implementation-specific.</t>
-          <t>Some sections later in this document describe key generation schemes for specific iCalendar elements by making use of <xref target="RFC9562" section="5.5" sectionFormat="parens">UUID Version 5 with SHA1 hash</xref>. The Namespace ID to generate such keys is "7f1e1965-ae73-4454-b088-232c90730ce2". These key generation schemes are not mandatory, nor is making use of that particular Namespace ID when using UUID Version 5 (UUIDv5) as keys.</t>
+          <t>Some sections later in this document describe key generation schemes for specific iCalendar elements by making use of <xref target="RFC9562" section="5.5" sectionFormat="parens">UUID Version 5 with SHA1 hash</xref>. The Namespace ID to generate such keys is <tt>7f1e1965-ae73-4454-b088-232c90730ce2</tt>. These key generation schemes are not mandatory, nor is making use of that particular Namespace ID when using UUID Version 5 (UUIDv5) as keys.</t>
           <t>Irrespective of the key generation scheme, all keys <bcp14>MUST</bcp14> be valid according to the definition of the Id type. For consistency, keys <bcp14>SHOULD</bcp14> be stable such that converting the same iCalendar data to JSCalendar multiple times produces the same keys.</t>
         </section>
         <section anchor="ical-timezone-identifiers">
           <name>Timezone identifiers</name>
           <t>Converting temporal properties such as DTSTART, DTEND, and RECURRENCE-ID requires to not only determine the date and time of the property value, but also the timezone it references.</t>
           <t>If the property value type is <xref target="RFC5545" section="3.3.4" sectionFormat="parens">DATE</xref> or  <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #1: DATE WITH LOCAL TIME</xref> then the timezone is not set in JSCalendar.</t>
-          <t>If the property value type is <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #2: DATE WITH UTC TIME</xref> then the timezone identifier is "Etc/UTC" in JSCalendar.</t>
+          <t>If the property value type is <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #2: DATE WITH UTC TIME</xref> then the timezone identifier is <tt>Etc/UTC</tt> in JSCalendar.</t>
           <t>If the property value type is <xref target="RFC5545" section="3.3.5" sectionFormat="parens">DATE-TIME in FORM #3: DATE WITH LOCAL TIME AND TIME ZONE REFERENCE</xref> then the timezone identifier is determined by the TZID parameter value as follows:</t>
           <t>If the TZID parameter value is equal to a name in the <xref target="TZDB">IANA Time Zone Database</xref> then the timezone identifier is that verbatim name. Otherwise, how to convert the TZID parameter value is implementation-specific: software libraries such as the <eref target="https://icu.unicode.org/">International Components for Unicode</eref> support converting Microsoft time zone names to IANA time zone identifiers. Alternatively, an implementation might determine the name of an IANA time zone which has identical time zone rules over the time span of the calendar object.</t>
           <t>Implementations <bcp14>MAY</bcp14> preserve a TZID parameter set to a non-IANA timezone identifier and its related VTIMEZONE by use of the "convertedProperties" and "components" properties (see <xref target="jscal-prop-icalendar"/>), but <bcp14>MUST NOT</bcp14> expect other implementations to consider them when processing the calendar object.</t>
@@ -1947,10 +1947,10 @@ ACTION:AUDIO
         <section anchor="ical-prop-attach">
           <name>ATTACH</name>
           <t>
-              The <xref target="RFC5545" section="3.8.1.1" sectionFormat="parens">ATTACH property</xref> in a VEVENT, VTODO, PARTICIPANT, VLOCATION, or VCALENDAR component converts to a <xref target="jscalendarbis" section="1.5.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the Event, Task, Participant, Location, or Group object's "links" property. The "rel" property value is set to "enclosure".
+              The <xref target="RFC5545" section="3.8.1.1" sectionFormat="parens">ATTACH property</xref> in a VEVENT, VTODO, PARTICIPANT, VLOCATION, or VCALENDAR component converts to a <xref target="jscalendarbis" section="1.5.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the Event, Task, Participant, Location, or Group object's "links" property. The "rel" property value is set to <tt>enclosure</tt>.
           </t>
           <t>The key of the Link object <bcp14>MUST</bcp14> be the value of the <xref target="ical-param-jsid">JSID parameter</xref>, if set. If no JSID parameter is set, then the key <bcp14>MAY</bcp14> be the UUIDv5 generated from the property value (see <xref target="generating-jscalendar-ids"/>). When converting to iCalendar, implementations <bcp14>MAY</bcp14> omit setting the JSID parameter if the key matches the UUIDv5 of the ATTACH property value and the key is not part of a JSON pointer in any JSPTR parameter value.</t>
-          <t>The ATTACH property value converts to the Link object's "href" property. A value of type URI converts as-is. A value of type BINARY converts to a URI in the "data" URL scheme (<xref target="RFC2397"/>. If the FMTTYPE parameter is set on the ATTACH property, then the parameter value <bcp14>MUST</bcp14> be set in the "mediatype" part of the data URL.</t>
+          <t>The ATTACH property value converts to the Link object's "href" property. A value of type URI converts as-is. A value of type BINARY converts to a URI in the <tt>data</tt> URL scheme (<xref target="RFC2397"/>. If the FMTTYPE parameter is set on the ATTACH property, then the parameter value <bcp14>MUST</bcp14> be set in the <tt>mediatype</tt> part of the data URL.</t>
           <t>The ATTACH property parameters convert as follows:</t>
           <table>
             <name>Parameters of the ATTACH property</name>
@@ -2056,7 +2056,7 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
                   <xref target="RFC5545" section="3.2.3" sectionFormat="comma"/>
                 </td>
                 <td>kind</td>
-                <td>ROOM converts to "location"</td>
+                <td>ROOM converts to <tt>location</tt></td>
               </tr>
               <tr>
                 <td>DELEGATED-FROM</td>
@@ -2429,7 +2429,7 @@ CATEGORIES:Meeting
               </tr>
             </tbody>
           </table>
-          <t>Any other value <bcp14>MUST</bcp14> convert to the "private" value. Implementations <bcp14>MAY</bcp14> preserve the original value in the <xref target="jscal-prop-icalendar">iCalendar/properties property</xref>.</t>
+          <t>Any other value <bcp14>MUST</bcp14> convert to the <tt>private</tt> value. Implementations <bcp14>MAY</bcp14> preserve the original value in the <xref target="jscal-prop-icalendar">iCalendar/properties property</xref>.</t>
           <t>The following example illustrates how to convert the CLASS property:</t>
           <figure anchor="test-ical-prop-class">
             <name>Converting the CLASS property</name>
@@ -2608,7 +2608,7 @@ DESCRIPTION:Their pancakes are delicious\; they are fluffy and sweet.
           </t>
           <t>If the value type of the DTEND property is DATE, then the duration is the number of days or weeks between the DTSTART and DTEND property values. If the value type is DATE-TIME, then the duration is the timespan between the DTSTART and DTEND property values when converted to UTC time.</t>
           <t>If the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DTEND property differs from that of the DTSTART property, then it converts to the Event's "endTimeZone" property.</t>
-          <t>Implementations <bcp14>MAY</bcp14> preserve the fact that the duration got determined by the DTEND property. How to do this depends on the timezone identifiers of the DTSTART and DTEND properties: If the time zone identifiers are not equal, then the presence of the "endTimeZone" property implies that it converted from the DTEND property. If the time zone identifiers are equal, then implementations <bcp14>MAY</bcp14> set the <xref target="jscal-prop-icalendar">"iCalendar" property</xref> in the Event object and there add an entry for the path "duration" in the "convertedProperties" property. The value <bcp14>MUST</bcp14> be an ICalProperty object with the "name" property set to "dtend".</t>
+          <t>Implementations <bcp14>MAY</bcp14> preserve the fact that the duration got determined by the DTEND property. How to do this depends on the timezone identifiers of the DTSTART and DTEND properties: If the time zone identifiers are not equal, then the presence of the "endTimeZone" property implies that it converted from the DTEND property. If the time zone identifiers are equal, then implementations <bcp14>MAY</bcp14> set the <xref target="jscal-prop-icalendar">"iCalendar" property</xref> in the Event object and there add an entry for the path "duration" in the "convertedProperties" property. The value <bcp14>MUST</bcp14> be an ICalProperty object with the "name" property set to <tt>dtend</tt>.</t>
           <t>The following examples illustrate how to convert the DTEND property:</t>
           <figure anchor="test-ical-prop-dtend-different-tzid">
             <name>Converting the DTEND property with different timezone</name>
@@ -2703,7 +2703,7 @@ DTSTAMP:20240304T132000Z
           <t>
               The <xref target="RFC5545" section="3.8.2.4" sectionFormat="parens">DTSTART property</xref> in a VEVENT or VTODO component converts to the Event or Task object's "start" property (Sections 4.1.1 and 4.2.2 of <xref target="jscalendarbis"/>).</t>
           <t>See <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values.</t>
-          <t>For VEVENT and VTODO components, the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DTSTART property converts to the Event or Task object's "timeZone" property.  In addition, if the value type of the DTSTART property is DATE, then the value of the <xref target="jscalendarbis" section="3.2.4" sectionFormat="parens">"showWithoutTime" property</xref> is "true".</t>
+          <t>For VEVENT and VTODO components, the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DTSTART property converts to the Event or Task object's "timeZone" property.  In addition, if the value type of the DTSTART property is DATE, then the value of the <xref target="jscalendarbis" section="3.2.4" sectionFormat="parens">"showWithoutTime" property</xref> is <tt>true</tt>.</t>
           <t>The following examples illustrate how to convert the DTSTART property for the VEVENT and VTODO components.</t>
           <figure anchor="test-ical-prop-dtstart-tzid">
             <name>Converting the DTSTART property with TZID parameter</name>
@@ -2754,7 +2754,7 @@ DTSTART;VALUE=DATE:20240921
               The <xref target="RFC5545" section="3.8.2.3" sectionFormat="parens">DUE property</xref> in a VTODO component converts to the <xref target="jscalendarbis" section="4.2.1" sectionFormat="parens">"due" property</xref> of the Task object.</t>
           <t>See <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values.</t>
           <t>If the VTODO component does not contain a DTSTART property, then the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DUE property converts to the Task object's "timeZone" property. If it contains both the DUE and DTSTART properties and the timezone identifier of the DUE property differs from that of the DTSTART property, then the "due" date-time property value <bcp14>MUST</bcp14> be relative to the time zone of DTSTART.</t>
-          <t>If the value type of the DUE property is DATE, then the value of the <xref target="jscalendarbis" section="3.2.4" sectionFormat="parens">"showWithoutTime" property</xref> is "true".</t>
+          <t>If the value type of the DUE property is DATE, then the value of the <xref target="jscalendarbis" section="3.2.4" sectionFormat="parens">"showWithoutTime" property</xref> is <tt>true</tt>.</t>
           <t>The following examples illustrate how to convert the DUE property:</t>
           <figure anchor="test-ical-prop-due-tzid">
             <name>Converting the DUE property with TZID parameter</name>
@@ -2866,7 +2866,7 @@ ESTIMATED-DURATION:P2D
           <t>
             The <xref target="RFC5545" section="3.8.5.1" sectionFormat="parens">EXDATE property</xref> in a VEVENT or VTODO component converts to a <xref target="jscalendarbis" section="1.5.9" sectionFormat="parens">PatchObject value</xref>.  The converted object is set in the Event or Task object's "recurrenceOverrides" property.
           </t>
-          <t>The property value converts to the key in the "recurrenceOverrides" property value. See <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values. The date-time <bcp14>MUST</bcp14> be relative to the timezone identified by the Event or Task's "timeZone" property.  The PatchObject value <bcp14>MUST</bcp14> set the "excluded" member to "true" and <bcp14>MUST NOT</bcp14> set any other property.</t>
+          <t>The property value converts to the key in the "recurrenceOverrides" property value. See <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values. The date-time <bcp14>MUST</bcp14> be relative to the timezone identified by the Event or Task's "timeZone" property.  The PatchObject value <bcp14>MUST</bcp14> set the "excluded" member to <tt>true</tt> and <bcp14>MUST NOT</bcp14> set any other property.</t>
           <t>The following example illustrates how to convert the EXDATE property:</t>
           <figure anchor="test-ical-prop-exdate">
             <name>Converting the EXDATE property</name>
@@ -2892,7 +2892,7 @@ EXDATE:20230801T130000Z
         </section>
         <section anchor="ical-prop-geo">
           <name>GEO</name>
-          <t>A GEO property with the DERIVED parameter value "TRUE" does not convert to JSCalendar. For non-derived GEO properties, the following rules apply:</t>
+          <t>A GEO property with the DERIVED parameter value <tt>TRUE</tt> does not convert to JSCalendar. For non-derived GEO properties, the following rules apply:</t>
           <t>
             The <xref target="RFC5545" section="3.8.1.6" sectionFormat="parens">GEO property</xref> in a VEVENT or VTODO component converts to a <xref target="jscalendarbis" section="3.2.5" sectionFormat="parens">Location object</xref>.  If the VEVENT or VTODO component also contains the <xref target="ical-prop-location">LOCATION property</xref>, then the GEO and LOCATION properties convert to the same Location object.  The converted object is set in the Event or Task object's "locations" property.
           </t>
@@ -2900,7 +2900,7 @@ EXDATE:20230801T130000Z
           <t>
             The <xref target="RFC5545" section="3.8.1.6" sectionFormat="parens">GEO property</xref> in a VLOCATION component converts to the <xref target="jscalendarbis" section="3.2.5" sectionFormat="parens">"coordinates" property</xref> of the Location object.
           </t>
-          <t>The pair of FLOAT values converts to a URI with the <xref target="RFC5870">"geo" scheme</xref>.  The first FLOAT value converts to the "coord-a" part of the URI, the second FLOAT value to the "coord-b" part. A preceding plus sign (+) of the FLOAT value <bcp14>MUST</bcp14> be omitted, a preceding minus sign (-) <bcp14>MUST</bcp14> be preserved.  The optional "coord-c" part of the URI <bcp14>MUST</bcp14> be omitted.</t>
+          <t>The pair of FLOAT values converts to a URI with the <tt>geo</tt> scheme (<xref target="RFC5870"/>).  The first FLOAT value converts to the <tt>coord-a</tt> part of the URI, the second FLOAT value to the <tt>coord-b</tt> part. A preceding plus sign (+) of the FLOAT value <bcp14>MUST</bcp14> be omitted, a preceding minus sign (-) <bcp14>MUST</bcp14> be preserved.  The optional <tt>coord-c</tt> part of the URI <bcp14>MUST</bcp14> be omitted.</t>
           <t>Implementations <bcp14>MAY</bcp14> preserve the fact that the coordinates converted from a GEO property by setting the JSON pointer path to the "coordinates" property in the "iCalendar/convertedProperties" property. If the GEO property converted from a VEVENT or VTODO component, then the "iCalendar" property <bcp14>MUST</bcp14> be that of the Event or Task object, for the VLOCATION component it <bcp14>MUST</bcp14> be the Location object's "iCalendar" property.</t>
           <t>The following examples illustrate how to convert the GEO property.</t>
           <figure anchor="test-ical-prop-geo">
@@ -2988,7 +2988,7 @@ GEO:48.858222;2.2945
         <section anchor="ical-prop-image">
           <name>IMAGE</name>
           <t>
-            The <xref target="RFC7986" section="5.10" sectionFormat="parens">IMAGE property</xref> in a VEVENT, VTODO, VLOCATION, PARTICIPANT, or VCALENDAR component converts to a <xref target="jscalendarbis" section="1.5.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the Event, Task, Location, Participant, or Group object's "links" property. The "rel" property value is set to "icon".
+            The <xref target="RFC7986" section="5.10" sectionFormat="parens">IMAGE property</xref> in a VEVENT, VTODO, VLOCATION, PARTICIPANT, or VCALENDAR component converts to a <xref target="jscalendarbis" section="1.5.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the Event, Task, Location, Participant, or Group object's "links" property. The "rel" property value is set to <tt>icon</tt>.
           </t>
           <t>The key of the Link object <bcp14>MUST</bcp14> be the value of the <xref target="ical-param-jsid">JSID parameter</xref>, if set. If no JSID parameter is set, then the key <bcp14>MAY</bcp14> be the UUIDv5 generated from the property value (see <xref target="generating-jscalendar-ids"/>). When converting to iCalendar, implementations <bcp14>MAY</bcp14> omit setting the JSID parameter if the key matches the UUIDv5 of the IMAGE property value and the key is not part of a JSON pointer in any JSPTR parameter value.</t>
           <t>The IMAGE property value converts to the Link object's "href" property. A value of type URI converts as-is. See <xref target="ical-prop-attach"/> how to convert a BINARY value.</t>
@@ -3323,7 +3323,7 @@ END:VLOCATION
           <name>ORGANIZER</name>
           <t>
               The <xref target="RFC5545" section="3.8.4.3" sectionFormat="parens">ORGANIZER property</xref> in a VEVENT or VTODO component converts to the <xref target="jscalendarbis" section="3.4.4" sectionFormat="parens">"organizerCalendarAddress" property</xref> of the Event or Task object.</t>
-          <t>It also converts to a Participant object in the <xref target="jscalendarbis" section="3.4.6" sectionFormat="parens">"participants" property</xref>, if any of its parameters convert to a Participant object property (see <xref target="ical-prop-organizer-parameters"/>), or if none of the ATTENDEE properties in the iCalendar component have the ROLE parameter set to "OWNER". The ORGANIZER property value converts to the Participant's "calendarAddress" property, the "owner" role is set in Participant "roles" property.</t>
+          <t>It also converts to a Participant object in the <xref target="jscalendarbis" section="3.4.6" sectionFormat="parens">"participants" property</xref>, if any of its parameters convert to a Participant object property (see <xref target="ical-prop-organizer-parameters"/>), or if none of the ATTENDEE properties in the iCalendar component have the ROLE parameter set to <tt>OWNER</tt>. The ORGANIZER property value converts to the Participant's "calendarAddress" property, the <tt>owner</tt> role is set in Participant "roles" property.</t>
           <t>The key of the Participant object <bcp14>MUST</bcp14> be the value of the <xref target="ical-param-jsid">JSID parameter</xref>, if set. If no JSID parameter is set, then the key <bcp14>MAY</bcp14> be the UUIDv5 generated from the ORGANIZER property value (see <xref target="generating-jscalendar-ids"/>). When converting to iCalendar, implementations <bcp14>MAY</bcp14> omit setting the JSID parameter if the key matches the UUIDv5 of the ORGANIZER property value and the key is not part of a JSON pointer in any JSPTR parameter value.</t>
           <t>The ORGANIZER property parameters convert to the Participant object as follows:</t>
           <table anchor="ical-prop-organizer-parameters">
@@ -3875,7 +3875,7 @@ SEQUENCE:3
         </section>
         <section anchor="ical-prop-show-without-time">
           <name>SHOW-WITHOUT-TIME</name>
-          <t>The <xref target="icaljscalexts" section="4.2" sectionFormat="parens">SHOW-WITHOUT-TIME property</xref> in a VEVENT or VTODO component converts to the <xref target="jscalendarbis" section="3.2.4" sectionFormat="parens">"showWithoutTime" property</xref> of the Event or Task object. As outlined in the definition of the SHOW-WITHOUT-TIME property, the property <bcp14>MUST</bcp14> be ignored if the temporal value type of the VEVENT or VTODO component is DATE, or if the property value is "FALSE".</t>
+          <t>The <xref target="icaljscalexts" section="4.2" sectionFormat="parens">SHOW-WITHOUT-TIME property</xref> in a VEVENT or VTODO component converts to the <xref target="jscalendarbis" section="3.2.4" sectionFormat="parens">"showWithoutTime" property</xref> of the Event or Task object. As outlined in the definition of the SHOW-WITHOUT-TIME property, the property <bcp14>MUST</bcp14> be ignored if the temporal value type of the VEVENT or VTODO component is DATE, or if the property value is <tt>FALSE</tt>.</t>
           <t>The following example illustrates how to convert the SHOW-WITHOUT-TIME property:</t>
           <figure anchor="test-ical-prop-show-without-time">
             <name>Example for converting the SHOW-WITHOUT-TIME property</name>
@@ -3953,7 +3953,7 @@ SOURCE;VALUE=URI:https://example.com/holidays.ics
           <t>The <xref target="RFC9073" section="6.5" sectionFormat="parens">STYLED-DESCRIPTION property</xref> in a PARTICIPANT, VEVENT or VTODO component converts to the <xref target="jscalendarbis" section="3.2.2" sectionFormat="parens">"description" property</xref> of the Participant, Event or Task object under the following conditions:</t>
           <ul>
             <li>The property value type <bcp14>MUST</bcp14> be TEXT.</li>
-            <li>The FMTTYPE parameter either <bcp14>MUST NOT</bcp14> be set, or its value <bcp14>MUST</bcp14> be a <xref target="RFC6838">media type</xref> with top-level type "text".</li>
+            <li>The FMTTYPE parameter either <bcp14>MUST NOT</bcp14> be set, or its value <bcp14>MUST</bcp14> be a <xref target="RFC6838">media type</xref> with top-level type <tt>text</tt>.</li>
             <li>Its DERIVED parameter value <bcp14>MUST NOT</bcp14> be TRUE. If the value is TRUE, then another property in the same component is expected to contain the description.</li>
           </ul>
           <t>If these conditions are not met, implementations MAY preserve the property in the <xref target="jscal-prop-icalendar">"iCalendar" property</xref>.</t>
@@ -4169,7 +4169,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
         <section anchor="ical-prop-url">
           <name>URL</name>
           <t>
-              The <xref target="RFC5545" section="3.8.4.6" sectionFormat="parens">URL property</xref> in a VEVENT, VTODO, PARTICIPANT, VLOCATION, or VCALENDAR component converts to a <xref target="jscalendarbis" section="1.5.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the Event, Task, Participant, Location, or Group object's "links" property. The "rel" property value is set to "describedby".
+              The <xref target="RFC5545" section="3.8.4.6" sectionFormat="parens">URL property</xref> in a VEVENT, VTODO, PARTICIPANT, VLOCATION, or VCALENDAR component converts to a <xref target="jscalendarbis" section="1.5.11" sectionFormat="parens">Link object</xref>.  The converted object is set in the Event, Task, Participant, Location, or Group object's "links" property. The "rel" property value is set to <tt>describedby</tt>.
           </t>
           <t>The key of the Link object <bcp14>MUST</bcp14> be the value of the <xref target="ical-param-jsid">JSID parameter</xref>, if set. If no JSID parameter is set, then the key <bcp14>MAY</bcp14> be the UUIDv5 generated from the property value (see <xref target="generating-jscalendar-ids"/>). When converting to iCalendar, implementations <bcp14>MAY</bcp14> omit setting the JSID parameter if the key matches the UUIDv5 of the URL property value and the key is not part of a JSON pointer in any JSPTR parameter value.</t>
           <t>The URL property value converts to the Link object's "href" property.</t>
@@ -4261,7 +4261,7 @@ URL:https://example.com/myurl
       <section anchor="jscal-event-and-task">
         <name>Event and Task</name>
         <t>The <xref target="jscalendarbis" section="2.1" sectionFormat="parens">Event object</xref> converts to a <xref target="ical-comp-vevent">VEVENT component</xref>, the <xref target="jscalendarbis" section="2.2" sectionFormat="parens">Task object</xref> converts to a <xref target="ical-comp-vtodo">VTODO component</xref>.</t>
-        <t>In the iCalendar component, the value data types of the DTSTART, DUE and RECURRENCE-ID properties all <bcp14>MUST</bcp14> be of the same form, either DATE, or DATE WITH LOCAL TIME, or DATE WITH UTC TIME (see <xref target="RFC5545" section="3.3.5"/>). It <bcp14>MUST</bcp14> be DATE if the "showWithoutTime" property value is "true", the "timeZone" property value is not set, and the time component is zero in the values of the "start", "due", "duration", "estimatedDuration", "recurrenceId" properties, and the RecurrenceRule object's "until" property, and in any key of the "recurrenceOverrides" property value. Otherwise, it <bcp14>MAY</bcp14> be DATE WITH UTC TIME if the "timeZone" property value is "Etc/UTC" and the "endTimeZone" property value is not set. It <bcp14>MUST</bcp14> be DATE WITH LOCAL TIME in all other cases.</t>
+        <t>In the iCalendar component, the value data types of the DTSTART, DUE and RECURRENCE-ID properties all <bcp14>MUST</bcp14> be of the same form, either DATE, or DATE WITH LOCAL TIME, or DATE WITH UTC TIME (see <xref target="RFC5545" section="3.3.5"/>). It <bcp14>MUST</bcp14> be DATE if the "showWithoutTime" property value is <tt>true</tt>, the "timeZone" property value is not set, and the time component is zero in the values of the "start", "due", "duration", "estimatedDuration", "recurrenceId" properties, and the RecurrenceRule object's "until" property, and in any key of the "recurrenceOverrides" property value. Otherwise, it <bcp14>MAY</bcp14> be DATE WITH UTC TIME if the "timeZone" property value is <tt>Etc/UTC</tt> and the "endTimeZone" property value is not set. It <bcp14>MUST</bcp14> be DATE WITH LOCAL TIME in all other cases.</t>
         <t>
             The following table defines how to convert properties that are common to both the Event and Task object types. <xref target="jscal-event-props"/> and <xref target="jscal-task-props"/> later in this section define how to convert properties specific to either Event or Task objects.</t>
         <table anchor="jscal-event-and-task-props">
@@ -4624,13 +4624,13 @@ URL:https://example.com/myurl
         <t>Remarks:</t>
         <ul>
           <li>
-            <t>The "descriptionContentType" property value determines if the "description" property converts to the DESCRIPTION or STYLED-DESCRIPTION property. A description of content type "text/plain" converts to the DESCRIPTION property. Any other description converts to the STYLED-DESCRIPTION property, in which case a plain text version of the rich-text description <bcp14>MAY</bcp14> be set additionally in the DESCRIPTION property, having its DERIVED parameter set to "TRUE". How to derive plain text from rich-text is implementation-specific.</t>
+            <t>The "descriptionContentType" property value determines if the "description" property converts to the DESCRIPTION or STYLED-DESCRIPTION property. A description of content type <tt>text/plain</tt> converts to the DESCRIPTION property. Any other description converts to the STYLED-DESCRIPTION property, in which case a plain text version of the rich-text description <bcp14>MAY</bcp14> be set additionally in the DESCRIPTION property, having its DERIVED parameter set to <tt>TRUE</tt>. How to derive plain text from rich-text is implementation-specific.</t>
           </li>
           <li>
-            <t>The "privacy" property converts to the CLASS property of the main component and all recurrence overrides. If the property value is "private" and the <xref target="jscal-prop-icalendar">iCalendar/properties property</xref> contains a CLASS property with an unknown value, then implementations <bcp14>MAY</bcp14> convert that preserved property rather than setting the PRIVATE classification. In any case they <bcp14>MUST NOT</bcp14> set more than one CLASS property per calendar component.</t>
+            <t>The "privacy" property converts to the CLASS property of the main component and all recurrence overrides. If the property value is <tt>private</tt> and the <xref target="jscal-prop-icalendar">iCalendar/properties property</xref> contains a CLASS property with an unknown value, then implementations <bcp14>MAY</bcp14> convert that preserved property rather than setting the PRIVATE classification. In any case they <bcp14>MUST NOT</bcp14> set more than one CLASS property per calendar component.</t>
           </li>
           <li>
-            <t>The entries in the "recurrenceOverrides" property convert depending on the contents of the PatchObject value. A PatchObject that sets the "excluded" member to "true" converts to an EXDATE property for the date-time of that recurrence instance. An empty PatchObject converts to an RDATE property. Any other PatchObject converts to a recurrence override component in the embedding VCALENDAR component.</t>
+            <t>The entries in the "recurrenceOverrides" property convert depending on the contents of the PatchObject value. A PatchObject that sets the "excluded" member to <tt>true</tt> converts to an EXDATE property for the date-time of that recurrence instance. An empty PatchObject converts to an RDATE property. Any other PatchObject converts to a recurrence override component in the embedding VCALENDAR component.</t>
           </li>
           <li>
             <t>The "showWithoutTime" property only converts to the SHOW-WITHOUT-TIME property if the value data type of the DTSTART or DUE properties is of form DATE WITH UTC TIME or DATE WITH LOCAL TIME.</t>
@@ -4935,7 +4935,7 @@ URL:https://example.com/myurl
         <t>Remarks:</t>
         <ul>
           <li>
-            <t>The "descriptionContentType" property value determines if the "description" property converts to the DESCRIPTION or STYLED-DESCRIPTION property. A description of content type "text/plain" converts to the DESCRIPTION property. Any other description converts to the STYLED-DESCRIPTION property, in which case a plain text version of the rich-text description <bcp14>MAY</bcp14> be set additionally in the DESCRIPTION property, having its DERIVED parameter set to "TRUE". How to derive plain text from rich-text is implementation-specific.</t>
+            <t>The "descriptionContentType" property value determines if the "description" property converts to the DESCRIPTION or STYLED-DESCRIPTION property. A description of content type <tt>text/plain</tt> converts to the DESCRIPTION property. Any other description converts to the STYLED-DESCRIPTION property, in which case a plain text version of the rich-text description <bcp14>MAY</bcp14> be set additionally in the DESCRIPTION property, having its DERIVED parameter set to <tt>TRUE</tt>. How to derive plain text from rich-text is implementation-specific.</t>
           </li>
           <li>
             <t>The "prodId" property value of the Group object is expected to be equal to the "prodId" property value of all the Group entries. They all convert to the same, single PRODID property in the VCALENDAR component. How to convert unequal "prodId" property values is implementation-specific. </t>
@@ -4951,9 +4951,9 @@ URL:https://example.com/myurl
         <t>The <xref target="jscalendarbis" section="1.5.11" sectionFormat="parens">Link object</xref> converts to either an <xref target="ical-prop-attach">ATTACH property</xref> or an <xref target="ical-prop-image">IMAGE property</xref>, or a <xref target="ical-prop-link">LINK property</xref>, or an <xref target="ical-prop-url">URL property</xref>.</t>
 	<t>Which iCalendar property to choose is implementation-specific. As a guideline, stopping at the first matching criteria:</t>
         <ol>
-            <li>Choose ATTACH if the "rel" property value is "enclosure".</li>
-            <li>Choose IMAGE if the "rel" property value is "icon".</li>
-            <li>Choose URL if the "rel" property value is "describedby" and no URL property is set in the iCalendar component.</li>
+            <li>Choose ATTACH if the "rel" property value is <tt>enclosure</tt>.</li>
+            <li>Choose IMAGE if the "rel" property value is <tt>icon</tt>.</li>
+            <li>Choose URL if the "rel" property value is <tt>describedby</tt> and no URL property is set in the iCalendar component.</li>
             <li>Choose LINK otherwise.</li>
         </ol>
         <t>The "href" property converts to the property value. The other Link properties convert as follows:</t>
@@ -5038,7 +5038,7 @@ URL:https://example.com/myurl
           <li>Choose LOCATION if the key of the Location object in the "locations" property matches the "mainLocationId" property, or if the "name" property is set and the iCalendar component does not already contain a LOCATION property. The "name" property converts to the LOCATION property value.</li>
           <li>Choose the VLOCATION component otherwise.</li>
         </ul>
-        <t>Implementations <bcp14>MAY</bcp14> convert one of the Location objects to both a VLOCATION component and the LOCATION and GEO properties of the component that contains the VLOCATION component. In this case, the DERIVED parameter <bcp14>MUST</bcp14> be set on the LOCATION and GEO properties with value "TRUE".</t>
+        <t>Implementations <bcp14>MAY</bcp14> convert one of the Location objects to both a VLOCATION component and the LOCATION and GEO properties of the component that contains the VLOCATION component. In this case, the DERIVED parameter <bcp14>MUST</bcp14> be set on the LOCATION and GEO properties with value <tt>TRUE</tt>.</t>
         <t>The properties convert to a VLOCATION component as follows:</t>
         <table>
           <name>Properties of the Location object</name>
@@ -5100,7 +5100,7 @@ URL:https://example.com/myurl
         <t>The <xref target="jscalendarbis" section="3.4.6" sectionFormat="parens">Participant object</xref> converts to an <xref target="ical-prop-attendee">ATTENDEE property</xref> and <xref target="ical-comp-participant">PARTICIPANT component</xref>, unless it is fully represented by the <xref target="ical-prop-organizer">ORGANIZER property</xref>:</t>
         <ul>
           <li>
-            <t>It if fully represented by the ORGANIZER property if its "calendarAddress" property value matches the "organizerCalendarAddress" property value, and it does not have any role but the "owner" role set, and it only has properties set that convert to ORGANIZER parameters (see <xref target="ical-prop-organizer-parameters"/>).
+            <t>It if fully represented by the ORGANIZER property if its "calendarAddress" property value matches the "organizerCalendarAddress" property value, and it does not have any role but the <tt>owner</tt> role set, and it only has properties set that convert to ORGANIZER parameters (see <xref target="ical-prop-organizer-parameters"/>).
         </t>
           </li>
           <li>
@@ -5232,7 +5232,7 @@ URL:https://example.com/myurl
         <t>Remarks:</t>
         <ul>
           <li>
-            <t>The "owner" role needs not convert to the ROLE parameter of the ATTENDEE property if the Participant object converts to both the ATTENDEE and ORGANIZER property.</t>
+            <t>The <tt>owner</tt> role needs not convert to the ROLE parameter of the ATTENDEE property if the Participant object converts to both the ATTENDEE and ORGANIZER property.</t>
           </li>
           <li>
             <t>The "name", "email" and "sentBy" properties also convert to parameters of the ORGANIZER property, if the Participant converts to the ORGANIZER property.</t>
@@ -6386,7 +6386,7 @@ END:X-BAZ
               <li>
                 <xref target="RFC5545" section="3.2.1" sectionFormat="comma">ALTREP</xref>
               </li>
-              <li><xref target="RFC7986" section="6.1" sectionFormat="comma">DISPLAY</xref> (if the parameter value contains more than one "displayval").
+              <li><xref target="RFC7986" section="6.1" sectionFormat="comma">DISPLAY</xref> (if the parameter value contains more than one <tt>displayval</tt>).
               </li>
             </ul>
           </section>
