@@ -5650,7 +5650,7 @@ JSPROP;JSPTR="example.com:foo":"bar"
               </dl>
             </dd>
           </dl>
-          <t>The example in <xref target="test-jscal-prop-icalendar"/> describes how to convert unknown iCalendar elements to the "iCalendar" property. The "X-FOO" parameter set on the SUMMARY property illustrates how to preserve an unknown iCalendar parameter on a property that does convert to a standard JSCalendar element. The "X-BAR" property and "X-BAZ" component illustrate how to convert entirely unknown iCalendar elements.</t>
+          <t>The example in <xref target="test-jscal-prop-icalendar"/> describes how to convert unknown iCalendar elements to the "iCalendar" property. The X-FOO parameter set on the SUMMARY property illustrates how to preserve an unknown iCalendar parameter on a property that does convert to a standard JSCalendar element. The X-BAR property and X-BAZ component illustrate how to convert entirely unknown iCalendar elements.</t>
           <figure anchor="test-jscal-prop-icalendar">
             <name>Converting unknown iCalendar elements to the "iCalendar" property</name>
             <sourcecode type="text/calendar"><![CDATA[
