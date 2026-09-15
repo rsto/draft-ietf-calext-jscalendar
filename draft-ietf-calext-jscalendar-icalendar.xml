@@ -5763,17 +5763,59 @@ END:X-BAZ
         <t>IANA will add the following entries to the "JSCalendar Properties" registry:</t>
         <dl spacing="compact">
           <dt>Property Name</dt>
-          <dd>iCalendar</dd>
+          <dd>components</dd>
           <dt>Property Type</dt>
-          <dd>ICalComponent</dd>
+          <dd>*[][]</dd>
           <dt>Property Context</dt>
-          <dd>Event, Location, Participant, Task</dd>
-          <dt>Reference</dt>
+          <dd>ICalComponent</dd>
+          <dt>Reference/Description</dt>
           <dd>
             <xref target="jscal-prop-icalendar"/>
           </dd>
           <dt>Intended Usage</dt>
           <dd>common</dd>
+          <dt>Since Version</dt>
+          <dd>2.0</dd>
+          <dt>Is Per-User</dt>
+          <dd>no</dd>
+          <dt>Change Controller</dt>
+          <dd>IETF</dd>
+        </dl>
+        <dl spacing="compact">
+          <dt>Property Name</dt>
+          <dd>convertedProperties</dd>
+          <dt>Property Type</dt>
+          <dd>String[ICalProperty]</dd>
+          <dt>Property Context</dt>
+          <dd>ICalComponent</dd>
+          <dt>Reference/Description</dt>
+          <dd>
+            <xref target="jscal-prop-icalendar"/>
+          </dd>
+          <dt>Intended Usage</dt>
+          <dd>common</dd>
+          <dt>Since Version</dt>
+          <dd>2.0</dd>
+          <dt>Is Per-User</dt>
+          <dd>no</dd>
+          <dt>Change Controller</dt>
+          <dd>IETF</dd>
+        </dl>
+        <dl spacing="compact">
+          <dt>Property Name</dt>
+          <dd>iCalendar</dd>
+          <dt>Property Type</dt>
+          <dd>ICalComponent</dd>
+          <dt>Property Context</dt>
+          <dd>Event, Location, Participant, Task</dd>
+          <dt>Reference/Description</dt>
+          <dd>
+            <xref target="jscal-prop-icalendar"/>
+          </dd>
+          <dt>Intended Usage</dt>
+          <dd>common</dd>
+          <dt>Since Version</dt>
+          <dd>2.0</dd>
           <dt>Is Per-User</dt>
           <dd>no</dd>
           <dt>Change Controller</dt>
@@ -5786,14 +5828,136 @@ END:X-BAZ
           <dd>ICalComponent</dd>
           <dt>Property Context</dt>
           <dd>Alert</dd>
-          <dt>Reference</dt>
+          <dt>Reference/Description</dt>
           <dd>
             <xref target="jscal-prop-icalendar"/>
           </dd>
           <dt>Intended Usage</dt>
           <dd>common</dd>
+          <dt>Since Version</dt>
+          <dd>2.0</dd>
           <dt>Is Per-User</dt>
           <dd>yes</dd>
+          <dt>Change Controller</dt>
+          <dd>IETF</dd>
+        </dl>
+        <dl spacing="compact">
+          <dt>Property Name</dt>
+          <dd>name</dd>
+          <dt>Property Type</dt>
+          <dd>String</dd>
+          <dt>Property Context</dt>
+          <dd>ICalComponent, ICalProperty</dd>
+          <dt>Reference/Description</dt>
+          <dd>
+            <xref target="jscal-prop-icalendar"/>
+          </dd>
+          <dt>Intended Usage</dt>
+          <dd>common</dd>
+          <dt>Since Version</dt>
+          <dd>2.0</dd>
+          <dt>Is Per-User</dt>
+          <dd>no</dd>
+          <dt>Change Controller</dt>
+          <dd>IETF</dd>
+        </dl>
+        <dl spacing="compact">
+          <dt>Property Name</dt>
+          <dd>parameters</dd>
+          <dt>Property Type</dt>
+          <dd>String[String|String[]]</dd>
+          <dt>Property Context</dt>
+          <dd>ICalProperty</dd>
+          <dt>Reference/Description</dt>
+          <dd>
+            <xref target="jscal-prop-icalendar"/>
+          </dd>
+          <dt>Intended Usage</dt>
+          <dd>common</dd>
+          <dt>Since Version</dt>
+          <dd>2.0</dd>
+          <dt>Is Per-User</dt>
+          <dd>no</dd>
+          <dt>Change Controller</dt>
+          <dd>IETF</dd>
+        </dl>
+        <dl spacing="compact">
+          <dt>Property Name</dt>
+          <dd>properties</dd>
+          <dt>Property Type</dt>
+          <dd>*[][]</dd>
+          <dt>Property Context</dt>
+          <dd>ICalComponent</dd>
+          <dt>Reference/Description</dt>
+          <dd>
+            <xref target="jscal-prop-icalendar"/>
+          </dd>
+          <dt>Intended Usage</dt>
+          <dd>common</dd>
+          <dt>Since Version</dt>
+          <dd>2.0</dd>
+          <dt>Is Per-User</dt>
+          <dd>no</dd>
+          <dt>Change Controller</dt>
+          <dd>IETF</dd>
+        </dl>
+        <dl spacing="compact">
+          <dt>Property Name</dt>
+          <dd>valueType</dd>
+          <dt>Property Type</dt>
+          <dd>String</dd>
+          <dt>Property Context</dt>
+          <dd>ICalProperty</dd>
+          <dt>Reference/Description</dt>
+          <dd>
+            <xref target="jscal-prop-icalendar"/>
+          </dd>
+          <dt>Intended Usage</dt>
+          <dd>common</dd>
+          <dt>Since Version</dt>
+          <dd>2.0</dd>
+          <dt>Is Per-User</dt>
+          <dd>no</dd>
+          <dt>Change Controller</dt>
+          <dd>IETF</dd>
+        </dl>
+        <t>IANA will update the following entry in the "JSCalendar Properties" registry. The entry is identified by its Property Name. The values listed for the other fields are appended to the comma-separated values already set for these fields, unchanged fields are omitted.</t>
+        <dl spacing="compact">
+          <dt>Property Name</dt>
+          <dd>@type</dd>
+          <dt>Property Context</dt>
+          <dd>ICalComponent, ICalProperty</dd>
+          <dt>Reference/Description</dt>
+          <dd>
+            <xref target="jscal-prop-icalendar"/>
+          </dd>
+        </dl>
+        <t>IANA will add the following entries to the "JSCalendar Types" registry:</t>
+        <dl spacing="compact">
+          <dt>Type Name</dt>
+          <dd>ICalComponent</dd>
+          <dt>Reference/Description</dt>
+          <dd>
+            <xref target="jscal-prop-icalendar"/>
+          </dd>
+          <dt>Intended Usage</dt>
+          <dd>common</dd>
+          <dt>Since Version</dt>
+          <dd>2.0</dd>
+          <dt>Change Controller</dt>
+          <dd>IETF</dd>
+        </dl>
+        <dl spacing="compact">
+          <dt>Type Name</dt>
+          <dd>ICalProperty</dd>
+          <dt>Reference/Description</dt>
+          <dd>
+            <xref target="jscal-prop-icalendar"/>
+          </dd>
+          <dt>Intended Usage</dt>
+          <dd>common</dd>
+          <dt>Since Version</dt>
+          <dd>2.0</dd>
           <dt>Change Controller</dt>
           <dd>IETF</dd>
         </dl>
