@@ -59,7 +59,7 @@
       </section>
       <section anchor="scope-and-goals">
         <name>Scope and Goals</name>
-	<t>This document outlines how to convert between the <xref target="RFC5545">iCalendar</xref> and <xref target="I-D.ietf-calext-jscalendarbis">JSCalendar</xref> data formats.  It describes which elements are common to both, but also highlights where the two formats differ. For each common element, it defines a conversion rule and includes an example of how to convert that element. All iCalendar and JSCalendar elements currently registered at IANA are in scope, but not all of these elements are common to both formats.</t>
+        <t>This document outlines how to convert between the <xref target="RFC5545">iCalendar</xref> and <xref target="I-D.ietf-calext-jscalendarbis">JSCalendar</xref> data formats.  It describes which elements are common to both, but also highlights where the two formats differ. For each common element, it defines a conversion rule and includes an example of how to convert that element. All iCalendar and JSCalendar elements currently registered at IANA are in scope, but not all of these elements are common to both formats.</t>
         <t>For elements that have no counterpart in the other format, it is the goal of this document to define how to preserve them during conversion, but in general it is not the goal to achieve this by defining new standard elements. Instead, this document updates <xref target="RFC5545"/> and <xref target="I-D.ietf-calext-jscalendarbis"/> by defining iCalendar and JSCalendar elements to preserve elements that have no equivalent in the other format. These conversion-specific properties are defined in Section <xref target="ical-prop-jsprop" format="counter"/> for iCalendar, and <xref target="jscal-prop-icalendar"/> for JSCalendar. <xref target="appendix-discrepancies"/> further outlines the discrepancies between the two formats.</t>
       </section>
       <section>
@@ -124,9 +124,9 @@ SUMMARY:he
         </section>
         <section anchor="notation-jscalendar">
           <name>JSCalendar Examples</name>
-	  <t>A JSCalendar example always represents a Group object, even if the example only depicts one of the Group entries or properties. E.g., an example containing only an Alert object is implied to be the sole value of the "alerts" property of an Event object, which is implied to be the sole list member in the "entries" property of a Group object. The Group object has its "version" property set to "2.0", unless the example explicitly defines a complete Group object.</t>
+          <t>A JSCalendar example always represents a Group object, even if the example only depicts one of the Group entries or properties. E.g., an example containing only an Alert object is implied to be the sole value of the "alerts" property of an Event object, which is implied to be the sole list member in the "entries" property of a Group object. The Group object has its "version" property set to "2.0", unless the example explicitly defines a complete Group object.</t>
           <t>JSCalendar objects are depicted either explicitly or implicitly. An explicit JSCalendar object starts and ends with braces.  An implicit JSCalendar object omits braces, it only consists of JSON name/value pairs, separated by comma.</t>
-	  <t>An implicit JSCalendar object is assumed to be of type Event, unless it contains the "@type" property with a different value.  It is assumed to contain all mandatory properties with some value; if they are not depicted, their actual value is irrelevant for the main point of the example.</t>
+          <t>An implicit JSCalendar object is assumed to be of type Event, unless it contains the "@type" property with a different value.  It is assumed to contain all mandatory properties with some value; if they are not depicted, their actual value is irrelevant for the main point of the example.</t>
           <t><xref target="example-notation-jscalendar-implicit-explicit"/> illustrates this with multiple examples, all of which represent the same JSCalendar data.  The first example contains an implicit JSCalendar object of type Event.  The second example contains an implicit JSCalendar object with a "@type" property.  The third example contains an explicit Event object but the Group object containing it is omitted.  The fourth example contains the full Group object, nothing is omitted.</t>
           <figure anchor="example-notation-jscalendar-implicit-explicit">
             <name>Examples for implicit and explicit JSCalendar object notation</name>
@@ -2337,7 +2337,7 @@ ORGANIZER:mailto:organizer@example.com
           <t>The following example illustrates how to convert the CALENDAR-ADDRESS property:</t>
           <figure anchor="test-ical-prop-calendar-address">
             <name>Converting the CALENDAR-ADDRESS property</name>
-	    <sourcecode type="text/calendar"><![CDATA[
+            <sourcecode type="text/calendar"><![CDATA[
 BEGIN:PARTICIPANT
 CALENDAR-ADDRESS:mailto:foo@example.com
 UID:47AD2E1C-49D4-45DF-BD83-8398ACC7D8E2
@@ -3551,7 +3551,7 @@ BEGIN:VEVENT
           <t>
               A <xref target="RFC5545" section="3.8.5.2" sectionFormat="parens">RDATE property</xref> in a VEVENT or VTODO component converts to a <xref target="I-D.ietf-calext-jscalendarbis" section="1.5.9" sectionFormat="parens">PatchObject value</xref>.  The converted object is set in the Event or Task object's "recurrenceOverrides" property.
           </t>
-	  <t>The property value converts to the key in the "recurrenceOverrides" property value, for values of type PERIOD this only applies to the period start. The date-time value <bcp14>MUST</bcp14> be relative to the timezone identified by the Event or Task object's "timeZone" property, see <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values. The duration of a PERIOD converts to the PatchObject's "duration" property, otherwise the PatchObject value <bcp14>MUST</bcp14> be an empty JSON object. Implementations <bcp14>MAY</bcp14> indicate that the recurrence override was converted from an RDATE in the <xref target="jscal-prop-icalendar">iCalendar</xref> property.</t>
+          <t>The property value converts to the key in the "recurrenceOverrides" property value, for values of type PERIOD this only applies to the period start. The date-time value <bcp14>MUST</bcp14> be relative to the timezone identified by the Event or Task object's "timeZone" property, see <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values. The duration of a PERIOD converts to the PatchObject's "duration" property, otherwise the PatchObject value <bcp14>MUST</bcp14> be an empty JSON object. Implementations <bcp14>MAY</bcp14> indicate that the recurrence override was converted from an RDATE in the <xref target="jscal-prop-icalendar">iCalendar</xref> property.</t>
           <t>The following examples illustrate how to convert the RDATE property:</t>
           <figure anchor="test-ical-prop-rdate">
             <name>Converting the RDATE property</name>
@@ -4458,8 +4458,7 @@ URL:https://example.com/myurl
               </td>
               <td>CLASS</td>
               <td>
-                <t>
-                  <xref target="ical-prop-class"/>, and remarks below
+                <t><xref target="ical-prop-class"/>, and remarks below
                 </t>
               </td>
             </tr>
@@ -4536,7 +4535,8 @@ URL:https://example.com/myurl
               </td>
               <td>SENT-BY (parameter) of ORGANIZER</td>
               <td>
-                <t><xref target="ical-prop-organizer"/>
+                <t>
+                  <xref target="ical-prop-organizer"/>
                 </t>
               </td>
             </tr>
@@ -4949,12 +4949,12 @@ URL:https://example.com/myurl
       <section anchor="jscal-link">
         <name>Link</name>
         <t>The <xref target="I-D.ietf-calext-jscalendarbis" section="1.5.11" sectionFormat="parens">Link object</xref> converts to either an <xref target="ical-prop-attach">ATTACH property</xref> or an <xref target="ical-prop-image">IMAGE property</xref>, or a <xref target="ical-prop-link">LINK property</xref>, or an <xref target="ical-prop-url">URL property</xref>.</t>
-	<t>Which iCalendar property to choose is implementation-specific. As a guideline, stopping at the first matching criteria:</t>
+        <t>Which iCalendar property to choose is implementation-specific. As a guideline, stopping at the first matching criteria:</t>
         <ol>
-            <li>Choose ATTACH if the "rel" property value is "enclosure".</li>
-            <li>Choose IMAGE if the "rel" property value is "icon".</li>
-            <li>Choose URL if the "rel" property value is "describedby" and no URL property is set in the iCalendar component.</li>
-            <li>Choose LINK otherwise.</li>
+          <li>Choose ATTACH if the "rel" property value is "enclosure".</li>
+          <li>Choose IMAGE if the "rel" property value is "icon".</li>
+          <li>Choose URL if the "rel" property value is "describedby" and no URL property is set in the iCalendar component.</li>
+          <li>Choose LINK otherwise.</li>
         </ol>
         <t>The "href" property converts to the property value. The other Link properties convert as follows:</t>
         <table>
@@ -4984,7 +4984,8 @@ URL:https://example.com/myurl
                 <xref target="I-D.ietf-calext-jscalendarbis" section="1.5.11" sectionFormat="comma"/>
               </td>
               <td>DISPLAY</td>
-              <td><xref target="ical-prop-image"/>
+              <td>
+                <xref target="ical-prop-image"/>
               </td>
             </tr>
             <tr>
@@ -4993,8 +4994,7 @@ URL:https://example.com/myurl
                 <xref target="I-D.ietf-calext-jscalendarbis" section="1.5.11" sectionFormat="comma"/>
               </td>
               <td>LINKREL, or none</td>
-              <td>
-                <xref target="RFC9253" section="6.1"/>, and remarks below
+              <td><xref target="RFC9253" section="6.1"/>, and remarks below
               </td>
             </tr>
             <tr>
@@ -5013,8 +5013,7 @@ URL:https://example.com/myurl
                 <xref target="RFC7986" section="6.4" sectionFormat="comma"/>
               </td>
               <td>FILENAME or LABEL</td>
-              <td>
-                <xref target="ical-prop-attach"/>, <xref target="ical-prop-link"/>, and remarks below
+              <td><xref target="ical-prop-attach"/>, <xref target="ical-prop-link"/>, and remarks below
               </td>
             </tr>
           </tbody>
