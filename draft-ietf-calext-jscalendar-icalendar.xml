@@ -1556,7 +1556,7 @@ END:VLOCATION
               <tr>
                 <td>ESTIMATED-DURATION</td>
                 <td>
-                  <xref target="I-D.ietf-calext-ical-tasks" section="12.1" sectionFormat="comma"/>
+                  <xref target="RFC10051" section="10.1" sectionFormat="comma"/>
                 </td>
                 <td>estimatedDuration</td>
                 <td>
@@ -2195,7 +2195,7 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
               <tr>
                 <td>FAILED</td>
                 <td>
-                  <xref target="I-D.ietf-calext-ical-tasks" section="11.1" sectionFormat="comma"/>
+                  <xref target="RFC10051" section="9.1" sectionFormat="comma"/>
                 </td>
                 <td>accepted</td>
                 <td>failed</td>
@@ -2331,9 +2331,9 @@ ORGANIZER:mailto:organizer@example.com
         <section anchor="ical-prop-calendar-address">
           <name>CALENDAR-ADDRESS</name>
           <t>
-              The <xref target="RFC9073" section="6.4" sectionFormat="parens">CALENDAR-ADDRESS property</xref> in a PARTICIPANT component converts to the <xref target="I-D.ietf-jmap-calendars" section="5.1.1" sectionFormat="parens">"calendarAddress" property</xref> of the Participant object.
+              The <xref target="RFC9073" section="6.4" sectionFormat="parens">CALENDAR-ADDRESS property</xref> in a PARTICIPANT component converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="3.4.6" sectionFormat="parens">"calendarAddress" property</xref> of the Participant object.
           </t>
-          <t>Implementations <bcp14>MAY</bcp14> preserve the fact that a Participant object's "calendarAddress" property converted from the CALENDAR-ADRESS property of a PARTICIPANT component, rather than an ATTENDEE property. In this case, they <bcp14>MUST</bcp14> add an entry for the "calendarAddress" property in the "iCalendar/convertedProperties" property of the Participant object.</t>
+          <t>Implementations <bcp14>MAY</bcp14> preserve the fact that a Participant object's "calendarAddress" property converted from the CALENDAR-ADDRESS property of a PARTICIPANT component, rather than an ATTENDEE property. In this case, they <bcp14>MUST</bcp14> add an entry for the "calendarAddress" property in the "iCalendar/convertedProperties" property of the Participant object.</t>
           <t>The following example illustrates how to convert the CALENDAR-ADDRESS property:</t>
           <figure anchor="test-ical-prop-calendar-address">
             <name>Converting the CALENDAR-ADDRESS property</name>
@@ -2845,7 +2845,7 @@ DURATION:PT1H
         <section anchor="ical-prop-estimated-duration">
           <name>ESTIMATED-DURATION</name>
           <t>
-            The <xref target="I-D.ietf-calext-ical-tasks" section="12.1" sectionFormat="parens">ESTIMATED-DURATION property</xref> in a VTODO component converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="4.2.3" sectionFormat="parens">"estimatedDuration" property</xref> of the Task object.
+            The <xref target="RFC10051" section="10.1" sectionFormat="parens">ESTIMATED-DURATION property</xref> in a VTODO component converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="4.2.3" sectionFormat="parens">"estimatedDuration" property</xref> of the Task object.
           </t>
           <t>The following example illustrates how to convert the ESTIMATED-DURATION property:</t>
           <figure anchor="test-ical-prop-estimated-duration">
@@ -5991,6 +5991,9 @@ END:X-BAZ
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.9074.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.9253.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.9562.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.10051.xml"/>
+        <xi:include href="https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-calext-jscalendarbis.xml"/>
+        <xi:include href="https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-calext-icalendar-jscalendar-extensions.xml"/>
         <reference anchor="TZDB" target="https://www.iana.org/time-zones">
           <front>
             <title>IANA Time Zone Database</title>
@@ -6002,9 +6005,6 @@ END:X-BAZ
       <references>
         <name>Informative References</name>
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-jmap-calendars.xml"/>
-        <xi:include href="https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-calext-ical-tasks.xml"/>
-        <xi:include href="https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-calext-jscalendarbis.xml"/>
-        <xi:include href="https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-calext-icalendar-jscalendar-extensions.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8607.xml"/>
       </references>
     </references>
@@ -6037,7 +6037,7 @@ END:X-BAZ
               <xref target="RFC5545" section="3.6.5" sectionFormat="comma">VTIMEZONE</xref>
             </li>
             <li>
-              <xref target="I-D.ietf-calext-ical-tasks" section="14.1" sectionFormat="comma">VSTATUS</xref>
+              <xref target="RFC10051" section="12.1" sectionFormat="comma">VSTATUS</xref>
             </li>
           </ul>
         </section>
@@ -6077,7 +6077,7 @@ END:X-BAZ
                 <xref target="RFC5545" section="3.8.1.9" sectionFormat="comma">PRIORITY</xref>
               </li>
               <li>
-                <xref target="I-D.ietf-calext-ical-tasks" section="12.2" sectionFormat="comma">REASON</xref>
+                <xref target="RFC10051" section="10.2" sectionFormat="comma">REASON</xref>
               </li>
               <li>
                 <xref target="RFC5545" section="3.8.4.5" sectionFormat="comma">RELATED-TO</xref>
@@ -6232,7 +6232,7 @@ END:X-BAZ
                 <xref target="RFC9074" section="6.6" sectionFormat="comma">STRUCTURED-DATA</xref>
               </li>
               <li>
-                <xref target="I-D.ietf-calext-ical-tasks" section="12.4" sectionFormat="comma">TASK-MODE</xref>
+                <xref target="RFC10051" section="10.4" sectionFormat="comma">TASK-MODE</xref>
               </li>
             </ul>
           </section>
