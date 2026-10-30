@@ -5720,7 +5720,7 @@ END:X-BAZ
       <section>
         <name>Changes to the "iCalendar Element Registries"</name>
         <t>IANA will add the following entries to the "Properties" registry:</t>
-        <dl spacing="compact">
+        <dl spacing="compact" newline="true">
           <dt>Property</dt>
           <dd>JSID</dd>
           <dt>Status</dt>
@@ -5730,7 +5730,7 @@ END:X-BAZ
             <xref target="ical-prop-jsid"/>
           </dd>
         </dl>
-        <dl spacing="compact">
+        <dl spacing="compact" newline="true">
           <dt>Property</dt>
           <dd>JSPROP</dd>
           <dt>Status</dt>
@@ -5741,7 +5741,7 @@ END:X-BAZ
           </dd>
         </dl>
         <t>IANA will add the following entries to the "Parameters" registry:</t>
-        <dl spacing="compact">
+        <dl spacing="compact" newline="true">
           <dt>Parameter</dt>
           <dd>JSID</dd>
           <dt>Status</dt>
@@ -5751,7 +5751,7 @@ END:X-BAZ
             <xref target="ical-param-jsid"/>
           </dd>
         </dl>
-        <dl spacing="compact">
+        <dl spacing="compact" newline="true">
           <dt>Parameter</dt>
           <dd>JSPTR</dd>
           <dt>Status</dt>
@@ -5765,7 +5765,7 @@ END:X-BAZ
       <section>
         <name>Changes to the "JSCalendar Registries"</name>
         <t>IANA will add the following entries to the "JSCalendar Properties" registry:</t>
-        <dl spacing="compact">
+        <dl spacing="compact" newline="true">
           <dt>Property Name</dt>
           <dd>components</dd>
           <dt>Property Type</dt>
@@ -5785,7 +5785,7 @@ END:X-BAZ
           <dt>Change Controller</dt>
           <dd>IETF</dd>
         </dl>
-        <dl spacing="compact">
+        <dl spacing="compact" newline="true">
           <dt>Property Name</dt>
           <dd>convertedProperties</dd>
           <dt>Property Type</dt>
@@ -5805,7 +5805,7 @@ END:X-BAZ
           <dt>Change Controller</dt>
           <dd>IETF</dd>
         </dl>
-        <dl spacing="compact">
+        <dl spacing="compact" newline="true">
           <dt>Property Name</dt>
           <dd>iCalendar</dd>
           <dt>Property Type</dt>
@@ -5825,7 +5825,7 @@ END:X-BAZ
           <dt>Change Controller</dt>
           <dd>IETF</dd>
         </dl>
-        <dl spacing="compact">
+        <dl spacing="compact" newline="true">
           <dt>Property Name</dt>
           <dd>iCalendar</dd>
           <dt>Property Type</dt>
@@ -5845,7 +5845,7 @@ END:X-BAZ
           <dt>Change Controller</dt>
           <dd>IETF</dd>
         </dl>
-        <dl spacing="compact">
+        <dl spacing="compact" newline="true">
           <dt>Property Name</dt>
           <dd>name</dd>
           <dt>Property Type</dt>
@@ -5865,7 +5865,7 @@ END:X-BAZ
           <dt>Change Controller</dt>
           <dd>IETF</dd>
         </dl>
-        <dl spacing="compact">
+        <dl spacing="compact" newline="true">
           <dt>Property Name</dt>
           <dd>parameters</dd>
           <dt>Property Type</dt>
@@ -5885,7 +5885,7 @@ END:X-BAZ
           <dt>Change Controller</dt>
           <dd>IETF</dd>
         </dl>
-        <dl spacing="compact">
+        <dl spacing="compact" newline="true">
           <dt>Property Name</dt>
           <dd>properties</dd>
           <dt>Property Type</dt>
@@ -5905,7 +5905,7 @@ END:X-BAZ
           <dt>Change Controller</dt>
           <dd>IETF</dd>
         </dl>
-        <dl spacing="compact">
+        <dl spacing="compact" newline="true">
           <dt>Property Name</dt>
           <dd>valueType</dd>
           <dt>Property Type</dt>
@@ -5926,7 +5926,7 @@ END:X-BAZ
           <dd>IETF</dd>
         </dl>
         <t>IANA will update the following entry in the "JSCalendar Properties" registry. The entry is identified by its Property Name. The values listed for the other fields are appended to the comma-separated values already set for these fields, unchanged fields are omitted.</t>
-        <dl spacing="compact">
+        <dl spacing="compact" newline="true">
           <dt>Property Name</dt>
           <dd>@type</dd>
           <dt>Property Context</dt>
@@ -5937,7 +5937,7 @@ END:X-BAZ
           </dd>
         </dl>
         <t>IANA will add the following entries to the "JSCalendar Types" registry:</t>
-        <dl spacing="compact">
+        <dl spacing="compact" newline="true">
           <dt>Type Name</dt>
           <dd>ICalComponent</dd>
           <dt>Reference/Description</dt>
@@ -5951,7 +5951,7 @@ END:X-BAZ
           <dt>Change Controller</dt>
           <dd>IETF</dd>
         </dl>
-        <dl spacing="compact">
+        <dl spacing="compact" newline="true">
           <dt>Type Name</dt>
           <dd>ICalProperty</dd>
           <dt>Reference/Description</dt>
