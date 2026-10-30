@@ -201,178 +201,116 @@ SUMMARY:he
             <name>Properties of the VCALENDAR component</name>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Group property</th>
-                <th>See</th>
-                <th>Note</th>
+                <th>iCalendar property</th>
+                <th>JSCalendar property</th>
+                <th>Section</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>ATTACH</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.1" sectionFormat="comma"/>
-                </td>
                 <td>links</td>
                 <td>
-                  <xref target="ical-prop-attach"/>
+                  <xref target="ical-prop-attach" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>CATEGORIES</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.2" sectionFormat="comma"/>
-                </td>
                 <td>keywords</td>
                 <td>
-                  <xref target="ical-prop-categories"/>
+                  <xref target="ical-prop-categories" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>COLOR</td>
-                <td>
-                  <xref target="RFC7986" section="5.9" sectionFormat="comma"/>
-                </td>
                 <td>color</td>
                 <td>
-                  <xref target="ical-prop-color"/>
+                  <xref target="ical-prop-color" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>CONCEPT</td>
-                <td>
-                  <xref target="RFC9253" section="8.1" sectionFormat="comma"/>
-                </td>
                 <td>categories</td>
                 <td>
-                  <xref target="ical-prop-concept"/>
+                  <xref target="ical-prop-concept" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>CREATED</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.7.1" sectionFormat="comma"/>
-                </td>
                 <td>created</td>
                 <td>
-                  <xref target="ical-prop-created"/>
+                  <xref target="ical-prop-created" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>DESCRIPTION</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.5" sectionFormat="comma"/>
-                </td>
                 <td>description</td>
                 <td>
-                  <xref target="ical-prop-description"/>
+                  <xref target="ical-prop-description" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>IMAGE</td>
-                <td>
-                  <xref target="RFC7986" section="5.10" sectionFormat="comma"/>
-                </td>
                 <td>links</td>
                 <td>
-                  <xref target="ical-prop-image"/>
+                  <xref target="ical-prop-image" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>LAST-MODIFIED</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.7.3" sectionFormat="comma"/>
-                </td>
                 <td>updated</td>
                 <td>
-                  <xref target="ical-prop-last-modified"/>
+                  <xref target="ical-prop-last-modified" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>LINK</td>
-                <td>
-                  <xref target="RFC9253" section="8.2" sectionFormat="comma"/>
-                </td>
                 <td>links</td>
                 <td>
-                  <xref target="ical-prop-link"/>
+                  <xref target="ical-prop-link" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>METHOD</td>
-                <td>
-                  <xref target="RFC5545" section="3.7.2" sectionFormat="comma"/>
-                </td>
                 <td>entries/*/method</td>
                 <td>
-                  <xref target="ical-prop-method"/>
+                  <xref target="ical-prop-method" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>NAME</td>
-                <td>
-                  <xref target="RFC7986" section="5.1" sectionFormat="comma"/>
-                </td>
                 <td>title</td>
                 <td>
-                  <xref target="ical-prop-name"/>
+                  <xref target="ical-prop-name" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>PRODID</td>
-                <td>
-                  <xref target="RFC5545" section="3.7.3" sectionFormat="comma"/>
-                </td>
                 <td>prodId, entries/*/prodId</td>
                 <td>
-                  <xref target="ical-prop-prodid"/>
+                  <xref target="ical-prop-prodid" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>SOURCE</td>
-                <td>
-                  <xref target="RFC7986" section="5.8" sectionFormat="comma"/>
-                </td>
                 <td>source</td>
                 <td>
-                  <xref target="ical-prop-source"/>
+                  <xref target="ical-prop-source" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>UID</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma"/>
-                </td>
                 <td>uid</td>
                 <td>
-                  <xref target="ical-prop-uid"/>
+                  <xref target="ical-prop-uid" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>URL</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.4.6" sectionFormat="comma"/>
-                </td>
                 <td>links</td>
                 <td>
-                  <xref target="ical-prop-url"/>
+                  <xref target="ical-prop-url" format="counter"/>
                 </td>
-                <td/>
               </tr>
             </tbody>
           </table>
@@ -381,35 +319,25 @@ SUMMARY:he
             <name>Components of the VCALENDAR component</name>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Group property</th>
-                <th>See</th>
-                <th>Note</th>
+                <th>iCalendar component</th>
+                <th>JSCalendar property</th>
+                <th>Section</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>VEVENT</td>
-                <td>
-                  <xref target="RFC5545" section="3.6.1" sectionFormat="comma"/>
-                </td>
                 <td>entries</td>
                 <td>
-                  <xref target="ical-comp-vevent"/>
+                  <xref target="ical-comp-vevent" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>VTODO</td>
-                <td>
-                  <xref target="RFC5545" section="3.6.2" sectionFormat="comma"/>
-                </td>
                 <td>entries</td>
                 <td>
-                  <xref target="ical-comp-vtodo"/>
+                  <xref target="ical-comp-vtodo" format="counter"/>
                 </td>
-                <td/>
               </tr>
             </tbody>
           </table>
@@ -573,90 +501,60 @@ END:VCALENDAR
             <name>Properties of the PARTICIPANT component</name>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Participant property</th>
-                <th>See</th>
-                <th>Note</th>
+                <th>iCalendar property</th>
+                <th>JSCalendar property</th>
+                <th>Section</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>ATTACH</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.1" sectionFormat="comma"/>
-                </td>
                 <td>links</td>
                 <td>
-                  <xref target="ical-prop-attach"/>
+                  <xref target="ical-prop-attach" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>CALENDAR-ADDRESS</td>
-                <td>
-                  <xref target="RFC9073" section="6.4" sectionFormat="comma"/>
-                </td>
                 <td>calendarAddress</td>
                 <td>
-                  <xref target="ical-prop-calendar-address"/>
+                  <xref target="ical-prop-calendar-address" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>DESCRIPTION</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.5" sectionFormat="comma"/>
-                </td>
                 <td>description</td>
                 <td>
-                  <xref target="ical-prop-description"/>
+                  <xref target="ical-prop-description" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>LINK</td>
-                <td>
-                  <xref target="RFC9253" section="8.2" sectionFormat="comma"/>
-                </td>
                 <td>links</td>
                 <td>
-                  <xref target="ical-prop-link"/>
+                  <xref target="ical-prop-link" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>STYLED-DESCRIPTION</td>
-                <td>
-                  <xref target="RFC9073" section="6.5" sectionFormat="comma"/>
-                </td>
                 <td>description</td>
                 <td>
-                  <xref target="ical-prop-styled-description"/>
+                  <xref target="ical-prop-styled-description" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>SUMMARY</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.12" sectionFormat="comma"/>
-                </td>
                 <td>name</td>
                 <td>
-                  <xref target="ical-prop-summary"/>
+                  <xref target="ical-prop-summary" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>URL</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.4.6" sectionFormat="comma"/>
-                </td>
                 <td>links</td>
                 <td>
-                  <xref target="ical-prop-url"/>
+                  <xref target="ical-prop-url" format="counter"/>
                 </td>
-                <td/>
               </tr>
             </tbody>
           </table>
@@ -702,60 +600,48 @@ END:PARTICIPANT
             <name>Properties of the VALARM component</name>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Alert property</th>
-                <th>See</th>
-                <th>Note</th>
+                <th>iCalendar property</th>
+                <th>JSCalendar property</th>
+                <th>Section</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>ACKNOWLEDGED</td>
-                <td>
-                  <xref target="RFC9074" section="6.1" sectionFormat="comma"/>
-                </td>
                 <td>acknowledged</td>
                 <td>
-                  <xref target="ical-prop-acknowledged"/>
+                  <xref target="ical-prop-acknowledged" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>ACTION</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.6.1" sectionFormat="comma"/>
-                </td>
                 <td>action</td>
                 <td>
-                  <xref target="ical-prop-action"/>
+                  <xref target="ical-prop-action" format="counter"/>, and remarks below
                 </td>
-                <td>Only if ACTION is EMAIL or DISPLAY.</td>
               </tr>
               <tr>
                 <td>RELATED-TO</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.4.5" sectionFormat="comma"/>
-                </td>
                 <td>relatedTo</td>
                 <td>
-                  <xref target="ical-prop-related-to"/>
+                  <xref target="ical-prop-related-to" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>TRIGGER</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.6.3" sectionFormat="comma"/>
-                </td>
                 <td>trigger</td>
                 <td>
-                  <xref target="ical-prop-trigger"/>
+                  <xref target="ical-prop-trigger" format="counter"/>
                 </td>
-                <td/>
               </tr>
             </tbody>
           </table>
+          <t>Remarks:</t>
+          <ul>
+            <li>
+              <t>The ACTION property only converts if its value is EMAIL or DISPLAY.</t>
+            </li>
+          </ul>
           <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalendar">"iCalendar" property</xref> of the Alert object. This includes mandatory properties such as <xref target="RFC5545" section="3.8.4.1" sectionFormat="parens">ATTENDEE</xref>, <xref target="RFC5545" section="3.8.1.5" sectionFormat="parens">DESCRIPTION</xref>, or <xref target="RFC5545" section="3.8.1.12" sectionFormat="parens">SUMMARY</xref>.</t>
           <t>The following example illustrates how to convert the VALARM component:</t>
           <figure anchor="test-ical-comp-valarm">
@@ -807,376 +693,242 @@ END:VALARM
             <name>Properties of the VEVENT component</name>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Event property</th>
-                <th>See</th>
-                <th>Note</th>
+                <th>iCalendar property</th>
+                <th>JSCalendar property</th>
+                <th>Section</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>ATTACH</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.1" sectionFormat="comma"/>
-                </td>
                 <td>links</td>
                 <td>
-                  <xref target="ical-prop-attach"/>
+                  <xref target="ical-prop-attach" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>ATTENDEE</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.4.1" sectionFormat="comma"/>
-                </td>
                 <td>participants</td>
                 <td>
-                  <xref target="ical-prop-attendee"/>
+                  <xref target="ical-prop-attendee" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>CATEGORIES</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.2" sectionFormat="comma"/>
-                </td>
                 <td>keywords</td>
                 <td>
-                  <xref target="ical-prop-categories"/>
+                  <xref target="ical-prop-categories" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>CLASS</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.3" sectionFormat="comma"/>
-                </td>
                 <td>privacy</td>
                 <td>
-                  <xref target="ical-prop-class"/>
+                  <xref target="ical-prop-class" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>COLOR</td>
-                <td>
-                  <xref target="RFC7986" section="5.9" sectionFormat="comma"/>
-                </td>
                 <td>color</td>
                 <td>
-                  <xref target="ical-prop-color"/>
+                  <xref target="ical-prop-color" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>CONCEPT</td>
-                <td>
-                  <xref target="RFC9253" section="8.1" sectionFormat="comma"/>
-                </td>
                 <td>categories</td>
                 <td>
-                  <xref target="ical-prop-concept"/>
+                  <xref target="ical-prop-concept" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>CONFERENCE</td>
-                <td>
-                  <xref target="RFC7986" section="5.11" sectionFormat="comma"/>
-                </td>
                 <td>virtualLocations</td>
                 <td>
-                  <xref target="ical-prop-conference"/>
+                  <xref target="ical-prop-conference" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>CREATED</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.7.1" sectionFormat="comma"/>
-                </td>
                 <td>created</td>
                 <td>
-                  <xref target="ical-prop-created"/>
+                  <xref target="ical-prop-created" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>DESCRIPTION</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.5" sectionFormat="comma"/>
-                </td>
                 <td>description</td>
                 <td>
-                  <xref target="ical-prop-description"/>
+                  <xref target="ical-prop-description" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>DTEND</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.2.2" sectionFormat="comma"/>
-                </td>
                 <td>duration, endTimeZone</td>
                 <td>
-                  <xref target="ical-prop-dtend"/>
+                  <xref target="ical-prop-dtend" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>DTSTAMP</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.7.2" sectionFormat="comma"/>
-                </td>
                 <td>updated</td>
                 <td>
-                  <xref target="ical-prop-dtstamp"/>
+                  <xref target="ical-prop-dtstamp" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>DTSTART</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.2.4" sectionFormat="comma"/>
-                </td>
                 <td>start</td>
                 <td>
-                  <xref target="ical-prop-dtstart"/>
+                  <xref target="ical-prop-dtstart" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>DURATION</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.2.5" sectionFormat="comma"/>
-                </td>
                 <td>duration</td>
                 <td>
-                  <xref target="ical-prop-duration"/>
+                  <xref target="ical-prop-duration" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>EXDATE</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.5.1" sectionFormat="comma"/>
-                </td>
                 <td>recurrenceOverrides</td>
                 <td>
-                  <xref target="ical-prop-exdate"/>
+                  <xref target="ical-prop-exdate" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>GEO</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.6" sectionFormat="comma"/>
-                </td>
                 <td>locations</td>
                 <td>
-                  <xref target="ical-prop-geo"/>
+                  <xref target="ical-prop-geo" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>IMAGE</td>
-                <td>
-                  <xref target="RFC7986" section="5.10" sectionFormat="comma"/>
-                </td>
                 <td>links</td>
                 <td>
-                  <xref target="ical-prop-image"/>
+                  <xref target="ical-prop-image" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>LAST-MODIFIED</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.7.3" sectionFormat="comma"/>
-                </td>
                 <td>updated</td>
                 <td>
-                  <xref target="ical-prop-last-modified"/>
+                  <xref target="ical-prop-last-modified" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>LINK</td>
-                <td>
-                  <xref target="RFC9253" section="8.2" sectionFormat="comma"/>
-                </td>
                 <td>links</td>
                 <td>
-                  <xref target="ical-prop-link"/>
+                  <xref target="ical-prop-link" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>LOCATION</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.7" sectionFormat="comma"/>
-                </td>
                 <td>locations</td>
                 <td>
-                  <xref target="ical-prop-location"/>
+                  <xref target="ical-prop-location" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>ORGANIZER</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.4.3" sectionFormat="comma"/>
-                </td>
                 <td>organizerCalendarAddress</td>
                 <td>
-                  <xref target="ical-prop-organizer"/>
+                  <xref target="ical-prop-organizer" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>PRIORITY</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.9" sectionFormat="comma"/>
-                </td>
                 <td>priority</td>
                 <td>
-                  <xref target="ical-prop-priority"/>
+                  <xref target="ical-prop-priority" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>RDATE</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.5.2" sectionFormat="comma"/>
-                </td>
                 <td>recurrenceOverrides</td>
                 <td>
-                  <xref target="ical-prop-rdate"/>
+                  <xref target="ical-prop-rdate" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>RECURRENCE-ID</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.4.4" sectionFormat="comma"/>
-                </td>
                 <td>recurrenceId</td>
                 <td>
-                  <xref target="ical-prop-recurrence-id"/>
+                  <xref target="ical-prop-recurrence-id" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>RELATED-TO</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.4.5" sectionFormat="comma"/>
-                </td>
                 <td>relatedTo</td>
                 <td>
-                  <xref target="ical-prop-related-to"/>
+                  <xref target="ical-prop-related-to" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>RRULE</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.5.3" sectionFormat="comma"/>
-                </td>
                 <td>recurrenceRule</td>
                 <td>
-                  <xref target="ical-prop-rrule"/>
+                  <xref target="ical-prop-rrule" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>SEQUENCE</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.7.4" sectionFormat="comma"/>
-                </td>
                 <td>sequence</td>
                 <td>
-                  <xref target="ical-prop-sequence"/>
+                  <xref target="ical-prop-sequence" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>SHOW-WITHOUT-TIME</td>
-                <td>
-                  <xref target="I-D.ietf-calext-icalendar-jscalendar-extensions" section="4.2" sectionFormat="comma"/>
-                </td>
                 <td>showWithoutTime</td>
                 <td>
-                  <xref target="ical-prop-show-without-time"/>
+                  <xref target="ical-prop-show-without-time" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>STATUS</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.11" sectionFormat="comma"/>
-                </td>
                 <td>status</td>
                 <td>
-                  <xref target="ical-prop-status"/>
+                  <xref target="ical-prop-status" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>STYLED-DESCRIPTION</td>
-                <td>
-                  <xref target="RFC9073" section="6.5" sectionFormat="comma"/>
-                </td>
                 <td>description</td>
                 <td>
-                  <xref target="ical-prop-styled-description"/>
+                  <xref target="ical-prop-styled-description" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>SUMMARY</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.12" sectionFormat="comma"/>
-                </td>
                 <td>title</td>
                 <td>
-                  <xref target="ical-prop-summary"/>
+                  <xref target="ical-prop-summary" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>TRANSP</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.2.7" sectionFormat="comma"/>
-                </td>
                 <td>freeBusyStatus</td>
                 <td>
-                  <xref target="ical-prop-transp"/>
+                  <xref target="ical-prop-transp" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>UID</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma"/>
-                </td>
                 <td>uid</td>
                 <td>
-                  <xref target="ical-prop-uid"/>
+                  <xref target="ical-prop-uid" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>URL</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.4.6" sectionFormat="comma"/>
-                </td>
                 <td>links</td>
                 <td>
-                  <xref target="ical-prop-url"/>
+                  <xref target="ical-prop-url" format="counter"/>
                 </td>
-                <td/>
               </tr>
             </tbody>
           </table>
@@ -1185,24 +937,18 @@ END:VALARM
             <name>Components of the  VEVENT component</name>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Event property</th>
-                <th>See</th>
-                <th>Note</th>
+                <th>iCalendar component</th>
+                <th>JSCalendar property</th>
+                <th>Section</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>VALARM</td>
-                <td>
-                  <xref target="RFC5545" section="3.6.6" sectionFormat="comma"/>
-                </td>
                 <td>alerts</td>
                 <td>
-                  <xref target="ical-comp-valarm"/>
+                  <xref target="ical-comp-valarm" format="counter"/>
                 </td>
-                <td/>
               </tr>
             </tbody>
           </table>
@@ -1256,101 +1002,67 @@ END:VCALENDAR
             <name>Properties of the VLOCATION component</name>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Location property</th>
-                <th>See</th>
-                <th>Note</th>
+                <th>iCalendar property</th>
+                <th>JSCalendar property</th>
+                <th>Section</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>ATTACH</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.1" sectionFormat="comma"/>
-                </td>
                 <td>links</td>
                 <td>
-                  <xref target="ical-prop-attach"/>
+                  <xref target="ical-prop-attach" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>COORDINATES</td>
-                <td>
-                  <xref target="I-D.ietf-calext-icalendar-jscalendar-extensions" section="4.1" sectionFormat="comma"/>
-                </td>
                 <td>coordinates</td>
                 <td>
-                  <xref target="ical-prop-coordinates"/>
+                  <xref target="ical-prop-coordinates" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>GEO</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.6" sectionFormat="comma"/>
-                </td>
                 <td>coordinates</td>
                 <td>
-                  <xref target="ical-prop-geo"/>
+                  <xref target="ical-prop-geo" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>IMAGE</td>
-                <td>
-                  <xref target="RFC7986" section="5.10" sectionFormat="comma"/>
-                </td>
                 <td>links</td>
                 <td>
-                  <xref target="ical-prop-image"/>
+                  <xref target="ical-prop-image" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>LINK</td>
-                <td>
-                  <xref target="RFC9253" section="8.2" sectionFormat="comma"/>
-                </td>
                 <td>links</td>
                 <td>
-                  <xref target="ical-prop-link"/>
+                  <xref target="ical-prop-link" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>LOCATION-TYPE</td>
-                <td>
-                  <xref target="RFC9073" section="6.1" sectionFormat="comma"/>
-                </td>
                 <td>locationTypes</td>
                 <td>
-                  <xref target="ical-prop-location-type"/>
+                  <xref target="ical-prop-location-type" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>NAME</td>
-                <td>
-                  <xref target="RFC7986" section="5.1" sectionFormat="comma"/>
-                </td>
                 <td>name</td>
                 <td>
-                  <xref target="ical-prop-name"/>
+                  <xref target="ical-prop-name" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>URL</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.4.6" sectionFormat="comma"/>
-                </td>
                 <td>links</td>
                 <td>
-                  <xref target="ical-prop-url"/>
+                  <xref target="ical-prop-url" format="counter"/>
                 </td>
-                <td/>
               </tr>
             </tbody>
           </table>
@@ -1402,387 +1114,249 @@ END:VLOCATION
             <name>Properties of the VTODO component</name>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Task property</th>
-                <th>See</th>
-                <th>Note</th>
+                <th>iCalendar property</th>
+                <th>JSCalendar property</th>
+                <th>Section</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>ATTACH</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.1" sectionFormat="comma"/>
-                </td>
                 <td>links</td>
                 <td>
-                  <xref target="ical-prop-attach"/>
+                  <xref target="ical-prop-attach" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>ATTENDEE</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.4.1" sectionFormat="comma"/>
-                </td>
                 <td>participants</td>
                 <td>
-                  <xref target="ical-prop-attendee"/>
+                  <xref target="ical-prop-attendee" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>CATEGORIES</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.2" sectionFormat="comma"/>
-                </td>
                 <td>keywords</td>
                 <td>
-                  <xref target="ical-prop-categories"/>
+                  <xref target="ical-prop-categories" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>CLASS</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.3" sectionFormat="comma"/>
-                </td>
                 <td>privacy</td>
                 <td>
-                  <xref target="ical-prop-class"/>
+                  <xref target="ical-prop-class" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>COLOR</td>
-                <td>
-                  <xref target="RFC7986" section="5.9" sectionFormat="comma"/>
-                </td>
                 <td>color</td>
                 <td>
-                  <xref target="ical-prop-color"/>
+                  <xref target="ical-prop-color" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>CONCEPT</td>
-                <td>
-                  <xref target="RFC9253" section="8.1" sectionFormat="comma"/>
-                </td>
                 <td>categories</td>
                 <td>
-                  <xref target="ical-prop-concept"/>
+                  <xref target="ical-prop-concept" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>CONFERENCE</td>
-                <td>
-                  <xref target="RFC7986" section="5.11" sectionFormat="comma"/>
-                </td>
                 <td>virtualLocations</td>
                 <td>
-                  <xref target="ical-prop-conference"/>
+                  <xref target="ical-prop-conference" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>CREATED</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.7.1" sectionFormat="comma"/>
-                </td>
                 <td>created</td>
                 <td>
-                  <xref target="ical-prop-created"/>
+                  <xref target="ical-prop-created" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>DESCRIPTION</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.5" sectionFormat="comma"/>
-                </td>
                 <td>description</td>
                 <td>
-                  <xref target="ical-prop-description"/>
+                  <xref target="ical-prop-description" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>DTSTAMP</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.7.2" sectionFormat="comma"/>
-                </td>
                 <td>updated</td>
                 <td>
-                  <xref target="ical-prop-dtstamp"/>
+                  <xref target="ical-prop-dtstamp" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>DTSTART</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.2.4" sectionFormat="comma"/>
-                </td>
                 <td>start</td>
                 <td>
-                  <xref target="ical-prop-dtstart"/>
+                  <xref target="ical-prop-dtstart" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>DUE</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.2.3" sectionFormat="comma"/>
-                </td>
                 <td>due</td>
                 <td>
-                  <xref target="ical-prop-due"/>
+                  <xref target="ical-prop-due" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>DURATION</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.2.5" sectionFormat="comma"/>
-                </td>
                 <td>duration</td>
                 <td>
-                  <xref target="ical-prop-duration"/>
+                  <xref target="ical-prop-duration" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>ESTIMATED-DURATION</td>
-                <td>
-                  <xref target="RFC10051" section="10.1" sectionFormat="comma"/>
-                </td>
                 <td>estimatedDuration</td>
                 <td>
-                  <xref target="ical-prop-estimated-duration"/>
+                  <xref target="ical-prop-estimated-duration" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>EXDATE</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.5.1" sectionFormat="comma"/>
-                </td>
                 <td>recurrenceOverrides</td>
                 <td>
-                  <xref target="ical-prop-exdate"/>
+                  <xref target="ical-prop-exdate" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>GEO</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.6" sectionFormat="comma"/>
-                </td>
                 <td>locations</td>
                 <td>
-                  <xref target="ical-prop-geo"/>
+                  <xref target="ical-prop-geo" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>IMAGE</td>
-                <td>
-                  <xref target="RFC7986" section="5.10" sectionFormat="comma"/>
-                </td>
                 <td>links</td>
                 <td>
-                  <xref target="ical-prop-image"/>
+                  <xref target="ical-prop-image" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>LAST-MODIFIED</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.7.3" sectionFormat="comma"/>
-                </td>
                 <td>updated</td>
                 <td>
-                  <xref target="ical-prop-last-modified"/>
+                  <xref target="ical-prop-last-modified" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>LINK</td>
-                <td>
-                  <xref target="RFC9253" section="8.2" sectionFormat="comma"/>
-                </td>
                 <td>links</td>
                 <td>
-                  <xref target="ical-prop-link"/>
+                  <xref target="ical-prop-link" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>LOCATION</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.7" sectionFormat="comma"/>
-                </td>
                 <td>locations</td>
                 <td>
-                  <xref target="ical-prop-location"/>
+                  <xref target="ical-prop-location" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>ORGANIZER</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.4.3" sectionFormat="comma"/>
-                </td>
                 <td>organizerCalendarAddress</td>
                 <td>
-                  <xref target="ical-prop-organizer"/>
+                  <xref target="ical-prop-organizer" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>PERCENT-COMPLETE</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.8" sectionFormat="comma"/>
-                </td>
                 <td>percentComplete</td>
                 <td>
-                  <xref target="ical-prop-percent-complete"/>
+                  <xref target="ical-prop-percent-complete" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>PRIORITY</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.9" sectionFormat="comma"/>
-                </td>
                 <td>priority</td>
                 <td>
-                  <xref target="ical-prop-priority"/>
+                  <xref target="ical-prop-priority" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>RDATE</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.5.2" sectionFormat="comma"/>
-                </td>
                 <td>recurrenceOverrides</td>
                 <td>
-                  <xref target="ical-prop-rdate"/>
+                  <xref target="ical-prop-rdate" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>RECURRENCE-ID</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.4.4" sectionFormat="comma"/>
-                </td>
                 <td>recurrenceId</td>
                 <td>
-                  <xref target="ical-prop-recurrence-id"/>
+                  <xref target="ical-prop-recurrence-id" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>RELATED-TO</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.4.5" sectionFormat="comma"/>
-                </td>
                 <td>relatedTo</td>
                 <td>
-                  <xref target="ical-prop-related-to"/>
+                  <xref target="ical-prop-related-to" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>RRULE</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.5.3" sectionFormat="comma"/>
-                </td>
                 <td>recurrenceRule</td>
                 <td>
-                  <xref target="ical-prop-rrule"/>
+                  <xref target="ical-prop-rrule" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>SEQUENCE</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.7.4" sectionFormat="comma"/>
-                </td>
                 <td>sequence</td>
                 <td>
-                  <xref target="ical-prop-sequence"/>
+                  <xref target="ical-prop-sequence" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>SHOW-WITHOUT-TIME</td>
-                <td>
-                  <xref target="I-D.ietf-calext-icalendar-jscalendar-extensions" section="4.2" sectionFormat="comma"/>
-                </td>
                 <td>showWithoutTime</td>
                 <td>
-                  <xref target="ical-prop-show-without-time"/>
+                  <xref target="ical-prop-show-without-time" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>STYLED-DESCRIPTION</td>
-                <td>
-                  <xref target="RFC9073" section="6.5" sectionFormat="comma"/>
-                </td>
                 <td>description</td>
                 <td>
-                  <xref target="ical-prop-styled-description"/>
+                  <xref target="ical-prop-styled-description" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>SUMMARY</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.1.12" sectionFormat="comma"/>
-                </td>
                 <td>title</td>
                 <td>
-                  <xref target="ical-prop-summary"/>
+                  <xref target="ical-prop-summary" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>TRANSP</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.2.7" sectionFormat="comma"/>
-                </td>
                 <td>freeBusyStatus</td>
                 <td>
-                  <xref target="ical-prop-transp"/>
+                  <xref target="ical-prop-transp" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>UID</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.4.7" sectionFormat="comma"/>
-                </td>
                 <td>uid</td>
                 <td>
-                  <xref target="ical-prop-uid"/>
+                  <xref target="ical-prop-uid" format="counter"/>
                 </td>
-                <td/>
               </tr>
               <tr>
                 <td>URL</td>
-                <td>
-                  <xref target="RFC5545" section="3.8.4.6" sectionFormat="comma"/>
-                </td>
                 <td>links</td>
                 <td>
-                  <xref target="ical-prop-url"/>
+                  <xref target="ical-prop-url" format="counter"/>
                 </td>
-                <td/>
               </tr>
             </tbody>
           </table>
@@ -1791,24 +1365,18 @@ END:VLOCATION
             <name>Components of the  VTODO component</name>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Task property</th>
-                <th>See</th>
-                <th>Note</th>
+                <th>iCalendar component</th>
+                <th>JSCalendar property</th>
+                <th>Section</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>VALARM</td>
-                <td>
-                  <xref target="RFC5545" section="3.6.6" sectionFormat="comma"/>
-                </td>
                 <td>alerts</td>
                 <td>
-                  <xref target="ical-comp-valarm"/>
+                  <xref target="ical-comp-valarm" format="counter"/>
                 </td>
-                <td/>
               </tr>
             </tbody>
           </table>
@@ -1879,8 +1447,8 @@ ACKNOWLEDGED:20241002T114703Z
             <name>Values of the ACTION property</name>
             <thead>
               <tr>
-                <th>iCalendar value</th>
-                <th>JSCalendar value</th>
+                <th>ACTION</th>
+                <th>action</th>
               </tr>
             </thead>
             <tbody>
@@ -1956,40 +1524,26 @@ ACTION:AUDIO
             <name>Parameters of the ATTACH property</name>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Link Property</th>
-                <th>Note</th>
+                <th>iCalendar parameter</th>
+                <th>JSCalendar property</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>FILENAME</td>
-                <td>
-                  <xref target="RFC8607" section="4.2" sectionFormat="comma"/>
-                </td>
                 <td>title</td>
-                <td/>
               </tr>
               <tr>
                 <td>FMTTYPE</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.8" sectionFormat="comma"/>
-                </td>
                 <td>contentType</td>
-                <td/>
               </tr>
               <tr>
                 <td>SIZE</td>
-                <td>
-                  <xref target="RFC8607" section="4.1" sectionFormat="comma"/>
-                </td>
                 <td>size</td>
-                <td/>
               </tr>
             </tbody>
           </table>
-          <t>Remarks:</t>
+          <t>These parameters are defined in <xref target="RFC8607"/>: FILENAME (Section <xref target="RFC8607" section="4.2" sectionFormat="bare"/>), SIZE (Section <xref target="RFC8607" section="4.1" sectionFormat="bare"/>); and in <xref target="RFC5545"/>: FMTTYPE (Section <xref target="RFC5545" section="3.2.8" sectionFormat="bare"/>).</t>
           <t>The following examples illustrate how to convert the ATTACH property:</t>
           <figure anchor="test-ical-prop-attach-uri">
             <name>Converting the ATTACH property with URI value</name>
@@ -2035,102 +1589,71 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
             <name>Parameters of the ATTENDEE property</name>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Participant Property</th>
+                <th>iCalendar parameter</th>
+                <th>JSCalendar property</th>
                 <th>Note</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>CN</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.2" sectionFormat="comma"/>
-                </td>
                 <td>name</td>
                 <td/>
               </tr>
               <tr>
                 <td>CUTYPE</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.3" sectionFormat="comma"/>
-                </td>
                 <td>kind</td>
                 <td>ROOM converts to "location"</td>
               </tr>
               <tr>
                 <td>DELEGATED-FROM</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.4" sectionFormat="comma"/>
-                </td>
                 <td>delegatedFrom</td>
                 <td/>
               </tr>
               <tr>
                 <td>DELEGATED-TO</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.5" sectionFormat="comma"/>
-                </td>
                 <td>delegatedTo</td>
                 <td/>
               </tr>
               <tr>
                 <td>EMAIL</td>
-                <td>
-                  <xref target="RFC7986" section="6.2" sectionFormat="comma"/>
-                </td>
                 <td>email</td>
                 <td/>
               </tr>
               <tr>
                 <td>MEMBER</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.11" sectionFormat="comma"/>
-                </td>
                 <td>memberOf</td>
                 <td/>
               </tr>
               <tr>
                 <td>PARTSTAT</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.12" sectionFormat="comma"/>
-                </td>
                 <td>participationStatus</td>
                 <td/>
               </tr>
               <tr>
                 <td>ROLE</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.16" sectionFormat="comma"/>
-                </td>
                 <td>roles</td>
                 <td>OWNER role defined in <xref target="I-D.ietf-calext-icalendar-jscalendar-extensions"/></td>
               </tr>
               <tr>
                 <td>RSVP</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.17" sectionFormat="comma"/>
-                </td>
                 <td>expectReply</td>
                 <td/>
               </tr>
               <tr>
                 <td>SENT-BY</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.18" sectionFormat="comma"/>
-                </td>
                 <td>sentBy</td>
                 <td/>
               </tr>
             </tbody>
           </table>
+          <t>These parameters are defined in <xref target="RFC5545"/>: CN (Section <xref target="RFC5545" section="3.2.2" sectionFormat="bare"/>), CUTYPE (Section <xref target="RFC5545" section="3.2.3" sectionFormat="bare"/>), DELEGATED-FROM (Section <xref target="RFC5545" section="3.2.4" sectionFormat="bare"/>), DELEGATED-TO (Section <xref target="RFC5545" section="3.2.5" sectionFormat="bare"/>), MEMBER (Section <xref target="RFC5545" section="3.2.11" sectionFormat="bare"/>), PARTSTAT (Section <xref target="RFC5545" section="3.2.12" sectionFormat="bare"/>), ROLE (Section <xref target="RFC5545" section="3.2.16" sectionFormat="bare"/>), RSVP (Section <xref target="RFC5545" section="3.2.17" sectionFormat="bare"/>), SENT-BY (Section <xref target="RFC5545" section="3.2.18" sectionFormat="bare"/>); and in <xref target="RFC7986"/>: EMAIL (Section <xref target="RFC7986" section="6.2" sectionFormat="bare"/>).</t>
           <t>The PARTSTAT of an ATTENDEE property in a VTODO component converts not only to the Participant object's "participationStatus" property, but also to its "progress" property if the PARTSTAT parameter value is specific for VTODO components:</t>
           <table anchor="ical-prop-attendee-param-partstat">
             <name>Converting the PARTSTAT parameter in a VTODO component to Participant properties</name>
             <thead>
               <tr>
                 <th>PARTSTAT</th>
-                <th>Reference</th>
                 <th>participationStatus</th>
                 <th>progress</th>
               </tr>
@@ -2138,70 +1661,47 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
             <tbody>
               <tr>
                 <td>NEEDS-ACTION</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.12" sectionFormat="comma"/>
-                </td>
                 <td>needs-action</td>
                 <td/>
               </tr>
               <tr>
                 <td>ACCEPTED</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.12" sectionFormat="comma"/>
-                </td>
                 <td>accepted</td>
                 <td/>
               </tr>
               <tr>
                 <td>DECLINED</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.12" sectionFormat="comma"/>
-                </td>
                 <td>declined</td>
                 <td/>
               </tr>
               <tr>
                 <td>TENTATIVE</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.12" sectionFormat="comma"/>
-                </td>
                 <td>tentative</td>
                 <td/>
               </tr>
               <tr>
                 <td>DELEGATED</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.12" sectionFormat="comma"/>
-                </td>
                 <td>delegated</td>
                 <td/>
               </tr>
               <tr>
                 <td>COMPLETED</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.12" sectionFormat="comma"/>
-                </td>
                 <td>accepted</td>
                 <td>completed</td>
               </tr>
               <tr>
                 <td>IN-PROCESS</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.12" sectionFormat="comma"/>
-                </td>
                 <td>accepted</td>
                 <td>in-process</td>
               </tr>
               <tr>
                 <td>FAILED</td>
-                <td>
-                  <xref target="RFC10051" section="9.1" sectionFormat="comma"/>
-                </td>
                 <td>accepted</td>
                 <td>failed</td>
               </tr>
             </tbody>
           </table>
+          <t>These values are defined in <xref target="RFC5545"/>: NEEDS-ACTION, ACCEPTED, DECLINED, TENTATIVE, DELEGATED, COMPLETED, IN-PROCESS (Section <xref target="RFC5545" section="3.2.12" sectionFormat="bare"/>); and in <xref target="RFC10051"/>: FAILED (Section <xref target="RFC10051" section="9.1" sectionFormat="bare"/>).</t>
           <t>The following examples illustrate how to convert the ATTENDEE property:</t>
           <figure anchor="test-ical-prop-attendee">
             <name>Converting the ATTENDEE property</name>
@@ -2410,8 +1910,8 @@ CATEGORIES:Meeting
             <name>Values of the CLASS property</name>
             <thead>
               <tr>
-                <th>iCalendar value</th>
-                <th>JSCalendar value</th>
+                <th>CLASS</th>
+                <th>privacy</th>
               </tr>
             </thead>
             <tbody>
@@ -2498,31 +1998,22 @@ CONCEPT:https://example.com/event-types/arts/literature
             <name>Parameters of the CONFERENCE property</name>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Property</th>
-                <th>Note</th>
+                <th>iCalendar parameter</th>
+                <th>JSCalendar property</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>FEATURE</td>
-                <td>
-                  <xref target="RFC7986" section="6.3" sectionFormat="comma"/>
-                </td>
                 <td>features</td>
-                <td/>
               </tr>
               <tr>
                 <td>LABEL</td>
-                <td>
-                  <xref target="RFC7986" section="6.4" sectionFormat="comma"/>
-                </td>
                 <td>name</td>
-                <td/>
               </tr>
             </tbody>
           </table>
+          <t>These parameters are defined in <xref target="RFC7986"/>: FEATURE (Section <xref target="RFC7986" section="6.3" sectionFormat="bare"/>), LABEL (Section <xref target="RFC7986" section="6.4" sectionFormat="bare"/>).</t>
           <t>The following example illustrates how to convert the CONFERENCE property:</t>
           <figure anchor="test-ical-prop-conference">
             <name>Converting the CONFERENCE property</name>
@@ -2607,7 +2098,7 @@ DESCRIPTION:Their pancakes are delicious\; they are fluffy and sweet.
             The <xref target="RFC5545" section="3.8.2.2" sectionFormat="parens">DTEND property</xref> in a VEVENT component converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="4.1.2" sectionFormat="parens">"duration" property</xref> of the Event object.
           </t>
           <t>If the value type of the DTEND property is DATE, then the duration is the number of days or weeks between the DTSTART and DTEND property values. If the value type is DATE-TIME, then the duration is the timespan between the DTSTART and DTEND property values when converted to UTC time.</t>
-          <t>If the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DTEND property differs from that of the DTSTART property, then it converts to the Event's "endTimeZone" property.</t>
+          <t>If the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DTEND property differs from that of the DTSTART property, then it converts to the Event's <xref target="I-D.ietf-calext-jscalendarbis" section="4.1.3" sectionFormat="parens">"endTimeZone" property</xref>.</t>
           <t>Implementations <bcp14>MAY</bcp14> preserve the fact that the duration got determined by the DTEND property. How to do this depends on the timezone identifiers of the DTSTART and DTEND properties: If the time zone identifiers are not equal, then the presence of the "endTimeZone" property implies that it converted from the DTEND property. If the time zone identifiers are equal, then implementations <bcp14>MAY</bcp14> set the <xref target="jscal-prop-icalendar">"iCalendar" property</xref> in the Event object and there add an entry for the path "duration" in the "convertedProperties" property. The value <bcp14>MUST</bcp14> be an ICalProperty object with the "name" property set to "dtend".</t>
           <t>The following examples illustrate how to convert the DTEND property:</t>
           <figure anchor="test-ical-prop-dtend-different-tzid">
@@ -2703,7 +2194,7 @@ DTSTAMP:20240304T132000Z
           <t>
               The <xref target="RFC5545" section="3.8.2.4" sectionFormat="parens">DTSTART property</xref> in a VEVENT or VTODO component converts to the Event or Task object's "start" property (Sections 4.1.1 and 4.2.2 of <xref target="I-D.ietf-calext-jscalendarbis"/>).</t>
           <t>See <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values.</t>
-          <t>For VEVENT and VTODO components, the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DTSTART property converts to the Event or Task object's "timeZone" property.  In addition, if the value type of the DTSTART property is DATE, then the value of the <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.4" sectionFormat="parens">"showWithoutTime" property</xref> is "true".</t>
+          <t>For VEVENT and VTODO components, the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DTSTART property converts to the Event or Task object's <xref target="I-D.ietf-calext-jscalendarbis" section="3.6.1" sectionFormat="parens">"timeZone" property</xref>.  In addition, if the value type of the DTSTART property is DATE, then the value of the <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.4" sectionFormat="parens">"showWithoutTime" property</xref> is "true".</t>
           <t>The following examples illustrate how to convert the DTSTART property for the VEVENT and VTODO components.</t>
           <figure anchor="test-ical-prop-dtstart-tzid">
             <name>Converting the DTSTART property with TZID parameter</name>
@@ -2753,7 +2244,7 @@ DTSTART;VALUE=DATE:20240921
           <t>
               The <xref target="RFC5545" section="3.8.2.3" sectionFormat="parens">DUE property</xref> in a VTODO component converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="4.2.1" sectionFormat="parens">"due" property</xref> of the Task object.</t>
           <t>See <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values.</t>
-          <t>If the VTODO component does not contain a DTSTART property, then the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DUE property converts to the Task object's "timeZone" property. If it contains both the DUE and DTSTART properties and the timezone identifier of the DUE property differs from that of the DTSTART property, then the "due" date-time property value <bcp14>MUST</bcp14> be relative to the time zone of DTSTART.</t>
+          <t>If the VTODO component does not contain a DTSTART property, then the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DUE property converts to the Task object's <xref target="I-D.ietf-calext-jscalendarbis" section="3.6.1" sectionFormat="parens">"timeZone" property</xref>. If it contains both the DUE and DTSTART properties and the timezone identifier of the DUE property differs from that of the DTSTART property, then the "due" date-time property value <bcp14>MUST</bcp14> be relative to the time zone of DTSTART.</t>
           <t>If the value type of the DUE property is DATE, then the value of the <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.4" sectionFormat="parens">"showWithoutTime" property</xref> is "true".</t>
           <t>The following examples illustrate how to convert the DUE property:</t>
           <figure anchor="test-ical-prop-due-tzid">
@@ -2997,47 +2488,30 @@ GEO:48.858222;2.2945
             <name>Parameters of the IMAGE property</name>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Property</th>
-                <th>Note</th>
+                <th>iCalendar parameter</th>
+                <th>JSCalendar property</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>DISPLAY</td>
-                <td>
-                  <xref target="RFC7986" section="6.1" sectionFormat="comma"/>
-                </td>
                 <td>display</td>
-                <td/>
               </tr>
               <tr>
                 <td>FILENAME</td>
-                <td>
-                  <xref target="RFC8607" section="4.2" sectionFormat="comma"/>
-                </td>
                 <td>title</td>
-                <td/>
               </tr>
               <tr>
                 <td>FMTTYPE</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.8" sectionFormat="comma"/>
-                </td>
                 <td>contentType</td>
-                <td/>
               </tr>
               <tr>
                 <td>SIZE</td>
-                <td>
-                  <xref target="RFC8607" section="4.1" sectionFormat="comma"/>
-                </td>
                 <td>size</td>
-                <td/>
               </tr>
             </tbody>
           </table>
+          <t>These parameters are defined in <xref target="RFC7986"/>: DISPLAY (Section <xref target="RFC7986" section="6.1" sectionFormat="bare"/>); and in <xref target="RFC8607"/>: FILENAME (Section <xref target="RFC8607" section="4.2" sectionFormat="bare"/>), SIZE (Section <xref target="RFC8607" section="4.1" sectionFormat="bare"/>); and in <xref target="RFC5545"/>: FMTTYPE (Section <xref target="RFC5545" section="3.2.8" sectionFormat="bare"/>).</t>
           <t>The following example illustrates how to convert the IMAGE property:</t>
           <figure anchor="test-ical-prop-image">
             <name>Converting the IMAGE property</name>
@@ -3093,39 +2567,26 @@ LAST-MODIFIED:20240914T231257Z
             <name>Parameters of the LINK property</name>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Link Property</th>
-                <th>Note</th>
+                <th>iCalendar parameter</th>
+                <th>JSCalendar property</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>FMTTYPE</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.8" sectionFormat="comma"/>
-                </td>
                 <td>contentType</td>
-                <td/>
               </tr>
               <tr>
                 <td>LABEL</td>
-                <td>
-                  <xref target="RFC7986" section="6.4" sectionFormat="comma"/>
-                </td>
                 <td>title</td>
-                <td/>
               </tr>
               <tr>
                 <td>LINKREL</td>
-                <td>
-                  <xref target="RFC9253" section="6.1" sectionFormat="comma"/>
-                </td>
                 <td>rel</td>
-                <td/>
               </tr>
             </tbody>
           </table>
+          <t>These parameters are defined in <xref target="RFC5545"/>: FMTTYPE (Section <xref target="RFC5545" section="3.2.8" sectionFormat="bare"/>); and in <xref target="RFC7986"/>: LABEL (Section <xref target="RFC7986" section="6.4" sectionFormat="bare"/>); and in <xref target="RFC9253"/>: LINKREL (Section <xref target="RFC9253" section="6.1" sectionFormat="bare"/>).</t>
           <t>A LINK property with any other value type does not convert to a standard JSCalendar element. Implementations <bcp14>MAY</bcp14> convert it to the <xref target="jscal-prop-icalendar">"iCalendar" property</xref>.</t>
           <t>The following example illustrates how to convert the LINK property:</t>
           <figure anchor="test-ical-prop-link">
@@ -3330,40 +2791,27 @@ END:VLOCATION
             <name>Parameters of the ORGANIZER property</name>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Property</th>
-                <th>Note</th>
+                <th>iCalendar parameter</th>
+                <th>JSCalendar property</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>CN</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.2" sectionFormat="comma"/>
-                </td>
                 <td>name</td>
-                <td/>
               </tr>
               <tr>
                 <td>EMAIL</td>
-                <td>
-                  <xref target="RFC7986" section="6.2" sectionFormat="comma"/>
-                </td>
                 <td>email</td>
-                <td/>
               </tr>
               <tr>
                 <td>SENT-BY</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.18" sectionFormat="comma"/>
-                </td>
                 <td>sentBy</td>
-                <td/>
               </tr>
             </tbody>
           </table>
-          <t>In addition, the SENT-BY parameter also converts to the "sentBy" property in the Event or Task object.</t>
+          <t>These parameters are defined in <xref target="RFC5545"/>: CN (Section <xref target="RFC5545" section="3.2.2" sectionFormat="bare"/>), SENT-BY (Section <xref target="RFC5545" section="3.2.18" sectionFormat="bare"/>); and in <xref target="RFC7986"/>: EMAIL (Section <xref target="RFC7986" section="6.2" sectionFormat="bare"/>).</t>
+          <t>In addition, the SENT-BY parameter also converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="3.4.5" sectionFormat="parens">"sentBy" property</xref> in the Event or Task object.</t>
           <t>An ORGANIZER property, an ATTENDEE property, and a PARTICIPANT component in the same iCalendar component all convert to the same Participant object, if their converted "calendarAddress" property values are equal. How to deal with conflicting property values is implementation-specific.</t>
           <t>The following examples illustrate how to convert the ORGANIZER property:</t>
           <figure anchor="test-ical-prop-organizer">
@@ -3551,7 +2999,7 @@ BEGIN:VEVENT
           <t>
               A <xref target="RFC5545" section="3.8.5.2" sectionFormat="parens">RDATE property</xref> in a VEVENT or VTODO component converts to a <xref target="I-D.ietf-calext-jscalendarbis" section="1.5.9" sectionFormat="parens">PatchObject value</xref>.  The converted object is set in the Event or Task object's "recurrenceOverrides" property.
           </t>
-          <t>The property value converts to the key in the "recurrenceOverrides" property value, for values of type PERIOD this only applies to the period start. The date-time value <bcp14>MUST</bcp14> be relative to the timezone identified by the Event or Task object's "timeZone" property, see <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values. The duration of a PERIOD converts to the PatchObject's "duration" property, otherwise the PatchObject value <bcp14>MUST</bcp14> be an empty JSON object. Implementations <bcp14>MAY</bcp14> indicate that the recurrence override was converted from an RDATE in the <xref target="jscal-prop-icalendar">iCalendar</xref> property.</t>
+          <t>The property value converts to the key in the "recurrenceOverrides" property value, for values of type PERIOD this only applies to the period start. The date-time value <bcp14>MUST</bcp14> be relative to the timezone identified by the Event or Task object's <xref target="I-D.ietf-calext-jscalendarbis" section="3.6.1" sectionFormat="parens">"timeZone" property</xref>, see <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values. The duration of a PERIOD converts to the PatchObject's "duration" property, otherwise the PatchObject value <bcp14>MUST</bcp14> be an empty JSON object. Implementations <bcp14>MAY</bcp14> indicate that the recurrence override was converted from an RDATE in the <xref target="jscal-prop-icalendar">iCalendar</xref> property.</t>
           <t>The following examples illustrate how to convert the RDATE property:</t>
           <figure anchor="test-ical-prop-rdate">
             <name>Converting the RDATE property</name>
@@ -3609,7 +3057,7 @@ RDATE;VALUE=PERIOD:20231223T150000Z/PT2H
         </section>
         <section anchor="ical-prop-recurrence-id">
           <name>RECURRENCE-ID</name>
-          <t>The <xref target="RFC5545" section="3.8.4.4" sectionFormat="parens">RECURRENCE-ID property</xref> in a VEVENT or VTODO component converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="3.3.1" sectionFormat="parens">"recurrenceId" property</xref> of the Event or Task object. The <xref target="ical-timezone-identifiers">timezone identifier</xref> of the RECURRENCE-ID property converts to the "recurrenceIdTimeZone" property.</t>
+          <t>The <xref target="RFC5545" section="3.8.4.4" sectionFormat="parens">RECURRENCE-ID property</xref> in a VEVENT or VTODO component converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="3.3.1" sectionFormat="parens">"recurrenceId" property</xref> of the Event or Task object. The <xref target="ical-timezone-identifiers">timezone identifier</xref> of the RECURRENCE-ID property converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="3.3.2" sectionFormat="parens">"recurrenceIdTimeZone" property</xref>.</t>
           <t>See <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values.</t>
           <t>The <xref target="RFC5545" section="3.2.13" sectionFormat="parens">RANGE parameter</xref> does not convert to a standard JSCalendar element. Implementations <bcp14>MAY</bcp14> preserve it in the <xref target="jscal-prop-icalendar">iCalendar</xref> property.</t>
           <t>See <xref target="ical-recurring-components"/> for further requirements and examples.</t>
@@ -3744,8 +3192,8 @@ END:VALARM
             <name>Converting the RECUR value type to a RecurrenceRule object</name>
             <thead>
               <tr>
-                <th>RRULE field</th>
-                <th>RecurrenceRule property</th>
+                <th>iCalendar RRULE field</th>
+                <th>JSCalendar RecurrenceRule property</th>
               </tr>
             </thead>
             <tbody>
@@ -3957,28 +3405,7 @@ SOURCE;VALUE=URI:https://example.com/holidays.ics
             <li>Its DERIVED parameter value <bcp14>MUST NOT</bcp14> be TRUE. If the value is TRUE, then another property in the same component is expected to contain the description.</li>
           </ul>
           <t>If these conditions are not met, implementations MAY preserve the property in the <xref target="jscal-prop-icalendar">"iCalendar" property</xref>.</t>
-          <t>Its parameters convert as follows:</t>
-          <table>
-            <name>Parameters of the STYLED-DESCRIPTION property</name>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Property</th>
-                <th>Note</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>FMTTYPE</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.8" sectionFormat="comma"/>
-                </td>
-                <td>descriptionContentType</td>
-                <td/>
-              </tr>
-            </tbody>
-          </table>
+          <t>Its <xref target="RFC5545" section="3.2.8" sectionFormat="parens">FMTTYPE parameter</xref> converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.3" sectionFormat="parens">"descriptionContentType" property</xref>.</t>
           <t>The following example illustrates how to convert the STYLED-DESCRIPTION property:</t>
           <figure anchor="test-ical-prop-styled-description">
             <name>Converting the STYLED-DESCRIPTION property</name>
@@ -4049,8 +3476,8 @@ SUMMARY:John
             <name>Values of the TRANSP property</name>
             <thead>
               <tr>
-                <th>iCalendar value</th>
-                <th>JSCalendar value</th>
+                <th>TRANSP</th>
+                <th>freeBusyStatus</th>
               </tr>
             </thead>
             <tbody>
@@ -4086,23 +3513,20 @@ TRANSP:TRANSPARENT
             <name>Parameters of the TRIGGER property</name>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Property</th>
+                <th>iCalendar parameter</th>
+                <th>JSCalendar property</th>
                 <th>Note</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>RELATED</td>
-                <td>
-                  <xref target="RFC5545" section="3.2.14" sectionFormat="comma"/>
-                </td>
                 <td>relativeTo</td>
                 <td>If VALUE=DURATION</td>
               </tr>
             </tbody>
           </table>
+          <t>These parameters are defined in <xref target="RFC5545"/>: RELATED (Section <xref target="RFC5545" section="3.2.14" sectionFormat="bare"/>).</t>
           <t>The following examples illustrate how to convert the TRIGGER property:</t>
           <figure anchor="test-ical-prop-trigger-offset">
             <name>Converting the TRIGGER property to an OffsetTrigger</name>
@@ -4201,51 +3625,38 @@ URL:https://example.com/myurl
           <name>Properties of the Alert object</name>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Reference</th>
-              <th>Property (or other)</th>
-              <th>See</th>
+              <th>JSCalendar property</th>
+              <th>iCalendar property (or other)</th>
+              <th>Section</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>acknowledged</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.5.1" sectionFormat="comma"/>
-              </td>
               <td>ACKNOWLEDGED</td>
               <td>
-                <xref target="ical-prop-acknowledged"/>
+                <xref target="ical-prop-acknowledged" format="counter"/>
               </td>
             </tr>
             <tr>
               <td>action</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.5.1" sectionFormat="comma"/>
-              </td>
               <td>ACTION</td>
               <td>
-                <xref target="ical-prop-action"/>
+                <xref target="ical-prop-action" format="counter"/>
               </td>
             </tr>
             <tr>
               <td>relatedTo</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.5.1" sectionFormat="comma"/>
-              </td>
               <td>RELATED-TO</td>
               <td>
-                <t><xref target="ical-prop-related-to"/>, and remarks below</t>
+                <t><xref target="ical-prop-related-to" format="counter"/>, and remarks below</t>
               </td>
             </tr>
             <tr>
               <td>trigger</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.5.1" sectionFormat="comma"/>
-              </td>
               <td>TRIGGER</td>
               <td>
-                <xref target="ical-prop-trigger"/>
+                <xref target="ical-prop-trigger" format="counter"/>
               </td>
             </tr>
           </tbody>
@@ -4268,354 +3679,260 @@ URL:https://example.com/myurl
           <name>Properties of the Event and Task object</name>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Reference</th>
-              <th>Property (or other)</th>
-              <th>See</th>
+              <th>JSCalendar property</th>
+              <th>iCalendar property (or other)</th>
+              <th>Section</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>alerts</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.5.1" sectionFormat="comma"/>
-              </td>
               <td>VALARM (component)</td>
               <td>
-                <xref target="jscal-alert">Alert object</xref>
+                <xref target="jscal-alert" format="counter"/>
               </td>
             </tr>
             <tr>
               <td>categories</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.11" sectionFormat="comma"/>
-              </td>
               <td>CONCEPT</td>
               <td>
-                <xref target="ical-prop-concept"/>
+                <xref target="ical-prop-concept" format="counter"/>
               </td>
             </tr>
             <tr>
               <td>color</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.12" sectionFormat="comma"/>
-              </td>
               <td>COLOR</td>
               <td>
-                <xref target="ical-prop-color"/>
+                <xref target="ical-prop-color" format="counter"/>
               </td>
             </tr>
             <tr>
               <td>created</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.1.5" sectionFormat="comma"/>
-              </td>
               <td>CREATED</td>
               <td>
-                <xref target="ical-prop-created"/>
+                <xref target="ical-prop-created" format="counter"/>
               </td>
             </tr>
             <tr>
               <td>description</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.2" sectionFormat="comma"/>
-              </td>
               <td>DESCRIPTION, or STYLED-DESCRIPTION</td>
               <td>
-                <t><xref target="ical-prop-description"/>, <xref target="ical-prop-styled-description"/>, and remarks below</t>
+                <t><xref target="ical-prop-description" format="counter"/>, <xref target="ical-prop-styled-description" format="counter"/>, and remarks below</t>
               </td>
             </tr>
             <tr>
               <td>descriptionContentType</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.3" sectionFormat="comma"/>
-              </td>
               <td>FMTTYPE (parameter) of STYLED-DESCRIPTION</td>
               <td>
-                <t><xref target="ical-prop-styled-description"/>, and remarks below</t>
+                <t><xref target="ical-prop-styled-description" format="counter"/>, and remarks below</t>
               </td>
             </tr>
             <tr>
               <td>freeBusyStatus</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.4.2" sectionFormat="comma"/>
-              </td>
               <td>TRANSP</td>
               <td>
                 <t>
-                  <xref target="ical-prop-transp"/>
+                  <xref target="ical-prop-transp" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>keywords</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.10" sectionFormat="comma"/>
-              </td>
               <td>CATEGORIES</td>
               <td>
                 <t>
-                  <xref target="ical-prop-categories"/>
+                  <xref target="ical-prop-categories" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>links</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.8" sectionFormat="comma"/>
-              </td>
               <td>ATTACH, or other</td>
               <td>
                 <t>
-                  <xref target="jscal-link">Link object</xref>
+                  <xref target="jscal-link" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>locale</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.9" sectionFormat="comma"/>
-              </td>
               <td>LANGUAGE (parameter) of SUMMARY property</td>
               <td>
-                <t><xref target="ical-prop-summary"/>, <xref target="ical-prop-description"/>, <xref target="ical-prop-styled-description"/></t>
+                <t><xref target="ical-prop-summary" format="counter"/>, <xref target="ical-prop-description" format="counter"/>, <xref target="ical-prop-styled-description" format="counter"/></t>
               </td>
             </tr>
             <tr>
               <td>locations</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.5" sectionFormat="comma"/>
-              </td>
               <td>LOCATION, GEO, or VLOCATION (component)</td>
               <td>
                 <t>
-                  <xref target="jscal-location">Location object</xref>
+                  <xref target="jscal-location" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>mainLocationId</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.6" sectionFormat="comma"/>
-              </td>
               <td>LOCATION</td>
               <td>
                 <t>
-                  <xref target="jscal-location">Location object</xref>
+                  <xref target="jscal-location" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>method</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.1.8" sectionFormat="comma"/>
-              </td>
               <td>METHOD of iCalendar object</td>
               <td>
-                <t><xref target="ical-prop-method"/>, and <xref target="jscal-group">Group object</xref></t>
+                <t><xref target="ical-prop-method" format="counter"/>, and <xref target="jscal-group" format="counter"/></t>
               </td>
             </tr>
             <tr>
               <td>organizerCalendarAddress</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.4.4" sectionFormat="comma"/>
-              </td>
               <td>ORGANIZER</td>
               <td>
                 <t>
-                  <xref target="ical-prop-organizer"/>
+                  <xref target="ical-prop-organizer" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>participants</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.4.6" sectionFormat="comma"/>
-              </td>
               <td>ATTENDEE, or PARTICIPANT (component)</td>
               <td>
                 <t>
-                  <xref target="jscal-participant">Participant object</xref>
+                  <xref target="jscal-participant" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>priority</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.4.1" sectionFormat="comma"/>
-              </td>
               <td>PRIORITY</td>
               <td>
                 <t>
-                  <xref target="ical-prop-priority"/>
+                  <xref target="ical-prop-priority" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>privacy</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.4.3" sectionFormat="comma"/>
-              </td>
               <td>CLASS</td>
               <td>
-                <t><xref target="ical-prop-class"/>, and remarks below
+                <t><xref target="ical-prop-class" format="counter"/>, and remarks below
                 </t>
               </td>
             </tr>
             <tr>
               <td>prodId</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.1.4" sectionFormat="comma"/>
-              </td>
               <td>PRODID of iCalendar object</td>
               <td>
-                <t><xref target="ical-prop-prodid"/>, and <xref target="jscal-group">Group object</xref></t>
+                <t><xref target="ical-prop-prodid" format="counter"/>, and <xref target="jscal-group" format="counter"/></t>
               </td>
             </tr>
             <tr>
               <td>recurrenceId</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.3.1" sectionFormat="comma"/>
-              </td>
               <td>RECURRENCE-ID</td>
               <td>
                 <t>
-                  <xref target="ical-prop-recurrence-id"/>
+                  <xref target="ical-prop-recurrence-id" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>recurrenceIdTimeZone</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.3.2" sectionFormat="comma"/>
-              </td>
               <td>TZID (parameter) of RECURRENCE-ID</td>
               <td>
                 <t>
-                  <xref target="ical-prop-recurrence-id"/>
+                  <xref target="ical-prop-recurrence-id" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>recurrenceOverrides</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.3.4" sectionFormat="comma"/>
-              </td>
               <td>RDATE, EXDATE or recurrence override component</td>
-              <td><xref target="ical-recurring-components"/>, and remarks below</td>
+              <td><xref target="ical-recurring-components" format="counter"/>, and remarks below</td>
             </tr>
             <tr>
               <td>recurrenceRule</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.3.3" sectionFormat="comma"/>
-              </td>
               <td>RRULE</td>
               <td>
                 <t>
-                  <xref target="ical-prop-rrule"/>
+                  <xref target="ical-prop-rrule" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>relatedTo</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.1.3" sectionFormat="comma"/>
-              </td>
               <td>RELATED-TO</td>
               <td>
                 <t>
-                  <xref target="ical-prop-related-to"/>
+                  <xref target="ical-prop-related-to" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>sentBy</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.4.5" sectionFormat="comma"/>
-              </td>
               <td>SENT-BY (parameter) of ORGANIZER</td>
               <td>
                 <t>
-                  <xref target="ical-prop-organizer"/>
+                  <xref target="ical-prop-organizer" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>sequence</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.1.7" sectionFormat="comma"/>
-              </td>
               <td>SEQUENCE</td>
               <td>
                 <t>
-                  <xref target="ical-prop-sequence"/>
+                  <xref target="ical-prop-sequence" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>showWithoutTime</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.4" sectionFormat="comma"/>
-              </td>
               <td>SHOW-WITHOUT-TIME</td>
               <td>
-                <t><xref target="ical-prop-show-without-time"/>, and remarks below
+                <t><xref target="ical-prop-show-without-time" format="counter"/>, and remarks below
                 </t>
               </td>
             </tr>
             <tr>
               <td>timeZone</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.6.1" sectionFormat="comma"/>
-              </td>
               <td>TZID (parameter) of DTSTART and DUE</td>
               <td>
-                <t><xref target="ical-prop-dtstart"/>, <xref target="ical-prop-due"/></t>
+                <t><xref target="ical-prop-dtstart" format="counter"/>, <xref target="ical-prop-due" format="counter"/></t>
               </td>
             </tr>
             <tr>
               <td>title</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.1" sectionFormat="comma"/>
-              </td>
               <td>SUMMARY</td>
               <td>
                 <t>
-                  <xref target="ical-prop-summary"/>
+                  <xref target="ical-prop-summary" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>uid</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.1.1" sectionFormat="comma"/>
-              </td>
               <td>UID</td>
               <td>
                 <t>
-                  <xref target="ical-prop-uid"/>
+                  <xref target="ical-prop-uid" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>updated</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.1.6" sectionFormat="comma"/>
-              </td>
               <td>DTSTAMP, and LAST-MODIFIED</td>
               <td>
-                <t><xref target="ical-prop-dtstamp"/>, <xref target="ical-prop-last-modified"/></t>
+                <t><xref target="ical-prop-dtstamp" format="counter"/>, <xref target="ical-prop-last-modified" format="counter"/></t>
               </td>
             </tr>
             <tr>
               <td>virtualLocations</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.7" sectionFormat="comma"/>
-              </td>
               <td>CONFERENCE</td>
               <td>
                 <t>
-                  <xref target="ical-prop-conference"/>
+                  <xref target="ical-prop-conference" format="counter"/>
                 </t>
               </td>
             </tr>
@@ -4641,53 +3958,41 @@ URL:https://example.com/myurl
           <name>Properties of the Event object</name>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Reference</th>
-              <th>Property (or other)</th>
-              <th>See</th>
+              <th>JSCalendar property</th>
+              <th>iCalendar property (or other)</th>
+              <th>Section</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>duration</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="4.1.2" sectionFormat="comma"/>
-              </td>
               <td>DURATION, or DTEND</td>
               <td>
-                <t><xref target="ical-prop-duration"/>, <xref target="ical-prop-dtend"/></t>
+                <t><xref target="ical-prop-duration" format="counter"/>, <xref target="ical-prop-dtend" format="counter"/></t>
               </td>
             </tr>
             <tr>
               <td>endTimeZone</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="4.1.3" sectionFormat="comma"/>
-              </td>
               <td>TZID parameter of DTEND</td>
               <td>
-                <t><xref target="ical-prop-dtend"/>, <xref target="ical-prop-due"/></t>
+                <t><xref target="ical-prop-dtend" format="counter"/>, <xref target="ical-prop-due" format="counter"/></t>
               </td>
             </tr>
             <tr>
               <td>start</td>
-              <td><xref target="I-D.ietf-calext-jscalendarbis" section="4.1.1" sectionFormat="comma"/>,
-              </td>
               <td>DTSTART</td>
               <td>
                 <t>
-                  <xref target="ical-prop-dtstart"/>
+                  <xref target="ical-prop-dtstart" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>status</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="4.1.4" sectionFormat="comma"/>
-              </td>
               <td>STATUS</td>
               <td>
                 <t>
-                  <xref target="ical-prop-status"/>
+                  <xref target="ical-prop-status" format="counter"/>
                 </t>
               </td>
             </tr>
@@ -4698,69 +4003,54 @@ URL:https://example.com/myurl
           <name>Properties of the Task object</name>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Reference</th>
-              <th>Property (or other)</th>
-              <th>See</th>
+              <th>JSCalendar property</th>
+              <th>iCalendar property (or other)</th>
+              <th>Section</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>due</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="4.2.1" sectionFormat="comma"/>
-              </td>
               <td>DUE</td>
               <td>
                 <t>
-                  <xref target="ical-prop-due"/>
+                  <xref target="ical-prop-due" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>estimatedDuration</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="4.2.3" sectionFormat="comma"/>
-              </td>
               <td>ESTIMATED-DURATION</td>
               <td>
                 <t>
-                  <xref target="ical-prop-estimated-duration"/>
+                  <xref target="ical-prop-estimated-duration" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>percentComplete</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="4.2.4" sectionFormat="comma"/>
-              </td>
               <td>PERCENT-COMPLETE</td>
               <td>
                 <t>
-                  <xref target="ical-prop-percent-complete"/>
+                  <xref target="ical-prop-percent-complete" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>progress</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="4.2.5" sectionFormat="comma"/>
-              </td>
               <td>STATUS</td>
               <td>
                 <t>
-                  <xref target="ical-prop-status"/>
+                  <xref target="ical-prop-status" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>start</td>
-              <td><xref target="I-D.ietf-calext-jscalendarbis" section="4.2.2" sectionFormat="comma"/>,
-              </td>
               <td>DTSTART</td>
               <td>
                 <t>
-                  <xref target="ical-prop-dtstart"/>
+                  <xref target="ical-prop-dtstart" format="counter"/>
                 </t>
               </td>
             </tr>
@@ -4770,163 +4060,123 @@ URL:https://example.com/myurl
       </section>
       <section anchor="jscal-group">
         <name>Group</name>
-        <t>The <xref target="I-D.ietf-calext-jscalendarbis" section="2.3" sectionFormat="parens">Group object</xref> converts to a <xref target="ical-comp-vcalendar">VCALENDAR component</xref>.  Its properties convert as follows:</t>
+        <t>The <xref target="I-D.ietf-calext-jscalendarbis" section="2.3" sectionFormat="parens">Group object</xref> converts to a <xref target="ical-comp-vcalendar">VCALENDAR component</xref>.  The Event and Task objects in its <xref target="I-D.ietf-calext-jscalendarbis" section="4.3.1" sectionFormat="parens">"entries" property</xref> convert to VEVENT and VTODO components, see <xref target="jscal-event-and-task"/>.  Its properties convert as follows:</t>
         <table>
           <name>Properties of the Group object</name>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Reference</th>
-              <th>Property (or other)</th>
-              <th>See</th>
+              <th>JSCalendar property</th>
+              <th>iCalendar property (or other)</th>
+              <th>Section</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>categories</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.11" sectionFormat="comma"/>
-              </td>
               <td>CONCEPT</td>
               <td>
                 <t>
-                  <xref target="ical-prop-concept"/>
+                  <xref target="ical-prop-concept" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>color</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.12" sectionFormat="comma"/>
-              </td>
               <td>COLOR</td>
               <td>
                 <t>
-                  <xref target="ical-prop-color"/>
+                  <xref target="ical-prop-color" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>created</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.1.5" sectionFormat="comma"/>
-              </td>
               <td>CREATED</td>
               <td>
                 <t>
-                  <xref target="ical-prop-created"/>
+                  <xref target="ical-prop-created" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>description</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.2" sectionFormat="comma"/>
-              </td>
               <td>DESCRIPTION, or STYLED-DESCRIPTION</td>
               <td>
-                <t><xref target="ical-prop-description"/>, <xref target="ical-prop-styled-description"/>, and remarks below</t>
+                <t><xref target="ical-prop-description" format="counter"/>, <xref target="ical-prop-styled-description" format="counter"/>, and remarks below</t>
               </td>
             </tr>
             <tr>
               <td>entries</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="4.3.1" sectionFormat="comma"/>
-              </td>
               <td>VEVENT or VTODO (component)</td>
               <td>
-                <t><xref target="jscal-event-and-task">Event and Task object</xref>, and remarks below</t>
+                <t><xref target="jscal-event-and-task" format="counter"/>, and remarks below</t>
               </td>
             </tr>
             <tr>
               <td>keywords</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.10" sectionFormat="comma"/>
-              </td>
               <td>CATEGORIES</td>
               <td>
                 <t>
-                  <xref target="ical-prop-categories"/>
+                  <xref target="ical-prop-categories" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>links</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.8" sectionFormat="comma"/>
-              </td>
               <td>ATTACH, or other</td>
               <td>
                 <t>
-                  <xref target="jscal-link">Link object</xref>
+                  <xref target="jscal-link" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>locale</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.9" sectionFormat="comma"/>
-              </td>
               <td>LANGUAGE (parameter) of either NAME, or DESCRIPTION (in order of preference)</td>
               <td>
-                <t><xref target="ical-prop-name"/>, <xref target="ical-prop-description"/></t>
+                <t><xref target="ical-prop-name" format="counter"/>, <xref target="ical-prop-description" format="counter"/></t>
               </td>
             </tr>
             <tr>
               <td>prodId</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.1.4" sectionFormat="comma"/>
-              </td>
               <td>PRODID</td>
               <td>
-                <t><xref target="ical-prop-prodid"/>, and remarks below</t>
+                <t><xref target="ical-prop-prodid" format="counter"/>, and remarks below</t>
               </td>
             </tr>
             <tr>
               <td>source</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="4.3.2" sectionFormat="comma"/>
-              </td>
               <td>SOURCE</td>
               <td>
                 <t>
-                  <xref target="ical-prop-source"/>
+                  <xref target="ical-prop-source" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>title</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.1" sectionFormat="comma"/>
-              </td>
               <td>NAME</td>
               <td>
                 <t>
-                  <xref target="ical-prop-name"/>
+                  <xref target="ical-prop-name" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>uid</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.1.1" sectionFormat="comma"/>
-              </td>
               <td>UID</td>
               <td>
                 <t>
-                  <xref target="ical-prop-uid"/>
+                  <xref target="ical-prop-uid" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>updated</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.1.6" sectionFormat="comma"/>
-              </td>
               <td>LAST-MODIFIED</td>
               <td>
                 <t>
-                  <xref target="ical-prop-last-modified"/>
+                  <xref target="ical-prop-last-modified" format="counter"/>
                 </t>
               </td>
             </tr>
@@ -4948,7 +4198,7 @@ URL:https://example.com/myurl
       </section>
       <section anchor="jscal-link">
         <name>Link</name>
-        <t>The <xref target="I-D.ietf-calext-jscalendarbis" section="1.5.11" sectionFormat="parens">Link object</xref> converts to either an <xref target="ical-prop-attach">ATTACH property</xref> or an <xref target="ical-prop-image">IMAGE property</xref>, or a <xref target="ical-prop-link">LINK property</xref>, or an <xref target="ical-prop-url">URL property</xref>.</t>
+        <t>The <xref target="I-D.ietf-calext-jscalendarbis" section="1.5.11" sectionFormat="parens">Link object</xref> in the <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.8" sectionFormat="parens">"links" property</xref> of an Event, Task, Group, Location, or Participant object converts to either an <xref target="ical-prop-attach">ATTACH property</xref> or an <xref target="ical-prop-image">IMAGE property</xref>, or a <xref target="ical-prop-link">LINK property</xref>, or an <xref target="ical-prop-url">URL property</xref>.</t>
         <t>Which iCalendar property to choose is implementation-specific. As a guideline, stopping at the first matching criteria:</t>
         <ol>
           <li>Choose ATTACH if the "rel" property value is "enclosure".</li>
@@ -4961,59 +4211,43 @@ URL:https://example.com/myurl
           <name>Properties of the Link object</name>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Reference</th>
-              <th>Parameter (or other)</th>
-              <th>See</th>
+              <th>JSCalendar property</th>
+              <th>iCalendar parameter (or other)</th>
+              <th>Section</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>contentType</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="1.5.11" sectionFormat="comma"/>
-              </td>
               <td>FMTTYPE</td>
               <td>
-                <xref target="ical-prop-attach"/>
+                <xref target="ical-prop-attach" format="counter"/>
               </td>
             </tr>
             <tr>
               <td>display</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="1.5.11" sectionFormat="comma"/>
-              </td>
               <td>DISPLAY</td>
               <td>
-                <xref target="ical-prop-image"/>
+                <xref target="ical-prop-image" format="counter"/>
               </td>
             </tr>
             <tr>
               <td>rel</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="1.5.11" sectionFormat="comma"/>
-              </td>
               <td>LINKREL, or none</td>
               <td><xref target="RFC9253" section="6.1"/>, and remarks below
               </td>
             </tr>
             <tr>
               <td>size</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="1.5.11" sectionFormat="comma"/>
-              </td>
               <td>SIZE</td>
               <td>
-                <xref target="ical-prop-attach"/>
+                <xref target="ical-prop-attach" format="counter"/>
               </td>
             </tr>
             <tr>
               <td>title</td>
-              <td>
-                <xref target="RFC7986" section="6.4" sectionFormat="comma"/>
-              </td>
               <td>FILENAME or LABEL</td>
-              <td><xref target="ical-prop-attach"/>, <xref target="ical-prop-link"/>, and remarks below
+              <td><xref target="ical-prop-attach" format="counter"/>, <xref target="ical-prop-link" format="counter"/>, and remarks below
               </td>
             </tr>
           </tbody>
@@ -5034,7 +4268,7 @@ URL:https://example.com/myurl
         <t>The <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.5" sectionFormat="parens">Location object</xref> converts to either a <xref target="ical-prop-location">LOCATION</xref> or <xref target="ical-prop-geo">GEO</xref> property, or it converts to a <xref target="ical-comp-vlocation">VLOCATION component</xref>. Which iCalendar element to choose is implementation-specific. As a guideline:</t>
         <ul>
           <li>If the "iCalendar" property on the Location object is set, or the parent JSCalendar object contains an entry for that Location in the "convertedProperties" property of its "iCalendar" property, then convert the object back to the named iCalendar component or property.</li>
-          <li>Choose LOCATION if the key of the Location object in the "locations" property matches the "mainLocationId" property, or if the "name" property is set and the iCalendar component does not already contain a LOCATION property. The "name" property converts to the LOCATION property value.</li>
+          <li>Choose LOCATION if the key of the Location object in the "locations" property matches the <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.6" sectionFormat="parens">"mainLocationId" property</xref>, or if the "name" property is set and the iCalendar component does not already contain a LOCATION property. The "name" property converts to the LOCATION property value.</li>
           <li>Choose the VLOCATION component otherwise.</li>
         </ul>
         <t>Implementations <bcp14>MAY</bcp14> convert one of the Location objects to both a VLOCATION component and the LOCATION and GEO properties of the component that contains the VLOCATION component. In this case, the DERIVED parameter <bcp14>MUST</bcp14> be set on the LOCATION and GEO properties with value "TRUE".</t>
@@ -5043,51 +4277,38 @@ URL:https://example.com/myurl
           <name>Properties of the Location object</name>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Reference</th>
-              <th>Property (or other)</th>
-              <th>See</th>
+              <th>JSCalendar property</th>
+              <th>iCalendar property (or other)</th>
+              <th>Section</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>coordinates</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.5" sectionFormat="comma"/>
-              </td>
               <td>COORDINATES</td>
-              <td><xref target="ical-prop-coordinates"/>, <xref target="ical-prop-geo"/></td>
+              <td><xref target="ical-prop-coordinates" format="counter"/>, <xref target="ical-prop-geo" format="counter"/></td>
             </tr>
             <tr>
               <td>links</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.8" sectionFormat="comma"/>
-              </td>
               <td>ATTACH, or other</td>
               <td>
                 <t>
-                  <xref target="jscal-link">Link object</xref>
+                  <xref target="jscal-link" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>locationTypes</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.5" sectionFormat="comma"/>
-              </td>
               <td>LOCATION-TYPE</td>
               <td>
-                <xref target="ical-prop-location-type"/>
+                <xref target="ical-prop-location-type" format="counter"/>
               </td>
             </tr>
             <tr>
               <td>name</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.5" sectionFormat="comma"/>
-              </td>
               <td>NAME</td>
               <td>
-                <xref target="ical-prop-name"/>
+                <xref target="ical-prop-name" format="counter"/>
               </td>
             </tr>
           </tbody>
@@ -5114,116 +4335,82 @@ URL:https://example.com/myurl
           <name>Properties of the Participant object that convert to the ATTENDEE property</name>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Reference</th>
-              <th>Parameter (or other)</th>
-              <th>See</th>
+              <th>JSCalendar property</th>
+              <th>iCalendar parameter (or other)</th>
+              <th>Section</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>delegatedFrom</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.4.6" sectionFormat="comma"/>
-              </td>
               <td>DELEGATED-FROM</td>
               <td>
-                <xref target="ical-prop-attendee"/>
+                <xref target="ical-prop-attendee" format="counter"/>
               </td>
             </tr>
             <tr>
               <td>delegatedTo</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.4.6" sectionFormat="comma"/>
-              </td>
               <td>DELEGATED-TO</td>
               <td>
-                <xref target="ical-prop-attendee"/>
+                <xref target="ical-prop-attendee" format="counter"/>
               </td>
             </tr>
             <tr>
               <td>email</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.4.6" sectionFormat="comma"/>
-              </td>
               <td>EMAIL</td>
-              <td><xref target="ical-prop-attendee"/>, and remarks below
+              <td><xref target="ical-prop-attendee" format="counter"/>, and remarks below
               </td>
             </tr>
             <tr>
               <td>expectReply</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.4.6" sectionFormat="comma"/>
-              </td>
               <td>RSVP</td>
               <td>
-                <xref target="ical-prop-attendee"/>
+                <xref target="ical-prop-attendee" format="counter"/>
               </td>
             </tr>
             <tr>
               <td>kind</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.4.6" sectionFormat="comma"/>
-              </td>
               <td>CUTYPE</td>
               <td>
-                <xref target="ical-prop-attendee"/>
+                <xref target="ical-prop-attendee" format="counter"/>
               </td>
             </tr>
             <tr>
               <td>memberOf</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.4.6" sectionFormat="comma"/>
-              </td>
               <td>MEMBER</td>
               <td>
-                <xref target="ical-prop-attendee"/>
+                <xref target="ical-prop-attendee" format="counter"/>
               </td>
             </tr>
             <tr>
               <td>name</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.4.6" sectionFormat="comma"/>
-              </td>
               <td>CN</td>
-              <td><xref target="ical-prop-attendee"/>, and remarks below
+              <td><xref target="ical-prop-attendee" format="counter"/>, and remarks below
               </td>
             </tr>
             <tr>
               <td>participationStatus</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.4.6" sectionFormat="comma"/>
-              </td>
               <td>PARTSTAT</td>
               <td>
-                <xref target="ical-prop-attendee"/>
+                <xref target="ical-prop-attendee" format="counter"/>
               </td>
             </tr>
             <tr>
               <td>progress</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.4.6" sectionFormat="comma"/>
-              </td>
               <td>PARTSTAT</td>
-              <td><xref target="ical-prop-attendee"/>, and remarks below
+              <td><xref target="ical-prop-attendee" format="counter"/>, and remarks below
               </td>
             </tr>
             <tr>
               <td>roles</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.4.6" sectionFormat="comma"/>
-              </td>
               <td>ROLE</td>
-              <td><xref target="ical-prop-attendee"/>, and remarks below
+              <td><xref target="ical-prop-attendee" format="counter"/>, and remarks below
               </td>
             </tr>
             <tr>
               <td>sentBy</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.4.6" sectionFormat="comma"/>
-              </td>
               <td>SENT-BY</td>
-              <td><xref target="ical-prop-attendee"/>, and remarks below
+              <td><xref target="ical-prop-attendee" format="counter"/>, and remarks below
               </td>
             </tr>
           </tbody>
@@ -5245,68 +4432,52 @@ URL:https://example.com/myurl
           <name>Properties of the Participant object that convert to the PARTICIPANT component</name>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Reference</th>
-              <th>Property (or other)</th>
-              <th>See</th>
+              <th>JSCalendar property</th>
+              <th>iCalendar property (or other)</th>
+              <th>Section</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>description</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.4.6" sectionFormat="comma"/>
-              </td>
               <td>DESCRIPTION, or STYLED-DESCRIPTION</td>
               <td>
-                <t><xref target="ical-prop-description"/>, <xref target="ical-prop-styled-description"/>, and remarks below</t>
+                <t><xref target="ical-prop-description" format="counter"/>, <xref target="ical-prop-styled-description" format="counter"/>, and remarks below</t>
               </td>
             </tr>
             <tr>
               <td>descriptionContentType</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.4.6" sectionFormat="comma"/>
-              </td>
               <td>FMTTYPE (parameter) of STYLED-DESCRIPTION</td>
               <td>
                 <t>
-                  <xref target="ical-prop-styled-description"/>
+                  <xref target="ical-prop-styled-description" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>links</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.8" sectionFormat="comma"/>
-              </td>
               <td>ATTACH, or other</td>
               <td>
                 <t>
-                  <xref target="jscal-link">Link object</xref>
+                  <xref target="jscal-link" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>name</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.4.6" sectionFormat="comma"/>
-              </td>
               <td>SUMMARY</td>
               <td>
                 <t>
-                  <xref target="ical-prop-summary"/>
+                  <xref target="ical-prop-summary" format="counter"/>
                 </t>
               </td>
             </tr>
             <tr>
               <td>percentComplete</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.4.6" sectionFormat="comma"/>
-              </td>
               <td>PERCENT-COMPLETE</td>
               <td>
                 <t>
-                  <xref target="ical-prop-percent-complete"/>
+                  <xref target="ical-prop-percent-complete" format="counter"/>
                 </t>
               </td>
             </tr>
@@ -5323,31 +4494,24 @@ URL:https://example.com/myurl
           <name>Properties of the VirtualLocation object</name>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Reference</th>
-              <th>Parameter (or other)</th>
-              <th>See</th>
+              <th>JSCalendar property</th>
+              <th>iCalendar parameter (or other)</th>
+              <th>Section</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>features</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.7" sectionFormat="comma"/>
-              </td>
               <td>FEATURE</td>
               <td>
-                <xref target="ical-prop-conference"/>
+                <xref target="ical-prop-conference" format="counter"/>
               </td>
             </tr>
             <tr>
               <td>name</td>
-              <td>
-                <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.7" sectionFormat="comma"/>
-              </td>
               <td>LABEL</td>
               <td>
-                <xref target="ical-prop-conference"/>
+                <xref target="ical-prop-conference" format="counter"/>
               </td>
             </tr>
           </tbody>
@@ -5969,6 +5133,9 @@ END:X-BAZ
     </section>
   </middle>
   <back>
+    <displayreference target="I-D.ietf-calext-jscalendarbis" to="JSCALENDAR"/>
+    <displayreference target="I-D.ietf-calext-icalendar-jscalendar-extensions" to="JSCAL-EXT"/>
+    <displayreference target="I-D.ietf-jmap-calendars" to="JMAP-CAL"/>
     <references>
       <name>References</name>
       <references>
