@@ -1607,16 +1607,15 @@ ATTACH:https://example.com/foo.pdf
             <name>Converting the ATTACH property with BINARY value</name>
             <sourcecode><![CDATA[
 --- iCalendar:
-ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
- 0KGgoAAAANSUhEUgAAAAEAAAABAQAAAAA3bvkkAAAAAmJLR0QAAd2KE6QAA
- AAKSURBVAjXY2gAAACCAIHdQ2r0AAAAAElFTkSuQmCC
+ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=application/octet-stream:
+ AAECAwQF
 
 --- JSCalendar:
 "links": {
-  "7beac36a-9287-57cb-96ab-dd2fc91163a2": {
+  "6c16f063-d57d-5692-8822-2dceec9f9487": {
     "@type": "Link",
-    "href": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQAAAAA3bvkkAAAAAmJLR0QAAd2KE6QAAAAKSURBVAjXY2gAAACCAIHdQ2r0AAAAAElFTkSuQmCC",
-    "contentType": "image/png",
+    "href": "data:application/octet-stream;base64,AAECAwQF",
+    "contentType": "application/octet-stream",
     "...": ""
   }
 }
@@ -1752,7 +1751,8 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=image/png:iVBORw
             <name>Converting the ATTENDEE property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
-ATTENDEE;RSVP=TRUE;PARTSTAT=TENTATIVE;CN=Henry Cabot:mailto:hcabot@example.com
+ATTENDEE;RSVP=TRUE;PARTSTAT=TENTATIVE;CN=Henry Cabot:
+ mailto:hcabot@example.com
 ORGANIZER:mailto:organizer@example.com
 
 --- JSCalendar:
@@ -2148,10 +2148,10 @@ CREATED:20240329T133000Z
             <name>Converting the DESCRIPTION property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
-DESCRIPTION:Their pancakes are delicious\; they are fluffy and sweet.
+DESCRIPTION:Pancakes are delicious\; they are fluffy and sweet.
 
 --- JSCalendar:
-"description": "Their pancakes are delicious; they are fluffy and sweet."
+"description": "Pancakes are delicious; they are fluffy and sweet."
 ]]></sourcecode>
           </figure>
         </section>
@@ -2610,8 +2610,8 @@ GEO:48.858222;2.2945
             <name>Converting the IMAGE property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
-IMAGE;VALUE=URI;DISPLAY=BADGE,THUMBNAIL;FILENAME=An image;FMTTYPE=image/png:
- https://example.com/images/party.png
+IMAGE;VALUE=URI;DISPLAY=BADGE,THUMBNAIL;FILENAME=An image;
+ FMTTYPE=image/png:https://example.com/images/party.png
 
 --- JSCalendar:
 "links": {
@@ -2688,8 +2688,8 @@ LAST-MODIFIED:20240914T231257Z
             <name>Converting the LINK property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
-LINK;LINKREL="https://example.com/linkrel/source";LABEL=Venue;VALUE=URI:
- https://example.com/events
+LINK;LINKREL="https://example.com/linkrel/source";LABEL=Venue;
+ VALUE=URI:https://example.com/events
 
 --- JSCalendar:
 "links": {
@@ -3538,10 +3538,10 @@ SOURCE;VALUE=URI:https://example.com/holidays.ics
             <sourcecode><![CDATA[
 --- iCalendar:
 STYLED-DESCRIPTION;VALUE=TEXT;FMTTYPE=text/html:
- <!DOCTYPE html><html><body>hello\,<b>world</b></body></html>
+ <html><body>hello\,<b>world</b></body></html>
 
 --- JSCalendar:
-"description": "<!DOCTYPE html><html><body>hello,<b>world</b></body></html>",
+"description": "<html><body>hello,<b>world</b></body></html>",
 "descriptionContentType": "text/html"
 ]]></sourcecode>
           </figure>
