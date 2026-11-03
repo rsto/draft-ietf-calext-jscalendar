@@ -127,12 +127,14 @@ SUMMARY:he
  llo
 ]]></sourcecode>
           </figure>
+          <t>The order of properties within a component, of the parameters of a property, and of the values of a multi-valued parameter is not significant.</t>
         </section>
         <section anchor="notation-jscalendar">
           <name>JSCalendar Examples</name>
           <t>A JSCalendar example always represents a Group object, even if the example only depicts one of the Group entries or properties. E.g., an example containing only an Alert object is implied to be the sole value of the "alerts" property of an Event object, which is implied to be the sole list member in the "entries" property of a Group object. The Group object has its "version" property set to "2.0", unless the example explicitly defines a complete Group object.</t>
           <t>JSCalendar objects are depicted either explicitly or implicitly. An explicit JSCalendar object starts and ends with braces.  An implicit JSCalendar object omits braces, it only consists of JSON name/value pairs, separated by comma.</t>
           <t>An implicit JSCalendar object is assumed to be of type Event, unless it contains the "@type" property with a different value.  It is assumed to contain all mandatory properties with some value; if they are not depicted, their actual value is irrelevant for the main point of the example.</t>
+          <t>A JSCalendar property that is set to its default value is equivalent to the property being omitted.  An example may depict either.</t>
           <t>Figures <xref target="example-notation-jscalendar-implicit" format="counter"/>, <xref target="example-notation-jscalendar-implicit-type" format="counter"/>, <xref target="example-notation-jscalendar-explicit-event" format="counter"/>, and <xref target="example-notation-jscalendar-explicit-group" format="counter"/> illustrate this with multiple examples, all of which represent the same JSCalendar data.  <xref target="example-notation-jscalendar-implicit"/> contains an implicit JSCalendar object of type Event.  <xref target="example-notation-jscalendar-implicit-type"/> contains an implicit JSCalendar object with a "@type" property.  <xref target="example-notation-jscalendar-explicit-event"/> contains an explicit Event object but the Group object containing it is omitted.  <xref target="example-notation-jscalendar-explicit-group"/> contains the full Group object, nothing is omitted.</t>
           <figure anchor="example-notation-jscalendar-implicit">
             <name>Example for an implicit JSCalendar object of type Event</name>
@@ -990,7 +992,7 @@ END:VALARM
             </tbody>
           </table>
           <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalendar">"iCalendar" property</xref> of the Event object.</t>
-          <t>VEVENT components with different UID property values in the same iCalendar object convert to different entries in the Group.  They sort in the same order as in the VCALENDAR component.</t>
+          <t>VEVENT components with different UID property values in the same iCalendar object convert to different entries in the Group.</t>
           <t>The following example illustrates how to convert the VEVENT component:</t>
           <figure anchor="test_ical_comp_vevent">
             <name>Converting the VEVENT component</name>
@@ -1420,7 +1422,7 @@ END:VLOCATION
             </tbody>
           </table>
           <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalendar">"iCalendar" property</xref> of the Task object.</t>
-          <t>VTODO components with different UID property values in the same iCalendar object convert to different entries in the Group.  They sort in the same order as in the VCALENDAR component.</t>
+          <t>VTODO components with different UID property values in the same iCalendar object convert to different entries in the Group.</t>
           <t>The following example illustrates how to convert the VTODO component:</t>
           <figure anchor="test_ical_comp_vtodo">
             <name>Converting the VTODO component</name>
@@ -4935,7 +4937,7 @@ JSPROP;JSPTR="example.com:foo":"bar"
                 <dt>name: String (mandatory)</dt>
                 <dd>This is the name of the iCalendar component in lowercase.</dd>
                 <dt>components: *[][] (optional)</dt>
-                <dd>This contains subcomponents of the iCalendar component which did not convert to standard JSCalendar elements. The value <bcp14>MUST</bcp14> be a list of iCalendar components formatted in jCal as defined in <xref target="RFC7265" section="3.3" sectionFormat="of"/>.
+                <dd>This contains subcomponents of the iCalendar component which did not convert to standard JSCalendar elements. The value <bcp14>MUST</bcp14> be a list of iCalendar components formatted in jCal as defined in <xref target="RFC7265" section="3.3" sectionFormat="of"/>. The order of the list elements is not significant.
                 </dd>
                 <dt>convertedProperties: String[ICalProperty] (optional)</dt>
                 <dd>
@@ -4943,7 +4945,7 @@ JSPROP;JSPTR="example.com:foo":"bar"
                   <t>The key <bcp14>MUST</bcp14> be a valid key of a PatchObject as defined in <xref target="I-D.ietf-calext-jscalendarbis" section="1.5.9" sectionFormat="of"/>.  The key <bcp14>MAY</bcp14> point to the key in a nested object if the element at that key was converted from an iCalendar property of the component for which the "iCalendar" property is set. It <bcp14>MUST NOT</bcp14> point into nested objects otherwise.</t>
                 </dd>
                 <dt>properties: *[][] (optional)</dt>
-                <dd>This contains properties of the iCalendar component which did not convert to standard JSCalendar elements. The value <bcp14>MUST</bcp14> be a list of iCalendar properties formatted in jCal as defined in <xref target="RFC7265" section="3.4" sectionFormat="of"/>.
+                <dd>This contains properties of the iCalendar component which did not convert to standard JSCalendar elements. The value <bcp14>MUST</bcp14> be a list of iCalendar properties formatted in jCal as defined in <xref target="RFC7265" section="3.4" sectionFormat="of"/>. The order of the list elements is not significant.
               </dd>
               </dl>
               <t>An ICalProperty object has the following properties:</t>
