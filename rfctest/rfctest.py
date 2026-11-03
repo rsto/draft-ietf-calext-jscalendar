@@ -481,6 +481,24 @@ class HTMLReporter:
         print("</details>", file=self.file)
 
 
+ICAL_MARKER = "--- iCalendar:"
+JSCAL_MARKER = "--- JSCalendar:"
+
+
+def split_conversion_example(text: str) -> dict[str, str]:
+    """Splits the text of a conversion example into its iCalendar and
+    JSCalendar parts, keyed by their marker line. Marker lines and
+    empty lines are not part of the example data."""
+    sections = {}
+    lines = None
+    for line in (text or "").splitlines():
+        if line.strip() in (ICAL_MARKER, JSCAL_MARKER):
+            lines = sections.setdefault(line.strip(), [])
+        elif line.strip() and lines is not None:
+            lines.append(line)
+    return {marker: "\n".join(lines) for marker, lines in sections.items()}
+
+
 def find_tests(rfcfile_name: str, names: set[str] = None, verbose=False):
     tests = []
     for figure in XMLTree.parse(rfcfile_name).getroot().findall(".//figure"):
@@ -490,18 +508,21 @@ def find_tests(rfcfile_name: str, names: set[str] = None, verbose=False):
         if not anchor.startswith("test-") or names and anchor not in names:
             continue
 
-        icalcode = figure.find("./sourcecode[@type='text/calendar']")
-        icaltext = icalcode.text.strip() if icalcode is not None else ""
+        sourcecode = figure.find("./sourcecode")
+        sections = split_conversion_example(
+            sourcecode.text if sourcecode is not None else ""
+        )
+
+        icaltext = sections.get(ICAL_MARKER, "")
         if not icaltext:
             if verbose or names:
-                print(f"{anchor}: no icalendar sourcecode, ignoring", file=sys.stderr)
+                print(f"{anchor}: no icalendar example, ignoring", file=sys.stderr)
             continue
 
-        jcalcode = figure.find("./sourcecode[@type='json']")
-        jcaltext = jcalcode.text.strip() if jcalcode is not None else ""
+        jcaltext = sections.get(JSCAL_MARKER, "")
         if not jcaltext:
             if verbose or names:
-                print(f"{anchor}: no jscalendar sourcecode, ignoring", file=sys.stderr)
+                print(f"{anchor}: no jscalendar example, ignoring", file=sys.stderr)
             continue
 
         tests.append(Test(anchor, icaltext, jcaltext))
