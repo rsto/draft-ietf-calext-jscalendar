@@ -374,7 +374,7 @@ SUMMARY:hello
           <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalendar">"iCalendar" property</xref> of the Group object.</t>
           <t>The order of elements in the "entries" property is implementation-specific, e.g. entries need not be in the same order as their source components in the iCalendar object.</t>
           <t>The following example illustrates how to convert the VCALENDAR component:</t>
-          <figure anchor="test-ical-comp-vcalendar">
+          <figure anchor="test_ical_comp_vcalendar">
             <name>Converting the VCALENDAR component</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -405,7 +405,7 @@ BEGIN:VEVENT
           <t>The main component converts to an entry in the Group object's "entries" property.</t>
           <t>The recurrence override converts to the converted main component's "recurrenceOverrides" property. Its RECURRENCE-ID property value converts to the key in the "recurrenceOverrides" property. The value of the "recurrenceOverrides" property at that key is a PatchObject that transforms the converted main component into the converted recurrence override, but it <bcp14>MUST NOT</bcp14> contain any of the patches that are forbidden for the <xref target="I-D.ietf-calext-jscalendarbis" section="3.3.4" sectionFormat="parens">"recurrenceOverrides" property</xref>.</t>
           <t>The following example illustrates how to convert a main component and its recurrence override:</t>
-          <figure anchor="test-ical-comp-vevent-recurrence-overrides">
+          <figure anchor="test_ical_comp_vevent_recurrence_overrides">
             <name>Converting VEVENT recurrence overrides</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -452,7 +452,7 @@ END:VCALENDAR
           </figure>
           <t>A VEVENT (or VTODO) component is a stand-alone recurrence instance if it has the RECURRENCE-ID property set and the iCalendar object does not contain its related main component. Each stand-alone recurrence instance converts to a distinct Event (or Task) object in the Group object's "entries" property.  The "recurrenceId" property <bcp14>MUST</bcp14> be set.</t>
           <t>The following example illustrates how to convert stand-alone recurrence instances:</t>
-          <figure anchor="test-ical-comp-vevent-recurrence-instances">
+          <figure anchor="test_ical_comp_vevent_recurrence_instances">
             <name>Converting VEVENT recurrence instances</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -593,7 +593,7 @@ END:VCALENDAR
           </table>
           <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalendar">"iCalendar" property</xref> of the Participant object. This includes mandatory properties such as <xref target="RFC5545" section="3.8.4.7" sectionFormat="parens">UID</xref>.</t>
           <t>The following example illustrates how to convert the PARTICIPANT component:</t>
-          <figure anchor="test-ical-comp-participant">
+          <figure anchor="test_ical_comp_participant">
             <name>Converting the PARTICIPANT component</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -678,7 +678,7 @@ END:PARTICIPANT
           </ul>
           <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalendar">"iCalendar" property</xref> of the Alert object. This includes mandatory properties such as <xref target="RFC5545" section="3.8.4.1" sectionFormat="parens">ATTENDEE</xref>, <xref target="RFC5545" section="3.8.1.5" sectionFormat="parens">DESCRIPTION</xref>, or <xref target="RFC5545" section="3.8.1.12" sectionFormat="parens">SUMMARY</xref>.</t>
           <t>The following example illustrates how to convert the VALARM component:</t>
-          <figure anchor="test-ical-comp-valarm">
+          <figure anchor="test_ical_comp_valarm">
             <name>Converting the VALARM component</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -990,7 +990,7 @@ END:VALARM
           <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalendar">"iCalendar" property</xref> of the Event object.</t>
           <t>VEVENT components with different UID property values in the same iCalendar object convert to different entries in the Group.  They sort in the same order as in the VCALENDAR component.</t>
           <t>The following example illustrates how to convert the VEVENT component:</t>
-          <figure anchor="test-ical-comp-vevent">
+          <figure anchor="test_ical_comp_vevent">
             <name>Converting the VEVENT component</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -1104,7 +1104,7 @@ END:VCALENDAR
           </table>
           <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalendar">"iCalendar" property</xref> of the Location object. This includes mandatory properties such as <xref target="RFC5545" section="3.8.4.7" sectionFormat="parens">UID</xref>.</t>
           <t>The following example illustrates how to convert the VLOCATION component:</t>
-          <figure anchor="test-ical-comp-vlocation">
+          <figure anchor="test_ical_comp_vlocation">
             <name>Converting the VLOCATION component</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -1420,7 +1420,7 @@ END:VLOCATION
           <t>Other properties or components <bcp14>MAY</bcp14> be converted to the <xref target="jscal-prop-icalendar">"iCalendar" property</xref> of the Task object.</t>
           <t>VTODO components with different UID property values in the same iCalendar object convert to different entries in the Group.  They sort in the same order as in the VCALENDAR component.</t>
           <t>The following example illustrates how to convert the VTODO component:</t>
-          <figure anchor="test-ical-comp-vtodo">
+          <figure anchor="test_ical_comp_vtodo">
             <name>Converting the VTODO component</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -1456,7 +1456,7 @@ DUE:20060102T030405Z
             The <xref target="RFC9074" section="6.1" sectionFormat="parens">ACKNOWLEDGED property</xref> in a VALARM component converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="3.5.1" sectionFormat="parens">"acknowledged" property</xref> of the Alert object.
           </t>
           <t>The following example illustrates how to convert the ACKNOWLEDGED property:</t>
-          <figure anchor="test-ical-prop-acknowledged">
+          <figure anchor="test_ical_prop_acknowledged">
             <name>Converting the ACKNOWLEDGED property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -1503,7 +1503,7 @@ ACKNOWLEDGED:20241002T114703Z
           </table>
           <t>An ACTION property with value AUDIO or any other not listed in <xref target="ical-prop-action-values"/> does not convert to the "action" property. Instead, the property converts to the <xref target="jscal-prop-icalendar">iCalendar/properties property</xref> of the Alert.</t>
           <t>The following example illustrates how to convert the ACTION property with value DISPLAY:</t>
-          <figure anchor="test-ical-prop-action-display">
+          <figure anchor="test_ical_prop_action_display">
             <name>Converting the ACTION property for value DISPLAY</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -1523,7 +1523,7 @@ ACTION:DISPLAY
 ]]></sourcecode>
           </figure>
           <t>The following example illustrates how to convert the ACTION property with value AUDIO:</t>
-          <figure anchor="test-ical-prop-action-audio">
+          <figure anchor="test_ical_prop_action_audio">
             <name>Converting the ACTION property for value AUDIO</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -1587,7 +1587,7 @@ ACTION:AUDIO
           </table>
           <t>These parameters are defined in <xref target="RFC8607"/>: FILENAME (Section <xref target="RFC8607" section="4.2" sectionFormat="bare"/>), SIZE (Section <xref target="RFC8607" section="4.1" sectionFormat="bare"/>); and in <xref target="RFC5545"/>: FMTTYPE (Section <xref target="RFC5545" section="3.2.8" sectionFormat="bare"/>).</t>
           <t>The following example illustrates how to convert the ATTACH property with a URI value:</t>
-          <figure anchor="test-ical-prop-attach-uri">
+          <figure anchor="test_ical_prop_attach_uri">
             <name>Converting the ATTACH property with URI value</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -1603,7 +1603,7 @@ ATTACH:https://example.com/foo.pdf
 ]]></sourcecode>
           </figure>
           <t>The following example illustrates how to convert the ATTACH property with a BINARY value:</t>
-          <figure anchor="test-ical-prop-attach-binary">
+          <figure anchor="test_ical_prop_attach_binary">
             <name>Converting the ATTACH property with BINARY value</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -1747,7 +1747,7 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=application/octet-stream:
           </table>
           <t>These values are defined in <xref target="RFC5545"/>: NEEDS-ACTION, ACCEPTED, DECLINED, TENTATIVE, DELEGATED, COMPLETED, IN-PROCESS (Section <xref target="RFC5545" section="3.2.12" sectionFormat="bare"/>); and in <xref target="RFC10051"/>: FAILED (Section <xref target="RFC10051" section="9.1" sectionFormat="bare"/>).</t>
           <t>The following example illustrates how to convert the ATTENDEE property:</t>
-          <figure anchor="test-ical-prop-attendee">
+          <figure anchor="test_ical_prop_attendee">
             <name>Converting the ATTENDEE property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -1776,7 +1776,7 @@ ORGANIZER:mailto:organizer@example.com
 ]]></sourcecode>
           </figure>
           <t>The following example illustrates how to convert the ATTENDEE property together with a PARTICIPANT component for the same calendar address:</t>
-          <figure anchor="test-ical-prop-attendee-participant">
+          <figure anchor="test_ical_prop_attendee_participant">
             <name>Converting the ATTENDEE property and PARTICIPANT component</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -1822,7 +1822,7 @@ ORGANIZER:mailto:organizer@example.com
 ]]></sourcecode>
           </figure>
           <t>The following example illustrates how to convert the ATTENDEE property with a participation status that is specific to VTODO components:</t>
-          <figure anchor="test-ical-prop-attendee-vtodo-partstat">
+          <figure anchor="test_ical_prop_attendee_vtodo_partstat">
             <name>Converting the ATTENDEE property with VTODO-specific PARTSTAT</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -1852,7 +1852,7 @@ ORGANIZER:mailto:organizer@example.com
 ]]></sourcecode>
           </figure>
           <t>The following example illustrates how to convert the ATTENDEE property with the OWNER role:</t>
-          <figure anchor="test-ical-prop-attendee-role-owner">
+          <figure anchor="test_ical_prop_attendee_role_owner">
             <name>Converting the ATTENDEE property with the OWNER role</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -1887,7 +1887,7 @@ ORGANIZER:mailto:organizer@example.com
           </t>
           <t>Implementations <bcp14>MAY</bcp14> preserve the fact that a Participant object's "calendarAddress" property converted from the CALENDAR-ADDRESS property of a PARTICIPANT component, rather than an ATTENDEE property. In this case, they <bcp14>MUST</bcp14> add an entry for the "calendarAddress" property in the "iCalendar/convertedProperties" property of the Participant object.</t>
           <t>The following example illustrates how to convert the CALENDAR-ADDRESS property:</t>
-          <figure anchor="test-ical-prop-calendar-address">
+          <figure anchor="test_ical_prop_calendar_address">
             <name>Converting the CALENDAR-ADDRESS property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -1940,7 +1940,7 @@ ORGANIZER:mailto:organizer@example.com
           </t>
           <t>The list of category values converts to a set of keywords. The values convert case-sensitively. All CATEGORIES properties in the same iCalendar component convert to the "keywords" property in the JSCalendar object.</t>
           <t>The following example illustrates how to convert the CATEGORIES property:</t>
-          <figure anchor="test-ical-prop-categories">
+          <figure anchor="test_ical_prop_categories">
             <name>Converting the CATEGORIES property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -1985,7 +1985,7 @@ CATEGORIES:Meeting
           </table>
           <t>Any other value <bcp14>MUST</bcp14> convert to the "private" value. Implementations <bcp14>MAY</bcp14> preserve the original value in the <xref target="jscal-prop-icalendar">iCalendar/properties property</xref>.</t>
           <t>The following example illustrates how to convert the CLASS property:</t>
-          <figure anchor="test-ical-prop-class">
+          <figure anchor="test_ical_prop_class">
             <name>Converting the CLASS property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2003,7 +2003,7 @@ CLASS:PRIVATE
           </t>
           <t>Its value converts verbatim.</t>
           <t>The following example illustrates how to convert the COLOR property with a color name:</t>
-          <figure anchor="test-ical-prop-color-name">
+          <figure anchor="test_ical_prop_color_name">
             <name>Converting the COLOR property with color name</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2014,7 +2014,7 @@ COLOR:maroon
 ]]></sourcecode>
           </figure>
           <t>The following example illustrates how to convert the COLOR property with a numeric RGB value:</t>
-          <figure anchor="test-ical-prop-color-numeric">
+          <figure anchor="test_ical_prop_color_numeric">
             <name>Converting the COLOR property with numeric value</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2032,7 +2032,7 @@ COLOR:#ffa07a
           </t>
           <t>The list of URI values converts to a set of URIs. Multiple occurrences of the CONCEPT property in the same iCalendar component convert to the same "categories" property in the JSCalendar object.</t>
           <t>The following example illustrates how to convert the CONCEPT property:</t>
-          <figure anchor="test-ical-prop-concept">
+          <figure anchor="test_ical_prop_concept">
             <name>Converting the CONCEPT property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2074,7 +2074,7 @@ CONCEPT:https://example.com/event-types/arts/literature
           </table>
           <t>These parameters are defined in <xref target="RFC7986"/>: FEATURE (Section <xref target="RFC7986" section="6.3" sectionFormat="bare"/>), LABEL (Section <xref target="RFC7986" section="6.4" sectionFormat="bare"/>).</t>
           <t>The following example illustrates how to convert the CONFERENCE property:</t>
-          <figure anchor="test-ical-prop-conference">
+          <figure anchor="test_ical_prop_conference">
             <name>Converting the CONFERENCE property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2102,7 +2102,7 @@ CONFERENCE;VALUE=URI;FEATURE=AUDIO,VIDEO;
           <t>
             The <xref target="I-D.ietf-calext-icalendar-jscalendar-extensions" section="4.1" sectionFormat="parens">COORDINATES property</xref> in a VLOCATION component converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.5" sectionFormat="parens">"coordinates" property</xref> of the Location object.</t>
           <t>The following example illustrates how to convert the COORDINATES property:</t>
-          <figure anchor="test-ical-prop-coordinates">
+          <figure anchor="test_ical_prop_coordinates">
             <name>Converting the COORDINATES property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2128,7 +2128,7 @@ COORDINATES;VALUE=URI:geo:48.198634,16.371648;crs=wgs84;u=40
             The <xref target="RFC5545" section="3.8.7.1" sectionFormat="parens">CREATED property</xref> in a VEVENT, VTODO, or VCALENDAR component converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="3.1.5" sectionFormat="parens">"created" property</xref> of the Event, Task, or Group object.
           </t>
           <t>The following example illustrates how to convert the CREATED property:</t>
-          <figure anchor="test-ical-prop-created">
+          <figure anchor="test_ical_prop_created">
             <name>Converting the CREATED property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2144,7 +2144,7 @@ CREATED:20240329T133000Z
           <t>The <xref target="RFC5545" section="3.8.1.5" sectionFormat="parens">DESCRIPTION property</xref> in a VEVENT, VTODO, VCALENDAR, or PARTICIPANT component converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.2" sectionFormat="parens">"description" property</xref> of the Event, Task, Group, or Participant object, unless its DERIVED parameter value is TRUE.</t>
           <t>If the DERIVED parameter value is TRUE, then the property does not convert to the "description" property. Instead, a non-derived STYLED-DESCRIPTION property is expected to contain the description. Implementations <bcp14>MAY</bcp14> preserve the property in the <xref target="jscal-prop-icalendar">"iCalendar" property</xref>.</t>
           <t>The following example illustrates how to convert the DESCRIPTION property:</t>
-          <figure anchor="test-ical-prop-description">
+          <figure anchor="test_ical_prop_description">
             <name>Converting the DESCRIPTION property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2164,7 +2164,7 @@ DESCRIPTION:Pancakes are delicious\; they are fluffy and sweet.
           <t>If the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DTEND property differs from that of the DTSTART property, then it converts to the Event's <xref target="I-D.ietf-calext-jscalendarbis" section="4.1.3" sectionFormat="parens">"endTimeZone" property</xref>.</t>
           <t>Implementations <bcp14>MAY</bcp14> preserve the fact that the duration got determined by the DTEND property. How to do this depends on the timezone identifiers of the DTSTART and DTEND properties: If the time zone identifiers are not equal, then the presence of the "endTimeZone" property implies that it converted from the DTEND property. If the time zone identifiers are equal, then implementations <bcp14>MAY</bcp14> set the <xref target="jscal-prop-icalendar">"iCalendar" property</xref> in the Event object and there add an entry for the path "duration" in the "convertedProperties" property. The value <bcp14>MUST</bcp14> be an ICalProperty object with the "name" property set to "dtend".</t>
           <t>The following example illustrates how to convert the DTEND property with a different timezone than the DTSTART property:</t>
-          <figure anchor="test-ical-prop-dtend-different-tzid">
+          <figure anchor="test_ical_prop_dtend_different_tzid">
             <name>Converting the DTEND property with different timezone</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2179,7 +2179,7 @@ DTEND;TZID=Asia/Bangkok:20241018T040000
 ]]></sourcecode>
           </figure>
           <t>The following example illustrates how to convert the DTEND property with the same timezone as the DTSTART property:</t>
-          <figure anchor="test-ical-prop-dtend-same-tzid">
+          <figure anchor="test_ical_prop_dtend_same_tzid">
             <name>Converting the DTEND property with same timezone</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2203,7 +2203,7 @@ DTEND;TZID=Australia/Melbourne:20241002T140000
 ]]></sourcecode>
           </figure>
           <t>The following example illustrates how to convert the DTEND property with value type DATE:</t>
-          <figure anchor="test-ical-prop-dtend-date-type">
+          <figure anchor="test_ical_prop_dtend_date_type">
             <name>Converting the DTEND property with value type DATE</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2232,7 +2232,7 @@ DTEND;VALUE=DATE:20240107
           <t>
               The <xref target="RFC5545" section="3.8.7.2" sectionFormat="parens">DTSTAMP property</xref> in a VEVENT or VTODO component converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="3.1.6" sectionFormat="parens">"updated" property</xref> of the Event or Task object.</t>
           <t>The following example illustrates how to convert the DTSTAMP property:</t>
-          <figure anchor="test-ical-prop-dtstamp-vevent-method">
+          <figure anchor="test_ical_prop_dtstamp_vevent_method">
             <name>Converting the DTSTAMP property in a VEVENT component</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2265,7 +2265,7 @@ DTSTAMP:20240304T132000Z
           <t>See <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values.</t>
           <t>For VEVENT and VTODO components, the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DTSTART property converts to the Event or Task object's <xref target="I-D.ietf-calext-jscalendarbis" section="3.6.1" sectionFormat="parens">"timeZone" property</xref>.  In addition, if the value type of the DTSTART property is DATE, then the value of the <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.4" sectionFormat="parens">"showWithoutTime" property</xref> is "true".</t>
           <t>The following example illustrates how to convert the DTSTART property with a TZID parameter:</t>
-          <figure anchor="test-ical-prop-dtstart-tzid">
+          <figure anchor="test_ical_prop_dtstart_tzid">
             <name>Converting the DTSTART property with TZID parameter</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2278,7 +2278,7 @@ DTSTART;TZID=Europe/Berlin:20240921T105302
 ]]></sourcecode>
           </figure>
           <t>The following example illustrates how to convert the DTSTART property with a UTC time:</t>
-          <figure anchor="test-ical-prop-dtstart-utc">
+          <figure anchor="test_ical_prop_dtstart_utc">
             <name>Converting the DTSTART property with UTC time</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2291,7 +2291,7 @@ DTSTART:20240921T105302Z
 ]]></sourcecode>
           </figure>
           <t>The following example illustrates how to convert the DTSTART property with a floating time:</t>
-          <figure anchor="test-ical-prop-dtstart-float">
+          <figure anchor="test_ical_prop_dtstart_float">
             <name>Converting the DTSTART property with floating time</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2303,7 +2303,7 @@ DTSTART:20240921T105302
 ]]></sourcecode>
           </figure>
           <t>The following example illustrates how to convert the DTSTART property with value type DATE:</t>
-          <figure anchor="test-ical-prop-dtstart-date">
+          <figure anchor="test_ical_prop_dtstart_date">
             <name>Converting the DTSTART property with value type DATE</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2323,7 +2323,7 @@ DTSTART;VALUE=DATE:20240921
           <t>If the VTODO component does not contain a DTSTART property, then the <xref target="ical-timezone-identifiers">timezone identifier</xref> of the DUE property converts to the Task object's <xref target="I-D.ietf-calext-jscalendarbis" section="3.6.1" sectionFormat="parens">"timeZone" property</xref>. If it contains both the DUE and DTSTART properties and the timezone identifier of the DUE property differs from that of the DTSTART property, then the "due" date-time property value <bcp14>MUST</bcp14> be relative to the time zone of DTSTART.</t>
           <t>If the value type of the DUE property is DATE, then the value of the <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.4" sectionFormat="parens">"showWithoutTime" property</xref> is "true".</t>
           <t>The following example illustrates how to convert the DUE property with a TZID parameter:</t>
-          <figure anchor="test-ical-prop-due-tzid">
+          <figure anchor="test_ical_prop_due_tzid">
             <name>Converting the DUE property with TZID parameter</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2339,7 +2339,7 @@ DUE;TZID=Europe/Berlin:20240921T105302
 ]]></sourcecode>
           </figure>
           <t>The following example illustrates how to convert the DUE property with a UTC time:</t>
-          <figure anchor="test-ical-prop-due-utc">
+          <figure anchor="test_ical_prop_due_utc">
             <name>Converting the DUE property with UTC time</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2355,7 +2355,7 @@ DUE:20240921T105302Z
 ]]></sourcecode>
           </figure>
           <t>The following example illustrates how to convert the DUE property with a floating time:</t>
-          <figure anchor="test-ical-prop-due-float">
+          <figure anchor="test_ical_prop_due_float">
             <name>Converting the DUE property with floating time</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2370,7 +2370,7 @@ DUE:20240921T105302
 ]]></sourcecode>
           </figure>
           <t>The following example illustrates how to convert the DUE property with value type DATE:</t>
-          <figure anchor="test-ical-prop-due-date">
+          <figure anchor="test_ical_prop_due_date">
             <name>Converting the DUE property with value type DATE</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2385,7 +2385,7 @@ DUE;VALUE=DATE:20240921
 ]]></sourcecode>
           </figure>
           <t>The following example illustrates how to convert the DUE property with value type DATE in combination with a DTSTART property with value type DATE:</t>
-          <figure anchor="test-ical-prop-due-and-dtstart-date">
+          <figure anchor="test_ical_prop_due_and_dtstart_date">
             <name>Converting the DUE and DTSTART properties with value type DATE</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2408,7 +2408,7 @@ DUE;VALUE=DATE:20250221
             The <xref target="RFC5545" section="3.8.2.5" sectionFormat="parens">DURATION property</xref> in a VEVENT or VTODO component converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="4.1.2" sectionFormat="parens">"duration" property</xref> of the Event or Task object.
           </t>
           <t>The following example illustrates how to convert the DURATION property:</t>
-          <figure anchor="test-ical-prop-duration">
+          <figure anchor="test_ical_prop_duration">
             <name>Converting the DURATION</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2425,7 +2425,7 @@ DURATION:PT1H
             The <xref target="RFC10051" section="10.1" sectionFormat="parens">ESTIMATED-DURATION property</xref> in a VTODO component converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="4.2.3" sectionFormat="parens">"estimatedDuration" property</xref> of the Task object.
           </t>
           <t>The following example illustrates how to convert the ESTIMATED-DURATION property:</t>
-          <figure anchor="test-ical-prop-estimated-duration">
+          <figure anchor="test_ical_prop_estimated_duration">
             <name>Converting the ESTIMATED-DURATION</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2446,7 +2446,7 @@ ESTIMATED-DURATION:P2D
           </t>
           <t>The property value converts to the key in the "recurrenceOverrides" property value. See <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values. The date-time <bcp14>MUST</bcp14> be relative to the timezone identified by the Event or Task's "timeZone" property.  The PatchObject value <bcp14>MUST</bcp14> set the "excluded" member to "true" and <bcp14>MUST NOT</bcp14> set any other property.</t>
           <t>The following example illustrates how to convert the EXDATE property:</t>
-          <figure anchor="test-ical-prop-exdate">
+          <figure anchor="test_ical_prop_exdate">
             <name>Converting the EXDATE property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2482,7 +2482,7 @@ EXDATE:20230801T130000Z
           <t>The pair of FLOAT values converts to a URI with the "geo" scheme (<xref target="RFC5870"/>).  The first FLOAT value converts to the "coord-a" part of the URI, the second FLOAT value to the "coord-b" part. A preceding plus sign (+) of the FLOAT value <bcp14>MUST</bcp14> be omitted, a preceding minus sign (-) <bcp14>MUST</bcp14> be preserved.  The optional "coord-c" part of the URI <bcp14>MUST</bcp14> be omitted.</t>
           <t>Implementations <bcp14>MAY</bcp14> preserve the fact that the coordinates converted from a GEO property by setting the JSON pointer path to the "coordinates" property in the "iCalendar/convertedProperties" property. If the GEO property converted from a VEVENT or VTODO component, then the "iCalendar" property <bcp14>MUST</bcp14> be that of the Event or Task object, for the VLOCATION component it <bcp14>MUST</bcp14> be the Location object's "iCalendar" property.</t>
           <t>The following example illustrates how to convert the GEO property in a VEVENT component. The JSID parameter is set to simplify testing.</t>
-          <figure anchor="test-ical-prop-geo">
+          <figure anchor="test_ical_prop_geo">
             <name>Converting the GEO property in a VEVENT</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2508,7 +2508,7 @@ GEO;JSID=loc1:45.5;-93.3
 ]]></sourcecode>
           </figure>
           <t>The following example illustrates how to convert the GEO and LOCATION properties in a VEVENT component. The JSID parameters are set to simplify testing.</t>
-          <figure anchor="test-ical-prop-geo-and-location">
+          <figure anchor="test_ical_prop_geo_and_location">
             <name>Converting the GEO and LOCATION properties in a VEVENT</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2537,7 +2537,7 @@ GEO;JSID=loc1:27.175;78.041944
 ]]></sourcecode>
           </figure>
           <t>The following example illustrates how to convert the GEO property in a VLOCATION component:</t>
-          <figure anchor="test-ical-prop-geo-vlocation">
+          <figure anchor="test_ical_prop_geo_vlocation">
             <name>Converting the GEO property in a VLOCATION</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2606,7 +2606,7 @@ GEO:48.858222;2.2945
           </table>
           <t>These parameters are defined in <xref target="RFC7986"/>: DISPLAY (Section <xref target="RFC7986" section="6.1" sectionFormat="bare"/>); and in <xref target="RFC8607"/>: FILENAME (Section <xref target="RFC8607" section="4.2" sectionFormat="bare"/>), SIZE (Section <xref target="RFC8607" section="4.1" sectionFormat="bare"/>); and in <xref target="RFC5545"/>: FMTTYPE (Section <xref target="RFC5545" section="3.2.8" sectionFormat="bare"/>).</t>
           <t>The following example illustrates how to convert the IMAGE property:</t>
-          <figure anchor="test-ical-prop-image">
+          <figure anchor="test_ical_prop_image">
             <name>Converting the IMAGE property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2638,7 +2638,7 @@ IMAGE;VALUE=URI;DISPLAY=BADGE,THUMBNAIL;FILENAME=An image;
           <t>
               The <xref target="RFC5545" section="3.8.7.3" sectionFormat="parens">LAST-MODIFIED property</xref> in a VEVENT or VTODO component does <em>not</em> convert to the <xref target="I-D.ietf-calext-jscalendarbis" section="3.1.6" sectionFormat="parens">"updated" property</xref> of the Event or Task object. Implementations <bcp14>MAY</bcp14> instead preserve the LAST-MODIFIED property in the "iCalendar" property.</t>
           <t>The following example illustrates how to convert the LAST-MODIFIED property:</t>
-          <figure anchor="test-ical-prop-last-modified">
+          <figure anchor="test_ical_prop_last_modified">
             <name>Converting the IMAGE property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2684,7 +2684,7 @@ LAST-MODIFIED:20240914T231257Z
           <t>These parameters are defined in <xref target="RFC5545"/>: FMTTYPE (Section <xref target="RFC5545" section="3.2.8" sectionFormat="bare"/>); and in <xref target="RFC7986"/>: LABEL (Section <xref target="RFC7986" section="6.4" sectionFormat="bare"/>); and in <xref target="RFC9253"/>: LINKREL (Section <xref target="RFC9253" section="6.1" sectionFormat="bare"/>).</t>
           <t>A LINK property with any other value type does not convert to a standard JSCalendar element. Implementations <bcp14>MAY</bcp14> convert it to the <xref target="jscal-prop-icalendar">"iCalendar" property</xref>.</t>
           <t>The following example illustrates how to convert the LINK property:</t>
-          <figure anchor="test-ical-prop-link">
+          <figure anchor="test_ical_prop_link">
             <name>Converting the LINK property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2710,7 +2710,7 @@ LINK;LINKREL="https://example.com/linkrel/source";LABEL=Venue;
           <t>The LOCATION property value converts to the Location object's "title" property.</t>
           <t>If the calendar component contains multiple VLOCATION components, then the LOCATION property also converts to the Event or Task object's "mainLocationId" property. If the LOCATION property does not have the DERIVED parameter set to TRUE, then the "mainLocationId" is set to the key of the Location object of the LOCATION property. If instead the LOCATION property is derived and its property value matches the NAME property value of a VLOCATION component, then the "mainLocationId" is the identifier of the Location object of that VLOCATION component.</t>
           <t>The following example illustrates how to convert the LOCATION property:</t>
-          <figure anchor="test-ical-prop-location">
+          <figure anchor="test_ical_prop_location">
             <name>Converting the LOCATION property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2727,7 +2727,7 @@ LOCATION:Conference Room - F123\, Bldg. 002
 ]]></sourcecode>
           </figure>
           <t>The following example illustrates how to convert the LOCATION property and multiple VLOCATION components:</t>
-          <figure anchor="test-ical-prop-location-vlocation">
+          <figure anchor="test_ical_prop_location_vlocation">
             <name>Converting the LOCATION property and multiple VLOCATION components</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2777,7 +2777,7 @@ END:VLOCATION
             The <xref target="RFC9073" section="6.1" sectionFormat="parens">LOCATION-TYPE property</xref> in a VLOCATION component converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.5" sectionFormat="parens">"locationTypes" property</xref> of the Location object.</t>
           <t>The list of location type values converts to a set of location types. The values convert case-sensitively. All LOCATION-TYPE properties in the same VLOCATION convert to the "locationTypes" property in the Location object.</t>
           <t>The following example illustrates how to convert the LOCATION-TYPE property:</t>
-          <figure anchor="test-ical-prop-location-type">
+          <figure anchor="test_ical_prop_location_type">
             <name>Converting the LOCATION property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2807,7 +2807,7 @@ LOCATION-TYPE:hotel,restaurant
           </t>
           <t>The property value converts in lowercase.</t>
           <t>The following example illustrates how to convert the METHOD property:</t>
-          <figure anchor="test-ical-prop-method">
+          <figure anchor="test_ical_prop_method">
             <name>Converting the METHOD property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2840,7 +2840,7 @@ BEGIN:VEVENT
             The <xref target="RFC7986" section="5.1" sectionFormat="parens">NAME property</xref> in a VCALENDAR component converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.1" sectionFormat="parens">"title" property</xref> of the Group object. If the LANGUAGE parameter is set, then the parameter value converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.9" sectionFormat="parens">"locale" property</xref> of the same object.
           </t>
           <t>The following example illustrates how to convert the NAME property in a VCALENDAR component:</t>
-          <figure anchor="test-ical-prop-name-vcalendar">
+          <figure anchor="test_ical_prop_name_vcalendar">
             <name>Converting the NAME property in a VCALENDAR</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2858,7 +2858,7 @@ NAME;LANGUAGE=de:Feiertage Deutschland 2025
 ]]></sourcecode>
           </figure>
           <t>The following example illustrates how to convert the NAME property in a VLOCATION component:</t>
-          <figure anchor="test-ical-prop-name-vlocation">
+          <figure anchor="test_ical_prop_name_vlocation">
             <name>Converting the NAME property in a VLOCATION</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2917,7 +2917,7 @@ END:VLOCATION
           <t>In addition, the SENT-BY parameter also converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="3.4.5" sectionFormat="parens">"sentBy" property</xref> in the Event or Task object.</t>
           <t>An ORGANIZER property, an ATTENDEE property, and a PARTICIPANT component in the same iCalendar component all convert to the same Participant object, if their converted "calendarAddress" property values are equal. How to deal with conflicting property values is implementation-specific.</t>
           <t>The following example illustrates how to convert the ORGANIZER property:</t>
-          <figure anchor="test-ical-prop-organizer">
+          <figure anchor="test_ical_prop_organizer">
             <name>Converting the ORGANIZER property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2944,7 +2944,7 @@ ATTENDEE;RSVP=TRUE:mailto:foo@example.com
 ]]></sourcecode>
           </figure>
           <t>The following example illustrates how to convert the ORGANIZER property together with an ATTENDEE property for the same calendar address:</t>
-          <figure anchor="test-ical-prop-organizer-and-attendee">
+          <figure anchor="test_ical_prop_organizer_and_attendee">
             <name>Converting the ORGANIZER and related ATTENDEE property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -2975,7 +2975,7 @@ ATTENDEE;RSVP=TRUE;PARTSTAT=TENTATIVE:mailto:foo@example.com
 ]]></sourcecode>
           </figure>
           <t>The following example illustrates how to convert the ORGANIZER property with a CN parameter if another participant has the OWNER role:</t>
-          <figure anchor="test-ical-prop-organizer-cn-other-owner">
+          <figure anchor="test_ical_prop_organizer_cn_other_owner">
             <name>Converting the ORGANIZER property with CN parameter and another owner</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -3006,7 +3006,7 @@ ATTENDEE;ROLE=OWNER;RSVP=TRUE:mailto:foo@example.com
 ]]></sourcecode>
           </figure>
           <t>The following example illustrates how to convert the ORGANIZER property if another participant has the OWNER role:</t>
-          <figure anchor="test-ical-prop-organizer-other-owner">
+          <figure anchor="test_ical_prop_organizer_other_owner">
             <name>Converting the ORGANIZER property with another owner</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -3035,7 +3035,7 @@ ATTENDEE;ROLE=OWNER;RSVP=TRUE:mailto:foo@example.com
             The <xref target="RFC5545" section="3.8.1.8" sectionFormat="parens">PERCENT-COMPLETE property</xref> in a VTODO component converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="4.2.4" sectionFormat="parens">"percentComplete" property</xref> of the Task object.
           </t>
           <t>The following example illustrates how to convert the PERCENT-COMPLETE property:</t>
-          <figure anchor="test-ical-prop-percent-complete-method">
+          <figure anchor="test_ical_prop_percent_complete_method">
             <name>Converting the PERCENT-COMPLETE property in a VTODO component</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -3065,7 +3065,7 @@ PERCENT-COMPLETE:53
             The <xref target="RFC5545" section="3.8.1.9" sectionFormat="parens">PRIORITY property</xref> in a VEVENT or VTODO component converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="3.4.1" sectionFormat="parens">"priority" property</xref> of the Event or Task object.
           </t>
           <t>The following example illustrates how to convert the PRIORITY property:</t>
-          <figure anchor="test-ical-prop-priority">
+          <figure anchor="test_ical_prop_priority">
             <name>Converting the PRIORITY property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -3082,7 +3082,7 @@ PRIORITY:3
               The <xref target="RFC5545" section="3.7.3" sectionFormat="parens">PRODID property</xref> in a VCALENDAR component converts to the Group object's <xref target="I-D.ietf-calext-jscalendarbis" section="3.1.4" sectionFormat="parens">"prodId" property</xref>. Implementations <bcp14>MAY</bcp14> additionally convert it also to the "prodId" property of all Event or Task objects that are listed in the Group object's "entries" property.</t>
           <t>The property value converts verbatim.</t>
           <t>The following example illustrates how to convert the PRODID property:</t>
-          <figure anchor="test-ical-prop-prodid">
+          <figure anchor="test_ical_prop_prodid">
             <name>Converting the PRODID property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -3114,7 +3114,7 @@ BEGIN:VEVENT
           </t>
           <t>The property value converts to the key in the "recurrenceOverrides" property value, for values of type PERIOD this only applies to the period start. The date-time value <bcp14>MUST</bcp14> be relative to the timezone identified by the Event or Task object's <xref target="I-D.ietf-calext-jscalendarbis" section="3.6.1" sectionFormat="parens">"timeZone" property</xref>, see <xref target="convert-date-and-date-time"/> how to convert DATE and DATE-TIME values. The duration of a PERIOD converts to the PatchObject's "duration" property, otherwise the PatchObject value <bcp14>MUST</bcp14> be an empty JSON object. Implementations <bcp14>MAY</bcp14> indicate that the recurrence override was converted from an RDATE in the <xref target="jscal-prop-icalendar">iCalendar</xref> property.</t>
           <t>The following example illustrates how to convert the RDATE property with value type DATE-TIME:</t>
-          <figure anchor="test-ical-prop-rdate">
+          <figure anchor="test_ical_prop_rdate">
             <name>Converting the RDATE property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -3135,7 +3135,7 @@ RDATE:20230805T170000Z
 ]]></sourcecode>
           </figure>
           <t>The following example illustrates how to convert the RDATE property with value type PERIOD:</t>
-          <figure anchor="test-ical-prop-rdate-period">
+          <figure anchor="test_ical_prop_rdate_period">
             <name>Converting the RDATE property with value type PERIOD</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -3185,7 +3185,7 @@ RDATE;VALUE=PERIOD:20231223T150000Z/PT2H
           </t>
           <t>The property value in a VEVENT or VTODO converts as-is to the id of the Relation object in the "relatedTo" property. The property value in a VALARM converts to the same value as the id of that Alert object, which represents the VALARM component having that property value set in the UID property. Any RELTYPE parameters convert to the "relation" property in that Relation object. The parameter values convert in lowercase.</t>
           <t>The following example illustrates how to convert the RELATED-TO property in a VEVENT component:</t>
-          <figure anchor="test-ical-prop-related-to">
+          <figure anchor="test_ical_prop_related_to">
             <name>Converting the RELATED-TO property in a VEVENT</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -3209,7 +3209,7 @@ RELATED-TO:4120A9B1-1133-4AC0-9185-C4C8396048ED
 ]]></sourcecode>
           </figure>
           <t>The following example illustrates how to convert the RELATED-TO property in a VALARM component:</t>
-          <figure anchor="test-ical-prop-related-to-valarm">
+          <figure anchor="test_ical_prop_related_to_valarm">
             <name>Converting the RELATED-TO property in a VALARM</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -3386,7 +3386,7 @@ END:VALARM
           </table>
           <t>The string values of the FREQ, WKST, RSCALE convert to lowercase.  The UNTIL part in a VEVENT or VTODO converts to a LocalDateTime value relative to the timezone of the Event or Task object.</t>
           <t>The following example illustrates how to convert the RRULE property:</t>
-          <figure anchor="test-ical-prop-rrule">
+          <figure anchor="test_ical_prop_rrule">
             <name>Example for converting the RRULE property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -3431,7 +3431,7 @@ RRULE:FREQ=YEARLY
           <name>SEQUENCE</name>
           <t>The <xref target="RFC5545" section="3.8.7.4" sectionFormat="parens">SEQUENCE property</xref> in a VEVENT or VTODO component converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="3.1.7" sectionFormat="parens">"sequence" property</xref> of the Event or Task object.</t>
           <t>The following example illustrates how to convert the SEQUENCE property:</t>
-          <figure anchor="test-ical-prop-sequence">
+          <figure anchor="test_ical_prop_sequence">
             <name>Example for converting the SEQUENCE property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -3446,7 +3446,7 @@ SEQUENCE:3
           <name>SHOW-WITHOUT-TIME</name>
           <t>The <xref target="I-D.ietf-calext-icalendar-jscalendar-extensions" section="4.2" sectionFormat="parens">SHOW-WITHOUT-TIME property</xref> in a VEVENT or VTODO component converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.4" sectionFormat="parens">"showWithoutTime" property</xref> of the Event or Task object. As outlined in the definition of the SHOW-WITHOUT-TIME property, the property <bcp14>MUST</bcp14> be ignored if the temporal value type of the VEVENT or VTODO component is DATE, or if the property value is "FALSE".</t>
           <t>The following example illustrates how to convert the SHOW-WITHOUT-TIME property:</t>
-          <figure anchor="test-ical-prop-show-without-time">
+          <figure anchor="test_ical_prop_show_without_time">
             <name>Example for converting the SHOW-WITHOUT-TIME property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -3471,7 +3471,7 @@ SHOW-WITHOUT-TIME;VALUE=BOOLEAN:TRUE
           </t>
           <t>The property value converts in lowercase.</t>
           <t>The following example illustrates how to convert the STATUS property in a VEVENT component:</t>
-          <figure anchor="test-ical-prop-status-vevent">
+          <figure anchor="test_ical_prop_status_vevent">
             <name>Converting the STATUS property in a VEVENT</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -3482,7 +3482,7 @@ STATUS:TENTATIVE
 ]]></sourcecode>
           </figure>
           <t>The following example illustrates how to convert the STATUS property in a VTODO component:</t>
-          <figure anchor="test-ical-prop-status-vtodo">
+          <figure anchor="test_ical_prop_status_vtodo">
             <name>Converting the STATUS property in a VTODO</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -3505,7 +3505,7 @@ STATUS:IN-PROCESS
             The <xref target="RFC7986" section="5.8" sectionFormat="parens">SOURCE property</xref> in a VCALENDAR component converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="4.3.2" sectionFormat="parens">"source" property</xref> of the Group object.
           </t>
           <t>The following example illustrates how to convert the SOURCE property:</t>
-          <figure anchor="test-ical-prop-source">
+          <figure anchor="test_ical_prop_source">
             <name>Example for converting the SOURCE property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -3533,7 +3533,7 @@ SOURCE;VALUE=URI:https://example.com/holidays.ics
           <t>If these conditions are not met, implementations <bcp14>MAY</bcp14> preserve the property in the <xref target="jscal-prop-icalendar">"iCalendar" property</xref>.</t>
           <t>Its <xref target="RFC5545" section="3.2.8" sectionFormat="parens">FMTTYPE parameter</xref> converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="3.2.3" sectionFormat="parens">"descriptionContentType" property</xref>.</t>
           <t>The following example illustrates how to convert the STYLED-DESCRIPTION property:</t>
-          <figure anchor="test-ical-prop-styled-description">
+          <figure anchor="test_ical_prop_styled_description">
             <name>Converting the STYLED-DESCRIPTION property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -3555,7 +3555,7 @@ STYLED-DESCRIPTION;VALUE=TEXT;FMTTYPE=text/html:
             The <xref target="RFC5545" section="3.8.1.12" sectionFormat="parens">SUMMARY property</xref> in a PARTICIPANT component converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="3.4.6" sectionFormat="parens">"name" property</xref> of the Participant object.
           </t>
           <t>The following example illustrates how to convert the SUMMARY property in a VEVENT component:</t>
-          <figure anchor="test-ical-prop-summary">
+          <figure anchor="test_ical_prop_summary">
             <name>Converting the SUMMARY property in a VEVENT</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -3566,7 +3566,7 @@ SUMMARY:Birthday Party
 ]]></sourcecode>
           </figure>
           <t>The following example illustrates how to convert the SUMMARY property with a LANGUAGE parameter:</t>
-          <figure anchor="test-ical-prop-summary-language">
+          <figure anchor="test_ical_prop_summary_language">
             <name>Converting the SUMMARY property with LANGUAGE parameter</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -3578,7 +3578,7 @@ SUMMARY;LANGUAGE=fr:Fête d'anniversaire
 ]]></sourcecode>
           </figure>
           <t>The following example illustrates how to convert the SUMMARY property in a PARTICIPANT component:</t>
-          <figure anchor="test-ical-prop-summary-participant">
+          <figure anchor="test_ical_prop_summary_participant">
             <name>Converting the SUMMARY property in a PARTICIPANT</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -3624,7 +3624,7 @@ SUMMARY:John
             </tbody>
           </table>
           <t>The following example illustrates how to convert the TRANSP property:</t>
-          <figure anchor="test-ical-prop-transp">
+          <figure anchor="test_ical_prop_transp">
             <name>Converting the TRANSP property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -3661,7 +3661,7 @@ TRANSP:TRANSPARENT
           </table>
           <t>These parameters are defined in <xref target="RFC5545"/>: RELATED (Section <xref target="RFC5545" section="3.2.14" sectionFormat="bare"/>).</t>
           <t>The following example illustrates how to convert the TRIGGER property to an OffsetTrigger object:</t>
-          <figure anchor="test-ical-prop-trigger-offset">
+          <figure anchor="test_ical_prop_trigger_offset">
             <name>Converting the TRIGGER property to an OffsetTrigger</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -3686,7 +3686,7 @@ TRIGGER;RELATED=END:PT5M
 ]]></sourcecode>
           </figure>
           <t>The following example illustrates how to convert the TRIGGER property to an AbsoluteTrigger object:</t>
-          <figure anchor="test-ical-prop-trigger-absolute">
+          <figure anchor="test_ical_prop_trigger_absolute">
             <name>Converting the TRIGGER property to an AbsoluteTrigger</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -3716,7 +3716,7 @@ TRIGGER;VALUE=DATE-TIME:20250302T010203Z
             The <xref target="RFC5545" section="3.8.4.7" sectionFormat="parens">UID property</xref> in a VEVENT, VTODO, or VCALENDAR component converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="3.1.1" sectionFormat="parens">"uid" property</xref> of the Event, Task, or Group object.
           </t>
           <t>The following example illustrates how to convert the UID property:</t>
-          <figure anchor="test-ical-prop-uid">
+          <figure anchor="test_ical_prop_uid">
             <name>Converting the UID property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -3735,7 +3735,7 @@ UID:5ACEA86F-40CF-47EE-9CCA-7C85588A589F
           <t>The key of the Link object <bcp14>MUST</bcp14> be the value of the <xref target="ical-param-jsid">JSID parameter</xref>, if set. If no JSID parameter is set, then the key <bcp14>MAY</bcp14> be the UUIDv5 generated from the property value (see <xref target="generating-jscalendar-ids"/>). When converting to iCalendar, implementations <bcp14>MAY</bcp14> omit setting the JSID parameter if the key matches the UUIDv5 of the URL property value and the key is not part of a JSON pointer in any JSPTR parameter value.</t>
           <t>The URL property value converts to the Link object's "href" property.</t>
           <t>The following example illustrates how to convert the URL property:</t>
-          <figure anchor="test-ical-prop-url">
+          <figure anchor="test_ical_prop_url">
             <name>Converting the URL property</name>
             <sourcecode><![CDATA[
 --- iCalendar:
@@ -4677,7 +4677,7 @@ URL:https://example.com/myurl
             <dd>This property can be specified at most once in any calendar component.</dd>
             <dt>Description:</dt>
             <dd>
-              <t>This property specifies the JSON object key of the JSCalendar object to which an iCalendar component converts to. For example, this property set in a VALARM component within a VEVENT component defines the key of the Alert object in the Event object's "alerts" property (see <xref target="test-ical-prop-jsid-alert"/>).</t>
+              <t>This property specifies the JSON object key of the JSCalendar object to which an iCalendar component converts to. For example, this property set in a VALARM component within a VEVENT component defines the key of the Alert object in the Event object's "alerts" property (see <xref target="test_ical_prop_jsid_alert"/>).</t>
               <t>The value of the JSID property <bcp14>MUST</bcp14> be a valid object key according to the definition of the JSCalendar property to which the component converts to.</t>
             </dd>
             <dt>Format Definition:</dt>
@@ -4690,7 +4690,7 @@ jsid-prop = "JSID" *(";" other-param) ":" TEXT CRLF
             <dt anchor="ical-prop-jsid-examples">Example(s):</dt>
             <dd>
               <t>The following example illustrates how to convert the JSID property set in a VALARM component.</t>
-              <figure anchor="test-ical-prop-jsid-alert">
+              <figure anchor="test_ical_prop_jsid_alert">
                 <name>Converting the JSID property of a VALARM component</name>
                 <sourcecode><![CDATA[
 --- iCalendar:
@@ -4770,7 +4770,7 @@ jsprop-param  = *(
             <dt anchor="ical-prop-jsprop-examples">Example(s):</dt>
             <dd>
               <t>The following example illustrates how to convert a JSPROP property with a JSON boolean value</t>
-              <figure anchor="test-ical-prop-jsprop-boolean">
+              <figure anchor="test_ical_prop_jsprop_boolean">
                 <name>Converting the JSPROP property with a JSON boolean value</name>
                 <sourcecode><![CDATA[
 --- iCalendar:
@@ -4781,7 +4781,7 @@ JSPROP;JSPTR="example.com:foo":true
 ]]></sourcecode>
               </figure>
               <t>The following example illustrates how to convert a JSPROP property with a JSON object value</t>
-              <figure anchor="test-ical-prop-jsprop-object">
+              <figure anchor="test_ical_prop_jsprop_object">
                 <name>Converting the JSPROP property with a JSON object value</name>
                 <sourcecode><![CDATA[
 --- iCalendar:
@@ -4795,7 +4795,7 @@ JSPROP;JSPTR="example.com:foo":{"bar":1234\,"baz":"bam"}
 ]]></sourcecode>
               </figure>
               <t>The following example illustrates how to convert a JSPROP property that points to a property within a JSCalendar Alert. The JSON pointer in the JSPTR parameter is relative to the Alert object.</t>
-              <figure anchor="test-ical-prop-jsprop-alert">
+              <figure anchor="test_ical_prop_jsprop_alert">
                 <name>Converting the JSPROP property within a VALARM component</name>
                 <sourcecode><![CDATA[
 --- iCalendar:
@@ -4818,7 +4818,7 @@ END:VALARM
 ]]></sourcecode>
               </figure>
               <t>The following example illustrates how to convert a JSPROP property that points to a property within a JSCalendar Link. The JSON pointer in the JSPTR parameter is relative to the Event object because the Link object converts to an iCalendar property. The <xref target="ical-param-jsid">JSID parameter</xref> on the ATTACH property ensures that the JSON path remains valid during conversion.</t>
-              <figure anchor="test-ical-prop-jsprop-link-object">
+              <figure anchor="test_ical_prop_jsprop_link_object">
                 <name>Converting the JSPROP property within a Link object</name>
                 <sourcecode><![CDATA[
 --- iCalendar:
@@ -4864,7 +4864,7 @@ jsid-param  = "JSID" "=" param-value
             </dd>
             <dt>Example(s):</dt>
             <dd>
-              <figure anchor="test-ical-param-jsid-attach">
+              <figure anchor="test_ical_param_jsid_attach">
                 <name>Converting the JSID parameter on an ATTACH property</name>
                 <sourcecode><![CDATA[
 --- iCalendar:
@@ -4957,8 +4957,8 @@ JSPROP;JSPTR="example.com:foo":"bar"
               </dl>
             </dd>
           </dl>
-          <t>The example in <xref target="test-jscal-prop-icalendar"/> describes how to convert unknown iCalendar elements to the "iCalendar" property. The X-FOO parameter set on the SUMMARY property illustrates how to preserve an unknown iCalendar parameter on a property that does convert to a standard JSCalendar element. The X-BAR property and X-BAZ component illustrate how to convert entirely unknown iCalendar elements.</t>
-          <figure anchor="test-jscal-prop-icalendar">
+          <t>The example in <xref target="test_jscal_prop_icalendar"/> describes how to convert unknown iCalendar elements to the "iCalendar" property. The X-FOO parameter set on the SUMMARY property illustrates how to preserve an unknown iCalendar parameter on a property that does convert to a standard JSCalendar element. The X-BAR property and X-BAZ component illustrate how to convert entirely unknown iCalendar elements.</t>
+          <figure anchor="test_jscal_prop_icalendar">
             <name>Converting unknown iCalendar elements to the "iCalendar" property</name>
             <sourcecode><![CDATA[
 --- iCalendar:

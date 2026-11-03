@@ -505,7 +505,7 @@ def find_tests(rfcfile_name: str, names: set[str] = None, verbose=False):
         anchor = figure.get("anchor")
         if not anchor:
             continue
-        if not anchor.startswith("test-") or names and anchor not in names:
+        if not anchor.startswith("test_") or names and anchor not in names:
             continue
 
         sourcecode = figure.find("./sourcecode")
