@@ -207,6 +207,7 @@ SUMMARY:hello
 ]]></sourcecode>
           </figure>
           <t>A conversion example applies in both directions: the iCalendar data converts to the JSCalendar data, and the JSCalendar data converts to the iCalendar data.</t>
+          <t>Keys of JSON objects that represent a collection of same-typed values (<xref target="generating-jscalendar-ids"/>) are illustrative, unless the iCalendar data sets them with the <xref target="ical-param-jsid">JSID parameter</xref> or <xref target="ical-prop-jsid">JSID property</xref>.</t>
         </section>
       </section>
       <section>
@@ -2734,7 +2735,7 @@ LOCATION:Conference Room - F123\, Bldg. 002
 --- iCalendar:
 LOCATION;DERIVED=TRUE:Fred's Bar
 BEGIN:VLOCATION
-UID:12D2B3EC-AC84-4B70-9EB6-CFE6AD5830B0
+JSID:loc1
 NAME:Fred's Bar
 LOCATION-TYPE:bar
 ...
@@ -2750,7 +2751,7 @@ END:VLOCATION
 
 --- JSCalendar:
 "locations": {
-  "12D2B3EC-AC84-4B70-9EB6-CFE6AD5830B0": {
+  "loc1": {
     "@type": "Location",
     "name": "Fred's Bar",
     "locationTypes": {
@@ -2768,7 +2769,7 @@ END:VLOCATION
     "...": ""
   }
 },
-"mainLocationId": "12D2B3EC-AC84-4B70-9EB6-CFE6AD5830B0"
+"mainLocationId": "loc1"
 ]]></sourcecode>
           </figure>
         </section>
