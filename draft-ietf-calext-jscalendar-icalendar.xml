@@ -206,6 +206,7 @@ SUMMARY:hello
 "title": "hello"
 ]]></sourcecode>
           </figure>
+          <t>A conversion example applies in both directions: the iCalendar data converts to the JSCalendar data, and the JSCalendar data converts to the iCalendar data.</t>
         </section>
       </section>
       <section>
