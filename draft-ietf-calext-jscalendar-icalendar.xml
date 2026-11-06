@@ -1666,7 +1666,7 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=application/octet-stream:
               <tr>
                 <td>EMAIL</td>
                 <td>email</td>
-                <td/>
+                <td>See below</td>
               </tr>
               <tr>
                 <td>MEMBER</td>
@@ -1691,11 +1691,20 @@ ATTACH;ENCODING=BASE64;VALUE=BINARY;FMTTYPE=application/octet-stream:
               <tr>
                 <td>SENT-BY</td>
                 <td>sentBy</td>
-                <td/>
+                <td>See below</td>
               </tr>
             </tbody>
           </table>
           <t>These parameters are defined in <xref target="RFC5545"/>: CN (Section <xref target="RFC5545" section="3.2.2" sectionFormat="bare"/>), CUTYPE (Section <xref target="RFC5545" section="3.2.3" sectionFormat="bare"/>), DELEGATED-FROM (Section <xref target="RFC5545" section="3.2.4" sectionFormat="bare"/>), DELEGATED-TO (Section <xref target="RFC5545" section="3.2.5" sectionFormat="bare"/>), MEMBER (Section <xref target="RFC5545" section="3.2.11" sectionFormat="bare"/>), PARTSTAT (Section <xref target="RFC5545" section="3.2.12" sectionFormat="bare"/>), ROLE (Section <xref target="RFC5545" section="3.2.16" sectionFormat="bare"/>), RSVP (Section <xref target="RFC5545" section="3.2.17" sectionFormat="bare"/>), SENT-BY (Section <xref target="RFC5545" section="3.2.18" sectionFormat="bare"/>); and in <xref target="RFC7986"/>: EMAIL (Section <xref target="RFC7986" section="6.2" sectionFormat="bare"/>).</t>
+          <t>The "email" and "sentBy" properties of the Participant object, as well as the "sentBy" property of the Event and Task object, are email addresses in the form of an "addr-spec" as defined in <xref target="RFC5322" section="3.4.1"/> and extended for internationalized email addresses in <xref target="RFC6532" section="3.2"/>. Their equivalent iCalendar parameters convert as follows:</t>
+          <ul>
+            <li>
+              <t>The EMAIL parameter value is an email address. It converts to and from the "email" property without modification. In particular, iCalendar parameter values may contain non-ASCII characters (<xref target="RFC5545" section="3.1"/>), so internationalized email addresses need not be percent-encoded or otherwise transformed.</t>
+            </li>
+            <li>
+              <t>The SENT-BY parameter value is a calendar user address in the form of a URI. If that URI is a <xref target="RFC6068">"mailto" URI</xref> that contains exactly one "addr-spec" and no header fields, then the SENT-BY parameter converts to the "sentBy" property. The property value is the "addr-spec" of the "mailto" URI after decoding any percent-encoded octets as defined in <xref target="RFC6068" section="2"/>. How to convert other SENT-BY parameter values is implementation-specific. Implementations <bcp14>MAY</bcp14> preserve them in the <xref target="jscal-prop-icalendar">iCalendar property</xref>.</t>
+            </li>
+          </ul>
           <t>The PARTSTAT of an ATTENDEE property in a VTODO component converts not only to the Participant object's "participationStatus" property, but also to its "progress" property if the PARTSTAT parameter value is specific for VTODO components:</t>
           <table anchor="ical-prop-attendee-param-partstat">
             <name>Converting the PARTSTAT parameter in a VTODO component to Participant properties</name>
@@ -1881,6 +1890,27 @@ ORGANIZER:mailto:organizer@example.com
   }
 },
 "organizerCalendarAddress": "mailto:organizer@example.com"
+]]></sourcecode>
+          </figure>
+          <t>The following example illustrates how to convert the EMAIL and SENT-BY parameters for internationalized email addresses:</t>
+          <figure anchor="test_ical_prop_attendee_email_sent_by_intl">
+            <name>Converting the EMAIL and SENT-BY parameters with internationalized email addresses</name>
+            <sourcecode><![CDATA[
+--- iCalendar:
+ATTENDEE;EMAIL=jürgen@example.com;
+ SENT-BY="mailto:sekret%C3%A4r@example.com":
+ mailto:juergen@example.com
+
+--- JSCalendar:
+"participants": {
+  "a13e7aa7-b1a7-56b4-91d6-e4d6f414a0e5": {
+    "@type": "Participant",
+    "calendarAddress": "mailto:juergen@example.com",
+    "email": "jürgen@example.com",
+    "sentBy": "sekretär@example.com"
+  }
+},
+"...": ""
 ]]></sourcecode>
           </figure>
         </section>
@@ -2918,7 +2948,7 @@ END:VLOCATION
             </tbody>
           </table>
           <t>These parameters are defined in <xref target="RFC5545"/>: CN (Section <xref target="RFC5545" section="3.2.2" sectionFormat="bare"/>), SENT-BY (Section <xref target="RFC5545" section="3.2.18" sectionFormat="bare"/>); and in <xref target="RFC7986"/>: EMAIL (Section <xref target="RFC7986" section="6.2" sectionFormat="bare"/>).</t>
-          <t>In addition, the SENT-BY parameter also converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="3.4.5" sectionFormat="parens">"sentBy" property</xref> in the Event or Task object.</t>
+          <t>The EMAIL and SENT-BY parameters convert as described in <xref target="ical-prop-attendee"/>. In addition, the SENT-BY parameter converts to the <xref target="I-D.ietf-calext-jscalendarbis" section="3.4.5" sectionFormat="parens">"sentBy" property</xref> in the Event or Task object.</t>
           <t>An ORGANIZER property, an ATTENDEE property, and a PARTICIPANT component in the same iCalendar component all convert to the same Participant object, if their converted "calendarAddress" property values are equal. How to deal with conflicting property values is implementation-specific.</t>
           <t>The following example illustrates how to convert the ORGANIZER property:</t>
           <figure anchor="test_ical_prop_organizer">
@@ -4015,9 +4045,7 @@ URL:https://example.com/myurl
               <td>sentBy</td>
               <td>SENT-BY (parameter) of ORGANIZER</td>
               <td>
-                <t>
-                  <xref target="ical-prop-organizer" format="counter"/>
-                </t>
+                <t><xref target="ical-prop-organizer" format="counter"/>, and remarks below</t>
               </td>
             </tr>
             <tr>
@@ -4090,6 +4118,9 @@ URL:https://example.com/myurl
           </li>
           <li>
             <t>The entries in the "recurrenceOverrides" property convert depending on the contents of the PatchObject value. A PatchObject that sets the "excluded" member to "true" converts to an EXDATE property for the date-time of that recurrence instance. An empty PatchObject converts to an RDATE property. Any other PatchObject converts to a recurrence override component in the embedding VCALENDAR component.</t>
+          </li>
+          <li>
+            <t>The "sentBy" property converts to the SENT-BY parameter of the ORGANIZER property with a "mailto" URI value. See <xref target="RFC6068" section="2"/> for how to percent-encode internationalized email addresses.</t>
           </li>
           <li>
             <t>The "showWithoutTime" property only converts to the SHOW-WITHOUT-TIME property if the value data type of the DTSTART or DUE properties is of form DATE WITH UTC TIME or DATE WITH LOCAL TIME.</t>
@@ -4567,6 +4598,9 @@ URL:https://example.com/myurl
           </li>
           <li>
             <t>The "progress" property converts to the PARTSTAT parameter as outlined in <xref target="ical-prop-attendee-param-partstat"/>.</t>
+          </li>
+          <li>
+            <t>The "sentBy" property converts to a SENT-BY parameter with a "mailto" URI value. See <xref target="RFC6068" section="2"/> for how to percent-encode internationalized email addresses.</t>
           </li>
         </ul>
         <t>The following Participant properties convert to the PARTICIPANT component:</t>
@@ -5292,9 +5326,12 @@ END:X-BAZ
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2397.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5234.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5322.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5545.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5870.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6047.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6068.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6532.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6638.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6838.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7265.xml"/>
