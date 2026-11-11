@@ -1900,6 +1900,7 @@ ORGANIZER:mailto:organizer@example.com
 ATTENDEE;EMAIL=jürgen@example.com;
  SENT-BY="mailto:sekret%C3%A4r@example.com":
  mailto:juergen@example.com
+ORGANIZER:mailto:organizer@example.com
 
 --- JSCalendar:
 "participants": {
@@ -1908,9 +1909,14 @@ ATTENDEE;EMAIL=jürgen@example.com;
     "calendarAddress": "mailto:juergen@example.com",
     "email": "jürgen@example.com",
     "sentBy": "sekretär@example.com"
+  },
+  "251d3e9f-d83f-534c-8c45-c2896c75670c": {
+    "@type": "Participant",
+    "calendarAddress": "mailto:organizer@example.com",
+    "...": ""
   }
 },
-"...": ""
+"organizerCalendarAddress": "mailto:organizer@example.com"
 ]]></sourcecode>
           </figure>
         </section>
